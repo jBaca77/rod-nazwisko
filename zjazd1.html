@@ -1,236 +1,225 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I Zjazd: Modlin i Buraków | Archiwum L&K</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-    --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
-    --line: rgba(122, 101, 72, 0.2);
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Zjazd: Modlin i Buraków | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; overflow-x: hidden; }
 
-  /* NAWIGACJA */
-  nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
-  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-  .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-  /* NAGŁÓWEK */
-  .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
-  .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
-  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+        /* NAGŁÓWEK I TREŚĆ */
+        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
 
-  /* PANEL INFO */
-  .info-panel { 
-    max-width: 850px; margin: 0 auto 50px; padding: 30px; 
-    background: var(--parchment); border-radius: 4px;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
-  }
-  .info-item { font-size: 0.9rem; }
-  .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
+        .info-panel { 
+            max-width: 850px; margin: 0 auto 50px; padding: 30px; 
+            background: var(--parchment); border-radius: 4px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
+        }
+        .info-item { font-size: 0.9rem; }
+        .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
 
-  /* GŁÓWNE ZDJĘCIE */
-  .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
-  .main-img { width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
+        .main-img { width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
-  /* WSPOMNIENIA */
-  .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; border-bottom: 1px solid var(--line); padding-bottom: 20px; }
-  .memory-card { 
-    border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; 
-    font-style: italic; position: relative;
-  }
-  .memory-card::before { 
-    content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; 
-    color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; 
-  }
-  .memory-author { display: block; margin-top: 15px; font-style: normal; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--sepia); }
+        /* WSPOMNIENIA */
+        .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
+        .memory-card { 
+            border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; 
+            font-style: italic; position: relative;
+        }
+        .memory-card::before { 
+            content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; 
+            color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; 
+        }
+        .memory-author { display: block; margin-top: 15px; font-style: normal; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--sepia); }
 
-  /* GALERIA MINIATUR */
-  .gallery-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
-  .simple-gallery { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-    grid-auto-rows: 180px;
-    gap: 12px; 
-  }
-  .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
-  .gallery-item img { 
-    width: 100%; height: 100%; object-fit: cover; 
-    transition: all 0.5s ease; opacity: 0.8; filter: grayscale(30%); 
-  }
-  .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.05); }
+        /* GALERIA MINIATUR */
+        .gallery-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
+        .simple-gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            grid-auto-rows: 180px; gap: 12px; 
+        }
+        .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; opacity: 0.8; filter: grayscale(30%); }
+        .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-  /* LIGHTBOX */
-  #lightbox {
-    display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center;
-    user-select: none; touch-action: none;
-  }
-  .lb-content { 
-    position: relative; display: flex; flex-direction: column; align-items: center; 
-    width: 90%; height: 90%; justify-content: center;
-  }
-  #lb-img { 
-    max-width: 100%; max-height: 80vh; border: 1px solid var(--gold); 
-    padding: 8px; background: #fff; box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    object-fit: contain;
-  }
-  .lb-close {
-    position: absolute; top: 20px; right: 30px; color: var(--parchment); font-size: 3rem;
-    cursor: pointer; z-index: 2200; font-family: 'Jost', sans-serif; font-weight: 300; transition: 0.3s;
-  }
-  .lb-close:hover { color: var(--gold-light); transform: rotate(90deg); }
-  .lb-nav-btn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    background: transparent; color: var(--gold-light); border: none;
-    font-size: 4rem; width: 80px; height: 120px; cursor: pointer;
-    transition: all 0.3s ease; z-index: 2100; font-family: 'Cormorant Garamond', serif;
-    display: flex; align-items: center; justify-content: center; opacity: 0.5;
-  }
-  .lb-nav-btn:hover { opacity: 1; background: rgba(255,255,255,0.03); }
-  .lb-prev { left: 0; }
-  .lb-next { right: 0; }
-  .lb-counter { 
-    color: var(--gold-light); margin-top: 20px; font-size: 0.8rem; letter-spacing: 3px; 
-    text-transform: uppercase; font-family: 'Jost', sans-serif;
-    border-bottom: 1px solid var(--gold); padding-bottom: 5px;
-  }
+        /* --- LIGHTBOX MODAL --- */
+        #lightbox {
+            display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; user-select: none;
+        }
+        .lb-content { position: relative; display: flex; flex-direction: column; align-items: center; width: 90%; height: 90%; }
+        #lb-img { 
+            max-width: 100%; max-height: 80vh; border: 1px solid var(--gold); 
+            padding: 10px; background: white; box-shadow: 0 0 50px rgba(0,0,0,0.5); object-fit: contain; 
+        }
 
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+        /* Navigacja w Lightboxie */
+        .lb-close {
+            position: absolute; top: 20px; right: 20px; color: var(--gold-light); 
+            font-size: 2.5rem; cursor: pointer; font-family: 'Jost', sans-serif; transition: 0.3s;
+        }
+        .lb-nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: transparent; color: var(--gold-light); border: none;
+            font-size: 4rem; width: 60px; height: 100px; cursor: pointer;
+            font-family: 'Cormorant Garamond', serif; transition: 0.3s; opacity: 0.6;
+        }
+        .lb-nav-btn:hover { opacity: 1; }
+        .lb-prev { left: 10px; }
+        .lb-next { right: 10px; }
+        .lb-counter { color: var(--gold-light); margin-top: 20px; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; }
 
-  @media (max-width: 768px) {
-    .lb-nav-btn { font-size: 2.5rem; width: 50px; }
-    .lb-close { top: 10px; right: 20px; font-size: 2.5rem; }
-  }
-</style>
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+
+        @media (max-width: 768px) {
+            .lb-nav-btn { font-size: 2.5rem; width: 40px; }
+            .lb-close { top: 10px; right: 10px; }
+        }
+    </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-    <a href="zjazdy.html" class="back-link">← Powrót do listy</a>
-  </div>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="zjazdy.html" class="back-link">← Powrót do listy</a>
+    </div>
 </nav>
 
 <article>
-  <header class="article-header">
-    <span class="meta-top">Archiwum Rodzinne • 1975</span>
-    <h1>I Zjazd: Modlin i Buraków</h1>
-  </header>
+    <header class="article-header">
+        <span class="meta-top">Archiwum Rodzinne • 1975</span>
+        <h1>I Zjazd: Modlin i Buraków</h1>
+    </header>
 
-  <div class="info-panel">
-    <div class="info-item"><strong>Data zjazdu</strong> 27-28 września 1975</div>
-    <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynku Ludzi Pracy, Modlin oraz Dom Sióstr Niepokalanek, Buraków</div>
-    <div class="info-item"><strong>Organizatorzy</strong> Tomasz i Zofia Ładomirscy</div>
-    <div class="info-item"><strong>Uczestnicy</strong> ok. 45 osób</div>
-  </div>
-
-  <div class="hero-container">
-    <img src="img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Zdjęcie grupowe I Zjazdu" class="main-img">
-  </div>
-
-  <section class="memories-section">
-    <h2 class="section-title">Wspomnienia i historie</h2>
-    <div class="memory-card">
-      <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę, pod koniec września 1975 roku, w Modlinie. Pamiętam to niesamowite poruszenie, że udało się zebrać tyle osób w jednym miejscu.</p>
-      <span class="memory-author">— M. Sz. (18.08.2013)</span>
+    <div class="info-panel">
+        <div class="info-item"><strong>Data zjazdu</strong> 27-28 września 1975</div>
+        <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynku Ludzi Pracy (Modlin) oraz Buraków</div>
+        <div class="info-item"><strong>Organizatorzy</strong> Tomasz i Zofia Ładomirscy</div>
+        <div class="info-item"><strong>Uczestnicy</strong> ok. 45 osób</div>
     </div>
-    <div class="memory-card">
-      <p>Dla mnie i mojej "świeżo upieczonej żony Barbary" była to jednocześnie podróż poślubna - 20.09.1975 braliśmy ślub. Nie mogliśmy sobie wymarzyć lepszego rozpoczęcia wspólnej drogi niż w gronie całej rodziny.</p>
-      <span class="memory-author">— M. R. (21.09.2019)</span>
-    </div>
-  </section>
 
-  <div class="gallery-wrapper">
-    <h2 class="section-title">Fotokronika</h2>
-    <div class="simple-gallery" id="gallery-container">
+    <div class="hero-container">
+        <img src="./img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Zdjęcie grupowe I Zjazdu" class="main-img">
+    </div>
+
+    <section class="memories-section">
+        <h2 class="section-title">Wspomnienia i historie</h2>
+        <div class="memory-card">
+            <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę, pod koniec września 1975 roku, w Modlinie. Większość jeszcze żyjących uczestników pamięta stryja Jędrka z Argentyny - zapalonego brydżystę...</p>
+            <span class="memory-author">— M. Sz. (18.08.2013)</span>
         </div>
-  </div>
+        <div class="memory-card">
+            <p>Dla mnie i mojej "świeżo upieczonej żony Barbary" była to jednocześnie podróż poślubna - 20.09.1975 braliśmy ślub.</p>
+            <span class="memory-author">— M. R. (21.09.2019)</span>
+        </div>
+    </section>
+
+    <div class="gallery-wrapper">
+        <h2 class="section-title">Fotokronika</h2>
+        <div class="simple-gallery" id="gallery-container"></div>
+    </div>
 </article>
 
 <div id="lightbox">
-  <span class="lb-close" onclick="closeLightbox()">&times;</span>
-  <button class="lb-nav-btn lb-prev" onclick="event.stopPropagation(); changePhoto(-1)">❮</button>
-  <div class="lb-content">
-    <img id="lb-img" src="" alt="Powiększenie" onclick="event.stopPropagation(); changePhoto(1)">
-    <div class="lb-counter" id="lb-counter"></div>
-  </div>
-  <button class="lb-nav-btn lb-next" onclick="event.stopPropagation(); changePhoto(1)">❯</button>
+    <span class="lb-close" onclick="closeLightbox()">&times;</span>
+    <button class="lb-nav-btn lb-prev" onclick="event.stopPropagation(); changePhoto(-1)">❮</button>
+    <div class="lb-content">
+        <img id="lb-img" src="" alt="Powiększenie" onclick="event.stopPropagation(); changePhoto(1)">
+        <div class="lb-counter" id="lb-counter"></div>
+    </div>
+    <button class="lb-nav-btn lb-next" onclick="event.stopPropagation(); changePhoto(1)">❯</button>
 </div>
 
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
 <script>
-  const zjazd_folder = 'zjazdi';
-  const liczba_zdjec = 38;
-  let currentPhotoIndex = 1;
+    const zjazd_folder = 'zjazdi';
+    const liczba_zdjec = 38; 
+    let currentIdx = 1;
 
-  const container = document.getElementById('gallery-container');
-  const lightbox = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lb-img');
-  const lbCounter = document.getElementById('lb-counter');
-  
-  // Generowanie miniatur
-  for (let i = 1; i <= liczba_zdjec; i++) {
-    const numerFoto = i.toString().padStart(2, '0');
-    const fullSrc = `img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${numerFoto}.jpg`;
+    const container = document.getElementById('gallery-container');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCounter = document.getElementById('lb-counter');
 
-    const wrapper = document.createElement('div');
-    wrapper.className = 'gallery-item';
-    
-    const img = document.createElement('img');
-    img.src = fullSrc;
-    img.alt = `Zdjęcie ${numerFoto}`;
-    img.loading = "lazy";
-    
-    wrapper.onclick = () => openLightbox(i);
-    wrapper.appendChild(img);
-    container.appendChild(wrapper);
-  }
+    // Generowanie galerii z obsługą błędnych ścieżek
+    for (let i = 1; i <= liczba_zdjec; i++) {
+        const nr = i.toString().padStart(2, '0');
+        const path = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
 
-  function openLightbox(index) {
-    currentPhotoIndex = index;
-    updateLightboxContent();
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-
-  function changePhoto(direction) {
-    currentPhotoIndex += direction;
-    if (currentPhotoIndex > liczba_zdjec) currentPhotoIndex = 1;
-    if (currentPhotoIndex < 1) currentPhotoIndex = liczba_zdjec;
-    updateLightboxContent();
-  }
-
-  function updateLightboxContent() {
-    const numerFoto = currentPhotoIndex.toString().padStart(2, '0');
-    lbImg.src = `img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${numerFoto}.jpg`;
-    lbCounter.textContent = `${currentPhotoIndex} / ${liczba_zdjec}`;
-  }
-
-  lightbox.onclick = (e) => { if (e.target === lightbox) closeLightbox(); };
-
-  document.addEventListener('keydown', (e) => {
-    if (lightbox.style.display === 'flex') {
-      if (e.key === "ArrowRight") changePhoto(1);
-      if (e.key === "ArrowLeft") changePhoto(-1);
-      if (e.key === "Escape") closeLightbox();
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        
+        const img = document.createElement('img');
+        img.src = path;
+        img.alt = `Zdjęcie ${nr}`;
+        img.loading = "lazy";
+        
+        // Jeśli zdjęcie nie istnieje, ukryj ramkę
+        img.onerror = function() { this.parentElement.style.display = 'none'; };
+        
+        div.onclick = () => openLightbox(i);
+        div.appendChild(img);
+        container.appendChild(div);
     }
-  });
+
+    function openLightbox(index) {
+        currentIdx = index;
+        updateLB();
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function changePhoto(dir) {
+        currentIdx += dir;
+        if (currentIdx > liczba_zdjec) currentIdx = 1;
+        if (currentIdx < 1) currentIdx = liczba_zdjec;
+        updateLB();
+    }
+
+    function updateLB() {
+        const nr = currentIdx.toString().padStart(2, '0');
+        lbImg.src = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+        lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
+    }
+
+    // Zamknięcie po kliknięciu w tło
+    lightbox.onclick = (e) => { if(e.target === lightbox) closeLightbox(); };
+
+    // Klawiatura
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+            if (e.key === "ArrowRight") changePhoto(1);
+            if (e.key === "ArrowLeft") changePhoto(-1);
+            if (e.key === "Escape") closeLightbox();
+        }
+    });
 </script>
 
 </body>
