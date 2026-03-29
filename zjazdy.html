@@ -3,126 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kronika Zjazdów | Klan L&K</title>
+<title>Zjazdy Rodzinne | Klan L&K</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
     --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-    --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
-    --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
-    --gold-light: #c8a96e; --line: rgba(122, 101, 72, 0.2);
-    --c-ladomirscy: #e6b422; --c-krainscy: #b32d2e; --c-domanscy: #2d7a2d;
+    --ink: #1e1a14; --gold: #9b7d4a; --gold-light: #c8a96e; --sepia: #7a6548;
+    --c-zolty: #ffcc00; --c-czerwony: #cc0000; --c-zielony: #2d7a2d;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; }
-  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
-  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
+  body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; }
+
+  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 15px 24px; }
   .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 1100; }
-  .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); }
-  .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s; }
+  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+  .menu-btn span { display: block; width: 25px; height: 1.5px; background: var(--gold-light); }
+
+  .drawer { position: fixed; top: 0; right: -300px; width: 300px; height: 100vh; background: var(--ink); z-index: 1050; padding: 80px 30px; transition: 0.3s; }
   .drawer.open { right: 0; }
   .drawer-links { list-style: none; }
-  .drawer-links li { margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-  .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
-  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
-  .overlay.active { opacity: 1; pointer-events: auto; }
-  main { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
-  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 30px; }
-  #map { height: 500px; width: 100%; border: 1px solid var(--sepia-pale); margin-bottom: 20px; z-index: 10; background: #f0f0f0; }
-  .map-legend { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 50px; background: var(--cream); padding: 15px; border: 1px solid var(--line); }
-  .leg-item { display: flex; align-items: center; gap: 8px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-  .dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid white; }
-  .z-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 15px; }
-  .z-card { background: var(--cream); padding: 25px; border: 1px solid var(--sepia-pale); text-decoration: none; color: inherit; transition: 0.3s; }
-  .z-card:hover { transform: translateY(-3px); border-color: var(--gold); background: var(--parchment); }
-  .z-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin: 5px 0; }
+  .drawer-links li { margin-bottom: 20px; }
+  .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1040; display: none; }
+  .overlay.active { display: block; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+  .s-title { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; text-align: center; margin-bottom: 30px; }
+  #map { height: 500px; width: 100%; border: 1px solid var(--sepia); margin-bottom: 20px; z-index: 1; background: #f0f0f0; }
+  
+  .legend { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; font-size: 0.8rem; }
+  .leg-item { display: flex; align-items: center; gap: 8px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.2); }
+
+  .z-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; }
+  .z-card { background: var(--cream); padding: 20px; border: 1px solid #ddd; text-decoration: none; color: inherit; transition: 0.2s; border-left: 5px solid #ccc; }
+  .z-card:hover { background: var(--parchment); transform: translateY(-2px); }
+  .z-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 5px; }
+  .z-card .meta { font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+
   .custom-pin { border-radius: 50%; border: 2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.3); }
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 40px; margin-top: 60px; font-size: 0.8rem; }
 </style>
 </head>
 <body>
+
 <div class="overlay" id="overlay"></div>
-<nav><div class="nav-inner"><a href="index.html" class="nav-logo">ARCHIWUM L&K</a><button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button></div></nav>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+    <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
 <aside class="drawer" id="drawer">
   <ul class="drawer-links">
     <li><a href="index.html">Strona Główna</a></li>
-    <li><a href="zjazdy.html" style="color:var(--gold-light)">Kronika Zjazdów</a></li>
+    <li><a href="zjazdy.html">Zjazdy</a></li>
     <li><a href="genealogia.html">Genealogia</a></li>
     <li><a href="pamiec.html">Pamięć</a></li>
   </ul>
 </aside>
+
 <main>
-  <h1 class="s-title">Kronika Zjazdów Rodzinnych</h1>
+  <h1 class="s-title">Kronika Zjazdów</h1>
   <div id="map"></div>
-  <div class="map-legend">
-    <div class="leg-item"><div class="dot" style="background:var(--c-ladomirscy)"></div><span>Ładomirscy</span></div>
-    <div class="leg-item"><div class="dot" style="background:var(--c-krainscy)"></div><span>Kraińscy</span></div>
-    <div class="leg-item"><div class="dot" style="background:var(--c-domanscy)"></div><span>Domańscy</span></div>
+  <div class="legend">
+    <div class="leg-item"><div class="dot" style="background:var(--c-zolty)"></div><span>Ładomirscy</span></div>
+    <div class="leg-item"><div class="dot" style="background:var(--c-czerwony)"></div><span>Kraińscy</span></div>
+    <div class="leg-item"><div class="dot" style="background:var(--c-zielony)"></div><span>Domańscy</span></div>
   </div>
   <div class="z-grid" id="z-container"></div>
 </main>
-<footer><p>Klan Ładomirskich i Kraińskich © 1975 – 2026</p></footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // Pełna baza 24 zjazdów
   const zData = [
-    { n: "I", p: "Modlin i Buraków-Wrzosów", d: "1975", c: [52.443, 20.690], t: 1, g: "Ładomirscy" },
-    { n: "II", p: "Szalejów Dolny", d: "1980", c: [50.435, 16.578], t: 2, g: "Kraińscy" },
-    { n: "III", p: "Jankowice", d: "1983", c: [50.155, 18.423], t: 3, g: "Domańscy" },
-    { n: "IV", p: "Trzebieszowice", d: "1985", c: [50.347, 16.782], t: 1, g: "Ładomirscy" },
-    { n: "V", p: "Trzebieszowice", d: "1987", c: [50.347, 16.782], t: 1, g: "Ładomirscy" },
-    { n: "VI", p: "Łopuszna", d: "1989", c: [49.482, 20.130], t: 3, g: "Domańscy" },
-    { n: "VII", p: "Piwniczna Zdrój", d: "1991", c: [49.435, 20.713], t: 3, g: "Domańscy" },
-    { n: "VIII", p: "Sorkwity", d: "1993", c: [53.839, 21.139], t: 3, g: "Domańscy" },
-    { n: "IX", p: "Dziwnów", d: "1995", c: [54.021, 14.736], t: 3, g: "Domańscy" },
-    { n: "X", p: "Bąblin", d: "1997", c: [52.684, 16.772], t: 3, g: "Domańscy" },
-    { n: "XI", p: "Myczkowce", d: "1999", c: [49.426, 22.408], t: 3, g: "Domańscy" },
-    { n: "XII", p: "Jarnołtówek", d: "2001", c: [50.288, 17.442], t: 3, g: "Domańscy" },
-    { n: "XIII", p: "Stawiska", d: "2003", c: [54.041, 23.059], t: 3, g: "Domańscy" },
-    { n: "XIV", p: "Wągrowiec", d: "2005", c: [52.807, 17.200], t: 3, g: "Domańscy" },
-    { n: "XV", p: "Bukowina Tatrzańska", d: "2007", c: [49.342, 20.106], t: 3, g: "Domańscy" },
-    { n: "XVI", p: "Okuninka", d: "2009", c: [51.488, 23.535], t: 3, g: "Domańscy" },
-    { n: "XVII", p: "Krościenko", d: "2011", c: [49.439, 20.443], t: 3, g: "Domańscy" },
-    { n: "XVIII", p: "Popowo - Letnisko", d: "2013", c: [52.540, 21.130], t: 3, g: "Domańscy" },
-    { n: "XIX", p: "Krynica Morska", d: "2015", c: [54.383, 19.444], t: 3, g: "Domańscy" },
-    { n: "XX", p: "Boszkowo", d: "2017", c: [51.943, 16.324], t: 3, g: "Domańscy" },
-    { n: "XXI", p: "Międzybrodzie Żywieckie", d: "2019", c: [49.774, 19.221], t: 3, g: "Domańscy" },
-    { n: "XXII", p: "Krzyże", d: "2022", c: [53.615, 21.579], t: 3, g: "Domańscy" },
-    { n: "XXIII", p: "Borowice", d: "2024", c: [50.793, 15.694], t: 3, g: "Domańscy" },
-    { n: "XXIV", p: "Bocheniec", d: "2026", c: [50.817, 20.268], t: 3, g: "Domańscy" }
+    { n: "I", p: "Modlin", d: "1975", c: [52.443, 20.690], g: "Ładomirscy" },
+    { n: "II", p: "Szalejów Dolny", d: "1980", c: [50.435, 16.578], g: "Ładomirscy" },
+    { n: "III", p: "Jankowice", d: "1983", c: [50.155, 18.423], g: "Ładomirscy" },
+    { n: "IV", p: "Trzebieszowice", d: "1985", c: [50.347, 16.782], g: "Ładomirscy" },
+    { n: "V", p: "Trzebieszowice", d: "1987", c: [50.347, 16.782], g: "Ładomirscy" },
+    { n: "VI", p: "Łopuszna", d: "1989", c: [49.482, 20.130], g: "Kraińscy" },
+    { n: "VII", p: "Piwniczna Zdrój", d: "1991", c: [49.435, 20.713], g: "Domańscy" },
+    { n: "VIII", p: "Sorkwity", d: "1993", c: [53.839, 21.139], g: "Kraińscy" },
+    { n: "IX", p: "Dziwnów", d: "1995", c: [54.021, 14.736], g: "Ładomirscy" },
+    { n: "X", p: "Bąblin", d: "1997", c: [52.684, 16.772], g: "Ładomirscy" },
+    { n: "XI", p: "Myczkowce", d: "1999", c: [49.426, 22.408], g: "Domańscy" },
+    { n: "XII", p: "Jarnołtówek", d: "2001", c: [50.288, 17.442], g: "Ładomirscy" },
+    { n: "XIII", p: "Stawiska", d: "2003", c: [54.041, 23.059], g: "Kraińscy" },
+    { n: "XIV", p: "Wągrowiec", d: "2005", c: [52.807, 17.200], g: "Ładomirscy" },
+    { n: "XV", p: "Bukowina Tatrzańska", d: "2007", c: [49.342, 20.106], g: "Kraińscy" },
+    { n: "XVI", p: "Okuninka", d: "2009", c: [51.488, 23.535], g: "Domańscy" },
+    { n: "XVII", p: "Krościenko", d: "2011", c: [49.439, 20.443], g: "Kraińscy" },
+    { n: "XVIII", p: "Popowo-Letnisko", d: "2013", c: [52.540, 21.130], g: "Ładomirscy" },
+    { n: "XIX", p: "Krynica Morska", d: "2015", c: [54.383, 19.444], g: "Kraińscy" },
+    { n: "XX", p: "Boszkowo", d: "2017", c: [51.943, 16.324], g: "Ładomirscy" },
+    { n: "XXI", p: "Międzybrodzie Żywieckie", d: "2019", c: [49.774, 19.221], g: "Kraińscy" },
+    { n: "XXII", p: "Krzyże", d: "2022", c: [53.615, 21.579], g: "Kraińscy" },
+    { n: "XXIII", p: "Borowice", d: "2024", c: [50.793, 15.694], g: "Ładomirscy" },
+    { n: "XXIV", p: "Bocheniec", d: "2026", c: [50.817, 20.268], g: "Kraińscy" }
   ];
 
-  const colors = { 1: "#e6b422", 2: "#b32d2e", 3: "#2d7a2d" };
+  const mapColors = { "Ładomirscy": "#ffcc00", "Kraińscy": "#cc0000", "Domańscy": "#2d7a2d" };
 
-  try {
-    const map = L.map('map').setView([52.1, 19.2], 6);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  const map = L.map('map').setView([52.1, 19.4], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    // Rysowanie granicy Polski (uproszczony obrys wektorowy dla pewności działania)
-    const polandBoundary = [[54.9,14.1],[54.9,19.0],[54.4,19.6],[54.5,22.8],[52.3,24.1],[50.2,23.5],[49.0,22.7],[49.5,18.9],[49.7,15.0],[51.0,14.2],[54.9,14.1]];
-    L.polyline(polandBoundary, {color: '#7a6548', weight: 5, opacity: 0.5}).addTo(map);
-
-    const container = document.getElementById('z-container');
-    zData.forEach((z, i) => {
-      const icon = L.divIcon({
-        className: 'custom-div-icon',
-        html: `<div class="custom-pin" style="background:${colors[z.t]}; width:14px; height:14px;"></div>`,
-        iconSize: [14, 14], iconAnchor: [7, 7]
-      });
-      L.marker(z.c, {icon}).addTo(map).bindPopup(`<b>${z.n} Zjazd: ${z.p}</b><br>${z.d}`);
-      
-      container.innerHTML += `
-        <a href="zjazd${i+1}.html" class="z-card">
-          <div style="font-size:0.7rem; color:var(--sepia)">${z.d}</div>
-          <h3 style="color:${colors[z.t]}">${z.n} Zjazd</h3>
-          <p style="font-size:0.9rem">${z.p}</p>
-        </a>`;
+  const container = document.getElementById('z-container');
+  zData.forEach((z, i) => {
+    const color = mapColors[z.g];
+    const icon = L.divIcon({
+      className: 'custom-icon',
+      html: `<div class="custom-pin" style="background:${color}; width:14px; height:14px;"></div>`,
+      iconSize: [14, 14], iconAnchor: [7, 7]
     });
-  } catch (err) { console.log("Mapa błąd: ", err); }
+
+    L.marker(z.c, {icon}).addTo(map).bindPopup(`<b>${z.n} Zjazd: ${z.p}</b> (${z.d})<br>Gałąź: ${z.g}`);
+
+    container.innerHTML += `
+      <a href="zjazd${i+1}.html" class="z-card" style="border-left-color:${color}">
+        <div class="meta" style="color:${color}">${z.d} | ${z.g}</div>
+        <h3>${z.n} Zjazd: ${z.p}</h3>
+      </a>`;
+  });
 
   const btn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
   btn.onclick = () => { drw.classList.toggle('open'); ovr.classList.toggle('active'); };
