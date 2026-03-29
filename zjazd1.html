@@ -1,232 +1,239 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I Zjazd: Modlin i Buraków | Archiwum L&K</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-    --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
-    --line: rgba(122, 101, 72, 0.2);
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria - Archiwum L&K</title>
+    <style>
+        :root {
+            --gold: #c5a059;
+            --gold-light: #e2c792;
+            --dark: #1e1a14;
+            --bg: #fdfaf6;
+        }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            color: var(--dark);
+        }
 
-  /* NAWIGACJA */
-  nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
-  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-  .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        /* Siatka galerii */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-  /* NAGŁÓWEK I PANEL INFO */
-  .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
-  .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
-  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+        .gallery-item {
+            aspect-ratio: 3/2;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
 
-  .info-panel { 
-    max-width: 850px; margin: 0 auto 50px; padding: 30px; 
-    background: var(--parchment); border-radius: 4px;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
-  }
-  .info-item { font-size: 0.9rem; }
-  .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
 
-  .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
-  .main-img { width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-  /* WSPOMNIENIA */
-  .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
-  .memory-card { 
-    border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; 
-    font-style: italic; position: relative;
-  }
-  .memory-card::before { 
-    content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; 
-    color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; 
-  }
-  .memory-author { display: block; margin-top: 15px; font-style: normal; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--sepia); }
+        /* --- LIGHTBOX (Nakładka) --- */
+        #lightbox {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0,0,0,0.95); 
+            justify-content: center; 
+            align-items: center;
+            user-select: none;
+            touch-action: none; /* Ważne dla gestów swipe */
+        }
 
-  /* GALERIA MINIATUR */
-  .gallery-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
-  .simple-gallery { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-    grid-auto-rows: 180px;
-    gap: 12px; 
-  }
-  .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
-  .gallery-item img { 
-    width: 100%; height: 100%; object-fit: cover; 
-    transition: all 0.5s ease; opacity: 0.75; filter: grayscale(40%); 
-  }
-  .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
+        .lb-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            height: 90%;
+            justify-content: center;
+        }
 
-  /* LIGHTBOX - NOWA FUNKCJONALNOŚĆ */
-  #lightbox {
-    display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95); justify-content: center; align-items: center;
-    user-select: none;
-  }
-  
-  .lb-content { position: relative; display: flex; flex-direction: column; align-items: center; max-width: 90%; max-height: 90%; }
-  
-  #lightbox img { 
-    max-width: 100%; max-height: 85vh; border: 3px solid white; 
-    box-shadow: 0 0 40px rgba(0,0,0,0.5); cursor: pointer; 
-  }
+        #lb-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border: 4px solid white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            object-fit: contain;
+            cursor: pointer;
+        }
 
-  /* Przycisk zamknięcia */
-  .lb-close {
-    position: absolute; top: -40px; right: 0; color: white; font-size: 2rem;
-    cursor: pointer; font-family: sans-serif; transition: 0.3s;
-  }
-  .lb-close:hover { color: var(--gold-light); }
+        /* Przyciski nawigacyjne */
+        .lb-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: none;
+            font-size: 3rem;
+            width: 70px;
+            height: 100px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-  /* Nawigacja strzałkami na ekranie */
-  .lb-nav-btn {
-    position: fixed; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3);
-    color: white; border: none; font-size: 3rem; padding: 20px; cursor: pointer;
-    transition: 0.3s; border-radius: 5px; font-family: 'Cormorant Garamond', serif;
-  }
-  .lb-nav-btn:hover { background: rgba(0,0,0,0.8); color: var(--gold-light); }
-  .lb-prev { left: 10px; }
-  .lb-next { right: 10px; }
+        .lb-nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            color: var(--gold-light);
+        }
 
-  /* Licznik zdjęć */
-  .lb-counter { color: white; margin-top: 15px; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; }
+        .lb-prev { left: 0; border-radius: 0 10px 10px 0; }
+        .lb-next { right: 0; border-radius: 10px 0 0 10px; }
 
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
-</style>
+        .lb-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3.5rem;
+            cursor: pointer;
+            z-index: 2200;
+            line-height: 1;
+        }
+
+        .lb-counter {
+            color: white;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            background: rgba(0,0,0,0.6);
+            padding: 6px 18px;
+            border-radius: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .lb-nav-btn { width: 50px; height: 70px; font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-    <a href="zjazdy.html" class="back-link">← Powrót do listy</a>
-  </div>
-</nav>
+    <div class="gallery-grid" id="gallery-container">
+        </div>
 
-<article>
-  <header class="article-header">
-    <span class="meta-top">Archiwum Rodzinne • 1975</span>
-    <h1>I Zjazd: Modlin i Buraków</h1>
-  </header>
-
-  <div class="info-panel">
-    <div class="info-item"><strong>Data zjazdu</strong> 27-28 września 1975</div>
-    <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynku Ludzi Pracy, Dom Wycieczkowy (Modlin) oraz Dom Sióstr Niepokalanek (Buraków-Wrzosów)</div>
-    <div class="info-item"><strong>Organizatorzy</strong> Tomasz i Zofia Ładomirscy</div>
-    <div class="info-item"><strong>Uczestnicy</strong> ok. 45 osób</div>
-  </div>
-
-  <div class="hero-container">
-    <img src="img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Zdjęcie grupowe I Zjazdu" class="main-img">
-  </div>
-
-  <section class="memories-section">
-    <h2 class="section-title">Wspomnienia i historie</h2>
-    <div class="memory-card">
-      <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę, pod koniec września 1975 roku, w Modlinie...</p>
-      <span class="memory-author">— M. Sz. (18.08.2013)</span>
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="lb-close" onclick="closeLightbox()">&times;</span>
+        
+        <button class="lb-nav-btn lb-prev" onclick="event.stopPropagation(); changePhoto(-1)">❮</button>
+        
+        <div class="lb-content">
+            <img id="lb-img" src="" alt="Powiększenie" onclick="event.stopPropagation(); changePhoto(1)">
+            <div class="lb-counter" id="lb-counter"></div>
+        </div>
+        
+        <button class="lb-nav-btn lb-next" onclick="event.stopPropagation(); changePhoto(1)">❯</button>
     </div>
-    <div class="memory-card">
-      <p>Dla mnie i mojej "świeżo upieczonej żony Barbary" była to jednocześnie podróż poślubna - 20.09.1975 braliśmy ślub.</p>
-      <span class="memory-author">— M. R. (21.09.2019)</span>
-    </div>
-  </section>
 
-  <div class="gallery-wrapper">
-    <h2 class="section-title">Fotokronika</h2>
-    <div class="simple-gallery" id="gallery-container"></div>
-  </div>
-</article>
+    <script>
+        // --- KONFIGURACJA ---
+        const zjazd_folder = 'zjazdi'; // nazwa podfolderu
+        const liczba_zdjec = 38;       // liczba plików w folderze
+        let currentPhotoIndex = 1;
 
-<div id="lightbox">
-  <span class="lb-close" onclick="closeLightbox()">&times;</span>
-  <button class="lb-nav-btn lb-prev" onclick="changePhoto(-1)">❮</button>
-  <div class="lb-content">
-    <img id="lb-img" src="" alt="Powiększenie" onclick="changePhoto(1)">
-    <div class="lb-counter" id="lb-counter"></div>
-  </div>
-  <button class="lb-nav-btn lb-next" onclick="changePhoto(1)">❯</button>
-</div>
+        const container = document.getElementById('gallery-container');
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        const lbCounter = document.getElementById('lb-counter');
 
-<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
+        // 1. Generowanie miniatur
+        for (let i = 1; i <= liczba_zdjec; i++) {
+            const numerFoto = i.toString().padStart(2, '0');
+            const fullSrc = `img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${numerFoto}.jpg`;
 
-<script>
-  const zjazd_folder = 'zjazdi';
-  const liczba_zdjec = 38;
-  let currentPhotoIndex = 1;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'gallery-item';
+            
+            const img = document.createElement('img');
+            img.src = fullSrc;
+            img.alt = `Zdjęcie ${i}`;
+            img.loading = "lazy";
+            
+            wrapper.onclick = () => openLightbox(i);
+            wrapper.appendChild(img);
+            container.appendChild(wrapper);
+        }
 
-  const container = document.getElementById('gallery-container');
-  const lightbox = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lb-img');
-  const lbCounter = document.getElementById('lb-counter');
-  
-  // Generowanie galerii
-  for (let i = 1; i <= liczba_zdjec; i++) {
-    const numerFoto = i.toString().padStart(2, '0');
-    const fullSrc = `img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${numerFoto}.jpg`;
+        // 2. Obsługa Lightboxa
+        function openLightbox(index) {
+            currentPhotoIndex = index;
+            updateLightboxContent();
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // blokada przewijania strony
+        }
 
-    const wrapper = document.createElement('div');
-    wrapper.className = 'gallery-item';
-    
-    const img = document.createElement('img');
-    img.src = fullSrc;
-    img.alt = `Zdjęcie ${numerFoto}`;
-    img.loading = "lazy";
-    
-    wrapper.onclick = () => openLightbox(i);
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-    wrapper.appendChild(img);
-    container.appendChild(wrapper);
-  }
+        function changePhoto(direction) {
+            currentPhotoIndex += direction;
+            if (currentPhotoIndex > liczba_zdjec) currentPhotoIndex = 1;
+            if (currentPhotoIndex < 1) currentPhotoIndex = liczba_zdjec;
+            updateLightboxContent();
+        }
 
-  function openLightbox(index) {
-    currentPhotoIndex = index;
-    updateLightboxContent();
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Blokada przewijania tła
-  }
+        function updateLightboxContent() {
+            const numerFoto = currentPhotoIndex.toString().padStart(2, '0');
+            lbImg.src = `img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${numerFoto}.jpg`;
+            lbCounter.textContent = `${currentPhotoIndex} / ${liczba_zdjec}`;
+        }
 
-  function closeLightbox() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
+        // 3. Sterowanie klawiaturą
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === "ArrowRight") changePhoto(1);
+                if (e.key === "ArrowLeft") changePhoto(-1);
+                if (e.key === "Escape") closeLightbox();
+            }
+        });
 
-  function changePhoto(direction) {
-    currentPhotoIndex += direction;
-    if (currentPhotoIndex > liczba_zdjec) currentPhotoIndex = 1;
-    if (currentPhotoIndex < 1) currentPhotoIndex = liczba_zdjec;
-    updateLightboxContent();
-  }
+        // 4. Obsługa gestów swipe na telefonach
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
 
-  function updateLightboxContent() {
-    const numerFoto = currentPhotoIndex.toString().padStart(2, '0');
-    lbImg.src = `img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${numerFoto}.jpg`;
-    lbCounter.textContent = `${currentPhotoIndex} / ${liczba_zdjec}`;
-  }
-
-  // Zamknięcie po kliknięciu poza zdjęcie
-  lightbox.onclick = function(e) {
-    if (e.target === lightbox) closeLightbox();
-  };
-
-  // Obsługa klawiatury (strzałki i Esc)
-  document.addEventListener('keydown', function(e) {
-    if (lightbox.style.display === 'flex') {
-      if (e.key === "ArrowRight") changePhoto(1);
-      if (e.key === "ArrowLeft") changePhoto(-1);
-      if (e.key === "Escape") closeLightbox();
-    }
-  });
-</script>
+        lightbox.addEventListener('touchend', e => {
+            let touchEndX = e.changedTouches[0].screenX;
+            let diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > 50) { // próg czułości
+                if (diff > 0) changePhoto(1);  // przesunięcie w lewo -> następne
+                else changePhoto(-1);          // przesunięcie w prawo -> poprzednie
+            }
+        }, {passive: true});
+    </script>
 
 </body>
 </html>
