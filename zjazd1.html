@@ -66,12 +66,39 @@
   }
   .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-  /* LIGHTBOX */
+  /* LIGHTBOX - NOWA FUNKCJONALNOŚĆ */
   #lightbox {
     display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95); justify-content: center; align-items: center; cursor: zoom-out;
+    background: rgba(0,0,0,0.95); justify-content: center; align-items: center;
+    user-select: none;
   }
-  #lightbox img { max-width: 90%; max-height: 90%; border: 3px solid white; box-shadow: 0 0 40px rgba(0,0,0,0.5); }
+  
+  .lb-content { position: relative; display: flex; flex-direction: column; align-items: center; max-width: 90%; max-height: 90%; }
+  
+  #lightbox img { 
+    max-width: 100%; max-height: 85vh; border: 3px solid white; 
+    box-shadow: 0 0 40px rgba(0,0,0,0.5); cursor: pointer; 
+  }
+
+  /* Przycisk zamknięcia */
+  .lb-close {
+    position: absolute; top: -40px; right: 0; color: white; font-size: 2rem;
+    cursor: pointer; font-family: sans-serif; transition: 0.3s;
+  }
+  .lb-close:hover { color: var(--gold-light); }
+
+  /* Nawigacja strzałkami na ekranie */
+  .lb-nav-btn {
+    position: fixed; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3);
+    color: white; border: none; font-size: 3rem; padding: 20px; cursor: pointer;
+    transition: 0.3s; border-radius: 5px; font-family: 'Cormorant Garamond', serif;
+  }
+  .lb-nav-btn:hover { background: rgba(0,0,0,0.8); color: var(--gold-light); }
+  .lb-prev { left: 10px; }
+  .lb-next { right: 10px; }
+
+  /* Licznik zdjęć */
+  .lb-counter { color: white; margin-top: 15px; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; }
 
   footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 </style>
@@ -104,12 +131,10 @@
 
   <section class="memories-section">
     <h2 class="section-title">Wspomnienia i historie</h2>
-    
     <div class="memory-card">
-      <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę, pod koniec września 1975 roku, w Modlinie. Większość jeszcze żyjących uczestników pamięta stryja Jędrka z Argentyny - zapalonego brydżystę, który dzielnie licytował i prowadził rozgrywki bez mała całą noc z młodszymi od siebie, nie gardząc polskimi trunkami. Innym niezapomnianym wrażeniem było podpuszczenie Krystyny Filipek, aby powitała się z wszystkimi klientami lokalu, w którym odbywało się śniadanie. Kuzynka ochoczo zaczęła się całować także z obcymi. Dopiero duże zdziwienie tychże oraz śmiech prowodyrów sprowadził Krysię na ziemię (przypis red. - kolejne Zjazdy miały zapewnioną wyłączność w wynajmowanym ośrodku).</p>
+      <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę, pod koniec września 1975 roku, w Modlinie...</p>
       <span class="memory-author">— M. Sz. (18.08.2013)</span>
     </div>
-
     <div class="memory-card">
       <p>Dla mnie i mojej "świeżo upieczonej żony Barbary" była to jednocześnie podróż poślubna - 20.09.1975 braliśmy ślub.</p>
       <span class="memory-author">— M. R. (21.09.2019)</span>
@@ -122,21 +147,30 @@
   </div>
 </article>
 
-<div id="lightbox" onclick="this.style.display='none'"><img src="" alt="Powiększenie"></div>
+<div id="lightbox">
+  <span class="lb-close" onclick="closeLightbox()">&times;</span>
+  <button class="lb-nav-btn lb-prev" onclick="changePhoto(-1)">❮</button>
+  <div class="lb-content">
+    <img id="lb-img" src="" alt="Powiększenie" onclick="changePhoto(1)">
+    <div class="lb-counter" id="lb-counter"></div>
+  </div>
+  <button class="lb-nav-btn lb-next" onclick="changePhoto(1)">❯</button>
+</div>
 
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
 <script>
-  // --- KONFIGURACJA GALERII ---
-  const zjazd_folder = 'zjazdi'; // Folder z plikami zdjęć
-  const liczba_zdjec = 38;        // Liczba zdjęć w folderze (zgodnie z listą plików)
+  const zjazd_folder = 'zjazdi';
+  const liczba_zdjec = 38;
+  let currentPhotoIndex = 1;
 
   const container = document.getElementById('gallery-container');
   const lightbox = document.getElementById('lightbox');
-  const lightboxImg = lightbox.querySelector('img');
+  const lbImg = document.getElementById('lb-img');
+  const lbCounter = document.getElementById('lb-counter');
   
+  // Generowanie galerii
   for (let i = 1; i <= liczba_zdjec; i++) {
-    // Formatowanie numeru: 01, 02... 10...
     const numerFoto = i.toString().padStart(2, '0');
     const fullSrc = `img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${numerFoto}.jpg`;
 
@@ -145,17 +179,53 @@
     
     const img = document.createElement('img');
     img.src = fullSrc;
-    img.alt = `Zjazd I - Zdjęcie ${numerFoto}`;
+    img.alt = `Zdjęcie ${numerFoto}`;
     img.loading = "lazy";
     
-    wrapper.onclick = () => {
-        lightboxImg.src = fullSrc;
-        lightbox.style.display = 'flex';
-    };
+    wrapper.onclick = () => openLightbox(i);
 
     wrapper.appendChild(img);
     container.appendChild(wrapper);
   }
+
+  function openLightbox(index) {
+    currentPhotoIndex = index;
+    updateLightboxContent();
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Blokada przewijania tła
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  function changePhoto(direction) {
+    currentPhotoIndex += direction;
+    if (currentPhotoIndex > liczba_zdjec) currentPhotoIndex = 1;
+    if (currentPhotoIndex < 1) currentPhotoIndex = liczba_zdjec;
+    updateLightboxContent();
+  }
+
+  function updateLightboxContent() {
+    const numerFoto = currentPhotoIndex.toString().padStart(2, '0');
+    lbImg.src = `img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${numerFoto}.jpg`;
+    lbCounter.textContent = `${currentPhotoIndex} / ${liczba_zdjec}`;
+  }
+
+  // Zamknięcie po kliknięciu poza zdjęcie
+  lightbox.onclick = function(e) {
+    if (e.target === lightbox) closeLightbox();
+  };
+
+  // Obsługa klawiatury (strzałki i Esc)
+  document.addEventListener('keydown', function(e) {
+    if (lightbox.style.display === 'flex') {
+      if (e.key === "ArrowRight") changePhoto(1);
+      if (e.key === "ArrowLeft") changePhoto(-1);
+      if (e.key === "Escape") closeLightbox();
+    }
+  });
 </script>
 
 </body>
