@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VI Zjazd – Łopuszna | Archiwum L&K</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6; --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e; --line: rgba(122, 101, 72, 0.2); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+  nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+  .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+  .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+  .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 400; line-height: 1.1; margin-bottom: 20px; }
+  .subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; color: var(--sepia); }
+  .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
+  .main-img { width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+  .content-wrapper { max-width: 800px; margin: 0 auto; padding: 0 24px 100px; }
+  .info-box { background: var(--cream); padding: 30px; border: 1px solid var(--line); margin-bottom: 40px; font-size: 0.95rem; }
+  .info-box strong { color: var(--sepia); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+  .content-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin: 50px 0 20px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+  .simple-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin: 40px 0; }
+  .simple-gallery img { width: 100%; height: 200px; object-fit: cover; border: 1px solid var(--line); padding: 5px; background: white; transition: 0.3s; }
+  .simple-gallery img:hover { transform: scale(1.02); border-color: var(--gold); }
+  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+    <a href="zjazdy.html" class="back-link">← Powrót do listy</a>
+  </div>
+</nav>
+
+<article>
+  <header class="article-header">
+    <span class="meta-top">VI Zjazd Rodzinny • 1989</span>
+    <h1>Łopuszna</h1>
+    <p class="subtitle">"W sercu Gorców"</p>
+  </header>
+
+  <div class="hero-container">
+    <img src="img/zjazdy/zjazdvi/foto_0.svg" alt="Zdjęcie grupowe" class="main-img">
+  </div>
+
+  <div class="content-wrapper">
+    <div class="info-box">
+      <p><strong>Data:</strong> wrzesień 1989</p>
+      <p><strong>Miejsce:</strong> Dom Kultury Wędkarskiej; Łopuszna</p>
+      <p><strong>Organizatorzy:</strong> Andrzej i Helena Wiszniewscy</p>
+      <p><strong>Uczestników:</strong> ponad 100</p>
+    </div>
+
+    <div class="content-text">
+      <h2>Relacja i dokumenty</h2>
+      <p>Podpisy uczestników VI Zjazdu w Łopusznej stanowią cenną pamiątkę tego licznego spotkania w górskiej scenerii.</p>
+      
+      <div class="simple-gallery">
+        <script>
+          for(let i=1; i<=41; i++) {
+            document.write(`<img src="img/zjazdy/zjazdvi/foto_${i}.jpg" alt="Foto ${i}" loading="lazy">`);
+          }
+        </script>
+      </div>
+    </div>
+  </div>
+</article>
+
+<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
+</body>
+</html>
