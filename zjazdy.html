@@ -3,48 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zjazdy Rodzinne | Klan L&K</title>
+<title>Kronika Zjazdów | Klan Ładomirskich i Kraińskich</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
-    --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-    --ink: #1e1a14; --gold: #9b7d4a; --gold-light: #c8a96e; --sepia: #7a6548;
-    --c-zolty: #ffcc00; --c-czerwony: #cc0000; --c-zielony: #2d7a2d;
+    --cream: #f8f4ee;
+    --parchment: #ede8df;
+    --warm-white: #fdfaf6;
+    --ink: #1e1a14;
+    --ink-light: #3d3628;
+    --sepia: #7a6548;
+    --sepia-light: #b09a7e;
+    --sepia-pale: #e8ddd0;
+    --gold: #9b7d4a;
+    --gold-light: #c8a96e;
+    --line: rgba(122, 101, 72, 0.2);
+    /* Kolory Gałęzi ze starej strony */
+    --c-zolty: #ffcc00;
+    --c-czerwony: #cc0000;
+    --c-zielony: #2d7a2d;
   }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; }
+  body { 
+    font-family: 'Jost', sans-serif; 
+    background-color: var(--warm-white); 
+    color: var(--ink); 
+    line-height: 1.7; 
+    -webkit-font-smoothing: antialiased;
+  }
 
-  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; }
-  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 15px 24px; }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
-  .menu-btn span { display: block; width: 25px; height: 1.5px; background: var(--gold-light); }
+  /* NAVIGATION - IDENTYCZNA JAK W INDEX.HTML */
+  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 2px; font-weight: 400; }
+  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; padding: 5px; }
+  .menu-btn span { display: block; width: 28px; height: 1px; background: var(--gold-light); transition: 0.3s; }
 
-  .drawer { position: fixed; top: 0; right: -300px; width: 300px; height: 100vh; background: var(--ink); z-index: 1050; padding: 80px 30px; transition: 0.3s; }
+  /* DRAWER */
+  .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
   .drawer.open { right: 0; }
   .drawer-links { list-style: none; }
-  .drawer-links li { margin-bottom: 20px; }
-  .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1040; display: none; }
+  .drawer-links li { margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; }
+  .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; }
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(3px); z-index: 1040; display: none; }
   .overlay.active { display: block; }
 
-  main { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
-  .s-title { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; text-align: center; margin-bottom: 30px; }
-  #map { height: 500px; width: 100%; border: 1px solid var(--sepia); margin-bottom: 20px; z-index: 1; background: #f0f0f0; }
+  /* HEADER SEKCJI */
+  main { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
+  .s-label { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--sepia-light); text-align: center; display: block; margin-bottom: 15px; }
+  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.2rem); text-align: center; margin-bottom: 50px; font-weight: 400; }
+
+  /* MAPA - STYLIZACJA RETRO */
+  #map { 
+    height: 550px; width: 100%; border: 1px solid var(--sepia-pale); 
+    margin-bottom: 25px; z-index: 1; border-radius: 2px;
+    filter: sepia(15%) contrast(95%) brightness(98%);
+  }
   
-  .legend { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; font-size: 0.8rem; }
-  .leg-item { display: flex; align-items: center; gap: 8px; }
-  .dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.2); }
+  .legend { 
+    display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; 
+    margin-bottom: 60px; padding: 20px; background: var(--cream); 
+    border: 1px solid var(--line); border-radius: 4px;
+  }
+  .leg-item { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--sepia); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); }
 
-  .z-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; }
-  .z-card { background: var(--cream); padding: 20px; border: 1px solid #ddd; text-decoration: none; color: inherit; transition: 0.2s; border-left: 5px solid #ccc; }
-  .z-card:hover { background: var(--parchment); transform: translateY(-2px); }
-  .z-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 5px; }
-  .z-card .meta { font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+  /* GRID KART */
+  .z-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+  .z-card { 
+    background: var(--cream); padding: 35px; border: 1px solid var(--line); 
+    text-decoration: none; color: inherit; transition: all 0.4s ease; 
+    display: flex; flex-direction: column; position: relative; overflow: hidden;
+  }
+  .z-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #ccc; }
+  .z-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(122, 101, 72, 0.1); }
+  
+  .z-card .meta { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+  .z-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 10px; line-height: 1.2; font-weight: 500; }
+  .z-card .place { font-size: 0.9rem; color: var(--ink-light); font-style: italic; }
 
-  .custom-pin { border-radius: 50%; border: 2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.3); }
+  /* LEAFLET POPUP STYLING */
+  .leaflet-popup-content-wrapper { background: var(--cream); font-family: 'Jost', sans-serif; border-radius: 2px; color: var(--ink); }
+  .leaflet-popup-tip { background: var(--cream); }
+  .custom-pin { border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
+  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.8rem; margin-top: 100px; letter-spacing: 1px; }
 </style>
 </head>
 <body>
@@ -52,7 +98,7 @@
 <div class="overlay" id="overlay"></div>
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+    <a href="index.html" class="nav-logo">ARCHIWUM RODZINNE</a>
     <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -60,22 +106,30 @@
 <aside class="drawer" id="drawer">
   <ul class="drawer-links">
     <li><a href="index.html">Strona Główna</a></li>
-    <li><a href="zjazdy.html">Zjazdy</a></li>
+    <li><a href="zjazdy.html" style="color:var(--gold-light)">Zjazdy Rodzinne</a></li>
     <li><a href="genealogia.html">Genealogia</a></li>
     <li><a href="pamiec.html">Pamięć</a></li>
   </ul>
 </aside>
 
 <main>
-  <h1 class="s-title">Kronika Zjazdów</h1>
+  <span class="s-label">Pół wieku tradycji</span>
+  <h1 class="s-title">Kronika Zjazdów Rodzinnych</h1>
+  
   <div id="map"></div>
+  
   <div class="legend">
     <div class="leg-item"><div class="dot" style="background:var(--c-zolty)"></div><span>Ładomirscy</span></div>
     <div class="leg-item"><div class="dot" style="background:var(--c-czerwony)"></div><span>Kraińscy</span></div>
     <div class="leg-item"><div class="dot" style="background:var(--c-zielony)"></div><span>Domańscy</span></div>
   </div>
+
   <div class="z-grid" id="z-container"></div>
 </main>
+
+<footer>
+  <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+</footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -108,7 +162,8 @@
 
   const mapColors = { "Ładomirscy": "#ffcc00", "Kraińscy": "#cc0000", "Domańscy": "#2d7a2d" };
 
-  const map = L.map('map').setView([52.1, 19.4], 6);
+  // MAPA
+  const map = L.map('map', { scrollWheelZoom: false }).setView([52.1, 19.4], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
   const container = document.getElementById('z-container');
@@ -116,21 +171,24 @@
     const color = mapColors[z.g];
     const icon = L.divIcon({
       className: 'custom-icon',
-      html: `<div class="custom-pin" style="background:${color}; width:14px; height:14px;"></div>`,
-      iconSize: [14, 14], iconAnchor: [7, 7]
+      html: `<div class="custom-pin" style="background:${color}; width:16px; height:16px;"></div>`,
+      iconSize: [16, 16], iconAnchor: [8, 8]
     });
 
-    L.marker(z.c, {icon}).addTo(map).bindPopup(`<b>${z.n} Zjazd: ${z.p}</b> (${z.d})<br>Gałąź: ${z.g}`);
+    L.marker(z.c, {icon}).addTo(map)
+      .bindPopup(`<div style="padding:5px"><b>${z.n} Zjazd Rodzinny</b><br>${z.p}, ${z.d}<br><br><a href="zjazd${i+1}.html" style="color:var(--gold); text-decoration:none; font-weight:600; font-size:11px; text-transform:uppercase;">Otwórz Archiwum →</a></div>`);
 
     container.innerHTML += `
       <a href="zjazd${i+1}.html" class="z-card" style="border-left-color:${color}">
-        <div class="meta" style="color:${color}">${z.d} | ${z.g}</div>
-        <h3>${z.n} Zjazd: ${z.p}</h3>
+        <div class="meta" style="color:${color}">${z.d} — ${z.g}</div>
+        <h3>${z.n} Zjazd Rodzinny</h3>
+        <div class="place">${z.p}</div>
       </a>`;
   });
 
+  // MENU DRAWER
   const btn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
-  btn.onclick = () => { drw.classList.toggle('open'); ovr.classList.toggle('active'); };
+  btn.onclick = () => { drw.classList.add('open'); ovr.classList.add('active'); };
   ovr.onclick = () => { drw.classList.remove('open'); ovr.classList.remove('active'); };
 </script>
 </body>
