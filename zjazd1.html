@@ -22,11 +22,12 @@
   .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
   .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-  /* NAGŁÓWEK I PANEL INFO */
+  /* NAGŁÓWEK */
   .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
   .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
   h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
 
+  /* PANEL INFO */
   .info-panel { 
     max-width: 850px; margin: 0 auto 50px; padding: 30px; 
     background: var(--parchment); border-radius: 4px;
@@ -35,12 +36,13 @@
   .info-item { font-size: 0.9rem; }
   .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
 
+  /* GŁÓWNE ZDJĘCIE */
   .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
   .main-img { width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
   /* WSPOMNIENIA */
   .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; border-bottom: 1px solid var(--line); padding-bottom: 20px; }
   .memory-card { 
     border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; 
     font-style: italic; position: relative;
@@ -62,50 +64,40 @@
   .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
   .gallery-item img { 
     width: 100%; height: 100%; object-fit: cover; 
-    transition: all 0.5s ease; opacity: 0.75; filter: grayscale(40%); 
+    transition: all 0.5s ease; opacity: 0.8; filter: grayscale(30%); 
   }
-  .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
+  .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.05); }
 
-  /* --- ULEPSZONY LIGHTBOX (ZGODNY Z DESIGNEM) --- */
+  /* LIGHTBOX */
   #lightbox {
     display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center;
     user-select: none; touch-action: none;
   }
-  
   .lb-content { 
     position: relative; display: flex; flex-direction: column; align-items: center; 
     width: 90%; height: 90%; justify-content: center;
   }
-  
   #lb-img { 
     max-width: 100%; max-height: 80vh; border: 1px solid var(--gold); 
     padding: 8px; background: #fff; box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    object-fit: contain; transition: 0.3s;
+    object-fit: contain;
   }
-
-  /* Zamknięcie - pasujące do nawigacji */
   .lb-close {
     position: absolute; top: 20px; right: 30px; color: var(--parchment); font-size: 3rem;
     cursor: pointer; z-index: 2200; font-family: 'Jost', sans-serif; font-weight: 300; transition: 0.3s;
   }
   .lb-close:hover { color: var(--gold-light); transform: rotate(90deg); }
-
-  /* Nawigacja strzałkami - elegancka i widoczna */
   .lb-nav-btn {
     position: absolute; top: 50%; transform: translateY(-50%);
     background: transparent; color: var(--gold-light); border: none;
     font-size: 4rem; width: 80px; height: 120px; cursor: pointer;
     transition: all 0.3s ease; z-index: 2100; font-family: 'Cormorant Garamond', serif;
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0.6;
+    display: flex; align-items: center; justify-content: center; opacity: 0.5;
   }
   .lb-nav-btn:hover { opacity: 1; background: rgba(255,255,255,0.03); }
-  
   .lb-prev { left: 0; }
   .lb-next { right: 0; }
-
-  /* Licznik zdjęć */
   .lb-counter { 
     color: var(--gold-light); margin-top: 20px; font-size: 0.8rem; letter-spacing: 3px; 
     text-transform: uppercase; font-family: 'Jost', sans-serif;
@@ -114,7 +106,6 @@
 
   footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 
-  /* Responsywność dla strzałek na mobile */
   @media (max-width: 768px) {
     .lb-nav-btn { font-size: 2.5rem; width: 50px; }
     .lb-close { top: 10px; right: 20px; font-size: 2.5rem; }
@@ -138,7 +129,7 @@
 
   <div class="info-panel">
     <div class="info-item"><strong>Data zjazdu</strong> 27-28 września 1975</div>
-    <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynku Ludzi Pracy, Dom Wycieczkowy (Modlin) oraz Dom Sióstr Niepokalanek (Buraków-Wrzosów)</div>
+    <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynku Ludzi Pracy, Modlin oraz Dom Sióstr Niepokalanek, Buraków</div>
     <div class="info-item"><strong>Organizatorzy</strong> Tomasz i Zofia Ładomirscy</div>
     <div class="info-item"><strong>Uczestnicy</strong> ok. 45 osób</div>
   </div>
@@ -150,38 +141,35 @@
   <section class="memories-section">
     <h2 class="section-title">Wspomnienia i historie</h2>
     <div class="memory-card">
-      <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę, pod koniec września 1975 roku, w Modlinie...</p>
+      <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę, pod koniec września 1975 roku, w Modlinie. Pamiętam to niesamowite poruszenie, że udało się zebrać tyle osób w jednym miejscu.</p>
       <span class="memory-author">— M. Sz. (18.08.2013)</span>
     </div>
     <div class="memory-card">
-      <p>Dla mnie i mojej "świeżo upieczonej żony Barbary" była to jednocześnie podróż poślubna - 20.09.1975 braliśmy ślub.</p>
+      <p>Dla mnie i mojej "świeżo upieczonej żony Barbary" była to jednocześnie podróż poślubna - 20.09.1975 braliśmy ślub. Nie mogliśmy sobie wymarzyć lepszego rozpoczęcia wspólnej drogi niż w gronie całej rodziny.</p>
       <span class="memory-author">— M. R. (21.09.2019)</span>
     </div>
   </section>
 
   <div class="gallery-wrapper">
     <h2 class="section-title">Fotokronika</h2>
-    <div class="simple-gallery" id="gallery-container"></div>
+    <div class="simple-gallery" id="gallery-container">
+        </div>
   </div>
 </article>
 
 <div id="lightbox">
   <span class="lb-close" onclick="closeLightbox()">&times;</span>
-  
   <button class="lb-nav-btn lb-prev" onclick="event.stopPropagation(); changePhoto(-1)">❮</button>
-  
   <div class="lb-content">
     <img id="lb-img" src="" alt="Powiększenie" onclick="event.stopPropagation(); changePhoto(1)">
     <div class="lb-counter" id="lb-counter"></div>
   </div>
-  
   <button class="lb-nav-btn lb-next" onclick="event.stopPropagation(); changePhoto(1)">❯</button>
 </div>
 
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
 <script>
-  // Konfiguracja
   const zjazd_folder = 'zjazdi';
   const liczba_zdjec = 38;
   let currentPhotoIndex = 1;
@@ -191,7 +179,7 @@
   const lbImg = document.getElementById('lb-img');
   const lbCounter = document.getElementById('lb-counter');
   
-  // 1. Generowanie galerii miniatur
+  // Generowanie miniatur
   for (let i = 1; i <= liczba_zdjec; i++) {
     const numerFoto = i.toString().padStart(2, '0');
     const fullSrc = `img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${numerFoto}.jpg`;
@@ -209,7 +197,6 @@
     container.appendChild(wrapper);
   }
 
-  // 2. Obsługa Lightboxa
   function openLightbox(index) {
     currentPhotoIndex = index;
     updateLightboxContent();
@@ -235,31 +222,15 @@
     lbCounter.textContent = `${currentPhotoIndex} / ${liczba_zdjec}`;
   }
 
-  // Zamknięcie po kliknięciu w tło
-  lightbox.onclick = function(e) {
-    if (e.target === lightbox) closeLightbox();
-  };
+  lightbox.onclick = (e) => { if (e.target === lightbox) closeLightbox(); };
 
-  // Obsługa klawiatury
-  document.addEventListener('keydown', function(e) {
+  document.addEventListener('keydown', (e) => {
     if (lightbox.style.display === 'flex') {
       if (e.key === "ArrowRight") changePhoto(1);
       if (e.key === "ArrowLeft") changePhoto(-1);
       if (e.key === "Escape") closeLightbox();
     }
   });
-
-  // Obsługa gestów swipe (na smartfony)
-  let touchStartX = 0;
-  lightbox.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, {passive: true});
-  lightbox.addEventListener('touchend', e => {
-    let touchEndX = e.changedTouches[0].screenX;
-    let diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) changePhoto(1);
-      else changePhoto(-1);
-    }
-  }, {passive: true});
 </script>
 
 </body>
