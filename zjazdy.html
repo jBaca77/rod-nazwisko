@@ -1,150 +1,84 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kronika Zjazdów | Klan L&K</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-
-<style>
-  :root {
-    --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-    --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
-    --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
-    --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
-    
-    /* Kolory Gałęzi */
-    --c-ladomirscy: #9b7d4a; /* Żółty/Złoty */
-    --c-krainscy: #a94442;   /* Czerwony */
-    --c-domanscy: #3c763d;    /* Zielony */
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; }
-
-  /* NAVIGATION & DRAWER */
-  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
-  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 1100; }
-  .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); }
-
-  .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s; }
-  .drawer.open { right: 0; }
-  .drawer-links { list-style: none; }
-  .drawer-links li { margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-  .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
-  
-  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
-  .overlay.active { opacity: 1; pointer-events: auto; }
-
-  /* MAIN CONTENT */
-  main { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
-  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 30px; }
-
-  /* MAP SECTION */
-  #map { height: 500px; width: 100%; border: 1px solid var(--sepia-pale); margin-bottom: 20px; z-index: 10; background: var(--parchment); }
-  
-  .map-legend { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-bottom: 50px; background: var(--cream); padding: 15px; border: 1px solid var(--line); }
-  .leg-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
-  .dot { width: 12px; height: 12px; border-radius: 50%; }
-
-  /* GRID */
-  .z-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-  .z-card { background: var(--cream); padding: 25px; border: 1px solid var(--sepia-pale); text-decoration: none; color: inherit; transition: 0.3s; }
-  .z-card:hover { transform: translateY(-5px); border-color: var(--gold); }
-  .z-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin: 5px 0; }
-  .z-card .branch-info { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
-
-  /* LEAFLET CUSTOM ICON FIX */
-  .custom-pin { display: block; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.4); }
-</style>
-</head>
-<body>
-
-<div class="overlay" id="overlay"></div>
-
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-    <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-
-<aside class="drawer" id="drawer">
-  <ul class="drawer-links">
-    <li><a href="index.html">Strona Główna</a></li>
-    <li><a href="historia.html">Historia Klanu</a></li>
-    <li><a href="zjazdy.html">Zjazdy</a></li>
-    <li><a href="pamiec.html">Pamięć</a></li>
-  </ul>
-</aside>
-
-<main>
-  <h1 class="s-title">Kronika Zjazdów Rodzinnych</h1>
-
-  <div id="map"></div>
-  
-  <div class="map-legend">
-    <div class="leg-item"><div class="dot" style="background:var(--c-ladomirscy)"></div><span>Ładomirscy</span></div>
-    <div class="leg-item"><div class="dot" style="background:var(--c-krainscy)"></div><span>Kraińscy</span></div>
-    <div class="leg-item"><div class="dot" style="background:var(--c-domanscy)"></div><span>Domańscy</span></div>
-  </div>
-
-  <div class="z-grid" id="z-container"></div>
-</main>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // t: 1-Ładomirscy, 2-Kraińscy, 3-Domańscy
+  // t: 1-Ładomirscy (Złoty), 2-Kraińscy (Czerwony), 3-Domańscy (Zielony)
   const zData = [
-    { n: "I", p: "Modlin", d: "1975", c: [52.443, 20.690], t: 1, g: "Ładomirscy" },
+    { n: "I", p: "Modlin i Buraków-Wrzosów", d: "1975", c: [52.443, 20.690], t: 1, g: "Ładomirscy" },
     { n: "II", p: "Szalejów Dolny", d: "1980", c: [50.435, 16.578], t: 2, g: "Kraińscy" },
     { n: "III", p: "Jankowice", d: "1983", c: [50.155, 18.423], t: 3, g: "Domańscy" },
     { n: "IV", p: "Trzebieszowice", d: "1985", c: [50.347, 16.782], t: 1, g: "Ładomirscy" },
+    { n: "V", p: "Trzebieszowice", d: "1987", c: [50.347, 16.782], t: 1, g: "Ładomirscy" },
     { n: "VI", p: "Łopuszna", d: "1989", c: [49.482, 20.130], t: 3, g: "Domańscy" },
+    { n: "VII", p: "Piwniczna Zdrój", d: "1991", c: [49.435, 20.713], t: 3, g: "Domańscy" },
+    { n: "VIII", p: "Sorkwity", d: "1993", c: [53.839, 21.139], t: 3, g: "Domańscy" },
+    { n: "IX", p: "Dziwnów", d: "1995", c: [54.021, 14.736], t: 3, g: "Domańscy" },
+    { n: "X", p: "Bąblin", d: "1997", c: [52.684, 16.772], t: 3, g: "Domańscy" },
+    { n: "XI", p: "Myczkowce", d: "1999", c: [49.426, 22.408], t: 3, g: "Domańscy" },
+    { n: "XII", p: "Jarnołtówek", d: "2001", c: [50.288, 17.442], t: 3, g: "Domańscy" },
+    { n: "XIII", p: "Stawiska", d: "2003", c: [54.041, 23.059], t: 3, g: "Domańscy" },
+    { n: "XIV", p: "Wągrowiec", d: "2005", c: [52.807, 17.200], t: 3, g: "Domańscy" },
+    { n: "XV", p: "Bukowina Tatrzańska", d: "2007", c: [49.342, 20.106], t: 3, g: "Domańscy" },
+    { n: "XVI", p: "Okuninka", d: "2009", c: [51.488, 23.535], t: 3, g: "Domańscy" },
     { n: "XVII", p: "Krościenko", d: "2011", c: [49.439, 20.443], t: 3, g: "Domańscy" },
+    { n: "XVIII", p: "Popowo - Letnisko", d: "2013", c: [52.540, 21.130], t: 3, g: "Domańscy" },
+    { n: "XIX", p: "Krynica Morska", d: "2015", c: [54.383, 19.444], t: 3, g: "Domańscy" },
+    { n: "XX", p: "Boszkowo", d: "2017", c: [51.943, 16.324], t: 3, g: "Domańscy" },
+    { n: "XXI", p: "Międzybrodzie Żywieckie", d: "2019", c: [49.774, 19.221], t: 3, g: "Domańscy" },
+    { n: "XXII", p: "Krzyże", d: "2022", c: [53.615, 21.579], t: 3, g: "Domańscy" },
     { n: "XXIII", p: "Borowice", d: "2024", c: [50.793, 15.694], t: 3, g: "Domańscy" },
     { n: "XXIV", p: "Bocheniec", d: "2026", c: [50.817, 20.268], t: 3, g: "Domańscy" }
-    // Tutaj dopisz resztę zjazdów...
   ];
 
-  // Inicjalizacja Mapy z obsługą błędów
-  try {
-    const map = L.map('map').setView([52.0, 19.0], 6);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
+  const colors = { 1: "#e6b422", 2: "#b32d2e", 3: "#2d7a2d" };
 
-    const colors = { 1: "#9b7d4a", 2: "#a94442", 3: "#3c763d" };
+  // 1. Inicjalizacja Mapy
+  const map = L.map('map', {
+    scrollWheelZoom: false // Opcjonalnie: wyłącza zoom scrollem, żeby łatwiej było przewijać stronę
+  }).setView([52.0, 19.0], 6);
+  
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    const container = document.getElementById('z-container');
-
-    zData.forEach((z, i) => {
-      // Pinezka
-      const icon = L.divIcon({
-        className: 'custom-div-icon',
-        html: `<div class="custom-pin" style="background:${colors[z.t]}"></div>`,
-        iconSize: [14, 14],
-        iconAnchor: [7, 7]
-      });
-
-      L.marker(z.c, { icon }).addTo(map).bindPopup(`<b>${z.n} Zjazd: ${z.p}</b><br>Gałąź: ${z.g}`);
-
-      // Karta
-      container.innerHTML += `
-        <a href="zjazd${i+1}.html" class="z-card">
-          <div class="branch-info" style="color:${colors[z.t]}">${z.g}</div>
-          <h3>${z.n} Zjazd: ${z.p}</h3>
-          <div style="font-size:0.8rem; color:var(--sepia)">Rok: ${z.d}</div>
-        </a>
-      `;
+  // 2. DODANIE POGRUBIONYCH GRANIC POLSKI
+  // Pobieramy dane GeoJSON granic Polski (publiczne repozytorium)
+  fetch('https://raw.githubusercontent.com/PiotrZSL/granice-polski/master/granice_panstwa.geojson')
+    .then(response => response.json())
+    .then(data => {
+      L.geoJSON(data, {
+        style: {
+          color: "#7a6548", // Kolor sepii/brązu pasujący do Archiwum
+          weight: 4,        // Grubość linii
+          opacity: 0.6,     // Przezroczystość
+          fillOpacity: 0    // Brak wypełnienia środka
+        }
+      }).addTo(map);
     });
-  } catch (e) {
-    console.error("Błąd mapy:", e);
-  }
+
+  // 3. Generowanie Pinezek i Kart
+  const container = document.getElementById('z-container');
+
+  zData.forEach((z, i) => {
+    const filename = `zjazd${i + 1}.html`;
+    
+    const icon = L.divIcon({
+      className: 'custom-div-icon',
+      html: `<div class="custom-pin" style="background:${colors[z.t]}; width:14px; height:14px;"></div>`,
+      iconSize: [14, 14],
+      iconAnchor: [7, 7]
+    });
+
+    L.marker(z.c, { icon }).addTo(map)
+      .bindPopup(`<b>${z.n} Zjazd: ${z.p}</b><br>Rok: ${z.d}<br>Gałąź: ${z.g}<br><br><a href="${filename}">Otwórz relację</a>`);
+
+    container.innerHTML += `
+      <a href="${filename}" class="z-card">
+        <div>
+          <div class="num">${z.n} ZJAZD</div>
+          <div class="year" style="color:${colors[z.t]}">${z.d}</div>
+          <h3>${z.p}</h3>
+        </div>
+        <div class="branch-tag" style="color:${colors[z.t]}">Gałąź: ${z.g}</div>
+      </a>
+    `;
+  });
 
   // Drawer
   const btn = document.getElementById('menuBtn');
@@ -153,5 +87,3 @@
   btn.onclick = () => { drw.classList.toggle('open'); ovr.classList.toggle('active'); };
   ovr.onclick = () => { drw.classList.remove('open'); ovr.classList.remove('active'); };
 </script>
-</body>
-</html>
