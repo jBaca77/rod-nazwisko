@@ -153,16 +153,41 @@
         <div class="simple-gallery" id="gallery-container"></div>
     </div>
 
-    <div class="video-wrapper">
-        <h2 class="section-title">Filmowa Relacja</h2>
-        <div class="video-container">
-            <iframe 
-                src="https://drive.google.com/file/d/19LGiOzzr4qda9TUygD4fv5m0-2w05fv3#grid" 
-                title="Relacja z VIII Zjazdu" 
-                allow="autoplay">
-            </iframe>
-        </div>
-    </div>
+    <style>
+    .video-placeholder {
+        max-width: 900px;
+        margin: 40px auto 80px;
+        padding: 40px 24px;
+        text-align: center;
+        background: var(--parchment);
+        border: 1px dashed var(--gold);
+        border-radius: 4px;
+    }
+    .video-btn {
+        display: inline-block;
+        padding: 15px 30px;
+        background: var(--ink);
+        color: var(--gold-light);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+        transition: 0.3s;
+        border: 1px solid var(--gold);
+    }
+    .video-btn:hover {
+        background: var(--gold);
+        color: white;
+    }
+</style>
+
+<div class="video-placeholder">
+    <h2 class="section-title">Filmowa Relacja</h2>
+    <p style="margin-bottom: 25px; color: var(--sepia);">Zapraszamy do obejrzenia nagrania wideo z VIII Zjazdu w Sorkwitach.</p>
+    <a href="https://drive.google.com/file/d/19LGiOzzr4qda9TUygD4fv5m0-2w05fv3/view?usp=sharing" target="_blank" class="video-btn">
+        Otwórz film w nowym oknie
+    </a>
+</div>
 
     <div class="zjazdy-pagination">
         <a href="zjazd7.html" class="pagination-btn">← Poprzedni</a>
