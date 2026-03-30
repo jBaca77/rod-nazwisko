@@ -79,6 +79,10 @@
             .lb-controls { gap: 60px; }
             .lb-arrow { font-size: 3.5rem; }
             .article-header { margin: 40px auto 30px; }
+            
+            /* Animacja płynnego pojawiania się */
+            #lb-img { transition: opacity 0.3s ease-in-out; opacity: 1; }
+            .lb-fade-out { opacity: 0 !important; }
         }
     </style>
 </head>
@@ -192,9 +196,18 @@
 
     function updateLB() {
         const nr = currentIdx.toString().padStart(2, '0');
-        lbImg.src = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
-        lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
-    }
+        const newSrc = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+    
+// 1. Rozpocznij zanikanie
+    lbImg.classList.add('lb-fade-out');
+    
+// 2. Czekaj na koniec animacji (0.3s) i podmień zdjęcie
+    setTimeout(() => { lbImg.src = newSrc; lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
+        
+// 3. Gdy zdjęcie się załaduje, przywróć widoczność
+        lbImg.onload = () => { lbImg.classList.remove('lb-fade-out'); };
+    }, 300); 
+}
 
     document.addEventListener('keydown', (e) => {
         if (lightbox.style.display === 'flex') {
