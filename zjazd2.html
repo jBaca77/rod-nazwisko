@@ -51,10 +51,56 @@
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-        /* PAGINACJA */
-        .zjazdy-pagination { max-width: 800px; margin: 0 auto 80px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .pagination-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 10px 20px; border: 1px solid var(--line); transition: 0.3s; background: transparent; }
-        .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--parchment); }
+       /* PAGINACJA - NOWY UKŁAD */
+.zjazdy-pagination { 
+    max-width: 800px; 
+    margin: 40px auto 80px; 
+    padding: 30px 20px; 
+    border-top: 1px solid var(--line); 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 12px; 
+}
+
+.pagination-btn { 
+    flex: 1 1 calc(50% - 6px); /* Dwa przyciski obok siebie */
+    text-decoration: none; 
+    color: var(--sepia); 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    padding: 16px 10px; 
+    border: 1px solid var(--line); 
+    transition: 0.3s; 
+    background: var(--parchment); 
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Przycisk "Wróć do listy" na całą szerokość */
+.pagination-btn.full-width {
+    flex: 1 1 100%;
+    background: transparent;
+    border-style: dashed; /* Delikatne wyróżnienie że to powrót */
+}
+
+.pagination-btn:hover { 
+    border-color: var(--gold); 
+    color: var(--gold); 
+    background: white; 
+}
+
+/* FIX DLA MOBILE */
+@media (max-width: 600px) {
+    .pagination-btn {
+        padding: 20px 10px; /* Większe pole dotyku dla kciuka */
+        font-size: 0.7rem;
+    }
+}
+
+
 
         /* LIGHTBOX */
         #lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; user-select: none; padding: 15px; }
@@ -115,10 +161,11 @@
     </div>
 
     <div class="zjazdy-pagination">
-        <a href="zjazd1.html" class="pagination-btn">← Poprzedni Zjazd</a>
-        <a href="zjazdy.html" class="pagination-btn">Wróć do listy</a>
-        <a href="zjazd3.html" class="pagination-btn">Następny Zjazd →</a>
-    </div>
+    <a href="zjazd1.html" class="pagination-btn">← Poprzedni</a>
+    <a href="zjazd3.html" class="pagination-btn">Następny →</a>
+    <a href="zjazdy.html" class="pagination-btn full-width">Powrót do listy zjazdów</a>
+</div>
+
 </article>
 
 <div id="lightbox" onclick="closeLightbox(event)">
