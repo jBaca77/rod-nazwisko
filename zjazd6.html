@@ -35,21 +35,62 @@
         .info-item { font-size: 0.9rem; }
         .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
 
-        .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; displey: flex; gap: 20px; justify-content: center; align-items: center; }
-        .main-img { width: calc(50%-10px); max-width: 500px; height: auto; border: 1px solid var(--line); padding: 8px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-
-        /* Nowy styl podpisu nad zdjęciami */
-        .hero-caption { display: block; width: 100%; text-align: center; font-family: 'Jost', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: var(--sepia); margin: 40px 0 20px 0; }
-        .memories-section img { display: block; margin: 0 auto; max-width: 70%;/* Delikatne pomniejszenie */ height: auto; border: 1px solid var(--line); padding: 10px; background: white; }
-        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
-        .memory-card { border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; font-style: italic; position: relative; }
-        .memory-card::before { content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; }
-        .memory-author { display: block; margin-top: 15px; font-style: normal; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--sepia); }
+        /* SEKCA HERO - ZDJĘCIA OBOK SIEBIE */
+        .hero-container { 
+            max-width: 1100px; 
+            margin: 0 auto 60px; 
+            padding: 0 24px; 
+            display: flex;            /* Naprawione 'displey' */
+            gap: 20px; 
+            justify-content: center; 
+            align-items: center; 
+            flex-wrap: nowrap;        /* Wymusza brak przeskakiwania do nowej linii */
+        }
         
+        .main-img { 
+            width: calc(50% - 10px);   /* Poprawna składnia calc ze spacjami */
+            max-width: 500px; 
+            height: auto; 
+            border: 1px solid var(--line); 
+            padding: 8px; 
+            background: white; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            min-width: 0;             /* Pozwala na skalowanie w dół na małych ekranach */
+        }
+
+        .hero-caption { 
+            display: block; 
+            width: 100%; 
+            text-align: center; 
+            font-family: 'Jost', sans-serif; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-size: 0.8rem; 
+            color: var(--sepia); 
+            margin: 40px 0 20px 0; 
+        }
+
+        /* SEKCA LIST OD WUJKA */
+        .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
+        .memories-section img { 
+            display: block; 
+            margin: 0 auto; 
+            max-width: 70%; 
+            height: auto; 
+            border: 1px solid var(--line); 
+            padding: 10px; 
+            background: white; 
+        }
+
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
+
+        /* RESPONSYWNOŚĆ */
         @media (max-width: 600px) {
-        .hero-container { flex-direction: column; align-items: center; }
-        .main-img { width: 90%; }
-        .memories-section img { max-width: 100%; }
+            .hero-container { gap: 10px; padding: 0 10px; }
+            .main-img { padding: 4px; }
+            .memories-section img { max-width: 100%; }
+            .pagination-btn { padding: 20px 10px; font-size: 0.7rem; }
+            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
         }
         
         /* GALERIA */
@@ -59,17 +100,11 @@
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-       /* PAGINACJA - NOWY UKŁAD */
+        /* PAGINACJA */
         .zjazdy-pagination { max-width: 800px; margin: 40px auto 80px; padding: 30px 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; }
-        .pagination-btn { flex: 1 1 calc(50% - 6px); /* Dwa przyciski obok siebie */text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center;display: flex;align-items: center;justify-content: center;}
-        /* Przycisk "Wróć do listy" na całą szerokość */
-        .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; /* Delikatne wyróżnienie że to powrót */}
+        .pagination-btn { flex: 1 1 calc(50% - 6px); text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center; display: flex; align-items: center; justify-content: center; }
+        .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; }
         .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: white; }
-        
-        /* FIX DLA MOBILE */
-        @media (max-width: 600px) {
-            .pagination-btn { padding: 20px 10px; /* Większe pole dotyku dla kciuka */font-size: 0.7rem; }
-        }
 
         /* LIGHTBOX */
         #lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; user-select: none; padding: 15px; }
@@ -81,13 +116,6 @@
         .lb-counter { color: var(--gold-light); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-family: 'Jost', sans-serif; }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
-
-        @media (max-width: 600px) {
-            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
-            .lb-controls { gap: 60px; }
-            .lb-arrow { font-size: 3.5rem; }
-            .article-header { margin: 40px auto 30px; }
-        }
     </style>
 </head>
 <body>
@@ -112,16 +140,16 @@
         <div class="info-item"><strong>Uczestnicy</strong> ponad 100 </div>
     </div>
 
-<span class="hero-caption">Podpisy uczestników VI Zjazdu w Łopusznej</span>
+    <span class="hero-caption">Podpisy uczestników VI Zjazdu w Łopusznej</span>
 
-<div class="hero-container">
-    <img src="./img/zjazdy/zjazdvi/foto_zjazdvi_000.jpg" alt="Zdjęcie grupowe 1" class="main-img">
-    <img src="./img/zjazdy/zjazdvi/foto_zjazdvi_0000.jpg" alt="Zdjęcie grupowe 2" class="main-img">
-</div>
+    <div class="hero-container">
+        <img src="./img/zjazdy/zjazdvi/foto_zjazdvi_000.jpg" alt="Zdjęcie grupowe 1" class="main-img">
+        <img src="./img/zjazdy/zjazdvi/foto_zjazdvi_0000.jpg" alt="Zdjęcie grupowe 2" class="main-img">
+    </div>
 
     <section class="memories-section">
         <h2 class="section-title">List od "Wujka"</h2>
-            <img src="./img/zjazdy/zjazdvi/foto_zjazdvi_99.jpg" alt="Zdjęcie od Wujka">
+        <img src="./img/zjazdy/zjazdvi/foto_zjazdvi_99.jpg" alt="Zdjęcie od Wujka">
     </section>
 
     <div class="gallery-wrapper">
@@ -130,11 +158,10 @@
     </div>
 
     <div class="zjazdy-pagination">
-    <a href="zjazd5.html" class="pagination-btn">← Poprzedni</a>
-    <a href="zjazd7.html" class="pagination-btn">Następny →</a>
-    <a href="zjazdy.html" class="pagination-btn full-width">Powrót do listy zjazdów</a>
-</div>
-
+        <a href="zjazd5.html" class="pagination-btn">← Poprzedni</a>
+        <a href="zjazd7.html" class="pagination-btn">Następny →</a>
+        <a href="zjazdy.html" class="pagination-btn full-width">Powrót do listy zjazdów</a>
+    </div>
 </article>
 
 <div id="lightbox" onclick="closeLightbox(event)">
