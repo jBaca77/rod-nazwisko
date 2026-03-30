@@ -51,10 +51,17 @@
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-        /* PAGINACJA */
-        .zjazdy-pagination { max-width: 800px; margin: 0 auto 80px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .pagination-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 10px 20px; border: 1px solid var(--line); transition: 0.3s; background: transparent; }
-        .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--parchment); }
+       /* PAGINACJA - NOWY UKŁAD */
+        .zjazdy-pagination { max-width: 800px; margin: 40px auto 80px; padding: 30px 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; }
+        .pagination-btn { flex: 1 1 calc(50% - 6px); /* Dwa przyciski obok siebie */text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center;display: flex;align-items: center;justify-content: center;}
+        /* Przycisk "Wróć do listy" na całą szerokość */
+        .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; /* Delikatne wyróżnienie że to powrót */}
+        .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: white; }
+        
+        /* FIX DLA MOBILE */
+        @media (max-width: 600px) {
+            .pagination-btn { padding: 20px 10px; /* Większe pole dotyku dla kciuka */font-size: 0.7rem; }
+        }
 
         /* LIGHTBOX */
         #lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; user-select: none; padding: 15px; }
@@ -68,7 +75,7 @@
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 
         @media (max-width: 600px) {
-            .simple-gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 110px; gap: 4px; }
+            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
             .lb-controls { gap: 60px; }
             .lb-arrow { font-size: 3.5rem; }
             .article-header { margin: 40px auto 30px; }
@@ -86,26 +93,30 @@
 
 <article>
     <header class="article-header">
-        <span class="meta-top">Archiwum Rodzinne • 1975</span>
-        <h1>III Zjazd: Jankowice</h1>
+        <span class="meta-top">Archiwum Rodzinne • 1983</span>
+        <h1>III Zjazd: Szalejów Dolny</h1>
     </header>
 
     <div class="info-panel">
-        <div class="info-item"><strong>Data zjazdu</strong> 27-28 września 1975</div>
-        <div class="info-item"><strong>Miejsce</strong> Modlin oraz Buraków</div>
-        <div class="info-item"><strong>Organizatorzy</strong> Tomasz i Zofia Ładomirscy</div>
-        <div class="info-item"><strong>Uczestnicy</strong> ok. 45 osób</div>
+        <div class="info-item"><strong>Data zjazdu</strong> 14-16 października 1983</div>
+        <div class="info-item"><strong>Miejsce</strong> Ośrodek Pracy Twórczej ZSP Jankowice </div>
+        <div class="info-item"><strong>Organizatorzy</strong> Piotr i Zofia Ładomirscy</div>
+        <div class="info-item"><strong>Uczestnicy</strong> ... </div>
     </div>
 
     <div class="hero-container">
-        <img src="./img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Zdjęcie grupowe" class="main-img">
+        <img src="./img/zjazdy/zjazdiii/foto_zjazdiii_00.jpg" alt="Zdjęcie grupowe" class="main-img">
     </div>
 
     <section class="memories-section">
         <h2 class="section-title">Wspomnienia</h2>
         <div class="memory-card">
-            <p>Pierwszy zjazd był krótkim, ale intensywnym spotkaniem rodzinnym...</p>
-            <span class="memory-author">— M. Sz.</span>
+            <p>Mój pierwszy zjazd to Jankowice. Pamiętam schody na piętro i ten ogrom rodziny. Miałam wtedy 22 lata i byłam oszołomiona. Ten stan trwa do dziś. Zjazdy dają mi takie poczucie siły i przynależności. Jednak największą radością jest dla mnie obserwowanie jak kolejne pokolenia dorastają, mają dzieci i jak dla nich jest ważne, aby się spotkać i utrzymywać te więzi. Dla takich chwil warto żyć i być w tym gronie.</p>
+            <span class="memory-author">— A. W. (23.09.2017)</span>
+        </div>
+        <div class="memory-card">
+            <p>Z Jankowic utkwił mi w pamięci koncert braci Kopaczów. W rodzinie jest trochę artystycznie uzdolnionych. Szkoda, że tak rzadko na zjazdach prezentują swoje talenty.</p>
+            <span class="memory-author">— H. N. (10.09.2019)</span>
         </div>
     </section>
 
@@ -115,9 +126,11 @@
     </div>
 
     <div class="zjazdy-pagination">
-        <a href="zjazd2.html" class="pagination-btn">Wróć do listy</a>
-        <a href="zjazd4.html" class="pagination-btn">Następny Zjazd →</a>
-    </div>
+    <a href="zjazd2.html" class="pagination-btn">← Poprzedni</a>
+    <a href="zjazd4.html" class="pagination-btn">Następny →</a>
+    <a href="zjazdy.html" class="pagination-btn full-width">Powrót do listy zjazdów</a>
+</div>
+
 </article>
 
 <div id="lightbox" onclick="closeLightbox(event)">
@@ -136,7 +149,7 @@
 
 <script>
     const zjazd_folder = 'zjazdiii';
-    const liczba_zdjec = 38; 
+    const liczba_zdjec = 87; 
     let currentIdx = 1;
 
     const container = document.getElementById('gallery-container');
@@ -191,29 +204,24 @@
         }
     });
 
-    // --- LOGIKA GESTÓW DOTYKOWYCH ---
     let tStart = 0;
-    let isMultiTouch = false; // Strażnik zoomowania
+    let isMultiTouch = false;
 
     lightbox.addEventListener('touchstart', e => {
-        // Jeśli dotykasz ekranu więcej niż 1 palcem...
         if (e.touches.length > 1) {
-            isMultiTouch = true; // ...zaznaczamy, że to MULTI-DOTYK (np. zoom)
+            isMultiTouch = true;
         } else {
-            isMultiTouch = false; // ...w przeciwnym razie to zwykły 1 palec
-            tStart = e.changedTouches[0].screenX; // Zapisujemy start przesunięcia
+            isMultiTouch = false;
+            tStart = e.changedTouches[0].screenX;
         }
     }, {passive: true});
 
     lightbox.addEventListener('touchend', e => {
-        // Jeśli strażnik wykrył multi-dotyk, PRZERWIJ funkcję (nie zmieniaj zdjęcia)
         if (isMultiTouch) return;
-
         let tEnd = e.changedTouches[0].screenX;
-        const threshold = 60; // Dystans w pikselach potrzebny do zmiany foto
-
-        if (tStart - tEnd > threshold) changePhoto(1);  // Swipe w lewo -> następne
-        if (tEnd - tStart > threshold) changePhoto(-1); // Swipe w prawo -> poprzednie
+        const threshold = 60;
+        if (tStart - tEnd > threshold) changePhoto(1);
+        if (tEnd - tStart > threshold) changePhoto(-1);
     }, {passive: true});
 </script>
 
