@@ -178,8 +178,8 @@
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
 <script>
-    // --- USTAWIENIA DLA KONKRETNEGO ZJAZDU ---
-    const zjazd_folder = 'zjazdii'; // Folder ze zdjęciami
+    // --- KONFIGURACJA PLIKU ---
+    const zjazd_folder = 'zjazdii'; 
     const liczba_zdjec = 87; 
     let currentIdx = 1;
 
@@ -188,7 +188,7 @@
     const lbImg = document.getElementById('lb-img');
     const lbCounter = document.getElementById('lb-counter');
 
-    // 1. Generowanie galerii
+    // 1. Galeria
     for (let i = 1; i <= liczba_zdjec; i++) {
         const nr = i.toString().padStart(2, '0');
         const path = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
@@ -203,7 +203,7 @@
         container.appendChild(div);
     }
 
-    // 2. Lightbox logic
+    // 2. Lightbox
     function openLightbox(index) {
         currentIdx = index;
         updateLB();
@@ -226,7 +226,7 @@
         lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
     }
 
-    // 3. Klawiatura
+    // 3. Obsługa klawiatury i gestów
     document.addEventListener('keydown', (e) => {
         if (lightbox.style.display === 'flex') {
             if (e.key === "ArrowRight") changePhoto(1);
@@ -235,62 +235,54 @@
         }
     });
 
-    // 4. Gesty (Swipe + Multi-touch Fix)
     let touchStartX = 0;
     let isMultiTouch = false;
-
     lightbox.addEventListener('touchstart', e => {
-        if (e.touches.length > 1) isMultiTouch = true;
-        else {
-            isMultiTouch = false;
-            touchStartX = e.changedTouches[0].screenX;
-        }
+        isMultiTouch = e.touches.length > 1;
+        if (!isMultiTouch) touchStartX = e.changedTouches[0].screenX;
     }, {passive: true});
 
     lightbox.addEventListener('touchend', e => {
         if (isMultiTouch) return;
         let touchEndX = e.changedTouches[0].screenX;
-        const threshold = 70;
-        if (touchEndX < touchStartX - threshold) changePhoto(1);
-        if (touchEndX > touchStartX + threshold) changePhoto(-1);
+        if (touchEndX < touchStartX - 70) changePhoto(1);
+        if (touchEndX > touchStartX + 70) changePhoto(-1);
     }, {passive: true});
 
-    // 5. INTELIGENTNA NAWIGACJA (Automatyczne wykrywanie plików)
+    // 4. INTELIGENTNA NAWIGACJA (Dostosowana do GitHub Pages)
     async function generujNawigacje() {
         const navContainer = document.getElementById('dynamic-nav');
-        
         let currentNum;
+        
+        // Mapowanie folderów na numery
         if (zjazd_folder === 'zjazdi') currentNum = 1;
         else if (zjazd_folder === 'zjazdii') currentNum = 2;
         else currentNum = parseInt(zjazd_folder.replace('zjazd', ''));
 
         let html = '';
 
-        // Przycisk "Poprzedni"
+        // Wstecz
         if (currentNum > 1) {
-            const prevNum = currentNum - 1;
-            const prevLink = prevNum === 1 ? 'zjazd1.html' : `zjazd${prevNum}.html`;
+            const prevLink = (currentNum - 1 === 1) ? 'zjazd1.html' : `zjazd${currentNum - 1}.html`;
             html += `<a href="${prevLink}" class="pagination-btn">← Poprzedni Zjazd</a>`;
         }
 
-        // Przycisk "Lista"
+        // Lista
         html += `<a href="zjazdy.html" class="pagination-btn">Lista Zjazdów</a>`;
 
-        // Przycisk "Następny" (Automatyczne sprawdzanie czy plik istnieje)
-        const nextNum = currentNum + 1;
-        const nextLink = `zjazd${nextNum}.html`;
-
+        // Dalej (Weryfikacja istnienia pliku)
+        const nextLink = `zjazd${currentNum + 1}.html`;
         try {
             const response = await fetch(nextLink, { method: 'HEAD' });
-            if (response.ok) {
+            // Jeśli nie ma przekierowania (na 404), plik istnieje
+            if (response.ok && !response.redirected) {
                 html += `<a href="${nextLink}" class="pagination-btn">Następny Zjazd →</a>`;
             }
-        } catch (e) { /* Plik nie istnieje */ }
+        } catch (e) {}
 
         navContainer.innerHTML = html;
     }
     generujNawigacje();
 </script>
-
 </body>
 </html>
