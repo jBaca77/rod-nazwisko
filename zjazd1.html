@@ -55,15 +55,15 @@
         .gallery-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
         .simple-gallery { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minimax(250px, 1fr); 
-            gap: 15px; 
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            grid-auto-rows: 180px; gap: 12px; 
         }
-        .gallery-item { overflow: hidden; cursor: pointer; backgrounnd: var(--line); border: 1px solid var(--line); aspect-ratio: 3 / 2; } /*wymusz format zdjęcia 3:2*/
+        .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
         .gallery-item img { 
             width: 100%; height: 100%; object-fit: cover; 
-            transition: all 0.5s ease; opacity: 0.9; 
+            transition: all 0.5s ease; opacity: 0.8; filter: grayscale(30%); 
         }
-        .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.05); }
+        .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
         /* PAGINACJA */
         .zjazdy-pagination { 
