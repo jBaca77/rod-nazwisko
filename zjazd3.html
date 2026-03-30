@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>III Zjazd:Jankowice  | Archiwum L&K</title>
+    <title>III Zjazd: Jankowice | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -22,7 +22,7 @@
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* NAGŁÓWEK I PANEL INFO */
+        /* ARTYKUŁ */
         .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
         .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
         h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
@@ -38,83 +38,37 @@
         .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
         .main-img { width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
-        /* WSPOMNIENIA */
         .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
         .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
-        .memory-card { 
-            border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; 
-            font-style: italic; position: relative;
-        }
-        .memory-card::before { 
-            content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; 
-            color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; 
-        }
+        .memory-card { border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; font-style: italic; position: relative; }
+        .memory-card::before { content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; }
         .memory-author { display: block; margin-top: 15px; font-style: normal; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--sepia); }
 
-        /* GALERIA MINIATUR */
+        /* GALERIA */
         .gallery-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
-        .simple-gallery { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-            grid-auto-rows: 180px; gap: 12px; 
-        }
+        .simple-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); grid-auto-rows: 180px; gap: 8px; }
         .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
-        .gallery-item img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            transition: all 0.5s ease; opacity: 0.8; filter: grayscale(30%); 
-        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-        /* NAWIGACJA MIĘDZY ZJAZDAMI */
-        .zjazdy-pagination { 
-            max-width: 800px; margin: 0 auto 80px; padding: 40px 24px; 
-            border-top: 1px solid var(--line); display: flex; 
-            justify-content: center; gap: 20px; flex-wrap: wrap;
-        }
-        .pagination-btn {
-            text-decoration: none; color: var(--sepia); font-size: 0.75rem; 
-            text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px;
-            border: 1px solid var(--line); transition: 0.3s; background: transparent;
-        }
+        /* PAGINACJA */
+        .zjazdy-pagination { max-width: 800px; margin: 0 auto 80px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .pagination-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 10px 20px; border: 1px solid var(--line); transition: 0.3s; background: transparent; }
         .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--parchment); }
 
         /* LIGHTBOX */
-        #lightbox {
-            display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; 
-            user-select: none; padding: 20px;
-        }
-        .lb-container {
-            display: flex; flex-direction: column; align-items: center;
-            max-width: 95%; max-height: 95%; position: relative;
-        }
-        .lb-close {
-            margin-bottom: 15px; color: var(--parchment); font-size: 0.9rem;
-            text-transform: uppercase; letter-spacing: 3px; cursor: pointer;
-            transition: 0.3s; padding: 5px 10px;
-        }
-        #lb-img { 
-            max-width: 100%; max-height: 70vh; border: 1px solid var(--gold); 
-            padding: 8px; background: white; box-shadow: 0 0 40px rgba(0,0,0,0.5); 
-            object-fit: contain; cursor: pointer;
-        }
-        .lb-controls {
-            margin-top: 20px; display: flex; align-items: center; gap: 40px;
-        }
-        .lb-arrow {
-            background: none; border: none; color: var(--gold-light);
-            font-size: 3rem; cursor: pointer; transition: 0.3s;
-            font-family: 'Cormorant Garamond', serif; line-height: 1;
-        }
-        .lb-counter {
-            color: var(--gold-light); font-size: 0.8rem; letter-spacing: 2px;
-            text-transform: uppercase; font-family: 'Jost', sans-serif;
-        }
+        #lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; user-select: none; padding: 15px; }
+        .lb-container { display: flex; flex-direction: column; align-items: center; max-width: 100%; max-height: 100%; position: relative; }
+        .lb-close { margin-bottom: 12px; color: var(--parchment); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; transition: 0.3s; opacity: 0.7; }
+        #lb-img { max-width: 100%; max-height: 70vh; border: 1px solid var(--gold); padding: 6px; background: white; box-shadow: 0 0 40px rgba(0,0,0,0.5); object-fit: contain; }
+        .lb-controls { margin-top: 15px; display: flex; align-items: center; gap: 40px; }
+        .lb-arrow { background: none; border: none; color: var(--gold-light); font-size: 3rem; cursor: pointer; transition: 0.3s; font-family: 'Cormorant Garamond', serif; }
+        .lb-counter { color: var(--gold-light); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-family: 'Jost', sans-serif; }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 
         @media (max-width: 600px) {
-            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px }
+            .simple-gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 110px; gap: 4px; }
             .lb-controls { gap: 60px; }
             .lb-arrow { font-size: 3.5rem; }
             .article-header { margin: 40px auto 30px; }
@@ -132,26 +86,26 @@
 
 <article>
     <header class="article-header">
-        <span class="meta-top">Archiwum Rodzinne • 1980</span>
-        <h1>III Zjazd:Jankowice</h1>
+        <span class="meta-top">Archiwum Rodzinne • 1975</span>
+        <h1>III Zjazd: Jankowice</h1>
     </header>
 
     <div class="info-panel">
-        <div class="info-item"><strong>Data zjazdu</strong> Wrzesień roku 1980</div>
-        <div class="info-item"><strong>Miejsce</strong> Ośrodek Agrokompleksu "Sudety"</div>
-        <div class="info-item"><strong>Organizatorzy</strong> Jerzy i Marta Niewęgłowscy</div>
-        <div class="info-item"><strong>Uczestnicy</strong> ... </div>
+        <div class="info-item"><strong>Data zjazdu</strong> 27-28 września 1975</div>
+        <div class="info-item"><strong>Miejsce</strong> Modlin oraz Buraków</div>
+        <div class="info-item"><strong>Organizatorzy</strong> Tomasz i Zofia Ładomirscy</div>
+        <div class="info-item"><strong>Uczestnicy</strong> ok. 45 osób</div>
     </div>
 
     <div class="hero-container">
-        <img src="./img/zjazdy/zjazdiii/foto_zjazdii_00.jpg" alt="Zdjęcie grupowe II Zjazdu" class="main-img">
+        <img src="./img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Zdjęcie grupowe" class="main-img">
     </div>
 
     <section class="memories-section">
-        <h2 class="section-title">Wspomnienia i historie</h2>
+        <h2 class="section-title">Wspomnienia</h2>
         <div class="memory-card">
-            <p>Przestawianie samochodów na zjazdach zaczęło się od wesela Majki i Marka Szczepaniaków...</p>
-            <span class="memory-author">— Z. Ł (23.09.2017)</span>
+            <p>Pierwszy zjazd był krótkim, ale intensywnym spotkaniem rodzinnym...</p>
+            <span class="memory-author">— M. Sz.</span>
         </div>
     </section>
 
@@ -160,7 +114,10 @@
         <div class="simple-gallery" id="gallery-container"></div>
     </div>
 
-    <div id="dynamic-nav" class="zjazdy-pagination"></div>
+    <div class="zjazdy-pagination">
+        <a href="zjazd2.html" class="pagination-btn">Wróć do listy</a>
+        <a href="zjazd4.html" class="pagination-btn">Następny Zjazd →</a>
+    </div>
 </article>
 
 <div id="lightbox" onclick="closeLightbox(event)">
@@ -178,9 +135,8 @@
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
 <script>
-    // --- KONFIGURACJA PLIKU ---
-    const zjazd_folder = 'zjazdii'; 
-    const liczba_zdjec = 87; 
+    const zjazd_folder = 'zjazdiii';
+    const liczba_zdjec = 38; 
     let currentIdx = 1;
 
     const container = document.getElementById('gallery-container');
@@ -188,7 +144,6 @@
     const lbImg = document.getElementById('lb-img');
     const lbCounter = document.getElementById('lb-counter');
 
-    // 1. Galeria
     for (let i = 1; i <= liczba_zdjec; i++) {
         const nr = i.toString().padStart(2, '0');
         const path = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
@@ -203,30 +158,31 @@
         container.appendChild(div);
     }
 
-    // 2. Lightbox
     function openLightbox(index) {
         currentIdx = index;
         updateLB();
         lightbox.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
-    function closeLightbox() {
+
+    function closeLightbox(e) {
         lightbox.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
+
     function changePhoto(dir) {
         currentIdx += dir;
         if (currentIdx > liczba_zdjec) currentIdx = 1;
         if (currentIdx < 1) currentIdx = liczba_zdjec;
         updateLB();
     }
+
     function updateLB() {
         const nr = currentIdx.toString().padStart(2, '0');
         lbImg.src = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
         lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
     }
 
-    // 3. Obsługa klawiatury i gestów
     document.addEventListener('keydown', (e) => {
         if (lightbox.style.display === 'flex') {
             if (e.key === "ArrowRight") changePhoto(1);
@@ -235,54 +191,31 @@
         }
     });
 
-    let touchStartX = 0;
-    let isMultiTouch = false;
+    // --- LOGIKA GESTÓW DOTYKOWYCH ---
+    let tStart = 0;
+    let isMultiTouch = false; // Strażnik zoomowania
+
     lightbox.addEventListener('touchstart', e => {
-        isMultiTouch = e.touches.length > 1;
-        if (!isMultiTouch) touchStartX = e.changedTouches[0].screenX;
+        // Jeśli dotykasz ekranu więcej niż 1 palcem...
+        if (e.touches.length > 1) {
+            isMultiTouch = true; // ...zaznaczamy, że to MULTI-DOTYK (np. zoom)
+        } else {
+            isMultiTouch = false; // ...w przeciwnym razie to zwykły 1 palec
+            tStart = e.changedTouches[0].screenX; // Zapisujemy start przesunięcia
+        }
     }, {passive: true});
 
     lightbox.addEventListener('touchend', e => {
+        // Jeśli strażnik wykrył multi-dotyk, PRZERWIJ funkcję (nie zmieniaj zdjęcia)
         if (isMultiTouch) return;
-        let touchEndX = e.changedTouches[0].screenX;
-        if (touchEndX < touchStartX - 70) changePhoto(1);
-        if (touchEndX > touchStartX + 70) changePhoto(-1);
+
+        let tEnd = e.changedTouches[0].screenX;
+        const threshold = 60; // Dystans w pikselach potrzebny do zmiany foto
+
+        if (tStart - tEnd > threshold) changePhoto(1);  // Swipe w lewo -> następne
+        if (tEnd - tStart > threshold) changePhoto(-1); // Swipe w prawo -> poprzednie
     }, {passive: true});
-
-    // 4. INTELIGENTNA NAWIGACJA (Dostosowana do GitHub Pages)
-    async function generujNawigacje() {
-        const navContainer = document.getElementById('dynamic-nav');
-        let currentNum;
-        
-        // Mapowanie folderów na numery
-        if (zjazd_folder === 'zjazdi') currentNum = 1;
-        else if (zjazd_folder === 'zjazdii') currentNum = 2;
-        else currentNum = parseInt(zjazd_folder.replace('zjazd', ''));
-
-        let html = '';
-
-        // Wstecz
-        if (currentNum > 1) {
-            const prevLink = (currentNum - 1 === 1) ? 'zjazd1.html' : `zjazd${currentNum - 1}.html`;
-            html += `<a href="${prevLink}" class="pagination-btn">← Poprzedni Zjazd</a>`;
-        }
-
-        // Lista
-        html += `<a href="zjazdy.html" class="pagination-btn">Lista Zjazdów</a>`;
-
-        // Dalej (Weryfikacja istnienia pliku)
-        const nextLink = `zjazd${currentNum + 1}.html`;
-        try {
-            const response = await fetch(nextLink, { method: 'HEAD' });
-            // Jeśli nie ma przekierowania (na 404), plik istnieje
-            if (response.ok && !response.redirected) {
-                html += `<a href="${nextLink}" class="pagination-btn">Następny Zjazd →</a>`;
-            }
-        } catch (e) {}
-
-        navContainer.innerHTML = html;
-    }
-    generujNawigacje();
 </script>
+
 </body>
 </html>
