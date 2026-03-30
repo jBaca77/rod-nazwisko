@@ -65,7 +65,7 @@
         }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-        /* PAGINACJA */
+        /* PAGINACJA (Dostosowana do dynamicznego generowania) */
         .zjazdy-pagination { 
             max-width: 800px; margin: 0 auto 80px; padding: 40px 24px; 
             border-top: 1px solid var(--line); display: flex; 
@@ -113,7 +113,6 @@
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 
-        /* MOBILE FIXES */
         @media (max-width: 600px) {
             .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px }
             .lb-controls { gap: 60px; }
@@ -139,7 +138,7 @@
 
     <div class="info-panel">
         <div class="info-item"><strong>Data zjazdu</strong> 27-28 września 1975</div>
-        <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynku Ludzi Pracy (Modlin) oraz Buraków</div>
+        <div class="info-item"><strong>Miejsce</strong> Ośrodek Modlin oraz Buraków</div>
         <div class="info-item"><strong>Organizatorzy</strong> Tomasz i Zofia Ładomirscy</div>
         <div class="info-item"><strong>Uczestnicy</strong> ok. 45 osób</div>
     </div>
@@ -151,7 +150,7 @@
     <section class="memories-section">
         <h2 class="section-title">Wspomnienia i historie</h2>
         <div class="memory-card">
-            <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę, pod koniec września 1975 roku, w Modlinie...</p>
+            <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę...</p>
             <span class="memory-author">— M. Sz. (18.08.2013)</span>
         </div>
     </section>
@@ -161,10 +160,7 @@
         <div class="simple-gallery" id="gallery-container"></div>
     </div>
 
-    <div class="zjazdy-pagination">
-        <a href="zjazdy.html" class="pagination-btn">Wróć do listy</a>
-        <a href="zjazd2.html" class="pagination-btn">Następny Zjazd →</a>
-    </div>
+    <div id="dynamic-nav" class="zjazdy-pagination"></div>
 </article>
 
 <div id="lightbox" onclick="closeLightbox(event)">
@@ -182,16 +178,19 @@
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
 <script>
+    // --- KLUCZOWA KONFIGURACJA PLIKU ---
+    const TEN_ZJAZD_NUMER = 1;        // Dla zjazd1.html ustawiamy 1
+    const OSTATNI_ZJAZD_NUMER = 24;   // Aktualnie najwyższy numer pliku na serwerze
     const zjazd_folder = 'zjazdi';
     const liczba_zdjec = 38; 
     let currentIdx = 1;
 
+    // 1. Generowanie galerii
     const container = document.getElementById('gallery-container');
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-img');
     const lbCounter = document.getElementById('lb-counter');
 
-    // 1. Generowanie galerii
     for (let i = 1; i <= liczba_zdjec; i++) {
         const nr = i.toString().padStart(2, '0');
         const path = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
@@ -206,7 +205,7 @@
         container.appendChild(div);
     }
 
-    // 2. Obsługa Lightboxa
+    // 2. Lightbox logic
     function openLightbox(index) {
         currentIdx = index;
         updateLB();
@@ -214,7 +213,7 @@
         document.body.style.overflow = 'hidden';
     }
 
-    function closeLightbox(e) {
+    function closeLightbox() {
         lightbox.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
@@ -232,7 +231,30 @@
         lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
     }
 
-    // 3. Obsługa klawiatury
+    // 3. NAWIGACJA MIĘDZY ZJAZDAMI (Ręczne sterowanie)
+    function generujNawigacje() {
+        const navContainer = document.getElementById('dynamic-nav');
+        let html = '';
+
+        // Przycisk WSTECZ (tylko jeśli to nie jest pierwszy zjazd)
+        if (TEN_ZJAZD_NUMER > 1) {
+            html += `<a href="zjazd${TEN_ZJAZD_NUMER - 1}.html" class="pagination-btn">← Poprzedni Zjazd</a>`;
+        }
+
+        // Przycisk LISTA (zawsze widoczny)
+        html += `<a href="zjazdy.html" class="pagination-btn">Lista Zjazdów</a>`;
+
+        // Przycisk DALEJ (tylko jeśli nie przekroczyliśmy ostatniego zjazdu)
+        if (TEN_ZJAZD_NUMER < OSTATNI_ZJAZD_NUMER) {
+            html += `<a href="zjazd${TEN_ZJAZD_NUMER + 1}.html" class="pagination-btn">Następny Zjazd →</a>`;
+        }
+
+        navContainer.innerHTML = html;
+    }
+
+    generujNawigacje();
+
+    // 4. Klawiatura i Gesty
     document.addEventListener('keydown', (e) => {
         if (lightbox.style.display === 'flex') {
             if (e.key === "ArrowRight") changePhoto(1);
@@ -241,32 +263,19 @@
         }
     });
 
-    // 4. OBSŁUGA GESTÓW (Z poprawką na Multi-Touch)
     let touchStartX = 0;
-    let isMultiTouch = false; // Nowy strażnik
-
+    let isMultiTouch = false;
     lightbox.addEventListener('touchstart', e => {
-        // Zmiana 1: Sprawdzamy iloma palcami użytkownik dotknął ekranu
-        if (e.touches.length > 1) {
-            isMultiTouch = true; // To jest gest przybliżania
-        } else {
-            isMultiTouch = false; // To jest gest jednego palca
-            touchStartX = e.changedTouches[0].screenX;
-        }
+        isMultiTouch = e.touches.length > 1;
+        if (!isMultiTouch) touchStartX = e.changedTouches[0].screenX;
     }, {passive: true});
 
     lightbox.addEventListener('touchend', e => {
-        // Zmiana 2: Jeśli wykryto więcej niż 1 palec, nie rób nic
         if (isMultiTouch) return;
-
         let touchEndX = e.changedTouches[0].screenX;
-        const threshold = 70; // Zwiększony próg dla lepszej stabilności
-
-        if (touchEndX < touchStartX - threshold) changePhoto(1);  // Swipe w lewo
-        if (touchEndX > touchStartX + threshold) changePhoto(-1); // Swipe w prawo
+        if (touchEndX < touchStartX - 70) changePhoto(1);
+        if (touchEndX > touchStartX + 70) changePhoto(-1);
     }, {passive: true});
 </script>
-
 </body>
 </html>
-
