@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XIX Zjazd: Krynica Morska | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ARTYKUŁ */
+        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+
+        .info-panel { 
+            max-width: 850px; margin: 0 auto 50px; padding: 30px; 
+            background: var(--parchment); border-radius: 4px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
+        }
+        .info-item { font-size: 0.9rem; }
+        .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
+
+        .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
+        .main-img { width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
+        .memory-card { border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; font-style: italic; position: relative; }
+        .memory-card::before { content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; }
+        .memory-author { display: block; margin-top: 15px; font-style: normal; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--sepia); }
+
+        /* GALERIA */
+        .gallery-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
+        .simple-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); grid-auto-rows: 180px; gap: 8px; }
+        .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); }
+        .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
+
+       /* PAGINACJA - NOWY UKŁAD */
+        .zjazdy-pagination { max-width: 800px; margin: 40px auto 80px; padding: 30px 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; }
+        .pagination-btn { flex: 1 1 calc(50% - 6px); /* Dwa przyciski obok siebie */text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center;display: flex;align-items: center;justify-content: center;}
+        /* Przycisk "Wróć do listy" na całą szerokość */
+        .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; /* Delikatne wyróżnienie że to powrót */}
+        .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: white; }
+        
+        /* FIX DLA MOBILE */
+        @media (max-width: 600px) {
+            .pagination-btn { padding: 20px 10px; /* Większe pole dotyku dla kciuka */font-size: 0.7rem; }
+        }
+
+        /* LIGHTBOX */
+        #lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; user-select: none; padding: 15px; }
+        .lb-container { display: flex; flex-direction: column; align-items: center; max-width: 100%; max-height: 100%; position: relative; }
+        .lb-close { margin-bottom: 12px; color: var(--parchment); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; transition: 0.3s; opacity: 0.7; }
+        #lb-img { max-width: 100%; max-height: 70vh; border: 1px solid var(--gold); padding: 6px; background: white; box-shadow: 0 0 40px rgba(0,0,0,0.5); object-fit: contain; }
+        .lb-controls { margin-top: 15px; display: flex; align-items: center; gap: 40px; }
+        .lb-arrow { background: none; border: none; color: var(--gold-light); font-size: 3rem; cursor: pointer; transition: 0.3s; font-family: 'Cormorant Garamond', serif; }
+        .lb-counter { color: var(--gold-light); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-family: 'Jost', sans-serif; }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+
+        @media (max-width: 600px) {
+            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
+            .lb-controls { gap: 60px; }
+            .lb-arrow { font-size: 3.5rem; }
+            .article-header { margin: 40px auto 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="zjazdy.html" class="back-link">← Powrót do listy</a>
+    </div>
+</nav>
+
+<article>
+    <header class="article-header">
+        <span class="meta-top">Archiwum Rodzinne • 2015</span>
+        <h1>XIX Zjazd: Krynica Morska</h1>
+    </header>
+
+    <div class="info-panel">
+        <div class="info-item"><strong>Data zjazdu</strong> 18-20 września 2016</div>
+        <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynkowo-Szkoleniowy Perkoz - Krynica Morska, ul. Teleexpresu 1</div>
+        <div class="info-item"><strong>Organizatorzy</strong> rodziny Doerffer, Fedorowicz i Meissne (Gdańsk, Olsztyn, Wrocław)</div>
+        <div class="info-item"><strong>Uczestnicy</strong> 198 </div>
+    </div>
+
+    <div class="hero-container">
+        <img src="./img/zjazdy/zjazdxix/foto_zjazdxix_00.jpg" alt="Zdjęcie grupowe" class="main-img">
+    </div>
+
+    <section class="memories-section">
+        <h2 class="section-title">Wspomnienia</h2>
+        <div class="memory-card">
+            <p>Na morskim zjeździe, w roku 2015, pogoda nie sprzyjała kąpieli, ale grupka odważnych ludzi nie zważając na temperaturę weszła do wody. Do wody weszli: Asiri Gandini, Ida Pestka, Paula Ropelewska, ja i jakiś niezidentyfikowany przez moją pamięć pan.</p>
+            <span class="memory-author">— Ł. H-Ł. (23.09.2017)</span>
+        </div>
+        <div class="memory-card">
+            <p>Na zjeździe widzieliśmy liska, który chciał zjeść nam wszystkie kiełbaski :) Była też plaża i super zimne morze, ale i tak w nim pływaliśmy.</p>
+            <span class="memory-author">— A. G. (23.09.2017)</span>
+        </div>
+         <div class="memory-card">
+            <p>Po grillu w piątek, kilku kuzynów wykąpało się w morzu, było ciemno i zastanawialiśmy się czy wrócą. Na szczęście wszystko skończyło się dobrze. Na spotkaniu wspominkowym został puszczony film z jednego ze zjazdów. Była tam moja babcia, to jedyny film jaki z nią mam. Do dziś na samą myśl o tym filmie się wzruszamy.</p>
+            <span class="memory-author">— A. W. (23.09.2017)</span>
+        </div>
+    </section>
+
+    <div class="gallery-wrapper">
+        <h2 class="section-title">Fotokronika</h2>
+        <div class="simple-gallery" id="gallery-container"></div>
+    </div>
+
+    <div class="zjazdy-pagination">
+    <a href="zjazd18.html" class="pagination-btn">← Poprzedni</a>
+    <a href="zjazd20.html" class="pagination-btn">Następny →</a>
+    <a href="zjazdy.html" class="pagination-btn full-width">Powrót do listy zjazdów</a>
+</div>
+
+</article>
+
+<div id="lightbox" onclick="closeLightbox(event)">
+    <div class="lb-container" onclick="event.stopPropagation()">
+        <span class="lb-close" onclick="closeLightbox(event)">Zamknij (X)</span>
+        <img id="lb-img" src="" alt="Powiększenie" onclick="changePhoto(1)">
+        <div class="lb-controls">
+            <button class="lb-arrow" onclick="changePhoto(-1)">❮</button>
+            <div class="lb-counter" id="lb-counter"></div>
+            <button class="lb-arrow" onclick="changePhoto(1)">❯</button>
+        </div>
+    </div>
+</div>
+
+<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
+
+<script>
+    const zjazd_folder = 'zjazdxix';
+    const liczba_zdjec = 172; 
+    let currentIdx = 1;
+
+    const container = document.getElementById('gallery-container');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCounter = document.getElementById('lb-counter');
+
+    for (let i = 1; i <= liczba_zdjec; i++) {
+        const nr = i.toString().padStart(2, '0');
+        const path = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        const img = document.createElement('img');
+        img.src = path;
+        img.loading = "lazy";
+        img.onerror = function() { this.parentElement.style.display = 'none'; };
+        div.onclick = () => openLightbox(i);
+        div.appendChild(img);
+        container.appendChild(div);
+    }
+
+    function openLightbox(index) {
+        currentIdx = index;
+        updateLB();
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(e) {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function changePhoto(dir) {
+        currentIdx += dir;
+        if (currentIdx > liczba_zdjec) currentIdx = 1;
+        if (currentIdx < 1) currentIdx = liczba_zdjec;
+        updateLB();
+    }
+
+    function updateLB() {
+        const nr = currentIdx.toString().padStart(2, '0');
+        lbImg.src = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+        lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+            if (e.key === "ArrowRight") changePhoto(1);
+            if (e.key === "ArrowLeft") changePhoto(-1);
+            if (e.key === "Escape") closeLightbox();
+        }
+    });
+
+    let tStart = 0;
+    let isMultiTouch = false;
+
+    lightbox.addEventListener('touchstart', e => {
+        if (e.touches.length > 1) {
+            isMultiTouch = true;
+        } else {
+            isMultiTouch = false;
+            tStart = e.changedTouches[0].screenX;
+        }
+    }, {passive: true});
+
+    lightbox.addEventListener('touchend', e => {
+        if (isMultiTouch) return;
+        let tEnd = e.changedTouches[0].screenX;
+        const threshold = 60;
+        if (tStart - tEnd > threshold) changePhoto(1);
+        if (tEnd - tStart > threshold) changePhoto(-1);
+    }, {passive: true});
+</script>
+
+</body>
+</html>
