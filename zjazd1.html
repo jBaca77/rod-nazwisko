@@ -51,7 +51,7 @@
         }
         .memory-author { display: block; margin-top: 15px; font-style: normal; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--sepia); }
 
-        /* GALERIA MINIATUR (MOZAIKA) */
+        /* GALERIA MINIATUR */
         .gallery-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
         .simple-gallery { 
             display: grid; 
@@ -65,7 +65,7 @@
         }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-        /* NAWIGACJA MIĘDZY ZJAZDAMI */
+        /* PAGINACJA */
         .zjazdy-pagination { 
             max-width: 800px; margin: 0 auto 80px; padding: 40px 24px; 
             border-top: 1px solid var(--line); display: flex; 
@@ -78,42 +78,34 @@
         }
         .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--parchment); }
 
-        /* --- LIGHTBOX (NOWA STRUKTURA) --- */
+        /* LIGHTBOX */
         #lightbox {
             display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; 
             user-select: none; padding: 20px;
         }
-
         .lb-container {
             display: flex; flex-direction: column; align-items: center;
             max-width: 95%; max-height: 95%; position: relative;
         }
-
         .lb-close {
             margin-bottom: 15px; color: var(--parchment); font-size: 0.9rem;
             text-transform: uppercase; letter-spacing: 3px; cursor: pointer;
             transition: 0.3s; padding: 5px 10px;
         }
-        .lb-close:hover { color: var(--gold-light); }
-
         #lb-img { 
             max-width: 100%; max-height: 70vh; border: 1px solid var(--gold); 
             padding: 8px; background: white; box-shadow: 0 0 40px rgba(0,0,0,0.5); 
-            object-fit: contain; cursor: pointer;
+            object-fit: contain;
         }
-
         .lb-controls {
             margin-top: 20px; display: flex; align-items: center; gap: 40px;
         }
-
         .lb-arrow {
             background: none; border: none; color: var(--gold-light);
             font-size: 3rem; cursor: pointer; transition: 0.3s;
             font-family: 'Cormorant Garamond', serif; line-height: 1;
         }
-        .lb-arrow:hover { color: white; transform: scale(1.2); }
-
         .lb-counter {
             color: var(--gold-light); font-size: 0.8rem; letter-spacing: 2px;
             text-transform: uppercase; font-family: 'Jost', sans-serif;
@@ -123,7 +115,11 @@
 
         /* MOBILE FIXES */
         @media (max-width: 600px) {
-            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
+            .simple-gallery { 
+                grid-template-columns: repeat(4, 1fr); 
+                grid-auto-rows: 90px; /* Korekta wysokości pod 4 kolumny */
+                gap: 4px; 
+            }
             .lb-controls { gap: 60px; }
             .lb-arrow { font-size: 3.5rem; }
             .article-header { margin:40px auto 30px; }
@@ -159,12 +155,8 @@
     <section class="memories-section">
         <h2 class="section-title">Wspomnienia i historie</h2>
         <div class="memory-card">
-            <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę, pod koniec września 1975 roku, w Modlinie. Pamiętam to niesamowite poruszenie, że udało się zebrać tyle osób w jednym miejscu...</p>
+            <p>Pierwszy zjazd był dość krótkim spotkaniem i odbył się z soboty na niedzielę, pod koniec września 1975 roku, w Modlinie...</p>
             <span class="memory-author">— M. Sz. (18.08.2013)</span>
-        </div>
-        <div class="memory-card">
-            <p>Dla mnie i mojej "świeżo upieczonej żony Barbary" była to jednocześnie podróż poślubna - 20.09.1975 braliśmy ślub. To był piękny czas.</p>
-            <span class="memory-author">— M. R. (21.09.2019)</span>
         </div>
     </section>
 
@@ -182,9 +174,7 @@
 <div id="lightbox" onclick="closeLightbox(event)">
     <div class="lb-container" onclick="event.stopPropagation()">
         <span class="lb-close" onclick="closeLightbox(event)">Zamknij (X)</span>
-        
         <img id="lb-img" src="" alt="Powiększenie" onclick="changePhoto(1)">
-        
         <div class="lb-controls">
             <button class="lb-arrow" onclick="changePhoto(-1)">❮</button>
             <div class="lb-counter" id="lb-counter"></div>
@@ -209,14 +199,12 @@
     for (let i = 1; i <= liczba_zdjec; i++) {
         const nr = i.toString().padStart(2, '0');
         const path = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
-
         const div = document.createElement('div');
         div.className = 'gallery-item';
         const img = document.createElement('img');
         img.src = path;
         img.loading = "lazy";
         img.onerror = function() { this.parentElement.style.display = 'none'; };
-        
         div.onclick = () => openLightbox(i);
         div.appendChild(img);
         container.appendChild(div);
@@ -257,25 +245,32 @@
         }
     });
 
-    // 4. Obsługa gestów (Swipe)
+    // 4. OBSŁUGA GESTÓW (Z poprawką na Multi-Touch)
     let touchStartX = 0;
-    let touchEndX = 0;
+    let isMultiTouch = false; // Nowy strażnik
 
     lightbox.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
+        // Zmiana 1: Sprawdzamy iloma palcami użytkownik dotknął ekranu
+        if (e.touches.length > 1) {
+            isMultiTouch = true; // To jest gest przybliżania
+        } else {
+            isMultiTouch = false; // To jest gest jednego palca
+            touchStartX = e.changedTouches[0].screenX;
+        }
     }, {passive: true});
 
     lightbox.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleGesture();
-    }, {passive: true});
+        // Zmiana 2: Jeśli wykryto więcej niż 1 palec, nie rób nic
+        if (isMultiTouch) return;
 
-    function handleGesture() {
-        const threshold = 50;
-        if (touchEndX < touchStartX - threshold) changePhoto(1); // Swipe w lewo
+        let touchEndX = e.changedTouches[0].screenX;
+        const threshold = 70; // Zwiększony próg dla lepszej stabilności
+
+        if (touchEndX < touchStartX - threshold) changePhoto(1);  // Swipe w lewo
         if (touchEndX > touchStartX + threshold) changePhoto(-1); // Swipe w prawo
-    }
+    }, {passive: true});
 </script>
 
 </body>
 </html>
+
