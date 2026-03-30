@@ -104,12 +104,8 @@
     <section class="memories-section">
         <h2 class="section-title">Wspomnienia</h2>
         <div class="memory-card">
-            <p>Przestawianie samochodów na zjazdach zaczęło się od wesela Majki i Marka Szczepaniaków. Pożyczony „maluch”, którym przyjechali Tomkowie Ładomirscy rano zniknął z miejsca parkowania. Odnalazł się jednak w parku zaklinowany między drzewami. Żartownisie mieli początkowo zamiar ustawienia go na tarasie ale schodów było zbyt dużo. Potem w Szalejewie już dzieciaki zaczęły kombinować z samochodami. Powodzeniem cieszył się Muscel (?), który nie wiem jakim sposobem został odblokowany i zaczął się toczyć. Na szczęście zauważył to ktoś z dorosłych (Jacek Niewęgłowski?) i uratował sytuację. W Sorkwitach samochód Konopków był przestawiany chyba dwa razy i w końcu wylądował w jeziorze. Czy to był koniec z przestawianiem nie pamiętam.</p>
+            <p>Przestawianie samochodów na zjazdach zaczęło się od wesela Majki i Marka Szczepaniaków...</p>
             <span class="memory-author">— Z. Ł. (23.09.2017)</span>
-        </div>
-        <div class="memory-card">
-            <p>Miałam 7 lat. Byliśmy na zamku u Barona Minhausena. Były tam wielkie drewniane schody. Wieczorem, pojawił się na tych schodach DUCH.</p>
-            <span class="memory-author">— J. Ł. (23.09.2017)</span>
         </div>
     </section>
 
@@ -119,6 +115,7 @@
     </div>
 
     <div class="zjazdy-pagination">
+        <a href="zjazd1.html" class="pagination-btn">← Poprzedni Zjazd</a>
         <a href="zjazdy.html" class="pagination-btn">Wróć do listy</a>
         <a href="zjazd3.html" class="pagination-btn">Następny Zjazd →</a>
     </div>
@@ -195,29 +192,24 @@
         }
     });
 
-    // --- LOGIKA GESTÓW DOTYKOWYCH ---
     let tStart = 0;
-    let isMultiTouch = false; // Strażnik zoomowania
+    let isMultiTouch = false;
 
     lightbox.addEventListener('touchstart', e => {
-        // Jeśli dotykasz ekranu więcej niż 1 palcem...
         if (e.touches.length > 1) {
-            isMultiTouch = true; // ...zaznaczamy, że to MULTI-DOTYK (np. zoom)
+            isMultiTouch = true;
         } else {
-            isMultiTouch = false; // ...w przeciwnym razie to zwykły 1 palec
-            tStart = e.changedTouches[0].screenX; // Zapisujemy start przesunięcia
+            isMultiTouch = false;
+            tStart = e.changedTouches[0].screenX;
         }
     }, {passive: true});
 
     lightbox.addEventListener('touchend', e => {
-        // Jeśli strażnik wykrył multi-dotyk, PRZERWIJ funkcję (nie zmieniaj zdjęcia)
         if (isMultiTouch) return;
-
         let tEnd = e.changedTouches[0].screenX;
-        const threshold = 60; // Dystans w pikselach potrzebny do zmiany foto
-
-        if (tStart - tEnd > threshold) changePhoto(1);  // Swipe w lewo -> następne
-        if (tEnd - tStart > threshold) changePhoto(-1); // Swipe w prawo -> poprzednie
+        const threshold = 60;
+        if (tStart - tEnd > threshold) changePhoto(1);
+        if (tEnd - tStart > threshold) changePhoto(-1);
     }, {passive: true});
 </script>
 
