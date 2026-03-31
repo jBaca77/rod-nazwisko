@@ -21,11 +21,11 @@
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         
-        /* PRZYCISK MENU - Widoczny na ciemnym tle nav */
+        /* PRZYCISK MENU */
         .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; padding: 5px; z-index: 1100; position: relative; }
         .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
 
-        /* DRAWER (PASEK BOCZNY) */
+        /* DRAWER */
         .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 30px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
         .drawer.open { right: 0; }
         .drawer-links { list-style: none; }
@@ -48,15 +48,22 @@
         .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
         .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
         h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+        
         .content-wrapper { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
+        
         .story-section { margin-bottom: 40px; text-align: justify; }
         .story-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin: 40px 0 20px; color: var(--gold); border-bottom: 1px solid var(--line); padding-bottom: 10px; text-align: left; }
+        
         .image-container { margin: 40px 0; text-align: center; }
         .image-container img { max-width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .img-label { display: block; margin-top: 10px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); }
+        
         .author-note { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--sepia); }
+        
         .dictionary-box { margin-top: 40px; padding: 30px; background: var(--parchment); border-radius: 4px; border-left: 4px solid var(--gold); }
         .dictionary-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .dictionary-content { font-style: italic; font-size: 0.95rem; }
+
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
     </style>
 </head>
@@ -105,16 +112,52 @@
         <span class="meta-top">Geneza powstania</span>
         <h1>Jak nieformalnie powołano do życia Klan Ładomirskich i Kraińskich</h1>
     </header>
+    
     <div class="content-wrapper">
         <section class="story-section">
-            <p>Była polska złota jesień, dzień 28 września roku 1974. W Wielichowie, w Wielkopolsce, na ślubnym kobiercu, w kościele pw. św. Marii Magdaleny, stanęli: Maria Ładomirska, panna lat 24 i Marek Szczepaniak, kawaler lat 26.</p>
+            <p>Była polska złota jesień, dzień 28 września roku 1974. W Wielichowie, w Wielkopolsce, na ślubnym kobiercu, w kościele pw. św. Marii Magdaleny, stanęli: Maria Ładomirska, panna lat 24 i Marek Szczepaniak, kawaler lat 26. Po zaślubinach Młodzi oraz zaproszeni goście udali się do Pałacu IUNGu. Tamże wieczorem odbyło się huczne wesele.</p>
+            
             <div class="image-container">
-                <img src="./img/historia/mloda_para_1974.jpg" alt="Młoda Para" onerror="this.src='https://placehold.co/600x400?text=Młoda+Para+1974'">
+                <img src="./img/historia/mloda_para_1974.jpg" alt="Młoda Para Wielichowo 1974" onerror="this.src='https://placehold.co/600x400?text=Młoda+Para+1974'">
                 <span class="img-label">Młoda para — Wielichowo 1974</span>
             </div>
-            <p>Moi rodzice, Jerzy i Marta z Ładomirskich małżonkowie Niewęgłowscy o mały włos na powyższe uroczystości by nie dotarli...</p>
+
+            <p>Moi rodzice, Jerzy i Marta z Ładomirskich małżonkowie Niewęgłowscy o mały włos na powyższe uroczystości by nie dotarli, gdyż w tym samym dniu w Radochowie, w Kotlinie Kłodzkiej, wraz z dyrektorem Kombinatu Trzebieszowice Jerzym Janickim omawiali możliwość realizacji swojej idei budowy w Radochowie ośrodka hodowli pstrągów. Szczęśliwie jednak rozmowy zakończyły się na tyle wcześnie, aby możliwym stało się pokonanie 250 km dzielących południe Polski z Wielichowem i wzięcie przez nich udziału choćby w weselu.</p>
         </section>
-        <div class="author-note"><p><strong>Hubert Niewęgłowski</strong>, Radochów 2012 r.</p></div>
+
+        <section class="story-section">
+            <h2>Dlaczego to istotne?</h2>
+            <p>Otóż tak się złożyło, że ojciec mój, w rodzinie oraz wśród koleżeństwa po fachu rybackim zwany Jackiem, był świeżo po lekturze artykułu o zjazdach rodzinnych organizowanych przez cieszyński ród Guziurów, do którego to należał jego kolega ze studiów. To właśnie ta idea spotkań rodzinnych, na gruncie uprawionym dyskusjami prowadzonymi w trakcie organizacji ślubu oraz w czasie samego wesela, zaowocowała decyzją zorganizowania zjazdu rodziny Ładomirskich.</p>
+            
+            <p>Wieczoru owego nie tylko podjęto decyzję, ale także ukonstytuowano zespół organizacyjny oraz ustalono zasady finansowania. Zorganizowania pierwszego zjazdu podjął się wuj Tomasz Ładomirski zaś „skarbniczką” została praciotka Anna Ładomirska. Aby ułatwić krewnym odłożenie środków na opłaty zjazdowe praciotka Anna niebawem otworzyła subkonto, na które każdy członek rodziny mógł deponować wg uznania i w dowolnym czasie oszczędności, z których później pokrywał koszty swojego udziału w zjeździe.</p>
+        </section>
+
+        <section class="story-section">
+            <h2>Narodziny Klanu</h2>
+            <p>Równo rok później tj. we wrześniu roku 1975 w Modlinie pod Warszawą decyzja doczekała się realizacji. Odbył się I Zjazd Rodziny Ładomirskich.</p>
+            
+            <div class="image-container">
+                <img src="./img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Uczestnicy I Zjazdu" onerror="this.src='https://placehold.co/800x400?text=I+Zjazd+w+Modlinie'">
+                <span class="img-label">Uczestnicy I Zjazdu w Modlinie</span>
+            </div>
+
+            <p>Na pierwszy Zjazd przybyli potomkowie Zdzisława i Anny z Kraińskich małżonków Ładomirskich. Z odwiedzinami wpadł nań także z pobliskiej Warszawy, bratanek Anny z Kraińskich Ładomirskiej, prawuj Stanisław Kraiński. Wizyta ta, choć krótka okazała się być brzemienną w skutkach. Gdy 5 lat później ruszyły prace nad organizacją drugiego zjazdu, ze strony potomków rodzeństwa Zdzisława Ładomirskiego oraz rodzeństwa Anny z Kraińskich Ładomirskiej padło pytanie – a my? My także jesteśmy przecież rodziną! Tak, więc Zjazd nr II odbył się już w rozszerzonym gronie tj. przybyli nań zarówno potomkowie Ładomirskich jak i Kraińskich. W ten też sposób nieformalnie narodził się Klan.</p>
+            
+            <p>Istniejące od lat więzy rodzinne zyskały zewnętrzną formę cyklicznych zjazdów. Zjazdów, które okazały się mieć ogromne znaczenie dla podtrzymywania i konsolidacji tychże więzów. Dzięki nim, mimo upływającego czasu, pojawiania się kolejnych pokoleń oraz przeróżnych migracji członków rodziny po kraju i świecie potomkowie Zdzisława i Anny oraz ich krewni nie stracili z sobą kontaktu.</p>
+            
+            <p>Przez blisko już 40 lat Klan nie wypracował żadnej formalnej struktury, choć były do tego przymiarki. Spontaniczność, wsparta odrobiną zwyczajowego już nadzoru wuja Tomasza Ładomirskiego (pierwszego organizatora), okazuje się w zupełności wystarczającą a może i optymalną formułą jego funkcjonowania.</p>
+        </section>
+
+        <div class="author-note">
+            <p><strong>Hubert Niewęgłowski</strong>, Radochów 2012 r.</p>
+        </div>
+
+        <div class="dictionary-box">
+            <h3>Słownik języka polskiego</h3>
+            <div class="dictionary-content">
+                <p><strong>KLAN</strong> — (1) związek osób oparty na pokrewieństwie bądź powinowactwie; (2) grupa osób popierających się, mających wspólne interesy, w jakiś sposób związanych ze sobą.</p>
+            </div>
+        </div>
     </div>
 </article>
 
@@ -125,12 +168,10 @@
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('overlay');
 
-    // Funkcja otwierania/zamykania
     function toggleMenu() {
         drawer.classList.toggle('open');
         overlay.classList.toggle('active');
         
-        // Animacja ikony hamburgera
         const spans = menuBtn.querySelectorAll('span');
         if(drawer.classList.contains('open')) {
             spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
@@ -146,7 +187,6 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // Obsługa podmenu
     function toggleSub(el) {
         el.parentElement.classList.toggle('active');
     }
