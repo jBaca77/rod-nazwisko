@@ -59,7 +59,7 @@
   .g-card { 
     background: var(--cream); padding: 30px 20px 45px 20px; border: 1px solid var(--sepia-pale); 
     text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    position: relative; display: flex; flex-direction: column; overflow: hidden; cursor: default;
+    position: relative; display: flex; flex-direction: column; overflow: hidden;
   }
   .g-card::after { content: ""; position: absolute; inset: 8px; border: 1px solid var(--line); pointer-events: none; transition: 0.4s; }
   .g-card:hover { transform: translateY(-5px); background-color: var(--parchment); border-color: var(--gold); }
@@ -69,8 +69,11 @@
   
   .g-card .card-actions { margin-top: auto; display: flex; justify-content: space-between; align-items: center; z-index: 2; }
   .btn-map { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); font-weight: 500; cursor: pointer; }
-  .btn-more { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-weight: 500; text-decoration: none; position: absolute; bottom: 20px; right: 20px; }
+  .btn-more { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-weight: 500; text-decoration: none; position: absolute; bottom: 20px; right: 20px; z-index: 3; }
   .btn-more:hover { color: var(--gold); }
+
+  /* Styl przycisku w dymku mapy */
+  .popup-more { display: inline-block; margin-top: 10px; font-size: 11px; text-transform: uppercase; color: var(--gold); text-decoration: none; font-weight: 600; border-top: 1px solid var(--line); padding-top: 5px; width: 100%; }
 
   footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; margin-top: 100px; }
 </style>
@@ -138,40 +141,40 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+  // Każdy rekord posiada teraz unikalne ID do generowania linków grobX.html
   const gData = [
-    { p: "Antoni, Albina i Zofa z Włodków Antoniowa Kraińscy", l: "Katowice", c: [50.23883632270827, 19.014169841971263] },
-    { p: "Amalia z Schützów Gołębiewska", l: "Lwów", c: [49.83260559894966, 24.056187556714455] },
-    { p: "Feliks Domański", l: "Ubinie", c: [49.927123683939705, 24.424722517796155] },
-    { p: "Feliks Paweł Hilary Domański", l: "Piotrków Trybunalski", c: [51.41413353302085, 19.693865247273028] },
-    { p: "Jan Alojzy Gołębski", l: "Lwów", c: [49.83260559894966, 24.056187556714455] },
-    { p: "Kazimierz, Anna i Teofil Ładomirscy", l: "Krzywcze", c: [50.0754, 19.9558] },
-    { p: "Ludwik Zakrzewski", l: "Dąbrowa Tarnowska", c: [50.171909, 20.993973] },
-    { p: "Leonnard Adolf Ładomirski", l: "Kozłów k/Tarnopola", c: [51.1168, 17.0592] },
-    { p: "Ludmiła z Zakrzewskich Wiszniewska", l: "Point-Claire", c: [45.443479020991546, -73.83603494959144] },
-    { p: "Leopold Wiszniewski", l: "Żytomierz", c: [50.266593914271226, 28.6335348582252] },
-    { p: "Maciej i Rafaela z Malczewskich Gołaszewscy", l: "Podstolice", c: [49.39118290445538, 24.78978802599947] },
-    { p: "Tytus i Anna z Węgleńskich Trzecieskich", l: "Jedlicz", c: [49.71559199060331, 21.63988768739242] },
-    { p: "Teofilia Józefa z Gołaszewskich Krobicka", l: "Kołomyja", c: [49.4385, 20.7162] },
-    { p: "Walenty Konstaty Brutus i Emeryk Stanisław Ładomiski", l: "Markowce", c: [48.83070477528586, 24.8152894745481] },
-    { p: "Władysław Marian Walenty i Stanisław Kraiński", l: "Dydnia", c: [49.68315395091004, 22.173459706860513] },
-    { p: "grobowiec rodziny Krobickich", l: "Kraków", c: [49.7765, 22.7845] },
-    { p: "grobowiec rodziny Fedorowiczów", l: "Laski", c: [52.29946432158031, 20.83639500093081] },
-    { p: "grobowiec rodziny Domańskich", l: "Warszawa", c: [52.25256536233156, 20.9779470687829] },
-    { p: "grobowiec rodziny Kraińskich", l: "Wyszatyce", c: [49.841679751729245, 22.889653242330645] },
-    { p: "grobowiec rodziny Onyszkiewiczów", l: "Zakopane", c: [49.301683385113414, 19.952873225720523] },
-    { p: "grobowiec Trzecieskich i Kraińskich", l: "Lwów", c: [49.83260559894966, 24.056187556714455] },
-    { p: "grobowiec Zdańskich", l: "Lwów", c: [49.83260559894966, 24.056187556714455] }, 
-    { p: "grobowiec rodziny Wąsowskich", l: "Nowy Sącz", c: [49.617184607937105, 20.705146607353985] },
-    { p: "grobowiec rodziny Węgleńskich i Morawieckich", l: "Pawłów", c: [51.141377716593524, 23.211578318494304] },
-    { p: "grobowiec rodziny Włodków", l: "Podstolice", c: [49.95836938158047, 19.988736184658194] },
-    { p: "kaplica grobowa Sulima Włodków z Dąbrowicy", l: "Niegowici", c: [49.940033979105266, 20.239058605735163] },
-    { p: "krypta z trumnami zmarłych z rodziny Götz-Okocimskich", l: "Okocim", c: [49.948805618685036, 20.602759773012707] },
-    { p: "krypta s.Marii Anieli (Jadwiga Kraińska)", l: "Szymanów", c: [52.163478880173344, 20.380888140674976] },
+    { id: 1, p: "Antoni, Albina i Zofa z Włodków Antoniowa Kraińscy", l: "Katowice", c: [50.23883632270827, 19.014169841971263] },
+    { id: 2, p: "Amalia z Schützów Gołębiewska", l: "Lwów", c: [49.83260559894966, 24.056187556714455] },
+    { id: 3, p: "Feliks Domański", l: "Ubinie", c: [49.927123683939705, 24.424722517796155] },
+    { id: 4, p: "Feliks Paweł Hilary Domański", l: "Piotrków Trybunalski", c: [51.41413353302085, 19.693865247273028] },
+    { id: 5, p: "Jan Alojzy Gołębski", l: "Lwów", c: [49.83260559894966, 24.056187556714455] },
+    { id: 6, p: "Kazimierz, Anna i Teofil Ładomirscy", l: "Krzywcze", c: [50.0754, 19.9558] },
+    { id: 7, p: "Ludwik Zakrzewski", l: "Dąbrowa Tarnowska", c: [50.171909, 20.993973] },
+    { id: 8, p: "Leonnard Adolf Ładomirski", l: "Kozłów k/Tarnopola", c: [51.1168, 17.0592] },
+    { id: 9, p: "Ludmiła z Zakrzewskich Wiszniewska", l: "Point-Claire", c: [45.443479020991546, -73.83603494959144] },
+    { id: 10, p: "Leopold Wiszniewski", l: "Żytomierz", c: [50.266593914271226, 28.6335348582252] },
+    { id: 11, p: "Maciej i Rafaela z Malczewskich Gołaszewscy", l: "Podstolice", c: [49.39118290445538, 24.78978802599947] },
+    { id: 12, p: "Tytus i Anna z Węgleńskich Trzecieskich", l: "Jedlicz", c: [49.71559199060331, 21.63988768739242] },
+    { id: 13, p: "Teofilia Józefa z Gołaszewskich Krobicka", l: "Kołomyja", c: [49.4385, 20.7162] },
+    { id: 14, p: "Walenty Konstaty Brutus i Emeryk Stanisław Ładomiski", l: "Markowce", c: [48.83070477528586, 24.8152894745481] },
+    { id: 15, p: "Władysław Marian Walenty i Stanisław Kraiński", l: "Dydnia", c: [49.68315395091004, 22.173459706860513] },
+    { id: 16, p: "grobowiec rodziny Krobickich", l: "Kraków", c: [49.7765, 22.7845] },
+    { id: 17, p: "grobowiec rodziny Fedorowiczów", l: "Laski", c: [52.29946432158031, 20.83639500093081] },
+    { id: 18, p: "grobowiec rodziny Domańskich", l: "Warszawa", c: [52.25256536233156, 20.9779470687829] },
+    { id: 19, p: "grobowiec rodziny Kraińskich", l: "Wyszatyce", c: [49.841679751729245, 22.889653242330645] },
+    { id: 20, p: "grobowiec rodziny Onyszkiewiczów", l: "Zakopane", c: [49.301683385113414, 19.952873225720523] },
+    { id: 21, p: "grobowiec Trzecieskich i Kraińskich", l: "Lwów", c: [49.83260559894966, 24.056187556714455] },
+    { id: 22, p: "grobowiec Zdańskich", l: "Lwów", c: [49.83260559894966, 24.056187556714455] }, 
+    { id: 23, p: "grobowiec rodziny Wąsowskich", l: "Nowy Sącz", c: [49.617184607937105, 20.705146607353985] },
+    { id: 24, p: "grobowiec rodziny Węgleńskich i Morawieckich", l: "Pawłów", c: [51.141377716593524, 23.211578318494304] },
+    { id: 25, p: "grobowiec rodziny Włodków", l: "Podstolice", c: [49.95836938158047, 19.988736184658194] },
+    { id: 26, p: "kaplica grobowa Sulima Włodków z Dąbrowicy", l: "Niegowici", c: [49.940033979105266, 20.239058605735163] },
+    { id: 27, p: "krypta z trumnami zmarłych z rodziny Götz-Okocimskich", l: "Okocim", c: [49.948805618685036, 20.602759773012707] },
+    { id: 28, p: "krypta s.Marii Anieli (Jadwiga Kraińska)", l: "Szymanów", c: [52.163478880173344, 20.380888140674976] },
   ];
 
   const themeColor = "#7a6548";
 
-  // Inicjalizacja mapy z włączonym scrollWheelZoom (obsługa gestów)
   const map = L.map('map', { 
     scrollWheelZoom: true,
     smoothWheelZoom: true,
@@ -184,7 +187,6 @@
   
   function locateOnMap(coords) {
     map.flyTo(coords, 15);
-    // Centrowanie mapy na ekranie
     const mapEl = document.getElementById('map');
     const mapRect = mapEl.getBoundingClientRect();
     const scrollTarget = window.pageYOffset + mapRect.top - (window.innerHeight / 2) + (mapRect.height / 2);
@@ -198,18 +200,25 @@
       iconSize: [12, 12], iconAnchor: [6, 6]
     });
 
-    L.marker(g.c, {icon}).addTo(map)
-      .bindPopup(`<div style="font-family:'Jost',sans-serif; padding:5px"><strong>${g.p}</strong><br>${g.l}</div>`);
+    // Usunięcie undefined z wyświetlania nekropolii
+    const cemeteryInfo = g.i ? `<br><small>${g.i}</small>` : "";
 
-    // Budowanie kafelka - usunięcie ", undefined" oraz dodanie przycisku Więcej
+    L.marker(g.c, {icon}).addTo(map)
+      .bindPopup(`
+        <div style="font-family:'Jost',sans-serif; padding:5px">
+          <strong>${g.p}</strong><br>${g.l}${cemeteryInfo}
+          <a href="grob${g.id}.html" class="popup-more">Więcej informacji →</a>
+        </div>
+      `);
+
     container.innerHTML += `
       <div class="g-card">
         <h3>${g.p}</h3>
-        <div class="cemetery">${g.l}</div>
+        <div class="cemetery">${g.l}${g.i ? ', ' + g.i : ''}</div>
         <div class="card-actions">
             <div class="btn-map" onclick="locateOnMap([${g.c}])">Zlokalizuj na mapie →</div>
         </div>
-        <a href="grob1.html" class="btn-more">Więcej</a>
+        <a href="grob${g.id}.html" class="btn-more">Więcej</a>
       </div>`;
   });
 
