@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historia Klanu | Archiwum L&K</title>
+    <title>Jak powstał Klan | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -27,56 +27,37 @@
         .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
         h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
 
-        /* TREŚĆ ARTYKUŁU */
+        /* TREŚĆ */
         .content-wrapper { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
         
-        .lead-text { 
-            font-size: 1.2rem; color: var(--sepia); font-style: italic; 
-            text-align: center; margin-bottom: 50px; line-height: 1.6;
-        }
-
-        .story-section { margin-bottom: 60px; }
+        .story-section { margin-bottom: 40px; text-align: justify; }
         .story-section h2 { 
             font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; 
-            margin-bottom: 20px; color: var(--gold); border-bottom: 1px solid var(--line);
-            padding-bottom: 10px;
+            margin: 40px 0 20px; color: var(--gold); border-bottom: 1px solid var(--line);
+            padding-bottom: 10px; text-align: left;
         }
 
-        .image-box { margin: 40px 0; text-align: center; }
-        .image-box img { 
+        .image-container { margin: 40px 0; text-align: center; }
+        .image-container img { 
             max-width: 100%; height: auto; border: 1px solid var(--line); 
             padding: 10px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
         }
-        .image-caption { 
-            display: block; margin-top: 10px; font-size: 0.8rem; 
-            text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); 
-        }
+        .img-label { display: block; margin-top: 10px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); }
 
-        .quote-block {
-            background: var(--parchment); padding: 40px; border-radius: 4px;
-            margin: 40px 0; position: relative; font-style: italic;
+        /* SŁOWNIK I PODPIS */
+        .author-note { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--sepia); }
+        
+        .dictionary-box {
+            margin-top: 40px; padding: 30px; background: var(--parchment); border-radius: 4px; border-left: 4px solid var(--gold);
         }
-        .quote-block::before {
-            content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem;
-            color: var(--gold-light); position: absolute; left: 15px; top: -10px; opacity: 0.3;
-        }
-
-        /* STOPKA I PRZYCISKI */
-        .page-footer-nav { 
-            border-top: 1px solid var(--line); padding-top: 40px; 
-            display: flex; justify-content: center; gap: 20px; 
-        }
-        .btn-outline {
-            text-decoration: none; color: var(--sepia); font-size: 0.75rem; 
-            text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px;
-            border: 1px solid var(--line); transition: 0.3s;
-        }
-        .btn-outline:hover { border-color: var(--gold); color: var(--gold); background: var(--parchment); }
+        .dictionary-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .dictionary-content { font-style: italic; font-size: 0.95rem; }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 
         @media (max-width: 600px) {
-            .quote-block { padding: 30px 20px; }
+            h1 { font-size: 2rem; }
+            .dictionary-box { padding: 20px; }
         }
     </style>
 </head>
@@ -91,40 +72,52 @@
 
 <article>
     <header class="article-header">
-        <span class="meta-top">Geneza i tradycja</span>
-        <h1>Jak powstał Klan</h1>
+        <span class="meta-top">Geneza powstania</span>
+        <h1>Jak nieformalnie powołano do życia Klan Ładomirskich i Kraińskich</h1>
     </header>
 
     <div class="content-wrapper">
-        <p class="lead-text">
-            Historia Klanu Ładomirskich i Kraińskich nie zaczęła się od oficjalnych statutów, lecz od rodzinnej radości, weselnych dyskusji i głębokiej potrzeby podtrzymania więzi.
-        </p>
-
         <section class="story-section">
-            <h2>Wielichowo 1974: Iskra zapalna</h2>
-            <p>Wszystko zaczęło się 28 września 1974 roku w Wielichowie. To właśnie tam, podczas wesela Marii Ładomirskiej i Marka Szczepaniaka, narodziła się idea cyklicznych spotkań. Jerzy "Jacek" Niewęgłowski, zainspirowany artykułem o zjazdach rodu Guziurów, rzucił myśl, która padła na niezwykle podatny grunt.</p>
+            <p>Była polska złota jesień, dzień 28 września roku 1974. W Wielichowie, w Wielkopolsce, na ślubnym kobiercu, w kościele pw. św. Marii Magdaleny, stanęli: Maria Ładomirska, panna lat 24 i Marek Szczepaniak, kawaler lat 26. Po zaślubinach Młodzi oraz zaproszeni goście udali się do Pałacu IUNGu. Tamże wieczorem odbyło się huczne wesele.</p>
             
-            <div class="image-box">
-                <img src="./img/historia/wielichowo_1974.jpg" alt="Wielichowo 1974" onerror="this.src='https://placehold.co/800x400?text=Wielichowo+1974'">
-                <span class="image-caption">Wielichowo 1974 — Miejsce, gdzie wszystko się zaczęło</span>
+            <div class="image-container">
+                <img src="./img/historia/mloda_para_1974.jpg" alt="Młoda Para Wielichowo 1974" onerror="this.src='https://placehold.co/600x400?text=Młoda+Para+1974'">
+                <span class="img-label">Młoda para — Wielichowo 1974</span>
             </div>
 
-            <p>Tego wieczoru nie tylko podjęto decyzję, ale także wybrano zespół organizacyjny. Tomasz Ładomirski podjął się przygotowania pierwszego zjazdu, a praciotka Anna Ładomska została pierwszą "skarbniczką", otwierając subkonto na oszczędności zjazdowe dla całej rodziny.</p>
+            <p>Moi rodzice, Jerzy i Marta z Ładomirskich małżonkowie Niewęgłowscy o mały włos na powyższe uroczystości by nie dotarli, gdyż w tym samym dniu w Radochowie, w Kotlinie Kłodzkiej, wraz z dyrektorem Kombinatu Trzebieszowice Jerzym Janickim omawiali możliwość realizacji swojej idei budowy w Radochowie ośrodka hodowli pstrągów. Szczęśliwie jednak rozmowy zakończyły się na tyle wcześnie, aby możliwym stało się pokonanie 250 km dzielących południe Polski z Wielichowem i wzięcie przez nich udziału choćby w weselu.</p>
         </section>
-
-        <div class="quote-block">
-            "Spontaniczność, wsparta odrobiną zwyczajowego już nadzoru organizacyjnego, okazała się w zupełności wystarczającą a może i optymalną formułą funkcjonowania klanu przez dziesięciolecia."
-        </div>
 
         <section class="story-section">
-            <h2>Od Rodziny do Klanu</h2>
-            <p>Pierwszy Zjazd (Modlin, 1975) zgromadził głównie potomków Zdzisława i Anny Ładomirskich. Jednak wizyta prawuja Stanisława Kraińskiego podczas tego spotkania zmieniła bieg historii. Przy organizacji drugiego zjazdu padły słynne słowa: <em>"A my? My także jesteśmy przecież rodziną!"</em>.</p>
+            <h2>Dlaczego to istotne?</h2>
+            <p>Otóż tak się złożyło, że ojciec mój, w rodzinie oraz wśród koleżeństwa po fachu rybackim zwany Jackiem, był świeżo po lekturze artykułu o zjazdach rodzinnych organizowanych przez cieszyński ród Guziurów, do którego to należał jego kolega ze studiów. To właśnie ta idea spotkań rodzinnych, na gruncie uprawionym dyskusjami prowadzonymi w trakcie organizacji ślubu oraz w czasie samego wesela, zaowocowała decyzją zorganizowania zjazdu rodziny Ładomirskich.</p>
             
-            <p>Od II Zjazdu grono uczestników rozszerzyło się o ród Kraińskich. W ten sposób, z połączenia dwóch wielkich rodzinnych gałęzi, nieformalnie narodził się <strong>Klan</strong>. Zjazdy stały się tradycją odbywającą się co dwa lata, stając się fundamentem jedności dla kolejnych pokoleń, mimo migracji i upływu czasu.</p>
+            <p>Wieczoru owego nie tylko podjęto decyzję, ale także ukonstytuowano zespół organizacyjny oraz ustalono zasady finansowania. Zorganizowania pierwszego zjazdu podjął się wuj Tomasz Ładomirski zaś „skarbniczką” została praciotka Anna Ładomirska. Aby ułatwić krewnym odłożenie środków na opłaty zjazdowe praciotka Anna niebawem otworzyła subkonto, na które każdy członek rodziny mógł deponować oszczędności, z których później pokrywał koszty swojego udziału.</p>
         </section>
 
-        <div class="page-footer-nav">
-            <a href="zjazdy.html" class="btn-outline">Zobacz listę zjazdów</a>
+        <section class="story-section">
+            <h2>Narodziny Klanu</h2>
+            <p>Równo rok później, we wrześniu 1975 roku w Modlinie, odbył się I Zjazd Rodziny Ładomirskich. Przybyli nań potomkowie Zdzisława i Anny z Kraińskich małżonków Ładomirskich. Z odwiedzinami wpadł także prawuj Stanisław Kraiński. Wizyta ta okazała się brzemienna w skutkach.</p>
+            
+            <div class="image-container">
+                <img src="./img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Uczestnicy I Zjazdu" onerror="this.src='https://placehold.co/800x400?text=I+Zjazd+w+Modlinie'">
+                <span class="img-label">Uczestnicy I Zjazdu w Modlinie</span>
+            </div>
+
+            <p>Gdy 5 lat później ruszyły prace nad II zjazdem, potomkowie rodzeństwa Zdzisława oraz Anny zadali pytanie: <em>„A my? My także jesteśmy przecież rodziną!”</em>. Tak więc Zjazd nr II odbył się już w rozszerzonym gronie. W ten też sposób nieformalnie narodził się Klan. Istniejące od lat więzy rodzinne zyskały zewnętrzną formę cyklicznych zjazdów, które od numeru III odbywają się co dwa lata.</p>
+            
+            <p>Przez blisko 40 lat Klan nie wypracował żadnej formalnej struktury. Spontaniczność, wsparta odrobiną zwyczajowego już nadzoru wuja Tomasza Ładomirskiego, okazuje się w zupełności wystarczającą a może i optymalną formułą jego funkcjonowania.</p>
+        </section>
+
+        <div class="author-note">
+            <p><strong>Hubert Niewęgłowski</strong>, Radochów 2012 r.</p>
+        </div>
+
+        <div class="dictionary-box">
+            <h3>Słownik języka polskiego</h3>
+            <div class="dictionary-content">
+                <p><strong>KLAN</strong> — (1) związek osób oparty na pokrewieństwie bądź powinowactwie; (2) grupa osób popierających się, mających wspólne interesy, w jakiś sposób związanych ze sobą.</p>
+            </div>
         </div>
     </div>
 </article>
@@ -133,4 +126,3 @@
 
 </body>
 </html>
-
