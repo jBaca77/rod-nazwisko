@@ -13,8 +13,6 @@
     --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
     --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
     --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
-    /* Kolory klanowe */
-    --c-ladomirscy: #fcc000; --c-krainscy: #cc0000; --c-domanscy: #2d7a2d;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,28 +52,20 @@
   /* ── MAPA ── */
   #map { 
     height: 500px; width: 100%; border: 1px solid var(--sepia-pale); 
-    margin-bottom: 30px; border-radius: 2px;
+    margin-bottom: 60px; border-radius: 2px;
     filter: sepia(10%) contrast(98%) brightness(98%);
   }
-  .legend { 
-    display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; 
-    margin-bottom: 60px; padding: 20px; background: var(--cream); 
-    border: 1px solid var(--line);
-  }
-  .leg-item { display: flex; align-items: center; gap: 8px; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sepia); }
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
 
   /* ── GRID GROBÓW ── */
-  .g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+  .g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
   .g-card { 
     background: var(--cream); padding: 35px 25px; border: 1px solid var(--sepia-pale); 
     text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    position: relative; display: flex; flex-direction: column; overflow: hidden;
+    position: relative; display: flex; flex-direction: column; overflow: hidden; cursor: pointer;
   }
   .g-card::after { content: ""; position: absolute; inset: 10px; border: 1px solid var(--line); pointer-events: none; transition: 0.4s; }
   .g-card:hover { transform: translateY(-5px); background-color: var(--parchment); border-color: var(--gold); }
   
-  .g-card .meta { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; z-index: 1; opacity: 0.8; }
   .g-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 8px; font-weight: 500; z-index: 1; color: var(--ink); line-height: 1.2; }
   .g-card .cemetery { font-size: 0.85rem; color: var(--sepia); font-style: italic; z-index: 1; margin-bottom: 10px; }
   .g-card .btn-map { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); font-weight: 500; margin-top: auto; z-index: 1; }
@@ -112,6 +102,7 @@
         <li><a href="drzewo-ladomirskich.html">Drzewo Ładomirskich</a></li>
       </ul>
     </li>
+    <li><a href="zjazdy.html">Kronika Zjazdów</a></li>
     <li><a href="biografie.html">Biografie</a></li>
     <li class="has-submenu active">
       <a onclick="toggleSub(this)">Pamięć i Groby</a>
@@ -131,12 +122,6 @@
   <h2 class="s-title">Mapa i Spis Grobów</h2>
   
   <div id="map"></div>
-  
-  <div class="legend">
-    <div class="leg-item"><div class="dot" style="background:var(--c-ladomirscy)"></div><span>Ładomirscy</span></div>
-    <div class="leg-item"><div class="dot" style="background:var(--c-krainscy)"></div><span>Kraińscy</span></div>
-    <div class="leg-item"><div class="dot" style="background:var(--c-domanscy)"></div><span>Domańscy / Inni</span></div>
-  </div>
 
   <div class="g-grid" id="g-container"></div>
 </main>
@@ -147,46 +132,51 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // Dane oparte na lik.info.pl/groby.php
+  // Pełna lista grobów z lik.info.pl/groby.php
   const gData = [
-    { p: "Anna i Zdzisław Ładomirscy", l: "Modlin Twierdza", c: [52.443, 20.690], g: "Ładomirscy", i: "Cmentarz Parafialny" },
-    { p: "Jerzy i Marta Niewęgłowscy", l: "Modlin Twierdza", c: [52.4435, 20.6905], g: "Ładomirscy", i: "Cmentarz Parafialny" },
-    { p: "Wincenty i Maria Kraińscy", l: "Łopuszna", c: [49.484, 20.132], g: "Kraińscy", i: "Cmentarz przy kościele" },
-    { p: "Stefan i Janina Ładomirscy", l: "Warszawa", c: [52.253, 20.978], g: "Ładomirscy", i: "Stare Powązki" },
-    { p: "Zygmunt i Helena Domańscy", l: "Piwniczna Zdrój", c: [49.435, 20.713], g: "Domańscy", i: "Cmentarz Komunalny" },
-    { p: "Krzysztof Ładomirski", l: "Wrocław", c: [51.134, 17.067], g: "Ładomirscy", i: "Cmentarz Św. Wawrzyńca" },
-    { p: "Władysław Kraiński", l: "Przemyśl", c: [49.783, 22.767], g: "Kraińscy", i: "Cmentarz Główny" },
-    { p: "Jan i Teresa Ładomirscy", l: "Kraków", c: [50.075, 19.954], g: "Ładomirscy", i: "Cmentarz Rakowicki" }
+    { p: "Anna i Zdzisław Ładomirscy", l: "Modlin Twierdza", c: [52.4430, 20.6900], i: "Cmentarz Parafialny" },
+    { p: "Jerzy i Marta Niewęgłowscy", l: "Modlin Twierdza", c: [52.4435, 20.6905], i: "Cmentarz Parafialny" },
+    { p: "Wincenty i Maria Kraińscy", l: "Łopuszna", c: [49.4842, 20.1328], i: "Cmentarz przy kościele" },
+    { p: "Stefan i Janina Ładomirscy", l: "Warszawa", c: [52.2530, 20.9780], i: "Stare Powązki" },
+    { p: "Zygmunt i Helena Domańscy", l: "Piwniczna Zdrój", c: [49.4350, 20.7130], i: "Cmentarz Komunalny" },
+    { p: "Krzysztof Ładomirski", l: "Wrocław", c: [51.1340, 17.0670], i: "Cmentarz Św. Wawrzyńca" },
+    { p: "Władysław Kraiński", l: "Przemyśl", c: [49.7830, 22.7670], i: "Cmentarz Główny" },
+    { p: "Jan i Teresa Ładomirscy", l: "Kraków", c: [50.0750, 19.9540], i: "Cmentarz Rakowicki" },
+    { p: "Zofia z Kraińskich Domańska", l: "Lwów", c: [49.8327, 24.0550], i: "Cmentarz Łyczakowski" },
+    { p: "Kazimierz i Maria Ładomirscy", l: "Częstochowa", c: [50.8120, 19.1150], i: "Cmentarz Kule" },
+    { p: "Andrzej Kraiński", l: "Gdańsk", c: [54.3480, 18.6330], i: "Cmentarz Srebrzysko" },
+    { p: "Barbara z Ładomirskich", l: "Poznań", c: [52.4180, 16.9950], i: "Cmentarz Junikowo" },
+    { p: "Tadeusz i Ewa Domańscy", l: "Lublin", c: [51.2400, 22.5500], i: "Cmentarz przy ul. Lipowej" }
   ];
 
-  const mapColors = { "Ładomirscy": "#fcc000", "Kraińscy": "#cc0000", "Domańscy": "#2d7a2d" };
+  const themeColor = "#7a6548"; // Jeden spójny kolor sepia dla wszystkich elementów
 
   const map = L.map('map', { scrollWheelZoom: false }).setView([52.1, 19.4], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
   const container = document.getElementById('g-container');
   
-  gData.forEach((g, index) => {
-    const color = mapColors[g.g] || "#7a6548";
+  gData.forEach((g) => {
+    // Marker na mapie (bez kolorów klanowych)
     const icon = L.divIcon({
       className: 'custom-icon',
-      html: `<div style="background:${color}; width:14px; height:14px; border-radius:50%; border:2px solid white; box-shadow:0 2px 4px rgba(0,0,0,0.3);"></div>`,
+      html: `<div style="background:${themeColor}; width:14px; height:14px; border-radius:50%; border:2px solid white; box-shadow:0 2px 4px rgba(0,0,0,0.3);"></div>`,
       iconSize: [14, 14], iconAnchor: [7, 7]
     });
 
     L.marker(g.c, {icon}).addTo(map)
       .bindPopup(`<div style="font-family:'Jost',sans-serif; padding:5px"><strong>${g.p}</strong><br>${g.l}<br><small>${g.i}</small></div>`);
 
+    // Karta w spisie (bez kolorów klanowych)
     container.innerHTML += `
-      <div class="g-card" onclick="map.flyTo([${g.c}], 14)">
-        <div class="meta" style="color:${color}">${g.g}</div>
+      <div class="g-card" onclick="map.flyTo([${g.c}], 14); window.scrollTo({top: 0, behavior: 'smooth'});">
         <h3>${g.p}</h3>
         <div class="cemetery">${g.l}, ${g.i}</div>
         <div class="btn-map">Pokaż na mapie →</div>
       </div>`;
   });
 
-  // UI Scripts
+  // Obsługa UI (Drawer i Overlay)
   const btn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
   btn.onclick = () => { drw.classList.add('open'); ovr.classList.add('active'); };
   ovr.onclick = () => { drw.classList.remove('open'); ovr.classList.remove('active'); };
