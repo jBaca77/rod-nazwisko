@@ -12,40 +12,106 @@
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
             --ink: #1e1a14; --gold: #9b7d4a; --gold-light: #c8a96e; 
             --sepia: #7a6548; --sepia-light: #b09a7e; --line: rgba(122, 101, 72, 0.2);
+            --green-dark: #2c3e2d; [span_2](start_span)/* Kolor z Twojej specyfikacji[span_2](end_span) */
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; }
 
-        /* NAV */
-        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; }
+        /* ── NAV ── */
+        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; border-right: 1px solid rgba(200, 169, 110, 0.3); padding-right: 20px; }
-        .nav-back-link { display: flex; align-items: center; gap: 8px; color: var(--gold-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+        .nav-back-link { display: flex; align-items: center; gap: 8px; color: var(--gold-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
+        .nav-back-link:hover { color: var(--cream); }
 
-        /* HEADER */
-        header { text-align: center; padding: 80px 24px 40px; }
-        .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); display: block; margin-bottom: 15px; }
-        header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 300; }
-        .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 30px auto; opacity: 0.6; }
+        [span_3](start_span)/* ── HEADER Z EFEKTEM ZIELENI[span_3](end_span) ── */
+        .hero-header { 
+            background-color: var(--green-dark); 
+            padding: 100px 24px 80px; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden; 
+            color: var(--cream);
+        }
 
-        /* MEMORY GRID */
-        .memory-grid { max-width: 1000px; margin: 0 auto 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 0 24px; }
+        [span_4](start_span)/* Tekstura linii z pliku Pages[span_4](end_span) */
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.025) 1px);
+            pointer-events: none;
+        }
+
+        .s-label { 
+            font-size: .7rem; 
+            letter-spacing: .4em; 
+            text-transform: uppercase; 
+            color: var(--gold-light); 
+            display: block; 
+            margin-bottom: 15px; 
+            position: relative;
+        }
+
+        .hero-header h1 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: clamp(2.6rem, 6vw, 4.2rem); 
+            font-weight: 300; 
+            position: relative;
+        }
+
+        .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 30px auto; opacity: 0.6; position: relative; }
+
+        /* ── MEMORY GRID ── */
+        main { max-width: 1200px; margin: -40px auto 80px; padding: 0 24px; position: relative; z-index: 10; }
+        
+        .memory-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 40px; 
+        }
         
         .memory-card { 
-            position: relative; background: var(--cream); padding: 50px 40px; text-decoration: none; color: var(--ink);
-            border: 1px solid var(--parchment); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; text-align: center;
+            position: relative; 
+            background: var(--cream); 
+            padding: 60px 40px; 
+            text-decoration: none; 
+            color: var(--ink);
+            border: 1px solid var(--parchment); 
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            overflow: hidden; 
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .memory-card::before { content: ""; position: absolute; inset: 10px; border: 1px solid var(--line); pointer-events: none; }
-        .memory-card:hover { transform: translateY(-8px); border-color: var(--gold-light); background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+
+        .memory-card::after { 
+            content: ""; 
+            position: absolute; 
+            inset: 10px; 
+            border: 1px solid var(--line); 
+            pointer-events: none; 
+        }
+
+        .memory-card:hover { 
+            transform: translateY(-8px); 
+            border-color: var(--gold-light); 
+            background: white; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+        }
 
         .card-icon { color: var(--gold); margin-bottom: 25px; display: block; transition: 0.5s; }
-        .memory-card:hover .card-icon { transform: scale(1.1); }
+        .memory-card:hover .card-icon { transform: scale(1.1); color: var(--green-dark); }
         
         .memory-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 15px; }
-        .memory-card p { font-size: 0.9rem; color: var(--sepia); font-style: italic; }
+        .memory-card p { font-size: 0.95rem; color: var(--sepia); font-style: italic; }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.75rem; letter-spacing: 1px; margin-top: auto; }
+        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.75rem; letter-spacing: 1px; }
+
+        @media (max-width: 768px) {
+            .hero-header { padding: 80px 20px 100px; }
+            main { margin-top: -20px; }
+        }
     </style>
 </head>
 <body>
@@ -60,15 +126,15 @@
     </div>
 </nav>
 
-<header>
-    <span class="s-label">Pielęgnując Dziedzictwo</span>
+<header class="hero-header">
+    <span class="s-label">Pielęgnując Tradycję</span>
     <h1>Pamięć i Historia</h1>
     <div class="s-line"></div>
 </header>
 
 <main>
     <div class="memory-grid">
-        <a href="groby.html" class="memory-card">
+        <a href="miejsca-pochowku-O.html" class="memory-card">
             <span class="card-icon">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                     <path d="M12 22V8M5 12H19M12 2L12 8M9 22H15"/>
@@ -78,7 +144,7 @@
             <p>Mapa i rejestr miejsc wiecznego spoczynku członków naszego klanu.</p>
         </a>
 
-        <a href="wspomnienia.html" class="memory-card">
+        <a href="wspomnienie-zmarly5.html" class="memory-card">
             <span class="card-icon">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
@@ -86,7 +152,7 @@
                 </svg>
             </span>
             <h2>Wspomnienia Zmarłych</h2>
-            <p>Biografie, fotografie i świadectwa o tych, którzy odeszli, lecz pozostają w naszych sercach.</p>
+            <p>Biografie, fotografie i świadectwa o tych, którzy odeszli, lecz pozostają w pamięci rodu.</p>
         </a>
     </div>
 </main>
@@ -97,4 +163,3 @@
 
 </body>
 </html>
-
