@@ -18,27 +18,27 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; }
 
-        /* ── NAV (Zamieniona kolejność) ── */
+        /* ── NAV (Układ ze strzałką w lewo przed napisem Wstecz po prawej) ── */
         nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         .nav-inner { 
             max-width: 1200px; margin: 0 auto; display: flex; 
-            flex-direction: row-reverse; /* Przycisk Wstecz ląduje na prawo */
             align-items: center; justify-content: space-between; 
             padding: 16px 24px; 
         }
         
+        .nav-logo { 
+            font-family: 'Cormorant Garamond', serif; color: var(--gold-light); 
+            text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; font-weight: 400;
+            /* Obramowanie z prawej strony loga dla oddzielenia */
+            border-right: 1px solid rgba(200, 169, 110, 0.3); padding-right: 20px;
+        }
+
         .nav-back-link {
             display: flex; align-items: center; gap: 8px; color: var(--gold-light);
             text-decoration: none; font-size: 0.7rem; text-transform: uppercase;
             letter-spacing: 2px; transition: 0.3s;
-            border-left: 1px solid rgba(200, 169, 110, 0.3); padding-left: 20px;
         }
         .nav-back-link:hover { color: var(--cream); }
-
-        .nav-logo { 
-            font-family: 'Cormorant Garamond', serif; color: var(--gold-light); 
-            text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; font-weight: 400;
-        }
 
         /* ── MAIN CONTENT ── */
         main { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
@@ -103,8 +103,8 @@
 
         @media (max-width: 768px) {
             .nav-inner { padding: 12px 20px; }
-            .nav-logo { font-size: 1rem; }
-            .nav-back-link { padding-left: 15px; font-size: 0.65rem; }
+            .nav-logo { font-size: 1rem; padding-right: 15px; }
+            .nav-back-link { font-size: 0.65rem; }
             .viewer-box { height: 60vh; }
             .intro-section h1 { font-size: 2.2rem; }
             main { padding: 40px 15px; }
@@ -115,11 +115,12 @@
 
 <nav>
     <div class="nav-inner">
-        <a href="genealogia.html" class="nav-back-link">
-            Wstecz
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate(180deg);"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        </a>
         <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        
+        <a href="genealogia.html" class="nav-back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Wstecz
+        </a>
     </div>
 </nav>
 
