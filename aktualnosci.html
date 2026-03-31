@@ -9,65 +9,75 @@
     <style>
         :root {
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
-            --line: rgba(122, 101, 72, 0.2);
-            --sepia-light: #b09a7e;
+            --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
+            --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
+            --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
 
-        /* NAWIGACJA */
-        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
-        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        /* ── HEADER ── */
+        header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 80px 24px 60px; position: relative; overflow: hidden; }
+        header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
+        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; display: block; }
+        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.6rem, 6vw, 4.2rem); line-height: 1.1; margin-bottom: 12px; }
+
+        /* ── NAV & DRAWER ── */
+        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         
         .nav-right { display: flex; align-items: center; gap: 20px; }
-
-        /* PRZEŁĄCZNIK JĘZYKÓW */
         .lang-switcher { display: flex; gap: 5px; }
-        .lang-btn { 
-            background: rgba(255,255,255,0.05); border: 1px solid var(--sepia); color: var(--cream); 
-            font-size: 0.7rem; padding: 5px 10px; cursor: pointer; transition: 0.3s;
-            text-transform: uppercase; border-radius: 3px;
-        }
-        .lang-btn:hover { background: var(--sepia); }
-        .lang-btn.active { background: var(--gold); border-color: var(--gold); color: white; }
+        .lang-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--sepia); color: var(--cream); font-size: 0.65rem; padding: 4px 8px; cursor: pointer; transition: 0.3s; border-radius: 2px; }
+        .lang-btn.active { background: var(--gold); border-color: var(--gold); }
 
-        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; padding: 5px; z-index: 1100; position: relative; }
-        .menu-btn span { display: block; width: 28px; height: 1px; background: var(--gold-light); transition: 0.3s; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 1100; }
+        .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
 
-        /* DRAWER (MENU BOCZNE) */
-        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 30px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; }
+        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
         .drawer.open { right: 0; }
         .drawer-links { list-style: none; }
         .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; }
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(3px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; cursor: pointer; }
+        
+        .has-submenu > a::after { content: ' ▾'; font-size: 0.7rem; color: var(--gold); }
+        .submenu { display: none; list-style: none; padding-left: 15px; margin-top: 10px; }
+        .submenu li { border: none; margin-bottom: 10px; padding-bottom: 0; }
+        .submenu a { font-size: 0.7rem; color: var(--sepia-light); text-transform: none; }
+        .has-submenu.active .submenu { display: block; }
+        
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
         .overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* TREŚĆ */
-        .page-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 400; }
-
-        .news-container { max-width: 800px; margin: 0 auto; padding: 0 24px 100px; }
-        .news-item { background: white; border: 1px solid var(--line); padding: 40px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
-        .news-date { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; border-bottom: 1px solid var(--parchment); padding-bottom: 10px; }
+        /* ── AKTUALNOŚCI ── */
+        main { max-width: 900px; margin: 0 auto; padding: 60px 24px 80px; }
+        .news-item { background: white; border: 1px solid var(--line); padding: 50px; margin-bottom: 40px; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .news-date { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px; display: block; border-bottom: 1px solid var(--parchment); padding-bottom: 10px; }
+        .news-content { font-family: 'Jost', sans-serif; font-size: 1.05rem; color: var(--ink-light); text-align: justify; }
+        .news-content p { margin-bottom: 20px; }
         
-        .bank-details { background: var(--cream); padding: 25px; border-radius: 4px; margin: 30px 0; border: 1px dashed var(--sepia-light); font-size: 0.95rem; }
-        .bank-details strong { color: var(--sepia); }
+        .bank-card { background: var(--parchment); padding: 30px; margin: 30px 0; border: 1px dashed var(--sepia-light); border-left: 4px solid var(--gold); }
+        .bank-card h4 { font-family: 'Cormorant Garamond', serif; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; }
 
         @media (max-width: 600px) {
-            .news-item { padding: 25px; }
-            .nav-inner { flex-direction: column; gap: 15px; }
+            .news-item { padding: 30px 20px; }
+            header { padding: 60px 20px; }
         }
     </style>
 </head>
 <body>
 
 <div class="overlay" id="overlay"></div>
+
+<header>
+    <span class="header-ornament" class="lang" data-pl="Komunikaty Rodzinne" data-en="Family Announcements" data-es="Anuncios de la familia" data-fr="Annonces familiales">Komunikaty Rodzinne</span>
+    <h1 class="lang" data-pl="Aktualności" data-en="News" data-es="Noticias" data-fr="Actualités">Aktualności</h1>
+</header>
 
 <nav>
     <div class="nav-inner">
@@ -79,7 +89,9 @@
                 <button class="lang-btn" onclick="translatePage('es', this)">ES</button>
                 <button class="lang-btn" onclick="translatePage('fr', this)">FR</button>
             </div>
-            <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
+            <button class="menu-btn" id="menuBtn">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </div>
 </nav>
@@ -88,15 +100,31 @@
     <ul class="drawer-links">
         <li><a href="index.html">Strona Główna</a></li>
         <li><a href="historia.html">Historia Klanu</a></li>
-        <li><a href="zjazdy.html">Kronika Zjazdów</a></li>
+        <li class="has-submenu">
+            <a onclick="toggleSub(this)">Genealogia</a>
+            <ul class="submenu">
+                <li><a href="drzewo-klanowe.html">Drzewo klanowe</a></li>
+                <li><a href="wywody.html">Wywody przodków</a></li>
+                <li><a href="drzewo-krainskich.html">Drzewo Kraińskich</a></li>
+                <li><a href="drzewo-ladomirskich.html">Drzewo Ładomirskich</a></li>
+            </ul>
+        </li>
+        <li><a href="zjazdy.html">Kronika zajazdów</a></li>
+        <li><a href="biografie.html">Biografie</a></li>
+        <li class="has-submenu">
+            <a onclick="toggleSub(this)">Pamięć i groby</a>
+            <ul class="submenu">
+                <li><a href="miejsca-pochowku.html">Miejsca pochówku</a></li>
+                <li><a href="wspomnienie-zmarlych.html">Wspomnienie zmarłych</a></li>
+            </ul>
+        </li>
+        <li><a href="geografia.html">Geografia rodowa</a></li>
+        <li><a href="biblioteczka.html">Biblioteczka</a></li>
+        <li><a href="archiwum.html">Archiwum</a></li>
     </ul>
 </aside>
 
-<header class="page-header">
-    <h1 class="lang" data-pl="AKTUALNOŚCI" data-en="NEWS" data-es="NOTICIAS" data-fr="ACTUALITÉS">AKTUALNOŚCI</h1>
-</header>
-
-<main class="news-container">
+<main>
     <article class="news-item">
         <span class="news-date lang" data-pl="15 grudnia 2022" data-en="December 15, 2022" data-es="15 de diciembre de 2022" data-fr="15 décembre 2022">15 grudnia 2022</span>
         
@@ -104,71 +132,80 @@
             <p><strong class="lang" data-pl="Kochani," data-en="Dear ones," data-es="Queridos," data-fr="Chers tous,">Kochani,</strong></p>
             
             <p class="lang" 
-               data-pl="W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego." 
-               data-en="The day has finally come!!! According to the decisions of the Council of Elders at the last Meeting, I was obliged to set up a family account."
-               data-es="¡Finalmente ha llegado el día! Según lo acordado por el Consejo de Ancianos w la última reunión, me he visto obligada a abrir una cuenta familiar."
-               data-fr="Le jour est enfin arrivé !!! Conformément aux décisions du Conseil des Sages lors de la dernière Réunion, j'ai été obligée d'ouvrir un compte familial.">
-               W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego.
+               data-pl="W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań." 
+               data-en="The day has finally come!!! According to the decisions of the Council of Elders at the last Meeting, I was obliged to set up a family account. On this account, we will be able to collect funds that will help reduce the costs of our future meetings."
+               data-es="¡Finalmente ha llegado el día! Según lo acordado por el Consejo de Ancianos en la última reunión, me he visto obligada a abrir una cuenta familiar. En esta cuenta podremos recaudar fondos para ayudar a reducir los costos de nuestras próximas reuniones."
+               data-fr="Le jour est enfin arrivé !!! Conformément aux décisions du Conseil des Sages lors de la dernière Réunion, j'ai été obligée d'ouvrir un compte familial. Sur ce compte, nous pourrons collecter des fonds qui aideront à réduire les coûts de nos prochaines rencontres.">
+               W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań.
             </p>
 
             <p class="lang"
-               data-pl="Środki te pomogą w obniżeniu kosztów kolejnych naszych spotkań. Będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe."
-               data-en="These funds will help reduce the costs of our next meetings. They will be used to support those for whom the cost of attending exceeds their budget."
-               data-es="Estos fondos ayudarán a reducir los costos de nuestras próximas reuniones. Se destinarán a apoyar a aquellos para quienes el costo de asistencia supere sus posibilidades."
-               data-fr="Ces fonds aideront à réduire les coûts de nos prochaines réunions. Ils seront utilisés pour soutenir ceux pour qui le coût de participation dépasse leur budget.">
-               Środki te pomogą w obniżeniu kosztów kolejnych naszych spotkań. Będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe.
+               data-pl="Środki te będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe. Idea, która przyświeca tej inicjatywie, to zapewnienie jak największego grona uczestników na kolejnych spotkaniach."
+               data-en="These funds will be used to support those for whom the cost of attending the Meeting exceeds their budget. The idea behind this initiative is to ensure the largest possible number of participants."
+               data-es="Estos fondos se utilizarán para apoyar a aquellos para quienes el costo de asistir supere sus posibilidades. La idea es asegurar el mayor número posible de participantes."
+               data-fr="Ces fonds seront utilisés pour soutenir ceux pour qui le coût de participation dépasse leur budget. L'idée est d'assurer le plus grand nombre possible de participants.">
+               Środki te będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe. Idea, która przyświeca tej inicjatywie, to zapewnienie jak największego grona uczestników na kolejnych spotkaniach.
             </p>
 
-            <div class="bank-details">
-                <p><strong class="lang" data-pl="Dane do przelewu:" data-en="Transfer details:" data-es="Datos bancarios:" data-fr="Détails du virement :">Dane do przelewu:</strong></p>
-                <p>Bank ING | Nr: 07 1050 1588 1000 0097 6819 4954</p>
-                <p>IBAN: PL 07 1050 1588 1000 0097 6819 4954<br>BIC/SWIFT: INGBPLPW</p>
-                <p><strong class="lang" data-pl="Tytuł:" data-en="Subject:" data-es="Concepto:" data-fr="Objet :">Tytuł:</strong> Zjazd Rodzinny</p>
+            <div class="bank-card">
+                <h4 class="lang" data-pl="Dane do przelewu:" data-en="Transfer Details:" data-es="Datos Bancarios:" data-fr="Détails du virement :">Dane do przelewu:</h4>
+                <p>Bank ING (Polska)<br>
+                Nr: 07 1050 1588 1000 0097 6819 4954</p>
+                <p style="margin-top:10px;"><strong>IBAN:</strong> PL 07 1050 1588 1000 0097 6819 4954<br>
+                <strong>BIC/SWIFT:</strong> INGBPLPW</p>
+                <p style="margin-top:10px;"><strong class="lang" data-pl="Tytuł:" data-en="Subject:" data-es="Concepto:" data-fr="Objet :">Tytuł:</strong> Zjazd Rodzinny</p>
             </div>
 
+            <p><em class="lang" data-pl="Współwłaściciele i pełnomocnicy:" data-en="Co-owners and proxies:" data-es="Copropietarios y apoderados:" data-fr="Co-propriétaires et mandataires :">Współwłaściciele oraz pełnomocnicy:</em><br>
+            Anna Wilk, Łukasz Ładomirski, Marta Kacorzyk, Paweł Meissner</p>
+            
             <p class="lang" data-pl="Ściskam Was serdecznie, Ania" data-en="Warm hugs, Ania" data-es="Un gran abrazo, Ania" data-fr="Je vous embrasse, Ania">Ściskam Was serdecznie, Ania</p>
         </div>
     </article>
 </main>
 
-<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
+<footer>
+    <p>Klan Ładomirskich i Kraińskich © 2026<br>Pamięć | Tożsamość | Wspólnota</p>
+</footer>
 
 <script>
-    // FUNKCJA AUTOMATYCZNEGO TŁUMACZENIA
+    // Automatyczne Tłumaczenie
     function translatePage(lang, btn) {
-        // 1. Znajdź wszystkie elementy z klasą 'lang'
         const elements = document.querySelectorAll('.lang');
-        
         elements.forEach(el => {
-            // Pobierz tekst z odpowiedniego atrybutu (data-pl, data-en, itd.)
             const translation = el.getAttribute('data-' + lang);
-            if (translation) {
-                el.innerText = translation;
-            }
+            if (translation) el.innerText = translation;
         });
-
-        // 2. Aktualizacja wyglądu przycisków
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
-        // 3. Opcjonalnie: Zapisz wybór w przeglądarce
-        localStorage.setItem('preferredLang', lang);
     }
 
-    // MENU DRAWER
+    // Drawer Logic
     const menuBtn = document.getElementById('menuBtn');
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('overlay');
 
-    menuBtn.addEventListener('click', () => {
+    function toggleSidebar() {
         drawer.classList.toggle('open');
         overlay.classList.toggle('active');
-    });
+        const spans = menuBtn.querySelectorAll('span');
+        if(drawer.classList.contains('open')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(4px, -5px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    }
 
-    overlay.addEventListener('click', () => {
-        drawer.classList.remove('open');
-        overlay.classList.remove('active');
-    });
+    menuBtn.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
+
+    function toggleSub(el) {
+        el.parentElement.classList.toggle('active');
+    }
 </script>
 
 </body>
