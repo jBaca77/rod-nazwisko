@@ -64,8 +64,10 @@
         .news-content { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--ink-light); text-align: justify; line-height: 1.6; }
         .news-content p { margin-bottom: 20px; }
         
-        .bank-card { background: var(--parchment); padding: 25px; margin: 30px 0; border: 1px dashed var(--sepia-light); font-family: 'Jost', sans-serif; font-size: 0.95rem; }
+        .bank-card { background: var(--parchment); padding: 25px; margin: 30px 0; border: 1px dashed var(--sepia-light); font-family: 'Jost', sans-serif; font-size: 0.95rem; line-height: 1.5; }
         .bank-card strong { color: var(--sepia); display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        .bank-card .bank-group { margin-bottom: 20px; }
+        .bank-card .bank-group:last-child { margin-bottom: 0; }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; }
 
@@ -135,30 +137,57 @@
         <div class="s-line"></div>
 
         <article class="news-item">
-            <span class="news-date lang" data-pl="15 grudnia 2022" data-en="December 15, 2022" data-es="15 de diciembre de 2022" data-fr="15 décembre 2022">15 grudnia 2022</span>
+            <span class="news-date lang" data-pl="List z dnia 15 grudnia 2022 roku" data-en="Letter dated December 15, 2022" data-es="Carta del 15 de diciembre de 2022" data-fr="Lettre du 15 décembre 2022">List z dnia 15 grudnia 2022 roku</span>
             
             <div class="news-content">
                 <p><strong class="lang" data-pl="Kochani," data-en="Dear ones," data-es="Queridos," data-fr="Chers tous,">Kochani,</strong></p>
                 
                 <p class="lang" 
                    data-pl="W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań." 
-                   data-en="The day has finally come!!! According to the decisions of the Council of Elders at the last Meeting, I was obliged to set up a family account. On this account, we will be able to collect funds that will help reduce the costs of our future meetings."
-                   data-es="¡Finalmente ha llegado el día! Según lo acordado por el Consejo de Ancianos en la última reunión, me he visto obligada a abrir una cuenta familiar. En esta cuenta podremos recaudar fondos para ayudar a reducir los costos de nuestras próximas reuniones."
-                   data-fr="Le jour est enfin arrivé !!! Conformément aux décisions du Conseil des Sages lors de la dernière Réunion, j'ai été obligée d'ouvrir un compte familial. Sur ce compte, nous pourrons collecter des fonds qui aideront à réduire les coûts de nos prochaines rencontres.">
+                   data-en="The day has finally come!!! According to the decisions of the Council of Elders at the last Meeting, I was obliged to set up a family account. On this account, we will be able to collect funds that will help reduce the costs of our future meetings.">
                    W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań.
                 </p>
 
+                <p class="lang"
+                   data-pl="Środki te będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe. Może to dotyczyć zarówno rodzin wielodzietnych, jak i emerytów oraz innych osób. Idea, która przyświeca tej inicjatywie, to zapewnienie jak największego grona uczestników na kolejnych spotkaniach."
+                   data-en="These funds will be used to support those for whom the cost of attending the Meeting exceeds their budget. This may apply to large families, retirees, and others. The idea behind this initiative is to ensure the largest possible number of participants at future meetings.">
+                   Środki te będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe. Może to dotyczyć zarówno rodzin wielodzietnych, jak i emerytów oraz innych osób. Idea, która przyświeca tej inicjatywie, to zapewnienie jak największego grona uczestników na kolejnych spotkaniach.
+                </p>
+
+                <p class="lang"
+                   data-pl="A teraz konkrety. Wpłat na konto można dokonywać każdy, który może, w dowolnych kwotach, w dowolnych terminach. Nie ma konieczności deklarowania się, co do wysokości oraz częstotliwości wpłat. Nawet małe kwoty wpłacane przez 2-letni okres do następnego Zjazdu na pewno stworzą spory budżet do dyspozycji. Każdy może zadecydować, jak mu jest wygodniej. Oczywiście podkreślam całkowitą DOBROWOLNOŚĆ tej inicjatywy."
+                   data-en="Now for the details. Anyone can make contributions in any amount and at any time. There is no need to declare the amount or frequency of payments. Even small amounts paid over the 2-year period until the next Meeting will certainly create a substantial budget. Everyone can decide what is more convenient for them. Of course, I emphasize the complete VOLUNTARY nature of this initiative.">
+                   A teraz konkrety. Wpłat na konto można dokonywać każdy, który może, w dowolnych kwotach, w dowolnych terminach. Nie ma konieczności deklarowania się, co do wysokości oraz częstotliwości wpłat. Nawet małe kwoty wpłacane przez 2-letni okres do następnego Zjazdu na pewno stworzą spory budżet do dyspozycji. Każdy może zadecydować, jak mu jest wygodniej. Oczywiście podkreślam całkowitą DOBROWOLNOŚĆ tej inicjatywy.
+                </p>
+
                 <div class="bank-card">
-                    <strong>Bank ING (Polska):</strong>
-                    07 1050 1588 1000 0097 6819 4954<br>
-                    <strong style="margin-top:10px;">IBAN / BIC-SWIFT:</strong>
-                    PL 07 1050 1588 1000 0097 6819 4954 / INGBPLPW<br>
-                    <strong style="margin-top:10px;" class="lang" data-pl="Tytuł przelewu:" data-en="Transfer subject:" data-es="Concepto:" data-fr="Objet du virement :">Tytuł przelewu:</strong> Zjazd Rodzinny
+                    <div class="bank-group">
+                        <strong class="lang" data-pl="Przelewy z Polski:" data-en="Transfers from Poland:" data-es="Transferencias desde Polonia:" data-fr="Virements depuis la Pologne :">Przelewy z Polski:</strong>
+                        Bank ING<br>
+                        07 1050 1588 1000 0097 6819 4954
+                    </div>
+                    
+                    <div class="bank-group">
+                        <strong class="lang" data-pl="Przelewy z zagranicy:" data-en="International transfers:" data-es="Transferencias internacionales:" data-fr="Virements internationaux :">Przelewy z zagranicy:</strong>
+                        IBAN: PL 07 1050 1588 1000 0097 6819 4954<br>
+                        Kod BIC SWIFT: INGBPLPW
+                    </div>
+
+                    <div class="bank-group">
+                        <strong class="lang" data-pl="Tytuł przelewu:" data-en="Transfer subject:" data-es="Concepto:" data-fr="Objet du virement :">Tytuł przelewu:</strong> 
+                        Zjazd Rodzinny
+                    </div>
                 </div>
 
-                <p><em class="lang" data-pl="Współwłaściciele i pełnomocnicy:" data-en="Co-owners and proxies:" data-es="Copropietarios y apoderados:" data-fr="Co-propriétaires et mandataires :">Współwłaściciele oraz pełnomocnicy:</em><br>
+                <p><em class="lang" data-pl="Współwłaściciele oraz pełnomocnicy:" data-en="Co-owners and proxies:" data-es="Copropietarios y apoderados:" data-fr="Co-propriétaires et mandataires :">Współwłaściciele oraz pełnomocnicy:</em><br>
                 Anna Wilk, Łukasz Ładomirski, Marta Kacorzyk, Paweł Meissner</p>
                 
+                <p class="lang"
+                   data-pl="W razie jakichkolwiek pytań bardzo proszę o kontakt do mnie."
+                   data-en="If you have any questions, please feel free to contact me.">
+                   W razie jakichkolwiek pytań bardzo proszę o kontakt do mnie.
+                </p>
+
                 <p class="lang" data-pl="Ściskam Was serdecznie, Ania" data-en="Warm hugs, Ania" data-es="Un gran abrazo, Ania" data-fr="Je vous embrasse, Ania">Ściskam Was serdecznie, Ania</p>
             </div>
         </article>
