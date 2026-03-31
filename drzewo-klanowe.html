@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drzewo Klanowe | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
+            --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
+            --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+        /* ── HEADER (Styl Zjazd1) ── */
+        header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
+        header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
+        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; display: block; }
+        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1.1; }
+
+        /* ── NAV ── */
+        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+        .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
+
+        /* ── MAIN CONTENT ── */
+        main { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+        .intro-text { text-align: center; margin-bottom: 50px; }
+        .s-label { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 10px; display: block; }
+        .s-line { width: 40px; height: 1px; background: var(--gold); margin: 20px auto 40px; }
+
+        /* ── PDF VIEWER CONTAINER ── */
+        .viewer-container {
+            background: var(--cream);
+            border: 1px solid var(--sepia-pale);
+            padding: 5px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            position: relative;
+            height: 85vh;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .mobile-hint {
+            display: none;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--sepia);
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .viewer-container { height: 70vh; }
+            .mobile-hint { display: block; }
+            header { padding: 60px 20px; }
+        }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; margin-top: 60px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <span class="header-ornament">Korzenie i Tradycja</span>
+    <h1>Drzewo Rodowe</h1>
+</header>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <button class="menu-btn">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<main>
+    <div class="intro-text">
+        <span class="s-label">Aktualizacja: Sierpień 2024</span>
+        <p>Prezentujemy pełne drzewo genealogiczne klanu Ładomirskich i Kraińskich.<br>Użyj narzędzi nawigacji, aby przybliżać i przesuwać widok.</p>
+        <div class="s-line"></div>
+    </div>
+
+    <div class="viewer-container">
+        <iframe 
+            src="https://drive.google.com/file/d/1dcD-e-MPsT3NgZnzt3hoMpuGtJsj2JLu/preview" 
+            allow="autoplay">
+        </iframe>
+    </div>
+    
+    <p class="mobile-hint">Na telefonie: dotknij ikony "pop-out" w prawym górnym rogu drzewa, aby wygodnie przeglądać je w pełnym ekranie.</p>
+</main>
+
+<footer>
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026<br>Pamięć | Tożsamość | Wspólnota</p>
+</footer>
+
+</body>
+</html>
