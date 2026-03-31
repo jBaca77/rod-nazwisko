@@ -19,73 +19,79 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; }
 
-        /* HEADER & NAV */
-        nav { padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 100; background: rgba(253, 250, 246, 0.95); border-bottom: 1px solid var(--line); }
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; letter-spacing: 3px; text-transform: uppercase; color: var(--ink); text-decoration: none; }
-        .menu-btn { background: none; border: none; cursor: pointer; padding: 10px; }
-        .menu-icon { width: 30px; height: 1px; background: var(--ink); position: relative; display: block; }
-        .menu-icon::before, .menu-icon::after { content: ''; position: absolute; width: 20px; height: 1px; background: var(--ink); right: 0; transition: 0.3s; }
-        .menu-icon::before { top: -8px; }
-        .menu-icon::after { top: 8px; }
+        /* NAWIGACJA */
+        nav { padding: 30px 50px; display: flex; justify-content: space-between; align-items: center; position: absolute; width: 100%; z-index: 100; }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+        .menu-btn { background: none; border: none; cursor: pointer; padding: 10px; z-index: 1002; }
+        .menu-icon { width: 35px; height: 1px; background: var(--ink); position: relative; display: block; }
+        .menu-icon::before, .menu-icon::after { content: ''; position: absolute; width: 25px; height: 1px; background: var(--ink); right: 0; transition: 0.4s; }
+        .menu-icon::before { top: -10px; }
+        .menu-icon::after { top: 10px; }
 
-        /* SIDEBAR & SUBMENU */
-        .sidebar { position: fixed; right: -400px; top: 0; width: 400px; height: 100vh; background: var(--ink); z-index: 1001; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); padding: 80px 40px; overflow-y: auto; }
+        /* NOWY SIDEBAR Z ROZWIJANIEM */
+        .sidebar { position: fixed; right: -450px; top: 0; width: 450px; height: 100vh; background: var(--ink); z-index: 1001; transition: 0.6s cubic-bezier(0.77, 0, 0.175, 1); padding: 100px 50px; overflow-y: auto; }
         .sidebar.active { right: 0; }
-        .close-btn { position: absolute; top: 30px; right: 40px; background: none; border: none; color: var(--gold-light); font-size: 2rem; cursor: pointer; }
-        
+        .close-btn { position: absolute; top: 30px; right: 50px; background: none; border: none; color: var(--gold-light); font-size: 2.5rem; cursor: pointer; }
+
         .nav-links ul { list-style: none; }
         .nav-links li { margin-bottom: 5px; }
-        .nav-links a { color: var(--parchment); text-decoration: none; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; display: block; padding: 15px 0; border-bottom: 1px solid rgba(200, 169, 110, 0.1); transition: 0.3s; cursor: pointer; }
+        .nav-links a { color: var(--parchment); text-decoration: none; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; display: block; padding: 18px 0; border-bottom: 1px solid rgba(200, 169, 110, 0.1); transition: 0.3s; }
         .nav-links a:hover { color: var(--gold-light); padding-left: 10px; }
 
-        .has-submenu > a::after { content: ' +'; font-size: 0.8rem; float: right; color: var(--gold); }
-        .has-submenu.open > a::after { content: ' −'; }
-        
-        .submenu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; background: rgba(255,255,255,0.03); }
-        .has-submenu.open .submenu { max-height: 400px; }
-        .submenu a { padding-left: 25px !important; font-size: 0.9rem !important; border-bottom: none !important; color: var(--gold-light); opacity: 0.8; }
-        .submenu a:hover { opacity: 1; }
+        /* Style dla podmenu */
+        .has-submenu > a { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .has-submenu > a::after { content: '+'; font-family: 'Jost'; font-weight: 300; transition: 0.3s; }
+        .has-submenu.open > a::after { content: '−'; transform: rotate(180deg); }
+        .has-submenu.open > a { color: var(--gold-light); }
 
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); opacity: 0; visibility: hidden; z-index: 1000; transition: 0.4s; }
+        .submenu { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; background: rgba(255,255,255,0.02); }
+        .has-submenu.open .submenu { max-height: 500px; padding-bottom: 10px; }
+        .submenu a { padding-left: 30px !important; font-size: 0.85rem !important; border-bottom: none !important; text-transform: none !important; letter-spacing: 1.5px !important; color: #a19584 !important; }
+        .submenu a:hover { color: var(--gold-light) !important; }
+
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; z-index: 1000; transition: 0.5s; }
         .overlay.active { opacity: 1; visibility: visible; }
 
         /* HERO */
-        .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; background: linear-gradient(rgba(253, 250, 246, 0.2), rgba(253, 250, 246, 0.2)), url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80') center/cover; }
-        .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 300; margin-bottom: 20px; animation: fadeIn 1.5s ease-out; }
-        .hero-subtitle { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 5px; color: var(--sepia); margin-bottom: 40px; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: var(--warm-white); position: relative; }
+        .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 10vw, 6rem); font-weight: 300; line-height: 1.1; margin-bottom: 30px; color: var(--ink); }
+        .hero-title span { display: block; font-style: italic; font-size: 0.5em; color: var(--sepia); }
 
         /* DISCOVERY GRID */
-        .discovery { padding: 120px 40px; max-width: 1300px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 80px; }
-        .section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; }
+        .discovery { padding: 150px 50px; background-color: var(--ink); color: var(--parchment); }
+        .discovery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto; }
         
-        .discovery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-        .discovery-card { position: relative; height: 500px; text-decoration: none; color: var(--ink); overflow: hidden; border: 1px solid var(--line); display: flex; align-items: flex-end; padding: 40px; transition: 0.5s; }
-        .discovery-card:hover { border-color: var(--gold); transform: translateY(-10px); }
+        .discovery-card { position: relative; text-decoration: none; color: var(--parchment); overflow: hidden; transition: 0.6s; }
+        .card-1 { grid-column: 1 / 8; height: 600px; }
+        .card-2 { grid-column: 8 / 13; height: 600px; margin-top: 100px; }
+        .card-3 { grid-column: 2 / 7; height: 500px; margin-top: -50px; }
         
-        /* SPECJALNA KARTA AKTUALNOŚCI */
-        .news-card { background: var(--ink); }
-        .news-card .card-category { color: var(--gold-light); }
-        .news-card .card-title { color: var(--cream); }
-        .news-card p { color: var(--parchment); opacity: 0.8; }
+        /* NOWA KARTA AKTUALNOŚCI */
+        .card-news { grid-column: 7 / 12; height: 450px; margin-top: 50px; border: 1px solid var(--gold); }
 
-        .card-content { position: relative; z-index: 2; }
-        .card-category { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); margin-bottom: 10px; display: block; }
-        .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 15px; }
-
-        footer { background: var(--ink); color: var(--parchment); padding: 80px 40px; text-align: center; }
-        .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 20px; color: var(--gold-light); }
+        .card-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%) sepia(20%); transition: 0.8s; }
+        .discovery-card:hover .card-img { transform: scale(1.05); filter: grayscale(0%); }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 768px) { .sidebar { width: 100%; right: -100%; } .discovery-grid { grid-template-columns: 1fr; } }
+        .card-content { position: absolute; bottom: 40px; left: 40px; right: 40px; z-index: 2; }
+        .card-category { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold-light); margin-bottom: 15px; display: block; }
+        .card-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 400; line-height: 1.2; }
+
+        footer { padding: 100px 50px; background-color: var(--ink); border-top: 1px solid var(--line); color: var(--parchment); text-align: center; }
+        .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; letter-spacing: 5px; color: var(--gold-light); margin-bottom: 30px; }
+
+        @media (max-width: 1024px) {
+            .discovery-grid { display: flex; flex-direction: column; }
+            .sidebar { width: 100%; right: -100%; }
+            .card-1, .card-2, .card-3, .card-news { height: 450px; margin-top: 0; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="logo">Klan Ł&K</a>
+        <a href="index.html" class="logo">L&K</a>
         <button class="menu-btn" onclick="toggleSidebar()">
             <span class="menu-icon"></span>
         </button>
@@ -130,47 +136,53 @@
     </div>
 
     <section class="hero">
-        <span class="hero-subtitle">Est. 1991</span>
-        <h1 class="hero-title">Rodzina Ładomirskich i Kraińskich</h1>
-        <p>Archiwum Pamięci i Historii Rodowej</p>
+        <h1 class="hero-title">
+            <span>Archiwum Rodzinne</span>
+            Ładomirskich & Kraińskich
+        </h1>
     </section>
 
     <section class="discovery">
-        <div class="section-header">
-            <h2>Odkrywaj</h2>
-        </div>
-        
         <div class="discovery-grid">
-            <a href="aktualnosci.html" class="discovery-card news-card">
+            
+            <a href="aktualnosci.html" class="discovery-card card-news">
                 <div class="card-content">
-                    <span class="card-category">Nowe Wydarzenia</span>
-                    <h3 class="card-title">Aktualności</h3>
-                    <p>Bądź na bieżąco z życiem klanu, planowanymi zjazdami i nowymi odkryciami.</p>
+                    <span class="card-category">Najnowsze</span>
+                    <h2 class="card-title">Aktualności Rodzinne</h2>
+                    <p style="margin-top: 10px; opacity: 0.7;">Wydarzenia, ogłoszenia i nowe odkrycia w archiwum.</p>
                 </div>
             </a>
 
-            <a href="zjazdy.html" class="discovery-card">
+            <a href="zjazdy.html" class="discovery-card card-1">
+                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80" class="card-img">
                 <div class="card-content">
                     <span class="card-category">Kronika</span>
-                    <h3 class="card-title">Zjazdy Rodzinne</h3>
-                    <p>Tradycja spotkań zapoczątkowana w 1991 roku. Relacje, zdjęcia i wspomnienia.</p>
+                    <h2 class="card-title">Zjazdy Rodzinne<br>od 1991 roku</h2>
                 </div>
             </a>
 
-            <a href="drzewo-klanowe.html" class="discovery-card">
+            <a href="drzewo-klanowe.html" class="discovery-card card-2">
+                <img src="https://images.unsplash.com/photo-1441759430827-8942856d9f91?auto=format&fit=crop&q=80" class="card-img">
                 <div class="card-content">
                     <span class="card-category">Genealogia</span>
-                    <h3 class="card-title">Drzewo Rodowe</h3>
-                    <p>Poznaj korzenie i gałęzie naszej rodziny sięgające wieków wstecz.</p>
+                    <h2 class="card-title">Drzewo Rodowe i Wywody</h2>
                 </div>
             </a>
+
+            <a href="archiwum.html" class="discovery-card card-3">
+                <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80" class="card-img">
+                <div class="card-content">
+                    <span class="card-category">Zasoby</span>
+                    <h2 class="card-title">Dokumenty i Archiwalia</h2>
+                </div>
+            </a>
+
         </div>
     </section>
 
     <footer id="footer">
-        <div class="footer-logo">Klan Ł&K</div>
+        <div class="footer-logo">L&K</div>
         <p>© 2026 Archiwum Rodzinne Ładomirskich i Kraińskich</p>
-        <p style="margin-top: 20px; font-size: 0.8rem; color: var(--gold-light);">Kontakt: kontakt@rod-nazwisko.pl</p>
     </footer>
 
     <script>
@@ -180,22 +192,21 @@
         }
 
         function toggleSubmenu(element) {
+            // Zamyka inne otwarte podmenu (opcjonalne)
             const parent = element.parentElement;
             parent.classList.toggle('open');
         }
 
         function closeSidebarAndScroll() {
-            // Zamyka sidebar
             document.getElementById('sidebar').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
             
-            // Płynne przewijanie do stopki
             setTimeout(() => {
                 document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
             }, 300);
         }
 
-        // Zamykanie wszystkich podmenu przy zamknięciu sidebaru
+        // Zamykanie przy kliknięciu w overlay
         document.getElementById('overlay').addEventListener('click', () => {
             const submenus = document.querySelectorAll('.has-submenu');
             submenus.forEach(s => s.classList.remove('open'));
