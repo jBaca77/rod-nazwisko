@@ -34,20 +34,23 @@
         .lang-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--sepia); color: var(--cream); font-size: 0.65rem; padding: 4px 8px; cursor: pointer; transition: 0.3s; border-radius: 2px; }
         .lang-btn.active { background: var(--gold); border-color: var(--gold); }
 
-        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 1100; }
-        .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
+        .menu-btn span { display: block; width: 28px; height: 1px; background: var(--gold-light); transition: 0.3s; }
 
-        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
+        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 30px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
         .drawer.open { right: 0; }
         .drawer-links { list-style: none; }
         .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; cursor: pointer; }
+        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; cursor: pointer; transition: 0.3s; }
+        .drawer-links a:hover { color: var(--gold-light); }
         
+        /* Submenu Style */
         .has-submenu > a::after { content: ' ▾'; font-size: 0.7rem; color: var(--gold); }
         .submenu { display: none; list-style: none; padding-left: 15px; margin-top: 10px; }
-        .submenu li { border: none; margin-bottom: 10px; padding-bottom: 0; }
-        .submenu a { font-size: 0.7rem; color: var(--sepia-light); text-transform: none; }
+        .submenu li { border: none; margin-bottom: 8px; padding-bottom: 0; }
+        .submenu a { font-size: 0.7rem; color: var(--sepia-light); text-transform: none; letter-spacing: 1px; }
         .has-submenu.active .submenu { display: block; }
+        .has-submenu.active > a { color: var(--gold-light); }
         
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
         .overlay.active { opacity: 1; pointer-events: auto; }
@@ -109,7 +112,7 @@
                 <li><a href="drzewo-ladomirskich.html">Drzewo Ładomirskich</a></li>
             </ul>
         </li>
-        <li><a href="zjazdy.html">Kronika zajazdów</a></li>
+        <li><a href="zjazdy.html">Kronika Zjazdów</a></li>
         <li><a href="biografie.html">Biografie</a></li>
         <li class="has-submenu">
             <a onclick="toggleSub(this)">Pamięć i groby</a>
@@ -137,14 +140,6 @@
                data-es="¡Finalmente ha llegado el día! Según lo acordado por el Consejo de Ancianos en la última reunión, me he visto obligada a abrir una cuenta familiar. En esta cuenta podremos recaudar fondos para ayudar a reducir los costos de nuestras próximas reuniones."
                data-fr="Le jour est enfin arrivé !!! Conformément aux décisions du Conseil des Sages lors de la dernière Réunion, j'ai été obligée d'ouvrir un compte familial. Sur ce compte, nous pourrons collecter des fonds qui aideront à réduire les coûts de nos prochaines rencontres.">
                W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań.
-            </p>
-
-            <p class="lang"
-               data-pl="Środki te będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe. Idea, która przyświeca tej inicjatywie, to zapewnienie jak największego grona uczestników na kolejnych spotkaniach."
-               data-en="These funds will be used to support those for whom the cost of attending the Meeting exceeds their budget. The idea behind this initiative is to ensure the largest possible number of participants."
-               data-es="Estos fondos se utilizarán para apoyar a aquellos para quienes el costo de asistir supere sus posibilidades. La idea es asegurar el mayor número posible de participantes."
-               data-fr="Ces fonds seront utilisés pour soutenir ceux pour qui le coût de participation dépasse leur budget. L'idée est d'assurer le plus grand nombre possible de participants.">
-               Środki te będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe. Idea, która przyświeca tej inicjatywie, to zapewnienie jak największego grona uczestników na kolejnych spotkaniach.
             </p>
 
             <div class="bank-card">
