@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia Klanu | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* NAGŁÓWEK */
+        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+
+        /* TREŚĆ ARTYKUŁU */
+        .content-wrapper { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
+        
+        .lead-text { 
+            font-size: 1.2rem; color: var(--sepia); font-style: italic; 
+            text-align: center; margin-bottom: 50px; line-height: 1.6;
+        }
+
+        .story-section { margin-bottom: 60px; }
+        .story-section h2 { 
+            font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; 
+            margin-bottom: 20px; color: var(--gold); border-bottom: 1px solid var(--line);
+            padding-bottom: 10px;
+        }
+
+        .image-box { margin: 40px 0; text-align: center; }
+        .image-box img { 
+            max-width: 100%; height: auto; border: 1px solid var(--line); 
+            padding: 10px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+        }
+        .image-caption { 
+            display: block; margin-top: 10px; font-size: 0.8rem; 
+            text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); 
+        }
+
+        .quote-block {
+            background: var(--parchment); padding: 40px; border-radius: 4px;
+            margin: 40px 0; position: relative; font-style: italic;
+        }
+        .quote-block::before {
+            content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem;
+            color: var(--gold-light); position: absolute; left: 15px; top: -10px; opacity: 0.3;
+        }
+
+        /* STOPKA I PRZYCISKI */
+        .page-footer-nav { 
+            border-top: 1px solid var(--line); padding-top: 40px; 
+            display: flex; justify-content: center; gap: 20px; 
+        }
+        .btn-outline {
+            text-decoration: none; color: var(--sepia); font-size: 0.75rem; 
+            text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px;
+            border: 1px solid var(--line); transition: 0.3s;
+        }
+        .btn-outline:hover { border-color: var(--gold); color: var(--gold); background: var(--parchment); }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+
+        @media (max-width: 600px) {
+            .quote-block { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="index.html" class="back-link">← Strona Główna</a>
+    </div>
+</nav>
+
+<article>
+    <header class="article-header">
+        <span class="meta-top">Geneza i tradycja</span>
+        <h1>Jak powstał Klan</h1>
+    </header>
+
+    <div class="content-wrapper">
+        <p class="lead-text">
+            Historia Klanu Ładomirskich i Kraińskich nie zaczęła się od oficjalnych statutów, lecz od rodzinnej radości, weselnych dyskusji i głębokiej potrzeby podtrzymania więzi.
+        </p>
+
+        <section class="story-section">
+            <h2>Wielichowo 1974: Iskra zapalna</h2>
+            <p>Wszystko zaczęło się 28 września 1974 roku w Wielichowie. To właśnie tam, podczas wesela Marii Ładomirskiej i Marka Szczepaniaka, narodziła się idea cyklicznych spotkań. Jerzy "Jacek" Niewęgłowski, zainspirowany artykułem o zjazdach rodu Guziurów, rzucił myśl, która padła na niezwykle podatny grunt.</p>
+            
+            <div class="image-box">
+                <img src="./img/historia/wielichowo_1974.jpg" alt="Wielichowo 1974" onerror="this.src='https://placehold.co/800x400?text=Wielichowo+1974'">
+                <span class="image-caption">Wielichowo 1974 — Miejsce, gdzie wszystko się zaczęło</span>
+            </div>
+
+            <p>Tego wieczoru nie tylko podjęto decyzję, ale także wybrano zespół organizacyjny. Tomasz Ładomirski podjął się przygotowania pierwszego zjazdu, a praciotka Anna Ładomska została pierwszą "skarbniczką", otwierając subkonto na oszczędności zjazdowe dla całej rodziny.</p>
+        </section>
+
+        <div class="quote-block">
+            "Spontaniczność, wsparta odrobiną zwyczajowego już nadzoru organizacyjnego, okazała się w zupełności wystarczającą a może i optymalną formułą funkcjonowania klanu przez dziesięciolecia."
+        </div>
+
+        <section class="story-section">
+            <h2>Od Rodziny do Klanu</h2>
+            <p>Pierwszy Zjazd (Modlin, 1975) zgromadził głównie potomków Zdzisława i Anny Ładomirskich. Jednak wizyta prawuja Stanisława Kraińskiego podczas tego spotkania zmieniła bieg historii. Przy organizacji drugiego zjazdu padły słynne słowa: <em>"A my? My także jesteśmy przecież rodziną!"</em>.</p>
+            
+            <p>Od II Zjazdu grono uczestników rozszerzyło się o ród Kraińskich. W ten sposób, z połączenia dwóch wielkich rodzinnych gałęzi, nieformalnie narodził się <strong>Klan</strong>. Zjazdy stały się tradycją odbywającą się co dwa lata, stając się fundamentem jedności dla kolejnych pokoleń, mimo migracji i upływu czasu.</p>
+        </section>
+
+        <div class="page-footer-nav">
+            <a href="zjazdy.html" class="btn-outline">Zobacz listę zjazdów</a>
+        </div>
+    </div>
+</article>
+
+<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
+
+</body>
+</html>
 
