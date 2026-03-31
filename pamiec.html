@@ -2,61 +2,56 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Pamięć | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --cream: #f8f4ee; 
-            --parchment: #ede8df; 
-            --warm-white: #fdfaf6;
-            --ink: #1e1a14; 
-            --gold: #9b7d4a; 
-            --gold-light: #c8a96e; 
-            --sepia: #7a6548; 
-            --sepia-light: #b09a7e; 
-            --line: rgba(122, 101, 72, 0.2);
-            --green-dark: #2c3e2d; /* Kolor klanowy zjazdów */
+            /* Paleta barw zgodna z plikiem zjazdy */
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
+            --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
+            --gold-light: #c8a96e; --line: rgba(122, 101, 72, 0.2);
+            --green-dark: #2c3e2d; /* Kolor tła nagłówka zjazdów */
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
 
-        /* ── NAWIGACJA ── */
+        /* ── NAV (Styl identyczny jak w zjazdy) ── */
         nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; padding: 16px 24px; gap: 20px; }
         
-        .nav-logo { 
-            font-family: 'Cormorant Garamond', serif; color: var(--gold-light); 
-            text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; 
-            border-right: 1px solid rgba(200, 169, 110, 0.3); padding-right: 20px; 
-        }
-
-        .nav-back-link { 
-            display: flex; align-items: center; gap: 8px; color: var(--gold-light); 
-            text-decoration: none; font-size: 0.7rem; text-transform: uppercase; 
-            letter-spacing: 2px; transition: 0.3s; 
+        .nav-back-link {
+            display: flex; align-items: center; gap: 8px; color: var(--gold-light);
+            text-decoration: none; font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 2px; transition: 0.3s;
         }
         .nav-back-link:hover { color: var(--cream); }
 
-        /* ── NAGŁÓWEK (Zielony Efekt) ── */
+        .nav-logo { 
+            font-family: 'Cormorant Garamond', serif; color: var(--gold-light); 
+            text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; font-weight: 400;
+            border-left: 1px solid rgba(200, 169, 110, 0.3); padding-left: 20px;
+        }
+
+        /* ── HERO HEADER (Styl Zielony zjazdów z teksturą i cytatem) ── */
         .hero-header { 
             background-color: var(--green-dark); 
-            padding: 120px 24px 100px; 
+            padding: 100px 24px 80px; 
             text-align: center; 
             position: relative; 
             overflow: hidden; 
             color: var(--cream);
         }
-
-        /* Tekstura linii klanowych */
+        /* Tekstura linii z pliku zjazdy */
         .hero-header::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.03) 1px);
+            background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.025) 1px);
             pointer-events: none;
         }
 
@@ -66,53 +61,59 @@
             text-transform: uppercase; 
             color: var(--gold-light); 
             display: block; 
-            margin-bottom: 20px; 
+            margin-bottom: 15px; 
             position: relative;
         }
-
         .hero-header h1 { 
             font-family: 'Cormorant Garamond', serif; 
-            font-size: clamp(2.4rem, 6vw, 4rem); 
+            font-size: clamp(2.4rem, 6vw, 3.8rem); 
             font-weight: 300; 
-            margin-bottom: 30px;
+            margin-bottom: 25px; 
             position: relative;
         }
-
-        .quote {
-            max-width: 700px;
-            margin: 0 auto;
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1.4rem;
-            color: var(--parchment);
-            line-height: 1.5;
+        .intro-description { 
+            max-width: 700px; 
+            margin: 0 auto; 
+            font-family: 'Cormorant Garamond', serif; 
+            font-style: italic; 
+            font-size: 1.3rem; 
+            color: var(--parchment); 
+            line-height: 1.6;
             position: relative;
-            opacity: 0.9;
         }
+        .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 30px auto; opacity: 0.6; position: relative; }
 
-        .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 35px auto; opacity: 0.6; position: relative; }
-
-        /* ── SEKCJA GŁÓWNA ── */
-        main { max-width: 1100px; margin: -50px auto 80px; padding: 0 24px; position: relative; z-index: 10; }
+        /* ── MAIN CONTENT & GRID ZJAZDÓW ── */
+        main { max-width: 1200px; margin: -40px auto 80px; padding: 0 24px; position: relative; z-index: 10; }
         
+        /* Gwarantuje idealne wyrównanie i identyczną wysokość kwadratów 
+           dzięki zastosowaniu CSS Grid i align-items: stretch.
+        */
         .memory-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
             gap: 40px; 
+            align-items: stretch; /* Kluczowe dla wyrównania wysokości */
         }
         
+        /* ── KAFELKI-KWADRATY (Styl .z-card z pliku zjazdy) ── */
         .memory-card { 
             position: relative; 
             background: var(--cream); 
-            padding: 70px 50px; 
+            padding: 60px 40px; 
             text-decoration: none; 
             color: var(--ink);
-            border: 1px solid var(--parchment); 
+            border: 1px solid var(--sepia-pale); 
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
             text-align: center;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
+        /* Ozdobna ramka wewnętrzna (zgodna ze stylem zjazdów) */
         .memory-card::after { 
             content: ""; 
             position: absolute; 
@@ -122,24 +123,40 @@
         }
 
         .memory-card:hover { 
-            transform: translateY(-10px); 
+            transform: translateY(-8px); 
             border-color: var(--gold-light); 
             background: white; 
-            box-shadow: 0 25px 55px rgba(0,0,0,0.1); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
         }
 
-        .card-icon { color: var(--gold); margin-bottom: 30px; display: block; transition: 0.6s; }
-        .memory-card:hover .card-icon { transform: scale(1.15); color: var(--green-dark); }
+        /* Ikony stylizowane na złoto */
+        .card-icon { color: var(--gold); margin-bottom: 30px; display: block; transition: 0.5s; }
+        .memory-card:hover .card-icon { transform: scale(1.1); color: var(--green-dark); }
         
-        .memory-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; margin-bottom: 18px; letter-spacing: 1px; }
-        .memory-card p { font-size: 0.95rem; color: var(--sepia); font-style: italic; font-weight: 400; }
+        .memory-card h2 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 2rem; 
+            font-weight: 400; 
+            margin-bottom: 15px; 
+            letter-spacing: 1px;
+        }
+        .memory-card p { 
+            font-size: 0.95rem; 
+            color: var(--sepia); 
+            font-style: italic; 
+            max-width: 280px;
+        }
 
+        /* ── FOOTER ── */
         footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.75rem; letter-spacing: 1px; }
 
+        /* Adaptacja dla mniejszych ekranów */
         @media (max-width: 768px) {
             .hero-header { padding: 80px 20px 100px; }
-            .quote { font-size: 1.2rem; }
-            main { margin-top: -30px; }
+            main { margin-top: -20px; }
+            .intro-section h1 { font-size: 2.2rem; }
+            .memory-grid { gap: 30px; }
+            .memory-card { padding: 50px 30px; }
         }
     </style>
 </head>
@@ -147,19 +164,20 @@
 
 <nav>
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-        <a href="index.html" class="nav-back-link">
+        <a href="genealogia.html" class="nav-back-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             Wstecz
         </a>
+        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
     </div>
 </nav>
 
 <header class="hero-header">
     <span class="s-label">Księga Pamięci</span>
     <h1>Pamięć i Historia</h1>
-    <p class="quote">
-        „ Umarłych wieczność dotąd trwa, dokąd pamięcią im się płaci. ”
+    <p class="intro-description">
+        „Rodzina to nie tylko krew. To pamięć o tych, którzy byli przed nami, <br>
+        i fundament dla tych, którzy przyjdą po nas.”
     </p>
     <div class="s-line"></div>
 </header>
@@ -173,7 +191,7 @@
                 </svg>
             </span>
             <h2>Miejsca Spoczynku</h2>
-            <p>Interaktywny spis i mapa miejsc wiecznego spoczynku członków naszego klanu.</p>
+            <p>Mapa i rejestr miejsc wiecznego spoczynku członków naszego klanu.</p>
         </a>
 
         <a href="wspomnienie-zmarly5.html" class="memory-card">
@@ -184,7 +202,7 @@
                 </svg>
             </span>
             <h2>Wspomnienia</h2>
-            <p>Biografie, archiwalne fotografie oraz osobiste świadectwa o przodkach.</p>
+            <p>Biografie, fotografie i świadectwa o tych, którzy odeszli, lecz pozostają w pamięci rodu.</p>
         </a>
     </div>
 </main>
