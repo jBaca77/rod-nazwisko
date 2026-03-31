@@ -9,80 +9,89 @@
     <style>
         :root {
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
-            --line: rgba(122, 101, 72, 0.2);
-            --sepia-light: #b09a7e;
+            --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
+            --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
+            --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
 
-        /* NAWIGACJA */
-        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
-        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        /* ── HEADER (Nowy styl spójny) ── */
+        header.main-header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
+        header.main-header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
+        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; display: block; position: relative; z-index: 1; }
+        header.main-header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+
+        /* ── NAV & DRAWER ── */
+        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         
-        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; padding: 5px; z-index: 1100; position: relative; }
-        .menu-btn span { display: block; width: 28px; height: 1px; background: var(--gold-light); transition: 0.3s; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 1100; }
+        .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
 
-        /* DRAWER (PASEK BOCZNY) */
-        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 30px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
+        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
         .drawer.open { right: 0; }
         .drawer-links { list-style: none; }
         .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; cursor: pointer; transition: 0.3s; }
+        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; transition: 0.3s; cursor: pointer; }
         .drawer-links a:hover { color: var(--gold-light); padding-left: 5px; }
 
-        /* Submenu Style */
         .has-submenu > a::after { content: ' ▾'; font-size: 0.7rem; color: var(--gold); }
         .submenu { display: none; list-style: none; padding-left: 15px; margin-top: 10px; }
-        .submenu li { border: none; margin-bottom: 8px; padding-bottom: 0; }
-        .submenu a { font-size: 0.7rem; color: var(--sepia-light); text-transform: none; letter-spacing: 1px; }
+        .submenu li { border: none; margin-bottom: 10px; padding-bottom: 0; }
+        .submenu a { font-size: 0.7rem; color: var(--sepia-light); text-transform: none; }
         .has-submenu.active .submenu { display: block; }
-        .has-submenu.active > a { color: var(--gold-light); }
-
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(3px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
+        
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
         .overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* TREŚĆ ARTYKUŁU */
-        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
-        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+        /* ── MAIN CONTENT ── */
+        main { max-width: 900px; margin: 0 auto; padding: 80px 24px; }
+        .s-label { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 10px; display: block; }
+        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 8px; color: var(--ink); }
+        .s-line { width: 40px; height: 1px; background: var(--gold); margin-bottom: 40px; }
 
-        .content-wrapper { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
-        .story-section { margin-bottom: 40px; text-align: justify; }
-        .story-section h2 { 
-            font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; 
-            margin: 40px 0 20px; color: var(--gold); border-bottom: 1px solid var(--line);
-            padding-bottom: 10px; text-align: left;
-        }
-
-        .image-container { margin: 40px 0; text-align: center; }
-        .image-container img { 
-            max-width: 100%; height: auto; border: 1px solid var(--line); 
-            padding: 10px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
-        }
-        .img-label { display: block; margin-top: 10px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); }
-
-        .author-note { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--sepia); }
+        .story-section { margin-bottom: 60px; }
+        .story-section p { font-family: 'Jost', sans-serif; font-size: 1.1rem; color: var(--ink-light); text-align: justify; margin-bottom: 25px; line-height: 1.8; }
         
-        .dictionary-box {
-            margin-top: 40px; padding: 30px; background: var(--parchment); border-radius: 4px; border-left: 4px solid var(--gold);
+        .story-section h2 { 
+            font-family: 'Cormorant Garamond', serif; font-size: 2rem; 
+            margin: 50px 0 25px; color: var(--sepia); position: relative;
+            padding-bottom: 15px;
         }
-        .dictionary-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .dictionary-content { font-style: italic; font-size: 0.95rem; }
+        .story-section h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 30px; height: 1px; background: var(--gold-light); }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+        /* Ilustracje */
+        .image-container { margin: 50px 0; text-align: center; background: var(--cream); padding: 20px; border: 1px solid var(--sepia-pale); }
+        .image-container img { max-width: 100%; height: auto; display: block; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .img-label { display: block; margin-top: 15px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); font-weight: 500; }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .dictionary-box { padding: 20px; }
+        /* Notka autora & Słownik */
+        .author-note { margin-top: 80px; padding-top: 30px; border-top: 1px solid var(--line); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: var(--sepia); }
+        
+        .dictionary-box { margin-top: 50px; padding: 40px; background: var(--parchment); border-left: 4px solid var(--gold); }
+        .dictionary-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; color: var(--ink); }
+        .dictionary-content { font-size: 0.95rem; color: var(--ink-light); line-height: 1.6; }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; }
+
+        @media (max-width: 850px) {
+            main { padding: 50px 20px; }
+            .dictionary-box { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
 <div class="overlay" id="overlay"></div>
+
+<header class="main-header">
+    <span class="header-ornament">Geneza powstania</span>
+    <h1>Jak nieformalnie powołano do życia Klan Ładomirskich i Kraińskich</h1>
+</header>
 
 <nav>
     <div class="nav-inner">
@@ -96,6 +105,7 @@
 <aside class="drawer" id="drawer">
     <ul class="drawer-links">
         <li><a href="index.html">Strona Główna</a></li>
+        <li><a href="historia.html">Historia Klanu</a></li>
         <li class="has-submenu">
             <a onclick="toggleSub(this)">Genealogia</a>
             <ul class="submenu">
@@ -108,7 +118,7 @@
         <li><a href="zjazdy.html">Kronika Zjazdów</a></li>
         <li><a href="biografie.html">Biografie</a></li>
         <li class="has-submenu">
-            <a onclick="toggleSub(this)">Pamięć i Groby</a>
+            <a onclick="toggleSub(this)">Pamięć i groby</a>
             <ul class="submenu">
                 <li><a href="miejsca-pochowku.html">Miejsca pochówku</a></li>
                 <li><a href="wspomnienie-zmarlych.html">Wspomnienie zmarłych</a></li>
@@ -120,46 +130,37 @@
     </ul>
 </aside>
 
-<article>
-    <header class="article-header">
-        <span class="meta-top">Geneza powstania</span>
-        <h1>Jak nieformalnie powołano do życia Klan Ładomirskich i Kraińskich</h1>
-    </header>
+<main>
+    <section class="story-section">
+        <span class="s-label">Wielichowo 1974</span>
+        <h2 class="s-title" style="border:none; margin:0; padding:0;">Początek drogi</h2>
+        <div class="s-line"></div>
 
-    <div class="content-wrapper">
-        <section class="story-section">
-            <p>Była polska złota jesień, dzień 28 września roku 1974. W Wielichowie, w Wielkopolsce, na ślubnym kobiercu, w kościele pw. św. Marii Magdaleny, stanęli: Maria Ładomirska, panna lat 24 i Marek Szczepaniak, kawaler lat 26. Po zaślubinach Młodzi oraz zaproszeni goście udali się do Pałacu IUNGu. Tamże wieczorem odbyło się huczne wesele.</p>
-            
-            <div class="image-container">
-                <img src="./img/historia/mloda_para_1974.jpg" alt="Młoda Para Wielichowo 1974" onerror="this.src='https://placehold.co/600x400?text=Młoda+Para+1974'">
-                <span class="img-label">Młoda para — Wielichowo 1974</span>
-            </div>
+        <p>Była polska złota jesień, dzień 28 września roku 1974. W Wielichowie, w Wielkopolsce, na ślubnym kobiercu, w kościele pw. św. Marii Magdaleny, stanęli: Maria Ładomirska, panna lat 24 i Marek Szczepaniak, kawaler lat 26. Po zaślubinach Młodzi oraz zaproszeni goście udali się do Pałacu IUNGu. Tamże wieczorem odbyło się huczne wesele.</p>
+        
+        <div class="image-container">
+            <img src="./img/historia/mloda_para_1974.jpg" alt="Młoda Para Wielichowo 1974" onerror="this.src='https://placehold.co/600x400?text=Młoda+Para+1974'">
+            <span class="img-label">Młoda para — Wielichowo 1974</span>
+        </div>
 
-            <p>Moi rodzice, Jerzy i Marta z Ładomirskich małżonkowie Niewęgłowscy o mały włos na powyższe uroczystości by nie dotarli, gdyż w tym samym dniu w Radochowie, w Kotlinie Kłodzkiej, wraz z dyrektorem Kombinatu Trzebieszowice Jerzym Janickim omawiali możliwość realizacji swojej idei budowy w Radochowie ośrodka hodowli pstrągów. Szczęśliwie jednak rozmowy zakończyły się na tyle wcześnie, aby możliwym stało się pokonanie 250 km dzielących południe Polski z Wielichowem i wzięcie przez nich udziału choćby w weselu.</p>
-        </section>
+        <p>Moi rodzice, Jerzy i Marta z Ładomirskich małżonkowie Niewęgłowscy o mały włos na powyższe uroczystości by nie dotarli, gdyż w tym samym dniu w Radochowie, w Kotlinie Kłodzkiej, wraz z dyrektorem Kombinatu Trzebieszowice Jerzym Janickim omawiali możliwość realizacji swojej idei budowy w Radochowie ośrodka hodowli pstrągów. Szczęśliwie jednak rozmowy zakończyły się na tyle wcześnie, aby możliwym stało się pokonanie 250 km dzielących południe Polski z Wielichowem i wzięcie przez nich udziału choćby w weselu.</p>
 
-        <section class="story-section">
-            <h2>Dlaczego to istotne?</h2>
-            <p>Otóż tak się złożyło, że ojciec mój, w rodzinie oraz wśród koleżeństwa po fachu rybackim zwany Jackiem, był świeżo po lekturze artykułu o zjazdach rodzinnych organizowanych przez cieszyński ród Guziurów, do którego to należał jego kolega ze studiów. To właśnie ta idea spotkań rodzinnych, na gruncie uprawionym dyskusjami prowadzonymi w trakcie organizacji ślubu oraz w czasie samego wesela, zaowocowała decyzją zorganizowania zjazdu rodziny Ładomirskich.</p>
-            
-            <p>Wieczoru owego nie tylko podjęto decyzję, ale także ukonstytuowano zespół organizacyjny oraz ustalono zasady finansowania. Zorganizowania pierwszego zjazdu podjął się wuj Tomasz Ładomirski zaś „skarbniczką” została praciotka Anna Ładomirska. Aby ułatwić krewnym odłożenie środków na opłaty zjazdowe praciotka Anna jako skarbniczka niebawem otworzyła subkonto, na które każdy członek rodziny mógł deponować wg uznania i w dowolnym czasie oszczędności, z których później pokrywał koszty swojego udziału w zjeździe.</p>
-        </section>
+        <h2>Dlaczego to istotne?</h2>
+        <p>Otóż tak się złożyło, że ojciec mój, w rodzinie oraz wśród koleżeństwa po fachu rybackim zwany Jackiem, był świeżo po lekturze artykułu o zjazdach rodzinnych organizowanych przez cieszyński ród Guziurów, do którego to należał jego kolega ze studiów. To właśnie ta idea spotkań rodzinnych, na gruncie uprawionym dyskusjami prowadzonymi w trakcie organizacji ślubu oraz w czasie samego wesela, zaowocowała decyzją zorganizowania zjazdu rodziny Ładomirskich.</p>
+        
+        <p>Wieczoru owego nie tylko podjęto decyzję, ale także ukonstytuowano zespół organizacyjny oraz ustalono zasady finansowania. Zorganizowania pierwszego zjazdu podjął się wuj Tomasz Ładomirski zaś „skarbniczką” została praciotka Anna Ładomirska. Aby ułatwić krewnym odłożenie środków na opłaty zjazdowe praciotka Anna jako skarbniczka niebawem otworzyła subkonto, na które każdy członek rodziny mógł deponować wg uznania i w dowolnym czasie oszczędności, z których później pokrywał koszty swojego udziału w zjeździe.</p>
 
-        <section class="story-section">
-            <h2>Narodziny Klanu</h2>
-            <p>Równo rok później tj. we wrześniu roku 1975 w Modlinie pod Warszawą decyzja doczekała się realizacji. Odbył się I Zjazd Rodziny Ładomirskich. Przybyli nań potomkowie Zdzisława i Anny z Kraińskich małżonków Ładomirskich. Z odwiedzinami wpadł nań także z pobliskiej Warszawy, bratanek Anny z Kraińskich Ładomirskiej, prawuj Stanisław Kraiński. Wizyta ta, choć krótka okazała się być brzemienną w skutkach.</p>
-            
-            <div class="image-container">
-                <img src="./img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Uczestnicy I Zjazdu" onerror="this.src='https://placehold.co/800x400?text=I+Zjazd+w+Modlinie'">
-                <span class="img-label">Uczestnicy I Zjazdu w Modlinie</span>
-            </div>
+        <h2>Narodziny Klanu</h2>
+        <p>Równo rok później tj. we wrześniu roku 1975 w Modlinie pod Warszawą decyzja doczekała się realizacji. Odbył się I Zjazd Rodziny Ładomirskich. Przybyli nań potomkowie Zdzisława i Anny z Kraińskich małżonków Ładomirskich. Z odwiedzinami wpadł nań także z pobliskiej Warszawy, bratanek Anny z Kraińskich Ładomirskiej, prawuj Stanisław Kraiński.</p>
+        
+        <div class="image-container">
+            <img src="./img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Uczestnicy I Zjazdu" onerror="this.src='https://placehold.co/800x400?text=I+Zjazd+w+Modlinie'">
+            <span class="img-label">Uczestnicy I Zjazdu w Modlinie</span>
+        </div>
 
-            <p>Gdy 5 lat później ruszyły prace nad organizacją drugiego zjazdu, ze strony potomków rodzeństwa Zdzisława Ładomirskiego oraz rodzeństwa Anny z Kraińskich Ładomirskiej padło pytanie – a my? My także jesteśmy przecież rodziną! Tak, więc Zjazd nr II odbył się już w rozszerzonym gronie tj. przybyli nań zarówno potomkowie Ładomirskich jak i Kraińskich. W ten też sposób nieformalnie narodził się Klan.</p>
+        <p>Gdy 5 lat później ruszyły prace nad organizacją drugiego zjazdu, ze strony potomków rodzeństwa Zdzisława Ładomirskiego oraz rodzeństwa Anny z Kraińskich Ładomirskiej padło pytanie – a my? My także jesteśmy przecież rodziną! Tak, więc Zjazd nr II odbył się już w rozszerzonym gronie tj. przybyli nań zarówno potomkowie Ładomirskich jak i Kraińskich. W ten też sposób nieformalnie narodził się Klan.</p>
 
-            <p>Istniejące od lat więzy rodzinne zyskały zewnętrzną formę cyklicznych zjazdów. Zjazdów, które okazały się mieć ogromne znaczenie dla podtrzymywania i konsolidacji tychże więzów. Dzięki nim, mimo upływającego czasu, pojawiania się kolejnych pokoleń oraz przeróżnych migracji członków rodziny po kraju i świecie potomkowie Zdzisława i Anny oraz ich krewni nie stracili z sobą kontaktu. Zjazdy od numeru III odbywają się co dwa lata, we wrześniu lub październiku.</p>
-
-            <p>Przez te blisko już 40 lat Klan nie wypracował żadnej formalnej struktury, choć były do tego przymiarki. Spontaniczność, wsparta odrobiną zwyczajowego już nadzoru wuja Tomasza Ładomirskiego (pierwszego organizatora), okazuje się w zupełności wystarczającą a może i optymalną formułą jego funkcjonowania.</p>
-        </section>
+        <p>Istniejące od lat więzy rodzinne zyskały zewnętrzną formę cyklicznych zjazdów. Zjazdów, które okazały się mieć ogromne znaczenie dla podtrzymywania i konsolidacji tychże więzów. Dzięki nim, mimo upływającego czasu, pojawiania się kolejnych pokoleń oraz przeróżnych migracji członków rodziny po kraju i świecie potomkowie Zdzisława i Anny oraz ich krewni nie stracili z sobą kontaktu. Zjazdy od numeru III odbywają się co dwa lata, we wrześniu lub październiku.</p>
 
         <div class="author-note">
             <p><strong>Hubert Niewęgłowski</strong>, Radochów 2012 r.</p>
@@ -171,18 +172,20 @@
                 <p><strong>KLAN</strong> — (1) związek osób oparty na pokrewieństwie bądź powinowactwie; (2) grupa osób popierających się, mających wspólne interesy, w jakiś sposób związanych ze sobą.</p>
             </div>
         </div>
-    </div>
-</article>
+    </section>
+</main>
 
-<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
+<footer>
+    <p>Klan Ładomirskich i Kraińskich © 2026<br>Pamięć | Tożsamość | Wspólnota</p>
+</footer>
 
 <script>
+    // Drawer Logic (Sidebar)
     const menuBtn = document.getElementById('menuBtn');
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('overlay');
 
-    // Drawer Toggle
-    menuBtn.addEventListener('click', () => {
+    function toggleSidebar() {
         drawer.classList.toggle('open');
         overlay.classList.toggle('active');
         const spans = menuBtn.querySelectorAll('span');
@@ -195,18 +198,11 @@
             spans[1].style.opacity = '1';
             spans[2].style.transform = 'none';
         }
-    });
+    }
 
-    overlay.addEventListener('click', () => {
-        drawer.classList.remove('open');
-        overlay.classList.remove('active');
-        const spans = menuBtn.querySelectorAll('span');
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
-    });
+    menuBtn.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
 
-    // Submenu Toggle
     function toggleSub(el) {
         el.parentElement.classList.toggle('active');
     }
