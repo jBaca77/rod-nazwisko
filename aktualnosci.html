@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktualności | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+            --sepia-light: #b09a7e;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; overflow-x: hidden; }
+
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+
+        /* PRZEŁĄCZNIK JĘZYKÓW */
+        .lang-switcher { display: flex; gap: 5px; }
+        .lang-btn { 
+            background: rgba(255,255,255,0.05); border: 1px solid var(--sepia); color: var(--cream); 
+            font-size: 0.7rem; padding: 5px 10px; cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; border-radius: 3px;
+        }
+        .lang-btn:hover { background: var(--sepia); }
+        .lang-btn.active { background: var(--gold); border-color: var(--gold); color: white; }
+
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; padding: 5px; z-index: 1100; position: relative; }
+        .menu-btn span { display: block; width: 28px; height: 1px; background: var(--gold-light); transition: 0.3s; }
+
+        /* DRAWER (MENU BOCZNE) */
+        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 30px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; }
+        .drawer.open { right: 0; }
+        .drawer-links { list-style: none; }
+        .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(3px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .overlay.active { opacity: 1; pointer-events: auto; }
+
+        /* TREŚĆ */
+        .page-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 400; }
+
+        .news-container { max-width: 800px; margin: 0 auto; padding: 0 24px 100px; }
+        .news-item { background: white; border: 1px solid var(--line); padding: 40px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .news-date { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; border-bottom: 1px solid var(--parchment); padding-bottom: 10px; }
+        
+        .bank-details { background: var(--cream); padding: 25px; border-radius: 4px; margin: 30px 0; border: 1px dashed var(--sepia-light); font-size: 0.95rem; }
+        .bank-details strong { color: var(--sepia); }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+
+        @media (max-width: 600px) {
+            .news-item { padding: 25px; }
+            .nav-inner { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="translatePage('pl', this)">PL</button>
+                <button class="lang-btn" onclick="translatePage('en', this)">EN</button>
+                <button class="lang-btn" onclick="translatePage('es', this)">ES</button>
+                <button class="lang-btn" onclick="translatePage('fr', this)">FR</button>
+            </div>
+            <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
+        </div>
+    </div>
+</nav>
+
+<aside class="drawer" id="drawer">
+    <ul class="drawer-links">
+        <li><a href="index.html">Strona Główna</a></li>
+        <li><a href="historia.html">Historia Klanu</a></li>
+        <li><a href="zjazdy.html">Kronika Zjazdów</a></li>
+    </ul>
+</aside>
+
+<header class="page-header">
+    <h1 class="lang" data-pl="AKTUALNOŚCI" data-en="NEWS" data-es="NOTICIAS" data-fr="ACTUALITÉS">AKTUALNOŚCI</h1>
+</header>
+
+<main class="news-container">
+    <article class="news-item">
+        <span class="news-date lang" data-pl="15 grudnia 2022" data-en="December 15, 2022" data-es="15 de diciembre de 2022" data-fr="15 décembre 2022">15 grudnia 2022</span>
+        
+        <div class="news-content">
+            <p><strong class="lang" data-pl="Kochani," data-en="Dear ones," data-es="Queridos," data-fr="Chers tous,">Kochani,</strong></p>
+            
+            <p class="lang" 
+               data-pl="W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego." 
+               data-en="The day has finally come!!! According to the decisions of the Council of Elders at the last Meeting, I was obliged to set up a family account."
+               data-es="¡Finalmente ha llegado el día! Según lo acordado por el Consejo de Ancianos w la última reunión, me he visto obligada a abrir una cuenta familiar."
+               data-fr="Le jour est enfin arrivé !!! Conformément aux décisions du Conseil des Sages lors de la dernière Réunion, j'ai été obligée d'ouvrir un compte familial.">
+               W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego.
+            </p>
+
+            <p class="lang"
+               data-pl="Środki te pomogą w obniżeniu kosztów kolejnych naszych spotkań. Będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe."
+               data-en="These funds will help reduce the costs of our next meetings. They will be used to support those for whom the cost of attending exceeds their budget."
+               data-es="Estos fondos ayudarán a reducir los costos de nuestras próximas reuniones. Se destinarán a apoyar a aquellos para quienes el costo de asistencia supere sus posibilidades."
+               data-fr="Ces fonds aideront à réduire les coûts de nos prochaines réunions. Ils seront utilisés pour soutenir ceux pour qui le coût de participation dépasse leur budget.">
+               Środki te pomogą w obniżeniu kosztów kolejnych naszych spotkań. Będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe.
+            </p>
+
+            <div class="bank-details">
+                <p><strong class="lang" data-pl="Dane do przelewu:" data-en="Transfer details:" data-es="Datos bancarios:" data-fr="Détails du virement :">Dane do przelewu:</strong></p>
+                <p>Bank ING | Nr: 07 1050 1588 1000 0097 6819 4954</p>
+                <p>IBAN: PL 07 1050 1588 1000 0097 6819 4954<br>BIC/SWIFT: INGBPLPW</p>
+                <p><strong class="lang" data-pl="Tytuł:" data-en="Subject:" data-es="Concepto:" data-fr="Objet :">Tytuł:</strong> Zjazd Rodzinny</p>
+            </div>
+
+            <p class="lang" data-pl="Ściskam Was serdecznie, Ania" data-en="Warm hugs, Ania" data-es="Un gran abrazo, Ania" data-fr="Je vous embrasse, Ania">Ściskam Was serdecznie, Ania</p>
+        </div>
+    </article>
+</main>
+
+<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
+
+<script>
+    // FUNKCJA AUTOMATYCZNEGO TŁUMACZENIA
+    function translatePage(lang, btn) {
+        // 1. Znajdź wszystkie elementy z klasą 'lang'
+        const elements = document.querySelectorAll('.lang');
+        
+        elements.forEach(el => {
+            // Pobierz tekst z odpowiedniego atrybutu (data-pl, data-en, itd.)
+            const translation = el.getAttribute('data-' + lang);
+            if (translation) {
+                el.innerText = translation;
+            }
+        });
+
+        // 2. Aktualizacja wyglądu przycisków
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // 3. Opcjonalnie: Zapisz wybór w przeglądarce
+        localStorage.setItem('preferredLang', lang);
+    }
+
+    // MENU DRAWER
+    const menuBtn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+
+    menuBtn.addEventListener('click', () => {
+        drawer.classList.toggle('open');
+        overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        overlay.classList.remove('active');
+    });
+</script>
+
+</body>
+</html>
