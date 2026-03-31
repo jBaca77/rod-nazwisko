@@ -17,69 +17,47 @@
         body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; overflow-x: hidden; }
 
         /* NAWIGACJA */
-        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         
-        /* MENU BTN */
-        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; padding: 5px; z-index: 1100; }
-        .menu-btn span { display: block; width: 28px; height: 1px; background: var(--gold-light); transition: 0.3s; }
+        /* PRZYCISK MENU - Widoczny na ciemnym tle nav */
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; padding: 5px; z-index: 1100; position: relative; }
+        .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
 
         /* DRAWER (PASEK BOCZNY) */
-        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 80px 30px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; }
+        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 30px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
         .drawer.open { right: 0; }
         .drawer-links { list-style: none; }
         .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; cursor: pointer; }
-        .drawer-links a:hover { color: var(--gold-light); }
+        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; cursor: pointer; transition: 0.3s; }
+        .drawer-links a:hover { color: var(--gold-light); padding-left: 5px; }
 
-        /* Submenu Logic */
+        /* Submenu */
         .has-submenu > a::after { content: ' ▾'; font-size: 0.7rem; color: var(--gold); }
         .submenu { display: none; list-style: none; padding-left: 15px; margin-top: 10px; }
         .submenu li { border: none; margin-bottom: 8px; padding-bottom: 0; }
-        .submenu a { font-size: 0.7rem; color: var(--sepia-light); text-transform: none; letter-spacing: 1px; }
+        .submenu a { font-size: 0.75rem; color: var(--sepia-light); text-transform: none; letter-spacing: 1px; }
         .has-submenu.active .submenu { display: block; }
 
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(3px); z-index: 1040; display: none; }
-        .overlay.active { display: block; }
+        /* Overlay */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(3px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* NAGŁÓWEK ARTYKUŁU */
+        /* TREŚĆ ARTYKUŁU */
         .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
         .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
         h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
-
-        /* TREŚĆ */
         .content-wrapper { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
-        
         .story-section { margin-bottom: 40px; text-align: justify; }
-        .story-section h2 { 
-            font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; 
-            margin: 40px 0 20px; color: var(--gold); border-bottom: 1px solid var(--line);
-            padding-bottom: 10px; text-align: left;
-        }
-
+        .story-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin: 40px 0 20px; color: var(--gold); border-bottom: 1px solid var(--line); padding-bottom: 10px; text-align: left; }
         .image-container { margin: 40px 0; text-align: center; }
-        .image-container img { 
-            max-width: 100%; height: auto; border: 1px solid var(--line); 
-            padding: 10px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
-        }
+        .image-container img { max-width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .img-label { display: block; margin-top: 10px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); }
-
-        /* SŁOWNIK I PODPIS */
         .author-note { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--sepia); }
-        
-        .dictionary-box {
-            margin-top: 40px; padding: 30px; background: var(--parchment); border-radius: 4px; border-left: 4px solid var(--gold);
-        }
+        .dictionary-box { margin-top: 40px; padding: 30px; background: var(--parchment); border-radius: 4px; border-left: 4px solid var(--gold); }
         .dictionary-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .dictionary-content { font-style: italic; font-size: 0.95rem; }
-
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .dictionary-box { padding: 20px; }
-        }
     </style>
 </head>
 <body>
@@ -89,7 +67,9 @@
 <nav>
     <div class="nav-inner">
         <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-        <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
+        <button class="menu-btn" id="menuBtn">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </nav>
 
@@ -97,7 +77,6 @@
     <ul class="drawer-links">
         <li><a href="index.html">Strona Główna</a></li>
         <li><a href="historia.html">Historia Klanu</a></li>
-        
         <li class="has-submenu">
             <a onclick="toggleSub(this)">Genealogia</a>
             <ul class="submenu">
@@ -107,10 +86,8 @@
                 <li><a href="drzewo-ladomirskich.html">Drzewo Ładomirskich</a></li>
             </ul>
         </li>
-
         <li><a href="zjazdy.html">Kronika Zjazdów</a></li>
         <li><a href="biografie.html">Biografie</a></li>
-
         <li class="has-submenu">
             <a onclick="toggleSub(this)">Pamięć i Groby</a>
             <ul class="submenu">
@@ -118,7 +95,6 @@
                 <li><a href="wspomnienie-zmarlych.html">Wspomnienie zmarłych</a></li>
             </ul>
         </li>
-
         <li><a href="geografia.html">Geografia rodowa</a></li>
         <li><a href="biblioteczka.html">Biblioteczka</a></li>
         <li><a href="archiwum.html">Archiwum</a></li>
@@ -130,85 +106,48 @@
         <span class="meta-top">Geneza powstania</span>
         <h1>Jak nieformalnie powołano do życia Klan Ładomirskich i Kraińskich</h1>
     </header>
-
     <div class="content-wrapper">
         <section class="story-section">
-            <p>Była polska złota jesień, dzień 28 września roku 1974. W Wielichowie, w Wielkopolsce, na ślubnym kobiercu, w kościele pw. św. Marii Magdaleny, stanęli: Maria Ładomirska, panna lat 24 i Marek Szczepaniak, kawaler lat 26. Po zaślubinach Młodzi oraz zaproszeni goście udali się do Pałacu IUNGu. Tamże wieczorem odbyło się huczne wesele.</p>
-            
+            <p>Była polska złota jesień, dzień 28 września roku 1974. W Wielichowie, w Wielkopolsce, na ślubnym kobiercu, w kościele pw. św. Marii Magdaleny, stanęli: Maria Ładomirska, panna lat 24 i Marek Szczepaniak, kawaler lat 26.</p>
             <div class="image-container">
-                <img src="./img/historia/mloda_para_1974.jpg" alt="Młoda Para Wielichowo 1974" onerror="this.src='https://placehold.co/600x400?text=Młoda+Para+1974'">
+                <img src="./img/historia/mloda_para_1974.jpg" alt="Młoda Para" onerror="this.src='https://placehold.co/600x400?text=Młoda+Para+1974'">
                 <span class="img-label">Młoda para — Wielichowo 1974</span>
             </div>
-
-            <p>Moi rodzice, Jerzy i Marta z Ładomirskich małżonkowie Niewęgłowscy o mały włos na powyższe uroczystości by nie dotarli, gdyż w tym samym dniu w Radochowie, w Kotlinie Kłodzkiej, wraz z dyrektorem Kombinatu Trzebieszowice Jerzym Janickim omawiali możliwość realizacji swojej idei budowy w Radochowie ośrodka hodowli pstrągów. Szczęśliwie jednak rozmowy zakończyły się na tyle wcześnie, aby możliwym stało się pokonanie 250 km dzielących południe Polski z Wielichowem i wzięcie przez nich udziału choćby w weselu.</p>
+            <p>Moi rodzice, Jerzy i Marta z Ładomirskich małżonkowie Niewęgłowscy o mały włos na powyższe uroczystości by nie dotarli...</p>
         </section>
-
-        <section class="story-section">
-            <h2>Dlaczego to istotne?</h2>
-            <p>Otóż tak się złożyło, że ojciec mój, w rodzinie oraz wśród koleżeństwa po fachu rybackim zwany Jackiem, był świeżo po lekturze artykułu o zjazdach rodzinnych organizowanych przez cieszyński ród Guziurów, do którego to należał jego kolega ze studiów. To właśnie ta idea spotkań rodzinnych, na gruncie uprawionym dyskusjami prowadzonymi w trakcie organizacji ślubu oraz w czasie samego wesela, zaowocowała decyzją zorganizowania zjazdu rodziny Ładomirskich.</p>
-            
-            <p>Wieczoru owego nie tylko podjęto decyzję, ale także ukonstytuowano zespół organizacyjny oraz ustalono zasady finansowania. Zorganizowania pierwszego zjazdu podjął się wuj Tomasz Ładomirski zaś „skarbniczką” została praciotka Anna Ładomirska. Aby ułatwić krewnym odłożenie środków na opłaty zjazdowe praciotka Anna niebawem otworzyła subkonto, na które każdy członek rodziny mógł deponować oszczędności, z których później pokrywał koszty swojego udziału.</p>
-        </section>
-
-        <section class="story-section">
-            <h2>Narodziny Klanu</h2>
-            <p>Równo rok później, we wrześniu 1975 roku w Modlinie, odbył się I Zjazd Rodziny Ładomirskich. Przybyli nań potomkowie Zdzisława i Anny z Kraińskich małżonków Ładomirskich. Z odwiedzinami wpadł także prawuj Stanisław Kraiński. Wizyta ta okazała się brzemienna w skutkach.</p>
-            
-            <div class="image-container">
-                <img src="./img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Uczestnicy I Zjazdu" onerror="this.src='https://placehold.co/800x400?text=I+Zjazd+w+Modlinie'">
-                <span class="img-label">Uczestnicy I Zjazdu w Modlinie</span>
-            </div>
-
-            <p>Gdy 5 lat później ruszyły prace nad II zjazdem, potomkowie rodzeństwa Zdzisława oraz Anny zadali pytanie: <em>„A my? My także jesteśmy przecież rodziną!”</em>. Tak więc Zjazd nr II odbył się już w rozszerzonym gronie. W ten też sposób nieformalnie narodził się Klan. Istniejące od lat więzy rodzinne zyskały zewnętrzną formę cyklicznych zjazdów, które od numeru III odbywają się co dwa lata.</p>
-            
-            <p>Przez blisko 40 lat Klan nie wypracował żadnej formalnej struktury. Spontaniczność, wsparta odrobiną zwyczajowego już nadzoru wuja Tomasza Ładomirskiego, okazuje się w zupełności wystarczającą a może i optymalną formułą jego funkcjonowania.</p>
-        </section>
-
-        <div class="author-note">
-            <p><strong>Hubert Niewęgłowski</strong>, Radochów 2012 r.</p>
-        </div>
-
-        <div class="dictionary-box">
-            <h3>Słownik języka polskiego</h3>
-            <div class="dictionary-content">
-                <p><strong>KLAN</strong> — (1) związek osób oparty na pokrewieństwie bądź powinowactwie; (2) grupa osób popierających się, mających wspólne interesy, w jakiś sposób związanych ze sobą.</p>
-            </div>
-        </div>
+        <div class="author-note"><p><strong>Hubert Niewęgłowski</strong>, Radochów 2012 r.</p></div>
     </div>
 </article>
 
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
 <script>
-    // Drawer Logic
     const menuBtn = document.getElementById('menuBtn');
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('overlay');
 
-    menuBtn.addEventListener('click', () => {
+    // Funkcja otwierania/zamykania
+    function toggleMenu() {
         drawer.classList.toggle('open');
         overlay.classList.toggle('active');
+        
+        // Animacja ikony hamburgera
         const spans = menuBtn.querySelectorAll('span');
         if(drawer.classList.contains('open')) {
             spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
             spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(4px, -5px)';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
         } else {
             spans[0].style.transform = 'none';
             spans[1].style.opacity = '1';
             spans[2].style.transform = 'none';
         }
-    });
+    }
 
-    overlay.addEventListener('click', () => {
-        drawer.classList.remove('open');
-        overlay.classList.remove('active');
-        const spans = menuBtn.querySelectorAll('span');
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
-    });
+    menuBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
 
+    // Obsługa podmenu
     function toggleSub(el) {
         el.parentElement.classList.toggle('active');
     }
