@@ -78,7 +78,7 @@
 <div class="overlay" id="overlay"></div>
 
 <header>
-    <span class="header-ornament">Pamięć i Tożsamość</span>
+    <span class="header-ornament">Pielęgnując Pamięć</span>
     <h1>Miejsca Pochówku</h1>
 </header>
 
@@ -119,7 +119,7 @@
 
 <main>
   <span class="s-label">Nekropolie Rodowe</span>
-  <h2 class="s-title">Mapa i Spis Grobów</h2>
+  <h2 class="s-title">Lokalizacja Miejsc Spoczynku</h2>
   
   <div id="map"></div>
 
@@ -132,32 +132,33 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // Pełna lista grobów z lik.info.pl/groby.php
+  // Zaktualizowane, precyzyjne dane geograficzne nekropolii
   const gData = [
-    { p: "Anna i Zdzisław Ładomirscy", l: "Modlin Twierdza", c: [52.4430, 20.6900], i: "Cmentarz Parafialny" },
-    { p: "Jerzy i Marta Niewęgłowscy", l: "Modlin Twierdza", c: [52.4435, 20.6905], i: "Cmentarz Parafialny" },
-    { p: "Wincenty i Maria Kraińscy", l: "Łopuszna", c: [49.4842, 20.1328], i: "Cmentarz przy kościele" },
-    { p: "Stefan i Janina Ładomirscy", l: "Warszawa", c: [52.2530, 20.9780], i: "Stare Powązki" },
-    { p: "Zygmunt i Helena Domańscy", l: "Piwniczna Zdrój", c: [49.4350, 20.7130], i: "Cmentarz Komunalny" },
-    { p: "Krzysztof Ładomirski", l: "Wrocław", c: [51.1340, 17.0670], i: "Cmentarz Św. Wawrzyńca" },
-    { p: "Władysław Kraiński", l: "Przemyśl", c: [49.7830, 22.7670], i: "Cmentarz Główny" },
-    { p: "Jan i Teresa Ładomirscy", l: "Kraków", c: [50.0750, 19.9540], i: "Cmentarz Rakowicki" },
+    { p: "Anna i Zdzisław Ładomirscy", l: "Modlin Twierdza", c: [52.4452, 20.6912], i: "Cmentarz Parafialny" },
+    { p: "Jerzy i Marta Niewęgłowscy", l: "Modlin Twierdza", c: [52.4455, 20.6915], i: "Cmentarz Parafialny" },
+    { p: "Wincenty i Maria Kraińscy", l: "Łopuszna", c: [49.4848, 20.1332], i: "Cmentarz przy kościele" },
+    { p: "Stefan i Janina Ładomirscy", l: "Warszawa", c: [52.2536, 20.9798], i: "Stare Powązki" },
+    { p: "Zygmunt i Helena Domańscy", l: "Piwniczna-Zdrój", c: [49.4385, 20.7162], i: "Cmentarz Komunalny" },
+    { p: "Krzysztof Ładomirski", l: "Wrocław", c: [51.1168, 17.0592], i: "Cmentarz św. Wawrzyńca" },
+    { p: "Władysław Kraiński", l: "Przemyśl", c: [49.7765, 22.7845], i: "Cmentarz Główny" },
+    { p: "Jan i Teresa Ładomirscy", l: "Kraków", c: [50.0754, 19.9558], i: "Cmentarz Rakowicki" },
     { p: "Zofia z Kraińskich Domańska", l: "Lwów", c: [49.8327, 24.0550], i: "Cmentarz Łyczakowski" },
-    { p: "Kazimierz i Maria Ładomirscy", l: "Częstochowa", c: [50.8120, 19.1150], i: "Cmentarz Kule" },
-    { p: "Andrzej Kraiński", l: "Gdańsk", c: [54.3480, 18.6330], i: "Cmentarz Srebrzysko" },
-    { p: "Barbara z Ładomirskich", l: "Poznań", c: [52.4180, 16.9950], i: "Cmentarz Junikowo" },
-    { p: "Tadeusz i Ewa Domańscy", l: "Lublin", c: [51.2400, 22.5500], i: "Cmentarz przy ul. Lipowej" }
+    { p: "Kazimierz i Maria Ładomirscy", l: "Częstochowa", c: [50.8228, 19.1198], i: "Cmentarz Kule" },
+    { p: "Andrzej Kraiński", l: "Gdańsk", c: [54.3732, 18.5835], i: "Cmentarz Srebrzysko" },
+    { p: "Barbara z Ładomirskich", l: "Poznań", c: [52.3872, 16.8285], i: "Cmentarz Junikowo" },
+    { p: "Tadeusz i Ewa Domańscy", l: "Lublin", c: [51.2435, 22.5518], i: "Cmentarz przy ul. Lipowej" }
   ];
 
-  const themeColor = "#7a6548"; // Jeden spójny kolor sepia dla wszystkich elementów
+  const themeColor = "#7a6548"; // Spójny kolor sepia dla wszystkich elementów
 
+  // Inicjalizacja mapy
   const map = L.map('map', { scrollWheelZoom: false }).setView([52.1, 19.4], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
   const container = document.getElementById('g-container');
   
   gData.forEach((g) => {
-    // Marker na mapie (bez kolorów klanowych)
+    // Marker na mapie
     const icon = L.divIcon({
       className: 'custom-icon',
       html: `<div style="background:${themeColor}; width:14px; height:14px; border-radius:50%; border:2px solid white; box-shadow:0 2px 4px rgba(0,0,0,0.3);"></div>`,
@@ -167,14 +168,18 @@
     L.marker(g.c, {icon}).addTo(map)
       .bindPopup(`<div style="font-family:'Jost',sans-serif; padding:5px"><strong>${g.p}</strong><br>${g.l}<br><small>${g.i}</small></div>`);
 
-    // Karta w spisie (bez kolorów klanowych)
+    // Karta w spisie
     container.innerHTML += `
-      <div class="g-card" onclick="map.flyTo([${g.c}], 14); window.scrollTo({top: 0, behavior: 'smooth'});">
+      <div class="g-card" onclick="map.flyTo([${g.c}], 15); window.scrollTo({top: 0, behavior: 'smooth'});">
         <h3>${g.p}</h3>
         <div class="cemetery">${g.l}, ${g.i}</div>
         <div class="btn-map">Pokaż na mapie →</div>
       </div>`;
   });
+
+  // Automatyczne dopasowanie widoku mapy do wszystkich punktów
+  const group = new L.featureGroup(gData.map(g => L.marker(g.c)));
+  map.fitBounds(group.getBounds().pad(0.1));
 
   // Obsługa UI (Drawer i Overlay)
   const btn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
