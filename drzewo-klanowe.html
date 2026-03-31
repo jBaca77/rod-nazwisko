@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Drzewo Klanowe | Archiwum L&K</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
 
     <style>
         :root {
@@ -17,104 +19,122 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); overflow: hidden; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); overflow: hidden; touch-action: none; }
 
         /* ── NAV ── */
-        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; }
+        nav { background-color: var(--ink); height: 60px; display: flex; align-items: center; z-index: 1000; position: relative; }
+        .nav-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 20px; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.1rem; letter-spacing: 2px; }
-        .nav-back-link { display: flex; align-items: center; gap: 8px; color: var(--gold-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-back { color: var(--gold-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 5px; }
 
-        /* ── LAYOUT ── */
-        .page-wrapper {
-            display: flex;
-            flex-direction: column;
-            height: 100vh; /* Pełna wysokość ekranu */
-        }
-
-        header { padding: 20px 20px 10px; text-align: center; flex-shrink: 0; }
-        header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; }
-        .s-line { width: 40px; height: 1px; background: var(--gold-light); margin: 10px auto; opacity: 0.5; }
-
-        /* ── VIEWER (Główny obszar drzewa) ── */
-        #tree-viewer {
-            flex-grow: 1; /* Zajmuje całą dostępną przestrzeń */
-            background-color: var(--cream);
-            border-top: 1px solid var(--sepia-pale);
-            border-bottom: 1px solid var(--sepia-pale);
+        /* ── VIEWER CONTAINER ── */
+        #viewer-container {
+            width: 100vw;
+            height: calc(100vh - 120px); /* Odliczamy nav i footer */
+            background: var(--cream);
+            overflow: hidden;
             position: relative;
+            cursor: grab;
+        }
+        #viewer-container:active { cursor: grabbing; }
+
+        /* Canvas z PDF */
+        #pdf-canvas {
+            display: block;
+            transform-origin: 0 0;
         }
 
-        /* ── FOOTER/ACTION ── */
-        .footer-actions {
-            padding: 15px;
-            text-align: center;
-            background: var(--warm-white);
-            flex-shrink: 0;
+        /* ── CONTROLS ── */
+        .controls {
+            position: absolute; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100;
         }
-        .btn-download {
-            display: inline-flex; align-items: center; padding: 10px 20px;
-            background-color: var(--ink); color: var(--gold-light);
-            text-decoration: none; font-size: 0.7rem; text-transform: uppercase;
-            letter-spacing: 1px; transition: 0.3s;
+        .btn-zoom {
+            width: 50px; height: 50px; background: var(--ink); color: var(--gold-light); border: none; border-radius: 50%; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
+
+        /* ── FOOTER ── */
+        footer { height: 60px; background: var(--warm-white); display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--sepia-pale); }
+        .btn-download { color: var(--ink); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; border: 1px solid var(--ink); padding: 8px 15px; transition: 0.3s; }
+        .btn-download:hover { background: var(--ink); color: var(--gold-light); }
+
+        #status { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--sepia); font-style: italic; }
     </style>
 </head>
 <body>
 
-<div class="page-wrapper">
-    <nav>
-        <div class="nav-inner">
-            <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-            <a href="genealogia.html" class="nav-back-link">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                Wstecz
-            </a>
-        </div>
-    </nav>
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="genealogia.html" class="nav-back">Wstecz</a>
+    </div>
+</nav>
 
-    <header>
-        <h1>Drzewo Klanowe</h1>
-        <div class="s-line"></div>
-    </header>
+<div id="viewer-container">
+    <div id="status">Wczytywanie dokumentu PDF...</div>
+    <div id="panzoom-element">
+        <canvas id="pdf-canvas"></canvas>
+    </div>
     
-    <div id="tree-viewer"></div>
-
-    <div class="footer-actions">
-        <a href="img/Dokumenty/drzewo_kol_20_08_2024.pdf" download class="btn-download">
-            Pobierz pełny PDF
-        </a>
+    <div class="controls">
+        <button class="btn-zoom" id="zin">+</button>
+        <button class="btn-zoom" id="zout">−</button>
     </div>
 </div>
 
+<footer>
+    <a href="img/Dokumenty/drzewo_kol_20_08_2024.pdf" download class="btn-download">Pobierz PDF do druku</a>
+</footer>
+
 <script>
-    // Inicjalizacja profesjonalnego silnika do przeglądania drzewa
-    var viewer = OpenSeadragon({
-        id: "tree-viewer",
-        prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/images/",
-        tileSources: {
-            type: 'image',
-            url: 'img/Dokumenty/drzewo_kol_20_08_2024_strona_1.jpeg'
-        },
-        visibilityRatio: 1.0,
-        constrainDuringPan: true,
-        defaultZoomLevel: 0,
-        minZoomLevel: 0,
-        maxZoomLevel: 10,
-        autoHideControls: true,
-        showNavigationControl: false, // Ukrywamy przyciski, bo gesty starczą
-        gestureSettingsMouse: {
-            scrollToZoom: true,
-            clickToZoom: true,
-            dblClickToZoom: true,
-            dragToPan: true
-        },
-        gestureSettingsTouch: {
-            pinchToZoom: true,
-            dragToPan: true,
-            dblClickToZoom: true
+    const url = 'img/Dokumenty/drzewo_kol_20_08_2024.pdf';
+    const canvas = document.getElementById('pdf-canvas');
+    const ctx = canvas.getContext('2d');
+    const status = document.getElementById('status');
+    const elem = document.getElementById('panzoom-element');
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    async function initPDF() {
+        try {
+            const pdf = await pdfjsLib.getDocument(url).promise;
+            const page = await pdf.getPage(1);
+
+            // KLUCZ: Wysoki współczynnik skali (4.0) gwarantuje ostrość przy dużym zoomie
+            const viewport = page.getViewport({ scale: 4.0 });
+            
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+            status.style.display = 'none';
+
+            // Inicjalizacja Panzoom (Gesty + Mysz)
+            const panzoom = Panzoom(elem, {
+                maxScale: 10,
+                minScale: 0.05,
+                contain: 'outside',
+                startScale: 0.2 // Startowy widok oddalony
+            });
+
+            // Obsługa kółka myszy
+            document.getElementById('viewer-container').addEventListener('wheel', panzoom.zoomWithWheel);
+
+            // Obsługa przycisków
+            document.getElementById('zin').addEventListener('click', panzoom.zoomIn);
+            document.getElementById('zout').addEventListener('click', panzoom.zoomOut);
+
+            // Centrowanie na starcie
+            setTimeout(() => {
+                panzoom.pan(0, 0);
+            }, 100);
+
+        } catch (e) {
+            status.innerText = "Błąd ładowania pliku PDF. Sprawdź ścieżkę.";
+            console.error(e);
         }
-    });
+    }
+
+    initPDF();
 </script>
 
 </body>
