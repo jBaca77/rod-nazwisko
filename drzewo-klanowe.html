@@ -6,6 +6,7 @@
     <title>Drzewo Klanowe | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
@@ -49,7 +50,7 @@
         }
         .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 30px auto; opacity: 0.6; }
 
-        /* ── RAMKA DRZEWA ── */
+        /* ── KONTENER DRZEWA ── */
         .tree-container {
             background: var(--cream);
             border: 1px solid var(--sepia-pale);
@@ -65,13 +66,19 @@
 
         .viewer-box {
             position: relative;
-            height: 80vh;
+            height: 75vh;
             width: 100%;
             background: white;
             z-index: 1;
+            overflow: hidden;
+            border-radius: 2px;
         }
 
-        iframe { width: 100%; height: 100%; border: none; }
+        .tree-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
 
         /* ── PRZYCISK POBIERANIA ── */
         .action-area { text-align: center; padding-bottom: 40px; }
@@ -92,7 +99,7 @@
         @media (max-width: 768px) {
             .nav-inner { padding: 12px 20px; }
             .nav-logo { font-size: 1rem; padding-left: 15px; }
-            .viewer-box { height: 65vh; }
+            .viewer-box { height: 60vh; }
             .intro-section h1 { font-size: 2.2rem; }
             main { padding: 40px 15px; }
         }
@@ -127,14 +134,14 @@
     <div class="tree-container">
         <div class="viewer-box">
             <iframe 
-                src="https://drive.google.com/file/d/1dcD-e-MPsT3NgZnzt3hoMpuGtJsj2JLu/preview" 
-                allow="autoplay">
+                class="tree-iframe" 
+                src="https://docs.google.com/viewer?url=https://github.com/jBaca77/rod-nazwisko/raw/main/img/Dokumenty/drzewo_kol_20_08_2024.pdf&embedded=true">
             </iframe>
         </div>
     </div>
 
     <div class="action-area">
-        <a href="https://drive.google.com/file/d/1dcD-e-MPsT3NgZnzt3hoMpuGtJsj2JLu/view?usp=sharing" target="_blank" class="btn-download">
+        <a href="./img/Dokumenty/drzewo_kol_20_08_2024.pdf" download class="btn-download">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>
