@@ -3,163 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pamięć | Archiwum L&K</title>
+    <title>Pamięć | Kronika Zjazdów</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-            --ink: #1e1a14; --gold: #9b7d4a; --gold-light: #c8a96e; 
-            --sepia: #7a6548; --sepia-light: #b09a7e; --line: rgba(122, 101, 72, 0.2);
-            --green-dark: #2c3e2d; [span_2](start_span)/* Kolor z Twojej specyfikacji[span_2](end_span) */
+            --cream: #f8f4ee;
+            --parchment: #ede8df;
+            --warm-white: #fdfaf6;
+            --ink: #1e1a14;
+            --sepia: #7a6548;
+            --gold: #9b7d4a;
+            --pline: rgba(122, 101, 72, 0.2);
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; }
-
-        /* ── NAV ── */
-        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
-        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; border-right: 1px solid rgba(200, 169, 110, 0.3); padding-right: 20px; }
-        .nav-back-link { display: flex; align-items: center; gap: 8px; color: var(--gold-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
-        .nav-back-link:hover { color: var(--cream); }
-
-        [span_3](start_span)/* ── HEADER Z EFEKTEM ZIELENI[span_3](end_span) ── */
-        .hero-header { 
-            background-color: var(--green-dark); 
-            padding: 100px 24px 80px; 
-            text-align: center; 
-            position: relative; 
-            overflow: hidden; 
-            color: var(--cream);
-        }
-
-        [span_4](start_span)/* Tekstura linii z pliku Pages[span_4](end_span) */
-        .hero-header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.025) 1px);
-            pointer-events: none;
-        }
-
-        .s-label { 
-            font-size: .7rem; 
-            letter-spacing: .4em; 
-            text-transform: uppercase; 
-            color: var(--gold-light); 
-            display: block; 
-            margin-bottom: 15px; 
-            position: relative;
-        }
-
-        .hero-header h1 { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: clamp(2.6rem, 6vw, 4.2rem); 
-            font-weight: 300; 
-            position: relative;
-        }
-
-        .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 30px auto; opacity: 0.6; position: relative; }
-
-        /* ── MEMORY GRID ── */
-        main { max-width: 1200px; margin: -40px auto 80px; padding: 0 24px; position: relative; z-index: 10; }
-        
-        .memory-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 40px; 
-        }
-        
-        .memory-card { 
-            position: relative; 
-            background: var(--cream); 
-            padding: 60px 40px; 
-            text-decoration: none; 
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--cream);
             color: var(--ink);
-            border: 1px solid var(--parchment); 
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            overflow: hidden; 
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        header {
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 80px 24px;
+            border-bottom: 1px solid var(--pline);
         }
 
-        .memory-card::after { 
-            content: ""; 
-            position: absolute; 
-            inset: 10px; 
-            border: 1px solid var(--line); 
-            pointer-events: none; 
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.6rem, 6vw, 4.8rem);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.35em;
+            margin-bottom: 20px;
         }
 
-        .memory-card:hover { 
-            transform: translateY(-8px); 
-            border-color: var(--gold-light); 
-            background: white; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+        .memory-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
         }
 
-        .card-icon { color: var(--gold); margin-bottom: 25px; display: block; transition: 0.5s; }
-        .memory-card:hover .card-icon { transform: scale(1.1); color: var(--green-dark); }
-        
-        .memory-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 15px; }
-        .memory-card p { font-size: 0.95rem; color: var(--sepia); font-style: italic; }
+        .memory-box {
+            background-color: var(--parchment);
+            border: 1px solid var(--pline);
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--ink);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 250px;
+        }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.75rem; letter-spacing: 1px; }
+        .memory-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
 
-        @media (max-width: 768px) {
-            .hero-header { padding: 80px 20px 100px; }
-            main { margin-top: -20px; }
+        .memory-box h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--sepia);
+        }
+
+        .memory-box p {
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            color: var(--sepia);
+            border-top: 1px solid var(--pline);
         }
     </style>
 </head>
 <body>
 
-<nav>
-    <div class="nav-inner">
-        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-        <a href="index.html" class="nav-back-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Wstecz
-        </a>
-    </div>
-</nav>
+    <header>
+        <h1>Pamięć</h1>
+        <p>Pielęgnując historię tych, którzy odeszli</p>
+    </header>
 
-<header class="hero-header">
-    <span class="s-label">Pielęgnując Tradycję</span>
-    <h1>Pamięć i Historia</h1>
-    <div class="s-line"></div>
-</header>
-
-<main>
-    <div class="memory-grid">
-        <a href="miejsca-pochowku-O.html" class="memory-card">
-            <span class="card-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                    <path d="M12 22V8M5 12H19M12 2L12 8M9 22H15"/>
-                </svg>
-            </span>
+    <main class="memory-container">
+        <a href="miejsca-pochowku.html" class="memory-box">
             <h2>Miejsca Spoczynku</h2>
-            <p>Mapa i rejestr miejsc wiecznego spoczynku członków naszego klanu.</p>
+            [span_1](start_span)<p>Lokalizacje grobów i informacje o nekropoliach członków Rodziny[span_1](end_span)</p>
         </a>
 
-        <a href="wspomnienie-zmarly5.html" class="memory-card">
-            <span class="card-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                </svg>
-            </span>
+        <a href="wspomnienia-zmarlych.html" class="memory-box">
             <h2>Wspomnienia Zmarłych</h2>
-            <p>Biografie, fotografie i świadectwa o tych, którzy odeszli, lecz pozostają w pamięci rodu.</p>
+            [span_2](start_span)<p>Biografie, fotografie i osobiste historie tych, którzy pozostają w naszej pamięci[span_2](end_span)</p>
         </a>
-    </div>
-</main>
+    </main>
 
-<footer>
-    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
-</footer>
+    <footer>
+        KLAN LADOMIRSKICH I KRAIŃSKICH | [span_3](start_span)1975 – 2026[span_3](end_span)
+    </footer>
 
 </body>
 </html>
