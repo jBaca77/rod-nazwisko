@@ -102,27 +102,15 @@
 <aside class="drawer" id="drawer">
   <ul class="drawer-links">
     <li><a href="index.html">Strona Główna</a></li>
+    <li><a href="aktualnosci.html">Aktualności</a></li>
     <li><a href="historia.html">Historia Klanu</a></li>
-    <li class="has-submenu">
-      <a onclick="toggleSub(this)">Genealogia</a>
-      <ul class="submenu">
-        <li><a href="drzewo-klanowe.html">Drzewo klanowe</a></li>
-        <li><a href="wywody.html">Wywody przodków</a></li>
-        <li><a href="drzewo-krainskich.html">Drzewo Kraińskich</a></li>
-        <li><a href="drzewo-ladomirskich.html">Drzewo Ładomirskich</a></li>
-      </ul>
-    </li>
-    <li><a href="biografie.html">Biografie</a></li>
-    <li class="has-submenu">
-      <a onclick="toggleSub(this)">Pamięć i Groby</a>
-      <ul class="submenu">
-        <li><a href="miejsca-pochowku.html">Miejsca pochówku</a></li>
-        <li><a href="wspomnienie-zmarlych.html">Wspomnienie zmarłych</a></li>
-      </ul>
-    </li>
-    <li><a href="geografia.html">Geografia rodowa</a></li>
-    <li><a href="biblioteczka.html">Biblioteczka</a></li>
-    <li><a href="archiwum.html">Archiwum</a></li>
+    <li><a href="genealogia/genealogia.html">Genealogia</a><li>
+    <li><a href="zjazdy/zjazdy.html">Kronika zajazdów</a></li>
+    <li><a href="slownik-biogr/biografie.html">Biografie</a></li>
+    <li><a href="pamiec.html">Pamięć i groby</a></li>
+    <li><a href="slownik-geo/geografia.html">Geografia rodowa</a></li>
+    <li><a href="biblioteka/biblioteczka.html">Biblioteczka</a></li>
+    <li><a href="archiwym/archiwum.html">Archiwum</a></li>
   </ul>
 </aside>
 
@@ -192,7 +180,7 @@
       .bindPopup(`<div style="font-family:'Jost',sans-serif; padding:5px"><strong>${z.n} Zjazd Rodzinny</strong><br>${z.p}, ${z.d}</div>`);
 
     container.innerHTML += `
-      <a href="zjazd${i+1}.html" class="z-card">
+      <a href="zjazdy/zjazd${i+1}.html" class="z-card">
         <div class="meta" style="color:${color}">${z.d} — ${z.g}</div>
         <h3>${z.n} Zjazd Rodzinny</h3>
         <div class="place">${z.p}</div>
