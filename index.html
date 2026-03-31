@@ -33,19 +33,19 @@
   .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 1100; }
   .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
 
-  .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 60px 30px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
+  .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
   .drawer.open { right: 0; }
   .drawer-links { list-style: none; }
-  .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; }
-  .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; display: block; padding: 10px 0; cursor: pointer; }
+  .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+  .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; display: block; cursor: pointer; }
   .drawer-links a:hover { color: var(--gold-light); padding-left: 5px; }
 
-  /* Submenu Logic */
-  .has-submenu > a::after { content: ' +'; color: var(--gold); font-size: 0.9rem; }
-  .has-submenu.active > a::after { content: ' −'; }
-  .submenu { max-height: 0; overflow: hidden; transition: 0.3s ease-out; padding-left: 15px; }
-  .has-submenu.active .submenu { max-height: 500px; margin-top: 5px; padding-bottom: 10px; }
-  .submenu a { text-transform: none; letter-spacing: 1px; font-size: 0.7rem; color: var(--sepia-light); border: none; padding: 5px 0; }
+  /* Style dla podmenu w pasku bocznym */
+  .has-submenu > a::after { content: ' ▾'; font-size: 0.7rem; color: var(--gold); }
+  .submenu { display: none; list-style: none; padding-left: 15px; margin-top: 10px; }
+  .submenu li { border: none; margin-bottom: 10px; padding-bottom: 0; }
+  .submenu a { font-size: 0.7rem; color: var(--sepia-light); text-transform: none; }
+  .has-submenu.active .submenu { display: block; }
   
   .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
   .overlay.active { opacity: 1; pointer-events: auto; }
@@ -126,32 +126,27 @@
   <ul class="drawer-links">
     <li><a href="index.html">Strona Główna</a></li>
     <li><a href="historia.html">Historia Klanu</a></li>
-    
     <li class="has-submenu">
       <a onclick="toggleSub(this)">Genealogia</a>
       <ul class="submenu">
-        <li><a href="drzewo-klanowe.html">Drzewo Klanowe</a></li>
-        <li><a href="wywody.html">Wywody Przodków</a></li>
+        <li><a href="drzewo-klanowe.html">Drzewo klanowe</a></li>
+        <li><a href="wywody.html">Wywody przodków</a></li>
         <li><a href="drzewo-krainskich.html">Drzewo Kraińskich</a></li>
         <li><a href="drzewo-ladomirskich.html">Drzewo Ładomirskich</a></li>
       </ul>
     </li>
-
-    <li><a href="zjazdy.html">Kronika Zjazdów</a></li>
+    <li><a href="zjazdy.html">Kronika zajazdów</a></li>
     <li><a href="biografie.html">Biografie</a></li>
-
     <li class="has-submenu">
-      <a onclick="toggleSub(this)">Pamięć i Groby</a>
+      <a onclick="toggleSub(this)">Pamięć i groby</a>
       <ul class="submenu">
-        <li><a href="miejsca-pochowku.html">Miejsca Pochówku</a></li>
-        <li><a href="wspomnienia-zmarlych.html">Wspomnienie Zmarłych</a></li>
+        <li><a href="miejsca-pochowku.html">Miejsca pochówku</a></li>
+        <li><a href="wspomnienie-zmarlych.html">Wspomnienie zmarłych</a></li>
       </ul>
     </li>
-
-    <li><a href="geografia.html">Geografia Rodowa</a></li>
+    <li><a href="geografia.html">Geografia rodowa</a></li>
     <li><a href="biblioteczka.html">Biblioteczka</a></li>
     <li><a href="archiwum.html">Archiwum</a></li>
-    <li><a href="aktualnosci.html">Aktualności</a></li>
     <li><a href="#kontakt" onclick="closeAndScroll()">Kontakt</a></li>
   </ul>
 </aside>
@@ -171,10 +166,10 @@
     <h2 class="s-title">Działy strony</h2>
     <div class="s-line"></div>
     <div class="grid-nav">
-      <a href="aktualnosci.html" class="nav-card" style="border-color: var(--gold);">
-        <div class="icon">🔔</div>
+      <a href="aktualnosci.html" class="nav-card">
+        <div class="icon">📰</div>
         <h3>Aktualności</h3>
-        <p>Najnowsze wydarzenia, ogłoszenia i informacje o nadchodzących zjazdach.</p>
+        <p>Bieżące informacje, zapowiedzi zjazdów i najnowsze wpisy w archiwum.</p>
       </a>
       <a href="historia.html" class="nav-card">
         <div class="icon">⚜️</div>
@@ -190,6 +185,11 @@
         <div class="icon">🏰</div>
         <h3>Zjazdy Rodzinne</h3>
         <p>Kronika wszystkich XXIV spotkań klanowych wraz z pamiątkowymi zdjęciami.</p>
+      </a>
+      <a href="pamiec.html" class="nav-card">
+        <div class="icon">🕯️</div>
+        <h3>Pamięć</h3>
+        <p>Wspomnienie o tych, którzy odeszli. Wykaz miejsc spoczynku członków klanu.</p>
       </a>
     </div>
   </section>
@@ -226,7 +226,7 @@
   </section>
 
   <section id="konto">
-    <span class="s-label">Finanse</span>
+    <span class="s-label">Aktualności</span>
     <h2 class="s-title">Konto Zjazdowe</h2>
     <div class="s-line"></div>
     <div class="news-box">
@@ -274,6 +274,7 @@
 </footer>
 
 <script>
+  // Drawer Logic
   const menuBtn = document.getElementById('menuBtn');
   const drawer = document.getElementById('drawer');
   const overlay = document.getElementById('overlay');
@@ -293,21 +294,26 @@
     }
   }
 
+  menuBtn.addEventListener('click', toggleSidebar);
+  overlay.addEventListener('click', toggleSidebar);
+
+  // Funkcja rozwijania podmenu w pasku bocznym
   function toggleSub(el) {
     el.parentElement.classList.toggle('active');
   }
 
+  // Funkcja dla kontaktu: zamknij pasek i przewiń
   function closeAndScroll() {
-    toggleSidebar();
-    // Płynny scroll do sekcji kontakt po zamknięciu paska
-    setTimeout(() => {
-        document.getElementById('kontakt').scrollIntoView({ behavior: 'smooth' });
-    }, 400);
+    drawer.classList.remove('open');
+    overlay.classList.remove('active');
+    const spans = menuBtn.querySelectorAll('span');
+    spans[0].style.transform = 'none';
+    spans[1].style.opacity = '1';
+    spans[2].style.transform = 'none';
+    // Przewijanie zostanie wykonane przez domyślne działanie linku #kontakt
   }
 
-  menuBtn.addEventListener('click', toggleSidebar);
-  overlay.addEventListener('click', toggleSidebar);
-
+  // RODO Accordion
   const rodoBtn = document.getElementById('rodoBtn');
   const rodoContent = document.getElementById('rodoContent');
   const rodoIcon = document.getElementById('rodoIcon');
