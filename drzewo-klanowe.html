@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
     <style>
         :root {
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
@@ -18,7 +20,7 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; }
 
-        /* ── NAV (Układ ze strzałką w lewo przed napisem Wstecz po prawej) ── */
+        /* ── NAV ── */
         nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         .nav-inner { 
             max-width: 1200px; margin: 0 auto; display: flex; 
@@ -29,7 +31,6 @@
         .nav-logo { 
             font-family: 'Cormorant Garamond', serif; color: var(--gold-light); 
             text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; font-weight: 400;
-            /* Obramowanie z prawej strony loga dla oddzielenia */
             border-right: 1px solid rgba(200, 169, 110, 0.3); padding-right: 20px;
         }
 
@@ -53,6 +54,10 @@
             max-width: 700px; margin: 0 auto; font-family: 'Cormorant Garamond', serif; 
             font-style: italic; font-size: 1.3rem; color: var(--sepia); line-height: 1.6;
         }
+        .intro-author { 
+            display: block; font-size: 0.9rem; text-transform: uppercase; 
+            letter-spacing: 1px; color: var(--sepia-light); margin-top: 10px; 
+        }
         .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 30px auto; opacity: 0.6; }
 
         /* ── KONTENER DRZEWA ── */
@@ -73,17 +78,50 @@
             position: relative;
             height: 75vh;
             width: 100%;
-            background: white;
+            background: #525659;
             z-index: 1;
-            overflow: hidden;
+            overflow: auto; 
             border-radius: 2px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            cursor: grab;
+        }
+        .viewer-box:active { cursor: grabbing; }
+
+        #pdf-canvas {
+            display: block;
+            margin: 0;
+            transform-origin: top left;
         }
 
-        .tree-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        /* Przyciski sterowania */
+        .zoom-controls {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
         }
+
+        .zoom-btn {
+            background: var(--ink);
+            color: var(--gold-light);
+            border: 1px solid var(--gold);
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            border-radius: 2px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .zoom-btn:hover { background: var(--gold); color: white; }
 
         /* ── PRZYCISK POBIERANIA ── */
         .action-area { text-align: center; padding-bottom: 40px; }
@@ -102,12 +140,8 @@
         footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.75rem; letter-spacing: 1px; }
 
         @media (max-width: 768px) {
-            .nav-inner { padding: 12px 20px; }
-            .nav-logo { font-size: 1rem; padding-right: 15px; }
-            .nav-back-link { font-size: 0.65rem; }
             .viewer-box { height: 60vh; }
-            .intro-section h1 { font-size: 2.2rem; }
-            main { padding: 40px 15px; }
+            .zoom-controls { bottom: 20px; right: 20px; }
         }
     </style>
 </head>
@@ -116,7 +150,6 @@
 <nav>
     <div class="nav-inner">
         <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-        
         <a href="genealogia.html" class="nav-back-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             Wstecz
@@ -129,8 +162,8 @@
         <span class="s-label">Księgi i Rodowody</span>
         <h1>Drzewo Klanowe</h1>
         <p class="intro-description">
-            „Rodzina to nie tylko krew. To pamięć o tych, którzy byli przed nami, <br>
-            i fundament dla tych, którzy przyjdą po nas.”
+            „Rodzina to nie tylko krew. To pamięć o tych, którzy byli przed nami, i fundament dla tych, którzy przyjdą po nas.”
+            <span class="intro-author">Autor Nieznany</span>
         </p>
         <div class="s-line"></div>
         <p style="font-size: 0.85rem; color: var(--sepia-light); text-transform: uppercase; letter-spacing: 1px;">
@@ -139,11 +172,12 @@
     </section>
     
     <div class="tree-container">
-        <div class="viewer-box">
-            <iframe 
-                class="tree-iframe" 
-                src="https://docs.google.com/viewer?url=https://github.com/jBaca77/rod-nazwisko/raw/main/img/Dokumenty/drzewo_kol_20_08_2024.pdf&embedded=true">
-            </iframe>
+        <div class="viewer-box" id="viewer-container">
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="changeZoom(0.25)" title="Powiększ">+</button>
+                <button class="zoom-btn" onclick="changeZoom(-0.25)" title="Pomniejsz">−</button>
+            </div>
+            <canvas id="pdf-canvas"></canvas>
         </div>
     </div>
 
@@ -162,6 +196,78 @@
 <footer>
     <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
 </footer>
+
+<script>
+    // Ścieżka do Twojego pliku PDF
+    const url = './img/Dokumenty/drzewo_kol_20_08_2024.pdf';
+
+    let pdfDoc = null,
+        pageNum = 1,
+        scale = 1.2, 
+        canvas = document.getElementById('pdf-canvas'),
+        ctx = canvas.getContext('2d'),
+        container = document.getElementById('viewer-container');
+
+    // Ustawienie workera dla PDF.js
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    function renderPage(num) {
+        pdfDoc.getPage(num).then(page => {
+            const viewport = page.getViewport({ scale: scale });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            
+            page.render(renderContext);
+        });
+    }
+
+    function changeZoom(delta) {
+        scale += delta;
+        if (scale < 0.3) scale = 0.3;
+        if (scale > 4.0) scale = 4.0;
+        renderPage(pageNum);
+    }
+
+    // Ładowanie PDF z obsługą błędów
+    pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+        pdfDoc = pdfDoc_;
+        renderPage(pageNum);
+    }).catch(err => {
+        console.error('Błąd ładowania PDF:', err);
+        container.innerHTML = '<div style="color:white; padding:40px; text-align:center; width:100%;">Nie udało się załadować pliku PDF. Sprawdź czy plik znajduje się w: /img/Dokumenty/drzewo_kol_20_08_2024.pdf</div>';
+    });
+
+    // Panning - przesuwanie myszką
+    let isMouseDown = false;
+    let startX, startY, scrollLeft, scrollTop;
+
+    container.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        startX = e.pageX - container.offsetLeft;
+        startY = e.pageY - container.offsetTop;
+        scrollLeft = container.scrollLeft;
+        scrollTop = container.scrollTop;
+    });
+
+    container.addEventListener('mouseleave', () => { isMouseDown = false; });
+    container.addEventListener('mouseup', () => { isMouseDown = false; });
+
+    container.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const y = e.pageY - container.offsetTop;
+        const walkX = (x - startX) * 1.5; 
+        const walkY = (y - startY) * 1.5;
+        container.scrollLeft = scrollLeft - walkX;
+        container.scrollTop = scrollTop - walkY;
+    });
+</script>
 
 </body>
 </html>
