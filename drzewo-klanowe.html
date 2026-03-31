@@ -21,7 +21,7 @@
         body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); overflow-x: hidden; }
 
         /* ── NAV ── */
-        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; }
+        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         .nav-back-link { display: flex; align-items: center; gap: 10px; color: var(--gold-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; border-left: 1px solid rgba(200, 169, 110, 0.3); padding-left: 20px; }
@@ -33,17 +33,20 @@
 
         /* ── VIEWPORT ── */
         .tree-viewport {
-            width: 100%; height: 70vh; background: var(--cream);
+            width: 100%; height: 75vh; background: var(--cream);
             border: 1px solid var(--sepia-pale); position: relative;
             overflow: hidden; cursor: grab; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex; align-items: center; justify-content: center;
         }
         .tree-viewport:active { cursor: grabbing; }
 
-        /* Tu renderujemy PDF */
-        #pdf-canvas { display: block; margin: 0 auto; }
+        #pdf-canvas { max-width: none; }
 
         .controls { position: absolute; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 10; }
         .zoom-btn { width: 44px; height: 44px; background: var(--ink); color: var(--gold-light); border: none; border-radius: 50%; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* Stan ładowania */
+        #loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--sepia); font-style: italic; }
 
         /* ── ACTION ── */
         .action-area { margin-top: 30px; }
@@ -70,6 +73,7 @@
     </section>
     
     <div class="tree-viewport" id="viewport">
+        <div id="loader">Wczytywanie drzewa genealogicznego...</div>
         <div id="panzoom-element">
             <canvas id="pdf-canvas"></canvas>
         </div>
@@ -85,19 +89,25 @@
 </main>
 
 <script>
-    // Konfiguracja PDF.js
-    const url = 'img/Dokumenty/drzewo_kol_20_08_2024.pdf';
+    // Ścieżka do pliku
+    const pdfUrl = 'img/Dokumenty/drzewo_kol_20_08_2024.pdf';
+    
     const canvas = document.getElementById('pdf-canvas');
     const ctx = canvas.getContext('2d');
     const elem = document.getElementById('panzoom-element');
+    const loader = document.getElementById('loader');
 
+    // Inicjalizacja PDF.js Worker
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-    // Wczytywanie PDF
-    pdfjsLib.getDocument(url).promise.then(pdf => {
-        pdf.getPage(1).then(page => {
-            // Renderujemy w bardzo wysokiej skali bazowej, aby przybliżenie było ostre
-            const scale = 4; 
+    async function loadTree() {
+        try {
+            const loadingTask = pdfjsLib.getDocument(pdfUrl);
+            const pdf = await loadingTask.promise;
+            const page = await pdf.getPage(1);
+
+            // Ustawienie wysokiej skali dla ostrości (3-4 jest optymalne)
+            const scale = 3.5; 
             const viewport = page.getViewport({ scale });
 
             canvas.height = viewport.height;
@@ -108,35 +118,42 @@
                 viewport: viewport
             };
 
-            page.render(renderContext).promise.then(() => {
-                // Po wyrenderowaniu PDF, inicjujemy Panzoom
-                const panzoom = Panzoom(elem, {
-                    maxScale: 10,
-                    minScale: 0.1,
-                    contain: 'outside',
-                    cursor: 'move'
-                });
+            await page.render(renderContext).promise;
+            
+            // Ukryj loader
+            loader.style.display = 'none';
 
-                // Dopasuj początkowy widok
-                const parent = elem.parentElement;
-                const startScale = parent.clientHeight / canvas.height;
-                panzoom.zoom(startScale, { silent: true });
-                panzoom.pan(0, 0);
-
-                // Obsługa zdarzeń
-                parent.addEventListener('wheel', panzoom.zoomWithWheel);
-                document.getElementById('zoom-in').addEventListener('click', panzoom.zoomIn);
-                document.getElementById('zoom-out').addEventListener('click', panzoom.zoomOut);
-                
-                parent.addEventListener('dblclick', () => {
-                    panzoom.getScale() > 1 ? panzoom.reset() : panzoom.zoomIn();
-                });
+            // Inicjalizacja Panzoom po wyrenderowaniu
+            const panzoom = Panzoom(elem, {
+                maxScale: 10,
+                minScale: 0.1,
+                contain: 'outside',
+                cursor: 'move',
+                step: 0.3
             });
-        });
-    }).catch(err => {
-        console.error("Błąd ładowania PDF: ", err);
-        alert("Nie udało się załadować pliku PDF. Sprawdź czy plik znajduje się w img/Dokumenty/drzewo_kol_20_08_2024.pdf");
-    });
+
+            // Początkowe dopasowanie widoku do wysokości kontenera
+            const parent = elem.parentElement;
+            const initialScale = parent.clientHeight / canvas.height;
+            panzoom.zoom(initialScale, { silent: true });
+            panzoom.pan(0, 0);
+
+            // Obsługa interakcji
+            parent.addEventListener('wheel', panzoom.zoomWithWheel);
+            document.getElementById('zoom-in').addEventListener('click', panzoom.zoomIn);
+            document.getElementById('zoom-out').addEventListener('click', panzoom.zoomOut);
+            
+            parent.addEventListener('dblclick', (e) => {
+                panzoom.zoomIn();
+            });
+
+        } catch (error) {
+            console.error("Błąd ładowania PDF:", error);
+            loader.innerHTML = "Błąd wczytywania pliku. <br><small>Upewnij się, że plik znajduje się w: img/Dokumenty/drzewo_kol_20_08_2024.pdf</small>";
+        }
+    }
+
+    loadTree();
 </script>
 
 </body>
