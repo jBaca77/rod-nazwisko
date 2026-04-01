@@ -54,27 +54,60 @@
 
         .gen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
-        /* Specjalny styl dla pierwszego dużego kafelka */
-        .card-hero { grid-column: 1 / -1; min-height: 280px !important; background: linear-gradient(to right, var(--cream), var(--parchment)) !important; }
+        /* Styl dla kafelka z linkami (Hero) */
+        .card-hero { 
+            grid-column: 1 / -1; 
+            min-height: 320px; 
+            background: linear-gradient(to right, var(--cream), var(--parchment));
+            cursor: pointer;
+        }
 
         .gen-card { 
             background: var(--cream); border: 1px solid var(--sepia-pale); padding: 40px 30px; 
             text-align: center; text-decoration: none; transition: all 0.4s ease;
             position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px;
+            color: var(--ink);
         }
         .gen-card::after { content: ""; position: absolute; inset: 10px; border: 1px solid var(--line); pointer-events: none; transition: 0.4s; }
         .gen-card:hover { transform: translateY(-5px); border-color: var(--gold); background: white; }
         .gen-card:hover::after { inset: 15px; border-color: var(--gold-light); }
 
-        .gen-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; color: var(--ink); font-weight: 400; margin-bottom: 10px; }
-        .gen-card span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); }
+        .gen-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--ink); font-weight: 400; margin-bottom: 10px; }
         .card-ornament { width: 30px; height: 1px; background: var(--gold); margin-bottom: 15px; transition: 0.4s; }
         .gen-card:hover .card-ornament { width: 60px; }
+
+        /* Sub-nawigacja wewnątrz kafelka Hero */
+        .hero-sublinks { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 15px; 
+            margin-top: 25px; 
+            z-index: 5; 
+            position: relative; 
+        }
+        .hero-sublinks a { 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            color: var(--gold); 
+            text-decoration: none; 
+            padding: 8px 16px; 
+            border: 1px solid var(--line); 
+            transition: 0.3s;
+            background: rgba(255,255,255,0.4);
+        }
+        .hero-sublinks a:hover { 
+            background: var(--ink); 
+            color: var(--gold-light); 
+            border-color: var(--ink); 
+        }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; }
 
         @media (max-width: 768px) {
             .card-hero { grid-column: auto; }
+            .hero-sublinks { gap: 10px; }
         }
     </style>
 </head>
@@ -117,22 +150,30 @@
 
 <main>
     <div class="gen-grid">
-        <a href="biografie/poczet-rodowy.html" class="gen-card card-hero">
+        <div class="gen-card card-hero" onclick="window.location.href='biografie/zycie.html'">
             <div class="card-ornament"></div>
             <h3>Poczet Członków Rodu</h3>
-            <span>Główny zbiór biograficzny (5 sekcji)</span>
-        </a>
+            <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia);">Archiwum biograficzne</span>
+            
+            <div class="hero-sublinks">
+                <a href="biografie/zycie.html" onclick="event.stopPropagation()">Życie</a>
+                <a href="biografie/na-zjazdach.html" onclick="event.stopPropagation()">Na Zjazdach</a>
+                <a href="biografie/blogoslawienstwa.html" onclick="event.stopPropagation()">Błogosławieństwa</a>
+                <a href="biografie/nauki.html" onclick="event.stopPropagation()">Nauki</a>
+                <a href="biografie/ksiazki.html" onclick="event.stopPropagation()">Książki</a>
+            </div>
+        </div>
 
         <a href="biografie/ladomirscy.html" class="gen-card">
             <div class="card-ornament"></div>
             <h3>Ród Ładomirskich</h3>
-            <span>Linia główna</span>
+            <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia);">Linia główna</span>
         </a>
 
         <a href="biografie/krainscy.html" class="gen-card">
             <div class="card-ornament"></div>
             <h3>Ród Kraińskich</h3>
-            <span>Linia główna</span>
+            <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia);">Linia główna</span>
         </a>
     </div>
 
@@ -144,19 +185,19 @@
         <a href="biografie/antoni-tom-1.html" class="gen-card">
             <div class="card-ornament"></div>
             <h3>Tom I</h3>
-            <span>Lata młodzieńcze</span>
+            <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia);">Lata młodzieńcze</span>
         </a>
 
         <a href="biografie/antoni-tom-2.html" class="gen-card">
             <div class="card-ornament"></div>
             <h3>Tom II</h3>
-            <span>Okres wojenny</span>
+            <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia);">Okres wojenny</span>
         </a>
 
         <a href="biografie/antoni-tom-3.html" class="gen-card">
             <div class="card-ornament"></div>
             <h3>Tom III</h3>
-            <span>Wspomnienia powojenne</span>
+            <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia);">Wspomnienia powojenne</span>
         </a>
     </div>
 </main>
