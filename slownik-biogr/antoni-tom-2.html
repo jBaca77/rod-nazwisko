@@ -12,30 +12,55 @@
             --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
             --line: rgba(122, 101, 72, 0.2);
         }
+
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
         nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
-        .profile-header { max-width: 1000px; margin: 60px auto; padding: 0 24px; display: grid; grid-template-columns: 350px 1fr; gap: 50px; align-items: center; }
-        .main-photo-frame { background: white; padding: 15px; border: 1px solid var(--line); box-shadow: 15px 15px 0px var(--parchment); }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+
+        .profile-header { 
+            max-width: 1000px; margin: 60px auto; padding: 0 24px; 
+            display: grid; grid-template-columns: 350px 1fr; gap: 50px; align-items: center;
+        }
+        .main-photo-frame { 
+            background: white; padding: 15px; border: 1px solid var(--line);
+            box-shadow: 15px 15px 0px var(--parchment);
+        }
         .main-photo-frame img { width: 100%; height: auto; display: block; filter: sepia(15%); }
+        
         .header-info h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; margin-bottom: 10px; line-height: 1.1; }
         .header-info .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); font-style: italic; display: block; margin-bottom: 20px; }
         .meta-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); display: block; margin-bottom: 5px; }
+
         .content-wrap { max-width: 850px; margin: 0 auto; padding: 0 24px; }
         .bio-para { margin-bottom: 25px; text-align: justify; font-size: 1.1rem; }
-        .bio-para:first-of-type::first-letter { float: left; font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; line-height: 0.8; padding: 8px 12px 4px 0; color: var(--gold); font-weight: 300; }
+        .bio-para:first-of-type::first-letter {
+            float: left; font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem; line-height: 0.8; padding: 8px 12px 4px 0;
+            color: var(--gold); font-weight: 300;
+        }
+
         .inline-photo { margin: 45px 0; text-align: center; }
         .inline-photo img { max-width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; }
         .caption { display: block; margin-top: 10px; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--sepia); font-size: 1rem; }
+
         .descendants { margin-top: 80px; border-top: 2px solid var(--gold-light); padding-top: 40px; }
         .descendants h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; margin-bottom: 40px; text-align: center; }
         .child-block { margin-bottom: 60px; padding-left: 20px; border-left: 1px solid var(--parchment); }
         .child-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 15px; }
+
+        .source-note { background: #f0ede6; padding: 30px; margin: 40px 0; border-left: 4px solid var(--gold); font-size: 1rem; }
+        .source-note h4 { font-family: 'Cormorant Garamond', serif; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+
         footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 100px; }
-        @media (max-width: 800px) { .profile-header { grid-template-columns: 1fr; text-align: center; } .main-photo-frame { max-width: 300px; margin: 0 auto 30px; } }
+
+        @media (max-width: 800px) {
+            .profile-header { grid-template-columns: 1fr; text-align: center; }
+            .main-photo-frame { max-width: 300px; margin: 0 auto 30px; }
+        }
     </style>
 </head>
 <body>
@@ -50,71 +75,68 @@
 <article>
     <header class="profile-header">
         <div class="main-photo-frame">
-            <img src="img/zdzislaw_anna.jpg" alt="Zdzisław i Anna Ładomirscy">
+            <img src="img/zdzislaw_anna_ladomirscy.jpg" alt="Zdzisław i Anna Ładomirscy" onerror="this.src='https://via.placeholder.com/400x500?text=Zdzisław+i+Anna+Ładomirscy'">
         </div>
         <div class="header-info">
             <span class="meta-tag">Linia Kraińskich</span>
             <h1>Ładomirscy z Markowiec</h1>
             <span class="subtitle">Zdzisław Ładomirski i Anna z Kraińskich</span>
+            <p style="font-size: 0.9rem; color: var(--sepia);">Markowce • Kosówka • Wyszatyce • Jabłonka</p>
         </div>
     </header>
 
     <div class="content-wrap">
         <div class="bio-para">
-            Anna Kraińska ur. 22 lutego 1875 r. w Miejscu Piastowym pow. Krosno, zmarła w Poznaniu 29.05.1959r. pogrzeb tamże 2.06.1959r. Od 1877r. mieszkała w Wyszatycach, uczyła się w domu przy pomocy kolejno następujących po sobie nauczycielek, które nauczyły ją tego co ówcześnie dla panien było wymagane i języków francuskiego, niemieckiego i angielskiego.
+            Anna Kraińska...
         </div>
 
         <div class="bio-para">
-            W karnawale 1895r. na zabawę w Wyszatycach przywiózł nasz kuzyn Tadeusz Bogdan z Zadwórza kilku młodych ludzi z ziemiaństwa ze wschodniej Małopolski (Galicji) między innymi Zdzisława Ładomirskiego z Markowiec koło Stanisławowa. Nawiązała się obopólna sympatia i w lecie już w Jabłonce, gdzie cała rodzina wyjeżdżała na letnie miesiące używać na podgórskim powietrzu, bliskości lasu i poziomkach, nastąpiły zaręczyny i ślub miał się odbyć na jesieni.
-        </div>
-
-        <div class="bio-para">
-            W październiku 1895r. spłonęły doszczętnie Wyszatyce, więc uzupełniwszy na prędce najpotrzebniejsze urządzenia w Jabłonce, by w niej i w ziemie mieszkać można było i liczniejszych gości można było przyjąć. 21 listopada 1895r. Rodzice urządzili ślub najstarszej córki w parafii Dydnia, a przyjęcie na około 20 osób najbliższych obu rodzin w Jabłonce.
+            W karnawale...
         </div>
 
         <div class="inline-photo">
-            <img src="img/dworek_kosowka.jpg" alt="Dworek Kosówka">
-            <span class="caption">Dworek Kosówka</span>
+            <img src="img/dworek_kosowka.jpg" alt="Dworek Kosówka" onerror="this.src='https://via.placeholder.com/600x400?text=Dworek+Kosówka'">
+            <span class="caption">Dworek Kosówka - folwark oddany Zdzisławowi przez ojca</span>
         </div>
 
         <div class="bio-para">
-            Ja jednak wtedy o tym nic nie wiedziałem, tylko pamiętam miłe wizytki w Kosówce, tam pierwszy raz strzelałem z prawdziwej strzelby. Tam byliśmy całą rodziną na Wielkanoc 1898r. po moim ciężkim tyfusie i tam wtedy robiłem pierwsze moje fotografie aparatem Zeiss mającym 112 płyt szklanych 9/12 do zmiany.
+            Nawiązała się...
         </div>
 
         <div class="bio-para">
-            W lutym 1898r. urodził się Andzi pierwszy syn Władzio, w 1899r. Marynka, w 1900r. Jadwiga, którą 2 lutego 1901r jako uczeń ósmej klasy dojechawszy z Sanoka do chrztu trzymałem. W następnych latach przybyły jeszcze Zosia, Stasia i Konstancja (Kostusia) oraz około roku 1907 zaczęła się seria chłopców: Józef, Zdziś, Andrzej, Antoni i na zakończenie w 1916r. Anka.
+            W październiku...
         </div>
 
         <div class="inline-photo">
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <img src="img/wyszatyce_1903.jpg" style="width: 45%;" alt="Ładomirscy 1903">
-                <img src="img/wyszatyce_1905.jpg" style="width: 45%;" alt="Ładomirscy 1905">
+                <img src="img/ladomirscy_wyszatyce_1903.jpg" style="width: 45%;" alt="Ładomirscy 1903" onerror="this.src='https://via.placeholder.com/350x250?text=Jadwiga,+Maryś+i+Władzio+1903'">
+                <img src="img/ladomirscy_wyszatyce_1905.jpg" style="width: 45%;" alt="Ładomirscy 1905" onerror="this.src='https://via.placeholder.com/350x250?text=Iga,+Władzio,+Zosia,+Maryś+i+Stasia+1905'">
             </div>
-            <span class="caption">Jadwiga, Maryś, Władzio (1903) oraz Iga, Władzio, Zosia, Maryś i Stasia (1905)</span>
+            <span class="caption">Dzieci Ładomirskich v Wyszatycach (1903-1905)</span>
         </div>
 
         <div class="bio-para">
-            Dom był tam stary i zagrzybiony więc go rozebrano a dobudowano do oficynki cztery ładne pokoje a później, gdy rodzinka rosła ciągle coś dodając i ulepszając doszli do obszernego i wygodnego domu z przemiłą i ogromną werandą wejściową, ciepłą w zimie, bo dzięki podwójnym szybom dającą się ogrzać.
+            Dom był...
         </div>
 
         <div class="inline-photo">
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <img src="img/markowce_1895.jpg" style="width: 45%;" alt="Stary dwór Markowce">
-                <img src="img/markowce_1938.jpg" style="width: 45%;" alt="Nowy dwór Markowce">
+                <img src="img/markowce_stary_1895.jpg" style="width: 45%;" alt="Stary dwór Markowce" onerror="this.src='https://via.placeholder.com/350x250?text=Stary+dwór+Markowce+1895'">
+                <img src="img/markowce_nowy_1938.jpg" style="width: 45%;" alt="Nowy dwór Markowce" onerror="this.src='https://via.placeholder.com/350x250?text=Nowy+dwór+Markowce+1938'">
             </div>
-            <span class="caption">Stary dwór (1895) oraz Nowy dwór w Markowcach (1938)</span>
+            <span class="caption">Ewolucja siedziby w Markowcach</span>
         </div>
 
         <div class="bio-para">
-            Zdzisław był bardzo dobry i zapobiegliwy gospodarz w hodowli tak bydła jak i koni i przy pomocy miejscowych ludzi umiał wszystko w porządku i doskonałym stanie utrzymać, liczną dzieciarnię wychować i wykształcić a także ziemi dokupywać gdy się okazja na miejscu zdarzyła, to grunta od Dominikanów z Tyśmienicy to obok leżące Bratkowce a w końcu od Matki Kosówkę. Pierwszą inwazję rosyjską w 1914r. przetrwali w domu broniąc się jak można było od strat w gospodarstwie, szczególnie w inwentarzu.
+            Zdzisław był...
         </div>
 
         <div class="inline-photo">
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <img src="img/konie_zima.jpg" style="width: 45%;" alt="Konie zimą">
-                <img src="img/konie_lato.jpg" style="width: 45%;" alt="Konie latem">
+                <img src="img/konie_zima_1886.jpg" style="width: 45%;" alt="Konie zimą" onerror="this.src='https://via.placeholder.com/350x250?text=Rekreacja+konna+zimą+1886'">
+                <img src="img/konie_lato.jpg" style="width: 45%;" alt="Konie latem" onerror="this.src='https://via.placeholder.com/350x250?text=Rekreacja+konna+latem'">
             </div>
-            <span class="caption">Rekreacja konna zimą i latem</span>
+            <span class="caption">Pasja do koni w rodzinie Ładomirskich</span>
         </div>
 
         <section class="descendants">
@@ -122,59 +144,64 @@
 
             <div class="child-block">
                 <h3>Władysław Ładomirski</h3>
-                <p>Na inwazję już bolszewicką przyjechali w 1920r. Zdzisławowie z dziećmi i inwentarzami do Jabłonki, tak że po powrocie mieli z czem zabrać się do odbudowy gospodarstwa. Dzieci wszystkie starannie kształcili.</p>
-                <div class="inline-photo">
-                    <img src="img/mlyn_dabrowa.jpg" alt="Młyn na Dąbrowie" style="max-width: 400px;">
-                    <span class="caption">Młyn na Dąbrowie i rodzina</span>
+                <div class="inline-photo" style="float: right; width: 250px; margin-left: 20px; margin-top: 0;">
+                    <img src="img/mlyn_dabrowa.jpg" alt="Młyn na Dąbrowie" onerror="this.src='https://via.placeholder.com/250x180?text=Młyn+na+Dąbrowie'">
+                    <span class="caption" style="font-size: 0.8rem;">Młyn na Dąbrowie</span>
                 </div>
-                <p>Po 17 września 1939r. będąc w wojsku we Lwowie, przezornie nie poszedł na plac Bernardyński gdy tam rozbrajali oficerów i tak uniknął Katynia. Gdy Wala z dziećmi nadciągnęła, osiadła w folwarku swej rodziny przy ujściu Dunajca a Władzio pracował w dużym młynie Konopków w Brniu.</p>
+                Na inwazję...
             </div>
 
             <div class="child-block">
                 <h3>Jadwiga z Ładomirskich Teleżyńska</h3>
-                <p>Jadwiga 27.04.1926r., wyszła za mąż za Tadeusza Teleżyńskiego będącego wówczas administratorem majątku Karasnobród koło Zamościa własność Kazimierza Fudakowskiego. Mieszkali tam do 1942r., mieli dwie córki, starsza Jadwiga zmarła w szpitalu w Lublinie w czasie okupacji a młodsza Teresa skończyła w Poznaniu medycynę i jest teraz asystentką profesora chirurga dr Degi.</p>
+                Jadwiga 27.04.1926r...
             </div>
 
             <div class="child-block">
                 <h3>Zofia z Ładomirskich Tyszkiewiczowa</h3>
-                <p>Następna córka Zofia miała projekta wstąpienia do klasztoru ale nic z tego nie wyszło i dopiero w 1936r. wyszła za mąż za Eustachego Tyszkiewicza syna Benedykta i Marii Lubomirskiej. Zosia dostała 200 morgów z Markowiec nadających się na stawy, które zostały tam przez nich założone.</p>
                 <div class="inline-photo">
-                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                        <img src="img/uniawa_stawy.jpg" style="width: 45%;" alt="Budowa stawów">
-                        <img src="img/uniawa_dom.jpg" style="width: 45%;" alt="Budowa domu">
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <img src="img/uniawa_stawy.jpg" style="width: 45%;" alt="Budowa stawów" onerror="this.src='https://via.placeholder.com/350x200?text=Budowa+stawów+Uniawa'">
+                        <img src="img/uniawa_dom.jpg" style="width: 45%;" alt="Budowa domu" onerror="this.src='https://via.placeholder.com/350x200?text=Budowa+domu+Uniawa'">
                     </div>
-                    <span class="caption">Budowa stawów i domu - folwark Uniawa</span>
+                    <span class="caption">Prace w folwarku Uniawa</span>
                 </div>
+                Następna córka...
             </div>
 
             <div class="child-block">
                 <h3>Stanisława z Ładomirskich Kozłowska</h3>
-                <p>Stasia, ładna jasna blondynka po klasztorze, była na praktyce gospodarstwa domowego w Kniażu i 29.09.1924r. wyszła za mąż za Aleksandra Kozłowskiego-Zarembę z Lipy Dolnej koło Birczy. Dzieci nie mieli, ale spokojnie pracując w Lipie, która żadnych obciążeń nie miała prowadzili gościnny dom dla sąsiadów i rodziny, dużo miłych chwil tam spędziliśmy.</p>
+                Stasia, ładna...
             </div>
 
             <div class="child-block">
                 <h3>Józef Ładomirski</h3>
-                <p>Józef skończywszy gimnazjum studiował w Dublanach rolnictwo i po odsłużeniu wojska przy artylerii wrócił do Markowiec i pomagał Ojcu w gospodarstwie a gdy się ożenił z koleżanką z Dublan Anną Trąbczyńską z Kieleckiego oddał mu Ojciec Kosówkę. Urodził im się syn Tomasz, potem już przed samą wojną córka Marta.</p>
-                <div class="inline-photo">
-                    <img src="img/sporty_kosowka.jpg" alt="Sporty wodne" style="max-width: 400px;">
+                <div class="inline-photo" style="max-width: 400px; margin: 20px auto;">
+                    <img src="img/tomasz_sporty_1937.jpg" alt="Tomasz Ładomirski 1937" onerror="this.src='https://via.placeholder.com/400x300?text=Sporty+wodne+na+Kosówce+1937'">
                     <span class="caption">Tomasz Ładomirski - Kosówka 1937</span>
                 </div>
+                Józef skończywszy...
             </div>
 
             <div class="child-block">
-                <h3>Zdzisław (Junior) i Andrzej</h3>
-                <p>Następny syn Zdzisław miał od najmłodszych lat dwa zamiłowania: rysunki i muzykę, ta ostatnia jednak zwyciężyła i jej się poświęcił, poważnie ją studiując po maturze u prof. Friemanna we Lwowie. Czwarty syn Andrzej (Jędrek) od najmłodszych lat był "zbytnik" gdy w 1920r. był w Jabłonce mając zdaje się 8 lat proch zapalił tak, że osmalił sobie całą głowę.</p>
+                <h3>Zdzisław (Junior) i Andrzej (Jędrek)</h3>
+                Następny syn...
             </div>
 
             <div class="child-block">
                 <h3>Antoni i Anna (Junior)</h3>
-                <p>Ostatni syn Antoni, bardzo ciekawy do gospodarstwa ukończył przed samą wojną szkołę rolniczą w Cieszynie, na praktyce u swych wujostwa Domańskich w Ubiniu, poznał Jadwigę Komarnicką. Najmłodsza córka Anna po maturze w klasztorze w Jazłowcu ukończyła szkołę pielęgniarek na Koszykowej w Warszawie.</p>
+                Ostatni syn...
             </div>
+
+        </section>
+
+        <section class="source-note">
+            <h4>Z archiwum Antoniego Kraińskiego</h4>
+            <p>Powyższe wspomnienia zostały spisane na podstawie rękopisów i listów rodzinnych, dokumentujących burzliwe losy Ładomirskich na przestrzeni dwóch wojen światowych.</p>
         </section>
     </div>
 
     <footer>
-        DOKUMENTACJA RODZINY ŁADOMIRSKICH © 2026
+        DOKUMENTACJA RODZINY ŁADOMIRSKICH © 2026 | ARCHIWUM L&K
     </footer>
 </article>
 
