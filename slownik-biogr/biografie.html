@@ -1,1 +1,183 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biografie | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
+            --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
+            --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+        /* ── HEADER ── */
+        header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
+        header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
+        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; display: block; position: relative; z-index: 1; }
+        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.1; position: relative; z-index: 1; }
+
+        /* ── NAV ── */
+        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        
+        .nav-back-link { 
+            display: flex; align-items: center; gap: 8px; color: var(--gold-light); 
+            text-decoration: none; font-size: 0.7rem; text-transform: uppercase; 
+            letter-spacing: 2px; transition: 0.3s; 
+        }
+        .nav-back-link:hover { color: var(--cream); }
+
+        /* ── QUOTE SECTION ── */
+        .quote-section { max-width: 800px; margin: 60px auto 20px; text-align: center; padding: 0 24px; }
+        .quote-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.6rem; color: var(--sepia); line-height: 1.5; margin-bottom: 15px; }
+        .quote-author { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); font-weight: 400; }
+        .s-line { width: 40px; height: 1px; background: var(--sepia-pale); margin: 30px auto; }
+
+        /* ── GRID BIOGRAFIE ── */
+        main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+        .s-label { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 10px; display: block; text-align: center; }
+        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 50px; color: var(--ink); text-align: center; }
+        
+        .bio-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+        }
+
+        .bio-card { 
+            background: var(--cream); 
+            border: 1px solid var(--sepia-pale); 
+            padding: 50px 30px; 
+            text-align: center; 
+            text-decoration: none; 
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+        }
+
+        .bio-card::after {
+            content: "";
+            position: absolute;
+            inset: 12px;
+            border: 1px solid var(--line);
+            pointer-events: none;
+            transition: 0.4s;
+        }
+
+        .bio-card:hover { 
+            transform: translateY(-8px); 
+            background-color: white;
+            border-color: var(--gold-light);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        .bio-card:hover::after {
+            border-color: var(--gold-light);
+            inset: 18px;
+        }
+
+        .bio-card h3 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.8rem; 
+            color: var(--ink); 
+            font-weight: 400;
+            margin-bottom: 12px;
+            z-index: 1;
+        }
+
+        .bio-card .card-ornament {
+            width: 35px;
+            height: 1px;
+            background: var(--gold);
+            margin-bottom: 20px;
+            transition: width 0.4s;
+        }
+
+        .bio-card:hover .card-ornament {
+            width: 70px;
+        }
+
+        .bio-card p {
+            font-size: 0.85rem;
+            color: var(--sepia);
+            z-index: 1;
+            max-width: 80%;
+            font-style: italic;
+        }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <span class="header-ornament">Losy i Świadectwa</span>
+    <h1>Biografie</h1>
+</header>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM RODZINNE</a>
+        <a href="genealogia.html" class="nav-back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Wstecz do menu
+        </a>
+    </div>
+</nav>
+
+<section class="quote-section">
+    <p class="quote-text">„Naród, który nie zna swej przeszłości, umiera i nie buduje przyszłości.”</p>
+    <p class="quote-author">Jan Paweł II</p>
+    <div class="s-line"></div>
+</section>
+
+<main>
+    <span class="s-label">Ludzie i Historia</span>
+    <h2 class="s-title">Poczet członków rodu</h2>
+    
+    <div class="bio-grid">
+        <a href="biografie-krainscy.html" class="bio-card">
+            <div class="card-ornament"></div>
+            <h3>Kraińscy</h3>
+            <p>Sylwetki i losy przedstawicieli rodu Kraińskich na przestrzeni wieków.</p>
+        </a>
+
+        <a href="biografie-ladomirscy.html" class="bio-card">
+            <div class="card-ornament"></div>
+            <h3>Ładomirscy</h3>
+            <p>Historie życia i dokonania członków rodziny Ładomirskich.</p>
+        </a>
+
+        <a href="biografie-inne.html" class="bio-card">
+            <div class="card-ornament"></div>
+            <h3>Inne Nazwiska</h3>
+            <p>Biografie osób spowinowaconych oraz rodzin zaprzyjaźnionych z klanem.</p>
+        </a>
+
+        <a href="wspomnienia.html" class="bio-card">
+            <div class="card-ornament"></div>
+            <h3>Wspomnienia</h3>
+            <p>Osobiste zapiski, listy i relacje przekazywane z pokolenia na pokolenie.</p>
+        </a>
+    </div>
+</main>
+
+<footer>
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+</footer>
+
+</body>
+</html>
 
