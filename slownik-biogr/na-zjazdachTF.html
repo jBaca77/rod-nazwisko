@@ -1,1 +1,153 @@
-work on progres
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ks. Tadeusz Fedorowicz - Na Zjazdach | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: var(--gold-light); }
+
+        /* NAGŁÓWEK */
+        .article-header { max-width: 900px; margin: 80px auto 40px; padding: 0 24px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: var(--sepia); margin-bottom: 15px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300; line-height: 1.1; margin-bottom: 15px; letter-spacing: 1px; }
+
+        /* SEKCJA LISTU (ZDJĘCIA) */
+        .letter-images { max-width: 850px; margin: 0 auto 40px; padding: 0 24px; display: flex; flex-direction: column; gap: 0; }
+        .letter-images img { width: 100%; height: auto; display: block; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+        /* TEKST LISTU */
+        .content-container { max-width: 850px; margin: 0 auto; padding: 0 24px; }
+        .letter-text { 
+            background: white; padding: 60px; border: 1px solid var(--line); 
+            font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; 
+            line-height: 1.6; color: #222; margin-bottom: 80px;
+        }
+        .letter-header { text-align: right; margin-bottom: 40px; }
+        .letter-content p { margin-bottom: 20px; text-indent: 30px; text-align: justify; }
+        .letter-footer { margin-top: 40px; text-align: right; font-style: italic; }
+
+        /* MULTIMEDIA */
+        .media-section { max-width: 1000px; margin: 80px auto; padding: 0 24px; border-top: 1px solid var(--line); padding-top: 60px; }
+        .media-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
+
+        /* VIDEO */
+        .video-container { width: 100%; aspect-ratio: 16/9; background: var(--ink); margin-bottom: 60px; border: 1px solid var(--line); }
+
+        /* FOTOKRONIKA - UKŁAD ZGODNY Z MODLINEM */
+        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .photo-card { position: relative; overflow: hidden; background: #fff; padding: 10px; border: 1px solid var(--line); transition: 0.4s; }
+        .photo-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; filter: grayscale(30%); transition: 0.5s; }
+        .photo-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .photo-card:hover img { filter: grayscale(0%); }
+
+        /* NAWIGACJA DOLNA */
+        .sub-pagination { max-width: 900px; margin: 40px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; background: white; }
+        .sub-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .sub-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+
+        /* MOBILE FIXES - IDENTYCZNIE JAK W ZJEŹDZIE W MODLINIE */
+        @media (max-width: 600px) {
+            .photo-grid { 
+                grid-template-columns: repeat(4, 1fr); 
+                grid-auto-rows: 140px; 
+                gap: 2px; 
+            }
+            .photo-card { padding: 0; border: 1px solid var(--line); }
+            .photo-card img { opacity: 0.8; }
+            .letter-text { padding: 30px 20px; font-size: 1.1rem; }
+            .article-header { margin-top: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="zycie.html" class="back-link">← Życie</a>
+    </div>
+</nav>
+
+<article>
+    <header class="article-header">
+        <span class="meta-top">Korespondencja i Obecność</span>
+        <h1>ks. Tadeusz na Zjazdach Rodzinnych</h1>
+    </header>
+
+    <div class="letter-images">
+        <img src="img/biografie/tf/list_cz1.jpg" alt="List ks. Tadeusza cz. 1" onerror="this.src='https://via.placeholder.com/800x1000?text=List+strona+1'">
+        <img src="img/biografie/tf/list_cz2.jpg" alt="List ks. Tadeusza cz. 2" onerror="this.src='https://via.placeholder.com/800x1000?text=List+strona+2'">
+        <img src="img/biografie/tf/list_cz3.jpg" alt="List ks. Tadeusza cz. 3" onerror="this.src='https://via.placeholder.com/800x1000?text=List+strona+3'">
+    </div>
+
+    <div class="content-container">
+        <section class="letter-text">
+            <div class="letter-header">
+                Laski, 17 września 1985 r.
+            </div>
+            <div class="letter-content">
+                <p>Kochani,</p>
+                <p>Bardzo, bardzo mi żal, że tym razem nie będę z Wami! Was wszystkich zobaczyć i uściskać, szczególnie mi przykro z powodu Andrzeja (seniora). Ostatnio trochę przeciążyłem swoją pracą i serce mi się rozregulowało. To na razie nic poważnego, ale lekarz nakazuje mi absolutny spokój i wypoczynek.</p>
+                <p>Jestem z Wami sercem i modlitwą. Cieszę się ogromnie z Waszego spotkania. Takie zjazdy są niezwykle ważne – budują więź, która jest fundamentem naszej rodziny. Niech to spotkanie w Szalejowie będzie dla Was czasem radości i wzajemnego umocnienia.</p>
+                <p>Przesyłam każdemu z osobna moje błogosławieństwo i serdeczne pozdrowienia. Niech Dobry Bóg ma Was wszystkich w swojej opiece.</p>
+            </div>
+            <div class="letter-footer">
+                Wasz Tadeusz
+            </div>
+        </section>
+    </div>
+
+    <section class="media-section">
+        <h2 class="media-title">Materiały Archiwalne</h2>
+        
+        <div class="video-container">
+            </div>
+
+        <div class="photo-grid">
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_1.jpg" alt="Zjazd 1" onerror="this.src='https://via.placeholder.com/200?text=Foto+1'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_2.jpg" alt="Zjazd 2" onerror="this.src='https://via.placeholder.com/200?text=Foto+2'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_3.jpg" alt="Zjazd 3" onerror="this.src='https://via.placeholder.com/200?text=Foto+3'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_4.jpg" alt="Zjazd 4" onerror="this.src='https://via.placeholder.com/200?text=Foto+4'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_5.jpg" alt="Zjazd 5" onerror="this.src='https://via.placeholder.com/200?text=Foto+5'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_6.jpg" alt="Zjazd 6" onerror="this.src='https://via.placeholder.com/200?text=Foto+6'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_7.jpg" alt="Zjazd 7" onerror="this.src='https://via.placeholder.com/200?text=Foto+7'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_8.jpg" alt="Zjazd 8" onerror="this.src='https://via.placeholder.com/200?text=Foto+8'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_9.jpg" alt="Zjazd 9" onerror="this.src='https://via.placeholder.com/200?text=Foto+9'"></div>
+        </div>
+    </section>
+
+    <div class="sub-pagination">
+        <a href="zycie.html" class="sub-btn">Życie</a>
+        <a href="na-zjazdachTF.html" class="sub-btn active">Na Zjazdach</a>
+        <a href="blogoslawienstwaTF.html" class="sub-btn">Błogosławieństwa</a>
+        <a href="naukiTF.html" class="sub-btn">Nauki</a>
+        <a href="ksiazkiTF.html" class="sub-btn">Książki</a>
+    </div>
+</article>
+
+<footer>
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+</footer>
+
+</body>
+</html>
