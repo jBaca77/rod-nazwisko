@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ks. Tadeusz Fedorowicz - Błogosławieństwa | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: var(--gold-light); }
+
+        /* NAGŁÓWEK */
+        .article-header { max-width: 900px; margin: 80px auto 40px; padding: 0 24px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: var(--sepia); margin-bottom: 15px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300; line-height: 1.1; margin-bottom: 15px; letter-spacing: 1px; }
+        .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--sepia); max-width: 700px; margin: 0 auto; }
+
+        /* TREŚĆ BŁOGOSŁAWIEŃSTW */
+        .content-container { max-width: 800px; margin: 60px auto; padding: 0 24px; }
+        
+        .blessing-item {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--line);
+            text-align: center;
+        }
+        
+        .blessing-item:last-child { border-bottom: none; }
+
+        .blessing-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            line-height: 1.5;
+            color: var(--ink);
+            margin-bottom: 10px;
+        }
+
+        .blessing-result {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.95rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        /* STOPKA TEKSTU */
+        .source-info {
+            margin-top: 80px;
+            padding: 40px;
+            background: var(--parchment);
+            border-left: 3px solid var(--gold);
+            font-size: 0.9rem;
+            color: var(--sepia);
+        }
+        .source-info strong { color: var(--ink); display: block; margin-bottom: 5px; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; }
+
+        /* NAWIGACJA DOLNA */
+        .sub-pagination { max-width: 900px; margin: 40px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; background: white; }
+        .sub-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .sub-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+
+        @media (max-width: 600px) {
+            .blessing-text { font-size: 1.2rem; }
+            .article-header { margin-top: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="biografie.html" class="back-link">← Biografie</a>
+    </div>
+</nav>
+
+<article>
+    <header class="article-header">
+        <span class="meta-top">Mądrość ks. Tadeusza</span>
+        <h1>Błogosławieństwa</h1>
+        <p class="subtitle">z mądrością i humorem</p>
+    </header>
+
+    <div class="content-container">
+        
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy potrafią śmiać się z samych siebie –</p>
+            <p class="blessing-result">będą mieli radość i zabawę przez całe życie.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy nie biorą siebie nazbyt serio –</p>
+            <p class="blessing-result">za to ludzie ich uszanują.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy odróżniają kretowinę od góry –</p>
+            <p class="blessing-result">będą widzieli sprawy we właściwych proporcjach.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy odróżniają owoce niedojrzałe od dojrzałych i potrafią czekać, aż dojrzeją –</p>
+            <p class="blessing-result">zaznają słodyczy dojrzałości.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy odróżniają to, czego „ja chcę”, od tego, czego „mnie się chce” –</p>
+            <p class="blessing-result">znajdą łatwo właściwą drogę w życiu.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy rozróżniają między kochaniem kogoś a kochaniem się w kimś –</p>
+            <p class="blessing-result">znajdą prawdziwą miłość i unikną wielu błędów własnych i zadawania bólu innym.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy doceniają, obok dobrych uczynków, uczynki dobre –</p>
+            <p class="blessing-result">zobaczą, że w świecie jest więcej dobra niż zła, oraz znajdą sens i radość życia.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy wielce cenią małe rzeczy dobre, a nie martwią się małymi rzeczami niedobrymi –</p>
+            <p class="blessing-result">znajdą pokój serca i pokój z ludźmi.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy wreszcie odkryli swoją miłość własną i chcą ją nadal odkrywać –</p>
+            <p class="blessing-result">będą szybko wzrastać w prawdziwej miłości.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy nie muszą, a za to niejednego świadomie chcą –</p>
+            <p class="blessing-result">zaznają prawdziwej wolności.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy nie muszą mieć tego czy tamtego, a to i tamto chętnie odstąpią –</p>
+            <p class="blessing-result">zaznają smaku większych wartości.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy pomyślą, zanim zrobią, i pomodlą się, zanim pomyślą –</p>
+            <p class="blessing-result">unikną wielu przykrości i nieporozumień.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy potrafią poczekać –</p>
+            <p class="blessing-result">doczekają się prawdziwego dobra.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy wiedzą, że rozum to dobra rzecz, i starają się go często używać –</p>
+            <p class="blessing-result">będą szli bezpieczną drogą.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy umieją używać kija nie do bicia w ciemności, ale do zapalania go ogniem, by świecił i ogrzewał –</p>
+            <p class="blessing-result">wiele dobra uczynią w życiu.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy wiedzą, że kwiaty należy oglądać od przodu, a nie od tyłu, krytykując, że są nie ładne –</p>
+            <p class="blessing-result">wiele pokoju znajdą i wniosą wokół siebie.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy wiedzą, że nie wystarczy, by woda podana komuś była świeża, ale że też trzeba podawać ją w czystej, niewyszczerbionej szklance –</p>
+            <p class="blessing-result">unikną wielu nieporozumień z ludźmi.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy potrafią się uśmiechać, nawet gdy jest trudno i gdy ktoś ich drażni –</p>
+            <p class="blessing-result">wiele radości rozsieją wokół siebie i łatwiej siebie samych zachowają w pokoju.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy mają zderzaki jak wagony kolejowe –</p>
+            <p class="blessing-result">bardzo to ułatwi współżycie z drugimi.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy zrozumieli, że większym szczęściem jest dawać niż brać, i służyć niż być obsłużonym –</p>
+            <p class="blessing-result">znajdą prawdziwe szczęście.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy miłują prawdę bardziej niż jakiekolwiek korzyści –</p>
+            <p class="blessing-result">znajdą rzeczywiste wartości.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy nie stawiają nade wszystko wyników, ale wiedzą, że chodzi przede wszystkim o dobrą wolę i starania –</p>
+            <p class="blessing-result">znajdą Miłość Bożą i pokój serca.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy nie są szafami gdańskimi, a potrafią być lekkimi stoliczkami na kółkach –</p>
+            <p class="blessing-result">będą poręczni Bogu i ludziom.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy wiedzą, że modlitwa nie polega na uczuciu, myśleniu i rozumieniu, ale na szczerym oddaniu się Bogu.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy wiedzą, że jaśniej świeci lampa z czystym kloszem niż z zabrudzonym albo pomalowanym –</p>
+            <p class="blessing-result">będą nieść więcej światła.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy nie zasłaniają sobą Boga i ludzi –</p>
+            <p class="blessing-result">będą jaśniej widzieli prawdę o rzeczywistości.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy nie są jak obsypany pączkami krzak róży, który nigdy nie zakwita i egoistycznie zamyka się w sobie –</p>
+            <p class="blessing-result">znajdą szczęście służąc innym.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy nawet w wygasłym ognisku znajdują żarzący się węgielek i zdołają go rozpłomienić w nowe ognisko.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy dają się zemleć młynowi Bożemu, tak by każde ziarno było przerobione przez kwas ewangeliczny –</p>
+            <p class="blessing-result">staną się jak dobry chleb Boży.</p>
+        </div>
+
+        <div class="blessing-item">
+            <p class="blessing-text">Szczęśliwi, którzy zrozumieli, że „drabina nauki nie dosięga Nieba” i że Wiara jest rozumna, choć nie rozumowa –</p>
+            <p class="blessing-result">zobaczą nieskończone horyzonty Boże i doznają radości tęsknoty za Pełnią.</p>
+        </div>
+
+        <div class="source-info">
+            <strong>Ks. Tadeusz Fedorowicz, 2003</strong>
+            BŁOGOSŁAWIEŃSTWA dla tych, którzy mają trochę zmysłu humoru i szukają mądrości.<br>
+            Norbertinum, Laski-Lublin
+        </div>
+    </div>
+
+    <div class="sub-pagination">
+        <a href="zycie.html" class="sub-btn">Życie</a>
+        <a href="na-zjazdachTF.html" class="sub-btn">Na Zjazdach</a>
+        <a href="blogoslawienstwaTF.html" class="sub-btn active">Błogosławieństwa</a>
+        <a href="naukiTF.html" class="sub-btn">Nauki</a>
+        <a href="ksiazkiTF.html" class="sub-btn">Książki</a>
+    </div>
+</article>
+
+<footer>
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+</footer>
+
+</body>
+</html>
