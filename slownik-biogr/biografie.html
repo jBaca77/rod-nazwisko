@@ -23,153 +23,140 @@
         .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; display: block; position: relative; z-index: 1; }
         header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.1; position: relative; z-index: 1; }
 
-        /* ── NAV ── */
+        /* ── NAV & DRAWER ── */
         nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         
-        .nav-back-link { 
-            display: flex; align-items: center; gap: 8px; color: var(--gold-light); 
-            text-decoration: none; font-size: 0.7rem; text-transform: uppercase; 
-            letter-spacing: 2px; transition: 0.3s; 
-        }
-        .nav-back-link:hover { color: var(--cream); }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 1100; }
+        .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
 
-        /* ── QUOTE SECTION ── */
-        .quote-section { max-width: 800px; margin: 60px auto 20px; text-align: center; padding: 0 24px; }
-        .quote-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.6rem; color: var(--sepia); line-height: 1.5; margin-bottom: 15px; }
-        .quote-author { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); font-weight: 400; }
-        .s-line { width: 40px; height: 1px; background: var(--sepia-pale); margin: 30px auto; }
+        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
+        .drawer.open { right: 0; }
+        .drawer-links { list-style: none; }
+        .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; transition: 0.3s; }
+        .drawer-links a:hover { color: var(--gold-light); padding-left: 5px; }
 
-        /* ── GRID BIOGRAFIE ── */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .overlay.active { opacity: 1; pointer-events: auto; }
+
+        /* ── QUOTE ── */
+        .quote-box { max-width: 800px; margin: 60px auto 20px; text-align: center; padding: 0 24px; }
+        .quote-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.5rem; color: var(--sepia); line-height: 1.5; margin-bottom: 10px; }
+        .quote-author { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); }
+
+        /* ── GRID SYSTEM ── */
         main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
-        .s-label { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 10px; display: block; text-align: center; }
-        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 50px; color: var(--ink); text-align: center; }
+        .section-divider { text-align: center; margin: 80px 0 50px; position: relative; }
+        .section-divider h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--ink); font-weight: 300; background: var(--warm-white); display: inline-block; padding: 0 30px; position: relative; z-index: 2; }
+        .section-divider::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: var(--sepia-pale); z-index: 1; }
+
+        .gen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
-        .bio-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 30px; 
-        }
+        /* Specjalny styl dla pierwszego dużego kafelka */
+        .card-hero { grid-column: 1 / -1; min-height: 280px !important; background: linear-gradient(to right, var(--cream), var(--parchment)) !important; }
 
-        .bio-card { 
-            background: var(--cream); 
-            border: 1px solid var(--sepia-pale); 
-            padding: 50px 30px; 
-            text-align: center; 
-            text-decoration: none; 
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 250px;
+        .gen-card { 
+            background: var(--cream); border: 1px solid var(--sepia-pale); padding: 40px 30px; 
+            text-align: center; text-decoration: none; transition: all 0.4s ease;
+            position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px;
         }
+        .gen-card::after { content: ""; position: absolute; inset: 10px; border: 1px solid var(--line); pointer-events: none; transition: 0.4s; }
+        .gen-card:hover { transform: translateY(-5px); border-color: var(--gold); background: white; }
+        .gen-card:hover::after { inset: 15px; border-color: var(--gold-light); }
 
-        .bio-card::after {
-            content: "";
-            position: absolute;
-            inset: 12px;
-            border: 1px solid var(--line);
-            pointer-events: none;
-            transition: 0.4s;
-        }
-
-        .bio-card:hover { 
-            transform: translateY(-8px); 
-            background-color: white;
-            border-color: var(--gold-light);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-        }
-
-        .bio-card:hover::after {
-            border-color: var(--gold-light);
-            inset: 18px;
-        }
-
-        .bio-card h3 { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: 1.8rem; 
-            color: var(--ink); 
-            font-weight: 400;
-            margin-bottom: 12px;
-            z-index: 1;
-        }
-
-        .bio-card .card-ornament {
-            width: 35px;
-            height: 1px;
-            background: var(--gold);
-            margin-bottom: 20px;
-            transition: width 0.4s;
-        }
-
-        .bio-card:hover .card-ornament {
-            width: 70px;
-        }
-
-        .bio-card p {
-            font-size: 0.85rem;
-            color: var(--sepia);
-            z-index: 1;
-            max-width: 80%;
-            font-style: italic;
-        }
+        .gen-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; color: var(--ink); font-weight: 400; margin-bottom: 10px; }
+        .gen-card span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); }
+        .card-ornament { width: 30px; height: 1px; background: var(--gold); margin-bottom: 15px; transition: 0.4s; }
+        .gen-card:hover .card-ornament { width: 60px; }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
+            .card-hero { grid-column: auto; }
+        }
     </style>
 </head>
 <body>
 
+<div class="overlay" id="overlay"></div>
+
 <header>
     <span class="header-ornament">Losy i Świadectwa</span>
-    <h1>Biografie</h1>
+    <h1>Biografie Rodowe</h1>
 </header>
 
 <nav>
     <div class="nav-inner">
-        <a href="../index.html" class="nav-logo">ARCHIWUM RODZINNE</a>
-        <a href="genealogia.html" class="nav-back-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Wstecz do menu
-        </a>
+        <a href="index.html" class="nav-logo">ARCHIWUM RODZINNE</a>
+        <button class="menu-btn" id="menuBtn">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </nav>
 
-<section class="quote-section">
-    <p class="quote-text">„Naród, który nie zna swej przeszłości, umiera i nie buduje przyszłości.”</p>
-    <p class="quote-author">Jan Paweł II</p>
-    <div class="s-line"></div>
+<aside class="drawer" id="drawer">
+    <ul class="drawer-links">
+        <li><a href="index.html">Strona Główna</a></li>
+        <li><a href="aktualnosci.html">Aktualności</a></li>
+        <li><a href="genealogia/genealogia.html">Genealogia</a></li>
+        <li><a href="zjazdy/zjazdy.html">Kronika zjazdów</a></li>
+        <li><a href="slownik-biogr/biografie.html">Biografie</a></li>
+        <li><a href="pamiec.html">Pamięć i groby</a></li>
+        <li><a href="slownik-geo/geografia.html">Geografia rodowa</a></li>
+        <li><a href="biblioteka/biblioteczka.html">Biblioteczka</a></li>
+        <li><a href="archiwym/archiwum.html">Archiwum</a></li>
+    </ul>
+</aside>
+
+<section class="quote-box">
+    <p class="quote-text">„Kto nie szanuje i nie ceni swej przeszłości, nie jest godzien szacunku teraźniejszości ani prawa do przyszłości.”</p>
+    <p class="quote-author">Józef Piłsudski</p>
 </section>
 
 <main>
-    <span class="s-label">Ludzie i Historia</span>
-    <h2 class="s-title">Poczet członków rodu</h2>
-    
-    <div class="bio-grid">
-        <a href="biografie-krainscy.html" class="bio-card">
+    <div class="gen-grid">
+        <a href="biografie/poczet-rodowy.html" class="gen-card card-hero">
             <div class="card-ornament"></div>
-            <h3>Kraińscy</h3>
-            <p>Sylwetki i losy przedstawicieli rodu Kraińskich na przestrzeni wieków.</p>
+            <h3>Poczet Członków Rodu</h3>
+            <span>Główny zbiór biograficzny (5 sekcji)</span>
         </a>
 
-        <a href="biografie-ladomirscy.html" class="bio-card">
+        <a href="biografie/ladomirscy.html" class="gen-card">
             <div class="card-ornament"></div>
-            <h3>Ładomirscy</h3>
-            <p>Historie życia i dokonania członków rodziny Ładomirskich.</p>
+            <h3>Ród Ładomirskich</h3>
+            <span>Linia główna</span>
         </a>
 
-        <a href="biografie-inne.html" class="bio-card">
+        <a href="biografie/krainscy.html" class="gen-card">
             <div class="card-ornament"></div>
-            <h3>Inne Nazwiska</h3>
-            <p>Biografie osób spowinowaconych oraz rodzin zaprzyjaźnionych z klanem.</p>
+            <h3>Ród Kraińskich</h3>
+            <span>Linia główna</span>
+        </a>
+    </div>
+
+    <div class="section-divider">
+        <h2>Zapiski Antoniego Kraińskiego</h2>
+    </div>
+
+    <div class="gen-grid">
+        <a href="biografie/antoni-tom-1.html" class="gen-card">
+            <div class="card-ornament"></div>
+            <h3>Tom I</h3>
+            <span>Lata młodzieńcze</span>
         </a>
 
-        <a href="wspomnienia.html" class="bio-card">
+        <a href="biografie/antoni-tom-2.html" class="gen-card">
             <div class="card-ornament"></div>
-            <h3>Wspomnienia</h3>
-            <p>Osobiste zapiski, listy i relacje przekazywane z pokolenia na pokolenie.</p>
+            <h3>Tom II</h3>
+            <span>Okres wojenny</span>
+        </a>
+
+        <a href="biografie/antoni-tom-3.html" class="gen-card">
+            <div class="card-ornament"></div>
+            <h3>Tom III</h3>
+            <span>Wspomnienia powojenne</span>
         </a>
     </div>
 </main>
@@ -178,6 +165,29 @@
     <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
 </footer>
 
+<script>
+    const menuBtn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+
+    function toggleSidebar() {
+        drawer.classList.toggle('open');
+        overlay.classList.toggle('active');
+        const spans = menuBtn.querySelectorAll('span');
+        if(drawer.classList.contains('open')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(4px, -5px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    }
+
+    menuBtn.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
+</script>
+
 </body>
 </html>
-
