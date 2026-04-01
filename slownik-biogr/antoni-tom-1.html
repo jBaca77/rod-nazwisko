@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fedorowiczowie z Klebanówki i Kamionek | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: var(--gold-light); }
+
+        /* NAGŁÓWEK */
+        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: var(--sepia); margin-bottom: 15px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 15px; color: var(--ink); }
+        .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold); font-style: italic; }
+
+        /* KONTENER TREŚCI */
+        .content-container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+        
+        /* STYL TEKSTU */
+        .biography-text p { margin-bottom: 25px; text-align: justify; font-size: 1.1rem; color: #333; position: relative; }
+        .biography-text p:first-of-type::first-letter {
+            float: left; font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem; line-height: 0.8; padding: 8px 12px 4px 0;
+            color: var(--gold); font-weight: 300;
+        }
+
+        /* SEKACJE ZDJĘĆ W TEKŚCIE */
+        .image-entry { margin: 40px 0; display: flex; flex-direction: column; align-items: center; }
+        .img-placeholder { 
+            width: 100%; 
+            max-width: 700px; 
+            background: white; 
+            padding: 15px; 
+            border: 1px solid var(--line);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .img-placeholder img { width: 100%; height: auto; filter: sepia(20%); display: block; }
+        .img-caption { 
+            margin-top: 15px; 
+            font-family: 'Cormorant Garamond', serif; 
+            font-style: italic; 
+            color: var(--sepia); 
+            font-size: 1rem; 
+            text-align: center; 
+            border-bottom: 1px solid var(--gold-light);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* LISTA DZIECI */
+        .children-list { margin: 60px 0; padding: 40px; background: var(--parchment); border: 1px solid var(--line); }
+        .children-list h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 30px; border-bottom: 1px solid var(--gold); display: inline-block; }
+        .child-item { margin-bottom: 45px; }
+        .child-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 15px; border-left: 3px solid var(--gold); padding-left: 15px; }
+
+        /* NOTATKI I UZUPEŁNIENIA */
+        .note-box { 
+            background: white; 
+            border: 1px solid var(--line); 
+            padding: 30px; 
+            margin: 50px 0; 
+            font-style: italic; 
+            position: relative;
+        }
+        .note-box::before { content: "“"; font-family: serif; font-size: 4rem; color: var(--parchment); position: absolute; top: -10px; left: 10px; }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; border-top: 1px solid var(--gold); }
+
+        /* RESPONSYWNOŚĆ */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .img-placeholder { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="biografie.html" class="back-link">← Biografie</a>
+    </div>
+</nav>
+
+<article>
+    <header class="article-header">
+        <span class="meta-top">Historia Rodzinna • Klebanówka • Kamionki</span>
+        <h1>Fedorowiczowie z Klebanówki i Kamionek</h1>
+        <div class="subtitle">Wspomnienia i zapiski genealogiczne</div>
+    </header>
+
+    <div class="content-container">
+        
+        <div class="biography-text">
+            <p>Zofia z Kraińskich Fedorowicz i Aleksander Fedorowicz. Zofia Fedorowicz od 1877 r. chowała się razem z Andzią w Wyszatycach. Z usposobienia powolniejsza, nauki wszystkie pobierały razem prócz fortepianu i śpiewu, do których nie miała uzdolnień. Po wyjściu Andzi za mąż była z rodzicami i Jadwigą w Scheveningen i zwiedzała Hagę, potem z ojcem i Czesią Dydyńską, późniejszą Zygmuntową Baczyńską była w ziemie na riwierze francuskiej. Gdy rodzice przenieśli się na zimę 1897/98 do Lwowa i Jadwiga wróciła do klasztoru, gdzie kończyła nauki, zaczęły bywać w towarzystwie lwowskim i w ładnym mieszkaniu przy ul. Kraszewskiego 17 były i u nas wtorki, na których w karnawale wesoło tańczono w kilkanaście par przy fortepianie.</p>
+
+            <div class="image-entry">
+                <div class="img-placeholder">
+                    <img src="img/zofia_aleksander.jpg" alt="Zofia i Aleksander Fedorowiczowie" onerror="this.src='https://via.placeholder.com/700x400?text=Zofia+z+Kraińskich+i+Aleksander+Fedorowicz'">
+                </div>
+                <span class="img-caption">Zofia z Kraińskich Fedorowicz i Aleksander Fedorowicz</span>
+            </div>
+
+            <p>W roku 1901, gdy ja zdałem maturę, pojechaliśmy we wrześniu, ojciec, Zosia i ja przez Drezno, któreśmy zwiedzili, do Londynu. Ja zostałem u pp. Russel w Lemington uczyć się języka, a ojciec z Zosią wrócili do domu przez Paryż, który tak jak i Londyn pobieżnie zwiedziła.</p>
+
+            <p>W 1900 Jadwiga wstąpiła do Niepokalanek, więc żurki i baliki odbywały się dla Zosi, miała kilku starających się jak Edmunda Komara i Brzezińskiego z Łazan, ale dopiero w 1902 r. zdecydowała się wyjść za mąż za Aleksandra (Saszę) Fedorowicza z Klebanówki w Zbarazkim. Ślub odbył się w Wyszatycach już odbudowujących się po pożarze w 1895 r. 16 lipca 1902 r. - było dość liczne zebranie rodzin obydwóch, a ja narobiłem trochę fotografii.</p>
+
+            <p>Państwo młodzi osiedli w Szyłach, też w Zbarazkim, które p. Tadeusz Fedorowicz synowi kupił. Dom Sasza bardzo starannie urządził, miał piękne konie i simentalery, dobrze im tam było, ale w parę lat, gdy nadarzyła się okazja nabycia Kamionek, majątku przy kolei, stacja Bogdanówka, niedaleko Klebanówki, z gorzelnią i dobrym domem mieszkalnym, Szyły sprzedali, Kamionki kupili i na razie zamieszkali w Obodówce, też koło Klebanówki, gdzie przed nimi mieszkali Władysławowie Tyszkiewiczowie, ona siostra Saszy, która po urodzeniu syna zmarła.</p>
+
+            <p>Do roku 1907 urodziło się im trzech synów: Jerzy, Andrzej, Tadeusz. W 1908 w lecie przybyła córka Olga w Wyszatycach. Tymczasem starsi Państwo przenieśli się do Kamionek, które wprawdzie były w dzierżawie, ale dom mieszkalny z ogrodem, oddalony od folwarku, był wolny. Sasza objął gospodarstwo w Klebanówce i Jacowcach dzierżawionych od jakiejś fundacji, zarządzanej przez Wydział Krajowy.</p>
+
+            <div class="image-entry">
+                <div class="img-placeholder">
+                    <img src="img/klebanowka_dwor.jpg" alt="Dwór w Klebanówce" onerror="this.src='https://via.placeholder.com/700x350?text=Dwór+w+Klebanówce'">
+                </div>
+                <span class="img-caption">Dwór w Klebanówce</span>
+            </div>
+
+            <p>Gospodarz był doskonały, skończył Hohenheim, a od ojca bardzo wymagającego dokładności ścisłości nabrał rutyny tak, że wszystko szło jak w zegarku, a Sasza był wesoły, polował z chartami, w jesieni konno na zające, w zimie z sani na lisy, a polowanie w kniei też lubił. Dzieci przybywało. Jeden chłopiec zmarł dzieckiem we Lwowie. 1910 przybył Janek, potem Marysia (1912), Ali (1914) i na końcu w czasie wojny Anielcia (1916).</p>
+
+            <div class="image-entry">
+                <div class="img-placeholder">
+                    <img src="img/rodzina_fedorowicz.jpg" alt="Dzieci Fedorowiczów" onerror="this.src='https://via.placeholder.com/700x450?text=Tadeusz+Tyszkiewicz+oraz+Dzieci+Fedorowiczów'">
+                </div>
+                <span class="img-caption">Tadeusz Tyszkiewicz oraz Jurek, Druś, Tadzio, Olga, Janek, Marysia, Ali i Anielcia Fedorowiczowie</span>
+            </div>
+
+            <p>Dzieci uczyły się w domu, babka pani Julia z domu Pankratieff wychowana w En la Chapelle, pilnowała, żeby francuski też dobrze umiały. W czasie I wojny wędrowali z inwentarzami na wschód, aż gdzieś pod Odessę, ale szczęśliwie powrócili i zabrali się do odnawiania zniszczonych wojna gospodarstw.</p>
+
+            <p>W okresie markowym i inflacyjnym Sasza wziął się do robienia interesów. Założył dom handlowy we Lwowie dla handlu zbożem, ale zdaje się za bardzo wierzył żydom, a także podolskim ziemianom, którzy brali pieniądze, a nie zawsze dostarczali zboże, tak, że korzyści nie było, a może i straty. Zaczął też kupować domy we Lwowie i kupił nawet majątek Kraczkowę koło Krasiczyna dla SYNA Andrzeja, a dla córek garaże na Bajkach. Kupił też i prowadził garbarnię „Pollis” we Lwowie, jeździł po skóry argentyńskie do Hamburga, ale i handel i przemysł kosztowały.</p>
+        </div>
+
+        <section class="children-list">
+            <h2>Dzieci</h2>
+
+            <div class="child-item">
+                <h3>1. Jerzy</h3>
+                <p>Jerzy skończył Dublany (rolnictwo) i osiadł w Oknie. Jerzy ożenił się w 1928 roku z Marią Kosielską, mieli syna i córkę. Stryjeczny brat Tadeusza, Władysław z Okna (syn Jana), wielki dziwak, zmarł w czasie wojny w Kijowie, zapisując majątek Jurkowi, synowi Saszy, ale jedynym świadkiem tego zapisu była pielęgnująca go służąca. A że p. Władysław miał przybraną córkę, która wyszła za p. Malickiego, działacza ukraińskiego, były więc długie sprawy spadkowe sądowe, ale wszystko się ułożyło, oddali Malickim Szlachcince, a Okno i Tołste zostało Jurkowi. Okno było całkiem spalone, kapitałów na odbudowę nie było, więc trzeba było zrobić je z częściowej parcelacji. On zginął w 1939 r. na zachód od Warszawy. Ona Pracuje i chowa dzieci we Wrocławiu, wyszła 2 raz za Kazimierza Małeckiego. Syn Jurka Andrzej inżynier sanitarny, córka Anna studiuje historię sztuki.</p>
+            </div>
+
+            <div class="child-item">
+                <h3>2. Andrzej</h3>
+                <p>Andrzej ukończył mechanikę i pracował w Stalowej Woli. Inżynier Andrzej oparł się w czasie wojny o Jabłonkę, nie chciał zajęcia w kopalniach nafty w Grabownicy, bo niemieckie, a gdy w czerwcu 1942 roku zaaresztowano w Krakowie Tunia Janiszewskiego, który zajmował się dla nas Maniowem Druś zdecydował się to robić. Jednak 4/9 wskoczywszy, dla kąpieli, do bardzo zimnej a głębokiej wody w górskim potoku utonął.</p>
+            </div>
+
+            <div class="child-item">
+                <h3>3. Tadeusz</h3>
+                <div class="image-entry" style="float: right; max-width: 300px; margin: 0 0 20px 20px;">
+                    <div class="img-placeholder">
+                        <img src="img/tadeusz_fedorowicz.jpg" alt="Ks. Tadeusz Fedorowicz" onerror="this.src='https://via.placeholder.com/300x400?text=Ks.+Tadeusz+Fedorowicz'">
+                    </div>
+                    <span class="img-caption">Ks. Tadeusz Fedorowicz - pozował do postaci św. Jerzego w katedrze ormiańskiej we Lwowie</span>
+                </div>
+                <p>Tadeusz ukończył prawo, odsłużył wojsko przy artylerii i wstąpił do seminarium duchownego we Lwowie, gdzie też po krótkiej wikarówce w Tarnopolu jako opiekun ubogich do wojny działał. Ks. Tadeusz, gdy w 1940 r. zaczęto wywozić Polaków ze Lwowa, dobrowolnie przyłączył się do jednego z transportów, wysadzono go jednak w Maryjskiej R.R. gdzieś koło Kazania i kazano mu rąbać lasy, a mieszkać w sali, gdzie miał 150 towarzyszy, przeważnie Żydów.</p>
+                <p>Po ugodzie Sikorskiego dostał się do Kazachstanu i tam podtrzymywał duchowo przymusowych emigrantów z Polski. Miał iść z armią Andersa, a aresztowany pod jakimś pozorem, wyjechać nie mógł, ale nadal był bardzo dobrze czynny wśród potrzebujących pomocy, o czym mam relację od mego kolegi, Żyda, adwokata z Brzozowa, który będąc w Semipałatyńsku członkiem komitetów opiekuńczych ogromnie wychwala współpracę z ks. Tadeuszem. Powrócił do kraju z armią tzw. Kościuszkowską, z Berlingiem i Żymirskim, jednak po jakimś kazaniu, które się nie podobało poradzono mu, by się schował, co też zrobił w Żułowie, a potem w Laskach, gdzie dotąd jest kapelanem i katechetą, a przy tym masom ludzi przyjeżdżającym z Warszawy udziela pomocy duchownej, mając krótsze lub dłuższe konferencje.</p>
+                <p>Matka mieszka w Laskach w domu rekolekcyjnym i często widuje synów, którzy z nią jadają posiłki dawane przez Zakład (dla ociemniałych).</p>
+            </div>
+
+            <div class="note-box">
+                Ojciec nasz, uzupełniając działy córek, oddał Zosi Wyszatyce bez Bandaków, folwarczku za Sanem, który zatrzymał sobie na możliwe parcelacje w razie potrzeby - a z których 30 morgów jeszcze po jego śmierci 3 córki dostały i korzystnie sprzedały. Wyszatyce wydzierżawili, a w miarę potrzeby i parcelowali. tak, że do wojny zostało tylko kilkadziesiąt morgów, a i to w bardzo zagmatwanych warunkach.
+            </div>
+
+            <div class="child-item">
+                <h3>4. Olga</h3>
+                <div class="image-entry" style="float: left; max-width: 280px; margin: 0 20px 20px 0;">
+                    <div class="img-placeholder">
+                        <img src="img/olga_fedorowicz.jpg" alt="Olga Fedorowicz" onerror="this.src='https://via.placeholder.com/280x350?text=Olga+Fedorowicz'">
+                    </div>
+                    <span class="img-caption">Olga przed wyjazdem do Chin - Marsylia 1934</span>
+                </div>
+                <p>Córka Olga wstąpiła do klasztoru Franciszkanek – misjonarek w Łabuniach, pojechała do Belgii i Francji, a potem do Chin i jest teraz przełożona domu w Pekinie, który utrzymuje szkołę dla dzieci azjatyckich dyplomatów.</p>
+            </div>
+
+            <div class="child-item" style="clear: both; padding-top: 20px;">
+                <h3>5. Janek</h3>
+                <p>Jankowi nauki szły ciężko, skończył szkołę rolniczą w Czernichowie i zaczął ojcu w gospodarstwie pomagać. Z wybuchem ostatniej wojny wzięto go na roboty przy drogach na Wołyniu słuch o nim zaginął, ale z Andersem dostał się do Persji, a potem na zachód i w Londynie fizycznie pracując zarabiał na życie. Ożenił się z p. Cieńską, córką „Nikiego” i Dzieduszyckiej z Jezupola, która mając skończony angielski uniwersytet w Bejrucie ma doskonałe posady. Teraz przy liniach lotniczych, on pracuje w garażach. Kupili sobie domek z ogródkiem, a teraz maszynę do robienia swetrów. Powodzi im się dobrze, zapraszają rodzeństwo by ich odwiedzali. We wrześniu 1957 Anielcia tam była.</p>
+            </div>
+
+            <div class="child-item">
+                <h3>6. Marysia</h3>
+                <p>Marysia ładna b. jasna blondynka, bardzo lubiana, przebywała z bratem inż., Andrzejem w Stalowej Woli i tam pracowała. W czasie wojny pomagała rodzeństwu, a gdy znaleźli się na gospodarstwie w Pławęcinie koło Kołobrzegu, wyszła za mąż za Karola Meissnera (syna budowniczego ze Lwowa), który był kierownikiem zespołu gospodarskiego do którego Pławęcin należał. Mają dwóch synów (Janka i Jurka) i córkę Gosię (Małgosię). Przed paru laty wyrwali się z Pomorza, gdzie stosunki stawały się niemiłe, byli naprzód koło Łęczycy, potem z Zielonkach pod Warszawą w Zakładach Urlycha, następnie w tychże Zakładach w Szymanowie, od roku w Opiniogórze, a teraz został agronomem przy PRN w Ciechanowie.</p>
+            </div>
+
+            <div class="child-item">
+                <h3>7. Aleksander (Ali)</h3>
+                <div class="image-entry" style="float: right; max-width: 250px; margin: 0 0 20px 20px;">
+                    <div class="img-placeholder">
+                        <img src="img/ali_fedorowicz.jpg" alt="Aleksander Ali Fedorowicz" onerror="this.src='https://via.placeholder.com/250x300?text=Ks.+Ali+Fedorowicz'">
+                    </div>
+                    <span class="img-caption">Aleksander (Ali) Fedorowicz</span>
+                </div>
+                <p>Piąty syn Aleksander (Ali) po zdaniu matury chciał wstąpić do seminarium duchownego, jednak gdy rodzice nie bardzo to pochwalali, studiował rok czy dwa filozofię, a potem poszedł do seminarium. Gdy jednak w 1939 r. nauki przerwano, zarabiał na życie we Lwowie pracą fizyczną jak rąbanie drzewa na opał. Dostał szkarlatyny, a gdy w 1940 r. przyjechał z matką do Jabłonki, zaraz po wyjściu ze szpitala, zaczął gorączkować i pokazało się że miał zaatakowane gruczoły, a może i płuca gruźlicą.</p>
+                <p>Mieliśmy wtedy w Maniowie gajówkę „na Strubiu” położoną około 700 m nad poziomem morza, tak jak Zakopane, w bardzo miłym i spokojnych klimacie. Tam pojechał z rodzicami na parę miesięcy i gorączki przeszły, tak, że mógł przenieść się pod Jarosław do swego ciotecznego brata Tadeusza Ilka Tyszkiewicza i tam studiować dalej teologię pod kierunkiem ks. Szpetnara, kapelana Niepokalanek na miejscu i ks. biskupa Kowalskiego przebywającego w czasie okupacji w Pełkiniach.</p>
+                <p>Gorączki jeszcze mu wracały, ale po ponownym pobycie przez jakiś czas na Strubiu o tyle wyzdrowiał, że został wyświęcony w Kalwarii Zebrzydowskiej, gdzie było wtedy Lwowskie Seminarium, na księdza i został ekspozytem w Tywonii, przy kapliczce przy drodze do Pawłosiowa. W 1945 czy 46 przeniósł się do Lasek pod Warszawę, gdzie i brat ks. Tadeusz przebywał przy zakładzie dla ociemniałych. Choroba się rozwinęła, tak że wysłano go do Zakopanego, gdzie przeszedł operację plastyczną płuc i dzięki Opatrzności Bożej i opiece jednej z zakonnic z Lasek powrócił całkiem do zdrowia. Został proboszczem w nowoutworzonej parafii w Izabelinie, do której i Laski należały.</p>
+                <p>W roku ... przy pomocy parafian postawił barakowy kościół z prezbiterium i frontonem murowanym z cegły (gruz z Warszawy). Mieszka w pokoiku nad przedsionkiem i gorliwie obsługuje parafię, prowadząc przy tym dużą działalność rekolekcyjną, mając dar wymowy, który mu zjednuje licznych słuchaczy. Gospodarstwo prowadzą mu zakonnice z Lasek, chętnie przyjmując odwiedzających go rodzinę i znajomych.</p>
+            </div>
+
+            <div class="child-item" style="clear: both;">
+                <h3>8. Anielcia</h3>
+                <p>Najmłodsza, Anielcia, po maturze była w szkole gospodarczej w Snopkowie. Sympatyzowali ze sobą z Tomaszem Bartmańskim (matka Ujejeska z domu, wnuczka poety Kornela Ujejskiego), który studiował prawo. Wojna ich rozdzieliła, ale gdy Anielcia przyjechała do Jabłonki w 1940 r. a Tomasz przebywał z rodzicami w pobliskich Izdebkach, sprawa się wznowiła, rodzice mimo niedokończonych studiów, co było pierwotnie przeszkodą, zezwolili i ślub odbył się w kościółku w Jabłonce 9 kwietnia 1942 r.</p>
+                <p>Ostatnie to było pogodne i miłe zebranie w Jabłonce, nasza rodzina była licznie zebrana z powodu okupacji, z rodziny Tomka też dużo miłych osób zjechało. Był po raz ostatni w Jabłonce bardzo miły, prawdziwy mój przyjaciel, właściciel Wydrny, prof. chemii UW Kazimierz Kling.</p>
+            </div>
+        </section>
+
+        <section class="biography-text">
+            <p>Rok 1942 przyniósł nam pozatym same przykrości, a to 14.06. zmarł w Warszawie prof. Kling, 24.06. aresztowano w Krakowie Tunia Janiszewskiego, który zajmował się dla nas Maniowem, a potem dostawszy się do obozu w Oświęcimiu i Guzen - jednak te ciężkie przejścia przetrzymał i wróciwszy w 1945 r. ożenił się z naszą Kolą 3.11.1945 r. w Brzozowie. 12.09. zmarł nagle, udzielając pomocy przy wypadku urwania nogi pracownicy przy młocarni parowej Adam Kosecki, mój kolega z Chyrowa o rok starszy, sąsiad Suszna w Tetenczycach, który pomógł mi w gospodarstwie w Susznie, gdy w 1909 r. objąłem Jabłonkę i Niebocko, a dzierżawę Suszna miałem do sprzedania w 1911 r.. On też planował odbudowę stodoły w Susznie po pożarze – on też dał plan stajni końskiej w Jabłonce i przebudowy dachu w domu w Jabłonce, na bardzo miłe i praktyczne pomieszkanie w mansardowych pokojach, o szerokich, prawie mansardowych oknach. On też pomagał mi, gdy między 1912 i 1914 administrowałem Gdyczyną i tam dla pani Trzcińskiej przez wojnę gospodarzył, a gdy po wojnie objął zastępstwo PZU w Brzozowie był często miłym gościem i doradcą. W końcu jesieni 1942 r. wyjechał nasz syn Antek na roboty do Tyrolu, gdzie mu się nieźle działo, ale dostawszy się do obozu zaginął bez wieści w 1944 czy 1945 r.</p>
+
+            <p>T. Bartmańscy wyjechali do Kamionki Strumiłłowej na dorywcze zajęcia, ale bardzo ciężko im było, ona poroniła, potem byli w Kościelnikach u siostry Tomasza, Wodzickiej, tam zastało ich „wyswobodzenie”, usunęli się do Krakowa, ona urodziła bliźniaki, które wkrótce zmarły. W 1945 czy 46 przenieśli się do Wrocławia, on skończył prawo i był asystentem i jako taki dostał na Oporowie dom o dwu mieszkaniach z ładnym ogródkiem, który po małych naprawach (700 zł) zamieszkali, nabyli i dotąd zajmują oni ... ... dół, a Małeccy z Andrzejem i Hanią Fedorowiczami górę. Tomasz zdał doktorat praw. Uczył w rozmaitych uczelniach, a teraz jest profesorem Politechniki, wykłada bezpieczeństwo pracy. Anielcia pracuje w administracji uniwersyteckiej. Wcale dobrze im się powodzi. Kupują dużo ładnych książek i wyjeżdżają na krajoznawcze wycieczki. Matka jego mieszka z nimi.</p>
+        </section>
+
+        <section class="note-box" style="margin-top: 80px; border-color: var(--ink);">
+            <strong>Uzupełnienie z notatki Antoniego Kraińskiego (15.07.1965 r.)</strong><br><br>
+            Zmarł w szpitalu w Warszawie ks. Ali Fedorowicz, proboszcz Izabelina-Lasek, po dość długiej i ciężkiej chorobie. Byłem 17.07. na pogrzebie. Było 2 biskupów, dużo księży, cała parafia, lało. Z rodziny były siostry z mężami i dziećmi, z Ładomirskich Anka, Antoś z żoną, Teleżyński z córką, Inka z Tych i dużo krewnych i znajomych z Warszawy.
+        </section>
+    </div>
+
+    <div style="height: 100px;"></div>
+</article>
+
+<footer>
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+</footer>
+
+</body>
+</html>
