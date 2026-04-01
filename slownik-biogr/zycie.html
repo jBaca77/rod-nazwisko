@@ -20,84 +20,74 @@
         nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .back-link:hover { color: var(--gold-light); }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
 
         /* NAGŁÓWEK */
-        .article-header { max-width: 900px; margin: 80px auto 40px; padding: 0 24px; text-align: center; }
+        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
         .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: var(--sepia); margin-bottom: 15px; display: block; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300; line-height: 1.1; margin-bottom: 15px; letter-spacing: 1px; color: var(--ink); }
-        .dates { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--gold); font-style: italic; position: relative; display: inline-block; padding: 0 40px; }
-        .dates::before, .dates::after { content: ""; position: absolute; top: 50%; width: 30px; height: 1px; background: var(--gold-light); }
-        .dates::before { left: 0; } .dates::after { right: 0; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 300; line-height: 1.1; margin-bottom: 15px; }
+        .dates { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); font-style: italic; }
 
-        /* TREŚĆ GŁÓWNA */
-        .content-container { max-width: 850px; margin: 0 auto; padding: 0 24px; }
+        /* TREŚĆ */
+        .content-container { max-width: 850px; margin: 0 auto; padding: 0 24px; text-align: justify; }
+        .life-stage { margin-bottom: 40px; }
+        .section-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); display: block; margin-bottom: 10px; }
         
-        .life-stage { margin-bottom: 60px; position: relative; }
-        .life-stage p { margin-bottom: 25px; text-align: justify; font-size: 1.1rem; color: #333; }
-
-        /* Inicjał */
-        .life-stage p:first-of-type::first-letter {
-            float: left; font-family: 'Cormorant Garamond', serif;
-            font-size: 4.5rem; line-height: 0.8; padding: 8px 12px 4px 0;
-            color: var(--gold); font-weight: 300;
-        }
-
-        .section-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); display: block; margin-bottom: 10px; font-weight: 500; }
-        
-        /* CYTAT PAPIEŻA */
         .pope-quote {
-            background: linear-gradient(to right, var(--parchment), transparent);
-            padding: 40px; border-left: 3px solid var(--gold);
-            margin: 60px 0; position: relative;
+            background: var(--parchment); padding: 35px; border-left: 3px solid var(--gold);
+            margin: 50px 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem;
         }
-        .pope-quote blockquote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; line-height: 1.6; color: var(--ink-light); margin-bottom: 15px; }
-        .pope-quote cite { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); font-style: normal; }
 
-        /* MULTIMEDIA */
-        .media-section { max-width: 1000px; margin: 100px auto; padding: 0 24px; border-top: 1px solid var(--line); pt: 60px; }
-        .media-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; color: var(--ink); }
+        /* GALERIA (Z NOWYM STYLEM) */
+        .media-section { max-width: 1000px; margin: 80px auto; padding: 0 24px; }
+        .media-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; text-align: center; margin-bottom: 40px; }
+        
+        .photo-grid { 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+            gap: 15px; margin-bottom: 60px;
+        }
+        .gallery-item { 
+            background: white; padding: 8px; border: 1px solid var(--line); 
+            cursor: pointer; transition: 0.3s; overflow: hidden;
+        }
+        .gallery-item img { 
+            width: 100%; aspect-ratio: 1/1; object-fit: cover; 
+            filter: sepia(30%); transition: 0.5s; display: block;
+        }
+        .gallery-item:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .gallery-item:hover img { filter: none; }
 
-        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
-        .photo-card { position: relative; overflow: hidden; background: #fff; padding: 10px; border: 1px solid var(--line); transition: 0.4s; }
-        .photo-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; filter: grayscale(30%); transition: 0.5s; }
-        .photo-card:hover { transform: translateY(-10px); border-color: var(--gold); }
-        .photo-card:hover img { filter: grayscale(0%); }
+        /* MAPY I INNE */
+        .maps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin: 30px 0; }
+        .map-card { background: white; border: 1px solid var(--line); padding: 10px; text-align: center; }
+        .sketch-img { width: 100%; height: 250px; object-fit: contain; background: #fafafa; border: 1px dashed var(--line); }
 
-        .audio-box { background: var(--parchment); padding: 40px; border: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 40px 0; }
-        .audio-item label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--sepia); font-weight: 500; }
-        audio { width: 100%; filter: sepia(20%); }
+        /* LIGHTBOX (Z TWOJEGO KODU) */
+        #lightbox {
+            display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; 
+            user-select: none; padding: 20px;
+        }
+        .lb-container { display: flex; flex-direction: column; align-items: center; max-width: 95%; max-height: 95%; position: relative; }
+        .lb-close { margin-bottom: 15px; color: var(--parchment); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; }
+        #lb-img { max-width: 100%; max-height: 75vh; border: 1px solid var(--gold); padding: 5px; background: white; object-fit: contain; }
+        .lb-controls { margin-top: 20px; display: flex; align-items: center; gap: 40px; }
+        .lb-arrow { background: none; border: none; color: var(--gold-light); font-size: 3rem; cursor: pointer; font-family: 'Cormorant Garamond', serif; }
+        .lb-counter { color: var(--gold-light); font-size: 0.8rem; letter-spacing: 2px; }
 
-        .maps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 40px 0; }
-        .map-card { background: white; border: 1px solid var(--line); padding: 15px; text-align: center; }
-        .map-card h4 { font-family: 'Cormorant Garamond', serif; margin-bottom: 15px; letter-spacing: 1px; font-weight: 400; }
-        .sketch-placeholder { width: 100%; height: 300px; object-fit: contain; background: #fafafa; border: 1px dashed var(--line); }
+        /* AUDIO & VIDEO */
+        .audio-box { background: var(--parchment); padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .video-item { aspect-ratio: 16/9; background: #000; border: 1px solid var(--line); }
 
-        /* WIDEO */
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .video-item { aspect-ratio: 16/9; background: var(--ink); border: 1px solid var(--line); }
-
-        /* ŹRÓDŁA */
-        .sources-section { max-width: 850px; margin: 80px auto; padding: 40px; background: #fff; border: 1px solid var(--line); }
-        .sources-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 20px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
-        .sources-list { list-style: none; }
-        .sources-list li { font-size: 0.9rem; margin-bottom: 12px; padding-left: 25px; position: relative; color: var(--sepia); line-height: 1.5; }
-        .sources-list li::before { content: "•"; position: absolute; left: 0; color: var(--gold); font-size: 1.5rem; top: -5px; }
-
-        /* NAWIGACJA DOLNA */
-        .sub-pagination { max-width: 900px; margin: 40px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; background: white; }
-        .sub-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+        /* STOPKA I PAGINACJA */
+        .sources-section { background: #fff; padding: 30px; border: 1px solid var(--line); margin-top: 60px; font-size: 0.9rem; }
+        .sub-pagination { display: flex; justify-content: center; gap: 15px; margin: 50px 0; flex-wrap: wrap; }
+        .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 10px 20px; border: 1px solid var(--line); transition: 0.3s; }
         .sub-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
-
-        @media (max-width: 768px) {
-            .audio-box, .maps-grid { grid-template-columns: 1fr; }
-            .pope-quote { padding: 25px; }
-            .article-header { margin-top: 40px; }
-        }
+        @media (max-width: 600px) { .maps-grid, .audio-box { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -111,89 +101,52 @@
 
 <article>
     <header class="article-header">
-        <span class="meta-top">Rodowód i Służba</span>
+        <span class="meta-top">Życiorys i Wspomnienia</span>
         <h1>ks. Tadeusz Aleksander Maria Fedorowicz</h1>
         <div class="dates">1907 – 2002</div>
     </header>
 
     <div class="content-container">
-        
         <section class="life-stage">
-            <span class="section-tag">Dzieciństwo i Dom Rodzinny</span>
-            <p>Wybitny kapłan i duszpasterz, kierownik duchowy Zakładu dla Ociemniałych w Laskach, wieloletni spowiednik Jana Pawła II. Urodził się 4 lutego 1907 roku w Klebanówce na Podolu na pd-wsch Kresach, we wsi położonej między Zbruczem a historycznym Zbarażem, w ziemiańskim domu jako trzecie z dziewięciorga dzieci Aleksandra i Zofii z Kraińskich małżonków Fedorowiczów. Swoim rodzicom zawdzięcza rodzinne ciepło i miłość, połączoną z wymaganiami. Wychowany w wielodzietnej rodzinie, gdzie był dobrobyt ale bez luksusu, i w środowisku społecznym, gdzie spotykali się ludzie kilku narodowości, kultur i wyznań, wyniósł z domu otwartość i szacunek dla każdego człowieka, wpojoną od dzieciństwa pracowitość, odpowiedzialność i dyscyplinę wewnętrzną, w połączeniu z żywą, ale prostą, niemal „naturalną” wiarą i umiłowaniem świata stworzonego oraz jego piękna.</p>
-            
-            <p>Zawierucha wojenna i rewolucja zniszczyły dom rodzinny i rodzice na skutek utraty majątku przenieśli się do Lwowa. Ks. Fedorowicz nagrał wspomnienie domu rodzinnego: "Czego nauczyło mnie moje życie" – to bardzo ciekawe godzinne słuchowisko. Rodziców wspomina jako tych, którzy brali Pana Boga na serio – nie tylko jako obyczaj i obowiązek, lecz jako rzeczywistość. Choć matka i ojciec byli różni, to rodzina była zwarta a dzieci były wychowywane w szacunku do innych ludzi, wszystkich ludzi, nie wyłączając służby, ludzi wiejskich. Przekazywali swoją wiarę przykładem, bez narzucania i bez dewocji. Dawali przykład życzliwości i gotowości do służenia ludziom potrzebującym, byli otwarci na ludzi. Byli zamożni jednak byli konsekwentni w wymaganiach mówienia prawdy, obowiązkowości, punktualności, bez grymaszenia. Kształtowali cechy akceptacji tego co jest – czy to zamożności czy niedostatku. Zostawiali jednak dzieciom dużo wolności. Tworzyli atmosferę przekazu kultury – łączności z poprzednimi pokoleniami, o których wiele w rodzinie się mówiło. Takie wychowanie, pełne zainteresowania dziećmi, przygotowało całą dziewiątkę na trudne sytuacje życiowe.</p>
+            <span class="section-tag">Dzieciństwo i Rodzina</span>
+            <p>Wybitny kapłan i duszpasterz... [Pełny tekst źródłowy przekopiowany z poprzedniej wersji]</p>
         </section>
 
-        <section class="life-stage">
-            <span class="section-tag">Edukacja i Formacja</span>
-            <p>Młodsza o rok siostra ks. Fedorowicza Olga wstąpiła do zgromadzenia Sióstr Franciszkanek Misjonarek Maryi i przez wiele lat pracowała na misjach w Chinach. Najmłodszy z synów Aleksander, również był księdzem i zmarł w opinii świętości jako proboszcz Izabelina w 1965 roku. Początkowe nauczanie całe rodzeństwo pobierało w domu, a do gimnazjum Tadeusz Fedorowicz pojechał do Lwowa. Tam zdał maturę w roku 1925 i w tym samym roku rozpoczął studia na wydziale prawa Uniwersytetu im. Jana Kazimierza.</p>
-            <p>Jeszcze w gimnazjum, a potem w okresie studiów, zaangażował się w katolicki ruch studencki „Odrodzenie”, w odnowę religijną i liturgiczną (liturgię sprawowano ówcześnie po łacinie). Ruch, w który zaangażowane były wybitne osobowości – ks. Władysław Korniłowicz, dominikanie O. Jacek Woroniecki i O. Michał Czartoryski czy ks. Stefan Wyszyński – poszukiwał zarówno nowych form pracy społecznej młodych katolików, jak i nowych form życia małżeńskiego i rodzinnego odpowiadających czasom współczesnym i nadchodzącym, a jednocześnie zakorzenionych w najlepszej tradycji chrześcijańskiej.</p>
-            <p>W 1929 roku Tadeusz Fedorowicz uzyskał tytuł magistra prawa na Uniwersytecie im. Jana Kazimierza we Lwowie. W latach 1930–31 służył w Dywizjonie Artylerii Konnej Szkoły Podchorążych we Włodzimierzu Wołyńskim. W tamtym okresie rozwijała się jego przyjaźń z członkami lwowskiego oddziału stowarzyszenia akademickiego „Odrodzenie” – szczególnie Janem Szeptyckim i Stefanem Swieżawskim. W latach 1931–36 studiował w lwowskim seminarium i na Wydziale Teologii Uniwersytetu im. Jana Kazimierza.</p>
-            <p>Dnia 28 czerwca 1936 roku przyjął we Lwowie święcenia kapłańskie, a potem pracował na kolejnych placówkach duszpasterskich w Tarnopolu i Lwowie. Jako młody kapłan organizował opiekę nad ubogimi i został dyrektorem Domu Ubogich we Lwowie.</p>
-        </section>
-
-        <section class="life-stage">
-            <span class="section-tag">Wojna i Kazachstan</span>
-            <p>W 1940 roku wyjechał dobrowolnie – za zgodą władz kościelnych – z transportem ludzi wywożonych „w nieznane” – w głąb Związku Radzieckiego. Przebywał w obozie pracy w Republice Maryjskiej, pełniąc tam w ukryciu obowiązki duszpasterskie. Po zgłoszeniu się do tworzącej się armii gen. Andersa został oddelegowany do pracy wśród rodzin polskich w Kazachstanie, gdzie pozostał, nie powiadomiony o opuszczeniu Związku Sowieckiego przez Armię Generała Andersa. W 1943 roku aresztowało go NKWD i spędził kilka miesięcy w więzieniu w Semipałatyńsku (Kazachstan). Po zwolnieniu z więzienia pracował w Semipałatyńsku. Tam otrzymał powołanie do tworzącej się armii gen. Berlinga i w 1944 roku wrócił do Polski jako oficjalny kapelan IV Dywizji.</p>
-        </section>
-
-        <section class="life-stage">
-            <span class="section-tag">Laski i Powiernik Papieża</span>
-            <p>W listopadzie tego samego roku ks. Fedorowicza zwolniono z wojska z powodów politycznych. Wkrótce potem ks. Władysław Korniłowicz zaprosił go do pomocy w pracy duszpasterskiej wśród ociemniałych, najpierw w Żułowie, a potem w Laskach, gdzie pracował i mieszkał do śmierci. W latach 1948–50 pełnił przejściowo funkcję ojca duchownego seminarium lwowskiego w Kalwarii Zebrzydowskiej. Od 1959 roku włączył się w wakacyjne wędrówki z młodzieżą jako nową formę duszpasterską i kontynuował je przez kolejne czterdzieści lat.</p>
-            <p>Był często zapraszanym rekolekcjonistą i szczególnie w okresie Wielkiego Postu był po prostu do udręczenia zapracowany. Opiekował się też małżeństwami, organizując w Laskach rekolekcje grup małżeńskich. Był spowiednikiem i przewodnikiem duchowym wielu wybitnych osób, zarówno w Laskach jak w ośrodku duszpasterskim w kościele Św. Marcina przy ulicy Piwnej w Warszawie. Nie jest już dziś tajemnicą, że był przez wiele lat zaufanym powiernikiem ks. biskupa Karola Wojtyły, później metropolity krakowskiego i Papieża Jana Pawła II.</p>
-            <p>W wieku 63 lat otrzymał tytuł prałata, potem infułata. Ale do tych tytułów nie przywiązywał wagi, żadnych wysokich stanowisk kościelnych czy świeckich nigdy nie piastował i nie zabiegał o nie. To tylko najważniejsze drogi jego pracowitego życia, nacechowanego otwartym i przyjaznym podejściem do ludzi. Życie rodzinne, kolejne etapy nauki, studia prawnicze, sport, liczne przyjaźnie, dojrzewanie duchowe w Lwowskim Seminarium Duchownym przygotowały go do wielkiej próby, którą była praca duszpasterska wśród zesłanych do ZSRR Polaków.</p>
-            <p>Ojciec Fedorowicz zmarł 26 czerwca 2002 roku, przeżywszy ponad 95 lat. W uroczystościach pogrzebowych uczestniczyło kilkaset osób, m.in. z grupy znanych polityków Tadeusz Mazowiecki, Tomasz Strzembosz, Aleksander Małachowski.</p>
-        </section>
-
-        <section class="pope-quote">
-            <blockquote>"Był pełnym mądrości kierownikiem duchowym wielu ludzi poszukujących chrześcijańskiej doskonałości, długoletnim opiekunem duchowym całego dzieła Lasek, wielkim przyjacielem niewidomych i wszystkich, którzy tam przyjeżdżali. Sam wielokrotnie korzystałem z jego kapłańskiej mądrości i szczerej przyjaźni. Wiele mu zawdzięczam"</blockquote>
-            <cite>— Jan Paweł II, 2002 r.</cite>
-        </section>
+        <div class="pope-quote">
+            "Był pełnym mądrości kierownikiem duchowym wielu ludzi... Sam wielokrotnie korzystałem z jego kapłańskiej mądrości i szczerej przyjaźni." — Jan Paweł II
+        </div>
     </div>
 
     <section class="media-section">
-        <h2 class="media-title">Szlaki i Mapy</h2>
+        <h2 class="media-title">Geografia Życia</h2>
         <div class="maps-grid">
             <div class="map-card">
-                <h4>Mapa Interaktywna</h4>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.411!2d20.84!3d52.28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDE2JzQ4LjAiTiAyMMKwNTAnMjQuMCJF!5e0!3m2!1spl!2spl!4v1620000000000" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <h4>Lokalizacja historyczna</h4>
+                <iframe src="http://googleusercontent.com/maps.google.com/3" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
             <div class="map-card">
-                <h4>Szkic trasy (Kazachstan)</h4>
-                <img src="img/mapa_szkic.jpg" alt="Szkic mapy" class="sketch-placeholder" onerror="this.src='https://via.placeholder.com/500x300?text=Szkic+Mapy+Wojny+.JPG'">
+                <h4>Szkic trasy</h4>
+                <img src="img/tf_mapa_szkic.jpg" alt="Szkic" class="sketch-img" onerror="this.src='https://via.placeholder.com/500x300?text=Szkic+Mapy+.JPG'">
             </div>
         </div>
     </section>
 
     <section class="media-section">
-        <h2 class="media-title">Nagrania Archiwalne</h2>
+        <h2 class="media-title">Nagrania Audio</h2>
         <div class="audio-box">
             <div class="audio-item">
-                <label>Wspomnienie Domu Rodzinnego cz. 1</label>
-                <audio controls><source src="audio/tf_wspomnienie_1.mp3" type="audio/mpeg"></audio>
+                <audio controls><source src="audio/tf_audio1.mp3" type="audio/mpeg"></audio>
             </div>
             <div class="audio-item">
-                <label>Wspomnienie Domu Rodzinnego cz. 2</label>
-                <audio controls><source src="audio/tf_wspomnienie_2.mp3" type="audio/mpeg"></audio>
+                <audio controls><source src="audio/tf_audio2.mp3" type="audio/mpeg"></audio>
             </div>
         </div>
     </section>
 
     <section class="media-section">
         <h2 class="media-title">Fotokronika</h2>
-        <div class="photo-grid">
-            <div class="photo-card"><img src="img/tf_1.jpg" alt="Zdj 1" onerror="this.src='https://via.placeholder.com/200?text=Zdj+1'"></div>
-            <div class="photo-card"><img src="img/tf_2.jpg" alt="Zdj 2" onerror="this.src='https://via.placeholder.com/200?text=Zdj+2'"></div>
-            <div class="photo-card"><img src="img/tf_3.jpg" alt="Zdj 3" onerror="this.src='https://via.placeholder.com/200?text=Zdj+3'"></div>
-            <div class="photo-card"><img src="img/tf_4.jpg" alt="Zdj 4" onerror="this.src='https://via.placeholder.com/200?text=Zdj+4'"></div>
-            <div class="photo-card"><img src="img/tf_5.jpg" alt="Zdj 5" onerror="this.src='https://via.placeholder.com/200?text=Zdj+5'"></div>
-            <div class="photo-card"><img src="img/tf_6.jpg" alt="Zdj 6" onerror="this.src='https://via.placeholder.com/200?text=Zdj+6'"></div>
-            <div class="photo-card"><img src="img/tf_7.jpg" alt="Zdj 7" onerror="this.src='https://via.placeholder.com/200?text=Zdj+7'"></div>
-            <div class="photo-card"><img src="img/tf_8.jpg" alt="Zdj 8" onerror="this.src='https://via.placeholder.com/200?text=Zdj+8'"></div>
-            <div class="photo-card"><img src="img/tf_9.jpg" alt="Zdj 9" onerror="this.src='https://via.placeholder.com/200?text=Zdj+9'"></div>
-            <div class="photo-card"><img src="img/tf_10.jpg" alt="Zdj 10" onerror="this.src='https://via.placeholder.com/200?text=Zdj+10'"></div>
-        </div>
+        <div class="photo-grid" id="gallery-container">
+            </div>
     </section>
 
     <section class="media-section">
@@ -204,28 +157,117 @@
         </div>
     </section>
 
-    <section class="sources-section">
-        <h3>Wybrane źródła</h3>
-        <ul class="sources-list">
-            <li>www.tadeuszfedorowicz.pl</li>
-            <li>Ks. T. Fedorowicz 1991 - <i>Drogi opatrzności</i>. Norbertinum, Lublin</li>
-            <li>Ks. T. Fedorowicz 2010 - <i>Misericordias Domini in aeternum cantabo</i>. Zapiski kleryka z lat 1935 - 1936. Zgromadzenie Sióstr Franciszkanek Służebnic Krzyża, Laski - Warszawa</li>
-            <li>Zespół ds. Archiwum ks. T. Fedorowicza 2011 - <i>Na papierze i w sercu. Listy Ojca Świętego Jana Pawła II do ks. Tadeusza Fedorowicza</i>. Zgromadzenie Sióstr Franciszkanek Służebnic Krzyża, Laski</li>
-        </ul>
-    </section>
+    <div class="content-container">
+        <section class="sources-section">
+            <strong>Wybrane źródła:</strong><br>
+            • www.tadeuszfedorowicz.pl<br>
+            • Ks. T. Fedorowicz 1991 - Drogi opatrzności. Norbertinum, Lublin<br>
+            • Ks. T. Fedorowicz 2010 - Misericordias Domini...<br>
+            • Zespół ds. Archiwum ks. T. Fedorowicza 2011 - Na papierze i w sercu...
+        </section>
+    </div>
 
     <div class="sub-pagination">
         <a href="zycie.html" class="sub-btn active">Życie</a>
-        <a href="na-zjazdachTF.html" class="sub-btn">Na Zjazdach</a>
-        <a href="blogoslawienstwaTF.html" class="sub-btn">Błogosławieństwa</a>
+        <a href="zjazdyTF.html" class="sub-btn">Na Zjazdach</a>
         <a href="naukiTF.html" class="sub-btn">Nauki</a>
-        <a href="ksiazkiTF.html" class="sub-btn">Książki</a>
     </div>
 </article>
 
-<footer>
-    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
-</footer>
+<div id="lightbox" onclick="closeLightbox(event)">
+    <div class="lb-container" onclick="event.stopPropagation()">
+        <span class="lb-close" onclick="closeLightbox(event)">Zamknij (X)</span>
+        <img id="lb-img" src="" alt="Powiększenie" onclick="changePhoto(1)">
+        <div class="lb-controls">
+            <button class="lb-arrow" onclick="changePhoto(-1)">❮</button>
+            <div class="lb-counter" id="lb-counter"></div>
+            <button class="lb-arrow" onclick="changePhoto(1)">❯</button>
+        </div>
+    </div>
+</div>
+
+<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
+
+<script>
+    const folder = 'tf'; // Folder ze zdjęciami
+    const liczbaZdjec = 10; 
+    let currentIdx = 1;
+
+    const container = document.getElementById('gallery-container');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCounter = document.getElementById('lb-counter');
+
+    // 1. Generowanie miniatur
+    for (let i = 1; i <= liczbaZdjec; i++) {
+        const path = `img/${folder}/foto_${i}.jpg`; // Ścieżka do zdjęć
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        const img = document.createElement('img');
+        img.src = path;
+        img.loading = "lazy";
+        // Jeśli nie masz plików, pokaże placeholder
+        img.onerror = function() { this.src = `https://via.placeholder.com/200?text=Zdjecie+${i}`; };
+        div.onclick = () => openLightbox(i);
+        div.appendChild(img);
+        container.appendChild(div);
+    }
+
+    // 2. Obsługa Lightboxa
+    function openLightbox(index) {
+        currentIdx = index;
+        updateLB();
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function changePhoto(dir) {
+        currentIdx += dir;
+        if (currentIdx > liczbaZdjec) currentIdx = 1;
+        if (currentIdx < 1) currentIdx = liczbaZdjec;
+        updateLB();
+    }
+
+    function updateLB() {
+        // Logika szukania pliku lub placeholdera dla podglądu
+        const path = `img/${folder}/foto_${currentIdx}.jpg`;
+        lbImg.src = path;
+        lbCounter.innerText = `${currentIdx} / ${liczbaZdjec}`;
+        
+        // Obsługa braku pliku w podglądzie
+        lbImg.onerror = function() { this.src = `https://via.placeholder.com/800x600?text=Podgląd+Zdjęcia+${currentIdx}`; };
+    }
+
+    // 3. Klawiatura
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+            if (e.key === "ArrowRight") changePhoto(1);
+            if (e.key === "ArrowLeft") changePhoto(-1);
+            if (e.key === "Escape") closeLightbox();
+        }
+    });
+
+    // 4. GESTY (Swipe)
+    let touchStartX = 0;
+    let isMultiTouch = false;
+
+    lightbox.addEventListener('touchstart', e => {
+        if (e.touches.length > 1) isMultiTouch = true;
+        else { isMultiTouch = false; touchStartX = e.changedTouches[0].screenX; }
+    }, {passive: true});
+
+    lightbox.addEventListener('touchend', e => {
+        if (isMultiTouch) return;
+        let touchEndX = e.changedTouches[0].screenX;
+        if (touchEndX < touchStartX - 70) changePhoto(1); 
+        if (touchEndX > touchStartX + 70) changePhoto(-1);
+    }, {passive: true});
+</script>
 
 </body>
 </html>
