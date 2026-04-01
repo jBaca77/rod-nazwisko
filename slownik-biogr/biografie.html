@@ -40,7 +40,7 @@
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
         .overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* ── QUOTE ── */
+        /* ── QUOTE (Nowy cytat) ── */
         .quote-box { max-width: 800px; margin: 60px auto 20px; text-align: center; padding: 0 24px; }
         .quote-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.5rem; color: var(--sepia); line-height: 1.5; margin-bottom: 10px; }
         .quote-author { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); }
@@ -49,7 +49,7 @@
         main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
         .gen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
-        /* ── ODŚWIEŻONY KAFELEK HERO ── */
+        /* ── KAFELEK HERO (Split-Style) ── */
         .card-hero { 
             grid-column: 1 / -1; 
             display: flex; 
@@ -101,7 +101,6 @@
             border: 1px solid var(--sepia-pale); 
             background: var(--warm-white);
             transition: 0.3s;
-            position: relative;
         }
 
         .hero-sublinks a:hover { 
@@ -166,8 +165,8 @@
 </aside>
 
 <section class="quote-box">
-    <p class="quote-text">„Kto nie szanuje i nie ceni swej przeszłości, nie jest godzien szacunku teraźniejszości ani prawa do przyszłości.”</p>
-    <p class="quote-author">Józef Piłsudski</p>
+    <p class="quote-text">„Przeszłość — to jest dziś, tylko cokolwiek dalej...”</p>
+    <p class="quote-author">Cyprian Kamil Norwid</p>
 </section>
 
 <main>
@@ -177,7 +176,7 @@
                 <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia-light);">Księga Zbiorcza</span>
                 <h3>Poczet Członków Rodu</h3>
                 <div class="card-ornament"></div>
-                <p style="font-size: 0.9rem; color: var(--sepia); font-style: italic;">Kompletny zbiór biografii, nauk oraz pamiątek klanowych zebrany w jednym archiwum.</p>
+                <p style="font-size: 0.9rem; color: var(--sepia); font-style: italic;">Kompletny zbiór biografii, pamiątek i nauk zebrany w jednym, wspólnym archiwum klanowym.</p>
             </div>
             <div class="hero-right">
                 <div class="hero-sublinks">
