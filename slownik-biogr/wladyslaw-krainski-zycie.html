@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ks. Władysław Korniłowicz - Życie | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: var(--gold-light); }
+
+        /* NAGŁÓWEK */
+        .article-header { max-width: 900px; margin: 80px auto 40px; padding: 0 24px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: var(--sepia); margin-bottom: 15px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300; line-height: 1.1; margin-bottom: 15px; letter-spacing: 1px; color: var(--ink); }
+        .dates { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--gold); font-style: italic; position: relative; display: inline-block; padding: 0 40px; }
+        .dates::before, .dates::after { content: ""; position: absolute; top: 50%; width: 30px; height: 1px; background: var(--gold-light); }
+        .dates::before { left: 0; } .dates::after { right: 0; }
+
+        /* TREŚĆ GŁÓWNA */
+        .content-container { max-width: 850px; margin: 0 auto; padding: 0 24px; }
+        
+        .life-stage { margin-bottom: 60px; position: relative; }
+        .life-stage p { margin-bottom: 25px; text-align: justify; font-size: 1.1rem; color: #333; }
+
+        .life-stage p:first-of-type::first-letter {
+            float: left; font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem; line-height: 0.8; padding: 8px 12px 4px 0;
+            color: var(--gold); font-weight: 300;
+        }
+
+        .section-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); display: block; margin-bottom: 10px; font-weight: 500; }
+        
+        /* CYTAT */
+        .pope-quote {
+            background: linear-gradient(to right, var(--parchment), transparent);
+            padding: 40px; border-left: 3px solid var(--gold);
+            margin: 60px 0; position: relative;
+        }
+        .pope-quote blockquote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; line-height: 1.6; color: var(--ink-light); margin-bottom: 15px; }
+        .pope-quote cite { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); font-style: normal; }
+
+        /* MULTIMEDIA */
+        .media-section { max-width: 1000px; margin: 100px auto; padding: 0 24px; border-top: 1px solid var(--line); padding-top: 60px; }
+        .media-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; color: var(--ink); }
+
+        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .photo-card { position: relative; overflow: hidden; background: #fff; padding: 10px; border: 1px solid var(--line); transition: 0.4s; cursor: pointer; }
+        .photo-card img { width: 100%; height: 100%; aspect-ratio: 1/1; object-fit: cover; filter: grayscale(30%); transition: 0.5s; }
+        .photo-card:hover { transform: translateY(-10px); border-color: var(--gold); }
+        .photo-card:hover img { filter: grayscale(0%); }
+
+        .audio-box { background: var(--parchment); padding: 40px; border: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 40px 0; }
+        .audio-item label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--sepia); font-weight: 500; }
+        audio { width: 100%; filter: sepia(20%); }
+
+        /* WIDEO */
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .video-item { aspect-ratio: 16/9; background: var(--ink); border: 1px solid var(--line); }
+
+        /* NAWIGACJA DOLNA */
+        .sub-pagination { max-width: 900px; margin: 40px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; background: white; }
+        .sub-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+        .sub-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+
+        @media (max-width: 600px) {
+            .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .audio-box { grid-template-columns: 1fr; }
+            .article-header { margin-top: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="biografie.html" class="back-link">← Biografie</a>
+    </div>
+</nav>
+
+<article>
+    <header class="article-header">
+        <span class="meta-top">Ojciec i Współtwórca Lasek</span>
+        <h1>ks. Władysław Korniłowicz</h1>
+        <div class="dates">1884 – 1946</div>
+    </header>
+
+    <div class="content-container">
+        
+        <section class="life-stage">
+            <span class="section-tag">Droga ku kapłaństwu</span>
+            <p>Władysław Korniłowicz urodził się 2 marca 1884 roku w Warszawie, w wybitnej rodzinie lekarskiej. Syn Edwarda Korniłowicza, znanego psychiatry, oraz Wiktorii z Pollów. Wychowany w atmosferze wysokiej kultury intelektualnej i patriotycznej, po ukończeniu gimnazjum w Warszawie, rozpoczął studia przyrodnicze w Zurychu. Jednak pod wpływem głębokich przemyśleń i rozwoju duchowego, zdecydował się na drogę kapłańską. Wstąpił do Warszawskiego Metropolitalnego Seminarium Duchownego, a dalszą formację kontynuował we Fryburgu Szwajcarskim, gdzie nasiąkł nowoczesną myślą katolicką i duchem odnowy liturgicznej.</p>
+            <p>Święcenia kapłańskie przyjął w 1912 roku w Krakowie z rąk bpa Adama Stefana Sapiehy. Już od pierwszych lat kapłaństwa wykazywał niezwykły dar duszpasterski, szczególnie wśród inteligencji i młodzieży akademickiej, stając się jednym z pionierów ruchu "Odrodzenie".</p>
+        </section>
+
+        <section class="life-stage">
+            <span class="section-tag">Dzieło Lasek i Matka Czacka</span>
+            <p>Kluczowym momentem w życiu ks. Władysława było spotkanie z Matką Elżbietą Różą Czacką. Zafascynowany jej wizją służby ociemniałym oraz ideą tworzenia środowiska skupionego wokół Krzyża, stał się współtwórcą i ojcem duchowym Dzieła Lasek. To on nadał Laskom unikalny profil duchowy – miejsce otwarte dla poszukujących, niewierzących i wątpiących, gdzie liturgia sprawowana była z najwyższą dbałością o jej głębię i piękno.</p>
+            <p>Dla ociemniałych i sióstr Franciszkanek Służebnic Krzyża był po prostu "Ojcem". Wprowadził w Laskach ducha tomizmu chrześcijańskiego, połączonego z franciszkańską prostotą. Był spowiednikiem i kierownikiem duchowym wielu wybitnych postaci tamtego czasu, m.in. późniejszego Prymasa Stefana Wyszyńskiego, którego wprowadził w środowisko Lasek.</p>
+        </section>
+
+        <section class="life-stage">
+            <span class="section-tag">Duchowość i Dziedzictwo</span>
+            <p>Ks. Korniłowicz był wizjonerem odnowy Kościoła. Kładł ogromny nacisk na apostolstwo świeckich i "sacrum" codzienności. Uważał, że każda praca i każdy ból, złączone z Chrystusem, mają moc przemieniającą świat. W czasie II wojny światowej, mimo słabnącego zdrowia, pozostał dla wielu ostoją spokoju i wiary. Zmarł 26 września 1946 roku w Laskach.</p>
+            <p>Jego proces beatyfikacyjny trwa, a dziedzictwo duszpasterskie pozostaje fundamentem, na którym opiera się współczesny profil duchowy Lasek. Był człowiekiem niezwykłej pokory, o którym mówiono, że "promieniował Bogiem".</p>
+        </section>
+
+        <section class="pope-quote">
+            <blockquote>"Ksiądz Władysław Korniłowicz był postacią opatrznościową. To on nauczył nas kochać liturgię i rozumieć Kościół jako wspólnotę osób poszukujących prawdy. Jego wpływ na formację intelektualną i duchową polskiej inteligencji katolickiej jest nie do przecenienia."</blockquote>
+            <cite>— ze wspomnień środowiska "Odrodzenia"</cite>
+        </section>
+    </div>
+
+    <section class="media-section">
+        <h2 class="media-title">Fotokronika Ojca</h2>
+        <div class="photo-grid">
+            <div class="photo-card"><img src="img/wk_1.jpg" alt="Ks. Władysław Korniłowicz - portret" onerror="this.src='https://via.placeholder.com/200?text=Zdjęcie+1'"></div>
+            <div class="photo-card"><img src="img/wk_2.jpg" alt="Ojciec w Laskach" onerror="this.src='https://via.placeholder.com/200?text=Zdjęcie+2'"></div>
+            <div class="photo-card"><img src="img/wk_3.jpg" alt="Z Matką Czacką" onerror="this.src='https://via.placeholder.com/200?text=Zdjęcie+3'"></div>
+            <div class="photo-card"><img src="img/wk_4.jpg" alt="Duszpasterstwo" onerror="this.src='https://via.placeholder.com/200?text=Zdjęcie+4'"></div>
+            <div class="photo-card"><img src="img/wk_5.jpg" alt="Wspólne modlitwy" onerror="this.src='https://via.placeholder.com/200?text=Zdjęcie+5'"></div>
+            <div class="photo-card"><img src="img/wk_6.jpg" alt="Archiwalne Laski" onerror="this.src='https://via.placeholder.com/200?text=Zdjęcie+6'"></div>
+            <div class="photo-card"><img src="img/wk_7.jpg" alt="Z ociemniałymi" onerror="this.src='https://via.placeholder.com/200?text=Zdjęcie+7'"></div>
+            <div class="photo-card"><img src="img/wk_8.jpg" alt="Grupa Odrodzenie" onerror="this.src='https://via.placeholder.com/200?text=Zdjęcie+8'"></div>
+            <div class="photo-card"><img src="img/wk_9.jpg" alt="Ostatnie lata" onerror="this.src='https://via.placeholder.com/200?text=Zdjęcie+9'"></div>
+            <div class="photo-card"><img src="img/wk_10.jpg" alt="Pamięć o Ojcu" onerror="this.src='https://via.placeholder.com/200?text=Zdjęcie+10'"></div>
+        </div>
+    </section>
+
+    <section class="media-section">
+        <h2 class="media-title">Słowo Archiwalne</h2>
+        <div class="audio-box">
+            <div class="audio-item">
+                <label>Konferencja o modlitwie (rekonstrukcja/czytanie)</label>
+                <audio controls><source src="audio/wk_slowo_1.mp3" type="audio/mpeg"></audio>
+            </div>
+            <div class="audio-item">
+                <label>Wspomnienie o Ojcu Władysławie</label>
+                <audio controls><source src="audio/wk_wspomnienie.mp3" type="audio/mpeg"></audio>
+            </div>
+        </div>
+    </section>
+
+    <section class="media-section">
+        <h2 class="media-title">Materiały Wideo i Dokumenty</h2>
+        <div class="video-grid">
+            <div class="video-item"></div>
+            <div class="video-item"></div>
+        </div>
+    </section>
+
+    <div class="sub-pagination">
+        <a href="wladkrml.html" class="sub-btn active">Życie</a>
+        <a href="laski_historia.html" class="sub-btn">Dzieło Lasek</a>
+        <a href="mysli_wk.html" class="sub-btn">Myśli i Nauki</a>
+        <a href="biografie.html" class="sub-btn">Biografie</a>
+    </div>
+</article>
+
+<footer>
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+</footer>
+
+</body>
+</html>
