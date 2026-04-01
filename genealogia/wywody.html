@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wywody Przodków | Ładomirscy i Kraińscy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fdfaf6;
+            --box-bg: #ffffff;
+            --text-color: #1e1a14;
+            --border-color: #7a6548;
+            --accent-color: #9b7d4a;
+            --shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header-nav {
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+
+        /* Struktura Drzewa */
+        .genealogy-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            overflow-x: auto;
+            padding: 40px 0;
+        }
+
+        .generation-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .person-card {
+            background: var(--box-bg);
+            border: 1px solid var(--border-color);
+            width: 220px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .herb-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .details {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #555;
+        }
+
+        .marriage-symbol {
+            font-size: 1.5rem;
+            color: var(--border-color);
+            align-self: center;
+            padding: 0 10px;
+        }
+
+        .relation-line {
+            height: 2px;
+            background: var(--border-color);
+            width: 100%;
+            max-width: 50px;
+            align-self: center;
+        }
+
+        /* Specyficzne dla strony wywody2.php - układ piętrowy */
+        .couple-group {
+            display: flex;
+            flex-direction: row;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .generation-row { flex-direction: column; align-items: center; }
+            .couple-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="header-nav">
+        DRZEWO KLANOWE | WYWODY PRZODKÓW | ARCHIWUM
+    </nav>
+
+    <h1>WYWODY PRZODKÓW</h1>
+    
+    <div class="warning-box">
+        <strong>UWAGA!</strong> To jest wersja robocza. Nie zweryfikowano jeszcze wszystkich przedstawionych poniżej informacji.
+    </div>
+
+    <div class="genealogy-wrapper">
+        
+        <div class="generation-row">
+            <div class="couple-group">
+                <div class="person-card">
+                    <div class="herb-name">ŁADA v WŁASNY</div>
+                    <div class="name">Zdzisław Fabian Ładomirski</div>
+                    <div class="details">
+                        wł. dóbr Markowce<br>
+                        (Babin 1864 - Poznań 1950)
+                    </div>
+                </div>
+
+                <div class="marriage-symbol">∞</div>
+
+                <div class="person-card">
+                    <div class="herb-name">JELITA</div>
+                    <div class="name">Anna Maria Kraińska</div>
+                    <div class="details">
+                        (Miejsce Piastowe 1875 - Poznań 1959)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="details" style="font-style: italic;">∞ 1895 Jabłonka, par. Dydnia</div>
+
+        <div class="generation-row">
+            <div class="couple-group">
+                <div class="person-card">
+                    <div class="herb-name">JELITA</div>
+                    <div class="name">Władysław Marian Walenty Kraiński</div>
+                    <div class="details">
+                        wł. dóbr Niebocko, Wyszatyce i Jabłonka<br>
+                        (1841 - 1926)
+                    </div>
+                </div>
+                <div class="marriage-symbol">∞</div>
+                <div class="person-card">
+                    <div class="herb-name">STRZEMIĘ</div>
+                    <div class="name">Maria Emilia Zofia Trzecieska</div>
+                    <div class="details">
+                        (Polanka 1853 - Markowce 1932)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="details" style="text-align: center; max-width: 600px;">
+            <strong>Potomstwo:</strong><br>
+            Władysław Maria, Maria Monika, Jadwiga Maria Rafała, Zofia Maria Franciszka, Stanisława Maria, Konstancja Maria Franciszka, Józef Maria Patrycjusz, Zdzisław Maria, Andrzej Maria, Maciej Kazimierz Maria, Antoni Maria Józef i Anna Ładomirscy.
+        </div>
+
+    </div>
+
+    <footer style="text-align: center; margin-top: 50px; color: var(--border-color); font-size: 0.8rem;">
+        &copy; 2026 Archiwum Rodzinne Ładomirskich i Kraińskich
+    </footer>
+
+</body>
+</html>
