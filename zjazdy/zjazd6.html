@@ -138,7 +138,7 @@
 
 <nav>
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
         <a href="zjazdy.html" class="back-link">← Powrót do listy</a>
     </div>
 </nav>
@@ -159,13 +159,13 @@
     <span class="hero-caption">Podpisy uczestników VI Zjazdu w Łopusznej</span>
 
     <div class="hero-container">
-        <img src="./img/zjazdy/zjazdvi/foto_zjazdvi_000.jpg" alt="Zdjęcie grupowe 1" class="main-img">
-        <img src="./img/zjazdy/zjazdvi/foto_zjazdvi_0000.jpg" alt="Zdjęcie grupowe 2" class="main-img">
+        <img src="../img/zjazdy/zjazdvi/foto_zjazdvi_000.jpg" alt="Zdjęcie grupowe 1" class="main-img">
+        <img src="../img/zjazdy/zjazdvi/foto_zjazdvi_0000.jpg" alt="Zdjęcie grupowe 2" class="main-img">
     </div>
 
     <section class="memories-section">
         <h2 class="section-title">List od "Wujka"</h2>
-        <img src="./img/zjazdy/zjazdvi/foto_zjazdvi_99.jpg" alt="Zdjęcie od Wujka">
+        <img src="../img/zjazdy/zjazdvi/foto_zjazdvi_99.jpg" alt="Zdjęcie od Wujka">
     </section>
 
     <div class="gallery-wrapper">
@@ -206,7 +206,7 @@
 
     for (let i = 1; i <= liczba_zdjec; i++) {
         const nr = i.toString().padStart(2, '0');
-        const path = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+        const path = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
         const div = document.createElement('div');
         div.className = 'gallery-item';
         const img = document.createElement('img');
@@ -239,7 +239,7 @@
 
     function updateLB() {
         const nr = currentIdx.toString().padStart(2, '0');
-        lbImg.src = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+        lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
         lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
     }
 
