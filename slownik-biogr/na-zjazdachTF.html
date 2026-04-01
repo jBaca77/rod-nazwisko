@@ -21,46 +21,48 @@
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .back-link:hover { color: var(--gold-light); }
+
+        /* CYTAT Z WATYKANU */
+        .vatican-quote { max-width: 800px; margin: 60px auto 20px; padding: 0 24px; text-align: center; }
+        .vatican-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; line-height: 1.4; color: var(--ink); margin-bottom: 15px; }
+        .vatican-quote cite { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); font-style: normal; display: block; }
 
         /* NAGŁÓWEK */
-        .article-header { max-width: 900px; margin: 80px auto 40px; padding: 0 24px; text-align: center; }
-        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: var(--sepia); margin-bottom: 15px; display: block; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300; line-height: 1.1; margin-bottom: 15px; letter-spacing: 1px; }
+        .article-header { max-width: 900px; margin: 40px auto 40px; padding: 0 24px; text-align: center; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 300; line-height: 1.2; color: var(--gold); }
 
         /* SEKCJA LISTU (ZDJĘCIA) */
         .letter-images { max-width: 850px; margin: 0 auto 40px; padding: 0 24px; display: flex; flex-direction: column; gap: 0; }
-        .letter-images img { width: 100%; height: auto; display: block; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .letter-images img { width: 100%; height: auto; display: block; }
 
         /* TEKST LISTU */
         .content-container { max-width: 850px; margin: 0 auto; padding: 0 24px; }
         .letter-text { 
             background: white; padding: 60px; border: 1px solid var(--line); 
-            font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; 
-            line-height: 1.6; color: #222; margin-bottom: 80px;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; 
+            line-height: 1.6; color: #222; margin-bottom: 80px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
         .letter-header { text-align: right; margin-bottom: 40px; }
-        .letter-content p { margin-bottom: 20px; text-indent: 30px; text-align: justify; }
-        .letter-footer { margin-top: 40px; text-align: right; font-style: italic; }
+        .letter-content p { margin-bottom: 20px; text-indent: 35px; text-align: justify; }
+        .letter-footer { margin-top: 40px; text-align: right; font-weight: 400; }
 
         /* MULTIMEDIA */
-        .media-section { max-width: 1000px; margin: 80px auto; padding: 0 24px; border-top: 1px solid var(--line); padding-top: 60px; }
-        .media-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
+        .media-section { max-width: 1000px; margin: 60px auto; padding: 0 24px; border-top: 1px solid var(--line); padding-top: 60px; }
+        .media-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; color: var(--ink); letter-spacing: 1px; }
 
-        /* VIDEO */
-        .video-container { width: 100%; aspect-ratio: 16/9; background: var(--ink); margin-bottom: 60px; border: 1px solid var(--line); }
+        /* WIDEO */
+        .video-container { width: 100%; aspect-ratio: 16/9; background: var(--ink); margin-bottom: 20px; border: 1px solid var(--line); }
 
-        /* FOTOKRONIKA - UKŁAD ZGODNY Z MODLINEM */
+        /* FOTOKRONIKA - SIATKA IDENTYCZNA JAK W MODLINIE */
         .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .photo-card { position: relative; overflow: hidden; background: #fff; padding: 10px; border: 1px solid var(--line); transition: 0.4s; }
         .photo-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; filter: grayscale(30%); transition: 0.5s; }
-        .photo-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .photo-card:hover { border-color: var(--gold); }
         .photo-card:hover img { filter: grayscale(0%); }
 
         /* NAWIGACJA DOLNA */
         .sub-pagination { max-width: 900px; margin: 40px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; background: white; }
-        .sub-btn:hover { border-color: var(--gold); color: var(--gold); }
         .sub-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
@@ -73,9 +75,8 @@
                 gap: 2px; 
             }
             .photo-card { padding: 0; border: 1px solid var(--line); }
-            .photo-card img { opacity: 0.8; }
-            .letter-text { padding: 30px 20px; font-size: 1.1rem; }
-            .article-header { margin-top: 40px; }
+            .letter-text { padding: 30px 20px; font-size: 1.15rem; }
+            .vatican-quote blockquote { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -88,28 +89,33 @@
     </div>
 </nav>
 
+<div class="vatican-quote">
+    <blockquote>
+        "Bardzo miłe muszą być takie zjazdy, gdzie zacieśniają się więzy rodzinnej miłości i przyjaźni pod duchowym przewodnictwem tak znakomitego i kochanego Ks. Infułata Tadeusza."
+    </blockquote>
+    <cite>Watykan 07.11.1989 r. /-/ Wujek</cite>
+</div>
+
 <article>
     <header class="article-header">
-        <span class="meta-top">Korespondencja i Obecność</span>
-        <h1>ks. Tadeusz na Zjazdach Rodzinnych</h1>
+        <h1>List do uczestników IV Zjazdu w Trzebieszowicach</h1>
     </header>
 
     <div class="letter-images">
-        <img src="img/biografie/tf/list_cz1.jpg" alt="List ks. Tadeusza cz. 1" onerror="this.src='https://via.placeholder.com/800x1000?text=List+strona+1'">
-        <img src="img/biografie/tf/list_cz2.jpg" alt="List ks. Tadeusza cz. 2" onerror="this.src='https://via.placeholder.com/800x1000?text=List+strona+2'">
-        <img src="img/biografie/tf/list_cz3.jpg" alt="List ks. Tadeusza cz. 3" onerror="this.src='https://via.placeholder.com/800x1000?text=List+strona+3'">
+        <img src="img/biografie/tf/list_cz1.jpg" alt="List strona 1" onerror="this.src='https://via.placeholder.com/800x600?text=Zdjęcie+Listu+Część+1'">
+        <img src="img/biografie/tf/list_cz2.jpg" alt="List strona 2" onerror="this.src='https://via.placeholder.com/800x600?text=Zdjęcie+Listu+Część+2'">
+        <img src="img/biografie/tf/list_cz3.jpg" alt="List strona 3" onerror="this.src='https://via.placeholder.com/800x600?text=Zdjęcie+Listu+Część+3'">
     </div>
 
     <div class="content-container">
         <section class="letter-text">
-            <div class="letter-header">
-                Laski, 17 września 1985 r.
-            </div>
+            <div class="letter-header">Laski, 17 września 1985 r.</div>
             <div class="letter-content">
                 <p>Kochani,</p>
-                <p>Bardzo, bardzo mi żal, że tym razem nie będę z Wami! Was wszystkich zobaczyć i uściskać, szczególnie mi przykro z powodu Andrzeja (seniora). Ostatnio trochę przeciążyłem swoją pracą i serce mi się rozregulowało. To na razie nic poważnego, ale lekarz nakazuje mi absolutny spokój i wypoczynek.</p>
-                <p>Jestem z Wami sercem i modlitwą. Cieszę się ogromnie z Waszego spotkania. Takie zjazdy są niezwykle ważne – budują więź, która jest fundamentem naszej rodziny. Niech to spotkanie w Szalejowie będzie dla Was czasem radości i wzajemnego umocnienia.</p>
-                <p>Przesyłam każdemu z osobna moje błogosławieństwo i serdeczne pozdrowienia. Niech Dobry Bóg ma Was wszystkich w swojej opiece.</p>
+                <p>Bardzo, bardzo mi żal, że tym razem nie będę z Wami! Was wszystkich zobaczyć i uściskać, szczególnie mi przykro z powodu Andrzeja (seniora). Ostatnio trochę przeciążyłem swoją pracą i serce mi się rozregulowało. To na razie nic poważnego, ale lekarz nakazuje mi absolutny spokój i wypoczynek. Dlatego muszę zrezygnować z dalszych wyjazdów.</p>
+                <p>Nigdy nie zapomnę tych naszych spotkań, które tak bardzo wzbogacały moją duszę i dawały mi tyle radości. Cieszę się, że tradycja ta trwa i że spotykacie się w tak pięknym miejscu jak Trzebieszowice. Niech te wspólne chwile umacniają Waszą jedność i miłość rodzinną, która jest największym skarbem.</p>
+                <p>Będę z Wami duchem podczas Mszy świętej i wspólnych rozmów. Modlę się za każdego z Was, za nasze rodziny, za starszych i tych najmłodszych, którzy są naszą nadzieją.</p>
+                <p>Przesyłam Wam wszystkim i każdemu z osobna moje najserdeczniejsze błogosławieństwo. Niech Pan Bóg darzy Was zdrowiem i pokojem.</p>
             </div>
             <div class="letter-footer">
                 Wasz Tadeusz
@@ -118,21 +124,23 @@
     </div>
 
     <section class="media-section">
-        <h2 class="media-title">Materiały Archiwalne</h2>
-        
+        <h2 class="media-title">Materiały Wideo</h2>
         <div class="video-container">
             </div>
+    </section>
 
+    <section class="media-section">
+        <h2 class="media-title">Fotokronika</h2>
         <div class="photo-grid">
-            <div class="photo-card"><img src="img/biografie/tf/zjazd_1.jpg" alt="Zjazd 1" onerror="this.src='https://via.placeholder.com/200?text=Foto+1'"></div>
-            <div class="photo-card"><img src="img/biografie/tf/zjazd_2.jpg" alt="Zjazd 2" onerror="this.src='https://via.placeholder.com/200?text=Foto+2'"></div>
-            <div class="photo-card"><img src="img/biografie/tf/zjazd_3.jpg" alt="Zjazd 3" onerror="this.src='https://via.placeholder.com/200?text=Foto+3'"></div>
-            <div class="photo-card"><img src="img/biografie/tf/zjazd_4.jpg" alt="Zjazd 4" onerror="this.src='https://via.placeholder.com/200?text=Foto+4'"></div>
-            <div class="photo-card"><img src="img/biografie/tf/zjazd_5.jpg" alt="Zjazd 5" onerror="this.src='https://via.placeholder.com/200?text=Foto+5'"></div>
-            <div class="photo-card"><img src="img/biografie/tf/zjazd_6.jpg" alt="Zjazd 6" onerror="this.src='https://via.placeholder.com/200?text=Foto+6'"></div>
-            <div class="photo-card"><img src="img/biografie/tf/zjazd_7.jpg" alt="Zjazd 7" onerror="this.src='https://via.placeholder.com/200?text=Foto+7'"></div>
-            <div class="photo-card"><img src="img/biografie/tf/zjazd_8.jpg" alt="Zjazd 8" onerror="this.src='https://via.placeholder.com/200?text=Foto+8'"></div>
-            <div class="photo-card"><img src="img/biografie/tf/zjazd_9.jpg" alt="Zjazd 9" onerror="this.src='https://via.placeholder.com/200?text=Foto+9'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_01.jpg" alt="Zdj 1" onerror="this.src='https://via.placeholder.com/200?text=1'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_02.jpg" alt="Zdj 2" onerror="this.src='https://via.placeholder.com/200?text=2'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_03.jpg" alt="Zdj 3" onerror="this.src='https://via.placeholder.com/200?text=3'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_04.jpg" alt="Zdj 4" onerror="this.src='https://via.placeholder.com/200?text=4'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_05.jpg" alt="Zdj 5" onerror="this.src='https://via.placeholder.com/200?text=5'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_06.jpg" alt="Zdj 6" onerror="this.src='https://via.placeholder.com/200?text=6'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_07.jpg" alt="Zdj 7" onerror="this.src='https://via.placeholder.com/200?text=7'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_08.jpg" alt="Zdj 8" onerror="this.src='https://via.placeholder.com/200?text=8'"></div>
+            <div class="photo-card"><img src="img/biografie/tf/zjazd_09.jpg" alt="Zdj 9" onerror="this.src='https://via.placeholder.com/200?text=9'"></div>
         </div>
     </section>
 
