@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwiga Kraińska (s. Maria Aniela) - Biografia | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: var(--gold-light); }
+
+        /* NAGŁÓWEK I PROFIL */
+        .profile-section { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: center; }
+        
+        .profile-image-container { position: relative; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        .profile-image-container img { width: 100%; height: auto; display: block; filter: sepia(20%); }
+        .profile-image-container::after { content: ""; position: absolute; top: -10px; right: -10px; width: 50px; height: 50px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); z-index: -1; }
+
+        .profile-info { text-align: left; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: var(--sepia); margin-bottom: 10px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.1; margin-bottom: 10px; color: var(--ink); }
+        .religious-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); font-style: italic; margin-bottom: 15px; display: block; }
+        .dates { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--sepia); border-top: 1px solid var(--line); padding-top: 10px; display: inline-block; }
+
+        /* TREŚĆ GŁÓWNA */
+        .content-container { max-width: 850px; margin: 0 auto; padding: 0 24px; }
+        
+        .life-stage { margin-bottom: 50px; position: relative; }
+        .life-stage h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--parchment); padding-bottom: 10px; }
+        .life-stage p { margin-bottom: 20px; text-align: justify; font-size: 1.05rem; color: #333; }
+
+        .life-stage p:first-of-type::first-letter {
+            float: left; font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem; line-height: 0.8; padding: 8px 12px 4px 0;
+            color: var(--gold); font-weight: 300;
+        }
+
+        /* BOX CYTATU / NOTATKI */
+        .note-box {
+            background: var(--parchment);
+            padding: 35px;
+            border-left: 3px solid var(--gold);
+            margin: 40px 0;
+            font-style: italic;
+        }
+        .note-box strong { font-style: normal; color: var(--ink); font-family: 'Jost', sans-serif; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* MULTIMEDIA ZASTĘPCZE */
+        .media-section { max-width: 900px; margin: 60px auto; padding: 0 24px; }
+        .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .location-card { background: white; border: 1px solid var(--line); padding: 20px; text-align: center; }
+        .location-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 10px; color: var(--sepia); }
+        .map-placeholder { width: 100%; height: 200px; background: var(--cream); border: 1px dashed var(--line); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--sepia); }
+
+        /* NAWIGACJA DOLNA */
+        .sub-pagination { max-width: 900px; margin: 40px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; background: white; }
+        .sub-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+
+        @media (max-width: 768px) {
+            .profile-section { grid-template-columns: 1fr; text-align: center; }
+            .profile-info { text-align: center; }
+            .profile-image-container { max-width: 250px; margin: 0 auto; }
+            .location-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="biografie.html" class="back-link">← Biografie</a>
+    </div>
+</nav>
+
+<article>
+    <header class="profile-section">
+        <div class="profile-image-container">
+            <img src="img/jadwiga_krainska.jpg" alt="s. Maria Aniela od Najświętszego Sakramentu" onerror="this.src='https://via.placeholder.com/300x400?text=Portret+Zakonny'">
+        </div>
+        <div class="profile-info">
+            <span class="meta-top">Nauczycielka • Zakonnica</span>
+            <h1>Jadwiga Kraińska</h1>
+            <span class="religious-name">s. Maria Aniela od Najświętszego Sakramentu</span>
+            <div class="dates">1877 – 1958</div>
+        </div>
+    </header>
+
+    <div class="content-container">
+        
+        <section class="life-stage">
+            <h2>Zapisy Archiwalne (Szymanów)</h2>
+            <p>Urodzona 18 listopada 1877 roku w Wyszatycach, Jadwiga Kraińska wstąpiła do Zgromadzenia Sióstr Niepokalanek 7 listopada 1900 roku. Przez dziesięciolecia oddawała się pracy pedagogicznej, ucząc w szkołach w Jazłowcu, Jarosławiu, Niżniowie i Nowym Sączu. Specjalizowała się w naukach ścisłych i przyrodniczych, wykładając głównie arytmetykę oraz przyrodę, a w późniejszych latach udzielając korepetycji z łaciny, fizyki i matematyki.</p>
+            
+            <p>Jej życie zakonne charakteryzowało się niezwykłą dzielnością i pokorą. Nawet gdy choroba odebrała jej możliwość chodzenia i wymagała poruszania się na wózku, Jadwiga nigdy nie skarżyła się na ból czy monotonię dietetycznego pożywienia. W ostatnich latach życia, mimo postępującej utraty pamięci, zachowała pogodę ducha, nie narzekając na swój los.</p>
+        </section>
+
+        <section class="note-box">
+            <strong>Źródło: Materiały biograficzne (Kraków 2006)</strong><br><br>
+            "Jadwiga Kraińska (imię zakonne: Aniela od Najświętszego Sakramentu) śluby złożyła w 1908 r. Była wychowanką szkoły SS. Niepokalanek w Jarosławiu. Przez całe zakonne życie pełniła funkcję nauczycielki, ucząc niemal we wszystkich szkołach prowadzonych przez Zgromadzenie. Zmarła 16 czerwca 1958 r. w Szymanowie."
+        </section>
+
+        <section class="life-stage">
+            <h2>Wspomnienia Rodzinne (Antoni Kraiński)</h2>
+            <p>Jadwiga była trzecią córką Władysława i Marii z Trzecieskich Kraińskich. Edukację rozpoczęła w domu wraz ze starszymi siostrami, Anną i Zofią. W 1892 roku podjęła naukę u Niepokalanek w Jarosławiu, a następnie ukończyła gimnazjum w Jazłowcu. Po wstąpieniu do zakonu w 1900 roku, pracowała w wielu domach zgromadzenia, nauczając matematyki i kosmografii.</p>
+            
+            <p>Wspomnienia brata przywołują również dramatyczne epizody, jak tajną katechizację w Słonimie (gubernia grodzieńska) w 1912 roku, skąd Antoni musiał potajemnie przewozić siostrę przez granicę do Galicji. Wojenne losy rzuciły ją do Maciejowa na Polesiu, a później przez Pacyków do Szymanowa. W wolnych chwilach zajmowała się introligatorstwem, a gdy siły osłabły – pracami ręcznymi, wykazując się doskonałą pamięcią, którą cieszyła się niemal do samego końca.</p>
+        </section>
+
+        <section class="media-section">
+            <div class="location-grid">
+                <div class="location-card">
+                    <h4>Miejsce urodzenia</h4>
+                    <p>Wyszatyce</p>
+                    <div class="map-placeholder">Podkarpacie</div>
+                </div>
+                <div class="location-card">
+                    <h4>Miejsce spoczynku</h4>
+                    <p>Szymanów</p>
+                    <div class="map-placeholder">Klasztor SS. Niepokalanek</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="sub-pagination">
+        <a href="biografie.html" class="sub-btn">← Powrót do biografii</a>
+        <a href="rodzina_krainscy.html" class="sub-btn">Rodzina Kraińskich</a>
+        <a href="niepokalanki.html" class="sub-btn">SS. Niepokalanki</a>
+    </div>
+</article>
+
+<footer>
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+</footer>
+
+</body>
+</html>
