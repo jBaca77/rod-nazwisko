@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ks. Tadeusz Fedorowicz - Książki | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; }
+
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+
+        /* NAGŁÓWEK */
+        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 300; color: var(--ink); margin-bottom: 10px; }
+        .header-sub { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); }
+
+        /* KARTY KSIĄŻEK */
+        .books-container { max-width: 900px; margin: 0 auto 80px; padding: 0 24px; }
+        
+        .book-item {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 30px;
+            background: white;
+            border: 1px solid var(--line);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+        .book-item:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+
+        /* Miejsce na okładkę */
+        .book-cover {
+            width: 180px;
+            height: 260px;
+            background-color: var(--parchment);
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .book-cover img { width: 100%; height: 100%; object-fit: cover; }
+        .book-cover::after { content: "OKŁADKA"; font-size: 0.6rem; letter-spacing: 1px; color: var(--sepia); opacity: 0.5; }
+
+        /* Treść książki */
+        .book-content { display: flex; flex-direction: column; }
+        .book-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); margin-bottom: 5px; line-height: 1.2; text-transform: uppercase; }
+        .book-subtitle { font-size: 0.9rem; font-weight: 500; color: var(--sepia); margin-bottom: 15px; border-bottom: 1px solid var(--cream); padding-bottom: 10px; }
+        
+        .book-excerpt { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: #444; margin-bottom: 20px; font-style: italic; position: relative; }
+        .book-excerpt::before { content: "„"; position: absolute; left: -15px; color: var(--gold-light); font-size: 2rem; top: -10px; }
+
+        .book-meta { margin-top: auto; font-size: 0.8rem; color: var(--sepia); display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--line); padding-top: 15px; }
+        .book-author-meta { font-weight: 600; color: var(--gold); }
+
+        /* NAWIGACJA DOLNA */
+        .sub-pagination { max-width: 900px; margin: 40px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; padding: 10px 18px; border: 1px solid var(--line); transition: 0.3s; background: white; }
+        .sub-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; }
+
+        @media (max-width: 650px) {
+            .book-item { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+            .book-excerpt::before { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="biografie.html" class="back-link">← Biografie</a>
+    </div>
+</nav>
+
+<article>
+    <header class="article-header">
+        <span class="header-sub">Publikacje i Opracowania</span>
+        <h1>Książki ks. Tadeusza Fedorowicza</h1>
+    </header>
+
+    <div class="books-container">
+
+        <div class="book-item">
+            <div class="book-cover">
+                </div>
+            <div class="book-content">
+                <h2 class="book-title">Na papierze i w sercu</h2>
+                <div class="book-subtitle">Listy Ojca Świętego Jana Pawła II do Ks. Tadeusza Fedorowicza</div>
+                <p class="book-excerpt">
+                    Mamy prawo sądzić, że wśród tych, którzy starali się rozumieć Papieża „od wewnątrz”, a przynajmniej towarzyszyć mu z delikatnością i dyskrecją w tym, co najgłębsze i najbardziej osobiste, był ks. Tadeusz Fedorowicz.
+                </p>
+                <div class="book-meta">
+                    <span>(wybrane fragmenty Wstępu)</span>
+                    <span class="book-publisher">Zgromadzenie Sióstr Franciszkanek Służebnic Krzyża, Laski 2011</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-item">
+            <div class="book-cover">
+                </div>
+            <div class="book-content">
+                <h2 class="book-title">Misericordias Domini In Aeternum Cantabo</h2>
+                <div class="book-subtitle">Zapiski kleryka z lat 1935 - 1936</div>
+                <p class="book-excerpt">
+                    Ukazują one kształtowanie się postaw wiary, drogi życia i powołania każdego chrześcijanina, zwłaszcza kapłana. Oby te nieznane powszechnie dokumenty pomogły kapłanom i wiernym świeckim w przeżywaniu pełni chrześcijaństwa.
+                </p>
+                <div class="book-meta">
+                    <span class="book-author-meta">abp Kazimierz Nycz (fragment Wprowadzenia)</span>
+                    <span class="book-publisher">Zgromadzenie Sióstr Franciszkanek Służebnic Krzyża, Laski – Warszawa 2010</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-item">
+            <div class="book-cover">
+                </div>
+            <div class="book-content">
+                <h2 class="book-title">Listy</h2>
+                <div class="book-subtitle">M. Elżbieta Róża Czacka, o. Władysław Korniłowicz, ks. Tadeusz Fedorowicz, ks. Aleksander Fedorowicz</div>
+                <p class="book-excerpt">
+                    „Ludzie święci zawsze się gdzieś spotykają, jedni drugich szukają i znajdują” – publikowane listy w pełni tę prawdę potwierdzają, ukazując wzajemną troskę łączącą cztery wybitne osobowości Lasek.
+                </p>
+                <div class="book-meta">
+                    <span class="book-publisher">Zgromadzenie Sióstr Franciszkanek Służebnic Krzyża, Laski-Warszawa 2007</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-item">
+            <div class="book-cover">
+                </div>
+            <div class="book-content">
+                <h2 class="book-title">Bez cienia goryczy</h2>
+                <div class="book-subtitle">Szkic o ks. Tadeuszu Fedorowiczu (1907 – 2002)</div>
+                <p class="book-excerpt">
+                    „Jesteś Panie / Dziękuję / Przepraszam / Bądź wola Twoja” – te słowa streszczają postawę życiową człowieka, który stoi w obliczu Boga. Uśmiechał się, nawet gdy mu było trudno, zachęcał do godnego życia.
+                </p>
+                <div class="book-meta">
+                    <span class="book-publisher">Księgarnia Świętego Wojciecha, Poznań 2005</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-item">
+            <div class="book-cover">
+                </div>
+            <div class="book-content">
+                <h2 class="book-title">Drogi Opatrzności</h2>
+                <div class="book-subtitle">Wspomnienia ks. Tadeusza Fedorowicza</div>
+                <p class="book-excerpt">
+                    Ks. Fedorowicz, będąc młodym kapłanem, zgłosił się do Arcybiskupa z prośbą o pozwolenie, aby mógł wyjechać z transportem Polaków deportowanych na Wschód. Niedawno opisał tę swoją tragiczną epopeję w ciekawej książce.
+                </p>
+                <div class="book-meta">
+                    <span class="book-author-meta">Jan Paweł II (w Dar i Tajemnica – 1996 r.)</span>
+                    <span class="book-publisher">Norbertinum, Lublin 2005</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-item">
+            <div class="book-cover">
+                </div>
+            <div class="book-content">
+                <h2 class="book-title">Błogosławieństwa</h2>
+                <div class="book-subtitle">Dla tych którzy mają trochę zmysłu humoru i szukają mądrości</div>
+                <p class="book-excerpt">
+                    Błogosławieństwa krążą wśród czytelników w wielu odpisach. Obecna edycja prezentuje oba człony (błogosławieństwa i objaśnienia) tego duchowego testamentu ks. Tadeusza Fedorowicza.
+                </p>
+                <div class="book-meta">
+                    <span class="book-publisher">Norbertinum, Laski-Lublin 2003</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-item">
+            <div class="book-cover">
+                </div>
+            <div class="book-content">
+                <h2 class="book-title">Pełny Wymiar</h2>
+                <div class="book-subtitle">Listy przyjaciół: Fedorowiczowie, Swieżawski, Wojtyła</div>
+                <p class="book-excerpt">
+                    Przez prawie osiemdziesiąt lat trwała przyjaźń między Stefanem Swieżawskim a ks. Tadeuszem Fedorowiczem. W latach młodzieńczych żywiła się marzeniem o gruntownej przemianie Kościoła.
+                </p>
+                <div class="book-meta">
+                    <span class="book-author-meta">Andrzej Dobrowolski (fragment z wprowadzenia)</span>
+                    <span class="book-publisher">Biblos, Tarnów 2002</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="sub-pagination">
+        <a href="zycie.html" class="sub-btn">Życie</a>
+        <a href="na-zjazdachTF.html" class="sub-btn">Na Zjazdach</a>
+        <a href="blogoslawienstwaTF.html" class="sub-btn">Błogosławieństwa</a>
+        <a href="naukiTF.html" class="sub-btn">Nauki</a>
+        <a href="ksiazkiTF.html" class="sub-btn active">Książki</a>
+    </div>
+</article>
+
+<footer>
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+</footer>
+
+</body>
+</html>
