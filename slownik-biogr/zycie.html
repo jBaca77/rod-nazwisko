@@ -1,1 +1,126 @@
-a
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadeusz Fedorowicz - Życie | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* NAGŁÓWEK */
+        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+        .dates { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold); font-style: italic; }
+
+        /* PANEL INFO / WSTĘP */
+        .intro-panel { 
+            max-width: 850px; margin: 0 auto 50px; padding: 40px; 
+            background: var(--parchment); border-left: 4px solid var(--gold);
+            font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; line-height: 1.6;
+        }
+
+        /* TREŚĆ GŁÓWNA */
+        .content-wrapper { max-width: 850px; margin: 0 auto; padding: 0 24px 60px; text-align: justify; }
+        .content-wrapper p { margin-bottom: 25px; }
+        .content-wrapper h2 { 
+            font-family: 'Cormorant Garamond', serif; font-size: 2rem; 
+            margin: 50px 0 30px; text-align: center; color: var(--gold);
+            border-bottom: 1px solid var(--line); padding-bottom: 10px;
+        }
+
+        /* PODPIS */
+        .signature { 
+            margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line);
+            font-size: 0.85rem; color: var(--sepia); text-transform: uppercase; letter-spacing: 1px; text-align: right;
+        }
+
+        /* NAWIGACJA WEWNĘTRZNA KAFELKA */
+        .sub-pagination { 
+            max-width: 900px; margin: 40px auto 80px; padding: 40px 24px; 
+            border-top: 1px solid var(--line); display: flex; 
+            justify-content: center; gap: 15px; flex-wrap: wrap;
+        }
+        .sub-btn {
+            text-decoration: none; color: var(--sepia); font-size: 0.7rem; 
+            text-transform: uppercase; letter-spacing: 1.5px; padding: 10px 20px;
+            border: 1px solid var(--line); transition: 0.3s; background: var(--cream);
+        }
+        .sub-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
+        .sub-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+
+        @media (max-width: 600px) {
+            .intro-panel { padding: 25px; font-size: 1.1rem; }
+            .article-header { margin: 40px auto 20px; }
+            .sub-btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="../biografie.html" class="back-link">← Powrót do biografii</a>
+    </div>
+</nav>
+
+<article>
+    <header class="article-header">
+        <span class="meta-top">Życiorys i Wspomnienia</span>
+        <h1>ks. Tadeusz Fedorowicz</h1>
+        <div class="dates">1907 – 2002</div>
+    </header>
+
+    <div class="intro-panel">
+        Ks. Tadeusz Fedorowicz, syn Aleksandra i Zofii z Kraińskich, urodził się 4 lutego 1907 r. w Klebanówce na Podolu. Po ukończeniu Gimnazjum im. Króla Jana Sobieskiego w Złoczowie studiował prawo na Uniwersytecie Jana Kazimierza we Lwowie. Po uzyskaniu w 1929 r. stopnia magistra praw wstąpił do lwowskiego seminarium duchownego. 
+    </div>
+
+    <div class="content-wrapper">
+        <p>Święcenia kapłańskie przyjął w 1936 r. Po roku pracy w parafii w Tarnopolu został mianowany wicemoderatorem lwowskiego oddziału Katolickiego Związku Akademików „Odrodzenie” i sekretarzem Instytutu Wyższej Kultury Religijnej we Lwowie.</p>
+
+        <h2>Wyprawa do Kazachstanu</h2>
+        <p>W 1940 r., po zajęciu Lwowa przez Armię Czerwoną, za zgodą arcybiskupa Bolesława Twardowskiego, ks. Tadeusz w cywilnym ubraniu dołączył dobrowolnie do transportu Polaków deportowanych przez NKWD do Kazachstanu. Pragnął służyć opieką duszpasterską wywożonym rodakom. W łagrach i na zesłaniu spędził blisko trzy lata, pracując fizycznie i potajemnie odprawiając msze święte oraz udzielając sakramentów.</p>
+
+        <p>Po zawarciu układu Sikorski-Majski został duszpasterzem w Armii Andersa, jednak ze względu na zły stan zdrowia (nabyta na zesłaniu choroba płuc) musiał pozostać w głębi ZSRR. W 1943 r. został kapelanem I Dywizji Piechoty im. Tadeusza Kościuszki. W 1944 r. wrócił do Polski.</p>
+
+        <h2>Laski i praca z młodzieżą</h2>
+        <p>Od 1948 r. związał się z Zakładem dla Niewidomych w Laskach pod Warszawą, gdzie przez dziesięciolecia służył jako ojciec duchowny, spowiednik i autorytet moralny. Był bliskim przyjacielem i doradcą Karola Wojtyły, późniejszego papieża Jana Pawła II, który wielokrotnie odwiedzał go w Laskach i cenił jego rady w sprawach duszpasterskich.</p>
+
+        <p>Ks. Tadeusz był znany z niezwykłej skromności, pogody ducha i głębokiej wiary. Przez całe życie kultywował więzi rodzinne, będąc moralnym filarem dla klanów Ładomirskich i Kraińskich. Zmarł w opinii świętości 26 czerwca 2002 r. w Laskach i tam został pochowany na cmentarzu leśnym.</p>
+
+        <div class="signature">
+            Opracowano na podstawie archiwów rodzinnych L&K
+        </div>
+    </div>
+
+    <div class="sub-pagination">
+        <a href="zycieTF.html" class="sub-btn active">Życie</a>
+        <a href="na-zjazdach.html" class="sub-btn">Na Zjazdach</a>
+        <a href="blogoslawienstwa.html" class="sub-btn">Błogosławieństwa</a>
+        <a href="nauki.html" class="sub-btn">Nauki</a>
+        <a href="ksiazki.html" class="sub-btn">Książki</a>
+    </div>
+</article>
+
+<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
+
+</body>
+</html>
