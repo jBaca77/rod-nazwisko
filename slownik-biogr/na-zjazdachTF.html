@@ -39,12 +39,15 @@
         .content-container { max-width: 850px; margin: 0 auto; padding: 0 24px; }
         .letter-text { 
             background: white; padding: 60px; border: 1px solid var(--line); 
-            font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; 
-            line-height: 1.6; color: #222; margin-bottom: 80px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; 
+            line-height: 1.7; color: #222; margin-bottom: 80px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
-        .letter-header { text-align: right; margin-bottom: 40px; }
-        .letter-content p { margin-bottom: 20px; text-indent: 35px; text-align: justify; }
-        .letter-footer { margin-top: 40px; text-align: right; font-weight: 400; }
+        .letter-header { text-align: right; margin-bottom: 40px; font-style: italic; border-bottom: 1px solid var(--parchment); padding-bottom: 10px; }
+        .letter-content p { margin-bottom: 25px; text-indent: 35px; text-align: justify; }
+        .letter-content strong { color: var(--gold); font-weight: 600; }
+        .letter-footer { margin-top: 50px; text-align: right; line-height: 1.4; }
+        .signature { font-size: 1.5rem; color: var(--ink); display: block; margin-bottom: 5px; }
+        .sub-signature { font-size: 1rem; color: var(--sepia); font-style: italic; }
 
         /* MULTIMEDIA */
         .media-section { max-width: 1000px; margin: 60px auto; padding: 0 24px; border-top: 1px solid var(--line); padding-top: 60px; }
@@ -53,7 +56,7 @@
         /* WIDEO */
         .video-container { width: 100%; aspect-ratio: 16/9; background: var(--ink); margin-bottom: 20px; border: 1px solid var(--line); }
 
-        /* FOTOKRONIKA - SIATKA IDENTYCZNA JAK W MODLINIE */
+        /* FOTOKRONIKA */
         .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .photo-card { position: relative; overflow: hidden; background: #fff; padding: 10px; border: 1px solid var(--line); transition: 0.4s; }
         .photo-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; filter: grayscale(30%); transition: 0.5s; }
@@ -67,7 +70,6 @@
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
 
-        /* MOBILE FIXES - IDENTYCZNIE JAK W ZJEŹDZIE W MODLINIE */
         @media (max-width: 600px) {
             .photo-grid { 
                 grid-template-columns: repeat(4, 1fr); 
@@ -75,7 +77,7 @@
                 gap: 2px; 
             }
             .photo-card { padding: 0; border: 1px solid var(--line); }
-            .letter-text { padding: 30px 20px; font-size: 1.15rem; }
+            .letter-text { padding: 35px 25px; font-size: 1.1rem; }
             .vatican-quote blockquote { font-size: 1.2rem; }
         }
     </style>
@@ -112,13 +114,22 @@
             <div class="letter-header">Laski, 17 września 1985 r.</div>
             <div class="letter-content">
                 <p>Kochani,</p>
-                <p>Bardzo, bardzo mi żal, że tym razem nie będę z Wami! Was wszystkich zobaczyć i uściskać, szczególnie mi przykro z powodu Andrzeja (seniora). Ostatnio trochę przeciążyłem swoją pracą i serce mi się rozregulowało. To na razie nic poważnego, ale lekarz nakazuje mi absolutny spokój i wypoczynek. Dlatego muszę zrezygnować z dalszych wyjazdów.</p>
-                <p>Nigdy nie zapomnę tych naszych spotkań, które tak bardzo wzbogacały moją duszę i dawały mi tyle radości. Cieszę się, że tradycja ta trwa i że spotykacie się w tak pięknym miejscu jak Trzebieszowice. Niech te wspólne chwile umacniają Waszą jedność i miłość rodzinną, która jest największym skarbem.</p>
-                <p>Będę z Wami duchem podczas Mszy świętej i wspólnych rozmów. Modlę się za każdego z Was, za nasze rodziny, za starszych i tych najmłodszych, którzy są naszą nadzieją.</p>
-                <p>Przesyłam Wam wszystkim i każdemu z osobna moje najserdeczniejsze błogosławieństwo. Niech Pan Bóg darzy Was zdrowiem i pokojem.</p>
+                <p>Bardzo, bardzo mi żal, że tym razem nie będę z Wami, że Was wszystkich nie zobaczę i nie uściskam, szczególnie mi przykro, że nie zobaczę Andrzeja (seniora). Ostatnio trochę się przemęczyłem swoją pracą i serce trochę się rozregulowało. To narazie nic poważnego, ale lekarz mówi, że trzeba to uspokoić.</p>
+                <p>Myślą i sercem będę z Wami. Ale chciałbym Wam powiedzieć pewne myśli płynące z głębi serca. Myślę zwłaszcza o młodszym pokoleniu.</p>
+                <p><strong>Przede wszystkim chcę powiedzieć, że najbardziej doceniam tę inicjatywę spotkań rodzinnych.</strong> To naprawdę wielka wartość. Tak bardzo cenne jest wzajemne poznawanie się w szerokiej Rodzinie i co za tym idzie przyjaźnienie się. To są istotne, ogromne wartości dziś zanikające i zaniedbane. Zapomina się, że najwyższą, najszlachetniejszą postacią miłości jest przyjaźń. A przecież ta właśnie „miłość przyjaźni” jest człowiekowi tak bardzo potrzebna.</p>
+                <p>Drugie na co chciałbym zwrócić Waszą uwagę to tak doniosła sprawa przekazywania następnym pokoleniom wartości, które myśmy otrzymali od naszych Rodziców i Dziadów. W biegu pokoleń tak wiele spraw się zmienia. Ale trzeba pamiętać, że istotne wartości moralne i kulturalne są niezmienne.</p>
+                <p>Bo prawdziwa kultura to nie jej przejawy w dziedzinie kultury materialnej, ale kultura samego człowieka, polegająca przede wszystkim na szanowaniu samego siebie i drugich. W Polsce kultura od zarania dziejów jest najściślej związana z wiarą, z żywą wiarą chrześcijańską. To są wartości przez nas otrzymane od pokoleń i trzeba je przekazywać następnym pokoleniom.</p>
+                <p>Po trzecie, trzeba sobie dobrze zdawać sprawę z tego, że dziś, na całej ziemi, ostrzej niż kiedykolwiek dotąd toczy się ostra walka złego z dobrym, szatana z Chrystusem – walka o człowieka! W Ameryce coraz bardziej szerzy się kult szatana; to nie są żarty. W jednej szeroko śpiewanej piosence „Rocku” jest refren: „Szatan jest Bogiem, szatan jest Bogiem, szatan jest Bogiem”. Inny, bardzo drastyczny objaw to t.zw. „zabiegi” dla otrzymania surowca na kosmetyki. To się b. szerzy w zachodniej Europie i sięga aż do Indii, gdzie się wykorzystuje na to tamtejszą nędzę materialną. Dalej ta nowa choroba „Aids” (ejds) polegająca na pozbawianiu organizmu człowieka wszelkiej odporności na inne choroby, co powoduje, że każda lekka choroba łatwo zabija człowieka. A choroba ta szerzy się w Ameryce, ale i w Europie w środowiskach szczególnie moralnie zepsutych. Można do tych przejawów dodać: alkoholizm, narkomanię, zastraszająco mnożące się rozwody, te t.zw. „zabiegi”, środki „antyk.”, a też powszechne niszczenie środowiska przyrodniczego. Dalej: zdziczenie moralne i kulturalne przejawiające się w morderstwach, w terroryźmie, w prześladowaniu religijnym, w ograniczaniu wolności człowieka, w przeraźliwym zakłamaniu (szatan od początku jest ojcem kłamstwa).</p>
+                <p>Trzeba sobie z tego zdawać sprawę. Ale też równocześnie idzie przez świat a może najbardziej przez Polskę bardzo żywe odrodzenie religijno moralne. Nigdy od 1000-ca lat, nie było u nas tyle powołań do seminariów Duchownych, do zakonów żeńskich i męskich, tyle młodzieży gromadzącej się na wspólne modlitwy i podejmującej dobroczynną służbę społeczną („Muminki”, „Oazy”). W Krakowie na rekolekcje akademickie przed Wielkanocą, do jednego tylko kościoła Dominikanów, chodziło 4000 młodzieży i około tyleż schodzi się tam na wspólne 2-godzinne modlitwy raz w tygodniu. Od czasu pielgrzymek Ojca Świętego do Polski wciąż bardzo wielu nawraca się do żywej Wiary. Wiecie zapewne o objawieniach Matki Bożej w Medziugorie w Jugosławii, które tam trwają już ponad 4-y lata codziennie. Zjeżdżają się tam ludzie z całej Europy i z za oceanu. To też żywo wpływa na budzenie się Wiary. Analogiczne objawienia od 1981-go roku są w Ruandzie (w Afryce) i też wywierają duży wpływ apostolski.</p>
+                <p><strong>Ta walka między złym a Dobrem toczy się nie na froncie politycznym czy ekonomicznym ale na froncie naszych, każdego z nas, serc i sumień.</strong> Każde dobro i każde odparcie pokusy, jak i każde zło w naszym postępowaniu przechyla zwycięstwo na tym froncie na stronę czy Chrystusa czy złego. Trzeba sobie szczerze z tego zdawać sprawę.</p>
+                <p>Po pierwszej wojnie światowej historiozof niemiecki Spengler napisał książkę pod tytułem: „Zmierzch cywilizacji zachodu”, uważając że ta nasza cywilizacja chyli się ku zupełnemu upadkowi. Czytałem w innej książce niemieckiej z r. 1895 go (?), że za 25 lat Watykan, jako instytucja przestanie istnieć gdyż nauka zastąpi wiarę chrześcijańską. (Jak ten autor wygląda wobec tego co dziś widzimy?). Spenglerowi odpowiedział francuz Henryk Massis książką „Obrona zachodu”. Pisze, że Spengler ma wiele słuszności, ale nie liczy się z tym, że Zachód ma w sobie pewną siłę, która daje ciągłą regenerację, odnowę: a tą siłą jest chrześcijaństwo. Dlatego kultura grecko-rzymska utrzymała się, mimo wędrówki ludów pogańskich (Gotów, Germanów), przez ochrzczenie tych ludów.</p>
+                <p>Pius XII, przed śmiercią, powiedział że jesteśmy w czasach przypominających przełom między jesienią, gdy wszystko zielone gnije, a wiosną gdy ukazuje się nowa zieleń. Jesteśmy dziś świadkami tego gnicia naszej cywilizacji. Ale też widzimy rodzącą się zieleń wiary i kultury chrześcijańskiej. Trzeba to zobaczyć, docenić i włączyć się na froncie swego serca o sumienia w tę odnowę. Napisałem te myśli Ojcu Świętemu; odpisał mi całkowicie potwierdzając to: „Tak jest. Walka przebiega przez front ludzkich serc i sumień: walka szatana z Chrystusem, a modlitwa, ofiara i dobroć mają w tej walce po stronie Chrystusa największe znaczenie.”</p>
+                <p>Tyle chciałem Wam powiedzieć; ustnie powiedziałbym to szerzej i może bardziej przekonywująco. W waszych dniach będę z Wami sercem i modlitwą. Z ogromną wdzięcznością myślę teraz o naszych Rodzicach, którzy tak wiele dobra nam dali. Dziękuję też organizatorom tych spotkań za Ich trud i ofiarność.</p>
+                <p>Serdecznie wszystkich Was pozdrawiam i ściskam i Panu Bogu polecam</p>
             </div>
             <div class="letter-footer">
-                Wasz Tadeusz
+                <span class="signature">X. Tadeusz Fedorowicz</span>
+                <span class="sub-signature">jeden z Was, z nas.</span>
             </div>
         </section>
     </div>
