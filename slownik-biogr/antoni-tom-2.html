@@ -3,256 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ładomirscy z Markowiec - Kronika</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Ładomirscy z Markowiec | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #f4f1ea;
-            color: #2c2c2c;
-            font-family: 'Lora', serif;
-            line-height: 1.8;
-            margin: 0;
-            padding: 0;
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
         }
 
-        .document-page {
-            max-width: 850px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 60px 80px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            border: 1px solid #dcd7ca;
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+
+        .profile-header { 
+            max-width: 1000px; margin: 60px auto; padding: 0 24px; 
+            display: grid; grid-template-columns: 350px 1fr; gap: 50px; align-items: center;
+        }
+        .main-photo-frame { 
+            background: white; padding: 15px; border: 1px solid var(--line);
+            box-shadow: 15px 15px 0px var(--parchment);
+        }
+        .main-photo-frame img { width: 100%; height: auto; display: block; filter: sepia(15%); }
+        
+        .header-info h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; margin-bottom: 10px; line-height: 1.1; }
+        .header-info .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); font-style: italic; display: block; margin-bottom: 20px; }
+        .meta-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); display: block; margin-bottom: 5px; }
+
+        .content-wrap { max-width: 850px; margin: 0 auto; padding: 0 24px; }
+        .bio-para { margin-bottom: 25px; text-align: justify; font-size: 1.1rem; }
+        .bio-para:first-of-type::first-letter {
+            float: left; font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem; line-height: 0.8; padding: 8px 12px 4px 0;
+            color: var(--gold); font-weight: 300;
         }
 
-        header {
-            text-align: center;
-            border-bottom: 2px double #8c7851;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-        }
+        .inline-photo { margin: 45px 0; text-align: center; }
+        .inline-photo img { max-width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; }
+        .caption { display: block; margin-top: 10px; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--sepia); font-size: 1rem; }
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #4a3e2a;
-        }
+        .descendants { margin-top: 80px; border-top: 2px solid var(--gold-light); padding-top: 40px; }
+        .descendants h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; margin-bottom: 40px; text-align: center; }
+        .child-block { margin-bottom: 60px; padding-left: 20px; border-left: 1px solid var(--parchment); }
+        .child-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 15px; }
 
-        h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            border-left: 4px solid #8c7851;
-            padding-left: 15px;
-            margin-top: 40px;
-            color: #5d5037;
-        }
+        .source-note { background: #f0ede6; padding: 30px; margin: 40px 0; border-left: 4px solid var(--gold); font-size: 1rem; }
+        .source-note h4 { font-family: 'Cormorant Garamond', serif; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
 
-        p {
-            text-align: justify;
-            margin-bottom: 20px;
-            text-indent: 30px;
-        }
+        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 100px; }
 
-        .photo-frame {
-            background: #fdfdfd;
-            border: 1px solid #e0ddd5;
-            padding: 10px;
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .photo-box {
-            width: 100%;
-            height: 400px;
-            background: #f0ede5;
-            border: 1px dashed #b7b09e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #8c7851;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        .photo-caption {
-            font-size: 0.9rem;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: #6d5f44;
-            padding: 0 10px;
-        }
-
-        .photo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .photo-grid .photo-box { height: 250px; }
-
-        .ornament {
-            text-align: center;
-            margin: 40px 0;
-            color: #8c7851;
-            font-size: 1.5rem;
-        }
-
-        footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px solid #dcd7ca;
-            text-align: right;
-            font-family: 'Playfair Display', serif;
-            font-weight: bold;
-        }
-
-        strong { color: #4a3e2a; }
-
-        @media (max-width: 768px) {
-            .document-page { padding: 30px; margin: 10px; }
-            .photo-grid { grid-template-columns: 1fr; }
+        @media (max-width: 800px) {
+            .profile-header { grid-template-columns: 1fr; text-align: center; }
+            .main-photo-frame { max-width: 300px; margin: 0 auto 30px; }
         }
     </style>
 </head>
 <body>
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="biografie.html" class="back-link">← Biografie</a>
+    </div>
+</nav>
 
-<div class="document-page">
-    <header>
-        <h1>Ładomirscy z Markowiec</h1>
+<article>
+    <header class="profile-header">
+        <div class="main-photo-frame">
+            <img src="img/zdzislaw_anna.jpg" alt="Zdzisław i Anna Ładomirscy" onerror="this.src='https://via.placeholder.com/400x500?text=Zdzisław+i+Anna+Ładomirscy'">
+        </div>
+        <div class="header-info">
+            <span class="meta-tag">Linia Kraińskich</span>
+            <h1>Ładomirscy z Markowiec</h1>
+            <span class="subtitle">Zdzisław Ładomirski i Anna z Kraińskich</span>
+            <p style="font-size: 0.9rem; color: var(--sepia);">Markowce • Kosówka • Wyszatyce</p>
+        </div>
     </header>
 
-    <p><strong>Zdzisław Ładomirski i Anna z Kraińskich Ładomirska.</strong> Anna Kraińska ur. 22 lutego 1875 r. w Miejscu Piastowym pow. Krosno, zmarła w Poznaniu 29.05.1959r. pogrzeb tamże 2.06.1959r. Od 1877r. mieszkała w Wyszatycach, uczyła się w domu przy pomocy kolejno następujących po sobie nauczycielek, które nauczyły ją tego co ówcześnie dla panien było wymagane i języków francuskiego, niemieckiego i angielskiego. Miss Bekland - angielka, nauczycielka języka angielskiego nauczyła też ją bardzo ładnego i wyraźnego pisma, którego dotąd używając, mając 83 lata, miłe listy pisuje. Anna także opanowała grę na fortepianie i miło śpiewała.</p>
-
-    <p>Kiedy panny Kraińskie dorosły, w Wyszatycach bywały zabawy z tańcami a i czasem panny z Mamą do domów rodzinnych wyjeżdżały. W karnawale 1895r. na zabawę w Wyszatycach przywiózł nasz kuzyn Tadeusz Bogdan z Zadwórza kilku młodych ludzi z ziemiaństwa ze wschodniej Małopolski (Galicji) między innymi Zdzisława Ładomirskiego z Markowiec koło Stanisławowa.</p>
-
-    <p>Nawiązała się obopólna sympatia i w lecie już w Jabłonce, gdzie cała rodzina wyjeżdżała na letnie miesiące używać na podgórskim powietrzu, bliskości lasu i poziomkach, nastąpiły zaręczyny i ślub miał się odbyć na jesieni. Sprawy Andzi mało albo wcale mnie nie interesowały, bo przechodziłem do trzeciej klasy gimnazjalnej w Chyrowie u OO. Jezuitów.</p>
-
-    <p>W październiku 1895r. spłonęły doszczętnie Wyszatyce, więc uzupełniwszy na prędce najpotrzebniejsze urządzenia w Jabłonce, by w niej i w ziemie mieszkać można było i liczniejszych gości można było przyjąć. 21 listopada 1895r. Rodzice urządzili ślub najstarszej córki w parafii Dydnia , a przyjęcie na około 20 osób najbliższych obu rodzin w Jabłonce.</p>
-
-    <p>Państwo młodzi wyjechali na Kosówkę, folwark od Markowiec, który ojciec Zdzisława mu oddał. Wkrótce po ślubie syna zmarł w Markowcach Pan Konstanty Ładomirski i zaczęły się rozmaite kłopoty dla Zdzisława, który musiał pomagać swej Matce i trzem siostrom paniom Krobickiej, Gołębskiej i pannie Sewerynie później Feliksowej Domańskiej.</p>
-
-    <div class="photo-frame">
-        <div class="photo-box">MIEJSCE NA ZDJĘCIE: DWOREK KOSÓWKA</div>
-        <div class="photo-caption">dworek Kosówka</div>
-    </div>
-
-    <p>Ja jednak wtedy o tym nic nie wiedziałem, tylko pamiętam miłe wizytki w Kosówce, tam pierwszy raz strzelałem z prawdziwej strzelby. Tam byliśmy całą rodziną na Wielkanoc 1898r. po moim ciężkim tyfusie i tam wtedy robiłem pierwsze moje fotografie aparatem Zeiss mającym 112 płyt szklanych 9/12 do zmiany.</p>
-
-    <p>W lutym 1898r. urodził się Andzi pierwszy syn Władzio, w 1899r. Marynka, w 1900r. Jadwiga, którą 2 lutego 1901r jako uczeń ósmej klasy dojechawszy z Sanoka do chrztu trzymałem. W następnych latach przybyły jeszcze Zosia, Stasia i Konstancja (Kostusia) oraz około roku 1907 zaczęła się seria chłopców: Józef, Zdziś, Andrzej, Antoni i na zakończenie w 1916r. Anka. Chrzciny Jadwigi już się odbywały w Markowcach, które Zdzisław nabył od Matki i sióstr oddając Kosówkę.</p>
-
-    <div class="photo-grid">
-        <div class="photo-frame">
-            <div class="photo-box">FOTO: JADWIGA, MARYŚ, WŁADZIO</div>
-            <div class="photo-caption">Jadwiga, Maryś (s. Anna) i Władzio Ładomirscy, Wyszatyce 1903</div>
+    <div class="content-wrap">
+        <div class="bio-para">
+            Zdzisław Ładomirski i Anna z Kraińskich Ładomirska. Anna Kraińska ur. 22 lutego 1875 r. w Miejscu Piastowym pow. Krosno, zmarła w Poznaniu 29.05.1959r. pogrzeb tamże 2.06.1959r. Od 1877r. mieszkała w Wyszatycach, uczyła się w domu przy pomocy kolejno następujących po sobie nauczycielek, które nauczyły ją tego co ówcześnie dla panien było wymagane i języków francuskiego, niemieckiego i angielskiego. 
         </div>
-        <div class="photo-frame">
-            <div class="photo-box">FOTO: RODZEŃSTWO 1905</div>
-            <div class="photo-caption">Iga, Władzio, Zosia, Maryś i Stasia Ładomirscy, Wyszatyce 1905</div>
+
+        <div class="bio-para">
+            Miss Bekland - angielka, nauczycielka języka angielskiego nauczyła też ją bardzo ładnego i wyraźnego pisma, którego dotąd używając, mając 83 lata, miłe listy pisuje. Anna także opanowała grę na fortepianie i miło śpiewała. Kiedy panny Kraińskie dorosły, w Wyszatycach bywały zabawy z tańcami a i czasem panny z Mamą do domów rodzinnych wyjeżdżały. 
         </div>
-    </div>
 
-    <div class="ornament">❦</div>
-
-    <p>Dom był tam stary i zagrzybiony więc go rozebrano a dobudowano do oficynki cztery ładne pokoje a później, gdy rodzinka rosła ciągle coś dodając i ulepszając doszli do obszernego i wygodnego domu z przemiłą i ogromną werandą wejściową, ciepłą w zimie, bo dzięki podwójnym szybom dającą się ogrzać.</p>
-
-    <div class="photo-grid">
-        <div class="photo-frame">
-            <div class="photo-box">FOTO: STARY DWÓR 1895</div>
-            <div class="photo-caption">stary dwór w Markowcach - rok 1895</div>
+        <div class="bio-para">
+            W karnawale 1895r. na zabawę w Wyszatycach przywiózł nasz kuzyn Tadeusz Bogdan z Zadwórza kilku młodych ludzi z ziemiaństwa ze wschodniej Małopolski (Galicji) między innymi Zdzisława Ładomirskiego z Markowiec koło Stanisławowa. Nawiązała się obopólna sympatia i w lecie już w Jabłonce, gdzie cała rodzina wyjeżdżała na letnie miesiące używać na podgórskim powietzu, bliskości lasu i poziomkach, nastąpiły zaręczyny i ślub miał się odbyć na jesieni.
         </div>
-        <div class="photo-frame">
-            <div class="photo-box">FOTO: NOWY DWÓR 1938</div>
-            <div class="photo-caption">nowy dwór w Markowcach - rok 1938</div>
+        <div class="bio-para">
+            Sprawy Andzi mało albo wcale mnie nie interesowały, bo przechodziłem do trzeciej klasy gimnazjalnej w Chyrowie u OO. Jezuitów. W październiku 1895r. spłonęły doszczętnie Wyszatyce, więc uzupełniwszy na prędce najpotrzebniejsze urządzenia w Jabłonce, by w niej i w ziemie mieszkać można było i liczniejszych gości można było przyjąć. 
         </div>
-    </div>
 
-    <p>Zdzisław był bardzo dobry i zapobiegliwy gospodarz w hodowli tak bydła jak i koni i przy pomocy miejscowych ludzi umiał wszystko w porządku i doskonałym stanie utrzymać, liczną dzieciarnię wychować i wykształcić a także ziemi dokupywać gdy się okazja na miejscu zdarzyła, to grunta od Dominikanów z Tyśmienicy to obok leżące Bratkowce a w końcu od Matki Kosówkę.</p>
-
-    <p>Pierwszą inwazję rosyjską w 1914r. przetrwali w domu broniąc się jak można było od strat w gospodarstwie, szczególnie w inwentarzu. Była tam wtedy i para koni arabów, które dla mnie Zdzisław kupił w Jabłonowie, miały być do ślubu, ale z wybuchem wojny zostały w Markowcach. Spodobały się Moskalom i chcieli je zabierać, ale dzieci tak się do tych koni przytulały i desperowały, że zostawili, a nam one długie lata służyły i kilka ładnych źrebiąt od Lotnej wychowaliśmy.</p>
-
-    <div class="photo-grid">
-        <div class="photo-frame">
-            <div class="photo-box">FOTO: KONIE ZIMĄ</div>
-            <div class="photo-caption">rekreacyja konna zimą. Gonitwa myśliwska. Lwów, 13 czerwca 1886r.</div>
+        <div class="bio-para">
+            21 listopada 1895r. Rodzice urządzili ślub najstarszej córki w parafii Dydnia, a przyjęcie na około 20 osób najbliższych obu rodzin w Jabłonce. Państwo młodzi wyjechali na Kosówkę, folwark od Markowiec, który ojciec Zdzisława mu oddał. Wkrótce po ślubie syna zmarł w Markowcach Pan Konstanty Ładomirski i zaczęły się rozmaite kłopoty dla Zdzisława, który musiał pomagać swej Matce i trzem siostrom paniom Krobickiej, Gołębskiej i pannie Sewerynie później Feliksowej Domańskiej.
         </div>
-        <div class="photo-frame">
-            <div class="photo-box">FOTO: KONIE LATEM</div>
-            <div class="photo-caption">rekreacyja konna latem</div>
+
+        <div class="inline-photo">
+            <img src="img/kosowka_dwor.jpg" alt="Dworek Kosówka" onerror="this.src='https://via.placeholder.com/600x350?text=Dworek+Kosówka'">
+            <span class="caption">Dworek Kosówka - pierwszy dom Anny i Zdzisława</span>
         </div>
-    </div>
 
-    <h2>Władysław Ładomirski</h2>
-    <p>Na inwazję już bolszewicką przyjechali w 1920r. Zdzisławowie z dziećmi i inwentarzami do Jabłonki, tak że po powrocie mieli z czem zabrać się do odbudowy gospodarstwa. Dzieci wszystkie starannie kształcili. Najstarszy Władzio był w Chyrowie, a po wybuchu wojny zdał maturę w Białej i mój Ojciec umieścił go u swego parlamentarnego kolegi Proskowica, starszego gospodarza na Morawach, na praktyce gospodarskiej, skąd wiele wiadomości wyniósł. Po udziale w wojnie 1920r. jako ochotnik zaczął gospodarować na Wołyniu, w majątku nabytym przez pana Rytowskiego (młodszego).</p>
-
-    <p>Ożenił się z Walą Nagórzańską, a gdy dzieci zaczęło przybywać ojciec oddał mu w Markowcach Młyn z dużym stawem i przylegającymi gruntami. Tam chował swoje sześcioro dzieci, aż do drugiej wojny, biorąc czynny udział w ruchu szlachty zagrodowej, której w Stanisławowskim było wiele zaścianków, a akcja ks. Półkanonika Miodońskiego starała się o podniesienie w nich ducha polskości do czego i Zdzisławowie walnie się przyczynili, budując kościółek i kreując parafię w Markowcach, której Władzio z rodziną był zawsze gorliwie praktykującym członkiem.</p>
-
-    <div class="photo-frame">
-        <div class="photo-box">MIEJSCE NA ZDJĘCIE: MŁYN</div>
-        <div class="photo-caption">młyn na Dąbrowie</div>
-    </div>
-
-    <div class="photo-frame">
-        <div class="photo-box">MIEJSCE NA ZDJĘCIE: DZIECI WŁADYSŁAWA</div>
-        <div class="photo-caption">Andrzej, Maja, Alka (Helena), Zosia i Krystyna Ładomirscy</div>
-    </div>
-
-    <p>Po 17 września 1939r. będąc w wojsku we Lwowie, przezornie nie poszedł na plac Bernardyński gdy tam rozbrajali oficerów i tak uniknął Katynia. Gdy Wala z dziećmi nadciągnęła, osiadła w folwarku swej rodziny przy ujściu Dunajca a Władzio pracował w dużym młynie Konopków w Brniu; potem przenieśli się do Kraśnika też do młyna, dzierżawionego przez męża Jadwigi Ładomirskiej Tadeusza Teleżyńskiego, a później gdy i to się skończyło, po śmierci bardzo obiecującego syna zmarłego w szpitalu w Lublinie gospodarował na folwarku oddanym SS. Niepokalankom w Szczecinku, i zajmował się potem także mleczarnią, następnie działał jako inspektor plantacji cykorii i przy tym stracił zdrowie gdyż serce nie wytrzymało forsownych marszów po rolach. Gdy wrócił do zdrowia został księgowym dla kilku spółdzielni produkcyjnych, a cztery córki, które kończyły nauki u Niepokalanek także w księgowości zajęcie dostały, więc lepiej im się powodziło.</p>
-
-    <p>Syn najmłodszy Andrzej uczył się w małym seminarium na Pomorzu ale gdy przełożeni odradzili mu wstąpienia do dużego seminarium, wrócił do rodziców, rok był gdzieś księgowym, potem zdał maturę i dostał się we Wrocławiu na historię starożytną, którą teraz (1958r.) kończy i ma zapewnioną asystenturę przy tej katedrze we Wrocławiu. Jedna z córek Maja przyjechała zdaje się w lecie 1955r. na urlop do wujostwa swych Kozłowskich do Krosna, tam poznała Adama Pillera i za niego wyszła w jesieni choć wesele mieli smutne bo zjechawszy się na pogrzeb ojca wzięli ślub. Teraz mieszkają oboje w Rzeszowie i mają dwoje dzieci i matki i dwie pracujące siostry Zosia i Ala mieszkają tam także. Krystyna i Andrzej pracują we Wrocławiu.</p>
-
-    <p>Córki Zdzisława wszystkie odbywały nauki u Niepokalanek w Niżniowie lub Jazłowcu. Najstarsza Maria po ukończeniu szkoły wstąpiła do Niepokalanek i jako siostra Anna bywała doskonałą "ekonomką" w Niżniowie, Sączu i Szymanowie a teraz od paru lat jest w Murkowie pod Poznaniem.</p>
-
-    <h2>Jadwiga z Ładomirskich i Tadeusz Teleżyńscy</h2>
-    <p>Jadwiga 27.04.1926r., wyszła za mąż za Tadeusza Teleżyńskiego będącego wówczas administratorem majątku Karasnobród koło Zamościa własność Kazimierza Fudakowskiego. Mieszkali tam do 1942r., mieli dwie córki, starsza Jadwiga zmarła w szpitalu w Lublinie w czasie okupacji a młodsza Teresa skończyła w Poznaniu medycynę i jest teraz asystentką profesora chirurga dr Degi. Jadwiga robiła bardzo ładne kilimy, potem dla pokrycia kosztów nauki córek zaczęła chować świnki, ale w końcu założyła hodowlę srebrnych lisów i w tem tak się wydoskonaliła, że Fudakowscy przystąpili do spółki, powstała ogromna ferma, która do końca okupacji niemieckiej trwała, choć też i wiele kłopotów przyniosła.</p>
-
-    <p>Z posagu Jadwigi i oszczędności kupili sobie Teleżyńscy z parcelacji Wilkołazu od ordynacji Zamojskich leśniczówkę i 10 ha pola i domek bardzo praktycznie i ładnie odnowili dodając na strychu nie zmieniając dachu kilka miłych pokoików. Założyli duży sad bardzo szlachetnych owoców i przenieśli tam swoją część fermy lisiej z Krasnobrodu. Po 1944r. leśniczówka stała się ostoją rodziny i ja tam z wielką przyjemnością kilka razy zajeżdżałem.</p>
-
-    <p>Zdzisławowie, którzy w 1939r. z Markowiec wyjechali bawili najpierw w Krasnobrodzie a potem w Leśniczówce do 1950r. tam 21.10.1945r. były ich złote gody. Leśniczówka leżała przy szosie Kraśnik - Lublin, ale przytykała też do wielkich lasów skąd tak zwani "leśni ludzie" często ją napadali, zabierając co im było potrzeba, spokoju więc nie mieli, co cenniejsze rzeczy wywieźli do Warszawy gdzie po powstaniu zginęły. T. Teleżyński dzierżawił w Kraśniku najpierw dwa, potem już jeden młyn parowy, ściągnął Antosia Ładomirskiego a sami wydali córkę z pierwszego małżeństwa Julę za inż. Spychałę, który w 1945r. założył szkołę jazdy samochodowej w Lublinie a potem przeniósł się do Poznania skąd pochodził a Teresa studiowała poza domem. Przenieśli się do Szepietowa gdzie Tadeusz objął posadę rolniczo naukową JUNG a po paru latach do Poraja koło Łeby też na naukowe badania kultur torfowych. 1.07.1958r. Tadeusz przechodzi na emeryturę i szukają jakiejś osady by na starsze lata spokojnie móc prowadzić hodowlę lisów do której Jadwiga znowu się zabrała. Córka Teresa skończyła medycynę w Poznaniu i jest asystentką prof. Degi chirurga tamże. Gdy z Leśniczówką były coraz większe trudności a Teresa oświadczyła, że tam nigdy nie osiądzie sprzedali ją, jednak w fatalnym czasie zmiany pieniędzy (1.11.1950r.) tak, że podstawy życiowej im nie dała. Jadwiga z Ładomirskich Teleżyńska ur. 27.10.1900 w Markowcu zmarła nagle 17.07.1959r. w Żarnowskiej koło Łeby pochowana została w Poznaniu na cmentarzu Junikowskim.</p>
-
-    <h2>Zofia z Ładomirskich Tyszkiewiczowa</h2>
-    <p>Następna córka Zofia miała projekta wstąpienia do klasztoru ale nic z tego nie wyszło i dopiero w 1936r. wyszła za mąż za Eustachego Tyszkiewicza syna Benedykta i Marii Lubomirskiej, który jako Inż. rybak urządzał i zarządzał stawami swojej ciotki w Horodyszczu w gromadzie Chamiakówka leżącym obok Markowiec. Zosia dostała 200 morgów z Markowiec nadających się na stawy, które zostały tam przez nich założone. Niestety w sierpniu 1938r. Zosia po urodzeniu syna we Lwowie zmarła. Syna Tadzia wzięła na wychowanie Stasia Kozłowska do Lipy koło Birczy a gdy wojna 1939r. z Lipy ich usunęła chowała go troskliwie naprzód w Hłudnie a potem w Krośnie gdzie pracowali. Gdy w 9tej klasie miał jakieś nieporozumienie w szkole pojechał do ojca, który pracował na wybrzeżu mieszkając v Sopocie z drugą żoną. Troszkę się uczył, troszkę pracował w Szczecinie, aż dostał się na statek dowożący słodką wodę do Świnoujścia. Z wiosną 1958r. ożenił się i pewno pójdzie jeszcze do szkoły rybołówstwa morskiego w Gdańsku.</p>
-
-    <div class="photo-grid">
-        <div class="photo-frame">
-            <div class="photo-box">FOTO: BUDOWA STAWÓW</div>
-            <div class="photo-caption">budowa stawów na Trpetnikach - folwark Uniawa</div>
+        <div class="bio-para">
+            Ja jednak wtedy o tym nic nie wiedziałem, tylko pamiętam miłe wizytki w Kosówce, tam pierwszy raz strzelałem z prawdziwej strzelby. Tam byliśmy całą rodziną na Wielkanoc 1898r. po moim ciężkim tyfusie i tam wtedy robiłem pierwsze moje fotografie aparatem Zeiss mającym 112 płyt szklanych 9/12 do zmiany.
         </div>
-        <div class="photo-frame">
-            <div class="photo-box">FOTO: BUDOWA DOMU</div>
-            <div class="photo-caption">budowa domu - folwark Uniawa</div>
+        <div class="bio-para">
+            W lutym 1898r. urodził się Andzi pierwszy syn Władzio, w 1899r. Marynka, w 1900r. Jadwiga, którą 2 lutego 1901r jako uczeń ósmej klasy dojechawszy z Sanoka do chrztu trzymałem. W następnych latach przybyły jeszcze Zosia, Stasia i Konstancja (Kostusia) oraz około roku 1907 zaczęła się seria chłopców: Józef, Zdziś, Andrzej, Antoni i na zakończenie w 1916r. Anka. 
         </div>
+
+        <div class="bio-para">
+            Chrzciny Jadwigi już się odbywały w Markowcach, które Zdzisław nabył od Matki i sióstr oddając Kosówkę. Dom był tam stary i zagrzybiony więc go rozebrano a dobudowano do oficynki cztery ładne pokoje a później, gdy rodzinka rosła ciągle coś dodając i ulepszając doszli do obszernego i wygodnego domu z przemiłą i ogromną werandą wejściową, ciepłą w zimie, bo dzięki podwójnym szybom dającą się ogrzać.
+        </div>
+
+        <div class="inline-photo">
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <img src="img/markowce_stary.jpg" style="width: 45%;" alt="Stary dwór Markowce" onerror="this.src='https://via.placeholder.com/350x250?text=Stary+dwór+Markowce+1895'">
+                <img src="img/markowce_nowy.jpg" style="width: 45%;" alt="Nowy dwór Markowce" onerror="this.src='https://via.placeholder.com/350x250?text=Nowy+dwór+Markowce+1938'">
+            </div>
+            <span class="caption">Ewolucja siedziby w Markowcach: rok 1895 oraz 1938</span>
+        </div>
+
+        <div class="bio-para">
+            Zdzisław był bardzo dobry i zapobiegliwy gospodarz w hodowli tak bydła jak i koni i przy pomocy miejscowych ludzi umiał wszystko w porządku i doskonałym stanie utrzymać, liczną dzieciarnię wychować i wykształcić a także ziemi dokupywać gdy się okazja na miejscu zdarzyła, to grunta od Dominikanów z Tyśmienicy to obok leżące Bratkowce a w końcu od Matki Kosówkę.
+        </div>
+        <div class="bio-para">
+            Pierwszą inwazję rosyjską w 1914r. przetrwali w domu broniąc się jak można było od strat w gospodarstwie, szczególnie w inwentarzu. Była tam wtedy i para koni arabów, które dla mnie Zdzisław kupił w Jabłonowie, miały być do ślubu, ale z wybuchem wojny zostały w Markowcach. Spodobały się Moskalom i chcieli je zabierać, ale dzieci tak się do tych koni przytulały i desperowały, że zostawili, a nam one długie lata służyły i kilka ładnych źrebiąt od Lotnej wychowaliśmy.
+        </div>
+
+        <div class="inline-photo">
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <img src="img/konie_zima.jpg" style="width: 45%;" alt="Konie zimą" onerror="this.src='https://via.placeholder.com/350x250?text=Konie+zimą+1886'">
+                <img src="img/konie_lato.jpg" style="width: 45%;" alt="Konie latem" onerror="this.src='https://via.placeholder.com/350x250?text=Konie+latem'">
+            </div>
+            <span class="caption">Rekreacja konna w rodzinie Ładomirskich</span>
+        </div>
+
+        <section class="descendants">
+            <h2>Losy Następnego Pokolenia</h2>
+
+            <div class="child-block">
+                <h3>Władysław Ładomirski</h3>
+                <p>Na inwazję już bolszewicką przyjechali w 1920r. Zdzisławowie z dziećmi i inwentarzami do Jabłonki, tak że po powrocie mieli z czem zabrać się do odbudowy gospodarstwa. Dzieci wszystkie starannie kształcili. Najstarszy Władzio był w Chyrowie, a po wybuchu wojny zdał maturę w Białej i mój Ojciec umieścił go u swego parlamentarnego kolegi Proskowica, starszego gospodarza na Morawach, na praktyce gospodarskiej, skąd wiele wiadomości wyniósł.</p>
+                <p>Po udziale w wojnie 1920r. jako ochotnik zaczął gospodarować na Wołyniu, w majątku nabytym przez pana Rytowskiego (młodszego). Ożenił się z Walą Nagórzańską, a gdy dzieci zaczęło przybywać ojciec oddał mu w Markowcach Młyn z dużym stawem i przylegającymi gruntami. Tam chował swoje sześcioro dzieci, aż do drugiej wojny, biorąc czynny udział w ruchu szlachty zagrodowej.</p>
+            </div>
+        <div class="child-block">
+            <p>Po 17 września 1939r. będąc w wojsku we Lwowie, przezornie nie poszedł na plac Bernardyński gdy tam rozbrajali oficerów i tak uniknął Katynia. Gdy Wala z dziećmi nadciągnęła, osiadła w folwarku swej rodziny przy ujściu Dunajca a Władzio pracował w dużym młynie Konopków w Brniu; potem przenieśli się do Kraśnika też do młyna, dzierżawionego przez męża Jadwigi Ładomirskiej Tadeusza Teleżyńskiego.</p>
+            <p>Po śmierci bardzo obiecującego syna zmarłego w szpitalu w Lublinie gospodarował na folwarku oddanym SS. Niepokalankom w Szczecinku, i zajmował się potem także mleczarnią, następnie działał jako inspektor plantacji cykorii i przy tym stracił zdrowie gdyż serce nie wytrzymało forsownych marszów po rolach. Gdy wrócił do zdrowia został księgowym dla kilku spółdzielni produkcyjnych.</p>
+        </div>
+
+        <div class="child-block">
+            <h3>Jadwiga z Ładomirskich Teleżyńska</h3>
+            <p>Jadwiga 27.04.1926r., wyszła za mąż za Tadeusza Teleżyńskiego będącego wówczas administratorem majątku Karasnobród koło Zamościa własność Kazimierza Fudakowskiego. Mieszkali tam do 1942r., mieli dwie córki, starsza Jadwiga zmarła w szpitalu w Lublinie w czasie okupacji a młodsza Teresa skończyła w Poznaniu medycynę i jest teraz asystentką profesora chirurga dr Degi.</p>
+            <p>Jadwiga robiła bardzo ładne kilimy, potem dla pokrycia kosztów nauki córek zaczęła chować świnki, ale w końcu założyła hodowlę srebrnych lisów i w tem tak się wydoskonaliła, że Fudakowscy przystąpili do spółki, powstała ogromna ferma, która do końca okupacji niemieckiej trwała, choć też i wiele kłopotów przyniosła.</p>
+            <div class="inline-photo">
+                <img src="img/jadwiga_telezynska.jpg" alt="Jadwiga Teleżyńska" onerror="this.src='https://via.placeholder.com/400x300?text=Jadwiga+z+Ładomirskich+Teleżyńska'">
+                <span class="caption">Jadwiga z Ładomirskich Teleżyńska - twórczyni fermy lisów</span>
+            </div>
+        </div>
+        <div class="child-block">
+            <p>Z posagu Jadwigi i oszczędności kupili sobie Teleżyńscy z parcelacji Wilkołazu od ordynacji Zamojskich leśniczówkę i 10 ha pola i domek bardzo praktycznie i ładnie odnowili. Założyli duży sad bardzo szlachetnych owoców i przenieśli tam swoją część fermy lisiej z Krasnobrodu. Po 1944r. leśniczówka stała się ostoją rodziny i ja tam z wielką przyjemnością kilka razy zajeżdżałem.</p>
+            <p>Zdzisławowie, którzy w 1939r. z Markowiec wyjechali bawili najpierw w Krasnobrodzie a potem w Leśniczówce do 1950r. tam 21.10.1945r. były ich złote gody. Leśniczówka leżała przy szosie Kraśnik - Lublin, ale przytykała też do wielkich lasów skąd tak zwani "leśni ludzie" często ją napadali, zabierając co im było potrzeba, spokoju więc nie mieli.</p>
+            <p>Jadwiga z Ładomirskich Teleżyńska ur. 27.10.1900 w Markowcu zmarła nagle 17.07.1959r. w Żarnowskiej koło Łeby pochowana została w Poznaniu na cmentarzu Junikowskim.</p>
+        </div>
+
+        <div class="child-block">
+            <h3>Zofia z Ładomirskich Tyszkiewiczowa</h3>
+            <p>Zofia w 1936r. wyszła za mąż za Eustachego Tyszkiewicza syna Benedykta i Marii Lubomirskiej, który jako Inż. rybak urządzał i zarządzał stawami swojej ciotki w Horodyszczu. Zosia dostała 200 morgów z Markowiec nadających się na stawy, które zostały tam przez nich założone. Niestety w sierpniu 1938r. Zosia po urodzeniu syna we Lwowie zmarła.</p>
+            <p>Syna Tadzia wzięła na wychowanie Stasia Kozłowska do Lipy koło Birczy a gdy wojna 1939r. z Lipy ich usunęła chowała go troskliwie naprzód w Hłudnie a potem w Krośnie gdzie pracowali. Gdy w 9tej klasie miał jakieś nieporozumienie w szkole pojechał do ojca, który pracował na wybrzeżu. Z wiosną 1958r. ożenił się i pewno pójdzie jeszcze do szkoły rybołówstwa morskiego w Gdańsku.</p>
+            <div class="inline-photo">
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <img src="img/stawy_uniawa.jpg" style="width: 45%;" alt="Budowa stawów" onerror="this.src='https://via.placeholder.com/350x250?text=Budowa+stawów+Uniawa'">
+                    <img src="img/dom_uniawa.jpg" style="width: 45%;" alt="Budowa domu" onerror="this.src='https://via.placeholder.com/350x250?text=Budowa+domu+Uniawa'">
+                </div>
+                <span class="caption">Prace gospodarcze Tyszkiewiczów w folwarku Uniawa</span>
+            </div>
+        </div>
+        <div class="child-block">
+            <h3>Stanisława z Ładomirskich Kozłowska</h3>
+            <p>Stasia, ładna jasna blondynka po klasztorze, 29.09.1924r. wyszła za mąż za Aleksandra Kozłowskiego-Zarembę z Lipy Dolnej koło Birczy. Dzieci nie mieli, ale spokojnie pracując w Lipie, prowadzili gościnny dom dla sąsiadów i rodziny. W 1939r. po wybuchu wojny wyjechali do Markowiec, skąd po 17.09 wrócili, ale że w Lipie inni już byli gospodarze, pojechali do Hłudna.</p>
+            <p>Lesio zajmował się gospodarstwem w folwarku swej matki. Przy studni był żuraw stary, który zwalił się i zabił Niemca. Pani Kozłowska została oskarżona o zabójstwo żołnierza, a Lesio był jakiś czas w jej zastępstwie więziony w Brzozowie. W 1945r. przenieśli się do Krosna, gdzie Lesio dostał posadę "mistrza gazowego". We wrześniu 1956r. przenieśli się do Krzeczowic, gdzie Lesio zmarł niespełna miesiąc później.</p>
+        </div>
+
+        <div class="child-block">
+            <h3>Józef Ładomirski</h3>
+            <p>Józef skończywszy gimnazjum studiował w Dublanach rolnictwo i po odsłużeniu wojska przy artylerii wrócił do Markowiec. Gdy się ożenił z koleżanką z Dublan Anną Trąbczyńską, oddał mu Ojciec Kosówkę. Urodził im się syn Tomasz, potem już przed samą wojną córka Marta. Józek poszedł na wojnę i zginął we wrześniu 1939r. gdzieś na zachód od Warszawy, nigdy nie dało się ustalić gdzie.</p>
+            <p>Wdowa jako inż. rolnik pracowała w Przeworsku i Aleksandrowicach, a potem została profesorem w szkole ogrodniczej w Krzeszowicach. Syn Tomasz studiował rolnictwo w Olsztynie i Warszawie, a córka Marta chemię.</p>
+            <div class="inline-photo">
+                <img src="img/tomasz_sporty.jpg" alt="Tomasz Ładomirski" onerror="this.src='https://via.placeholder.com/400x300?text=Sporty+wodne+na+Kosówce+1937'">
+                <span class="caption">Sporty wodne na Kosówce; Tomasz Ładomirski - rok 1937</span>
+            </div>
+        </div>
+        <div class="child-block">
+            <h3>Zdzisław Ładomirski (junior)</h3>
+            <p>Następny syn Zdzisław miał od najmłodszych lat dwa zamiłowania: rysunki i muzykę, ta ostatnia jednak zwyciężyła i jej się poświęcił, poważnie ją studiując po maturze u prof. Friemanna we Lwowie, potem wyjechał na dalsze studia do Paryża, gdzie poznawszy Marjorie Ara z nią się ożenił i już stale pozostał za granicą.</p>
+            <p>W czasie wojny przesiedlił się do Maroka, gdzie dobrze mu się działo, gdyż miał uczniów Amerykanów. Po wojnie, na zaproszenie koleżanki Marjorie, pojechali całą rodziną do Perth w Australii i zaczęli uczyć, on muzyki, ona języków. Córka Marjorie została bibliotekarką w Canberze, Joasia studiuje matematykę, a urodzony w Australii syn Antoni niezadługo pójdzie do szkoły. Dobry syn, regularnie przekazuje matce 10 funtów australijskich.</p>
+        </div>
+
+        <div class="child-block">
+            <h3>Andrzej Ładomirski (Jędrek)</h3>
+            <p>Czwarty syn Andrzej (Jędrek) od najmłodszych lat był "zbytnik". Pojechał na gapę do Rzymu z pielgrzymką na kanonizację św. Andrzeja Boboli, a w końcu ożenił się z panną Jurczyńską, córką adwokata w Krakowie. Z wybuchem wojny w 1939r. pogubili się; on w wojsku, ona została we Lwowie. Jędrek umknął z obozu jeńców pod Łodzią i zjawił się w Jabłonce.</p>
+            <p>Nie wojował, ale zwiedził kawał świata, prowadził transporty wojskowe w Azji i w Afryce, widzieli go w Rzymie, w końcu wylądował w obozie byłych wojskowych w Anglii. Żona jego tymczasem zginęła w powstaniu warszawskim. On ożenił się w obozie z córką lekarza z kieleckiego i wyjechali do Argentyny. Prowadził wielkie tartaki, plantacje, mierzył puszcze dziewicze z aeroplanu, a ostatnio trasował linię wysokiego napięcia.</p>
+        </div>
+        <div class="child-block">
+            <h3>Antoni Ładomirski</h3>
+            <p>Ostatni syn Antoni, bardzo ciekawy do gospodarstwa ukończył przed samą wojną szkołę rolniczą w Cieszynie, na praktyce u swych wujostwa Domańskich w Ubiniu, poznał Jadwigę Komarnicką inż. ogrodnictwa z S.G.G.W. i już po wybuchu wojny się pobrali 23.01.1940r.</p>
+            <p>Najprzód mieszkali w Babulach koło Jaślan gdzie domek i kilkanaście morgów należących do naszych dzieci po babce było wolnych, potem Teleżyńscy ściągnęli ich do Leśniczówki a gdy ta została sprzedana w październiku 1950r. Antek został inspektorem plantacji buraczanych w Krośnie a zamieszkał w Korczynie bo tam mieszkanie dostali. Urodziło się im trzech chłopców i dwie dziewczynki, doskonale te dzieci chowają. W 1955r. przenieśli się do Krzeczowic koło Przeworska do gospodarstwa nasiennego.</p>
+        </div>
+
+        <div class="child-block">
+            <h3>Anna Ładomirska (junior)</h3>
+            <p>Najmłodsza córka Anna po maturze w klasztorze w Jazłowcu ukończyła szkołę pielęgniarek na Koszykowej w Warszawie, pracowała najpierw we Wrzeszczu a w 1950r. po Leśniczówce zamieszkała z mężem, który 25.11.1950r. zmarł w klasztorku na Winiarach ul. Rejtana 6 w Poznaniu, gdzie mieszka 25 staruszek, a gdzie Teleżyńscy pomógłszy zakonnicom do wykończenia kaplicy uzyskali ładny pokój na parterze dla rodziców.</p>
+        </div>
+
+        <section class="source-note">
+            <h4>Notatka kronikarska</h4>
+            <p>Powyższy zapis stanowi fragment rodzinnej kroniki spisanej przez Antoniego Kraińskiego, dokumentujący losy linii Ładomirskich z Markowiec oraz ich powiązania z domem w Wyszatycach i Jabłonce.</p>
+        </section>
     </div>
-
-    <h2>Stanisława z Ładomirskich Kozłowska</h2>
-    <p>Stasia, ładna jasna blondynka po klasztorze, była na praktyce gospodarstwa domowego w Kniażu i 29.09.1924r. wyszła za mąż za Aleksandra Kozłowskiego-Zarembę z Lipy Dolnej koło Birczy . Dzieci nie mieli, ale spokojnie pracując w Lipie, która żadnych obciążeń nie miała prowadzili gościnny dom dla sąsiadów i rodziny , dużo miłych chwil tam spędziliśmy. W 1939r. po wybuchu wojny wyjechali z dzieckiem Zosi i trochę dobytku do Markowiec skąd po 17.09 wrócili, ale że w Lipie inni już byli gospodarze, pojechali do Hłudna, gdzie przez czas okupacji Lesio zajmował się gospodarstwem w folwarku swej matki i bronił ją od skutków nieszczęśliwego wypadku, który się tam zdarzył. Przy studni był żuraw stary więc nadpróchniały, gdy żołnierze niemieccy przed przejściem przez San v 1941r. zaczęli bardzo go używać zwalił się i zabił Niemca. Pani Kozłowska została oskarżona o zabójstwo żołnierza niemieckiego i długo trzeba było walczyć nim się ją z tego zarzutu zwolniło a nawet Lesio był jakiś czas w jej zastępstwie więziony w Brzozowie. W 1944r. w lipcu Lesiowie przenieśli się do Brzozowa a w 1945r. w sierpniu do Krosna gdzie Lesio dostał posadę "mistrza gazowego" na Kopalni nafty w Krościenku i gdzie spokojnie przemieszkali 11 lat, z których połowę on przepracował a połowę zapadł na zdrowiu, że dostał emeryturę inwalidzką, kopalnia Stasi zajęcie dała, tak, że spokojnie dalej mieszkali. W sierpniu 1956r. przenieśli się do Krzeczowic koło Przeworska, gdzie w nasiennym gospodarstwie pracuje Antoni Ładomirski z żoną a mając pięcioro dzieci potrzebowali pomocy ciotki. Pomagałem im wtedy się pakować. Niestety zdrowie Lesia nie wytrzymało zmiany i zmarł we wrześniu niespełna miesiąc bawiąc w Krzeczowicach. Stasia do połowy roku 1957 pomagała jeszcze w domu Antosiom ale gdy jej matka tak się posunęła i na zdrowiu zapadła, że stałej pielęgnacji potrzebowała, przeniosła się do Poznania i od roku matkę starannie pielęgnuje.</p>
-
-    <p><strong>Konstancja Ładomirska.</strong> Kostusia zmarła na tyfus już jako dorosła panna.</p>
-
-    <p>Dla edukacji synów warto było przenieść się do Lwowa. Nasz Ojciec sprzedawszy Suszno w 1911r. i poszedłszy na emeryturę w Tow. Kred. Ziem. postanowił córkom uzupełnić ich posagi. Pomógł zatem Andzi do kupna domu przy ul.. Listopada 28 od Oberskiego (kiedyś sklep zabawek). W tym domu mieszkała Andzia z synami.</p>
-
-    <h2>Józef Ładomirski i Anna z Trąbczyńskich Ładomirska</h2>
-    <p>Józef skończywszy gimnazjum studiował w Dublanach rolnictwo i po odsłużeniu wojska przy artylerii wrócił do Markowiec i pomagał Ojcu w gospodarstwie a gdy się ożenił z koleżanką z Dublan Anną Trąbczyńską z Kieleckiego oddal mu Ojciec Kosówkę. Urodził im się syn Tomasz, potem już przed samą wojną córka Marta. Józek poszedł na wojnę i zginął we wrześniu 1939r. gdzieś na zachód od Warszawy, nigdy nie dało się ustalić gdzie. Wdowa jako inż. rolnik była inspektorem plantacji buraków dla Przeworska, a w 1944r. jakiś czas pomagała w hodowli lisów w Leśniczówce i prowadziła drugą fermę Teleżyńskich gdzieś na Pomorzu, a gdy i to się skończyło była zajęta w hodowli w Aleksandrowicach folwarku Balic pod Krakowem i przeszła na profesora w szkole ogrodniczej w Krzeszowicach, gdzie jej dzieci do szkoły już chodziły. Później była w Werbkowicach w Hrubiszkowskim parę lat na badaniach erozji ziemi a teraz przeniosła się koło Puław. Syn Tomasz studiował rolnictwo w Olsztynie i wtedy kilka razy odwiedzał bardzo miło naszego Jasia. Później gdy od ciotki dostał pokój w spółdzielni mieszkaniowej tam się przeniósł i kończy S.G.G.W. Od roku mieszka z nim siostra Marta, która po zdaniu matury w Hrubieszowie studiuje chemię w Warszawie.</p>
-
-    <div class="photo-frame">
-        <div class="photo-box">MIEJSCE NA ZDJĘCIE: SPORTY WODNE / TOMASZ</div>
-        <div class="photo-caption">sporty wodne na Kosówce; Tomasz Ładomirski - rok 1937</div>
-    </div>
-
-    <p>Następny syn <strong>Zdzisław</strong> miał od najmłodszych lat dwa zamiłowania: rysunki i muzykę, ta ostatnia jednak zwyciężyła i jej się poświęcił, poważnie ją studiując po maturze u prof. Friemanna we Lwowie, potem wyjechał na dalsze studia do Paryża, gdzie poznawszy Marjorie Ara z nią się ożenił i już stale pozostał za granicą i tylko raz przyjechał z żoną, córką i teściową w odwiedziny do rodziny i kraju zdaje się w grudniu 1938r. W czasie wojny przesiedlił się do Maroka, gdzie dobrze mu się działo, gdyż miał ucznów Amerykanów. Po wojnie, gdy Amerykanie z Maroka wyjechali było coraz ciężej dwoma córkami. Wtedy na zaproszenie koleżanki z pensji Marjorie, która była kierowniczką szkoły w Perth w Australii, pojechali tam całą rodziną i zaczęli uczyć, on muzyki, ona języków. Starsza Marjorie poszła na Uniwersytet w Camberze, została tam bibliotekarką, ukończyła studia i wyszła za mąż za Australijczyka Micka Letts, z którym wiosną urodziła córkę Martine. Druga córka Zdzisława Joasia już jest drugi rok na uniwersytecie, studiuje matematykę i zarazem pracuje a w Australii już urodzony syn Antoni niezadługo pójdzie do szkoły. Dobry syn, choć mu nieraz ciężko, regularnie, co kwartał przekazuje matce 10 funtów australijskich.</p>
-
-    <p>Czwarty syn <strong>Andrzej (Jędrek)</strong> od najmłodszych lat był "zbytnik" gdy w 1920r. był w Jabłonce mając zdaje się 8 lat proch zapalił tak, że osmalił sobie całą głowę i brwi i rzęsy opalił. Studiował w domu i paru gimnazjach, w końcu zdawszy maturę zapisał się na leśnictwo na politechnice Lwowskiej, gdzieś praktykował, jeździł na wycieczki zagraniczne, pojechał na gapę do Rzymu z pielgrzymką na kanonizację św. Andrzeja Boboli, a w końcu ożenił się z panną Jurczyńską, córką Hieronima Jurczyńskiego adwokata w Krakowie i naszej kuzynki Romerówny (jej prababka z Trzecieskich Łosiowa i mój dziadek Tytus Trzecieski - rodzeństwo), która była na kursach w Snopkowie, mieszkali w Zimnej Wodzie. Całe umeblowanie sam sobie zrobił z pak i desek; wyjeżdżał z agitacją na Ruś Zakarpacką; mieli syna Jurka i z wybuchem wojny w 1939r. pogubili się, on w wojaku, ona dziecko zostawiła we Lwowie i granica ją odcięła; przyjechała do Jabłonki by jej ułatwić dostanie się do Lwowa do dziecka. Jak się udało ją przerzucić przez San w Lesku ją aresztowali, jak przybyła do Lwowa dziecka już nie zastała było w Krakowie. Jędrek zjawił się niezadługo też w Jabłonce, umknął z obozu jeńców pod Łodzią, spotkał się u nas z Ksawerym Prekiem, wziął od niego polecenie opiekowania się jego lasami w Kalenicy, z tym zgłosił się do niemieckiego komendanta lasów w Sanoku, wytłumaczył mu, że tego samego profesora w Torencie słuchali, uzyskał pieczątkę na piśmie Preka a za parę tygodni dostaliśmy od niego kartkę z Budapesztu, że jedzie dalej. Nie wojował, ale zwiedził kawał świata, prowadził transporta wojskowe w Azji i w Afryce, widzieli go w Rzymie, w końcu wylądował w obozie byłych wojskowych w Anglii. Żona jego tymczasem zginęła w powstaniu warszawskim, syna Jurka chowali dziadkowie w Krakowie. On się ożenił w obozie z córką lekarza z kieleckiego, wyjechali do Argentyny, mają dwoje dzieci, on prowadził wielkie tartaki, potem plantacje, które zmarzły, mierzył i szacował puszcza dziewicze z aeroplanu, a ostatnio trasował linię wysokiego napięcia. Ona wydzierżawiła kilkanaście hektarów ziemi pod stolicą i gospodaruje i posyła dzieci do szkoły. Matce raz przysłał jakieś lekarstwa, czasem pisują, ona częściej. Syn Jurka ukończył szkołę techniczną, pracuje, mieszka u dziadków w Krakowie.</p>
-
-    <p>Ostatni syn <strong>Antoni</strong>, bardzo ciekawy do gospodarstwa ukończył przed samą wojną szkołę rolniczą w Cieszynie, na praktyce u swych wujostwa Domańskich w Ubiniu, poznał Jadwigę Komarnicką inż. ogrodnictwa z S.G.G.W. i już po wybuchu wojny się pobrali 23.01.1940r. Najprzód mieszkali w Babulach koło Jaślan gdzie domek i kilkanaście morgów należących do naszych dzieci po babce było wolnych, potem Telżyńscy ściągnęli ich do Leśniczówki a gdy ta została sprzedana w październiku 1950r. Antek został inspektorem plantacji buraczanych w Krośnie a zamieszkał w Korczynie bo tam mieszkanie dostali. Urodziło się im trzech chłopców i dwie dziewczynki, doskonale te dzieci chowają. W 1955r. przenieśli się do Krzeczowic koło przeworska do gospodarstwa nasiennego, mieszkanie mają dobre, ale sąsiada z dołu, hodowcę niemiłego, który im żyć nie daje. W 1956r. sprowadzili do siebie Kozłowskich, Lesiu wkrótce umarł, Stasia po roku pojechała pielęgnować matkę do Poznania. Najstarszy syn Jacek zdał w 1957r. maturę, chciał dostać się na politechnikę we Wrocławiu, nie udało się, pracował w miejskim zaopatrzeniu weterynaryjnym. Teraz ma próbować zdawać na politechnikę w Gdańsku.</p>
-
-    <p>Najmłodsza córka <strong>Anna</strong> po maturze w klasztorze w Jazłowcu ukończyła szkołę pielęgniarek na Koszykowej w Warszawie, pracowała najpierw we Wrzeszczu a w 1950r. po Leśniczówce zamieszkała z mężem, który 25.11.1950r. zmarł w klasztorku na Winiarach ul. Rejtana 6 w Poznaniu, gdzie mieszka 25 staruszek, a gdzie Teleżyńscy pomógłszy zakonnicom do wykończenia kaplicy uzyskali ładny pokój na parterze dla rodziców.</p>
 
     <footer>
-        Antoni Kraiński
+        DOKUMENTACJA RODZINY ŁADOMIRSKICH © 2026 | ARCHIWUM L&K
     </footer>
-</div>
+</article>
 
 </body>
 </html>
