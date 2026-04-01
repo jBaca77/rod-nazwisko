@@ -96,7 +96,7 @@
 
 <nav>
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
         <a href="zjazdy.html" class="back-link">← Powrót do listy</a>
     </div>
 </nav>
@@ -115,7 +115,7 @@
     </div>
 
     <div class="hero-container">
-        <img src="./img/zjazdy/zjazdxiii/foto_zjazdxiii_00.jpg" alt="Zdjęcie grupowe" class="main-img">
+        <img src="../img/zjazdy/zjazdxiii/foto_zjazdxiii_00.jpg" alt="Zdjęcie grupowe" class="main-img">
     </div>
 
     <section class="memories-section">
@@ -184,7 +184,7 @@
 
     function createImageElement(i) {
         const nr = i.toString().padStart(2, '0');
-        const path = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+        const path = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
         const div = document.createElement('div');
         div.className = 'gallery-item';
         const img = document.createElement('img');
@@ -227,7 +227,7 @@
 
     function updateLB() {
         const nr = currentIdx.toString().padStart(2, '0');
-        lbImg.src = `./img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+        lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
         lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
     }
 
