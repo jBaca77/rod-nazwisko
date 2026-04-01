@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiszniewscy z Horyhlad | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+
+        .profile-header { 
+            max-width: 1000px; margin: 60px auto; padding: 0 24px; 
+            display: grid; grid-template-columns: 350px 1fr; gap: 50px; align-items: center;
+        }
+        .main-photo-frame { 
+            background: white; padding: 15px; border: 1px solid var(--line);
+            box-shadow: 15px 15px 0px var(--parchment);
+        }
+        .main-photo-frame img { width: 100%; height: auto; display: block; filter: sepia(15%); }
+        
+        .header-info h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; margin-bottom: 10px; line-height: 1.1; }
+        .header-info .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); font-style: italic; display: block; margin-bottom: 20px; }
+        .meta-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); display: block; margin-bottom: 5px; }
+
+        .content-wrap { max-width: 850px; margin: 0 auto; padding: 0 24px; }
+        .bio-para { margin-bottom: 25px; text-align: justify; font-size: 1.1rem; }
+        .bio-para:first-of-type::first-letter {
+            float: left; font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem; line-height: 0.8; padding: 8px 12px 4px 0;
+            color: var(--gold); font-weight: 300;
+        }
+
+        .inline-photo { margin: 45px 0; text-align: center; }
+        .inline-photo img { max-width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; }
+        .caption { display: block; margin-top: 10px; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--sepia); font-size: 1rem; }
+
+        .descendants { margin-top: 80px; border-top: 2px solid var(--gold-light); padding-top: 40px; }
+        .descendants h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; margin-bottom: 40px; text-align: center; }
+        .child-block { margin-bottom: 60px; padding-left: 20px; border-left: 1px solid var(--parchment); }
+        .child-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 15px; }
+
+        .source-note { background: #f0ede6; padding: 30px; margin: 40px 0; border-left: 4px solid var(--gold); font-size: 1rem; }
+        .source-note h4 { font-family: 'Cormorant Garamond', serif; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .audio-player {
+            background: var(--ink); color: white; padding: 30px; margin: 60px 0; text-align: center; border-radius: 4px;
+        }
+        .audio-player p { margin-bottom: 15px; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; letter-spacing: 1px; }
+        audio { width: 100%; max-width: 500px; filter: invert(100%) hue-rotate(180deg) brightness(1.5); }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 100px; }
+
+        @media (max-width: 800px) {
+            .profile-header { grid-template-columns: 1fr; text-align: center; }
+            .main-photo-frame { max-width: 300px; margin: 0 auto 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="biografie.html" class="back-link">← Biografie</a>
+    </div>
+</nav>
+
+<article>
+    <header class="profile-header">
+        <div class="main-photo-frame">
+            <img src="img/ludwik_teresa.jpg" alt="Ludwik i Teresa Wiszniewscy" onerror="this.src='https://via.placeholder.com/400x500?text=Ludwik+i+Teresa+Wiszniewscy'">
+        </div>
+        <div class="header-info">
+            <span class="meta-tag">Linia Kraińskich</span>
+            <h1>Wiszniewscy z Horyhlad</h1>
+            <span class="subtitle">Ludwik Wiszniewski i Teresa z Kraińskich</span>
+            <p style="font-size: 0.9rem; color: var(--sepia);">Horyhlady • Dźwiniacz Dolny • Ostra nad Dniestrem</p>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        <div class="bio-para">
+            Najmłodsza moja siostra Teresa urodziła się w Wyszatycach 15.10.1888r. Chowała się i uczyła razem z Anielcią i doskonale się z sobą zgadzały i wesoło z kuzynkami i T. z Frablówki, do której należeli studiujący na Uniwersytecie i Politechnice mili młodzi ludzie, się zabawiały.
+        </div>
+
+        <div class="bio-para">
+            W roku 1907 pojawił się we Lwowie Maria Ludwik Wiszniewski, syn Marszałka powiatu Drohobyckiego, przemysłowca naftowego, który zdawszy doktorat prawa, studiował w Lipsku i Wrocławiu rolnictwo gdyż ojciec kupił dla niego majątek Horyhlady i Ostrą nad Dniestrem koło Niżniowa.
+        </div>
+
+        <div class="inline-photo">
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <img src="img/dwor_horyhlady.jpg" style="width: 45%;" alt="Dwór w Horyhladach" onerror="this.src='https://via.placeholder.com/350x250?text=Dwór+w+Horyhladach'">
+                <img src="img/dniestr.jpg" style="width: 45%;" alt="Dniestr Horyhlady" onerror="this.src='https://via.placeholder.com/350x250?text=Dniestr+w+okolicy+Horyhlad'">
+            </div>
+            <span class="caption">Dwór w Horyhladach oraz zakole Dniestru</span>
+        </div>
+
+        <div class="bio-para">
+            Munek był za młodu w szybie naftowym w czasie wybuchu gazów, brat jego wtedy zginą, a jemu pozostały na twarzy ślady poparzenia, ale był miły i poważny, tak że sympatia się zawiązała i 14.02.1908 roku pobrali się we Lwowie, biorąc ślub w kościele św. Marii Magdaleny. Młodzi wyjechali do Włoch, a potem wrócili do bardzo starannie urządzonych Horyhlad (był i wodociąg). Zdaje się w 1909 byliśmy razem we Wiedniu... Wieczorem znowu pamiętam wesołą i doskonałą kolacyjkę u Sachera, pierwsza restauracja Wiednia.
+        </div>
+
+        <div class="bio-para">
+            W 1909 urodził się syn Jan, a po nim następowały córki: Teresa, Hania i Krystyna, dopiero w 1915 na ruskiej plebani w Ostrej, bo w czasie inwazji nie mogli w domu swym mieszkać, urodził się syn Stanisław. Potem mieszkali z rok w Niebocku, przybył Tadeusz, a w Dźwiniaczu koło Ustrzyk, który razem z Ojcem Teresa nabyła od p. Słotwińskiego, urodził się Andrzej.
+        </div>
+
+        <div class="bio-para">
+            Pojechaliśmy do Horyhlad z Markowiec z Tadeuszem Sroczyńskim, doskonałym budowniczym, opracowali plan przerobienia domu... Schody na górę otwarte w jadalnym pokoju i kanalizację ja zaprojektowałem i zniwelowałem. Do tak wygodnie przerobonego domu, przeniosła się cała rodzina z Dżwiniacza i spokojnie tam żyli lat kilkanaście, aż do wybuchu ostatniej wojny.
+        </div>
+
+        <div class="inline-photo">
+            <img src="img/rodzina_1928.jpg" alt="Rodzina Wiszniewskich we Lwowie 1928" onerror="this.src='https://via.placeholder.com/600x400?text=Rodzina+Wiszniewskich+1928'">
+            <span class="caption">Na ławce: Krystyna, Dzidzia Weiss, Hania, Wika Weiss, Lidia Petrino, Tereska i Tychna. Na trawie: Staś, Tadzio i Andrzej. Lwów 1928</span>
+        </div>
+
+        <div class="bio-para">
+            17 września 1939 znalazłem się w Horyhladach z siostrą Andzią i synem Antkiem własnym małym Fiatem 508... Teresa z Andzią i pannami wróciła do Horyhlad. Munia zaaresztowano do Tłumacza, potem Stanisławowa, a w końcu na Cherzon, gdzie słuch o nim zaginął. Pewnie go wykończyli, bo wywołany z celi już nie wrócił. Teresa z córkami ściągnęła do Lwowa, a w maju 1940 z synową i jej matką do Jabłonki.
+        </div>
+
+        <div class="inline-photo">
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <img src="img/wiszniewskie_1947.jpg" style="width: 45%;" alt="Krystyna, Anna i Teresa" onerror="this.src='https://via.placeholder.com/350x250?text=Siostry+Wiszniewskie+1947'">
+                <img src="img/wiszniewscy_bracia.jpg" style="width: 45%;" alt="Andrzej, Jan, Tadeusz i Staś" onerror="this.src='https://via.placeholder.com/350x250?text=Bracia+Wiszniewscy+1939'">
+            </div>
+            <span class="caption">Rodzeństwo Wiszniewskich w latach 1939-1947</span>
+        </div>
+
+        <section class="descendants">
+            <h2>Losy Wojenne i Powojenne</h2>
+
+            <div class="child-block">
+                <h3>Jan Wiszniewski</h3>
+                <p>Jaś, jako lotnik, dostał się na zachód. Latał na bombowcu i spadł z nim nad Bremą. Wdowa Wanda z synem Tomaszem przedostała się do Londynu. Tomasz jest na trzecim roku Politechniki w Londynie (1958).</p>
+                <div class="inline-photo">
+                    <img src="img/jan_hanower.jpg" style="max-width: 300px;" alt="Andrzej przy grobie Jana" onerror="this.src='https://via.placeholder.com/300x400?text=Andrzej+przy+grobie+Jana'">
+                    <span class="caption">Andrzej przy grobie Jana, Hanower</span>
+                </div>
+            </div>
+
+            <div class="child-block">
+                <h3>Stanisław Wiszniewski</h3>
+                <p>Staś pracował przy rentgenie we Lwowie, potem w Warszawie i Radzyminie... Po nadejściu Sowietów, Staś wezwany niby to do chorego, powrócił z obozu w Rosji dopiero za trzy lata, zastając trzyletnią córkę, której nie znał. Obydwoje ze swą żoną pracują jako lekarze w Radzyminie.</p>
+            </div>
+
+            <div class="child-block">
+                <h3>Teresa Wąsowska</h3>
+                <p>Wyszła za swego brata ciotecznego Wąsowskiego. Osiedli pod lasem w Dźwiniaczu, zakładając fermę srebrnych lisów. Mąż Józef zginął w 1944 w Normandii służąc w brygadzie Maczka. Teresa pracowała jako księgowa na Śląsku i w Pińczowie, osiadła w Nowym Sączu.</p>
+                <div class="inline-photo">
+                    <img src="img/grob_wasowskiego.jpg" style="max-width: 300px;" alt="Grób Józefa Wąsowskiego" onerror="this.src='https://via.placeholder.com/300x200?text=Grób+Józefa+Wąsowskiego'">
+                    <span class="caption">Grób Józefa Wąsowskiego w Jort, Francja</span>
+                </div>
+            </div>
+
+            <div class="child-block">
+                <h3>Tadeusz Maria Wiszniewski</h3>
+                <div class="inline-photo" style="float: right; width: 200px; margin-left: 20px;">
+                    <img src="img/tadeusz_oswiecim.jpg" alt="Tadeusz w KL Auschwitz" onerror="this.src='https://via.placeholder.com/200x280?text=Tadeusz+w+Auschwitz'">
+                </div>
+                <p>Aresztowany z powodu jakiejś wsypy, dostał się do obozu w Oświęcimiu, a potem w Buchenwaldzie skąd uciekł w czasie marszu śmierci. Po wojnie ukończył studia w Cambridge. Wyjechał na Złote Wybrzeże w Afryce, a ostatecznie osiadł w Kanadzie pod Toronto (Newmarket), gdzie prowadzi farmę i zajmuje się budownictwem.</p>
+            </div>
+
+            <div class="child-block">
+                <h3>Andrzej Wiszniewski</h3>
+                <p>W czasie okupacji pomagał w gospodarstwach krewnych. Po 1945 osiadł w Zabrzu, ukończył studia handlowe i podjął pracę na kopalni Wirek. Ożenił się z Heleną Dudziak.</p>
+            </div>
+        </section>
+
+        <section class="source-note">
+            <h4>List Antoniego Kraińskiego do Andrzeja (3.V.1971)</h4>
+            <p>Prosisz o wiadomości o swoim Dziadku – nie wiele ich mam, ale co wiem to napiszę... L. Wiszniewski - zdaje mi się imię Leonard. W Galicji pisał się czas jakiś Wiśniewski dla ukrycia się po powstaniu 1863r. Przeszedł przez Rumunię do Drohobycza... Był Marszałkiem powiatowym. Około 1900 r. kupił dla Twego Ojca Horychlady i Ostre.</p>
+        </section>
+
+        <section class="audio-player">
+            <p>Nagrania archiwalne i wspomnienia mówione:</p>
+            <audio controls>
+                <source src="audio/wiszniewscy_wspomnienia.mp3" type="audio/mpeg">
+                Twoja przeglądarka nie obsługuje elementu audio.
+            </audio>
+            <div style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">
+                [Wgraj plik audio do folderu /audio/ jako wiszniewscy_wspomnienia.mp3]
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        DOKUMENTACJA RODZINY WISZNIEWSKICH © 2026
+    </footer>
+</article>
+
+</body>
+</html>
