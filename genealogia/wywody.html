@@ -3,161 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Wywód I | Archiwum L&K</title>
+    <title>Wywód | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
-        /* OPRAWA GRAFICZNA Z PUSTY 3 */
         :root {
-            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-            --ink: #1e1a14; --gold: #9b7d4a; --gold-light: #c8a96e; 
-            --sepia: #7a6548; --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; 
+            --cream: #f8f4ee;
+            --parchment: #ede8df;
+            --warm-white: #fdfaf6;
+            --ink: #1e1a14;
+            --gold: #9b7d4a;
+            --gold-light: #c8a96e; 
+            --sepia: #7a6548;
+            --sepia-pale: #e8ddd0; 
             --line: rgba(122, 101, 72, 0.2);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; }
 
-        /* NAWIGACJA Z PUSTY 3 */
-        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
-        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; font-weight: 400; border-right: 1px solid rgba(200, 169, 110, 0.3); padding-right: 20px; }
-        .nav-back-link { display: flex; align-items: center; gap: 8px; color: var(--gold-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+        body { 
+            font-family: 'Jost', sans-serif; 
+            background-color: var(--warm-white); 
+            color: var(--ink); 
+            line-height: 1.7; 
+            padding: 40px 20px;
+        }
 
-        /* UKŁAD KAFELKÓW DOKŁADNIE JAK W PUSTY 2 */
-        main { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
-        
-        .intro-section { text-align: center; margin-bottom: 50px; }
-        .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); display: block; margin-bottom: 15px; }
-        .intro-section h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 3rem); font-weight: 300; margin-bottom: 10px; color: var(--ink); }
-        .intro-description { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: var(--sepia); }
-        .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 30px auto; opacity: 0.6; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* Bliskie odstępy między kafelkami */
+        }
 
-        /* LISTA KAFELKÓW (PIONOWA) */
-        .tree-list { display: flex; flex-direction: column; gap: 25px; }
-        
-        .person-card {
+        .tile {
             background: var(--cream);
             border: 1px solid var(--sepia-pale);
-            padding: 30px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(122, 101, 72, 0.05);
-        }
-        /* Paski boczne dla płci */
-        .person-card.male { border-left: 5px solid var(--sepia); }
-        .person-card.female { border-left: 5px solid var(--gold); }
-
-        .marriage-tag { 
-            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); 
-            display: block; margin-bottom: 10px; font-weight: 500; 
-        }
-
-        .name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: 5px; text-transform: none; color: var(--ink); }
-        .role-desc { font-size: 0.95rem; color: var(--sepia); font-style: italic; margin-bottom: 15px; line-height: 1.5; }
-        .family-details { font-size: 0.9rem; margin-bottom: 15px; color: var(--ink); }
-        .dates-place { font-family: 'Jost', sans-serif; font-size: 0.8rem; color: var(--sepia-light); border-top: 1px solid var(--line); padding-top: 15px; letter-spacing: 0.5px; }
-
-        .potomstwo-section {
-            margin-top: 50px;
-            background: var(--parchment);
-            padding: 40px;
-            border: 1px solid var(--sepia-pale);
+            padding: 20px;
             text-align: center;
+            box-shadow: 0 2px 10px rgba(122, 101, 72, 0.05);
+            border-left: 4px solid var(--sepia); /* Akcent graficzny */
+            transition: transform 0.2s ease;
         }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.75rem; letter-spacing: 1px; margin-top: 60px; }
+        .tile:hover {
+            border-color: var(--gold);
+            transform: translateX(5px);
+        }
+
+        .tile-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--ink);
+            letter-spacing: 1px;
+        }
+
+        /* Opcjonalny nagłówek dla zachowania stylu Archiwum */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .s-line { 
+            width: 60px; 
+            height: 1px; 
+            background: var(--gold-light); 
+            margin: 20px auto; 
+        }
     </style>
 </head>
 <body>
 
-<nav>
-    <div class="nav-inner">
-        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
-        <a href="genealogia.html" class="nav-back-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Wstecz
-        </a>
-    </div>
-</nav>
-
-<main>
-    <section class="intro-section">
-        <span class="s-label">Genealogia Wywodu I</span>
-        <h1>Felix Domański & Seweryna Ładomirska</h1>
-        <p class="intro-description">Ślub 1898 — Markowce</p>
+    <div class="header">
+        <h1 style="font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 2.5rem;">Archiwum L&K</h1>
         <div class="s-line"></div>
-    </section>
-
-    <div class="tree-list">
-        <div class="person-card male">
-            <div class="name">ks. Paweł Hilary Domański</div>
-            <div class="role-desc">sędzia pokoju okręgu siennickiego; właściciel dóbr Grzebowilk, Iwowe, Kotuszów i Pilichowice</div>
-            <div class="dates-place">ur. 1790 Grzebowilk — zm. 1866 Piotrków Tryb.</div>
-        </div>
-
-        <div class="person-card female">
-            <span class="marriage-info marriage-tag">∞ 1825 Długowa Wola</span>
-            <div class="name">Barbara Marcjanna Proszkowska</div>
-            <div class="family-details">z Biejkowa</div>
-            <div class="dates-place">ur. 1795 — zm. 1837 Warszawa</div>
-        </div>
-
-        <div class="person-card male">
-            <div class="name">Maciej Brutus Ładomirski</div>
-            <div class="role-desc">oficjalista w Kozłowie; dzierżawca dóbr Taurów, Koniuszki i Kozłów; właściciel dóbr Wierzchnia</div>
-            <div class="family-details">syn Filipa i Karoliny Weroniki Janickiej</div>
-            <div class="dates-place">zm. po 1855</div>
-        </div>
-
-        <div class="person-card male">
-            <div class="name">Edward Maxymilian Domański</div>
-            <div class="role-desc">dzierżawca dóbr Jarochy i Żytniów; urzędnik szpitala św. Jana w Warszawie</div>
-            <div class="dates-place">ur. 1831 Iłówiec — zm. 1886 Moszków</div>
-        </div>
-
-        <div class="person-card female">
-            <span class="marriage-info marriage-tag">∞ 1857 Rożenek</span>
-            <div class="name">Teodozja Karczewska</div>
-            <div class="family-details">z Gulina</div>
-            <div class="dates-place">ur. 1837 — zm. 1873 Warszawa</div>
-        </div>
-
-        <div class="person-card male">
-            <div class="name">Walenty Konstanty Ładomirski</div>
-            <div class="role-desc">właściciel dóbr Tomaszowce, Markowce i Dzieduszyce Małe</div>
-            <div class="dates-place">ur. 1832 Taurów — zm. 1895 Markowce</div>
-        </div>
-
-        <div class="person-card female">
-            <span class="marriage-info marriage-tag">∞ 1862 Stanisławów</span>
-            <div class="name">Katarzyna Walentyna Gołaszewska</div>
-            <div class="dates-place">ur. 1841 Tarnów — zm. 1917 Markowce</div>
-        </div>
-
-        <div class="person-card male">
-            <span class="marriage-info marriage-tag">Para Główna Wywodu</span>
-            <div class="name">Felix Domański</div>
-            <div class="role-desc">Obrońca Lwowa; właściciel dóbr Ubinie ze Strutynem</div>
-            <div class="dates-place">ur. 1868 Warszawa — zm. 1939 Ubinie</div>
-        </div>
-
-        <div class="person-card female">
-            <div class="name">Seweryna Ładomirska</div>
-            <div class="dates-place">ur. 1875 Markowce — zm. 1943 Sokal</div>
-        </div>
     </div>
 
-    <section class="potomstwo-section">
-        <span class="s-label">Potomstwo</span>
-        <div class="name">Stanisław Konstanty, Helena Aleksandra, Edward Zbigniew</div>
-        <div class="role-desc" style="margin-top: 10px; margin-bottom: 0;">— z Domanina Domańscy —</div>
-    </section>
-</main>
-
-<footer>
-    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
-</footer>
+    <div class="container">
+        <div class="tile"><div class="tile-text">próba</div></div>
+        <div class="tile"><div class="tile-text">próba</div></div>
+        <div class="tile"><div class="tile-text">próba</div></div>
+        <div class="tile"><div class="tile-text">próba</div></div>
+        <div class="tile"><div class="tile-text">próba</div></div>
+        <div class="tile"><div class="tile-text">próba</div></div>
+        <div class="tile"><div class="tile-text">próba</div></div>
+        <div class="tile"><div class="tile-text">próba</div></div>
+    </div>
 
 </body>
 </html>
