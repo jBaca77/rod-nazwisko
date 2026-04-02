@@ -6,241 +6,165 @@
 
 <title>Wywody przodków | Archiwum L&K</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --cream:#f8f4ee; --parchment:#ede8df; --warm-white:#fdfaf6;
-    --ink:#1e1a14; --gold:#9b7d4a; --gold-light:#c8a96e;
-    --sepia:#7a6548; --sepia-light:#b09a7e; --line:rgba(122,101,72,0.2);
+    --bg:#fdfaf6;
+    --line:#d8cfc3;
+    --gold:#9b7d4a;
+    --ink:#1e1a14;
 }
 
 body {
-    font-family:'Jost',sans-serif;
-    background:var(--warm-white);
-    color:var(--ink);
     margin:0;
-    line-height:1.7;
+    background:var(--bg);
+    font-family:'Jost',sans-serif;
 }
 
 /* NAV */
 nav {
     background:var(--ink);
-    position:sticky;
-    top:0;
+    padding:15px 25px;
+    color:#c8a96e;
+    font-family:'Cormorant Garamond';
 }
 
-.nav-inner {
-    max-width:1200px;
-    margin:auto;
+/* WRAPPER */
+.wrapper {
+    overflow:auto;
+    padding:40px;
+}
+
+/* DRZEWO */
+.tree {
     display:flex;
-    justify-content:space-between;
-    padding:16px 24px;
+    flex-direction:column;
+    gap:80px;
+    min-width:1200px;
 }
 
-.nav-logo {
-    font-family:'Cormorant Garamond';
-    color:var(--gold-light);
-    text-decoration:none;
-    letter-spacing:2px;
-}
-
-/* MAIN */
-main {
-    max-width:1100px;
-    margin:auto;
-    padding:60px 20px;
-}
-
-.intro {
-    text-align:center;
-    margin-bottom:60px;
-}
-
-.intro h1 {
-    font-family:'Cormorant Garamond';
-    font-weight:300;
-    font-size:3rem;
-}
-
-.intro p {
-    font-style:italic;
-    color:var(--sepia);
-}
-
-/* BLOKI */
-.line-block {
-    background:var(--cream);
-    border:1px solid var(--line);
-    padding:25px;
-    margin-bottom:25px;
+/* POKOLENIE */
+.generation {
+    display:flex;
+    justify-content:center;
+    gap:60px;
     position:relative;
-}
-
-.line-block::after {
-    content:"";
-    position:absolute;
-    inset:8px;
-    border:1px solid var(--line);
-    pointer-events:none;
 }
 
 /* OSOBA */
 .person {
-    padding:12px 0;
-    border-bottom:1px solid var(--line);
-}
-
-.person:last-child {
-    border:none;
-}
-
-.name {
-    font-weight:500;
-}
-
-.meta {
-    font-size:0.9rem;
-    color:var(--sepia);
-}
-
-/* GRID */
-.grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
-}
-
-/* FOOTER */
-footer {
-    background:var(--ink);
-    color:#aaa;
+    min-width:180px;
     text-align:center;
-    padding:50px;
-    font-size:0.75rem;
+    position:relative;
 }
+
+.box {
+    padding:12px 10px;
+    border:1px solid var(--line);
+    background:white;
+    font-size:13px;
+}
+
+/* LINIE PIONOWE */
+.person::after {
+    content:"";
+    position:absolute;
+    bottom:-40px;
+    left:50%;
+    width:1px;
+    height:40px;
+    background:var(--line);
+}
+
+/* USUWANIE linii dla ostatniego poziomu */
+.generation:last-child .person::after {
+    display:none;
+}
+
+/* LINIA POZIOMA (łączenie dzieci) */
+.connector {
+    position:absolute;
+    top:-40px;
+    left:0;
+    right:0;
+    height:1px;
+    background:var(--line);
+}
+
+/* PARA */
+.couple {
+    display:flex;
+    gap:10px;
+}
+
+/* SUBTLE OZDOBA */
+.box:hover {
+    border-color:var(--gold);
+}
+
 </style>
 </head>
 
 <body>
 
-<nav>
-<div class="nav-inner">
-<a href="#" class="nav-logo">ARCHIWUM L&K</a>
-</div>
-</nav>
+<nav>ARCHIWUM L&K</nav>
 
-<main>
+<div class="wrapper">
 
-<div class="intro">
-<h1>Wywody przodków</h1>
-<p>„Rodzina to pamięć i ciągłość pokoleń.”</p>
-</div>
+<div class="tree">
 
-<div class="grid">
+    <!-- POKOLENIE 1 -->
+    <div class="generation">
+        <div class="person">
+            <div class="box">Osoba</div>
+        </div>
+    </div>
 
-<!-- DOMAŃSCY -->
-<div class="line-block">
-<h2>Domańscy</h2>
+    <!-- POKOLENIE 2 -->
+    <div class="generation">
 
-<div class="person">
-<div class="name">Edward Maksymilian Domański</div>
-<div class="meta">1831–1886 • dzierżawca dóbr</div>
-</div>
+        <div class="person">
+            <div class="connector"></div>
+            <div class="couple">
+                <div class="box">Osoba</div>
+                <div class="box">Osoba</div>
+            </div>
+        </div>
 
-<div class="person">
-<div class="name">Teodozja Karczewska</div>
-<div class="meta">1837–1873</div>
-</div>
+        <div class="person">
+            <div class="connector"></div>
+            <div class="couple">
+                <div class="box">Osoba</div>
+                <div class="box">Osoba</div>
+            </div>
+        </div>
 
-<div class="person">
-<div class="name">Felix Domański</div>
-<div class="meta">1868–1939 • obrońca Lwowa</div>
-</div>
+    </div>
 
-</div>
+    <!-- POKOLENIE 3 -->
+    <div class="generation">
 
-<!-- ŁADOMIRSCY -->
-<div class="line-block">
-<h2>Ładomirscy</h2>
+        <div class="person">
+            <div class="connector"></div>
+            <div class="box">Osoba</div>
+        </div>
 
-<div class="person">
-<div class="name">Walenty Konstanty Brutus Ładomirski</div>
-<div class="meta">1832–1895</div>
-</div>
+        <div class="person">
+            <div class="connector"></div>
+            <div class="box">Osoba</div>
+        </div>
 
-<div class="person">
-<div class="name">Katarzyna Walentyna Gołaszewska</div>
-<div class="meta">1841–1917</div>
-</div>
+        <div class="person">
+            <div class="connector"></div>
+            <div class="box">Osoba</div>
+        </div>
 
-<div class="person">
-<div class="name">Zdzisław Fabian Ładomirski</div>
-<div class="meta">1864–1950</div>
-</div>
-
-</div>
-
-<!-- KRAIŃSCY -->
-<div class="line-block">
-<h2>Kraińscy</h2>
-
-<div class="person">
-<div class="name">Władysław Marian Walenty Kraiński</div>
-<div class="meta">1841–1926 • poseł</div>
-</div>
-
-<div class="person">
-<div class="name">Maria Emilia Zofia Trzecieska</div>
-<div class="meta">1853–1932</div>
-</div>
-
-<div class="person">
-<div class="name">Antoni Maurycy Walenty Kraiński</div>
-<div class="meta">1883–1975</div>
-</div>
-
-</div>
-
-<!-- FEDOROWICZ -->
-<div class="line-block">
-<h2>Fedorowiczowie</h2>
-
-<div class="person">
-<div class="name">Tadeusz Adolf Fedorowicz</div>
-<div class="meta">1849–1919</div>
-</div>
-
-<div class="person">
-<div class="name">Aleksander Arian Teofil Fedorowicz</div>
-<div class="meta">1875–1951</div>
-</div>
-
-</div>
-
-<!-- WISZNIEWSKI -->
-<div class="line-block">
-<h2>Wiszniewscy</h2>
-
-<div class="person">
-<div class="name">Leonard Wiszniewski</div>
-<div class="meta">1835–1914 • powstaniec</div>
-</div>
-
-<div class="person">
-<div class="name">Maria Ludwik Wiszniewski</div>
-<div class="meta">1879–1940</div>
-</div>
+    </div>
 
 </div>
 
 </div>
-
-</main>
-
-<footer>
-KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026
-</footer>
 
 </body>
 </html>
