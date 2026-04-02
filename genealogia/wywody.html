@@ -3,32 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drzewo Genealogiczne | Archiwum L&K</title>
+    <title>Wywód Przodków | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #f8f4ee;
-            --warm-white: #fdfaf6;
-            --ink: #1e1a14;
-            --gold: #9b7d4a;
-            --gold-light: #c8a96e; 
-            --sepia: #7a6548;
-            --sepia-pale: #e8ddd0; 
-            --line-color: #b0a496;
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
+            --line-color: #b0a496; /* Kolor linii w drzewie */
         }
 
-        body { margin: 0; padding: 40px 20px; background: var(--warm-white); font-family: 'Jost', sans-serif; color: var(--ink); }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; }
 
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* NAGŁÓWEK I PANEL INFO */
+        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+        .s-line-main { width: 50px; height: 1px; background: var(--gold-light); margin: 15px auto; }
+
+        .info-panel { 
+            max-width: 850px; margin: 0 auto 50px; padding: 30px; 
+            background: var(--parchment); border-radius: 4px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
+        }
+        .info-item { font-size: 0.9rem; }
+        .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
+
+        /* ==========================================================================
+           SEKCJA DRZEWA (KOD STRUKTURALNY BEZ ZMIAN)
+           ========================================================================== */
+        .tree-wrapper { max-width: 1200px; margin: 0 auto 80px; padding: 0 20px; overflow-x: auto; }
+        
         .tree {
             display: grid;
             grid-template-columns: repeat(8, 1fr);
-            max-width: 1200px;
+            min-width: 800px; /* Zapewnia czytelność na mobile */
             margin: auto;
         }
 
-        /* BOX */
         .box {
             border: 1px solid var(--sepia-pale);
             background: var(--cream);
@@ -49,7 +69,6 @@
 
         .node { position: relative; display: flex; flex-direction: column; }
 
-        /* LINIE PIONOWE PROSTE */
         .v-line-down::after {
             content: ""; position: absolute; left: 50%; top: 100%;
             width: 1px; height: 25px; background: var(--line-color);
@@ -59,7 +78,6 @@
             width: 1px; height: 25px; background: var(--line-color);
         }
 
-        /* ŁĄCZNIK POZIOMY (T-SHAPE) */
         .connector-group {
             grid-column: 1 / -1;
             display: grid;
@@ -68,111 +86,132 @@
             position: relative;
         }
 
-        /* Belka pozioma między dwoma punktami */
-        .h-line {
-            position: absolute;
-            top: 25px;
-            height: 1px;
-            background: var(--line-color);
-        }
-
-        /* Pion w dół od środka belki */
-        .v-stem {
-            position: absolute;
-            top: 25px;
-            width: 1px;
-            height: 25px;
-            background: var(--line-color);
-        }
+        .h-line { position: absolute; top: 25px; height: 1px; background: var(--line-color); }
+        .v-stem { position: absolute; top: 25px; width: 1px; height: 25px; background: var(--line-color); }
 
         .spacer-small { grid-column: 1 / -1; height: 25px; }
         .row { display: contents; }
 
-        /* SPANY */
         .lvl-8 .node { grid-column: span 1; }
         .lvl-4 .node { grid-column: span 2; }
         .lvl-2 .node { grid-column: span 4; }
         .lvl-1 .node { grid-column: span 8; }
+        /* ========================================================================== */
 
-        .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; letter-spacing: 2px; }
+        /* PAGINACJA / PRZYCISKI */
+        .tree-pagination { 
+            max-width: 800px; margin: 0 auto 80px; padding: 40px 24px; 
+            border-top: 1px solid var(--line); display: flex; 
+            justify-content: center; gap: 20px;
+        }
+        .pagination-btn {
+            text-decoration: none; color: var(--sepia); font-size: 0.75rem; 
+            text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px;
+            border: 1px solid var(--line); transition: 0.3s; background: transparent;
+        }
+        .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--parchment); }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-<div class="header">
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="wywody.html" class="back-link">← Powrót do listy</a>
+    </div>
+</nav>
+
+<header class="article-header">
+    <span class="meta-top">Tablice Genealogiczne</span>
     <h1>Wywód Przodków</h1>
-    <div style="width:50px; height:1px; background:var(--gold-light); margin:15px auto;"></div>
+    <div class="s-line-main"></div>
+</header>
+
+<div class="info-panel">
+    <div class="info-item"><strong>Linia główna</strong> Ładomirscy i Krainscy</div>
+    <div class="info-item"><strong>Status badania</strong> Zweryfikowano w oparciu o akta metrykalne</div>
+    <div class="info-item"><strong>Opracowanie</strong> Redakcja Archiwum L&K</div>
 </div>
 
-<div class="tree">
+<div class="tree-wrapper">
+    <div class="tree">
 
-    <div class="row lvl-8">
-        <div class="node v-line-down"><div class="box">1</div></div>
-        <div class="node v-line-down"><div class="box">2</div></div>
-        <div class="node v-line-down"><div class="box">3</div></div>
-        <div class="node v-line-down"><div class="box">4</div></div>
-        <div class="node v-line-down"><div class="box">5</div></div>
-        <div class="node v-line-down"><div class="box">6</div></div>
-        <div class="node v-line-down"><div class="box">7</div></div>
-        <div class="node v-line-down"><div class="box">8</div></div>
+        <div class="row lvl-8">
+            <div class="node v-line-down"><div class="box">1</div></div>
+            <div class="node v-line-down"><div class="box">2</div></div>
+            <div class="node v-line-down"><div class="box">3</div></div>
+            <div class="node v-line-down"><div class="box">4</div></div>
+            <div class="node v-line-down"><div class="box">5</div></div>
+            <div class="node v-line-down"><div class="box">6</div></div>
+            <div class="node v-line-down"><div class="box">7</div></div>
+            <div class="node v-line-down"><div class="box">8</div></div>
+        </div>
+
+        <div class="connector-group">
+            <div class="h-line" style="left: 6.25%; right: 81.25%;"></div> <div class="v-stem" style="left: 12.5%;"></div>
+            <div class="h-line" style="left: 31.25%; right: 56.25%;"></div> <div class="v-stem" style="left: 37.5%;"></div>
+            <div class="h-line" style="left: 56.25%; right: 31.25%;"></div> <div class="v-stem" style="left: 62.5%;"></div>
+            <div class="h-line" style="left: 81.25%; right: 6.25%;"></div> <div class="v-stem" style="left: 87.5%;"></div>
+        </div>
+
+        <div class="row lvl-4">
+            <div class="node v-line-up v-line-down"><div class="box">A</div></div>
+            <div class="node v-line-up v-line-down"><div class="box">B</div></div>
+            <div class="node v-line-up v-line-down"><div class="box">C</div></div>
+            <div class="node v-line-up v-line-down"><div class="box">D</div></div>
+        </div>
+
+        <div class="spacer-small"></div>
+
+        <div class="row lvl-4">
+            <div class="node v-line-up v-line-down"><div class="box">A2</div></div>
+            <div class="node v-line-up v-line-down"><div class="box">B2</div></div>
+            <div class="node v-line-up v-line-down"><div class="box">C2</div></div>
+            <div class="node v-line-up v-line-down"><div class="box">D2</div></div>
+        </div>
+
+        <div class="connector-group">
+            <div class="h-line" style="left: 12.5%; right: 62.5%;"></div> <div class="v-stem" style="left: 25%;"></div>
+            <div class="h-line" style="left: 62.5%; right: 12.5%;"></div> <div class="v-stem" style="left: 75%;"></div>
+        </div>
+
+        <div class="row lvl-2">
+            <div class="node v-line-up v-line-down"><div class="box">Para 1</div></div>
+            <div class="node v-line-up v-line-down"><div class="box">Para 2</div></div>
+        </div>
+
+        <div class="spacer-small"></div>
+
+        <div class="row lvl-2">
+            <div class="node v-line-up v-line-down"><div class="box">P 1.2</div></div>
+            <div class="node v-line-up v-line-down"><div class="box">P 2.2</div></div>
+        </div>
+
+        <div class="connector-group">
+            <div class="h-line" style="left: 25%; right: 25%;"></div> <div class="v-stem" style="left: 50%;"></div>
+        </div>
+
+        <div class="row lvl-1">
+            <div class="node v-line-up v-line-down"><div class="box">Jedność</div></div>
+        </div>
+
+        <div class="spacer-small"></div>
+
+        <div class="row lvl-1">
+            <div class="node v-line-up"><div class="box">Finał</div></div>
+        </div>
+
     </div>
-
-    <div class="connector-group">
-        <div class="h-line" style="left: 6.25%; right: 81.25%;"></div> <div class="v-stem" style="left: 12.5%;"></div>
-        <div class="h-line" style="left: 31.25%; right: 56.25%;"></div> <div class="v-stem" style="left: 37.5%;"></div>
-        <div class="h-line" style="left: 56.25%; right: 31.25%;"></div> <div class="v-stem" style="left: 62.5%;"></div>
-        <div class="h-line" style="left: 81.25%; right: 6.25%;"></div> <div class="v-stem" style="left: 87.5%;"></div>
-    </div>
-
-    <div class="row lvl-4">
-        <div class="node v-line-up v-line-down"><div class="box">A</div></div>
-        <div class="node v-line-up v-line-down"><div class="box">B</div></div>
-        <div class="node v-line-up v-line-down"><div class="box">C</div></div>
-        <div class="node v-line-up v-line-down"><div class="box">D</div></div>
-    </div>
-
-    <div class="spacer-small"></div>
-
-    <div class="row lvl-4">
-        <div class="node v-line-up v-line-down"><div class="box">A2</div></div>
-        <div class="node v-line-up v-line-down"><div class="box">B2</div></div>
-        <div class="node v-line-up v-line-down"><div class="box">C2</div></div>
-        <div class="node v-line-up v-line-down"><div class="box">D2</div></div>
-    </div>
-
-    <div class="connector-group">
-        <div class="h-line" style="left: 12.5%; right: 62.5%;"></div> <div class="v-stem" style="left: 25%;"></div>
-        <div class="h-line" style="left: 62.5%; right: 12.5%;"></div> <div class="v-stem" style="left: 75%;"></div>
-    </div>
-
-    <div class="row lvl-2">
-        <div class="node v-line-up v-line-down"><div class="box">Para 1</div></div>
-        <div class="node v-line-up v-line-down"><div class="box">Para 2</div></div>
-    </div>
-
-    <div class="spacer-small"></div>
-
-    <div class="row lvl-2">
-        <div class="node v-line-up v-line-down"><div class="box">P 1.2</div></div>
-        <div class="node v-line-up v-line-down"><div class="box">P 2.2</div></div>
-    </div>
-
-    <div class="connector-group">
-        <div class="h-line" style="left: 25%; right: 25%;"></div> <div class="v-stem" style="left: 50%;"></div>
-    </div>
-
-    <div class="row lvl-1">
-        <div class="node v-line-up v-line-down"><div class="box">Jedność</div></div>
-    </div>
-
-    <div class="spacer-small"></div>
-
-    <div class="row lvl-1">
-        <div class="node v-line-up"><div class="box">Finał</div></div>
-    </div>
-
 </div>
+
+<div class="tree-pagination">
+    <a href="wywody.html" class="pagination-btn">Wróć do listy</a>
+    <a href="wywod2.html" class="pagination-btn">Inna tablica →</a>
+</div>
+
+<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
 </body>
 </html>
