@@ -16,143 +16,125 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; }
 
+        /* HEADER & NAV */
         nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-        .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        .article-header { max-width: 900px; margin: 60px auto 20px; text-align: center; }
-        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; margin-bottom: 10px; }
+        .article-header { max-width: 900px; margin: 60px auto 40px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 10px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 400; margin-bottom: 10px; }
         .s-line-main { width: 50px; height: 1px; background: var(--gold-light); margin: 15px auto; }
 
-        /* KONTENER DRZEWA */
-        .tree-wrapper { max-width: 1400px; margin: 0 auto 100px; padding: 40px 20px; overflow-x: auto; }
-        .tree-container { display: flex; flex-direction: column; align-items: center; min-width: 1150px; }
+        /* LOGIKA DRZEWA I LINII */
+        .tree-wrapper { max-width: 1400px; margin: 0 auto 100px; padding: 20px; overflow-x: auto; }
+        .tree { display: flex; flex-direction: column; align-items: center; min-width: 1100px; }
 
-        /* LINIE ŁĄCZĄCE - ZBIERAJĄCE DO ŚRODKA */
-        .connector-svg { width: 100%; height: 60px; display: block; margin: -10px 0; }
-        .line-path { fill: none; stroke: var(--line-color); stroke-width: 1; }
+        .row { display: flex; justify-content: center; position: relative; padding: 20px 0; gap: 20px; width: 100%; }
 
-        /* RZĘDY */
-        .row-flex { 
-            display: flex; 
-            justify-content: center; 
-            gap: 20px; 
-            width: 100%; 
-            padding: 10px 0;
+        /* Kontener na okienko + linie */
+        .node { position: relative; display: flex; flex-direction: column; align-items: center; }
+
+        /* Linie pionowe wychodzące w dół */
+        .v-down::after {
+            content: ""; position: absolute; bottom: -20px; left: 50%;
+            width: 1px; height: 20px; background: var(--line-color);
         }
+
+        /* Linie pionowe wchodzące od góry */
+        .v-up::before {
+            content: ""; position: absolute; top: -20px; left: 50%;
+            width: 1px; height: 20px; background: var(--line-color);
+        }
+
+        /* Linie poziome łączące (belki) */
+        .h-bridge::before {
+            content: ""; position: absolute; top: -20px; 
+            left: -10px; right: -10px; height: 1px; background: var(--line-color);
+        }
+        /* Zaokrąglenia na krańcach belek */
+        .h-bridge-first::before { left: 50% !important; }
+        .h-bridge-last::before { right: 50% !important; }
 
         /* OKIENKA */
         .box {
-            border: 1px solid rgba(122, 101, 72, 0.2); 
-            background: var(--cream);
-            padding: 12px; 
-            text-align: center; 
-            font-family: 'Cormorant Garamond', serif;
-            border-left: 3px solid var(--sepia); 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center;
-            text-transform: uppercase; 
-            font-weight: 600;
-            text-decoration: none; 
-            color: inherit; 
-            transition: 0.3s;
-            min-width: 130px;
-            width: auto;
+            border: 1px solid rgba(122, 101, 72, 0.2); background: var(--cream);
+            padding: 12px 15px; text-align: center; font-family: 'Cormorant Garamond', serif;
+            border-left: 3px solid var(--sepia); box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-transform: uppercase; font-weight: 600; text-decoration: none; color: inherit;
+            min-width: 130px; width: auto; z-index: 5;
         }
-        .box:hover { border-color: var(--gold); background: white; transform: translateY(-2px); }
+        .box-short { min-height: 45px; padding: 5px 20px; font-size: 0.85rem; }
 
-        /* SPECYFIKA OKIENEK */
-        .lvl-top .box { min-height: 120px; }
-        .box-short { min-height: 45px !important; padding: 5px 15px !important; font-size: 0.85rem; }
+        /* ELEMENTY GRAFICZNE */
+        .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 5px; }
+        .img-wrap span { font-size: 0.55rem; color: var(--sepia); font-family: 'Jost'; text-transform: none; }
+        .img-single { width: 45px; height: 55px; background: #eee; border: 1px solid rgba(0,0,0,0.05); object-fit: cover; }
+        .img-double { display: flex; gap: 5px; }
+        .name-tag { font-size: 0.8rem; border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 4px; width: 100%; margin-top: 4px; }
 
-        /* TREŚĆ */
-        .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 6px; }
-        .img-wrap span { font-size: 0.6rem; color: var(--sepia); font-family: 'Jost'; text-transform: none; margin-top: 2px; }
-        .img-single { width: 45px; height: 60px; background: #eee; border: 1px solid rgba(0,0,0,0.05); object-fit: cover; }
-        .img-double-row { display: flex; gap: 6px; }
-        .name-tag { font-size: 0.85rem; border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 4px; width: 100%; margin-top: 4px; }
-        .date-tag { font-family: 'Jost'; font-size: 0.75rem; font-weight: 400; white-space: nowrap; }
-
-        /* POTOMEK */
+        /* KAFELEK POTOMKA (NAJWAŻNIEJSZY) */
         .box-potomek { 
             flex-direction: row !important; gap: 20px; text-align: left; padding: 25px !important;
-            max-width: 550px; border-left: 5px solid var(--gold);
+            max-width: 600px; border-left: 5px solid var(--gold); background: white;
         }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 40px 24px; font-size: 0.7rem; letter-spacing: 2px; }
+        footer { background: var(--ink); color: rgba(248,244,238,0.2); text-align: center; padding: 40px; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-<nav><div class="nav-inner"><a href="#" class="nav-logo">ARCHIWUM L&K</a><a href="#" class="back-link">← Powrót</a></div></nav>
+<nav><div class="nav-inner"><a href="#" class="nav-logo">ARCHIWUM L&K</a></div></nav>
 
 <header class="article-header">
-    <span class="meta-top">Tablica Genealogiczna I</span>
+    <span class="meta-top">Dokumentacja Genealogiczna</span>
     <h1>Linia Główna Rodu</h1>
     <div class="s-line-main"></div>
 </header>
 
 <div class="tree-wrapper">
-    <div class="tree-container">
+    <div class="tree">
         
-        <div class="row-flex lvl-top">
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 1</span></div><div class="name-tag">Osoba 1</div></div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 2</span></div><div class="name-tag">Osoba 2</div></div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 3</span></div><div class="name-tag">Osoba 3</div></div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 4</span></div><div class="name-tag">Osoba 4</div></div>
-            <div class="box"><div class="img-double-row"><img src="" class="img-single" style="width:35px"><img src="" class="img-single" style="width:35px"></div><div class="name-tag">Para 5</div></div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 6</span></div><div class="name-tag">Osoba 6</div></div>
-            <div class="box"><div class="name-tag">Osoba 7</div></div>
-            <div class="box"><div class="name-tag">Osoba 8</div></div>
+        <div class="row">
+            <div class="node v-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto</span></div><div class="name-tag">Osoba 1</div></div></div>
+            <div class="node v-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto</span></div><div class="name-tag">Osoba 2</div></div></div>
+            <div class="node v-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto</span></div><div class="name-tag">Osoba 3</div></div></div>
+            <div class="node v-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto</span></div><div class="name-tag">Osoba 4</div></div></div>
+            <div class="node v-down"><div class="box"><div class="img-double"><img src="" class="img-single" style="width:35px"><img src="" class="img-single" style="width:35px"></div><div class="name-tag">Para 5</div></div></div>
+            <div class="node v-down"><div class="box"><div class="name-tag">Osoba 6</div></div></div>
+            <div class="node v-down"><div class="box"><div class="name-tag">Osoba 7</div></div></div>
+            <div class="node v-down"><div class="box"><div class="name-tag">Osoba 8</div></div></div>
         </div>
 
-        <svg class="connector-svg" preserveAspectRatio="none" viewBox="0 0 100 60">
-            <path class="line-path" d="M 6.25 0 V 30 H 93.75 V 0 M 18.75 0 V 30 M 31.25 0 V 30 M 43.75 0 V 30 M 56.25 0 V 30 M 68.75 0 V 30 M 81.25 0 V 30 M 50 30 V 60"></path>
-        </svg>
-
-        <div class="row-flex">
-            <a href="#" class="box box-short"><span class="date-tag">Dziadek A | 1890</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Babcia B | 1895</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Dziadek C | 1888</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Babcia D | 1900</span></a>
+        <div class="row" style="padding-top: 40px;">
+            <div class="node v-up v-down h-bridge h-bridge-first"><a href="#" class="box box-short">Dziadek A</a></div>
+            <div class="node v-up v-down h-bridge"><a href="#" class="box box-short">Babcia B</a></div>
+            <div class="node v-up v-down h-bridge"><a href="#" class="box box-short">Dziadek C</a></div>
+            <div class="node v-up v-down h-bridge h-bridge-last"><a href="#" class="box box-short">Babcia D</a></div>
         </div>
 
-        <svg class="connector-svg" preserveAspectRatio="none" viewBox="0 0 100 60">
-            <path class="line-path" d="M 20 0 V 30 H 80 V 0 M 40 0 V 30 M 60 0 V 30 M 50 30 V 60"></path>
-        </svg>
-
-        <div class="row-flex">
-            <a href="#" class="box box-short"><span class="date-tag">Ojciec | 1920</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Matka | 1925</span></a>
+        <div class="row" style="padding-top: 40px;">
+            <div class="node v-up v-down h-bridge h-bridge-first"><a href="#" class="box box-short">Ojciec</a></div>
+            <div class="node v-up v-down h-bridge h-bridge-last"><a href="#" class="box box-short">Matka</a></div>
         </div>
 
-        <svg class="connector-svg" preserveAspectRatio="none" viewBox="0 0 100 60">
-            <path class="line-path" d="M 40 0 V 30 H 60 V 0 M 50 30 V 60"></path>
-        </svg>
-
-        <div class="row-flex">
-            <a href="#" class="box box-short"><span class="date-tag">Jedność | 2026</span></a>
+        <div class="row" style="padding-top: 40px;">
+            <div class="node v-up v-down"><a href="#" class="box box-short">Wspólne Korzenie</a></div>
         </div>
 
-        <svg class="connector-svg" style="height: 40px;" viewBox="0 0 100 40">
-            <path class="line-path" d="M 50 0 V 40"></path>
-        </svg>
-
-        <div class="row-flex">
-            <div class="box box-potomek">
-                <div style="display: flex; flex-direction: column; align-items: center; min-width: 80px;">
-                    <img src="" class="img-single" style="width:80px; height:105px;">
-                    <span class="name-tag" style="border:none; text-align:center;">Nazwa</span>
-                </div>
-                <div style="flex: 1; padding-left: 20px; border-left: 1px solid rgba(122,101,72,0.1);">
-                    <p style="font-size: 0.9rem; font-family: 'Jost'; text-transform: none; font-weight: 300;">
-                        Nota biograficzna. W tym układzie okienka są odblokowane, a kształt "V" zachowany dzięki centralnemu schodzeniu się linii.
-                    </p>
+        <div class="row" style="padding-top: 40px;">
+            <div class="node v-up">
+                <div class="box box-potomek">
+                    <div style="display: flex; flex-direction: column; align-items: center; min-width: 90px;">
+                        <img src="" class="img-single" style="width:90px; height:120px; border: 2px solid var(--parchment);">
+                        <span class="name-tag" style="border:none; text-align:center; font-size: 0.9rem;">Nazwa</span>
+                    </div>
+                    <div style="flex: 1; padding-left: 25px; border-left: 1px solid var(--line-color);">
+                        <h4 style="font-family: 'Cormorant Garamond'; color: var(--gold); margin-bottom: 5px;">Aktualny Status</h4>
+                        <p style="font-size: 0.95rem; font-family: 'Jost'; text-transform: none; font-weight: 300; color: var(--ink);">
+                            Nota biograficzna została rozszerzona. Dzięki odblokowaniu szerokości, tekst płynnie wypełnia przestrzeń, a okienko dominuje na dole struktury, tworząc mocny fundament Twojego wywodu.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
