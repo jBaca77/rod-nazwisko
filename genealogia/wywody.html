@@ -2,316 +2,202 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Wywody Przodków | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&display=swap">
     <style>
+        /* OPRAWA GRAFICZNA Z PLIKU PUSTY 3 */
         :root {
+            --cream: #f8f4ee;
+            --parchment: #ede8df;
             --warm-white: #fdfaf6;
             --ink: #1e1a14;
-            --sepia: #7a6548;
-            --sepia-light: #a08060;
             --gold: #9b7d4a;
-            --gold-pale: #e8d9c0;
-            --line: rgba(122, 101, 72, 0.25);
-            --gen-A: #f0ebe0; /* Pradziadkowie */
-            --gen-B: #e8e0d2; /* Dziadkowie */
-            --gen-C: #ffffff; /* Para centralna */
+            --light-gold: #a08060;
+            --sepia: #7a6548;
+            --outline: rgba(122, 101, 72, 0.2);
         }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
             background-color: var(--warm-white);
             color: var(--ink);
             line-height: 1.5;
-            margin: 0;
         }
 
-        /* NAGŁÓWEK I NAWIGACJA */
+        /* STYL NAWIGACJI Z PUSTY 3 */
         nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--warm-white);
+            border-bottom: 1px solid var(--outline);
             padding: 15px 32px;
-            border-bottom: 1px solid var(--line);
             display: flex;
             justify-content: space-between;
-            font-family: 'Jost', sans-serif;
+            align-items: center;
+        }
+
+        .nav-logo {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.16em;
             font-size: 0.72rem;
         }
 
-        .page-header {
-            padding: 52px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .page-header h1 { font-size: 2.8rem; font-weight: 300; margin-bottom: 5px; }
-        .page-header p { font-style: italic; color: var(--sepia); }
-
-        /* STRUKTURA WYWODU */
-        .wywod {
-            max-width: 1400px;
-            margin: 0 auto 80px auto;
+        /* STRUKTURA I KAFELKI Z PLIKU PUSTY 2 */
+        main {
+            max-width: 1200px;
+            margin: 80px auto;
             padding: 0 40px;
         }
 
-        .wywod-header {
-            display: flex;
-            align-items: baseline;
-            gap: 18px;
-            margin-bottom: 36px;
-            border-bottom: 1px solid var(--line);
-            padding-bottom: 15px;
+        .header-section {
+            margin-bottom: 52px;
+            text-align: center;
         }
 
-        .wywod-num {
-            background: var(--gold-pale);
-            color: var(--gold);
-            padding: 3px 10px;
-            font-family: 'Jost', sans-serif;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 5px;
         }
 
-        .wywod-title-text { font-size: 1.35rem; font-weight: 400; }
-
-        /* DRZEWO FLEX */
-        .wywod-tree {
-            display: flex;
-            align-items: stretch;
-            gap: 0;
-            overflow-x: auto;
+        .intro-text {
+            font-style: italic;
+            opacity: 0.8;
         }
 
-        .col { display: flex; flex-direction: column; min-width: 230px; flex: 1; }
-        .conn { width: 48px; position: relative; }
-
-        /* KARTA OSOBY */
-        .person-card {
-            padding: 16px;
-            border: 1px solid var(--line);
-            position: relative;
+        .tree-grid {
             display: flex;
             flex-direction: column;
-            margin: 2px 0;
-            transition: box-shadow 0.3s;
+            gap: 18px;
         }
 
-        .person-card.male { border-left: 3px solid var(--sepia); }
-        .person-card.female { border-left: 3px solid var(--gold-light); }
-
-        /* Tła pokoleń */
-        .col-A .person-card { background: var(--gen-A); }
-        .col-B .person-card { background: var(--gen-B); }
-        .col-C .person-card { background: var(--gen-C); border-color: var(--gold); border-width: 1.5px; }
-
-        /* MIEJSCE NA HERB */
-        .pc-herb-wrapper {
-            margin-bottom: 8px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
+        .person-card {
+            position: relative;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid var(--outline);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.02);
+            transition: 0.3s;
         }
 
-        .pc-herb-img {
-            width: 35px;
-            height: 40px;
-            border: 1px dashed var(--sepia-light);
-            background: rgba(255,255,255,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
+        .male { border-left: 4px solid #d0ebe0; } /* Pradziadkowie */
+        .central { border-left: 4px solid #e8e0d2; } /* Para centralna */
+
+        .herb-wrapper {
+            border: 1px dashed rgba(255, 255, 255, 0.4);
+            margin-bottom: 10px;
         }
 
-        .pc-herb-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
-
-        .pc-herb-name {
-            font-family: 'Jost', sans-serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.14em;
+        .name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
             text-transform: uppercase;
-            color: var(--gold);
         }
 
-        /* TREŚĆ KARTY */
-        .pc-name { font-size: 0.98rem; font-weight: 600; line-height: 1.25; margin-bottom: 4px; }
-        .pc-role { font-size: 0.8rem; color: var(--sepia); line-height: 1.4; margin-bottom: 8px; flex: 1; }
-        .pc-dates {
-            font-family: 'Jost', sans-serif;
-            font-size: 0.65rem;
-            color: var(--sepia-light);
-            border-top: 1px solid var(--line);
-            padding-top: 6px;
-            margin-top: auto;
-        }
+        .dates { font-style: italic; font-size: 0.9rem; }
+        .marriage { color: rgba(155, 125, 74, 0.8); font-size: 0.85rem; }
 
-        .pc-marriage {
-            background: rgba(155,125,74,0.05);
-            border-top: 1px dashed var(--line);
-            border-bottom: 1px dashed var(--line);
-            padding: 5px;
-            text-align: center;
-            font-family: 'Jost', sans-serif;
-            font-size: 0.67rem;
-            color: var(--gold);
-        }
-
-        /* DZIECI */
         .children-block {
-            background: var(--gold-pale);
-            border: 1px solid var(--line);
-            border-left: 3px solid var(--gold);
-            padding: 16px 20px;
-            margin-left: 20px;
-            align-self: center;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid var(--outline);
+            font-size: 0.85rem;
+        }
+
+        footer {
+            margin-top: 80px;
+            padding: 40px;
+            text-align: center;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-top: 1px solid var(--outline);
         }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="#" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="#" style="text-decoration: none; color: inherit; font-size: 0.7rem; letter-spacing: 0.1em;">POWRÓT</a>
+    </nav>
 
-<nav>
-    <div class="nav-logo">ARCHIWUM L&K</div>
-    <a href="#" style="text-decoration:none; color:inherit;">← POWRÓT</a>
-</nav>
+    <main>
+        <div class="header-section">
+            <p class="intro-text">Czteropokoleniowe wywody przodków rodzin Radomirskich i Kraińskich</p>
+            <h1>Felix Domański & Seweryna Radomirska</h1>
+            <p class="marriage"><em>ślub 1898 Markowce</em></p>
+        </div>
 
-<header class="page-header">
-    <h1>Wywody Przodków</h1>
-    <p>Czteropokoleniowe wywody przodków rodzin Ładomirskich i Kraińskich</p>
-</header>
-
-<main>
-
-<section class="wywod">
-    <div class="wywod-header">
-        <span class="wywod-num">Wywód I</span>
-        <span class="wywod-title-text">Felix Domański & Seweryna Ładomirska <em>· ∞ 1898 Markowce</em></span>
-    </div>
-
-    <div class="wywod-tree">
-        <div class="col col-A">
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-                <div class="person-card male">
-                    <div class="pc-herb-wrapper">
-                        <div class="pc-herb-img"><img src="herby/larissa.png" alt=""></div>
-                        <div class="pc-herb-name">LARISSA</div>
-                    </div>
-                    <div class="pc-name">Feliks Paweł Hilary Domański</div>
-                    <div class="pc-role">sędzia pokoju okr. siennickiego; wł. dóbr Grzebowilk, Iłówiec, Kotuszów i Pilichowice</div>
-                    <div class="pc-dates">Grzebowilk 1790 — Piotrków Tryb. 1866</div>
-                </div>
-                <div class="pc-marriage">∞ 1825 Ługowa Wola</div>
-                <div class="person-card female">
-                    <div class="pc-herb-wrapper">
-                        <div class="pc-herb-img"><img src="herby/lada.png" alt=""></div>
-                        <div class="pc-herb-name">ŁADA</div>
-                    </div>
-                    <div class="pc-name">Barbara Felicjanna Proszkowska</div>
-                    <div class="pc-role"></div>
-                    <div class="pc-dates">Biejków 1795 — Warszawa 1837</div>
-                </div>
+        <div class="tree-grid">
+            <div class="person-card central">
+                <div class="name">LARISSA</div>
+                <div class="details">ks. Paweł Hilary Domański</div>
+                <div class="desc">sędzia pokr. siennickiego; w br. Grzebowilk, Iwowe, Kotuszów i Pilichowice</div>
+                <div class="dates">ur. 1790 Piotrków Tryb. zm. 1866</div>
             </div>
-            <div style="height:10px;"></div>
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-                <div class="person-card male">
-                    <div class="pc-herb-wrapper">
-                        <div class="pc-herb-img"></div>
-                        <div class="pc-herb-name">ŁADA v WŁASNY</div>
-                    </div>
-                    <div class="pc-name">Maciej <em>Brutus</em> Ładomirski</div>
-                    <div class="pc-role">oficjalista w Kozłowie; dzierż. dóbr Taurów, Koniuszki i Kozłów; wł. dóbr Wierzchnia</div>
-                    <div class="pc-dates">Filipkowce 1798 — ?</div>
-                </div>
-                <div class="pc-marriage">∞ ok. 1824</div>
-                <div class="person-card female">
-                    <div class="pc-herb-wrapper">
-                        <div class="pc-herb-img"></div>
-                        <div class="pc-herb-name">ROLA</div>
-                    </div>
-                    <div class="pc-name">Karolina Weronika Janicka</div>
-                    <div class="pc-role">wł. części dóbr Martynów i Hałuszczyńce</div>
-                    <div class="pc-dates">Martynów Nowy 1795 — Markowce 1874</div>
+
+            <div class="person-card male">
+                <div class="marriage">ślub 1825 Długowa Wola</div>
+                <div class="name">BARBARA MARCJANNA PROSZKOWSKA</div>
+                <div class="details">z Biejkowa</div>
+                <div class="dates">ur. 1795 zm. Warszawa 1837</div>
+            </div>
+
+            <div class="person-card male">
+                <div class="name">MACIEJ BRUTUS</div>
+                <div class="desc">dz. dóbr w Kozłowie; dz. dóbr Taurów, Koniuszki i Wierzchnia</div>
+                <div class="details">Filip i Karolina Weronika Jaromirska</div>
+                <div class="dates">zm. po 1855</div>
+            </div>
+
+            <div class="person-card male">
+                <div class="name">MARTYNA HALUSZCZYŃSKA</div>
+                <div class="details">z Nowych Jarochów</div>
+                <div class="dates">ur. 1870 zm. 1957</div>
+            </div>
+
+            <div class="person-card male">
+                <div class="name">MAXYMILIAN JAROCHY</div>
+                <div class="desc">mytnik, urzędnik szp. w Rożenku</div>
+                <div class="details">Teodozja Karczewska z Gulina</div>
+                <div class="dates">ur. 1810 zm. 1862</div>
+            </div>
+
+            <div class="person-card male">
+                <div class="name">WALENTY KONSTANTY TOMASZ</div>
+                <div class="details">z Dzieduszyc Małych</div>
+                <div class="dates">ur. 1795 zm. 1862</div>
+            </div>
+
+            <div class="person-card male">
+                <div class="name">KATARZYNA GOCIESZEWSKA</div>
+                <div class="details">z d. Gocieszewska</div>
+                <div class="dates">zm. 1910</div>
+            </div>
+
+            <div class="person-card male">
+                <div class="name">OBROŃCA LWOWA</div>
+                <div class="desc">w Ubinie ze Strutynem 1939; Sokal 1943</div>
+                <div class="children-block">
+                    <strong>Potomstwo:</strong> Helena, Aleksandra, Zbigniew
                 </div>
             </div>
         </div>
+    </main>
 
-        <div class="conn"></div>
-
-        <div class="col col-B">
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-                <div class="person-card male">
-                    <div class="pc-herb-wrapper"><div class="pc-herb-img"></div><div class="pc-herb-name">LARISSA</div></div>
-                    <div class="pc-name">Edward Maxymilian Domański</div>
-                    <div class="pc-role">dzierż. dóbr Jarochy, Żytniów; urzędnik szp. św. Jana w Warszawie</div>
-                    <div class="pc-dates">Iłówiec 1831 — Moszków 1886</div>
-                </div>
-                <div class="pc-marriage">∞ 1857 Rożenek</div>
-                <div class="person-card female">
-                    <div class="pc-herb-wrapper"><div class="pc-herb-img"></div></div>
-                    <div class="pc-name">Teodozja Karczewska</div>
-                    <div class="pc-role"></div>
-                    <div class="pc-dates">Gulin 1837 — Warszawa 1873</div>
-                </div>
-            </div>
-            <div style="height:10px;"></div>
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-                <div class="person-card male">
-                    <div class="pc-herb-wrapper"><div class="pc-herb-img"></div><div class="pc-herb-name">ŁADA</div></div>
-                    <div class="pc-name">Walenty <em>Konstanty</em> Ładomirski</div>
-                    <div class="pc-role">wł. dóbr Tomaszowce, Markowce i Dzieduszyce Małe</div>
-                    <div class="pc-dates">Taurów 1832 — Markowce 1895</div>
-                </div>
-                <div class="pc-marriage">∞ 1862 Stanisławów</div>
-                <div class="person-card female">
-                    <div class="pc-herb-wrapper"><div class="pc-herb-img"></div><div class="pc-herb-name">KOŚCIESZA</div></div>
-                    <div class="pc-name">Katarzyna Walentyna Gołaszewska</div>
-                    <div class="pc-role"></div>
-                    <div class="pc-dates">Tarnów 1841 — Markowce 1917</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="conn"></div>
-
-        <div class="col col-C">
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-                <div class="person-card male">
-                    <div class="pc-herb-wrapper"><div class="pc-herb-img"></div><div class="pc-herb-name">LARISSA</div></div>
-                    <div class="pc-name">Felix Domański</div>
-                    <div class="pc-role">Obrońca Lwowa; wł. dóbr Ubinie ze Strutynem</div>
-                    <div class="pc-dates">Warszawa 1868 — Ubinie 1939</div>
-                </div>
-                <div class="pc-marriage" style="background:var(--gold-pale);">∞ 1898 Markowce</div>
-                <div class="person-card female">
-                    <div class="pc-herb-wrapper"><div class="pc-herb-img"></div><div class="pc-herb-name">ŁADA</div></div>
-                    <div class="pc-name">Seweryna Ładomirska</div>
-                    <div class="pc-role"></div>
-                    <div class="pc-dates">Markowce 1875 — Sokal 1943</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="children-block">
-            <div style="font-family:'Jost'; font-size:0.6rem; text-transform:uppercase; color:var(--sepia-light); margin-bottom:8px;">Potomstwo</div>
-            <div style="font-size:0.88rem;">
-                Stanisław Konstanty<br>
-                Helena Aleksandra<br>
-                Edward Zbigniew<br>
-                <strong>z Domanina DOMAŃSCY</strong>
-            </div>
-        </div>
-    </div>
-</section>
-
-</main>
-
-<footer style="padding: 40px; text-align: center; border-top: 1px solid var(--line); font-family: 'Jost'; font-size: 0.7rem; color: var(--sepia-light);">
-    DOKUMENTACJA GENEALOGICZNA ŁADOMIRSKICH I KRAIŃSKICH &copy; 2026 | Archiwum L&K
-</footer>
-
+    <footer>
+        DOKUMENTACJA GENEALOGICZNA RODZIN RADOMIRSKICH I KRAIŃSKICH &copy; 2026
+    </footer>
 </body>
 </html>
