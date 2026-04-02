@@ -21,53 +21,37 @@
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        .article-header { max-width: 900px; margin: 60px auto 40px; text-align: center; }
+        .article-header { max-width: 900px; margin: 60px auto 20px; text-align: center; }
         .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
         h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; margin-bottom: 10px; }
         .s-line-main { width: 50px; height: 1px; background: var(--gold-light); margin: 15px auto; }
 
-        /* STRUKTURA DRZEWA */
-        .tree-wrapper { max-width: 1400px; margin: 0 auto 100px; padding: 0 20px; overflow-x: auto; }
-        
-        .tree-flex { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            min-width: 1100px;
-        }
+        /* KONTENER DRZEWA */
+        .tree-wrapper { max-width: 1400px; margin: 0 auto 100px; padding: 40px 20px; overflow-x: auto; }
+        .tree-container { display: flex; flex-direction: column; align-items: center; min-width: 1150px; }
 
-        /* Rząd i logika linii */
+        /* LINIE ŁĄCZĄCE - ZBIERAJĄCE DO ŚRODKA */
+        .connector-svg { width: 100%; height: 60px; display: block; margin: -10px 0; }
+        .line-path { fill: none; stroke: var(--line-color); stroke-width: 1; }
+
+        /* RZĘDY */
         .row-flex { 
             display: flex; 
             justify-content: center; 
-            align-items: flex-start; 
-            gap: 40px; 
-            width: 100%;
-            position: relative;
-            padding: 30px 0;
+            gap: 20px; 
+            width: 100%; 
+            padding: 10px 0;
         }
-
-        /* Pionowe linie łączące rzędy */
-        .row-flex::after {
-            content: "";
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            width: 1px;
-            height: 30px;
-            background: var(--line-color);
-        }
-        .row-flex:last-child::after { display: none; }
 
         /* OKIENKA */
         .box {
             border: 1px solid rgba(122, 101, 72, 0.2); 
             background: var(--cream);
-            padding: 15px; 
+            padding: 12px; 
             text-align: center; 
             font-family: 'Cormorant Garamond', serif;
             border-left: 3px solid var(--sepia); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             display: flex; 
             flex-direction: column; 
             align-items: center; 
@@ -77,43 +61,28 @@
             text-decoration: none; 
             color: inherit; 
             transition: 0.3s;
-            position: relative;
+            min-width: 130px;
             width: auto;
-            min-width: 140px;
         }
+        .box:hover { border-color: var(--gold); background: white; transform: translateY(-2px); }
 
-        .box:hover { transform: translateY(-3px); border-color: var(--gold); background: white; }
-
-        /* Specyficzne wysokości */
+        /* SPECYFIKA OKIENEK */
         .lvl-top .box { min-height: 120px; }
-        .box-short { min-height: 50px !important; padding: 5px 25px !important; font-size: 0.85rem; }
+        .box-short { min-height: 45px !important; padding: 5px 15px !important; font-size: 0.85rem; }
 
-        /* ELEMENTY GRAFICZNE */
-        .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 8px; }
-        .img-wrap span { font-size: 0.6rem; color: var(--sepia); margin-top: 2px; font-family: 'Jost'; text-transform: none; }
-        .img-single { width: 50px; height: 65px; background: #eee; border: 1px solid rgba(0,0,0,0.05); object-fit: cover; }
-        .img-double-row { display: flex; gap: 8px; }
-        
-        .name-tag { font-size: 0.85rem; letter-spacing: 0.5px; border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 5px; width: 100%; }
-        .date-tag { font-family: 'Jost'; font-size: 0.75rem; font-weight: 400; white-space: nowrap; letter-spacing: 1px; }
+        /* TREŚĆ */
+        .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 6px; }
+        .img-wrap span { font-size: 0.6rem; color: var(--sepia); font-family: 'Jost'; text-transform: none; margin-top: 2px; }
+        .img-single { width: 45px; height: 60px; background: #eee; border: 1px solid rgba(0,0,0,0.05); object-fit: cover; }
+        .img-double-row { display: flex; gap: 6px; }
+        .name-tag { font-size: 0.85rem; border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 4px; width: 100%; margin-top: 4px; }
+        .date-tag { font-family: 'Jost'; font-size: 0.75rem; font-weight: 400; white-space: nowrap; }
 
         /* POTOMEK */
         .box-potomek { 
-            flex-direction: row !important; 
-            gap: 20px; 
-            text-align: left; 
-            padding: 25px !important;
-            max-width: 550px;
-            margin-top: 20px;
+            flex-direction: row !important; gap: 20px; text-align: left; padding: 25px !important;
+            max-width: 550px; border-left: 5px solid var(--gold);
         }
-
-        /* NAWIGACJA DOLNA */
-        .tree-nav-container { max-width: 1100px; margin: 40px auto; padding: 40px 24px; border-top: 1px solid rgba(122, 101, 72, 0.1); }
-        .tree-nav-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; text-align: center; margin-bottom: 30px; color: var(--sepia); text-transform: uppercase; letter-spacing: 2px; }
-        .tree-grid-nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .tree-nav-item { text-decoration: none; color: var(--ink); background: var(--parchment); padding: 15px; text-align: center; border: 1px solid transparent; transition: 0.3s; }
-        .tree-nav-item:hover { background: white; border-color: var(--gold); }
-        .tree-nav-item.active { opacity: 0.5; pointer-events: none; }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 40px 24px; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
@@ -129,24 +98,22 @@
 </header>
 
 <div class="tree-wrapper">
-    <div class="tree-flex">
+    <div class="tree-container">
         
         <div class="row-flex lvl-top">
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 1</div></div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 2</div></div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 3</div></div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 4</div></div>
-            <div class="box">
-                <div class="img-double-row">
-                    <div class="img-wrap"><img src="" class="img-single" style="width:40px"><span>Mąż</span></div>
-                    <div class="img-wrap"><img src="" class="img-single" style="width:40px"><span>Żona</span></div>
-                </div>
-                <div class="name-tag">Para 5</div>
-            </div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 6</div></div>
+            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 1</span></div><div class="name-tag">Osoba 1</div></div>
+            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 2</span></div><div class="name-tag">Osoba 2</div></div>
+            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 3</span></div><div class="name-tag">Osoba 3</div></div>
+            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 4</span></div><div class="name-tag">Osoba 4</div></div>
+            <div class="box"><div class="img-double-row"><img src="" class="img-single" style="width:35px"><img src="" class="img-single" style="width:35px"></div><div class="name-tag">Para 5</div></div>
+            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 6</span></div><div class="name-tag">Osoba 6</div></div>
             <div class="box"><div class="name-tag">Osoba 7</div></div>
             <div class="box"><div class="name-tag">Osoba 8</div></div>
         </div>
+
+        <svg class="connector-svg" preserveAspectRatio="none" viewBox="0 0 100 60">
+            <path class="line-path" d="M 6.25 0 V 30 H 93.75 V 0 M 18.75 0 V 30 M 31.25 0 V 30 M 43.75 0 V 30 M 56.25 0 V 30 M 68.75 0 V 30 M 81.25 0 V 30 M 50 30 V 60"></path>
+        </svg>
 
         <div class="row-flex">
             <a href="#" class="box box-short"><span class="date-tag">Dziadek A | 1890</span></a>
@@ -155,24 +122,36 @@
             <a href="#" class="box box-short"><span class="date-tag">Babcia D | 1900</span></a>
         </div>
 
+        <svg class="connector-svg" preserveAspectRatio="none" viewBox="0 0 100 60">
+            <path class="line-path" d="M 20 0 V 30 H 80 V 0 M 40 0 V 30 M 60 0 V 30 M 50 30 V 60"></path>
+        </svg>
+
         <div class="row-flex">
             <a href="#" class="box box-short"><span class="date-tag">Ojciec | 1920</span></a>
             <a href="#" class="box box-short"><span class="date-tag">Matka | 1925</span></a>
         </div>
 
+        <svg class="connector-svg" preserveAspectRatio="none" viewBox="0 0 100 60">
+            <path class="line-path" d="M 40 0 V 30 H 60 V 0 M 50 30 V 60"></path>
+        </svg>
+
         <div class="row-flex">
-            <a href="#" class="box box-short"><span class="date-tag">Wspólne Korzenie 2026</span></a>
+            <a href="#" class="box box-short"><span class="date-tag">Jedność | 2026</span></a>
         </div>
+
+        <svg class="connector-svg" style="height: 40px;" viewBox="0 0 100 40">
+            <path class="line-path" d="M 50 0 V 40"></path>
+        </svg>
 
         <div class="row-flex">
             <div class="box box-potomek">
                 <div style="display: flex; flex-direction: column; align-items: center; min-width: 80px;">
-                    <img src="" class="img-single" style="width:80px; height:100px;">
-                    <span class="name-tag" style="border:none; text-align:center;">Potomek</span>
+                    <img src="" class="img-single" style="width:80px; height:105px;">
+                    <span class="name-tag" style="border:none; text-align:center;">Nazwa</span>
                 </div>
                 <div style="flex: 1; padding-left: 20px; border-left: 1px solid rgba(122,101,72,0.1);">
                     <p style="font-size: 0.9rem; font-family: 'Jost'; text-transform: none; font-weight: 300;">
-                        Tutaj znajduje się nota biograficzna oraz opis aktualnego statusu potomka rodu w linii głównej. Dzięki Flexbox okienko to może być szersze bez psucia układu powyżej.
+                        Nota biograficzna. W tym układzie okienka są odblokowane, a kształt "V" zachowany dzięki centralnemu schodzeniu się linii.
                     </p>
                 </div>
             </div>
@@ -180,16 +159,6 @@
 
     </div>
 </div>
-
-<section class="tree-nav-container">
-    <h2 class="tree-nav-title">Pozostałe Tablice</h2>
-    <div class="tree-grid-nav">
-        <a href="#" class="tree-nav-item active">Linia Główna</a>
-        <a href="#" class="tree-nav-item">Gałąź Modlińska</a>
-        <a href="#" class="tree-nav-item">Linia Argentyńska</a>
-        <a href="#" class="tree-nav-item">Rodzina Krainskich</a>
-    </div>
-</section>
 
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
