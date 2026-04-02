@@ -28,7 +28,7 @@
 
         /* KONTENER DRZEWA */
         .tree-wrapper { max-width: 1400px; margin: 0 auto 100px; padding: 40px 20px; overflow-x: auto; }
-        .tree-container { display: flex; flex-direction: column; align-items: center; min-width: 1150px; }
+        .tree-container { display: flex; flex-direction: column; align-items: center; min-width: 1150px; gap: 40px; }
 
         /* RZĘDY */
         .row-flex { 
@@ -36,8 +36,7 @@
             justify-content: center; 
             gap: 20px; 
             width: 100%; 
-            padding: 0;
-            position: relative;
+            padding: 10px 0;
         }
 
         /* OKIENKA */
@@ -60,38 +59,14 @@
             transition: 0.3s;
             min-width: 130px;
             width: auto;
-            position: relative;
         }
+        .box:hover { border-color: var(--gold); background: white; transform: translateY(-2px); }
 
-        /* KLUCZ: ELASTYCZNE LINIE CSS */
-        /* Linia w dół z każdego okienka */
-        .box::after {
-            content: ""; position: absolute; top: 100%; left: 50%;
-            width: 1px; height: 20px; background: var(--line-color);
-        }
-        /* Linia w górę do każdego okienka (poza najwyższym rzędem) */
-        .row-flex:not(.lvl-top) .box::before {
-            content: ""; position: absolute; bottom: 100%; left: 50%;
-            width: 1px; height: 20px; background: var(--line-color);
-        }
-
-        /* Pozioma szyna łącząca między rzędami */
-        .connector-bar {
-            width: 80%; /* Szerokość szyny zbierającej */
-            height: 1px;
-            background: var(--line-color);
-            margin: 20px 0;
-            position: relative;
-        }
-        /* Pionowy bolec łączący szynę z rzędem niżej */
-        .connector-bar::after {
-            content: ""; position: absolute; top: 0; left: 50%;
-            width: 1px; height: 20px; background: var(--line-color);
-        }
-
+        /* SPECYFIKA OKIENEK */
         .lvl-top .box { min-height: 120px; }
         .box-short { min-height: 45px !important; padding: 5px 15px !important; font-size: 0.85rem; }
 
+        /* TREŚĆ */
         .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 6px; }
         .img-wrap span { font-size: 0.6rem; color: var(--sepia); font-family: 'Jost'; text-transform: none; margin-top: 2px; }
         .img-single { width: 45px; height: 60px; background: #eee; border: 1px solid rgba(0,0,0,0.05); object-fit: cover; }
@@ -99,11 +74,11 @@
         .name-tag { font-size: 0.85rem; border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 4px; width: 100%; margin-top: 4px; }
         .date-tag { font-family: 'Jost'; font-size: 0.75rem; font-weight: 400; white-space: nowrap; }
 
+        /* POTOMEK */
         .box-potomek { 
             flex-direction: row !important; gap: 20px; text-align: left; padding: 25px !important;
             max-width: 550px; border-left: 5px solid var(--gold);
         }
-        .box-potomek::after { display: none; } /* Ostatnie okienko nie ma linii w dół */
 
         footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 40px 24px; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
@@ -132,8 +107,6 @@
             <div class="box"><div class="name-tag">Osoba 8</div></div>
         </div>
 
-        <div class="connector-bar" style="width: 88%;"></div>
-
         <div class="row-flex">
             <a href="#" class="box box-short"><span class="date-tag">Dziadek A | 1890</span></a>
             <a href="#" class="box box-short"><span class="date-tag">Babcia B | 1895</span></a>
@@ -141,20 +114,16 @@
             <a href="#" class="box box-short"><span class="date-tag">Babcia D | 1900</span></a>
         </div>
 
-        <div class="connector-bar" style="width: 45%;"></div>
-
         <div class="row-flex">
             <a href="#" class="box box-short"><span class="date-tag">Ojciec | 1920</span></a>
             <a href="#" class="box box-short"><span class="date-tag">Matka | 1925</span></a>
         </div>
 
-        <div class="connector-bar" style="width: 15%;"></div>
-
         <div class="row-flex">
             <a href="#" class="box box-short"><span class="date-tag">Jedność | 2026</span></a>
         </div>
 
-        <div class="row-flex" style="padding-top: 20px;">
+        <div class="row-flex">
             <div class="box box-potomek">
                 <div style="display: flex; flex-direction: column; align-items: center; min-width: 80px;">
                     <img src="" class="img-single" style="width:80px; height:105px;">
@@ -162,8 +131,7 @@
                 </div>
                 <div style="flex: 1; padding-left: 20px; border-left: 1px solid rgba(122,101,72,0.1);">
                     <p style="font-size: 0.9rem; font-family: 'Jost'; text-transform: none; font-weight: 300;">
-                        Linie są teraz częścią okienek. Jeśli okienko się rozszerzy, linia zostanie na środku. 
-                        Szerokość szyny (connector-bar) możesz regulować procentowo w HTML.
+                        Wklej tutaj swój tekst nota biograficzna.
                     </p>
                 </div>
             </div>
