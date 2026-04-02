@@ -26,8 +26,11 @@
         h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; margin-bottom: 10px; }
         .s-line-main { width: 50px; height: 1px; background: var(--gold-light); margin: 15px auto; }
 
-        .tree-wrapper { max-width: 1400px; margin: 0 auto 100px; padding: 40px 20px; overflow-x: auto; }
+        .tree-wrapper { max-width: 1400px; margin: 0 auto 50px; padding: 40px 20px; overflow-x: auto; }
         .tree-container { display: flex; flex-direction: column; align-items: center; min-width: 1150px; gap: 40px; }
+
+        /* ZMNIEJSZONE ODSTĘPY W CENTRUM */
+        .tight-gap { gap: 10px !important; }
 
         .row-flex { display: flex; justify-content: center; gap: 20px; width: 100%; padding: 10px 0; }
 
@@ -56,19 +59,33 @@
         .name-tag { font-size: 0.85rem; border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 4px; width: 100%; margin-top: 4px; }
         .date-tag { font-family: 'Jost'; font-size: 0.75rem; font-weight: 400; white-space: nowrap; }
 
-        /* INTERAKTYWNY OBRAZEK (FLIP) */
-        .interactive-node { width: 40px; height: 40px; perspective: 1000px; cursor: pointer; text-decoration: none; }
+        /* INTERAKTYWNY OBRAZEK */
+        .interactive-node { width: 35px; height: 35px; perspective: 1000px; cursor: pointer; text-decoration: none; margin: -5px 0; }
         .flip-card { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
         .interactive-node:hover .flip-card { transform: rotateY(180deg); }
-        .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center; background: var(--cream); font-size: 10px; color: var(--sepia); }
+        .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center; background: var(--cream); font-size: 9px; color: var(--sepia); border-radius: 50%; }
         .flip-back { transform: rotateY(180deg); background: var(--gold); color: white; }
 
         .box-potomek { flex-direction: row !important; gap: 20px; text-align: left; padding: 25px !important; max-width: 550px; border-left: 5px solid var(--gold); }
 
-        /* NAWIGACJA LINII */
-        .lines-nav { max-width: 1100px; margin: 50px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; padding: 0 20px; }
-        .line-btn { padding: 12px; background: var(--parchment); border: 1px solid rgba(122, 101, 72, 0.1); text-decoration: none; color: var(--sepia); text-align: center; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .line-btn:hover { background: var(--gold); color: white; }
+        /* NOWA NAWIGACJA DOLNA */
+        .lines-nav-container { max-width: 1100px; margin: 40px auto 80px; padding: 0 20px; text-align: center; }
+        .nav-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); margin-bottom: 20px; display: block; opacity: 0.7; }
+        .lines-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .line-btn { 
+            padding: 10px 20px; 
+            background: transparent; 
+            border: 1px solid rgba(122, 101, 72, 0.2); 
+            text-decoration: none; 
+            color: var(--ink); 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem; 
+            font-weight: 500;
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .line-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(155, 125, 74, 0.03); transform: translateY(-3px); }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 40px 24px; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
@@ -84,7 +101,7 @@
 </header>
 
 <div class="tree-wrapper">
-    <div class="tree-container">
+    <div class="tree-container tight-gap">
         
         <div class="row-flex lvl-top">
             <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 1</span></div><div class="name-tag">Osoba 1</div></div>
@@ -138,7 +155,7 @@
             <a href="#" class="box box-short"><span class="date-tag">Jedność | 2026</span></a>
         </div>
 
-        <div class="row-flex">
+        <div class="row-flex" style="margin-top: 20px;">
             <div class="box box-potomek">
                 <div style="display: flex; flex-direction: column; align-items: center; min-width: 80px;">
                     <img src="" class="img-single" style="width:80px; height:105px;">
@@ -152,15 +169,18 @@
     </div>
 </div>
 
-<nav class="lines-nav">
-    <a href="#" class="line-btn">Linia II</a>
-    <a href="#" class="line-btn">Linia III</a>
-    <a href="#" class="line-btn">Linia IV</a>
-    <a href="#" class="line-btn">Linia V</a>
-    <a href="#" class="line-btn">Linia VI</a>
-    <a href="#" class="line-btn">Linia VII</a>
-    <a href="#" class="line-btn">Linia VIII</a>
-</nav>
+<div class="lines-nav-container">
+    <span class="nav-label">— Pozostałe Linie Rodu —</span>
+    <nav class="lines-nav">
+        <a href="#" class="line-btn">Linia II</a>
+        <a href="#" class="line-btn">Linia III</a>
+        <a href="#" class="line-btn">Linia IV</a>
+        <a href="#" class="line-btn">Linia V</a>
+        <a href="#" class="line-btn">Linia VI</a>
+        <a href="#" class="line-btn">Linia VII</a>
+        <a href="#" class="line-btn">Linia VIII</a>
+    </nav>
+</div>
 
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
