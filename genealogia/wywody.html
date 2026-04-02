@@ -10,7 +10,6 @@
         :root {
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
             --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
-            --line: rgba(122, 101, 72, 0.2);
             --line-color: #b0a496;
         }
 
@@ -22,98 +21,90 @@
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+        .article-header { max-width: 900px; margin: 60px auto 40px; text-align: center; }
         .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; margin-bottom: 10px; }
         .s-line-main { width: 50px; height: 1px; background: var(--gold-light); margin: 15px auto; }
 
-        .info-panel { 
-            max-width: 850px; margin: 0 auto 50px; padding: 30px; 
-            background: var(--parchment); border-radius: 4px;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
-        }
-        .info-item { font-size: 0.9rem; }
-        .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
-
-        /* STRUKTURA DRZEWA - ODBLOKOWANA SZEROKOŚĆ KOLUMN */
-        .tree-wrapper { max-width: 1350px; margin: 0 auto 80px; padding: 0 20px; overflow-x: auto; }
-        .tree { 
-            display: grid; 
-            grid-template-columns: repeat(8, minmax(min-content, 1fr)); 
-            min-width: 1150px; 
-            margin: auto; 
+        /* NOWA LEKKA STRUKTURA DRZEWA */
+        .tree-wrapper { max-width: 1400px; margin: 0 auto 80px; padding: 0 20px; overflow-x: auto; }
+        
+        .tree-flex { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; /* Centrowanie rzędów tworzy kształt V */
+            gap: 40px; 
+            min-width: 1000px;
         }
 
+        .row-flex { 
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start; 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        /* OKIENKA BEZ SZTYWNEJ SZEROKOŚCI */
         .box {
-            border: 1px solid var(--sepia-pale); background: var(--cream);
-            padding: 10px 15px; text-align: center; font-family: 'Cormorant Garamond', serif;
-            border-left: 3px solid var(--sepia); box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-            z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-transform: uppercase; margin: 0 3px; font-weight: 600;
-            text-decoration: none; color: inherit; transition: 0.2s;
+            border: 1px solid rgba(122, 101, 72, 0.2); 
+            background: var(--cream);
+            padding: 15px; 
+            text-align: center; 
+            font-family: 'Cormorant Garamond', serif;
+            border-left: 3px solid var(--sepia); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            text-transform: uppercase; 
+            font-weight: 600;
+            text-decoration: none; 
+            color: inherit; 
+            transition: all 0.3s ease;
             width: auto;
-            min-width: fit-content; /* Dopasowanie do zawartości */
+            min-width: 120px; /* Minimalna, żeby nie zniknęły */
         }
         
-        .lvl-8 .box { min-height: 120px; }
-        .box-short { min-height: 50px !important; padding: 5px 10px !important; font-size: 0.8rem; }
-        a.box:hover { background: var(--parchment); border-color: var(--gold); }
+        .box:hover { transform: translateY(-3px); border-color: var(--gold); background: white; }
 
+        /* POZIOMY WYSOKOŚCI */
+        .lvl-top .box { min-height: 120px; }
+        .box-short { min-height: 45px !important; padding: 5px 20px !important; font-size: 0.8rem; }
+
+        /* ELEMENTY WEWNĄTRZ */
         .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 8px; }
-        .img-wrap span { font-size: 0.6rem; color: var(--sepia); margin-top: 2px; font-family: 'Jost'; }
-        .img-single { width: 50px; height: 60px; background: #eee; border: 1px solid var(--line); object-fit: cover; }
-        .img-double-row { display: flex; gap: 10px; }
+        .img-wrap span { font-size: 0.6rem; color: var(--sepia); margin-top: 2px; font-family: 'Jost'; text-transform: none; }
+        .img-single { width: 50px; height: 65px; background: #eee; border: 1px solid rgba(0,0,0,0.05); object-fit: cover; }
+        .img-double-row { display: flex; gap: 8px; }
+        
+        .name-tag { font-size: 0.85rem; letter-spacing: 0.5px; border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 5px; width: 100%; }
+        .date-tag { font-family: 'Jost'; font-size: 0.75rem; font-weight: 400; white-space: nowrap; letter-spacing: 1px; }
 
-        .name-tag { font-size: 0.85rem; letter-spacing: 0.5px; border-top: 1px solid var(--line); padding-top: 5px; width: 100%; }
-        .date-tag { font-family: 'Jost'; font-size: 0.75rem; font-weight: 300; white-space: nowrap; }
-
+        /* POTOMEK - NA SAMYM DOLE */
         .box-potomek { 
-            flex-direction: row !important; gap: 15px; justify-content: flex-start; text-align: left; 
-            min-height: 150px !important; padding: 15px !important; width: auto; 
+            flex-direction: row !important; 
+            gap: 20px; 
+            text-align: left; 
+            padding: 20px !important;
+            max-width: 500px;
         }
-        .box-potomek .name-tag { border-top: none; padding-top: 0; margin-top: 5px; width: 100%; }
-
-        /* LINIE */
-        .node { position: relative; display: flex; flex-direction: column; }
-        .v-line-down::after { content: ""; position: absolute; left: 50%; top: 100%; width: 1px; height: 25px; background: var(--line-color); }
-        .v-line-up::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 1px; height: 25px; background: var(--line-color); }
-        .connector-group { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(8, 1fr); height: 50px; position: relative; }
-        .h-line { position: absolute; top: 25px; height: 1px; background: var(--line-color); }
-        .v-stem { position: absolute; top: 25px; width: 1px; height: 25px; background: var(--line-color); }
-
-        .link-node {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 44px; height: 44px; z-index: 20; background: var(--warm-white);
-            border: 1px solid var(--line-color); border-radius: 50%; padding: 3px;
-        }
-        .link-node img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
         /* NAWIGACJA DOLNA */
-        .tree-nav-container { max-width: 1100px; margin: 60px auto 20px; padding: 40px 24px; border-top: 1px solid var(--line); }
-        .tree-nav-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; text-align: center; margin-bottom: 30px; color: var(--sepia); text-transform: uppercase; letter-spacing: 2px; }
-        .tree-grid-nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
-        .tree-nav-item { text-decoration: none; color: var(--ink); background: var(--parchment); padding: 20px; text-align: center; border: 1px solid var(--line); transition: 0.3s; display: flex; flex-direction: column; }
-        .tree-nav-item span { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 5px; }
-        .tree-nav-item strong { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; }
-        .tree-nav-item:hover { background: var(--cream); border-color: var(--gold); transform: translateY(-3px); }
-        .tree-nav-item.active { border-color: var(--gold); background: white; pointer-events: none; opacity: 0.6; }
+        .tree-nav-container { max-width: 1100px; margin: 100px auto 40px; padding: 40px 24px; border-top: 1px solid rgba(122, 101, 72, 0.1); }
+        .tree-nav-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; text-align: center; margin-bottom: 30px; color: var(--sepia); text-transform: uppercase; letter-spacing: 2px; }
+        .tree-grid-nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .tree-nav-item { text-decoration: none; color: var(--ink); background: var(--parchment); padding: 15px; text-align: center; border: 1px solid transparent; transition: 0.3s; }
+        .tree-nav-item:hover { background: white; border-color: var(--gold); }
+        .tree-nav-item.active { opacity: 0.5; pointer-events: none; }
 
-        .back-to-list { text-align: center; margin-bottom: 80px; }
-        .pagination-btn { text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; display: inline-block; }
-
-        .spacer-small { grid-column: 1 / -1; height: 25px; }
-        .row { display: contents; }
-        .lvl-8 .node { grid-column: span 1; }
-        .lvl-4 .node { grid-column: span 2; }
-        .lvl-2 .node { grid-column: span 4; }
-        .lvl-1 .node { grid-column: span 8; }
-
-        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 40px 24px; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-<nav><div class="nav-inner"><a href="index.html" class="nav-logo">ARCHIWUM L&K</a><a href="wywody.html" class="back-link">← Powrót</a></div></nav>
+<nav><div class="nav-inner"><a href="#" class="nav-logo">ARCHIWUM L&K</a><a href="#" class="back-link">← Powrót</a></div></nav>
 
 <header class="article-header">
     <span class="meta-top">Tablica Genealogiczna I</span>
@@ -121,100 +112,78 @@
     <div class="s-line-main"></div>
 </header>
 
-<div class="info-panel">
-    <div class="info-item"><strong>Główna Linia</strong> Ładomirscy i Krainscy</div>
-    <div class="info-item"><strong>Zakres dat</strong> 1750 — 2026</div>
-    <div class="info-item"><strong>Status</strong> Zweryfikowano</div>
-</div>
-
 <div class="tree-wrapper">
-    <div class="tree">
-        <div class="row lvl-8">
-            <div class="node v-line-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 1</div></div></div>
-            <div class="node v-line-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 2</div></div></div>
-            <div class="node v-line-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 3</div></div></div>
-            <div class="node v-line-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Franciszek Salezy Walenty Roch Karczewski<p>wł. dóbr Brzozowa, Gulin, Rożenek i Milczany</p><p>(Ciepielów 1804 - Budków 1886)</p></div></div></div>
-            <div class="node v-line-down"><div class="box"><div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Mąż</span></div><div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Żona</span></div></div><div class="name-tag">Para 5</div></div></div>
-            <div class="node v-line-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 6</div></div></div>
-            <div class="node v-line-down"><div class="box"><div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Mąż</span></div><div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Żona</span></div></div><div class="name-tag">Para 7</div></div></div>
-            <div class="node v-line-down"><div class="box"><div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Mąż</span></div><div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Żona</span></div></div><div class="name-tag">Para 8</div></div></div>
+    <div class="tree-flex">
+        
+        <div class="row-flex lvl-top">
+            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 1</div></div>
+            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 2</div></div>
+            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 3</div></div>
+            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 4</div></div>
+            <div class="box">
+                <div class="img-double-row">
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px"><span>Mąż</span></div>
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px"><span>Żona</span></div>
+                </div>
+                <div class="name-tag">Para 5</div>
+            </div>
+            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis</span></div><div class="name-tag">Osoba 6</div></div>
+            <div class="box">
+                <div class="img-double-row">
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px"><span>Mąż</span></div>
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px"><span>Żona</span></div>
+                </div>
+                <div class="name-tag">Para 7</div>
+            </div>
+            <div class="box">
+                <div class="img-double-row">
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px"><span>Mąż</span></div>
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px"><span>Żona</span></div>
+                </div>
+                <div class="name-tag">Para 8</div>
+            </div>
         </div>
 
-        <div class="connector-group">
-            <div class="h-line" style="left: 6.25%; right: 81.25%;"></div> <div class="v-stem" style="left: 12.5%;"></div>
-            <div class="h-line" style="left: 31.25%; right: 56.25%;"></div> <div class="v-stem" style="left: 37.5%;"></div>
-            <div class="h-line" style="left: 56.25%; right: 31.25%;"></div> <div class="v-stem" style="left: 62.5%;"></div>
-            <div class="h-line" style="left: 81.25%; right: 6.25%;"></div> <div class="v-stem" style="left: 87.5%;"></div>
+        <div class="row-flex">
+            <a href="#" class="box box-short"><span class="date-tag">Dziadek A | 1890</span></a>
+            <a href="#" class="box box-short"><span class="date-tag">Babcia B | 1895</span></a>
+            <a href="#" class="box box-short"><span class="date-tag">Dziadek C | 1888</span></a>
+            <a href="#" class="box box-short"><span class="date-tag">Babcia D | 1900</span></a>
         </div>
 
-        <div class="row lvl-4">
-            <a href="#" class="node v-line-up v-line-down box box-short"><span class="date-tag">1890 - 1950</span></a>
-            <a href="#" class="node v-line-up v-line-down box box-short"><span class="date-tag">1895 - 1960</span></a>
-            <a href="#" class="node v-line-up v-line-down box box-short"><span class="date-tag">1888 - 1945</span></a>
-            <a href="#" class="node v-line-up v-line-down box box-short"><span class="date-tag">1900 - 1970</span></a>
+        <div class="row-flex">
+            <a href="#" class="box box-short"><span class="date-tag">Ojciec | 1920</span></a>
+            <a href="#" class="box box-short"><span class="date-tag">Matka | 1925</span></a>
         </div>
 
-        <div class="spacer-small"></div>
-
-        <div class="row lvl-4">
-            <div class="node v-line-up v-line-down box box-short">Linia A2</div>
-            <div class="node v-line-up v-line-down box box-short">Linia B2</div>
-            <div class="node v-line-up v-line-down box box-short">Linia C2</div>
-            <div class="node v-line-up v-line-down box box-short">Linia D2</div>
+        <div class="row-flex">
+            <a href="#" class="box box-short"><span class="date-tag">Wspólne Korzenie 2026</span></a>
         </div>
 
-        <div class="connector-group">
-            <div class="h-line" style="left: 12.5%; right: 62.5%;"></div> <div class="v-stem" style="left: 25%;"></div>
-            <div class="h-line" style="left: 62.5%; right: 12.5%;"></div> <div class="v-stem" style="left: 75%;"></div>
-        </div>
-
-        <div class="row lvl-2">
-            <a href="#" class="node v-line-up v-line-down box box-short"><span class="date-tag">1920 - 1990</span></a>
-            <a href="#" class="node v-line-up v-line-down box box-short"><span class="date-tag">1925 - 2005</span></a>
-        </div>
-
-        <div class="spacer-small"></div>
-
-        <div class="row lvl-2">
-            <div class="node v-line-up v-line-down box box-short">P 1.2</div>
-            <div class="node v-line-up v-line-down box box-short">P 2.2</div>
-        </div>
-
-        <div class="connector-group">
-            <div class="h-line" style="left: 25%; right: 25%;"></div>
-            <div class="v-stem" style="left: 50%;"></div>
-            <a href="#" class="link-node"><img src="" alt="L"></a>
-        </div>
-
-        <div class="row lvl-1">
-            <a href="#" class="node v-line-up v-line-down box box-short"><span class="date-tag">2026</span></a>
-        </div>
-
-        <div class="spacer-small"></div>
-
-        <div class="row lvl-1">
-            <div class="node v-line-up">
-                <div class="box box-potomek">
-                    <div class="img-left-side" style="display: flex; flex-direction: column; align-items: center; width: 70px;">
-                        <img src="" class="img-single" style="width:70px; height:90px; margin:0;">
-                        <span class="name-tag" style="text-align: center;">Nazwa</span>
-                    </div>
-                    <div class="text-right-side" style="flex: 1;">
-                        <p style="font-size: 0.8rem; font-family: 'Jost'; text-transform: none; margin: 0;">Nota biograficzna.</p>
-                    </div>
+        <div class="row-flex">
+            <div class="box box-potomek">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="" class="img-single" style="width:80px; height:100px;">
+                    <span class="name-tag" style="border:none; text-align:center;">Potomek</span>
+                </div>
+                <div style="flex: 1; padding-left: 10px; border-left: 1px solid rgba(122,101,72,0.1);">
+                    <p style="font-size: 0.85rem; font-family: 'Jost'; text-transform: none; font-weight: 300;">
+                        Tutaj znajduje się nota biograficzna oraz opis aktualnego statusu potomka rodu w linii głównej.
+                    </p>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
 <section class="tree-nav-container">
-    <h2 class="tree-nav-title">Pozostałe Tablice Genealogiczne</h2>
+    <h2 class="tree-nav-title">Pozostałe Tablice</h2>
     <div class="tree-grid-nav">
-        <a href="#" class="tree-nav-item active"><span>Tablica I</span><strong>Linia Główna</strong></a>
-        <a href="#" class="tree-nav-item"><span>Tablica II</span><strong>Gałąź Modlińska</strong></a>
-        <a href="#" class="tree-nav-item"><span>Tablica III</span><strong>Linia Argentyńska</strong></a>
-        <a href="#" class="tree-nav-item"><span>Tablica IV</span><strong>Rodzina Krainskich</strong></a>
+        <a href="#" class="tree-nav-item active">Linia Główna</a>
+        <a href="#" class="tree-nav-item">Gałąź Modlińska</a>
+        <a href="#" class="tree-nav-item">Linia Argentyńska</a>
+        <a href="#" class="tree-nav-item">Rodzina Krainskich</a>
     </div>
 </section>
 
