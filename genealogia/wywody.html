@@ -2,6 +2,9 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Drzewo genealogiczne</title>
 
 <style>
 body {
@@ -26,25 +29,17 @@ body {
     background:white;
     padding:12px;
     text-align:center;
+    position:relative;
 }
 
-/* WIERSZE */
-.row {
-    display:contents;
-}
-
-/* SPANY */
-.lvl-8 .node { grid-column: span 1; }
-.lvl-4 .node { grid-column: span 2; }
-.lvl-2 .node { grid-column: span 4; }
-.lvl-1 .node { grid-column: span 8; }
-
-/* NODE (z liniami) */
+/* NODE */
 .node {
     position:relative;
 }
 
-/* pion w dół (dziecko) */
+/* --- LINIE --- */
+
+/* dół */
 .node.child::after {
     content:"";
     position:absolute;
@@ -56,12 +51,45 @@ body {
     transform:translateX(-50%);
 }
 
-/* grupa pary */
+/* góra */
+.node.parent::before {
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:100%;
+    width:1px;
+    height:30px;
+    background:#d8cfc3;
+    transform:translateX(-50%);
+}
+
+/* przelot (góra + dół) */
+.node.pass::before,
+.node.pass::after {
+    content:"";
+    position:absolute;
+    left:50%;
+    width:1px;
+    background:#d8cfc3;
+    transform:translateX(-50%);
+}
+
+.node.pass::before {
+    bottom:100%;
+    height:30px;
+}
+
+.node.pass::after {
+    top:100%;
+    height:30px;
+}
+
+/* PARA */
 .pair {
     position:relative;
 }
 
-/* linia pozioma między parą */
+/* pozioma linia między dziećmi */
 .pair::before {
     content:"";
     position:absolute;
@@ -84,7 +112,18 @@ body {
     transform:translateX(-50%);
 }
 
-/* odstęp */
+/* GRID SPANY */
+.lvl-8 .node { grid-column: span 1; }
+.lvl-4 .node { grid-column: span 2; }
+.lvl-2 .node { grid-column: span 4; }
+.lvl-1 .node { grid-column: span 8; }
+
+/* ROW */
+.row {
+    display:contents;
+}
+
+/* ODSTĘP */
 .spacer {
     grid-column:1/-1;
     height:30px;
@@ -112,50 +151,50 @@ body {
 
 <!-- 4 -->
 <div class="row lvl-4">
-    <div class="node pair"><div class="box">1</div></div>
-    <div class="node pair"><div class="box">2</div></div>
-    <div class="node pair"><div class="box">3</div></div>
-    <div class="node pair"><div class="box">4</div></div>
+    <div class="node pair parent pass"><div class="box">1</div></div>
+    <div class="node pair parent pass"><div class="box">2</div></div>
+    <div class="node pair parent pass"><div class="box">3</div></div>
+    <div class="node pair parent pass"><div class="box">4</div></div>
 </div>
 
 <div class="spacer"></div>
 
 <!-- 4 -->
 <div class="row lvl-4">
-    <div class="node child"><div class="box">1</div></div>
-    <div class="node child"><div class="box">2</div></div>
-    <div class="node child"><div class="box">3</div></div>
-    <div class="node child"><div class="box">4</div></div>
+    <div class="node child pass"><div class="box">1</div></div>
+    <div class="node child pass"><div class="box">2</div></div>
+    <div class="node child pass"><div class="box">3</div></div>
+    <div class="node child pass"><div class="box">4</div></div>
 </div>
 
 <div class="spacer"></div>
 
 <!-- 2 -->
 <div class="row lvl-2">
-    <div class="node pair"><div class="box">1</div></div>
-    <div class="node pair"><div class="box">2</div></div>
+    <div class="node pair parent pass"><div class="box">1</div></div>
+    <div class="node pair parent pass"><div class="box">2</div></div>
 </div>
 
 <div class="spacer"></div>
 
 <!-- 2 -->
 <div class="row lvl-2">
-    <div class="node child"><div class="box">1</div></div>
-    <div class="node child"><div class="box">2</div></div>
+    <div class="node child pass"><div class="box">1</div></div>
+    <div class="node child pass"><div class="box">2</div></div>
 </div>
 
 <div class="spacer"></div>
 
 <!-- 1 -->
 <div class="row lvl-1">
-    <div class="node pair"><div class="box">1</div></div>
+    <div class="node pair parent pass"><div class="box">1</div></div>
 </div>
 
 <div class="spacer"></div>
 
 <!-- 1 -->
 <div class="row lvl-1">
-    <div class="node"><div class="box">1</div></div>
+    <div class="node parent"><div class="box">1</div></div>
 </div>
 
 </div>
