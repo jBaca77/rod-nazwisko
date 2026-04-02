@@ -14,28 +14,53 @@
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
+        
         nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+
         .profile-header { max-width: 1000px; margin: 60px auto; padding: 0 24px; display: grid; grid-template-columns: 350px 1fr; gap: 50px; align-items: center; }
         .main-photo-frame { background: white; padding: 15px; border: 1px solid var(--line); box-shadow: 15px 15px 0px var(--parchment); }
         .main-photo-frame img { width: 100%; height: auto; display: block; filter: sepia(15%); }
+        
         .header-info h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; margin-bottom: 10px; line-height: 1.1; }
         .header-info .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); font-style: italic; display: block; margin-bottom: 20px; }
         .meta-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); display: block; margin-bottom: 5px; }
+
         .content-wrap { max-width: 850px; margin: 0 auto; padding: 0 24px; }
         .bio-para { margin-bottom: 25px; text-align: justify; font-size: 1.1rem; }
         .bio-para:first-of-type::first-letter { float: left; font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; line-height: 0.8; padding: 8px 12px 4px 0; color: var(--gold); font-weight: 300; }
+
+        /* Stylizacja sekcji PDF */
+        .pdf-archive-link { 
+            margin: 60px 0; padding: 30px; border: 1px double var(--gold); 
+            text-align: center; background-color: var(--parchment);
+        }
+        .pdf-archive-link p { font-family: 'Cormorant Garamond', serif; font-style: italic; margin-bottom: 15px; }
+        .btn-pdf { 
+            display: inline-block; padding: 12px 30px; background: var(--ink); color: var(--gold-light); 
+            text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+            transition: 0.3s; border: 1px solid var(--gold);
+        }
+        .btn-pdf:hover { background: var(--gold); color: var(--ink); }
+
         .inline-photo { margin: 45px 0; text-align: center; }
         .inline-photo img { max-width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; }
         .caption { display: block; margin-top: 10px; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--sepia); font-size: 1rem; }
+
         .descendants { margin-top: 80px; border-top: 2px solid var(--gold-light); padding-top: 40px; }
         .descendants h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; margin-bottom: 40px; text-align: center; }
         .child-block { margin-bottom: 60px; padding-left: 20px; border-left: 1px solid var(--parchment); }
         .child-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 15px; }
-        .source-note { background: #f0ede6; padding: 30px; margin: 40px 0; border-left: 4px solid var(--gold); font-size: 1rem; }
+
+        .source-note { background: #f0ede6; padding: 30px; margin: 40px 0; border-left: 4px solid var(--gold); font-size: 1rem; position: relative; }
+        .editorial-note { 
+            display: block; margin-top: 20px; font-size: 0.75rem; color: #a09a90; font-style: italic; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 10px;
+        }
+
         footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 100px; }
+
         @media (max-width: 800px) { .profile-header { grid-template-columns: 1fr; text-align: center; } .main-photo-frame { max-width: 300px; margin: 0 auto 30px; } }
     </style>
 </head>
@@ -104,7 +129,7 @@
         </div>
 
         <div class="bio-para">
-            Podczas inwazji rosyjskiej inwazji w 1914 roku rodzina pozostała w domu. Ocalili inwentarz, w tym parę koni arabskich, które dzieci wybroniły przed konfiskatą przez Rosjan swoją rozpaczą. Konie te służyły rodzinie przez lata. W 1920 roku, uciekając przed bolszewikami, rodzina schroniła się w Jabłonce z inwentarzem, co ułatwiło późniejszą odbudowę.
+            Podczas inwazji rosyjskiej w 1914 roku rodzina pozostała w domu. Ocalili inwentarz, w tym parę koni arabskich, które dzieci wybroniły przed konfiskatą przez Rosjan swoją rozpaczą. Konie te służyły rodzinie przez lata. W 1920 roku, uciekając przed bolszewikami, rodzina schroniła się w Jabłonce z inwentarzem, co ułatwiło późniejszą odbudowę.
         </div>
 
         <div class="inline-photo">
@@ -113,6 +138,11 @@
                 <img src="img/rekreacja_konna.jpg" style="width: 45%;" alt="Rekreacja konna">
             </div>
             <span class="caption">Pasja do koni: Rekreacja konna i gonitwy myśliwskie we Lwowie (1886)</span>
+        </div>
+
+        <div class="pdf-archive-link">
+            <p>Aby zapoznać się z pełną treścią oryginalnych zapisów historycznych dotyczących rodziny Ładomirskich:</p>
+            <a href="pdf/zapiski_markowce.pdf" target="_blank" class="btn-pdf">Otwórz pełny plik PDF</a>
         </div>
 
         <section class="descendants">
@@ -162,6 +192,7 @@
 
         <section class="source-note">
             <p>Powyższe wspomnienia spisał <strong>Antoni Kraiński</strong>, dokumentując burzliwe losy rodziny Ładomirskich na przestrzeni lat.</p>
+            <span class="editorial-note">Treść powyższych wspomnień została zredagowana i skrócona na potrzeby prezentacji na stronie internetowej.</span>
         </section>
     </div>
 
