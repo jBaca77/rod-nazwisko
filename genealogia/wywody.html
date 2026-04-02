@@ -2,7 +2,6 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
@@ -16,68 +15,80 @@ body {
 .tree {
     display:grid;
     grid-template-columns:repeat(8, 1fr);
-    gap:30px 20px;
+    gap:60px 20px;
     max-width:1400px;
     margin:auto;
 }
 
-/* KAFEL */
+/* BOX */
 .box {
     border:1px solid #d8cfc3;
     background:white;
-    padding:15px;
+    padding:12px;
     text-align:center;
+}
+
+/* WIERSZE */
+.row {
+    display:contents;
+}
+
+/* SPANY */
+.lvl-8 .node { grid-column: span 1; }
+.lvl-4 .node { grid-column: span 2; }
+.lvl-2 .node { grid-column: span 4; }
+.lvl-1 .node { grid-column: span 8; }
+
+/* NODE (z liniami) */
+.node {
     position:relative;
 }
 
-/* PIONOWA LINIA W DÓŁ */
-.box::after {
+/* pion w dół (dziecko) */
+.node.child::after {
     content:"";
     position:absolute;
     left:50%;
-    bottom:-30px;
+    top:100%;
     width:1px;
     height:30px;
     background:#d8cfc3;
     transform:translateX(-50%);
 }
 
-/* USUWAMY linię dla ostatniego poziomu */
-.last .box::after {
-    display:none;
-}
-
-/* POZIOMA LINIA (łączenie dzieci) */
-.group {
+/* grupa pary */
+.pair {
     position:relative;
 }
 
-.group::before {
+/* linia pozioma między parą */
+.pair::before {
     content:"";
     position:absolute;
     top:-30px;
-    left:10%;
-    right:10%;
+    left:25%;
+    right:25%;
     height:1px;
     background:#d8cfc3;
 }
 
-/* GRID SPANY */
-.lvl-8 .box { grid-column: span 1; }
-.lvl-4 .box { grid-column: span 2; }
-.lvl-2 .box { grid-column: span 4; }
-.lvl-1 .box { grid-column: span 8; }
-
-/* ROW */
-.row {
-    display:contents;
+/* pion do rodzica */
+.pair::after {
+    content:"";
+    position:absolute;
+    top:-30px;
+    left:50%;
+    width:1px;
+    height:30px;
+    background:#d8cfc3;
+    transform:translateX(-50%);
 }
 
+/* odstęp */
 .spacer {
-    grid-column:1 / -1;
+    grid-column:1/-1;
     height:30px;
 }
-
 </style>
 </head>
 
@@ -85,67 +96,67 @@ body {
 
 <div class="tree">
 
-    <!-- 8 -->
-    <div class="row lvl-8">
-        <div class="box">1</div>
-        <div class="box">2</div>
-        <div class="box">3</div>
-        <div class="box">4</div>
-        <div class="box">5</div>
-        <div class="box">6</div>
-        <div class="box">7</div>
-        <div class="box">8</div>
-    </div>
+<!-- 8 -->
+<div class="row lvl-8">
+    <div class="node child"><div class="box">1</div></div>
+    <div class="node child"><div class="box">2</div></div>
+    <div class="node child"><div class="box">3</div></div>
+    <div class="node child"><div class="box">4</div></div>
+    <div class="node child"><div class="box">5</div></div>
+    <div class="node child"><div class="box">6</div></div>
+    <div class="node child"><div class="box">7</div></div>
+    <div class="node child"><div class="box">8</div></div>
+</div>
 
-    <div class="spacer"></div>
+<div class="spacer"></div>
 
-    <!-- 4 -->
-    <div class="row lvl-4">
-        <div class="group"><div class="box">1</div></div>
-        <div class="group"><div class="box">2</div></div>
-        <div class="group"><div class="box">3</div></div>
-        <div class="group"><div class="box">4</div></div>
-    </div>
+<!-- 4 -->
+<div class="row lvl-4">
+    <div class="node pair"><div class="box">1</div></div>
+    <div class="node pair"><div class="box">2</div></div>
+    <div class="node pair"><div class="box">3</div></div>
+    <div class="node pair"><div class="box">4</div></div>
+</div>
 
-    <div class="spacer"></div>
+<div class="spacer"></div>
 
-    <!-- 4 -->
-    <div class="row lvl-4">
-        <div class="group"><div class="box">1</div></div>
-        <div class="group"><div class="box">2</div></div>
-        <div class="group"><div class="box">3</div></div>
-        <div class="group"><div class="box">4</div></div>
-    </div>
+<!-- 4 -->
+<div class="row lvl-4">
+    <div class="node child"><div class="box">1</div></div>
+    <div class="node child"><div class="box">2</div></div>
+    <div class="node child"><div class="box">3</div></div>
+    <div class="node child"><div class="box">4</div></div>
+</div>
 
-    <div class="spacer"></div>
+<div class="spacer"></div>
 
-    <!-- 2 -->
-    <div class="row lvl-2">
-        <div class="group"><div class="box">1</div></div>
-        <div class="group"><div class="box">2</div></div>
-    </div>
+<!-- 2 -->
+<div class="row lvl-2">
+    <div class="node pair"><div class="box">1</div></div>
+    <div class="node pair"><div class="box">2</div></div>
+</div>
 
-    <div class="spacer"></div>
+<div class="spacer"></div>
 
-    <!-- 2 -->
-    <div class="row lvl-2">
-        <div class="group"><div class="box">1</div></div>
-        <div class="group"><div class="box">2</div></div>
-    </div>
+<!-- 2 -->
+<div class="row lvl-2">
+    <div class="node child"><div class="box">1</div></div>
+    <div class="node child"><div class="box">2</div></div>
+</div>
 
-    <div class="spacer"></div>
+<div class="spacer"></div>
 
-    <!-- 1 -->
-    <div class="row lvl-1">
-        <div class="group"><div class="box">1</div></div>
-    </div>
+<!-- 1 -->
+<div class="row lvl-1">
+    <div class="node pair"><div class="box">1</div></div>
+</div>
 
-    <div class="spacer"></div>
+<div class="spacer"></div>
 
-    <!-- 1 -->
-    <div class="row lvl-1 last">
-        <div class="box">1</div>
-    </div>
+<!-- 1 -->
+<div class="row lvl-1">
+    <div class="node"><div class="box">1</div></div>
+</div>
 
 </div>
 
