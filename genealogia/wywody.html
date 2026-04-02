@@ -4,103 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wywody przodków | Archiwum L&K</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
-
 <style>
-:root {
-    --bg:#fdfaf6;
-    --line:#d8cfc3;
-    --gold:#9b7d4a;
-    --ink:#1e1a14;
-}
-
 body {
     margin:0;
-    background:var(--bg);
-    font-family:'Jost',sans-serif;
-}
-
-/* NAV */
-nav {
-    background:var(--ink);
-    padding:15px 25px;
-    color:#c8a96e;
-    font-family:'Cormorant Garamond';
-}
-
-/* WRAPPER */
-.wrapper {
-    overflow:auto;
     padding:40px;
+    background:#fdfaf6;
+    font-family:Arial;
 }
 
-/* DRZEWO */
+/* GRID GŁÓWNY */
 .tree {
-    display:flex;
-    flex-direction:column;
-    gap:80px;
-    min-width:1200px;
+    display:grid;
+    grid-template-columns:repeat(8, 1fr);
+    gap:20px;
+    max-width:1400px;
+    margin:auto;
 }
 
-/* POKOLENIE */
-.generation {
-    display:flex;
-    justify-content:center;
-    gap:60px;
-    position:relative;
-}
-
-/* OSOBA */
-.person {
-    min-width:180px;
-    text-align:center;
-    position:relative;
-}
-
+/* KAFEL */
 .box {
-    padding:12px 10px;
-    border:1px solid var(--line);
+    border:1px solid #d8cfc3;
     background:white;
-    font-size:13px;
+    padding:15px;
+    text-align:center;
 }
 
-/* LINIE PIONOWE */
-.person::after {
-    content:"";
-    position:absolute;
-    bottom:-40px;
-    left:50%;
-    width:1px;
+/* POZIOMY */
+.row {
+    display:contents;
+}
+
+/* GENERACJE */
+
+/* 8 */
+.lvl-8 .box { grid-column: span 1; }
+
+/* 4 (każdy = 2 kolumny) */
+.lvl-4 .box { grid-column: span 2; }
+
+/* 2 (każdy = 4 kolumny) */
+.lvl-2 .box { grid-column: span 4; }
+
+/* 1 (pełna szerokość) */
+.lvl-1 .box { grid-column: span 8; }
+
+/* ODSTĘPY PIONOWE */
+.spacer {
+    grid-column:1 / -1;
     height:40px;
-    background:var(--line);
-}
-
-/* USUWANIE linii dla ostatniego poziomu */
-.generation:last-child .person::after {
-    display:none;
-}
-
-/* LINIA POZIOMA (łączenie dzieci) */
-.connector {
-    position:absolute;
-    top:-40px;
-    left:0;
-    right:0;
-    height:1px;
-    background:var(--line);
-}
-
-/* PARA */
-.couple {
-    display:flex;
-    gap:10px;
-}
-
-/* SUBTLE OZDOBA */
-.box:hover {
-    border-color:var(--gold);
 }
 
 </style>
@@ -108,61 +59,69 @@ nav {
 
 <body>
 
-<nav>ARCHIWUM L&K</nav>
-
-<div class="wrapper">
-
 <div class="tree">
 
-    <!-- POKOLENIE 1 -->
-    <div class="generation">
-        <div class="person">
-            <div class="box">Osoba</div>
-        </div>
+    <!-- 8 -->
+    <div class="row lvl-8">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+        <div class="box">7</div>
+        <div class="box">8</div>
     </div>
 
-    <!-- POKOLENIE 2 -->
-    <div class="generation">
+    <div class="spacer"></div>
 
-        <div class="person">
-            <div class="connector"></div>
-            <div class="couple">
-                <div class="box">Osoba</div>
-                <div class="box">Osoba</div>
-            </div>
-        </div>
-
-        <div class="person">
-            <div class="connector"></div>
-            <div class="couple">
-                <div class="box">Osoba</div>
-                <div class="box">Osoba</div>
-            </div>
-        </div>
-
+    <!-- 4 -->
+    <div class="row lvl-4">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
     </div>
 
-    <!-- POKOLENIE 3 -->
-    <div class="generation">
+    <div class="spacer"></div>
 
-        <div class="person">
-            <div class="connector"></div>
-            <div class="box">Osoba</div>
-        </div>
-
-        <div class="person">
-            <div class="connector"></div>
-            <div class="box">Osoba</div>
-        </div>
-
-        <div class="person">
-            <div class="connector"></div>
-            <div class="box">Osoba</div>
-        </div>
-
+    <!-- 4 -->
+    <div class="row lvl-4">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
     </div>
 
-</div>
+    <div class="spacer"></div>
+
+    <!-- 2 -->
+    <div class="row lvl-2">
+        <div class="box">1</div>
+        <div class="box">2</div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- 2 -->
+    <div class="row lvl-2">
+        <div class="box">1</div>
+        <div class="box">2</div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- 1 -->
+    <div class="row lvl-1">
+        <div class="box">1</div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- 1 -->
+    <div class="row lvl-1">
+        <div class="box">1</div>
+    </div>
 
 </div>
 
