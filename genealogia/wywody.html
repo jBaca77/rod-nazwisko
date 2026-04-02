@@ -17,66 +17,59 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; }
 
-        /* NAWIGACJA GŁÓWNA */
+        /* NAWIGACJA */
         nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* NAGŁÓWEK */
         .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
-        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
         .s-line-main { width: 50px; height: 1px; background: var(--gold-light); margin: 15px auto; }
 
-        .info-panel { 
-            max-width: 850px; margin: 0 auto 50px; padding: 30px; 
-            background: var(--parchment); border-radius: 4px;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
-        }
-        .info-item { font-size: 0.9rem; }
-        .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
+        /* DRZEWO */
+        .tree-wrapper { max-width: 1300px; margin: 0 auto 80px; padding: 0 20px; overflow-x: auto; }
+        .tree { display: grid; grid-template-columns: repeat(8, 1fr); min-width: 1100px; margin: auto; }
 
-        /* STRUKTURA DRZEWA */
-        .tree-wrapper { max-width: 1200px; margin: 0 auto 80px; padding: 0 20px; overflow-x: auto; }
-        .tree { display: grid; grid-template-columns: repeat(8, 1fr); min-width: 1000px; margin: auto; }
-
-        /* KAFELEK BOX - ZMODYFIKOWANY DLA TREŚCI */
+        /* KAFELEK BAZOWY */
         .box {
             border: 1px solid var(--sepia-pale); background: var(--cream);
-            padding: 12px 8px; text-align: center; font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem; border-left: 3px solid var(--sepia);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03); z-index: 10;
-            min-height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-transform: uppercase; margin: 0 5px; font-weight: 600;
+            padding: 10px; text-align: center; font-family: 'Cormorant Garamond', serif;
+            border-left: 3px solid var(--sepia); box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-transform: uppercase; margin: 0 3px; font-weight: 600;
+            text-decoration: none; color: inherit; transition: 0.2s;
         }
+        
+        /* Odblokowana szerokość dla najwyższego poziomu */
+        .lvl-8 .box { width: auto; min-height: 120px; }
 
-        /* STYLE DLA ZDJĘĆ W KAFELKACH */
-        .img-single { width: 45px; height: 55px; background: #ddd; margin-bottom: 5px; border: 1px solid var(--line); object-fit: cover; }
-        .img-container-double { display: flex; gap: 8px; margin-bottom: 5px; }
-        .img-double { width: 40px; height: 50px; background: #ddd; border: 1px solid var(--line); object-fit: cover; }
-        .box p { margin: 0; line-height: 1.2; font-size: 0.75rem; letter-spacing: 0.5px; }
+        /* Niższe okienka dla dat i linków */
+        .box-short { min-height: 50px !important; padding: 5px !important; font-size: 0.8rem; }
+        a.box:hover { background: var(--parchment); border-color: var(--gold); }
 
-        /* SPECJALNY KAFLOWY DLA POTOMKA */
-        .box-potomek { flex-direction: row !important; gap: 10px; justify-content: center; }
+        /* ELEMENTY GRAFICZNE W KAFELKACH */
+        .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 8px; }
+        .img-wrap span { font-size: 0.6rem; color: var(--sepia); margin-top: 2px; font-family: 'Jost'; }
+        
+        .img-single { width: 50px; height: 60px; background: #eee; border: 1px solid var(--line); object-fit: cover; }
+        .img-double-row { display: flex; gap: 10px; }
 
+        .name-tag { font-size: 0.85rem; letter-spacing: 0.5px; border-top: 1px solid var(--line); pt: 5px; width: 90%; }
+        .date-tag { font-family: 'Jost'; font-size: 0.75rem; font-weight: 300; }
+
+        /* LINIE I ŁĄCZNIKI */
         .node { position: relative; display: flex; flex-direction: column; }
-
-        /* LINIE */
         .v-line-down::after { content: ""; position: absolute; left: 50%; top: 100%; width: 1px; height: 25px; background: var(--line-color); }
         .v-line-up::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 1px; height: 25px; background: var(--line-color); }
-
         .connector-group { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(8, 1fr); height: 50px; position: relative; }
         .h-line { position: absolute; top: 25px; height: 1px; background: var(--line-color); }
         .v-stem { position: absolute; top: 25px; width: 1px; height: 25px; background: var(--line-color); }
 
-        /* LINK NA LINII */
         .link-node {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 44px; height: 44px; z-index: 20; background: var(--warm-white);
             border: 1px solid var(--line-color); border-radius: 50%; padding: 3px; transition: 0.3s;
         }
-        .link-node:hover { transform: translate(-50%, -50%) scale(1.15); border-color: var(--gold); }
         .link-node img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
         .spacer-small { grid-column: 1 / -1; height: 25px; }
@@ -86,132 +79,114 @@
         .lvl-2 .node { grid-column: span 4; }
         .lvl-1 .node { grid-column: span 8; }
 
-        /* NAWIGACJA DOLNA */
-        .tree-nav-container { max-width: 1100px; margin: 60px auto 20px; padding: 40px 24px; border-top: 1px solid var(--line); }
-        .tree-nav-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; text-align: center; margin-bottom: 30px; color: var(--sepia); text-transform: uppercase; letter-spacing: 2px; }
-        .tree-grid-nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
-        .tree-nav-item { text-decoration: none; color: var(--ink); background: var(--parchment); padding: 20px; text-align: center; border: 1px solid var(--line); transition: 0.3s; display: flex; flex-direction: column; }
-        .tree-nav-item span { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 5px; }
-        .tree-nav-item strong { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; }
-        .tree-nav-item:hover { background: var(--cream); border-color: var(--gold); transform: translateY(-3px); }
-        .tree-nav-item.active { border-color: var(--gold); background: white; pointer-events: none; opacity: 0.6; }
-
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
-        @media (max-width: 600px) { .tree-grid-nav { grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
 <body>
 
-<nav>
-    <div class="nav-inner">
-        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-        <a href="wywody.html" class="back-link">← Powrót do listy</a>
-    </div>
-</nav>
+<nav><div class="nav-inner"><a href="index.html" class="nav-logo">ARCHIWUM L&K</a><a href="wywody.html" class="back-link">← Powrót</a></div></nav>
 
-<article>
-    <header class="article-header">
-        <span class="meta-top">Tablica Genealogiczna I</span>
-        <h1>Linia Główna Rodu</h1>
-        <div class="s-line-main"></div>
-    </header>
+<header class="article-header">
+    <h1>Wywód Przodków</h1>
+    <div class="s-line-main"></div>
+</header>
 
-    <div class="info-panel">
-        <div class="info-item"><strong>Główna Linia</strong> Ładomirscy i Krainscy</div>
-        <div class="info-item"><strong>Zakres dat</strong> 1750 — 2026</div>
-        <div class="info-item"><strong>Status</strong> Zweryfikowano</div>
-    </div>
+<div class="tree-wrapper">
+    <div class="tree">
+        <div class="row lvl-8">
+            <div class="node v-line-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis foto</span></div><div class="name-tag">Osoba 1</div></div></div>
+            <div class="node v-line-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis foto</span></div><div class="name-tag">Osoba 2</div></div></div>
+            <div class="node v-line-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis foto</span></div><div class="name-tag">Osoba 3</div></div></div>
+            <div class="node v-line-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis foto</span></div><div class="name-tag">Osoba 4</div></div></div>
+            <div class="node v-line-down"><div class="box">
+                <div class="img-double-row">
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Mąż</span></div>
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Żona</span></div>
+                </div>
+                <div class="name-tag">Para 5</div>
+            </div></div>
+            <div class="node v-line-down"><div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Opis foto</span></div><div class="name-tag">Osoba 6</div></div></div>
+            <div class="node v-line-down"><div class="box">
+                <div class="img-double-row">
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Mąż</span></div>
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Żona</span></div>
+                </div>
+                <div class="name-tag">Para 7</div>
+            </div></div>
+            <div class="node v-line-down"><div class="box">
+                <div class="img-double-row">
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Mąż</span></div>
+                    <div class="img-wrap"><img src="" class="img-single" style="width:40px;height:50px"><span>Żona</span></div>
+                </div>
+                <div class="name-tag">Para 8</div>
+            </div></div>
+        </div>
 
-    <div class="tree-wrapper">
-        <div class="tree">
-            <div class="row lvl-8">
-                <div class="node v-line-down"><div class="box"><img src="" class="img-single"><p>Feliks Paweł Hilary Domański sędzia pokoju okr. siennickiego, wł. dóbr: Grzebowilk, Iłówiec, Kotuszów i Pilichowice (Grzebowilk 1790 - Piotrków Trybunalski 1866) /2∞ Wa-wa, 1838, Franciszka Starzyńska</p></div></div>
-                <div class="node v-line-down"><div class="box"><img src="" class="img-single"><p>Osoba 2</p></div></div>
-                <div class="node v-line-down"><div class="box"><img src="" class="img-single"><p>Osoba 3</p></div></div>
-                <div class="node v-line-down"><div class="box"><img src="" class="img-single"><p>Osoba 4</p></div></div>
-                <div class="node v-line-down"><div class="box"><div class="img-container-double"><img src="" class="img-double"><img src="" class="img-double"></div><p>Para 5</p></div></div>
-                <div class="node v-line-down"><div class="box"><img src="" class="img-single"><p>Osoba 6</p></div></div>
-                <div class="node v-line-down"><div class="box"><div class="img-container-double"><img src="" class="img-double"><img src="" class="img-double"></div><p>Para 7</p></div></div>
-                <div class="node v-line-down"><div class="box"><div class="img-container-double"><img src="" class="img-double"><img src="" class="img-double"></div><p>Para 8</p></div></div>
-            </div>
+        <div class="connector-group">
+            <div class="h-line" style="left: 6.25%; right: 81.25%;"></div> <div class="v-stem" style="left: 12.5%;"></div>
+            <div class="h-line" style="left: 31.25%; right: 56.25%;"></div> <div class="v-stem" style="left: 37.5%;"></div>
+            <div class="h-line" style="left: 56.25%; right: 31.25%;"></div> <div class="v-stem" style="left: 62.5%;"></div>
+            <div class="h-line" style="left: 81.25%; right: 6.25%;"></div> <div class="v-stem" style="left: 87.5%;"></div>
+        </div>
 
-            <div class="connector-group">
-                <div class="h-line" style="left: 6.25%; right: 81.25%;"></div> <div class="v-stem" style="left: 12.5%;"></div>
-                <div class="h-line" style="left: 31.25%; right: 56.25%;"></div> <div class="v-stem" style="left: 37.5%;"></div>
-                <div class="h-line" style="left: 56.25%; right: 31.25%;"></div> <div class="v-stem" style="left: 62.5%;"></div>
-                <div class="h-line" style="left: 81.25%; right: 6.25%;"></div> <div class="v-stem" style="left: 87.5%;"></div>
-            </div>
+        <div class="row lvl-4">
+            <a href="dziadek_a.html" class="node v-line-up v-line-down box box-short"><span class="date-tag">1890 - 1950</span></a>
+            <a href="babcia_b.html" class="node v-line-up v-line-down box box-short"><span class="date-tag">1895 - 1960</span></a>
+            <a href="dziadek_c.html" class="node v-line-up v-line-down box box-short"><span class="date-tag">1888 - 1945</span></a>
+            <a href="babcia_d.html" class="node v-line-up v-line-down box box-short"><span class="date-tag">1900 - 1970</span></a>
+        </div>
 
-            <div class="row lvl-4">
-                <div class="node v-line-up v-line-down"><div class="box">Dziadek A</div></div>
-                <div class="node v-line-up v-line-down"><div class="box">Babcia B</div></div>
-                <div class="node v-line-up v-line-down"><div class="box">Dziadek C</div></div>
-                <div class="node v-line-up v-line-down"><div class="box">Babcia D</div></div>
-            </div>
+        <div class="spacer-small"></div>
 
-            <div class="spacer-small"></div>
+        <div class="row lvl-4">
+            <div class="node v-line-up v-line-down box box-short">Linia A2</div>
+            <div class="node v-line-up v-line-down box box-short">Linia B2</div>
+            <div class="node v-line-up v-line-down box box-short">Linia C2</div>
+            <div class="node v-line-up v-line-down box box-short">Linia D2</div>
+        </div>
 
-            <div class="row lvl-4">
-                <div class="node v-line-up v-line-down"><div class="box">Dziadek A2</div></div>
-                <div class="node v-line-up v-line-down"><div class="box">Babcia B2</div></div>
-                <div class="node v-line-up v-line-down"><div class="box">Dziadek C2</div></div>
-                <div class="node v-line-up v-line-down"><div class="box">Babcia D2</div></div>
-            </div>
+        <div class="connector-group">
+            <div class="h-line" style="left: 12.5%; right: 62.5%;"></div> <div class="v-stem" style="left: 25%;"></div>
+            <div class="h-line" style="left: 62.5%; right: 12.5%;"></div> <div class="v-stem" style="left: 75%;"></div>
+        </div>
 
-            <div class="connector-group">
-                <div class="h-line" style="left: 12.5%; right: 62.5%;"></div> <div class="v-stem" style="left: 25%;"></div>
-                <div class="h-line" style="left: 62.5%; right: 12.5%;"></div> <div class="v-stem" style="left: 75%;"></div>
-            </div>
+        <div class="row lvl-2">
+            <a href="ojciec.html" class="node v-line-up v-line-down box box-short"><span class="date-tag">1920 - 1990</span></a>
+            <a href="matka.html" class="node v-line-up v-line-down box box-short"><span class="date-tag">1925 - 2005</span></a>
+        </div>
 
-            <div class="row lvl-2">
-                <div class="node v-line-up v-line-down"><div class="box">Ojciec</div></div>
-                <div class="node v-line-up v-line-down"><div class="box">Matka</div></div>
-            </div>
+        <div class="spacer-small"></div>
 
-            <div class="spacer-small"></div>
+        <div class="row lvl-2">
+            <div class="node v-line-up v-line-down box box-short">P 1.2</div>
+            <div class="node v-line-up v-line-down box box-short">P 2.2</div>
+        </div>
 
-            <div class="row lvl-2">
-                <div class="node v-line-up v-line-down"><div class="box">Ojciec 2</div></div>
-                <div class="node v-line-up v-line-down"><div class="box">Matka 2</div></div>
-            </div>
+        <div class="connector-group">
+            <div class="h-line" style="left: 25%; right: 25%;"></div>
+            <div class="v-stem" style="left: 50%;"></div>
+            <a href="link.html" class="link-node"><img src="" alt="Link"></a>
+        </div>
 
-            <div class="connector-group">
-                <div class="h-line" style="left: 25%; right: 25%;"></div>
-                <div class="v-stem" style="left: 50%;"></div>
-                <a href="link.html" class="link-node"><img src="" alt="Link"></a>
-            </div>
+        <div class="row lvl-1">
+            <a href="jednosc.html" class="node v-line-up v-line-down box box-short"><span class="date-tag">2026</span></a>
+        </div>
 
-            <div class="row lvl-1">
-                <div class="node v-line-up v-line-down"><div class="box">Jedność Rodu</div></div>
-            </div>
+        <div class="spacer-small"></div>
 
-            <div class="spacer-small"></div>
-
-            <div class="row lvl-1">
-                <div class="node v-line-up">
-                    <div class="box box-potomek">
-                        <img src="" class="img-single" style="margin:0;">
-                        <p>Potomek</p>
+        <div class="row lvl-1">
+            <div class="node v-line-up">
+                <div class="box" style="min-height: 150px;">
+                    <div class="img-wrap">
+                        <img src="" class="img-single" style="width:70px; height:90px;">
                     </div>
+                    <div class="name-tag">Imię Potomka</div>
+                    <p style="font-size: 0.7rem; font-family: 'Jost'; text-transform: none; margin-top: 5px;">Krótki opis lub nota biograficzna potomka rodu.</p>
                 </div>
             </div>
         </div>
     </div>
-
-    <section class="tree-nav-container">
-        <h2 class="tree-nav-title">Pozostałe Tablice Genealogiczne</h2>
-        <div class="tree-grid-nav">
-            <a href="wywod1.html" class="tree-nav-item active"><span>Tablica I</span><strong>Linia Główna</strong></a>
-            <a href="wywod2.html" class="tree-nav-item"><span>Tablica II</span><strong>Gałąź Modlińska</strong></a>
-            <a href="wywod3.html" class="tree-nav-item"><span>Tablica III</span><strong>Linia Argentyńska</strong></a>
-            <a href="wywod4.html" class="tree-nav-item"><span>Tablica IV</span><strong>Rodzina Krainskich</strong></a>
-            <a href="wywod5.html" class="tree-nav-item"><span>Tablica V</span><strong>Wywód po kądzieli</strong></a>
-            <a href="wywod6.html" class="tree-nav-item"><span>Tablica VI</span><strong>Linia Burakowska</strong></a>
-            <a href="wywod7.html" class="tree-nav-item"><span>Tablica VII</span><strong>Gałąź Warszawska</strong></a>
-            <a href="wywod8.html" class="tree-nav-item"><span>Tablica VIII</span><strong>Koligacje</strong></a>
-        </div>
-    </section>
-</article>
+</div>
 
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
