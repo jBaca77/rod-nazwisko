@@ -41,14 +41,24 @@
         .tree-wrapper { max-width: 1200px; margin: 0 auto 80px; padding: 0 20px; overflow-x: auto; }
         .tree { display: grid; grid-template-columns: repeat(8, 1fr); min-width: 1000px; margin: auto; }
 
+        /* KAFELEK BOX - ZMODYFIKOWANY DLA TREŚCI */
         .box {
             border: 1px solid var(--sepia-pale); background: var(--cream);
-            padding: 10px; text-align: center; font-family: 'Cormorant Garamond', serif;
-            font-size: 0.9rem; border-left: 3px solid var(--sepia);
+            padding: 12px 8px; text-align: center; font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem; border-left: 3px solid var(--sepia);
             box-shadow: 0 2px 5px rgba(0,0,0,0.03); z-index: 10;
-            min-height: 45px; display: flex; align-items: center; justify-content: center;
+            min-height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-transform: uppercase; margin: 0 5px; font-weight: 600;
         }
+
+        /* STYLE DLA ZDJĘĆ W KAFELKACH */
+        .img-single { width: 45px; height: 55px; background: #ddd; margin-bottom: 5px; border: 1px solid var(--line); object-fit: cover; }
+        .img-container-double { display: flex; gap: 8px; margin-bottom: 5px; }
+        .img-double { width: 40px; height: 50px; background: #ddd; border: 1px solid var(--line); object-fit: cover; }
+        .box p { margin: 0; line-height: 1.2; font-size: 0.75rem; letter-spacing: 0.5px; }
+
+        /* SPECJALNY KAFLOWY DLA POTOMKA */
+        .box-potomek { flex-direction: row !important; gap: 10px; justify-content: center; }
 
         .node { position: relative; display: flex; flex-direction: column; }
 
@@ -60,32 +70,14 @@
         .h-line { position: absolute; top: 25px; height: 1px; background: var(--line-color); }
         .v-stem { position: absolute; top: 25px; width: 1px; height: 25px; background: var(--line-color); }
 
-        /* NOWY ELEMENT: LINK Z OBRAZKIEM NA LINII */
+        /* LINK NA LINII */
         .link-node {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 44px;
-            height: 44px;
-            z-index: 20;
-            background: var(--warm-white);
-            border: 1px solid var(--line-color);
-            border-radius: 50%;
-            padding: 3px;
-            transition: 0.3s;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 44px; height: 44px; z-index: 20; background: var(--warm-white);
+            border: 1px solid var(--line-color); border-radius: 50%; padding: 3px; transition: 0.3s;
         }
-        .link-node:hover {
-            transform: translate(-50%, -50%) scale(1.15);
-            border-color: var(--gold);
-            box-shadow: 0 0 10px rgba(155, 125, 74, 0.3);
-        }
-        .link-node img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
+        .link-node:hover { transform: translate(-50%, -50%) scale(1.15); border-color: var(--gold); }
+        .link-node img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
         .spacer-small { grid-column: 1 / -1; height: 25px; }
         .row { display: contents; }
@@ -98,27 +90,13 @@
         .tree-nav-container { max-width: 1100px; margin: 60px auto 20px; padding: 40px 24px; border-top: 1px solid var(--line); }
         .tree-nav-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; text-align: center; margin-bottom: 30px; color: var(--sepia); text-transform: uppercase; letter-spacing: 2px; }
         .tree-grid-nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
-        
-        .tree-nav-item { 
-            text-decoration: none; color: var(--ink); background: var(--parchment); 
-            padding: 20px; text-align: center; border: 1px solid var(--line); 
-            transition: 0.3s; display: flex; flex-direction: column; 
-        }
+        .tree-nav-item { text-decoration: none; color: var(--ink); background: var(--parchment); padding: 20px; text-align: center; border: 1px solid var(--line); transition: 0.3s; display: flex; flex-direction: column; }
         .tree-nav-item span { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 5px; }
         .tree-nav-item strong { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; }
         .tree-nav-item:hover { background: var(--cream); border-color: var(--gold); transform: translateY(-3px); }
         .tree-nav-item.active { border-color: var(--gold); background: white; pointer-events: none; opacity: 0.6; }
 
-        .back-to-list { text-align: center; margin-bottom: 80px; }
-        .pagination-btn {
-            text-decoration: none; color: var(--sepia); font-size: 0.75rem; 
-            text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px;
-            border: 1px solid var(--line); transition: 0.3s; display: inline-block;
-        }
-        .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--parchment); }
-
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
-        
         @media (max-width: 600px) { .tree-grid-nav { grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
@@ -147,14 +125,14 @@
     <div class="tree-wrapper">
         <div class="tree">
             <div class="row lvl-8">
-                <div class="node v-line-down"><div class="box">Pradziadek 1</div></div>
-                <div class="node v-line-down"><div class="box">Prababcia 2</div></div>
-                <div class="node v-line-down"><div class="box">Pradziadek 3</div></div>
-                <div class="node v-line-down"><div class="box">Prababcia 4</div></div>
-                <div class="node v-line-down"><div class="box">Pradziadek 5</div></div>
-                <div class="node v-line-down"><div class="box">Prababcia 6</div></div>
-                <div class="node v-line-down"><div class="box">Pradziadek 7</div></div>
-                <div class="node v-line-down"><div class="box">Prababcia 8</div></div>
+                <div class="node v-line-down"><div class="box"><img src="" class="img-single"><p>Osoba 1</p></div></div>
+                <div class="node v-line-down"><div class="box"><img src="" class="img-single"><p>Osoba 2</p></div></div>
+                <div class="node v-line-down"><div class="box"><img src="" class="img-single"><p>Osoba 3</p></div></div>
+                <div class="node v-line-down"><div class="box"><img src="" class="img-single"><p>Osoba 4</p></div></div>
+                <div class="node v-line-down"><div class="box"><div class="img-container-double"><img src="" class="img-double"><img src="" class="img-double"></div><p>Para 5</p></div></div>
+                <div class="node v-line-down"><div class="box"><img src="" class="img-single"><p>Osoba 6</p></div></div>
+                <div class="node v-line-down"><div class="box"><div class="img-container-double"><img src="" class="img-double"><img src="" class="img-double"></div><p>Para 7</p></div></div>
+                <div class="node v-line-down"><div class="box"><div class="img-container-double"><img src="" class="img-double"><img src="" class="img-double"></div><p>Para 8</p></div></div>
             </div>
 
             <div class="connector-group">
@@ -200,10 +178,7 @@
             <div class="connector-group">
                 <div class="h-line" style="left: 25%; right: 25%;"></div>
                 <div class="v-stem" style="left: 50%;"></div>
-                
-                <a href="twoja_strona.html" class="link-node">
-                    <img src="sciezka_do_obrazka.jpg" alt="Link">
-                </a>
+                <a href="link.html" class="link-node"><img src="" alt="Link"></a>
             </div>
 
             <div class="row lvl-1">
@@ -213,7 +188,12 @@
             <div class="spacer-small"></div>
 
             <div class="row lvl-1">
-                <div class="node v-line-up"><div class="box">Potomek</div></div>
+                <div class="node v-line-up">
+                    <div class="box box-potomek">
+                        <img src="" class="img-single" style="margin:0;">
+                        <p>Potomek</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -231,10 +211,6 @@
             <a href="wywod8.html" class="tree-nav-item"><span>Tablica VIII</span><strong>Koligacje</strong></a>
         </div>
     </section>
-
-    <div class="back-to-list">
-        <a href="wywody.html" class="pagination-btn">← Powrót do spisu treści</a>
-    </div>
 </article>
 
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
