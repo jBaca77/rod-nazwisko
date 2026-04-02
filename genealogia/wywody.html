@@ -26,7 +26,7 @@
             font-family: 'Jost', sans-serif; 
             background-color: var(--warm-white); 
             color: var(--ink); 
-            line-height: 1.7; 
+            line-height: 1.5; 
             padding: 40px 20px;
         }
 
@@ -35,42 +35,70 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 8px; /* Bliskie odstępy między kafelkami */
+            gap: 8px; /* Bliskie odstępy */
         }
 
         .tile {
             background: var(--cream);
             border: 1px solid var(--sepia-pale);
-            padding: 20px;
-            text-align: center;
+            padding: 15px 20px;
             box-shadow: 0 2px 10px rgba(122, 101, 72, 0.05);
-            border-left: 4px solid var(--sepia); /* Akcent graficzny */
-            transition: transform 0.2s ease;
+            border-left: 4px solid var(--sepia);
         }
 
-        .tile:hover {
-            border-color: var(--gold);
-            transform: translateX(5px);
+        /* Sekcja zdjęć */
+        .photo-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            justify-content: flex-start;
+        }
+
+        .photo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px; /* Szerokość dostosowana pod herb */
+        }
+
+        .photo-placeholder {
+            width: 80px;
+            height: 100px;
+            background-color: #fff;
+            border: 1px dashed var(--sepia-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .label-herb {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            margin-top: 5px;
         }
 
         .tile-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: var(--ink);
-            letter-spacing: 1px;
         }
 
-        /* Opcjonalny nagłówek dla zachowania stylu Archiwum */
         .header {
             text-align: center;
             margin-bottom: 40px;
         }
-        .s-line { 
-            width: 60px; 
-            height: 1px; 
-            background: var(--gold-light); 
-            margin: 20px auto; 
-        }
+        .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 20px auto; }
     </style>
 </head>
 <body>
@@ -81,14 +109,97 @@
     </div>
 
     <div class="container">
-        <div class="tile"><div class="tile-text">próba</div></div>
-        <div class="tile"><div class="tile-text">próba</div></div>
-        <div class="tile"><div class="tile-text">próba</div></div>
-        <div class="tile"><div class="tile-text">próba</div></div>
-        <div class="tile"><div class="tile-text">próba</div></div>
-        <div class="tile"><div class="tile-text">próba</div></div>
-        <div class="tile"><div class="tile-text">próba</div></div>
-        <div class="tile"><div class="tile-text">próba</div></div>
+        <div class="tile">
+            <div class="photo-section">
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+            </div>
+            <div class="tile-text">próba</div>
+        </div>
+
+        <div class="tile">
+            <div class="photo-section">
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+            </div>
+            <div class="tile-text">próba</div>
+        </div>
+
+        <div class="tile">
+            <div class="photo-section">
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+            </div>
+            <div class="tile-text">próba</div>
+        </div>
+
+        <div class="tile">
+            <div class="photo-section">
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+            </div>
+            <div class="tile-text">próba</div>
+        </div>
+
+        <div class="tile">
+            <div class="photo-section">
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+            </div>
+            <div class="tile-text">próba</div>
+        </div>
+
+        <div class="tile">
+            <div class="photo-section">
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+            </div>
+            <div class="tile-text">próba</div>
+        </div>
+
+        <div class="tile">
+            <div class="photo-section">
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+            </div>
+            <div class="tile-text">próba</div>
+        </div>
+
+        <div class="tile">
+            <div class="photo-section">
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+                <div class="photo-container">
+                    <div class="photo-placeholder"></div>
+                    <div class="label-herb">herb</div>
+                </div>
+            </div>
+            <div class="tile-text">próba</div>
+        </div>
     </div>
 
 </body>
