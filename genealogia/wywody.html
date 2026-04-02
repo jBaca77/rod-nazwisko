@@ -16,7 +16,7 @@
             --gold-light: #c8a96e; 
             --sepia: #7a6548;
             --sepia-pale: #e8ddd0; 
-            --line-color: #b0a496; /* Ciemniejszy kolor linii dla lepszej widoczności */
+            --line-color: #b0a496;
         }
 
         body { margin: 0; padding: 40px 20px; background: var(--warm-white); font-family: 'Jost', sans-serif; color: var(--ink); }
@@ -26,9 +26,9 @@
             grid-template-columns: repeat(8, 1fr);
             max-width: 1200px;
             margin: auto;
-            align-items: center;
         }
 
+        /* BOX */
         .box {
             border: 1px solid var(--sepia-pale);
             background: var(--cream);
@@ -49,54 +49,43 @@
 
         .node { position: relative; display: flex; flex-direction: column; }
 
-        /* LINIE PIONOWE (WYCHODZĄCE Z KAFELKÓW) */
+        /* LINIE PIONOWE PROSTE */
         .v-line-down::after {
             content: ""; position: absolute; left: 50%; top: 100%;
-            width: 1px; height: 20px; background: var(--line-color);
+            width: 1px; height: 25px; background: var(--line-color);
         }
         .v-line-up::before {
             content: ""; position: absolute; left: 50%; bottom: 100%;
-            width: 1px; height: 20px; background: var(--line-color);
+            width: 1px; height: 25px; background: var(--line-color);
         }
 
-        /* WARSTWA LINII POZIOMEJ */
-        .line-row {
+        /* ŁĄCZNIK POZIOMY (T-SHAPE) */
+        .connector-group {
             grid-column: 1 / -1;
-            height: 40px;
-            position: relative;
             display: grid;
             grid-template-columns: repeat(8, 1fr);
+            height: 50px;
+            position: relative;
         }
 
-        /* POZIOMY ŁĄCZNIK (OD ŚRODKA DO ŚRODKA) */
-        .h-connector {
-            position: relative;
-            height: 100%;
-        }
-        
-        /* Belka pozioma */
-        .h-connector::before {
-            content: "";
+        /* Belka pozioma między dwoma punktami */
+        .h-line {
             position: absolute;
-            top: 50%;
-            left: 50%;  /* Startuje w połowie pierwszego kafelka pary */
-            right: -50%; /* Ciągnie się do połowy drugiego kafelka pary */
+            top: 25px;
             height: 1px;
             background: var(--line-color);
         }
 
-        /* Pion w dół od belki poziomej do dziecka */
-        .h-connector::after {
-            content: "";
+        /* Pion w dół od środka belki */
+        .v-stem {
             position: absolute;
-            top: 50%;
-            left: 100%; /* Dokładnie między kafelkami */
+            top: 25px;
             width: 1px;
-            height: 20px;
+            height: 25px;
             background: var(--line-color);
         }
 
-        .spacer-small { grid-column: 1 / -1; height: 20px; }
+        .spacer-small { grid-column: 1 / -1; height: 25px; }
         .row { display: contents; }
 
         /* SPANY */
@@ -129,11 +118,11 @@
         <div class="node v-line-down"><div class="box">8</div></div>
     </div>
 
-    <div class="line-row">
-        <div class="h-connector" style="grid-column: 1;"></div>
-        <div class="h-connector" style="grid-column: 3;"></div>
-        <div class="h-connector" style="grid-column: 5;"></div>
-        <div class="h-connector" style="grid-column: 7;"></div>
+    <div class="connector-group">
+        <div class="h-line" style="left: 6.25%; right: 81.25%;"></div> <div class="v-stem" style="left: 12.5%;"></div>
+        <div class="h-line" style="left: 31.25%; right: 56.25%;"></div> <div class="v-stem" style="left: 37.5%;"></div>
+        <div class="h-line" style="left: 56.25%; right: 31.25%;"></div> <div class="v-stem" style="left: 62.5%;"></div>
+        <div class="h-line" style="left: 81.25%; right: 6.25%;"></div> <div class="v-stem" style="left: 87.5%;"></div>
     </div>
 
     <div class="row lvl-4">
@@ -152,9 +141,9 @@
         <div class="node v-line-up v-line-down"><div class="box">D2</div></div>
     </div>
 
-    <div class="line-row">
-        <div class="h-connector" style="grid-column: span 2; grid-column-start: 2;"></div>
-        <div class="h-connector" style="grid-column: span 2; grid-column-start: 6;"></div>
+    <div class="connector-group">
+        <div class="h-line" style="left: 12.5%; right: 62.5%;"></div> <div class="v-stem" style="left: 25%;"></div>
+        <div class="h-line" style="left: 62.5%; right: 12.5%;"></div> <div class="v-stem" style="left: 75%;"></div>
     </div>
 
     <div class="row lvl-2">
@@ -169,8 +158,8 @@
         <div class="node v-line-up v-line-down"><div class="box">P 2.2</div></div>
     </div>
 
-    <div class="line-row">
-        <div class="h-connector" style="grid-column: span 4; grid-column-start: 3;"></div>
+    <div class="connector-group">
+        <div class="h-line" style="left: 25%; right: 25%;"></div> <div class="v-stem" style="left: 50%;"></div>
     </div>
 
     <div class="row lvl-1">
