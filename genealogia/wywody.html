@@ -12,11 +12,11 @@ body {
     font-family:Arial;
 }
 
-/* GRID GŁÓWNY */
+/* GRID */
 .tree {
     display:grid;
     grid-template-columns:repeat(8, 1fr);
-    gap:20px;
+    gap:30px 20px;
     max-width:1400px;
     margin:auto;
 }
@@ -27,31 +27,55 @@ body {
     background:white;
     padding:15px;
     text-align:center;
+    position:relative;
 }
 
-/* POZIOMY */
+/* PIONOWA LINIA W DÓŁ */
+.box::after {
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-30px;
+    width:1px;
+    height:30px;
+    background:#d8cfc3;
+    transform:translateX(-50%);
+}
+
+/* USUWAMY linię dla ostatniego poziomu */
+.last .box::after {
+    display:none;
+}
+
+/* POZIOMA LINIA (łączenie dzieci) */
+.group {
+    position:relative;
+}
+
+.group::before {
+    content:"";
+    position:absolute;
+    top:-30px;
+    left:10%;
+    right:10%;
+    height:1px;
+    background:#d8cfc3;
+}
+
+/* GRID SPANY */
+.lvl-8 .box { grid-column: span 1; }
+.lvl-4 .box { grid-column: span 2; }
+.lvl-2 .box { grid-column: span 4; }
+.lvl-1 .box { grid-column: span 8; }
+
+/* ROW */
 .row {
     display:contents;
 }
 
-/* GENERACJE */
-
-/* 8 */
-.lvl-8 .box { grid-column: span 1; }
-
-/* 4 (każdy = 2 kolumny) */
-.lvl-4 .box { grid-column: span 2; }
-
-/* 2 (każdy = 4 kolumny) */
-.lvl-2 .box { grid-column: span 4; }
-
-/* 1 (pełna szerokość) */
-.lvl-1 .box { grid-column: span 8; }
-
-/* ODSTĘPY PIONOWE */
 .spacer {
     grid-column:1 / -1;
-    height:40px;
+    height:30px;
 }
 
 </style>
@@ -77,49 +101,49 @@ body {
 
     <!-- 4 -->
     <div class="row lvl-4">
-        <div class="box">1</div>
-        <div class="box">2</div>
-        <div class="box">3</div>
-        <div class="box">4</div>
+        <div class="group"><div class="box">1</div></div>
+        <div class="group"><div class="box">2</div></div>
+        <div class="group"><div class="box">3</div></div>
+        <div class="group"><div class="box">4</div></div>
     </div>
 
     <div class="spacer"></div>
 
     <!-- 4 -->
     <div class="row lvl-4">
-        <div class="box">1</div>
-        <div class="box">2</div>
-        <div class="box">3</div>
-        <div class="box">4</div>
+        <div class="group"><div class="box">1</div></div>
+        <div class="group"><div class="box">2</div></div>
+        <div class="group"><div class="box">3</div></div>
+        <div class="group"><div class="box">4</div></div>
     </div>
 
     <div class="spacer"></div>
 
     <!-- 2 -->
     <div class="row lvl-2">
-        <div class="box">1</div>
-        <div class="box">2</div>
+        <div class="group"><div class="box">1</div></div>
+        <div class="group"><div class="box">2</div></div>
     </div>
 
     <div class="spacer"></div>
 
     <!-- 2 -->
     <div class="row lvl-2">
-        <div class="box">1</div>
-        <div class="box">2</div>
+        <div class="group"><div class="box">1</div></div>
+        <div class="group"><div class="box">2</div></div>
     </div>
 
     <div class="spacer"></div>
 
     <!-- 1 -->
     <div class="row lvl-1">
-        <div class="box">1</div>
+        <div class="group"><div class="box">1</div></div>
     </div>
 
     <div class="spacer"></div>
 
     <!-- 1 -->
-    <div class="row lvl-1">
+    <div class="row lvl-1 last">
         <div class="box">1</div>
     </div>
 
