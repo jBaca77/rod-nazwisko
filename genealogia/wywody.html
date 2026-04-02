@@ -9,239 +9,309 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #f8f4ee;
-            --parchment: #ede8df;
             --warm-white: #fdfaf6;
             --ink: #1e1a14;
-            --ink-soft: #3a3228;
             --sepia: #7a6548;
             --sepia-light: #a08060;
             --gold: #9b7d4a;
-            --gold-light: #c8a96e;
             --gold-pale: #e8d9c0;
             --line: rgba(122, 101, 72, 0.25);
-            --line-strong: rgba(122, 101, 72, 0.5);
-            --shadow: 0 2px 12px rgba(30,26,20,0.08);
-            --shadow-hover: 0 6px 24px rgba(30,26,20,0.14);
-
-            /* Pokolenia – kolory tła kart */
-            --gen-A: #f0ebe0;   /* pradziadkowie */
-            --gen-B: #e8e0d2;   /* dziadkowie */
-            --gen-C: #ffffff;   /* para centralna */
-            --gen-border-A: rgba(122,101,72,0.3);
-            --gen-border-C: var(--gold);
+            --gen-A: #f0ebe0; /* Pradziadkowie */
+            --gen-B: #e8e0d2; /* Dziadkowie */
+            --gen-C: #ffffff; /* Para centralna */
         }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Cormorant Garamond', serif;
             background-color: var(--warm-white);
             color: var(--ink);
-            line-height: 1.55;
+            margin: 0;
+            line-height: 1.5;
         }
 
-        /* --- NAWIGACJA I HEADER (zgodnie z Archiwum L&K) --- */
         nav {
-            padding: 15px 32px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--warm-white);
+            padding: 20px 40px;
             border-bottom: 1px solid var(--line);
             display: flex;
             justify-content: space-between;
-            align-items: center;
-        }
-        .nav-logo, .nav-back {
             font-family: 'Jost', sans-serif;
-            font-size: 0.72rem;
-            letter-spacing: 0.16em;
             text-transform: uppercase;
-            color: var(--sepia);
-            text-decoration: none;
+            letter-spacing: 0.15em;
+            font-size: 0.75rem;
         }
 
         .page-header {
-            padding: 52px 40px 36px;
+            padding: 60px 40px;
             max-width: 1400px;
             margin: 0 auto;
-            border-bottom: 1px solid var(--line);
         }
-        .page-header h1 { font-size: 2.8rem; font-weight: 300; }
 
-        /* --- KARTA OSOBY Z MIEJSCEM NA HERB --- */
-        .person-card {
-            background: var(--gen-A);
-            border: 1px solid var(--gen-border-A);
-            padding: 14px 16px;
-            position: relative;
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        /* Sekcja Wywodu */
+        .wywod {
+            max-width: 1400px;
+            margin: 0 auto 100px auto;
+            padding: 0 40px;
+        }
+
+        .wywod-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 10px;
+        }
+
+        .wywod-num {
+            background: var(--gold-pale);
+            padding: 2px 10px;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gold);
+        }
+
+        /* Kontener Drzewa */
+        .wywod-tree {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            overflow-x: auto;
+        }
+
+        .col-A, .col-B, .col-C, .col-D {
             display: flex;
             flex-direction: column;
-            min-height: 130px; /* Zwiększone dla herbu */
-            margin-bottom: 2px;
+            min-width: 240px;
+            flex: 1;
         }
 
-        /* Kontener na obrazek herbu */
+        /* Karta Osoby */
+        .person-card {
+            padding: 15px;
+            border: 1px solid var(--line);
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            margin: 2px 0;
+        }
+
+        .person-card.male { border-left: 4px solid var(--sepia); }
+        .person-card.female { border-left: 4px solid var(--gold); }
+        
+        /* Kolory pokoleń */
+        .col-A .person-card { background: var(--gen-A); }
+        .col-B .person-card { background: var(--gen-B); }
+        .col-C .person-card { background: var(--gen-C); border-color: var(--gold); }
+
+        /* Miejsce na Herb */
         .pc-herb-img {
             position: absolute;
             top: 10px;
             right: 10px;
-            width: 45px;
-            height: 55px;
-            border: 1px dashed var(--line); /* Miejsce na obrazek */
+            width: 40px;
+            height: 50px;
+            background: rgba(122, 101, 72, 0.05);
+            border: 1px dashed var(--line);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255,255,255,0.3);
+            overflow: hidden;
         }
+        
         .pc-herb-img img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
         }
-        .pc-herb-img::after {
-            content: 'Herb';
-            font-family: 'Jost', sans-serif;
-            font-size: 0.5rem;
-            color: var(--sepia-light);
-        }
 
         .pc-herb-name {
             font-family: 'Jost', sans-serif;
             font-size: 0.6rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 4px;
+            letter-spacing: 0.1em;
+            margin-bottom: 5px;
         }
 
         .pc-name {
-            font-size: 0.98rem;
             font-weight: 600;
-            max-width: calc(100% - 50px); /* Miejsce dla herbu po prawej */
+            font-size: 1.1rem;
+            padding-right: 45px; /* miejsce na herb */
+            line-height: 1.2;
         }
 
-        /* --- UKŁAD DRZEWA (FLEX/GRID) --- */
-        .wywod-tree {
-            display: flex;
-            gap: 0;
-            overflow-x: auto;
-            padding: 20px 0;
+        .pc-role {
+            font-size: 0.85rem;
+            color: var(--sepia);
+            font-style: italic;
+            margin: 5px 0;
         }
 
-        .col-A, .col-B, .col-C { min-width: 220px; display: flex; flex-direction: column; }
-        
-        .pair-wrapper { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-
-        /* Style specyficzne dla pokoleń */
-        .person-card.gen-b { background: var(--gen-B); }
-        .person-card.gen-c { background: var(--gen-C); border-color: var(--gold); border-width: 1.5px; }
+        .pc-dates {
+            margin-top: auto;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.65rem;
+            border-top: 1px solid var(--line);
+            padding-top: 5px;
+        }
 
         .pc-marriage {
-            background: rgba(155,125,74,0.05);
-            padding: 4px;
             text-align: center;
             font-family: 'Jost', sans-serif;
             font-size: 0.65rem;
             color: var(--gold);
-            border-top: 1px dashed var(--line);
-            border-bottom: 1px dashed var(--line);
+            padding: 5px;
+            background: rgba(255,255,255,0.4);
         }
 
-        /* Connectory */
-        .conn-AB, .conn-BC { width: 40px; position: relative; }
-        /* Pionowe i poziome linie łączące (uproszczone dla czytelności) */
-        .conn-line {
-            position: absolute;
-            background: var(--line-strong);
+        /* Łączniki */
+        .conn {
+            width: 40px;
+            position: relative;
         }
 
+        /* Dzieci */
+        .children-block {
+            background: var(--gold-pale);
+            padding: 20px;
+            border: 1px solid var(--gold);
+            margin-left: 20px;
+        }
+
+        @media (max-width: 1000px) {
+            .wywod-tree { flex-direction: column; }
+            .conn { height: 30px; width: 100%; }
+        }
     </style>
 </head>
 <body>
 
 <nav>
-    <a class="nav-logo" href="#">ARCHIWUM L&K</a>
-    <a class="nav-back" href="wywody2.php">← Powrót</a>
+    <div>ARCHIWUM L&K</div>
+    <div><a href="drzewo.php" style="text-decoration:none; color:inherit;">← POWRÓT</a></div>
 </nav>
 
 <header class="page-header">
-    <span class="meta-top" style="font-family:'Jost'; font-size:0.7rem; text-transform:uppercase; color:var(--sepia-light);">Genealogia • Wywody</span>
     <h1>Wywody Przodków</h1>
+    <p>Analiza rodowodów rodzin Ładomirskich, Kraińskich i spokrewnionych</p>
 </header>
 
-<main style="max-width:1400px; margin: 0 auto; padding: 40px;">
+<main>
 
-    <section class="wywod" style="margin-bottom: 100px;">
-        <div class="wywod-header" style="margin-bottom: 30px;">
-            <h2 style="font-weight:300; font-size:1.5rem;">Zdzisław Fabian Ładomirski & Anna Maria Kraińska</h2>
-        </div>
-
-        <div class="wywod-tree">
-            <div class="col-A">
-                <div class="pair-wrapper">
-                    <div class="person-card male">
-                        <div class="pc-herb-img"><img src="path_to_lada_herb.png" alt=""></div>
-                        <div class="pc-herb-name">ŁADA</div>
-                        <div class="pc-name">Maciej Brutus Ładomirski</div>
-                        <div class="pc-dates" style="font-size:0.7rem; margin-top:10px;">1798 — ?</div>
-                    </div>
-                    <div class="pc-marriage">∞ ok. 1824</div>
-                    <div class="person-card female">
-                        <div class="pc-herb-img"></div> <div class="pc-herb-name">ROLA</div>
-                        <div class="pc-name">Karolina Weronika Janicka</div>
-                        <div class="pc-dates" style="font-size:0.7rem; margin-top:10px;">1795 — 1874</div>
-                    </div>
-                </div>
+<section class="wywod">
+    <div class="wywod-header">
+        <span class="wywod-num">Wywód I</span>
+        <div class="pc-name">Felix Domański & Seweryna Ładomirska</div>
+    </div>
+    <div class="wywod-tree">
+        <div class="col-A">
+            <div class="person-card male">
+                <div class="pc-herb-img"><img src="herby/larissa.png" alt=""></div>
+                <div class="pc-herb-name">LARISSA</div>
+                <div class="pc-name">Feliks Paweł Hilary Domański</div>
+                <div class="pc-dates">1790 — 1866</div>
             </div>
-
-            <div class="conn-AB"></div>
-
-            <div class="col-B">
-                <div class="pair-wrapper">
-                    <div class="person-card gen-b male">
-                        <div class="pc-herb-img"></div>
-                        <div class="pc-herb-name">ŁADA</div>
-                        <div class="pc-name">Walenty Konstanty Ładomirski</div>
-                        <div class="pc-dates" style="font-size:0.7rem; margin-top:10px;">1832 — 1895</div>
-                    </div>
-                    <div class="pc-marriage">∞ 1862</div>
-                    <div class="person-card gen-b female">
-                        <div class="pc-herb-img"></div>
-                        <div class="pc-herb-name">KOŚCIESZA</div>
-                        <div class="pc-name">Katarzyna Gołaszewska</div>
-                        <div class="pc-dates" style="font-size:0.7rem; margin-top:10px;">1841 — 1917</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="conn-BC"></div>
-
-            <div class="col-C">
-                <div class="pair-wrapper">
-                    <div class="person-card gen-c male">
-                        <div class="pc-herb-img"></div>
-                        <div class="pc-herb-name">ŁADA</div>
-                        <div class="pc-name">Zdzisław Fabian Ładomirski</div>
-                        <div class="pc-dates" style="font-size:0.7rem; margin-top:10px;">1864 — 1950</div>
-                    </div>
-                    <div class="pc-marriage" style="background:var(--gold-pale)">∞ 1895 Jabłonka</div>
-                    <div class="person-card gen-c female">
-                        <div class="pc-herb-img"></div>
-                        <div class="pc-herb-name">JELITA</div>
-                        <div class="pc-name">Anna Maria Kraińska</div>
-                        <div class="pc-dates" style="font-size:0.7rem; margin-top:10px;">1875 — 1959</div>
-                    </div>
-                </div>
+            <div class="pc-marriage">∞ 1825</div>
+            <div class="person-card female">
+                <div class="pc-herb-img"><img src="herby/lada.png" alt=""></div>
+                <div class="pc-herb-name">ŁADA</div>
+                <div class="pc-name">Barbara Proszkowska</div>
+                <div class="pc-dates">1795 — 1837</div>
             </div>
         </div>
-    </section>
+        <div class="conn"></div>
+        <div class="col-B">
+            <div class="person-card male">
+                <div class="pc-name">Edward Maxymilian Domański</div>
+                <div class="pc-dates">1831 — 1886</div>
+            </div>
+            <div class="pc-marriage">∞ 1857</div>
+            <div class="person-card female">
+                <div class="pc-name">Teodozja Karczewska</div>
+                <div class="pc-dates">1837 — 1873</div>
+            </div>
+        </div>
+        <div class="conn"></div>
+        <div class="col-C">
+            <div class="person-card male">
+                <div class="pc-name">Felix Domański</div>
+                <div class="pc-role">Obrońca Lwowa, wł. dóbr Ubinie</div>
+                <div class="pc-dates">1868 — 1939</div>
+            </div>
+            <div class="pc-marriage">∞ 1898</div>
+            <div class="person-card female">
+                <div class="pc-name">Seweryna Ładomirska</div>
+                <div class="pc-dates">1875 — 1943</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="wywod">
+    <div class="wywod-header">
+        <span class="wywod-num">Wywód IV</span>
+        <div class="pc-name">Zdzisław Fabian Ładomirski & Anna Maria Kraińska</div>
+    </div>
+    <div class="wywod-tree">
+        <div class="col-A">
+            <div class="person-card male">
+                <div class="pc-herb-img"></div>
+                <div class="pc-herb-name">JELITA</div>
+                <div class="pc-name">Władysław Jerzy Kraiński</div>
+                <div class="pc-dates">1797 — 1840</div>
+            </div>
+            <div class="pc-marriage">∞ 1840</div>
+            <div class="person-card female">
+                <div class="pc-herb-img"></div>
+                <div class="pc-herb-name">BROCHWICZ</div>
+                <div class="pc-name">Aniela Wiktor</div>
+                <div class="pc-dates">1816 — 1887</div>
+            </div>
+        </div>
+        <div class="conn"></div>
+        <div class="col-B">
+            <div class="person-card male">
+                <div class="pc-herb-img"></div>
+                <div class="pc-herb-name">JELITA + STRZEMIĘ</div>
+                <div class="pc-name">Władysław Marian Kraiński</div>
+                <div class="pc-role">Poseł do Sejmu Krajowego</div>
+                <div class="pc-dates">1841 — 1926</div>
+            </div>
+            <div class="pc-marriage">∞ 1873</div>
+            <div class="person-card female">
+                <div class="pc-herb-img"></div>
+                <div class="pc-herb-name">STRZEMIĘ</div>
+                <div class="pc-name">Maria Emilia Trzecieska</div>
+                <div class="pc-dates">1853 — 1932</div>
+            </div>
+        </div>
+        <div class="conn"></div>
+        <div class="col-C">
+            <div class="person-card male">
+                <div class="pc-herb-name">ŁADA</div>
+                <div class="pc-name">Zdzisław Fabian Ładomirski</div>
+                <div class="pc-dates">1864 — 1950</div>
+            </div>
+            <div class="pc-marriage">∞ 1895</div>
+            <div class="person-card female">
+                <div class="pc-herb-name">JELITA</div>
+                <div class="pc-name">Anna Maria Kraińska</div>
+                <div class="pc-dates">1875 — 1959</div>
+            </div>
+        </div>
+    </div>
+</section>
 
 </main>
 
-<footer style="text-align:center; padding: 40px; border-top: 1px solid var(--line); font-family:'Jost'; font-size:0.7rem; color:var(--sepia-light);">
-    ARCHIWUM L&K &copy; 2026
+<footer style="padding: 40px; text-align: center; border-top: 1px solid var(--line); font-family: 'Jost'; font-size: 0.7rem; color: var(--sepia-light);">
+    DOKUMENTACJA GENEALOGICZNA ŁADOMIRSKICH I KRAIŃSKICH &copy; 2026 | Archiwum L&K
 </footer>
 
 </body>
