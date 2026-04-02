@@ -18,7 +18,7 @@ body {
 .tree {
     display:grid;
     grid-template-columns:repeat(8, 1fr);
-    gap:60px 20px;
+    gap:30px 20px;
     max-width:1400px;
     margin:auto;
 }
@@ -39,31 +39,29 @@ body {
 
 /* --- LINIE --- */
 
-/* dół */
 .node.child::after {
     content:"";
     position:absolute;
     left:50%;
     top:100%;
     width:1px;
-    height:30px;
+    height:20px;
     background:#d8cfc3;
     transform:translateX(-50%);
 }
 
-/* góra */
 .node.parent::before {
     content:"";
     position:absolute;
     left:50%;
     bottom:100%;
     width:1px;
-    height:30px;
+    height:20px;
     background:#d8cfc3;
     transform:translateX(-50%);
 }
 
-/* przelot (góra + dół) */
+/* przelot */
 .node.pass::before,
 .node.pass::after {
     content:"";
@@ -76,12 +74,12 @@ body {
 
 .node.pass::before {
     bottom:100%;
-    height:30px;
+    height:20px;
 }
 
 .node.pass::after {
     top:100%;
-    height:30px;
+    height:20px;
 }
 
 /* PARA */
@@ -89,11 +87,11 @@ body {
     position:relative;
 }
 
-/* pozioma linia między dziećmi */
+/* pozioma linia */
 .pair::before {
     content:"";
     position:absolute;
-    top:-30px;
+    top:-20px;
     left:25%;
     right:25%;
     height:1px;
@@ -104,10 +102,10 @@ body {
 .pair::after {
     content:"";
     position:absolute;
-    top:-30px;
+    top:-20px;
     left:50%;
     width:1px;
-    height:30px;
+    height:20px;
     background:#d8cfc3;
     transform:translateX(-50%);
 }
@@ -126,7 +124,7 @@ body {
 /* ODSTĘP */
 .spacer {
     grid-column:1/-1;
-    height:30px;
+    height:15px;
 }
 </style>
 </head>
