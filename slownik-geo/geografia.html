@@ -1,97 +1,115 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Geografia Rodowa | Archiwum L&K</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-    --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
-    --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
-    --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
-    /* Kolory klanowe */
-    --c-ladomirscy: #fcc000; --c-krainscy: #cc0000; --c-domanscy: #2d7a2d;
-    --c-other: #7a6548;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geografia Rodowa | Archiwum L&K</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
+            --c-ladomirscy: #fcc000; --c-krainscy: #cc0000; --c-domanscy: #2d7a2d;
+        }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
 
-  /* ── HEADER ── */
-  header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
-  header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
-  .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; display: block; }
-  header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.1; }
+        /* --- NAWIGACJA --- */
+        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+        .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
 
-  /* ── NAV ── */
-  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
-  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
-  .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
+        /* --- DRAWER (MENU BOCZNE) --- */
+        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
+        .drawer.open { right: 0; }
+        .drawer-links { list-style: none; }
+        .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; transition: 0.3s; }
+        .drawer-links a:hover { color: var(--gold-light); }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .overlay.active { opacity: 1; pointer-events: auto; }
 
-  /* ── DRAWER ── */
-  .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
-  .drawer.open { right: 0; }
-  .drawer-links { list-style: none; }
-  .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-  .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; transition: 0.3s; }
-  .drawer-links a:hover { color: var(--gold-light); }
-  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
-  .overlay.active { opacity: 1; pointer-events: auto; }
+        /* --- HEADER & CYTAT --- */
+        header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 80px 20px; position: relative; }
+        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 12px; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 15px; display: block; }
+        header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 300; line-height: 1.1; }
+        
+        .quote-section { max-width: 800px; margin: 50px auto 30px; text-align: center; padding: 0 20px; }
+        .quote-text { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; color: var(--sepia); position: relative; display: inline-block; }
+        .quote-text::after { content: ''; display: block; width: 60px; height: 1px; background: var(--gold-light); margin: 20px auto 0; }
 
-  /* ── GEOGRAPHY CONTENT ── */
-  main { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
-  .geo-intro { text-align: center; max-width: 700px; margin: 0 auto 60px; }
-  .s-label { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 10px; display: block; }
-  .geo-description { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--sepia); }
+        /* --- MAPA --- */
+        .map-wrapper { max-width: 1150px; margin: 0 auto; padding: 0 20px; }
+        #map { 
+            height: 550px; width: 100%; border: 1px solid var(--sepia-pale); 
+            background: #f4f1ea; border-radius: 3px; 
+            box-shadow: 0 15px 45px rgba(0,0,0,0.08);
+            z-index: 5;
+        }
 
-  /* Sekcje klanów */
-  .geo-section { margin-bottom: 80px; }
-  .clan-header { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
-  .clan-dot { width: 12px; height: 12px; border-radius: 50%; }
-  .clan-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--ink); }
+        /* --- PASEK FILTRÓW (7 ELEMENTÓW) --- */
+        .filter-bar { 
+            max-width: 1100px; margin: 30px auto; 
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; 
+            padding: 20px; background: var(--cream); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+        }
+        .filter-item { 
+            cursor: pointer; display: flex; align-items: center; gap: 10px; 
+            padding: 8px 16px; border-radius: 2px; background: white; 
+            border: 1px solid var(--line); transition: all 0.3s ease;
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia);
+        }
+        .filter-item:hover { border-color: var(--gold); transform: translateY(-2px); }
+        .filter-item.active { background: var(--ink); color: white; border-color: var(--ink); }
+        
+        .dual-dot { 
+            width: 16px; height: 16px; border-radius: 50%; 
+            background: linear-gradient(135deg, var(--c1) 50%, var(--c2) 50%);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
 
-  /* Grid miejscowości */
-  .geo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-  .geo-item { 
-    background: var(--cream); 
-    padding: 15px 20px; 
-    border: 1px solid var(--sepia-pale); 
-    text-decoration: none; 
-    color: var(--ink-light); 
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-  }
-  .geo-item::before { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 0; background: var(--accent-color); transition: 0.3s; }
-  .geo-item:hover { transform: translateX(5px); background: white; border-color: var(--accent-color); }
-  .geo-item:hover::before { width: 4px; }
-  .geo-item span { font-weight: 400; letter-spacing: 0.5px; }
-  .geo-item i { font-size: 0.7rem; color: var(--sepia-light); font-style: normal; }
+        /* --- GRID BOXÓW --- */
+        .geo-grid { 
+            max-width: 1150px; margin: 40px auto 100px; 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 15px; padding: 0 20px;
+        }
+        .geo-box { 
+            background: white; border: 1px solid var(--line); padding: 18px; 
+            display: flex; flex-direction: column; gap: 12px; transition: 0.3s ease;
+            position: relative;
+        }
+        .geo-box:hover { border-color: var(--gold-light); box-shadow: 0 8px 20px rgba(0,0,0,0.04); }
+        .box-header { display: flex; align-items: center; gap: 12px; font-weight: 500; font-size: 0.9rem; color: var(--ink); border-bottom: 1px solid var(--warm-white); padding-bottom: 10px; }
+        
+        .box-actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .btn-locate { font-size: 0.65rem; color: var(--gold); cursor: pointer; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid transparent; }
+        .btn-locate:hover { border-bottom: 1px solid var(--gold); }
+        
+        .btn-more { 
+            font-size: 0.6rem; background: var(--sepia); color: white; 
+            padding: 6px 14px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+        }
+        .btn-more:hover { background: var(--ink); }
 
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; margin-top: 100px; }
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 
-  @media (max-width: 600px) {
-    .geo-grid { grid-template-columns: 1fr 1fr; }
-    .clan-header { flex-direction: column; align-items: flex-start; gap: 5px; }
-  }
-</style>
+        @media (max-width: 768px) {
+            #map { height: 400px; }
+            .filter-bar { gap: 8px; padding: 15px 10px; }
+            .filter-item { padding: 6px 10px; font-size: 0.65rem; }
+        }
+    </style>
 </head>
 <body>
 
 <div class="overlay" id="overlay"></div>
-
-<header>
-    <span class="header-ornament">Miejsca i Regiony</span>
-    <h1>Słowniczek Geograficzny</h1>
-</header>
 
 <nav>
   <div class="nav-inner">
@@ -109,107 +127,162 @@
     <li><a href="../zjazdy/zjazdy.html">Kronika zjazdów</a></li>
     <li><a href="../slownik-biogr/biografie.html">Biografie</a></li>
     <li><a href="../pamiec/pamiec.html">Pamięć i groby</a></li>
-    <li><a href="../slownik-geo/geografia.html">Geografia rodowa</a></li>
+    <li><a href="../slownik-geo/geografia.html" style="color:var(--gold-light)">Geografia rodowa</a></li>
     <li><a href="../biblioteka/biblioteczka.html">Biblioteczka</a></li>
     <li><a href="../archiwym/archiwum.html">Archiwum</a></li>
   </ul>
 </aside>
 
-<main>
-  <section class="geo-intro">
-    <span class="s-label">Słownik Miejscowości</span>
-    <p class="geo-description">Wykaz historycznych siedzib, majątków i miejsc związanych z liniami rodowymi od końca XVIII wieku do roku 1939.</p>
-  </section>
+<header>
+    <span class="header-ornament">Słowniczek Miejscowości</span>
+    <h1>Geografia Rodowa</h1>
+</header>
 
-  <section class="geo-section">
-    <div class="clan-header">
-      <div class="clan-dot" style="background:var(--c-ladomirscy)"></div>
-      <h2 class="clan-name">Ładomirscy</h2>
-    </div>
-    <div class="geo-grid">
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Biejków</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Brzozów</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Budki</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Ciepielów</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Grzebowilk</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Iłówiec</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Gulin</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Jarochy</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Kotuszów</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Milczany</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Pilichowice</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Rożenek</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Ubinie</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Wielgie</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-ladomirscy)"><span>Żytniów</span><i>→</i></a>
-    </div>
-  </section>
+<div class="quote-section">
+    <p class="quote-text">"Krajobraz dzieciństwa zostaje w nas na zawsze."</p>
+</div>
 
-  <section class="geo-section">
-    <div class="clan-header">
-      <div class="clan-dot" style="background:var(--c-krainscy)"></div>
-      <h2 class="clan-name">Kraińscy</h2>
-    </div>
-    <div class="geo-grid">
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Babin</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Dzieduszyce Małe</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Filipkowce</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Hałuszczyńce</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Kałusz</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Koniuszki</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Lwów</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Martynów Stary</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Podbórze</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Sambor</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Tomaszowce</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-krainscy)"><span>Wierzchnia</span><i>→</i></a>
-    </div>
-  </section>
+<div class="map-wrapper">
+    <div id="map"></div>
+</div>
 
-  <section class="geo-section">
-    <div class="clan-header">
-      <div class="clan-dot" style="background:var(--c-domanscy)"></div>
-      <h2 class="clan-name">Domańscy</h2>
+<div class="filter-bar" id="filterBar">
+    <div class="filter-item active" onclick="filterMap('all', this)">
+        <div class="dual-dot" style="--c1: #888; --c2: #444"></div><span>Wszystkie</span>
     </div>
-    <div class="geo-grid">
-      <a href="#" class="geo-item" style="--accent-color: var(--c-domanscy)"><span>Bierówka</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-domanscy)"><span>Gródek n. Dunajcem</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-domanscy)"><span>Harklowa</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-domanscy)"><span>Kołomyja</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-domanscy)"><span>Łapsze Niżne</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-domanscy)"><span>Podole-Górowa</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-domanscy)"><span>Rożnów</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-domanscy)"><span>Szczawnica</span><i>→</i></a>
+    <div class="filter-item" onclick="filterMap('L', this)">
+        <div class="dual-dot" style="--c1: var(--c-ladomirscy); --c2: #fff"></div><span>Ładomirscy</span>
     </div>
-  </section>
+    <div class="filter-item" onclick="filterMap('K', this)">
+        <div class="dual-dot" style="--c1: var(--c-krainscy); --c2: #fff"></div><span>Kraińscy</span>
+    </div>
+    <div class="filter-item" onclick="filterMap('D', this)">
+        <div class="dual-dot" style="--c1: var(--c-domanscy); --c2: #fff"></div><span>Domańscy</span>
+    </div>
+    <div class="filter-item" onclick="filterMap('LK', this)">
+        <div class="dual-dot" style="--c1: var(--c-ladomirscy); --c2: var(--c-krainscy)"></div><span>L & K</span>
+    </div>
+    <div class="filter-item" onclick="filterMap('G', this)">
+        <div class="dual-dot" style="--c1: var(--sepia); --c2: var(--gold-light)"></div><span>Gołębscy</span>
+    </div>
+    <div class="filter-item" onclick="filterMap('OTHER', this)">
+        <div class="dual-dot" style="--c1: #444; --c2: #999"></div><span>Pozostali</span>
+    </div>
+</div>
 
-  <section class="geo-section">
-    <div class="clan-header">
-      <div class="clan-dot" style="background:var(--c-other)"></div>
-      <h2 class="clan-name">Inne Linie (Gołębscy, Fedorowiczowie i in.)</h2>
+<div class="geo-grid" id="geoGrid">
     </div>
-    <div class="geo-grid">
-      <a href="#" class="geo-item" style="--accent-color: var(--c-other)"><span>Chersoń</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-other)"><span>Irkuck</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-other)"><span>Klebanówka</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-other)"><span>Miejsce Piastowe</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-other)"><span>Niegowić</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-other)"><span>Okocim</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-other)"><span>Wiedeń</span><i>→</i></a>
-      <a href="#" class="geo-item" style="--accent-color: var(--c-other)"><span>Zarszyn</span><i>→</i></a>
-    </div>
-  </section>
-</main>
 
 <footer>
-  <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  const btn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
-  btn.onclick = () => { drw.classList.add('open'); ovr.classList.add('active'); };
-  ovr.onclick = () => { drw.classList.remove('open'); ovr.classList.remove('active'); };
+    // PRZYKŁADOWE DANE (Dodaj tutaj docelowo 100 pozycji)
+    const locations = [
+        { id: 1, n: "Biejków", cat: "L", c: [51.68, 20.93], color: "#fcc000", url: "miejsca/biejkow.html" },
+        { id: 2, n: "Babin", cat: "K", c: [49.88, 24.35], color: "#cc0000", url: "miejsca/babin.html" },
+        { id: 3, n: "Rożnów", cat: "D", c: [49.77, 20.68], color: "#2d7a2d", url: "miejsca/roznow.html" },
+        { id: 4, n: "Lwów", cat: "LK", c: [49.83, 24.02], color: "#fcc000", url: "miejsca/lwow.html" },
+        { id: 5, n: "Niegowić", cat: "G", c: [49.91, 20.21], color: "#7a6548", url: "miejsca/niegowic.html" },
+        { id: 6, n: "Wiedeń", cat: "OTHER", c: [48.20, 16.37], color: "#444444", url: "miejsca/wieden.html" },
+        { id: 7, n: "Harklowa", cat: "D", c: [49.44, 20.18], color: "#2d7a2d", url: "miejsca/harklowa.html" }
+    ];
+
+    // INICJALIZACJA MAPY
+    // Styl CartoDB Positron (czysty, archiwalny)
+    const map = L.map('map', { scrollWheelZoom: false }).setView([50.5, 21.0], 6);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
+
+    const markerMap = {}; // Indeks dla funkcji namierzania
+
+    function init() {
+        const grid = document.getElementById('geoGrid');
+        
+        locations.forEach(loc => {
+            // Dodanie Markerów na mapę
+            const marker = L.circleMarker(loc.c, {
+                radius: 8,
+                fillColor: loc.color,
+                color: "#fff",
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.9
+            }).addTo(map).bindPopup(`<strong>${loc.n}</strong>`);
+            
+            marker.category = loc.cat;
+            markerMap[loc.id] = marker;
+
+            // Dodanie Boxów do Gridu
+            grid.innerHTML += `
+                <div class="geo-box" data-cat="${loc.cat}">
+                    <div class="box-header">
+                        <div class="dual-dot" style="--c1: ${loc.color}; --c2: #fff; width:12px; height:12px;"></div>
+                        <span>${loc.n}</span>
+                    </div>
+                    <div class="box-actions">
+                        <span class="btn-locate" onclick="highlightMarker(${loc.id})">Namierz na mapie</span>
+                        <a href="${loc.url}" class="btn-more">Więcej</a>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // FUNKCJA PODŚWIETLANIA PINEZKI
+    function highlightMarker(id) {
+        const marker = markerMap[id];
+        if (!marker) return;
+
+        // Przewiń do mapy
+        const mapEl = document.getElementById('map');
+        window.scrollTo({ top: mapEl.offsetTop - 100, behavior: 'smooth' });
+
+        // Otwórz popup i pulsowanie
+        marker.openPopup();
+        
+        let counter = 0;
+        const pulse = setInterval(() => {
+            marker.setRadius(counter % 2 === 0 ? 16 : 8);
+            marker.setStyle({ weight: counter % 2 === 0 ? 4 : 2 });
+            counter++;
+            if (counter > 5) {
+                clearInterval(pulse);
+                marker.setRadius(8);
+                marker.setStyle({ weight: 2 });
+            }
+        }, 250);
+    }
+
+    // FILTROWANIE
+    function filterMap(cat, element) {
+        document.querySelectorAll('.filter-item').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+
+        Object.values(markerMap).forEach(m => {
+            if (cat === 'all' || m.category === cat) {
+                map.addLayer(m);
+            } else {
+                map.removeLayer(m);
+            }
+        });
+
+        document.querySelectorAll('.geo-box').forEach(box => {
+            if (cat === 'all' || box.dataset.cat === cat) {
+                box.style.display = 'flex';
+            } else {
+                box.style.display = 'none';
+            }
+        });
+    }
+
+    // OBSŁUGA DRAWERA
+    const btn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
+    btn.onclick = () => { drw.classList.add('open'); ovr.classList.add('active'); };
+    ovr.onclick = () => { drw.classList.remove('open'); ovr.classList.remove('active'); };
+
+    init();
 </script>
 </body>
 </html>
-
