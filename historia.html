@@ -22,7 +22,8 @@
         header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
         header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
         .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }
-        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; margin-bottom: 20px; position: relative; z-index: 1; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 650px; margin: 0 auto; position: relative; z-index: 1; line-height: 1.5; }
 
         /* ── NAV ── */
         nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
@@ -32,7 +33,7 @@
         .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
         .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        /* ── DRAWER (IDENTYCZNY JAK WE WZORZE) ── */
+        /* ── DRAWER ── */
         .drawer { 
             position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; 
             background: var(--ink); z-index: 1050; padding: 50px 0; 
@@ -80,12 +81,10 @@
         }
         .story-section h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 1px; background: var(--gold-light); }
 
-        /* Ilustracje */
         .image-container { margin: 50px 0; text-align: center; background: var(--cream); padding: 25px; border: 1px solid var(--sepia-pale); }
         .image-container img { max-width: 100%; height: auto; display: block; margin: 0 auto; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
         .img-label { display: block; margin-top: 18px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); font-weight: 500; }
 
-        /* Notka autora & Słownik */
         .author-note { margin-top: 80px; padding-top: 35px; border-top: 1px solid var(--line); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.25rem; color: var(--sepia); }
         
         .dictionary-box { margin-top: 60px; padding: 45px; background: var(--parchment); border-left: 5px solid var(--gold); }
@@ -108,6 +107,7 @@
 <header>
     <span class="header-ornament">Geneza powstania</span>
     <h1>Jak nieformalnie powołano do życia Klan Ładomirskich i Kraińskich</h1>
+    <p class="header-quote">„Rodzina to nie tylko krew. To duma z tych, którzy byli przed nami, i odpowiedzialność za tych, którzy przyjdą po nas.” — Aleksander Kamiński</p>
 </header>
 
 <nav>
