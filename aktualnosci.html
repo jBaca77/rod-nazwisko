@@ -1,139 +1,295 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aktualności | Archiwum Rodzinne L&K</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-    --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
-    --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
-    --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktualności | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ── ROOT & BASE ── */
+        :root {
+            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+            --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
+            --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
+            --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
+        }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Jost', sans-serif; 
+            font-weight: 300; 
+            background-color: var(--warm-white); 
+            color: var(--ink); 
+            line-height: 1.7; 
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-  /* ── HEADER ── */
-  header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
-  header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
-  .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }
-  header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1; margin-bottom: 15px; position: relative; z-index: 1; }
-  .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+        /* ── HEADER (Zgodnie z Index.pages) ── */
+        header { 
+            background-color: var(--green-dark); 
+            color: var(--cream); 
+            text-align: center; 
+            padding: 120px 24px 100px; 
+            position: relative; 
+        }
+        header h1 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-weight: 300; 
+            font-size: clamp(2.8rem, 7vw, 5.2rem); 
+            line-height: 1.1;
+        }
+        header h1 em { font-style: italic; opacity: 0.7; }
 
-  /* ── NAV ── */
-  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
-  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; }
-  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
-  .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* ── NAV ── */
+        nav { 
+            background-color: var(--ink); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
+        }
+        .nav-inner { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 18px 24px; 
+        }
+        .nav-logo { 
+            font-family: 'Cormorant Garamond', serif; 
+            color: var(--gold-light); 
+            text-decoration: none; 
+            font-size: 1.3rem; 
+            letter-spacing: 2px; 
+        }
+        
+        .nav-right { display: flex; align-items: center; gap: 25px; }
+        .lang-switcher { display: flex; gap: 8px; }
+        .lang-btn { 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid var(--sepia); 
+            color: var(--cream); 
+            font-size: 0.7rem; 
+            padding: 5px 10px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .lang-btn.active { background: var(--gold); border-color: var(--gold); }
 
-  /* ── DRAWER ── */
-  .drawer { position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; background: var(--ink); z-index: 1050; padding: 50px 0; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -15px 0 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow-y: auto; }
-  .drawer.open { right: 0; }
-  .drawer-links { list-style: none; padding: 0 25px; }
-  .drawer-links a { color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; display: block; transition: 0.3s; }
-  .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); }
-  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
-  .overlay.active { opacity: 1; pointer-events: auto; }
+        .menu-btn { 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 6px; 
+            z-index: 1100; 
+        }
+        .menu-btn span { display: block; width: 30px; height: 1px; background: var(--gold-light); transition: 0.4s; }
 
-  /* ── CONTENT ── */
-  main { max-width: 1100px; margin: 0 auto; padding: 60px 24px 100px; }
-  .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; }
-  .s-title { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--ink); font-weight: 400; }
-  .s-line { width: 50px; height: 1.5px; background: var(--gold); margin-bottom: 45px; }
+        /* ── POPRAWIONY DRAWER (Zgodnie z Index.pages) ── */
+        .drawer { 
+            position: fixed; 
+            top: 0; 
+            right: -350px; 
+            width: 350px; 
+            height: 100vh; 
+            background: var(--ink); 
+            z-index: 1050; 
+            padding: 60px 40px; 
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: -10px 0 40px rgba(0,0,0,0.6); 
+            overflow-y: auto; 
+        }
+        .drawer.open { right: 0; }
+        .drawer h2 {
+            color: var(--gold-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 15px;
+        }
+        .drawer-links { list-style: none; }
+        .drawer-links li { margin-bottom: 20px; }
+        .drawer-links a { 
+            color: var(--cream); 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            display: block; 
+            transition: 0.3s; 
+            opacity: 0.8;
+        }
+        .drawer-links a:hover { color: var(--gold-light); opacity: 1; padding-left: 8px; }
 
-  .news-card { background: var(--cream); border-left: 4px solid var(--gold); padding: 40px; margin-bottom: 30px; border-bottom: 1px solid var(--sepia-pale); }
-  .news-date { font-size: 0.8rem; font-weight: 600; color: var(--gold); letter-spacing: 1px; margin-bottom: 10px; display: block; }
-  .news-content h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 15px; color: var(--ink); }
+        .overlay { 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0,0,0,0.6); 
+            backdrop-filter: blur(6px); 
+            z-index: 1040; 
+            opacity: 0; 
+            pointer-events: none; 
+            transition: 0.4s; 
+        }
+        .overlay.active { opacity: 1; pointer-events: auto; }
 
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.85rem; }
-</style>
+        /* ── MAIN CONTENT ── */
+        main { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
+        .s-label { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; }
+        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 10px; color: var(--ink); }
+        .s-line { width: 50px; height: 1px; background: var(--gold); margin-bottom: 50px; }
+
+        .news-item { 
+            background: var(--cream); 
+            border: 1px solid var(--sepia-pale); 
+            padding: 60px; 
+            margin-bottom: 50px; 
+            position: relative; 
+            border-left: 5px solid var(--gold); 
+        }
+        .news-date { font-size: .8rem; font-weight: 500; color: var(--gold); letter-spacing: 1.5px; margin-bottom: 20px; display: block; }
+        .news-content { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--ink-light); text-align: justify; line-height: 1.7; }
+        
+        /* ── KONTO ZJAZDOWE (STYLIZACJA KAFELKA) ── */
+        .bank-card { 
+            background: var(--parchment); 
+            padding: 30px; 
+            margin: 40px 0; 
+            border: 1px dashed var(--sepia); 
+            font-size: 1rem;
+        }
+        .bank-card strong { color: var(--sepia); display: block; margin-bottom: 8px; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1.5px; }
+        .bank-card .bank-group { margin-bottom: 25px; }
+        .bank-card .bank-group:last-child { margin-bottom: 0; }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.5); text-align: center; padding: 80px 24px; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+        @media (max-width: 850px) {
+            .news-item { padding: 40px 25px; }
+            .drawer { width: 100%; right: -100%; }
+        }
+    </style>
 </head>
 <body>
 
 <div class="overlay" id="overlay"></div>
 
 <header>
-  <span class="header-ornament">Kronika Bieżąca</span>
-  <h1>Aktualności</h1>
-  <p class="header-quote">„Kto nie szanuje i nie ceni swojej przeszłości, ten nie jest godzien szacunku teraźniejszości...” — Józef Piłsudski</p>
+    <h1 class="lang" data-pl="Aktualności & <em>Kronika</em>" data-en="News & <em>Chronicle</em>">Aktualności & <em>Kronika</em></h1>
 </header>
 
 <nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-    <button class="menu-btn" id="menuBtn">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="translatePage('pl', this)">PL</button>
+                <button class="lang-btn" onclick="translatePage('en', this)">EN</button>
+                <button class="lang-btn" onclick="translatePage('es', this)">ES</button>
+                <button class="lang-btn" onclick="translatePage('fr', this)">FR</button>
+            </div>
+            <button class="menu-btn" id="menuBtn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
 </nav>
 
 <aside class="drawer" id="drawer">
-  <ul class="drawer-links">
-    <li><a href="index.html">Strona Główna</a></li>
-    <li><a href="aktualnosci.html">Aktualności</a></li>
-    <li><a href="historia.html">Historia Klanu</a></li>
-    <li><a href="genealogia.html">Genealogia</a></li>
-    <li><a href="zjazdy.html">Kronika Zjazdów</a></li>
-    <li><a href="biografie.html">Biografie</a></li>
-    <li><a href="pamiec.html">Pamięć i Groby</a></li>
-    <li><a href="geografia.html">Geografia Rodowa</a></li>
-  </ul>
+    <h2>Menu serwisowe</h2>
+    <ul class="drawer-links">
+        <li><a href="index.html">Strona Główna</a></li>
+        <li><a href="historia.html">Historia Klanu</a></li>
+        <li><a href="genealogia/genealogia.html">Genealogia</a></li>
+        <li><a href="zjazdy/zjazdy.html">Kronika Zjazdów</a></li>
+        <li><a href="slownik-biogr/biografie.html">Biografie</a></li>
+        <li><a href="pamiec.html">Pamięć i Groby</a></li>
+        <li><a href="slownik-geo/geografia.html">Geografia Rodowa</a></li>
+        <li><a href="biblioteka/biblioteczka.html">Biblioteczka</a></li>
+        <li><a href="archiwym/archiwum.html">Archiwum Cyfrowe</a></li>
+    </ul>
 </aside>
 
 <main>
-  <span class="s-label">Najnowsze wpisy</span>
-  <h2 class="s-title">Co nowego w Klanie?</h2>
-  <div class="s-line"></div>
+    <section>
+        <span class="s-label lang" data-pl="Kronika Bieżąca" data-en="Current Chronicle">Kronika Bieżąca</span>
+        <h2 class="s-title lang" data-pl="Najnowsze wpisy" data-en="Latest entries">Najnowsze wpisy</h2>
+        <div class="s-line"></div>
 
-  <article class="news-card">
-    <span class="news-date">MARZEC 2026</span>
-    <div class="news-content">
-      <h2>Przygotowania do XXIV Zjazdu w Bocheńcu</h2>
-      <p>Rozpoczynamy wielkie odliczanie do naszego kolejnego spotkania. W dziale "Zjazdy" znajdą Państwo aktualne informacje dotyczące logistyki i planu wydarzenia.</p>
-    </div>
-  </article>
+        <article class="news-item">
+            <span class="news-date lang" data-pl="List z dnia 15 grudnia 2022 roku" data-en="Letter dated December 15, 2022">List z dnia 15 grudnia 2022 roku</span>
+            
+            <div class="news-content">
+                <p><strong class="lang" data-pl="Kochani," data-en="Dear ones,">Kochani,</strong></p>
+                
+                <p class="lang" 
+                   data-pl="W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań.">
+                   W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań.
+                </p>
 
-  <article class="news-card">
-    <span class="news-date">LUTY 2026</span>
-    <div class="news-content">
-      <h2>Nowe materiały w Archiwum Cyfrowym</h2>
-      <p>Dzięki uprzejmości członków rodziny, nasza biblioteczka wzbogaciła się o skany dokumentów z lat 50. Zapraszamy do przeglądania!</p>
-    </div>
-  </article>
+                <div class="bank-card">
+                    <div class="bank-group">
+                        <strong class="lang" data-pl="Numer konta (ING Bank):" data-en="Account number:">Numer konta (ING Bank):</strong>
+                        07 1050 1588 1000 0097 6819 4954
+                    </div>
+                    <div class="bank-group">
+                        <strong class="lang" data-pl="Tytuł przelewu:" data-en="Transfer subject:">Tytuł przelewu:</strong> 
+                        Zjazd Rodzinny
+                    </div>
+                </div>
+
+                <p><em class="lang" data-pl="Współwłaściciele oraz pełnomocnicy:" data-en="Co-owners and proxies:">Współwłaściciele oraz pełnomocnicy:</em><br>
+                Anna Wilk, Łukasz Ładomirski, Marta Kacorzyk, Paweł Meissner</p>
+                
+                <p class="lang" data-pl="Ściskam Was serdecznie, Ania" data-en="Warm hugs, Ania">Ściskam Was serdecznie, Ania</p>
+            </div>
+        </article>
+    </section>
 </main>
 
 <footer>
-  <p>Klan Ładomirskich i Kraińskich © 1975 – 2026</p>
+    <p>Klan Ładomirskich i Kraińskich © 2026<br>Pamięć | Tożsamość | Wspólnota</p>
 </footer>
 
 <script>
-  const menuBtn = document.getElementById('menuBtn');
-  const drawer = document.getElementById('drawer');
-  const overlay = document.getElementById('overlay');
-
-  function toggleSidebar() {
-    drawer.classList.toggle('open');
-    overlay.classList.toggle('active');
-    const spans = menuBtn.querySelectorAll('span');
-    if(drawer.classList.contains('open')) {
-      spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
-      spans[1].style.opacity = '0';
-      spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-    } else {
-      spans[0].style.transform = 'none';
-      spans[1].style.opacity = '1';
-      spans[2].style.transform = 'none';
+    function translatePage(lang, btn) {
+        const elements = document.querySelectorAll('.lang');
+        elements.forEach(el => {
+            const translation = el.getAttribute('data-' + lang);
+            if (translation) el.innerHTML = translation;
+        });
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
     }
-  }
 
-  menuBtn.addEventListener('click', toggleSidebar);
-  overlay.addEventListener('click', toggleSidebar);
+    const menuBtn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+
+    function toggleSidebar() {
+        drawer.classList.toggle('open');
+        overlay.classList.toggle('active');
+        const spans = menuBtn.querySelectorAll('span');
+        if(drawer.classList.contains('open')) {
+            spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(4px, -5px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    }
+
+    menuBtn.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
 </script>
 
 </body>
