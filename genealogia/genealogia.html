@@ -30,11 +30,13 @@
         .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
         .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
 
-        /* ── GRID SEKCJII ── */
-        main { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
-        .s-label { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 10px; display: block; text-align: center; }
-        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 40px; color: var(--ink); text-align: center; }
-        
+        /* ── QUOTE SECTION ── */
+        .quote-box { max-width: 800px; margin: 60px auto 20px; text-align: center; padding: 0 24px; }
+        .quote-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.6rem; color: var(--sepia); line-height: 1.5; margin-bottom: 10px; }
+        .quote-author { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); font-weight: 400; }
+
+        /* ── GRID ── */
+        main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
         .gen-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -42,7 +44,7 @@
             margin-top: 20px;
         }
 
-        /* ── KAFELEK ROZBUDOWANY (WYWODY) ── */
+        /* ── KAFELEK ROZBUDOWANY (MAIN) ── */
         .card-main {
             grid-column: 1 / -1;
             background: linear-gradient(to bottom right, var(--cream), var(--parchment));
@@ -109,7 +111,7 @@
         @media (max-width: 768px) {
             .card-main { grid-column: auto; padding: 40px 20px; }
             .sub-nav { gap: 8px; }
-            .sub-nav a { font-size: 0.6rem; padding: 5px 8px; }
+            .sub-nav a { width: 45%; text-align: center; }
         }
     </style>
 </head>
@@ -129,12 +131,20 @@
     </div>
 </nav>
 
+<section class="quote-box">
+    <p class="quote-text">„Przeszłość — to jest dziś, tylko cokolwiek dalej...”</p>
+    <p class="quote-author">Cyprian Kamil Norwid</p>
+</section>
+
 <main>
-    <span class="s-label">Zasoby Archiwalne</span>
-    <h2 class="s-title">Wybierz sekcję badań</h2>
-    
     <div class="gen-grid">
-        <div class="card-main" onclick="window.location.href='wywody.html'">
+        <a href="drzewo-klanowe.html" class="card-main">
+            <div class="card-ornament"></div>
+            <h3>Drzewo klanowe</h3>
+            <span>Pełna linia klanu Ładomirskich i Kraińskich</span>
+        </a>
+
+        <div class="card-main" style="background: var(--warm-white);" onclick="window.location.href='wywody.html'">
             <div class="card-ornament"></div>
             <h3>Wywody przodków</h3>
             <span>Dokumentacja historyczna i linie rodu</span>
@@ -152,12 +162,6 @@
                 <a href="linia-8.html" onclick="event.stopPropagation()">Linia VIII</a>
             </div>
         </div>
-
-        <a href="drzewo-klanowe.html" class="gen-card">
-            <div class="card-ornament"></div>
-            <h3>Drzewo klanowe</h3>
-            <span>Pełna linia klanu</span>
-        </a>
 
         <a href="drzewo-krainskich.html" class="gen-card">
             <div class="card-ornament"></div>
