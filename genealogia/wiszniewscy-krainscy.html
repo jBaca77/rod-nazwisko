@@ -11,59 +11,57 @@
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
             --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
             --line: rgba(122, 101, 72, 0.2);
+            /* Kolory wstążek */
             --ribbon-left: #EE2B1D;
             --ribbon-right: #F29079;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+        
+        body { 
+            font-family: 'Jost', sans-serif; 
+            background-color: var(--warm-white); 
+            color: var(--ink); 
+            line-height: 1.6;
+            overflow-x: hidden; /* Zapobiega pływaniu całej strony na boki */
+        }
 
         nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); }
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        .article-header { max-width: 900px; margin: 60px auto 20px; text-align: center; }
+        .article-header { max-width: 900px; margin: 60px auto 20px; text-align: center; padding: 0 20px; }
         .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; margin-bottom: 10px; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 400; margin-bottom: 10px; }
         .s-line-main { width: 50px; height: 1px; background: var(--gold-light); margin: 15px auto; }
 
-        /* KONTENER DRZEWA */
+        /* KONTENER DRZEWA Z OBSŁUGĄ SCROLLA */
         .tree-wrapper { 
-            max-width: 100vw; 
+            max-width: 100%; 
             margin: 0 auto 20px; 
             padding: 40px 0; 
-            overflow: hidden; /* Wyłączamy scroll, bo będziemy skalować */
+            overflow-x: auto; /* Włącza przewijanie poziome */
+            -webkit-overflow-scrolling: touch; /* Płynność na iOS */
         }
-        
+
         .tree-container { 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            min-width: 1150px; /* Stała szerokość dla struktury */
+            min-width: 1200px; /* Szerokość drzewa - wymusza scroll na małych ekranach */
             gap: 40px; 
-            margin: 0 auto;
-            transform-origin: top center; /* Punkt zakotwiczenia skalowania */
+            padding: 0 40px;
         }
 
-        /* Responsywność dla Telefonów */
-        @media screen and (max-width: 1150px) {
-            .tree-wrapper {
-                /* Dynamiczna wysokość, aby uniknąć pustego pola pod skalowanym elementem */
-                height: auto; 
-                display: flex;
-                justify-content: center;
-            }
-            .tree-container {
-                /* Skalowanie: szerokość ekranu / 1150px szerokości drzewa */
-                transform: scale(calc(100vw / 1200)); 
-                margin-bottom: -400px; /* Korekta marginesu po skalowaniu */
-            }
-        }
+        /* Styl paska przewijania dla estetyki */
+        .tree-wrapper::-webkit-scrollbar { height: 5px; }
+        .tree-wrapper::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 10px; }
 
         .tight-gap { gap: 5px !important; }
         .row-flex { display: flex; justify-content: center; gap: 20px; width: 100%; padding: 10px 0; }
 
+        /* BOX */
         .box {
             position: relative; overflow: hidden; border: 1px solid rgba(122, 101, 72, 0.2); 
             background: var(--cream); padding: 12px; text-align: center; font-family: 'Cormorant Garamond', serif;
@@ -73,6 +71,7 @@
             min-width: 130px; width: auto;
         }
 
+        /* WSTĄŻKA */
         .corner-ribbon { position: absolute; top: 0; right: 0; width: 50px; height: 50px; z-index: 1; pointer-events: none; }
         .corner-ribbon::before {
             content: ''; position: absolute; top: 5px; right: -20px; width: 70px; height: 16px;
@@ -81,6 +80,7 @@
 
         .box:hover { border-color: var(--gold); background: white; transform: translateY(-2px); }
         .img-wrap, .img-double-row, .name-tag, .date-tag, .bio-content { position: relative; z-index: 2; }
+        
         .lvl-top .box { min-height: 120px; }
         .box-short { min-height: 45px !important; padding: 5px 15px !important; font-size: 0.85rem; }
         .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 6px; }
@@ -90,20 +90,31 @@
         .name-tag { font-size: 0.85rem; border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 4px; width: 100%; margin-top: 4px; }
         .date-tag { font-family: 'Jost'; font-size: 0.75rem; font-weight: 400; white-space: nowrap; }
 
+        /* INTERAKTYWNY OBRAZEK */
         .interactive-node { width: 30px; height: 30px; perspective: 1000px; cursor: pointer; text-decoration: none; margin: -15px 0; z-index: 5; }
         .flip-card { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
         .interactive-node:hover .flip-card { transform: rotateY(180deg); }
         .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center; background: var(--cream); font-size: 8px; color: var(--sepia); border-radius: 50%; }
         .flip-back { transform: rotateY(180deg); background: var(--gold); color: white; }
 
+        /* BOX POTOMEK */
         .box-potomek { flex-direction: row !important; gap: 20px; text-align: left; padding: 25px !important; max-width: 550px; border-left: 5px solid var(--gold); }
 
+        /* NAWIGACJA DOLNA */
         .sub-pagination { max-width: 900px; margin: 60px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; background: white; }
         .sub-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
         .sub-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+
+        /* POPRAWKI DLA MAŁYCH EKRANÓW (POZA DRZEWEM) */
+        @media screen and (max-width: 768px) {
+            .box-potomek { flex-direction: column !important; text-align: center; align-items: center; }
+            .box-potomek div:last-child { border-left: none !important; border-top: 1px solid rgba(122,101,72,0.1); padding-left: 0 !important; padding-top: 15px; margin-top: 15px; }
+            .sub-pagination { gap: 8px; padding: 20px 10px; }
+            .sub-btn { padding: 8px 16px; font-size: 0.6rem; }
+        }
     </style>
 </head>
 <body>
@@ -118,6 +129,7 @@
 
 <div class="tree-wrapper">
     <div class="tree-container tight-gap">
+        
         <div class="row-flex lvl-top">
             <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--ribbon-left);"></div>
                 <div class="img-double-row">
@@ -140,6 +152,7 @@
             <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--ribbon-left);"></div>
                 <div class="name-tag">Osoba 4</div>
             </div>
+
             <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--ribbon-right);"></div>
                 <div class="img-wrap"><img src="" class="img-single"><span>Para 5</span></div>
                 <div class="name-tag">Para 5</div>
