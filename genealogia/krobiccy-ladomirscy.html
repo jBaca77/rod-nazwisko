@@ -11,6 +11,9 @@
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
             --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
             --line: rgba(122, 101, 72, 0.2);
+            /* Zdefiniowane kolory wstążek */
+            --color-left: #66F94E;
+            --color-right: #F9F955;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +35,10 @@
 
         .row-flex { display: flex; justify-content: center; gap: 20px; width: 100%; padding: 10px 0; }
 
+        /* BOX Z OBSŁUGĄ WSTĄŻKI */
         .box {
+            position: relative;
+            overflow: hidden;
             border: 1px solid rgba(122, 101, 72, 0.2); 
             background: var(--cream);
             padding: 12px; 
@@ -45,7 +51,39 @@
             text-decoration: none; color: inherit; transition: 0.3s;
             min-width: 130px; width: auto;
         }
+
+        /* ELEMENT WSTĄŻKI */
+        .corner-ribbon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .corner-ribbon::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            right: -20px;
+            width: 70px;
+            height: 16px;
+            background: var(--ribbon-color); 
+            transform: rotate(45deg);
+            display: block;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
         .box:hover { border-color: var(--gold); background: white; transform: translateY(-2px); }
+
+        /* Warstwa treści nad wstążką */
+        .img-wrap, .img-double-row, .name-tag, .date-tag, .bio-content {
+            position: relative;
+            z-index: 2;
+        }
 
         .lvl-top .box { min-height: 120px; }
         .box-short { min-height: 45px !important; padding: 5px 15px !important; font-size: 0.85rem; }
@@ -66,7 +104,6 @@
 
         .box-potomek { flex-direction: row !important; gap: 20px; text-align: left; padding: 25px !important; max-width: 550px; border-left: 5px solid var(--gold); }
 
-        /* NAWIGACJA DOLNA */
         .sub-pagination { max-width: 900px; margin: 60px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; background: white; }
         .sub-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
@@ -89,92 +126,63 @@
     <div class="tree-container tight-gap">
         
         <div class="row-flex lvl-top">
-            <div class="box">
-                <div class="img-wrap"><img src="" class="img-single"><span>Foto 1</span></div>
-                <div class="name-tag">Osoba 1</div>
-            </div>
-
-            <div class="box">
-                <div class="img-wrap"><img src="" class="img-single"><span>Foto 2</span></div>
-                <div class="name-tag">Osoba 2</div>
-            </div>
-
-            <div class="box">
-                <div class="img-double-row">
-                    <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div>
-                    <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div>
-                </div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 1</span></div><div class="name-tag">Osoba 1</div></div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 2</span></div><div class="name-tag">Osoba 2</div></div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+                <div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div></div>
                 <div class="name-tag">Osoba 3</div>
             </div>
-
-            <div class="box">
-                <div class="img-double-row">
-                    <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div>
-                    <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div>
-                </div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+                <div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div></div>
                 <div class="name-tag">Osoba 4</div>
             </div>
 
-            <div class="box">
-                <div class="img-double-row">
-                    <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Mąż</span></div>
-                    <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Żona</span></div>
-                </div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
+                <div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Mąż</span></div><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Żona</span></div></div>
                 <div class="name-tag">Para 5</div>
             </div>
-
-            <div class="box">
-                <div class="img-wrap"><img src="" class="img-single"><span>Foto 6</span></div>
-                <div class="name-tag">Osoba 6</div>
-            </div>
-
-            <div class="box">
-                <div class="img-double-row">
-                    <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div>
-                    <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div>
-                </div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 6</span></div><div class="name-tag">Osoba 6</div></div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
+                <div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div></div>
                 <div class="name-tag">Osoba 7</div>
             </div>
-
-            <div class="box">
-                <div class="img-double-row">
-                    <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div>
-                    <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div>
-                </div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
+                <div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div></div>
                 <div class="name-tag">Osoba 8</div>
             </div>
         </div>
 
         <div class="row-flex">
-            <a href="#" class="box box-short"><span class="date-tag">Dziadek A | 1890</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Babcia B | 1895</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Dziadek C | 1888</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Babcia D | 1900</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><span class="date-tag">Dziadek A | 1890</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><span class="date-tag">Babcia B | 1895</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><span class="date-tag">Dziadek C | 1888</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><span class="date-tag">Babcia D | 1900</span></a>
         </div>
 
         <div class="row-flex">
-            <a href="#" class="box box-short"><span class="date-tag">Ojciec | 1920</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Matka | 1925</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><span class="date-tag">Ojciec | 1920</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><span class="date-tag">Matka | 1925</span></a>
         </div>
 
         <a href="inna_strona.html" class="interactive-node">
-            <div class="flip-card">
-                <div class="flip-front">L&K</div>
-                <div class="flip-back">GO</div>
-            </div>
+            <div class="flip-card"><div class="flip-front">L&K</div><div class="flip-back">GO</div></div>
         </a>
 
         <div class="row-flex">
-            <a href="#" class="box box-short active"><span class="date-tag">Jedność | 2026</span></a>
+            <a href="#" class="box box-short active">
+                <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+                <span class="date-tag">Jedność | 2026</span>
+            </a>
         </div>
 
         <div class="row-flex" style="margin-top: 20px;">
             <div class="box box-potomek">
-                <div style="display: flex; flex-direction: column; align-items: center; min-width: 80px;">
+                <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+                <div style="display: flex; flex-direction: column; align-items: center; min-width: 80px;" class="bio-content">
                     <img src="" class="img-single" style="width:80px; height:105px;">
                     <span class="name-tag" style="border:none; text-align:center;">Nazwa</span>
                 </div>
-                <div style="flex: 1; padding-left: 20px; border-left: 1px solid rgba(122,101,72,0.1);">
+                <div style="flex: 1; padding-left: 20px; border-left: 1px solid rgba(122,101,72,0.1);" class="bio-content">
                     <p style="font-size: 0.9rem; font-family: 'Jost'; text-transform: none; font-weight: 300;">Wklej tutaj swój tekst nota biograficzna.</p>
                 </div>
             </div>
