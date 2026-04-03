@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -8,117 +9,117 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --warm-white: #fdfaf6; --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a;
-            --gold-light: #c8a96e; --line: rgba(122, 101, 72, 0.2);
-            /* Kolory klanowe ze zdjęcia */
-            --c-ladomirscy: #fcc000; 
-            --c-krainscy: #cc0000; 
-            --c-domanscy: #2d7a2d;
-            --c-golebscy: #7a6548;
-            --c-fedorowicz: #444444;
-            --c-bg: #f8f4ee;
+            --bg-khaki: #8B8263; 
+            --ink: #1e1a14; --sepia: #7a6548; --gold-light: #c8a96e; --line: rgba(0, 0, 0, 0.15);
+            /* Kolory z Twojego zdjęcia */
+            --hex1a: #C9D980; --hex1b: #F2F24E;
+            --hex2a: #A8E653; --hex2b: #F9F955;
+            --hex3a: #66F94E; --hex3b: #F9F955;
+            --hex4a: #F9F955; --hex4b: #F29079;
+            --hex5a: #F9D0D7; --hex5b: #F29079;
+            --hex6a: #F29079; --hex6b: #70E1F5;
+            --hex7a: #EE2B1D; --hex7b: #F29079;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--bg-khaki); color: var(--ink); line-height: 1.6; }
 
-        /* HEADER */
         header { background-color: #2c3e2d; color: #f8f4ee; text-align: center; padding: 60px 20px; }
-        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-light); display: block; margin-bottom: 10px; }
         h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; }
 
-        /* MAPA */
-        .map-container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-        #map { height: 500px; width: 100%; border: 1px solid var(--line); border-radius: 2px; background: #f0ede5; }
+        .map-wrapper { max-width: 1150px; margin: 30px auto; padding: 0 20px; }
+        #map { height: 500px; width: 100%; border: 1px solid var(--sepia); background: #f0ede5; border-radius: 2px; }
 
-        /* 8 DWUKOLOROWYCH PRZYCISKÓW */
-        .filter-bar { 
-            max-width: 1100px; margin: 20px auto; 
-            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 15px; 
-        }
+        /* FILTRY - PIGUŁKI */
+        .filter-bar { max-width: 1100px; margin: 20px auto; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 15px; }
         .filter-item { 
             cursor: pointer; display: flex; align-items: center; gap: 8px; 
-            padding: 8px 14px; border: 1px solid var(--line); background: white;
+            padding: 8px 14px; border: 1px solid var(--line); background: rgba(255,255,255,0.9); 
             font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
         }
-        .filter-item:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .filter-item.active { border-color: var(--ink); background: #f0f0f0; font-weight: 500; }
-
-        /* Kropka dwukolorowa - wg zdjęcia */
-        .dual-dot { 
-            width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15);
-            background: linear-gradient(135deg, var(--c1) 50%, var(--c2) 50%);
-        }
-
-        /* GRID BOXÓW */
-        .geo-grid { 
-            max-width: 1100px; margin: 40px auto; 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-            gap: 15px; padding: 0 20px;
-        }
-        .geo-box { 
-            background: white; border: 1px solid var(--line); padding: 15px; 
-            display: flex; flex-direction: column; gap: 10px; transition: 0.3s;
-        }
-        .box-header { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.85rem; }
-        .btn-locate { font-size: 0.65rem; color: var(--gold); cursor: pointer; text-transform: uppercase; font-weight: 600; }
+        .filter-item.active { background: var(--ink); color: #fff; }
         
-        footer { background: var(--ink); color: rgba(255,255,255,0.3); text-align: center; padding: 40px; font-size: 0.8rem; }
+        .dual-pill { 
+            width: 32px; height: 18px; border-radius: 10px; border: 2px solid #000; 
+            position: relative; overflow: hidden;
+            background: linear-gradient(90deg, var(--cl) 50%, var(--cr) 50%);
+        }
+        .dual-pill::after { content: ''; position: absolute; left: calc(50% - 1px); top: 0; height: 100%; width: 2px; background: #000; }
+
+        /* GRID I WSTĄŻKI */
+        .geo-grid { max-width: 1150px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; padding: 0 20px; }
+        
+        .geo-box { 
+            background: #fff; border: 1px solid var(--line); padding: 25px 20px 15px; 
+            display: flex; flex-direction: column; gap: 12px; transition: 0.3s;
+            position: relative; overflow: hidden;
+        }
+
+        /* WSTĄŻKA W PRAWYM GÓRNYM ROGU */
+        .ribbon {
+            position: absolute; 
+            top: 0; 
+            right: 15px; /* Przeniesione na prawą stronę */
+            width: 20px; 
+            height: 38px;
+            background: linear-gradient(90deg, var(--c1) 50%, var(--c2) 50%);
+            box-shadow: -2px 2px 5px rgba(0,0,0,0.15);
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 2;
+        }
+        /* Wycięcie na dole wstążki */
+        .ribbon::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0; height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 8px solid #fff; 
+        }
+
+        .box-title { font-weight: 500; font-size: 1rem; padding-right: 25px; color: var(--ink); }
+        .box-actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 10px; border-top: 1px solid #eee; }
+        .btn-locate { font-size: 0.65rem; color: var(--sepia); cursor: pointer; text-transform: uppercase; font-weight: 700; }
+        .btn-more { font-size: 0.6rem; background: var(--ink); color: #fff; padding: 5px 12px; text-decoration: none; text-transform: uppercase; }
+
+        footer { background: var(--ink); color: rgba(255,255,255,0.2); text-align: center; padding: 40px; }
     </style>
 </head>
 <body>
 
-<header>
-    <span class="header-ornament">Słownik Miejscowości</span>
-    <h1>Geografia Rodowa</h1>
-</header>
+<header><h1>Geografia Rodowa</h1></header>
 
-<div class="map-container">
-    <div id="map"></div>
-</div>
+<div class="map-wrapper"><div id="map"></div></div>
 
 <div class="filter-bar">
     <div class="filter-item active" onclick="filterMap('all', this)">
-        <div class="dual-dot" style="--c1: #333; --c2: #eee"></div><span>Wszystkie</span>
+        <div class="dual-pill" style="--cl: #444; --cr: #eee;"></div><span>Wszystkie</span>
     </div>
-    <div class="filter-item" onclick="filterMap('L', this)">
-        <div class="dual-dot" style="--c1: var(--c-ladomirscy); --c2: #fff"></div><span>Ładomirscy</span>
+    <div class="filter-item" onclick="filterMap('c1', this)">
+        <div class="dual-pill" style="--cl: var(--hex1a); --cr: var(--hex1b);"></div><span>Linia 1</span>
     </div>
-    <div class="filter-item" onclick="filterMap('K', this)">
-        <div class="dual-dot" style="--c1: var(--c-krainscy); --c2: #fff"></div><span>Kraińscy</span>
+    <div class="filter-item" onclick="filterMap('c4', this)">
+        <div class="dual-pill" style="--cl: var(--hex4a); --cr: var(--hex4b);"></div><span>Linia 4</span>
     </div>
-    <div class="filter-item" onclick="filterMap('D', this)">
-        <div class="dual-dot" style="--c1: var(--c-domanscy); --c2: #fff"></div><span>Domańscy</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('LK', this)">
-        <div class="dual-dot" style="--c1: var(--c-ladomirscy); --c2: var(--c-krainscy)"></div><span>L & K</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('G', this)">
-        <div class="dual-dot" style="--c1: var(--c-golebscy); --c2: #fff"></div><span>Gołębscy</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('F', this)">
-        <div class="dual-dot" style="--c1: var(--c-fedorowicz); --c2: #fff"></div><span>Fedorowicz</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('MIX', this)">
-        <div class="dual-dot" style="--c1: var(--c-domanscy); --c2: var(--c-golebscy)"></div><span>Inne Linie</span>
+    <div class="filter-item" onclick="filterMap('c7', this)">
+        <div class="dual-pill" style="--cl: var(--hex7a); --cr: var(--hex7b);"></div><span>Linia 7</span>
     </div>
 </div>
 
 <div class="geo-grid" id="geoGrid"></div>
 
-<footer>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 2026</footer>
+<footer>ARCHIWUM L&K © 2026</footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // Dane punktów
+    // Dane testowe
     const locations = [
-        { id: 1, n: "Biejków", cat: "L", c: [51.68, 20.93], color: "#fcc000" },
-        { id: 2, n: "Babin", cat: "K", c: [49.88, 24.35], color: "#cc0000" },
-        { id: 3, n: "Rożnów", cat: "D", c: [49.77, 20.68], color: "#2d7a2d" },
-        { id: 4, n: "Lwów", cat: "LK", c: [49.83, 24.02], color: "#fcc000" }
+        { id: 1, n: "Biejków", cat: "c1", c: [51.68, 20.93], c1: "#C9D980", c2: "#F2F24E" },
+        { id: 2, n: "Babin", cat: "c4", c: [49.88, 24.35], c1: "#F9F955", c2: "#F29079" },
+        { id: 3, n: "Lwów", cat: "c7", c: [49.83, 24.02], c1: "#EE2B1D", c2: "#EE2B1D" }, // Jednokolorowa
+        { id: 4, n: "Niegowić", cat: "c4", c: [49.91, 20.21], c1: "#F29079", c2: "#F29079" } // Jednokolorowa
     ];
 
-    const map = L.map('map', { scrollWheelZoom: false }).setView([51.5, 21.0], 6);
+    const map = L.map('map', { scrollWheelZoom: false }).setView([50.5, 21.0], 6);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
 
     const markerMap = {};
@@ -126,62 +127,43 @@
     function init() {
         const grid = document.getElementById('geoGrid');
         locations.forEach(loc => {
-            // ZMNIEJSZONE KROPKI: radius zmieniony na 5
             const marker = L.circleMarker(loc.c, {
-                radius: 5, 
-                fillColor: loc.color,
-                color: "#fff",
-                weight: 1.5,
-                opacity: 1,
-                fillOpacity: 1
-            }).addTo(map).bindPopup(`<strong>${loc.n}</strong>`);
+                radius: 6, fillColor: loc.c1, color: "#fff", weight: 2, fillOpacity: 0.9
+            }).addTo(map).bindPopup(loc.n);
             
             marker.category = loc.cat;
             markerMap[loc.id] = marker;
 
             grid.innerHTML += `
                 <div class="geo-box" data-cat="${loc.cat}">
-                    <div class="box-header">
-                        <div class="dual-dot" style="--c1: ${loc.color}; --c2: #fff; width:12px; height:12px;"></div>
-                        <span>${loc.n}</span>
+                    <div class="ribbon" style="--c1: ${loc.c1}; --c2: ${loc.c2};"></div>
+                    <div class="box-title">${loc.n}</div>
+                    <div class="box-actions">
+                        <span class="btn-locate" onclick="highlightMarker(${loc.id})">Namierz</span>
+                        <a href="#" class="btn-more">Więcej</a>
                     </div>
-                    <span class="btn-locate" onclick="highlightMarker(${loc.id})">Namierz na mapie</span>
                 </div>
             `;
         });
     }
 
     function highlightMarker(id) {
-        const marker = markerMap[id];
-        if (!marker) return;
-
-        // Skok do mapy
+        const m = markerMap[id];
+        if (!m) return;
         document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        marker.openPopup();
-        let cnt = 0;
-        const pulse = setInterval(() => {
-            marker.setRadius(cnt % 2 === 0 ? 12 : 5);
-            cnt++;
-            if (cnt > 5) { clearInterval(pulse); marker.setRadius(5); }
+        m.openPopup();
+        let i = 0;
+        const p = setInterval(() => {
+            m.setRadius(i % 2 === 0 ? 15 : 6);
+            if (++i > 5) { clearInterval(p); m.setRadius(6); }
         }, 200);
     }
 
-    function filterMap(cat, element) {
-        document.querySelectorAll('.filter-item').forEach(el => el.classList.remove('active'));
-        element.classList.add('active');
-
-        Object.values(markerMap).forEach(m => {
-            if (cat === 'all' || m.category === cat) {
-                map.addLayer(m);
-            } else {
-                map.removeLayer(m);
-            }
-        });
-
-        document.querySelectorAll('.geo-box').forEach(box => {
-            box.style.display = (cat === 'all' || box.dataset.cat === cat) ? 'flex' : 'none';
-        });
+    function filterMap(cat, el) {
+        document.querySelectorAll('.filter-item').forEach(x => x.classList.remove('active'));
+        el.classList.add('active');
+        Object.values(markerMap).forEach(m => (cat==='all' || m.category===cat) ? map.addLayer(m) : map.removeLayer(m));
+        document.querySelectorAll('.geo-box').forEach(b => b.style.display = (cat==='all' || b.dataset.cat===cat) ? 'flex' : 'none');
     }
 
     init();
