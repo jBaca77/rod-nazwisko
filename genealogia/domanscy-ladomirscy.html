@@ -11,6 +11,9 @@
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
             --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
             --line: rgba(122, 101, 72, 0.2);
+            /* Dodane kolory z analizy */
+            --color-left: #C9D980;
+            --color-right: #F2F24E;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,6 +36,7 @@
         .row-flex { display: flex; justify-content: center; gap: 20px; width: 100%; padding: 10px 0; }
 
         .box {
+            position: relative; /* Dodane dla pozycjonowania elementu kolorystycznego */
             border: 1px solid rgba(122, 101, 72, 0.2); 
             background: var(--cream);
             padding: 12px; 
@@ -45,6 +49,18 @@
             text-decoration: none; color: inherit; transition: 0.3s;
             min-width: 130px; width: auto;
         }
+
+        /* Nowy element kolorystyczny */
+        .color-marker {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
         .box:hover { border-color: var(--gold); background: white; transform: translateY(-2px); }
 
         .lvl-top .box { min-height: 120px; }
@@ -89,26 +105,27 @@
     <div class="tree-container tight-gap">
         
         <div class="row-flex lvl-top">
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 1</span></div><div class="name-tag">Osoba 1</div></div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 2</span></div><div class="name-tag">Osoba 2</div></div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 3</span></div><div class="name-tag">Osoba 3</div></div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 4</span></div><div class="name-tag">Osoba 4</div></div>
-            <div class="box">
+            <div class="box"><div class="color-marker" style="background: var(--color-left);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 1</span></div><div class="name-tag">Osoba 1</div></div>
+            <div class="box"><div class="color-marker" style="background: var(--color-left);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 2</span></div><div class="name-tag">Osoba 2</div></div>
+            <div class="box"><div class="color-marker" style="background: var(--color-left);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 3</span></div><div class="name-tag">Osoba 3</div></div>
+            <div class="box"><div class="color-marker" style="background: var(--color-left);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 4</span></div><div class="name-tag">Osoba 4</div></div>
+            
+            <div class="box"><div class="color-marker" style="background: var(--color-right);"></div>
                 <div class="img-double-row">
                     <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Mąż</span></div>
                     <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Żona</span></div>
                 </div>
                 <div class="name-tag">Para 5</div>
             </div>
-            <div class="box"><div class="img-wrap"><img src="" class="img-single"><span>Foto 6</span></div><div class="name-tag">Osoba 6</div></div>
-            <div class="box">
+            <div class="box"><div class="color-marker" style="background: var(--color-right);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 6</span></div><div class="name-tag">Osoba 6</div></div>
+            <div class="box"><div class="color-marker" style="background: var(--color-right);"></div>
                 <div class="img-double-row">
                     <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div>
                     <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div>
                 </div>
                 <div class="name-tag">Osoba 7</div>
             </div>
-            <div class="box">
+            <div class="box"><div class="color-marker" style="background: var(--color-right);"></div>
                 <div class="img-double-row">
                     <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div>
                     <div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div>
@@ -118,15 +135,15 @@
         </div>
 
         <div class="row-flex">
-            <a href="#" class="box box-short"><span class="date-tag">Dziadek A | 1890</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Babcia B | 1895</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Dziadek C | 1888</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Babcia D | 1900</span></a>
+            <a href="#" class="box box-short"><div class="color-marker" style="background: var(--color-left);"></div><span class="date-tag">Dziadek A | 1890</span></a>
+            <a href="#" class="box box-short"><div class="color-marker" style="background: var(--color-left);"></div><span class="date-tag">Babcia B | 1895</span></a>
+            <a href="#" class="box box-short"><div class="color-marker" style="background: var(--color-right);"></div><span class="date-tag">Dziadek C | 1888</span></a>
+            <a href="#" class="box box-short"><div class="color-marker" style="background: var(--color-right);"></div><span class="date-tag">Babcia D | 1900</span></a>
         </div>
 
         <div class="row-flex">
-            <a href="#" class="box box-short"><span class="date-tag">Ojciec | 1920</span></a>
-            <a href="#" class="box box-short"><span class="date-tag">Matka | 1925</span></a>
+            <a href="#" class="box box-short"><div class="color-marker" style="background: var(--color-left);"></div><span class="date-tag">Ojciec | 1920</span></a>
+            <a href="#" class="box box-short"><div class="color-marker" style="background: var(--color-right);"></div><span class="date-tag">Matka | 1925</span></a>
         </div>
 
         <a href="inna_strona.html" class="interactive-node">
@@ -137,11 +154,15 @@
         </a>
 
         <div class="row-flex">
-            <a href="#" class="box box-short active"><span class="date-tag">Jedność | 2026</span></a>
+            <a href="#" class="box box-short active">
+                <div class="color-marker" style="background: var(--color-left);"></div>
+                <span class="date-tag">Jedność | 2026</span>
+            </a>
         </div>
 
         <div class="row-flex" style="margin-top: 20px;">
             <div class="box box-potomek">
+                <div class="color-marker" style="background: var(--color-left); top: 10px; right: 10px;"></div>
                 <div style="display: flex; flex-direction: column; align-items: center; min-width: 80px;">
                     <img src="" class="img-single" style="width:80px; height:105px;">
                     <span class="name-tag" style="border:none; text-align:center;">Nazwa</span>
