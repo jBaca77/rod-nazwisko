@@ -22,9 +22,10 @@
         header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
         header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
         .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }
-        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.1; margin-bottom: 12px; position: relative; z-index: 1; }
+        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.1; margin-bottom: 20px; position: relative; z-index: 1; }
+        .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 650px; margin: 0 auto; position: relative; z-index: 1; line-height: 1.5; }
 
-        /* ── NAV & DRAWER ── */
+        /* ── NAV ── */
         nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
         .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; }
@@ -37,6 +38,7 @@
         .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
         .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
+        /* ── DRAWER (IDENTYCZNY Z KODEM ŹRÓDŁOWYM) ── */
         .drawer { 
             position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; 
             background: var(--ink); z-index: 1050; padding: 50px 0; 
@@ -44,26 +46,38 @@
             box-shadow: -15px 0 40px rgba(0,0,0,0.6); 
             display: flex; flex-direction: column; overflow-y: auto;
         }
+        .drawer::-webkit-scrollbar { width: 4px; }
+        .drawer::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 10px; }
         .drawer.open { right: 0; }
+
         .drawer-header { padding: 0 40px 35px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 25px; }
         .drawer-header span { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 8px; opacity: 0.8; }
         .drawer-header h2 { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-size: 1.8rem; font-weight: 300; letter-spacing: 1px; }
 
         .drawer-links { list-style: none; padding: 0 25px; }
         .drawer-links li { margin-bottom: 4px; }
-        .drawer-links a { color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; display: block; transition: 0.3s; border-radius: 2px; }
+        .drawer-links a { 
+            color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; 
+            text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; 
+            display: block; transition: all 0.3s; position: relative; border-radius: 2px;
+        }
+        .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
         .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
+        .drawer-links a:hover::before { width: 3px; }
+
+        .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
 
         .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
         .overlay.active { opacity: 1; pointer-events: auto; }
 
         /* ── MAIN CONTENT ── */
-        main { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
+        main { max-width: 900px; margin: 0 auto; padding: 80px 24px 100px; }
         .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; }
         .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); font-weight: 400; }
         .s-line { width: 50px; height: 1.5px; background: var(--gold); margin-bottom: 45px; }
 
-        .news-item { background: var(--cream); border: 1px solid var(--sepia-pale); padding: 60px; margin-bottom: 40px; position: relative; border-left: 5px solid var(--gold); }
+        .news-item { background: var(--cream); border: 1px solid var(--sepia-pale); padding: 60px; margin-bottom: 40px; position: relative; border-left: 5px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
         .news-date { font-size: .8rem; font-weight: 600; color: var(--gold); letter-spacing: 2px; margin-bottom: 25px; display: block; text-transform: uppercase; }
         .news-content { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--ink-light); text-align: justify; line-height: 1.7; }
         .news-content p { margin-bottom: 25px; }
@@ -88,6 +102,11 @@
 <header>
     <span class="header-ornament lang" data-pl="Komunikaty Rodzinne" data-en="Family Announcements">Komunikaty Rodzinne</span>
     <h1 class="lang" data-pl="Aktualności" data-en="News">Aktualności</h1>
+    <p class="header-quote lang" 
+       data-pl="„Wspólnota to nie tylko wspólne nazwisko, to przede wszystkim gotowość do bycia blisko siebie, gdy inni są daleko.”" 
+       data-en="“Community is not just a shared name, it is primarily the willingness to be close to each other when others are far away.”">
+       „Wspólnota to nie tylko wspólne nazwisko, to przede wszystkim gotowość do bycia blisko siebie, gdy inni są daleko.”
+    </p>
 </header>
 
 <nav>
@@ -112,6 +131,7 @@
     </div>
     <ul class="drawer-links">
         <li><a href="index.html">Strona Główna</a></li>
+        <li><a href="aktualnosci.html">Aktualności</a></li>
         <li><a href="historia.html">Historia Klanu</a></li>
         <li><a href="genealogia/genealogia.html">Genealogia</a></li>
         <li><a href="zjazdy/zjazdy.html">Kronika Zjazdów</a></li>
@@ -121,6 +141,9 @@
         <li><a href="biblioteka/biblioteczka.html">Biblioteczka</a></li>
         <li><a href="archiwym/archiwum.html">Archiwum Cyfrowe</a></li>
     </ul>
+    <div class="drawer-footer">
+        <p>Klan L&K © 1975 – 2026</p>
+    </div>
 </aside>
 
 <main>
@@ -200,16 +223,21 @@
 </footer>
 
 <script>
+    // Funkcja tłumaczenia (zachowana oryginalna funkcjonalność)
     function translatePage(lang, btn) {
         const elements = document.querySelectorAll('.lang');
         elements.forEach(el => {
             const translation = el.getAttribute('data-' + lang);
-            if (translation) el.innerText = translation;
+            if (translation) {
+                // Jeśli element to cytat, zachowujemy strukturę tekstową
+                el.innerText = translation;
+            }
         });
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
     }
 
+    // Obsługa Drawer (identyczna z kodem źródłowym)
     const menuBtn = document.getElementById('menuBtn');
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('overlay');
