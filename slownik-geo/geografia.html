@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geografia Rodowa | Archiwum L&K</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-khaki: #8B8263; 
-            --ink: #1e1a14; --sepia: #7a6548; --gold-light: #c8a96e; --line: rgba(0, 0, 0, 0.15);
-            /* Kolory precyzyjne z Twojego zdjęcia */
+            --ink: #1e1a14; --sepia: #7a6548; --gold-light: #c8a96e; --line: rgba(0, 0, 0, 0.2);
+            /* Precyzyjne kolory z przesłanego zdjęcia */
             --hex1a: #C9D980; --hex1b: #F2F24E;
             --hex2a: #A8E653; --hex2b: #F9F955;
             --hex3a: #66F94E; --hex3b: #F9F955;
@@ -21,26 +22,30 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--bg-khaki); color: var(--ink); line-height: 1.6; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--bg-khaki); color: var(--ink); line-height: 1.5; overflow-x: hidden; }
 
-        header { background-color: #2c3e2d; color: #f8f4ee; text-align: center; padding: 50px 20px; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; }
+        /* --- NAWIGACJA --- */
+        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+        .nav-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+        .menu-btn span { display: block; width: 24px; height: 1.5px; background: var(--gold-light); }
 
+        /* --- HEADER --- */
+        header { background-color: #2c3e2d; color: #f8f4ee; text-align: center; padding: 40px 20px; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; letter-spacing: 1px; }
+
+        /* --- MAPA --- */
         .map-wrapper { max-width: 1150px; margin: 20px auto; padding: 0 20px; }
-        #map { height: 450px; width: 100%; border: 1px solid var(--sepia); background: #f0ede5; border-radius: 2px; }
+        #map { height: 400px; width: 100%; border: 1px solid var(--sepia); background: #f0ede5; border-radius: 2px; }
 
-        /* --- 8 KLIKANYCH LINII (PIGUŁKI) --- */
-        .filter-bar { 
-            max-width: 1150px; margin: 10px auto; 
-            display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; 
-            padding: 15px; 
-        }
+        /* --- 8 FILTRÓW (PIGUŁKI) --- */
+        .filter-bar { max-width: 1150px; margin: 10px auto; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; padding: 10px; }
         .filter-item { 
             cursor: pointer; display: flex; align-items: center; gap: 6px; 
             padding: 6px 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.9); 
             font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;
         }
-        .filter-item:hover { transform: translateY(-2px); background: #fff; }
         .filter-item.active { background: var(--ink); color: #fff; border-color: var(--ink); }
         
         .dual-pill { 
@@ -50,47 +55,49 @@
         }
         .dual-pill::after { content: ''; position: absolute; left: calc(50% - 1px); top: 0; height: 100%; width: 2px; background: #000; }
 
-        /* --- MNIEJSZE BOXY (GRID) --- */
+        /* --- EKSTREMALNIE KOMPAKTOWE BOXY --- */
         .geo-grid { 
-            max-width: 1150px; margin: 20px auto 60px; 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-            gap: 12px; padding: 0 20px; 
+            max-width: 1150px; margin: 10px auto 50px; 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+            gap: 8px; padding: 0 20px; 
         }
         
         .geo-box { 
-            background: #fff; border: 1px solid var(--line); 
-            padding: 12px; /* Mniejszy padding */
-            display: flex; flex-direction: column; gap: 8px; transition: 0.2s;
-            position: relative; overflow: hidden;
-            min-height: 100px;
+            background: #fff; border: 1px solid var(--line); padding: 8px; 
+            display: flex; flex-direction: column; gap: 4px; transition: 0.2s;
+            position: relative; overflow: hidden; min-height: 70px;
         }
-        .geo-box:hover { border-color: var(--ink); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .geo-box:hover { border-color: var(--ink); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        /* WSTĄŻKA W PRAWYM GÓRNYM ROGU */
+        /* MINI WSTĄŻKA W PRAWYM ROGU */
         .ribbon {
-            position: absolute; top: 0; right: 10px; 
-            width: 14px; height: 28px; /* Mniejsza wstążka */
+            position: absolute; top: 0; right: 8px; 
+            width: 10px; height: 22px;
             background: linear-gradient(90deg, var(--c1) 50%, var(--c2) 50%);
             z-index: 2;
         }
         .ribbon::after {
             content: ''; position: absolute; bottom: 0; left: 0;
             width: 0; height: 0;
-            border-left: 7px solid transparent;
-            border-right: 7px solid transparent;
-            border-bottom: 5px solid #fff; 
+            border-left: 5px solid transparent; border-right: 5px solid transparent;
+            border-bottom: 4px solid #fff; 
         }
 
-        .box-title { font-weight: 600; font-size: 0.85rem; padding-right: 15px; color: var(--ink); margin-top: 5px; }
+        .box-title { 
+            font-weight: 600; font-size: 0.75rem; padding-right: 12px; color: var(--ink); 
+            margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
+        }
         
-        .box-actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 8px; border-top: 1px solid #f0f0f0; }
-        .btn-locate { font-size: 0.6rem; color: var(--sepia); cursor: pointer; text-transform: uppercase; font-weight: 700; }
-        .btn-more { font-size: 0.55rem; background: var(--ink); color: #fff; padding: 4px 8px; text-decoration: none; text-transform: uppercase; }
+        .box-actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 5px; border-top: 1px solid #f5f5f5; }
+        .btn-locate { font-size: 0.55rem; color: var(--sepia); cursor: pointer; text-transform: uppercase; font-weight: 700; }
+        .btn-more { font-size: 0.5rem; background: var(--ink); color: #fff; padding: 2px 6px; text-decoration: none; text-transform: uppercase; }
 
-        footer { background: var(--ink); color: rgba(255,255,255,0.2); text-align: center; padding: 30px; font-size: 0.7rem; }
+        footer { background: var(--ink); color: rgba(255,255,255,0.2); text-align: center; padding: 30px; font-size: 0.7rem; letter-spacing: 1px; }
     </style>
 </head>
 <body>
+
+<nav><div class="nav-inner"><a href="#" class="nav-logo">ARCHIWUM L&K</a><button class="menu-btn"><span></span><span></span><span></span></button></div></nav>
 
 <header><h1>Geografia Rodowa</h1></header>
 
@@ -125,19 +132,20 @@
 
 <div class="geo-grid" id="geoGrid"></div>
 
-<footer>ARCHIWUM L&K © 2026</footer>
+<footer>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 2026</footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // Przykładowe dane miejscowości
+    // PRZYKŁADOWE DANE (Wstążki mogą być jedno- lub dwukolorowe)
     const locations = [
         { id: 1, n: "Biejków", cat: "c1", c: [51.68, 20.93], c1: "#C9D980", c2: "#F2F24E" },
         { id: 2, n: "Babin", cat: "c2", c: [49.88, 24.35], c1: "#A8E653", c2: "#F9F955" },
         { id: 3, n: "Lwów", cat: "c4", c: [49.83, 24.02], c1: "#F9F955", c2: "#F29079" },
-        { id: 4, n: "Niegowić", cat: "c7", c: [49.91, 20.21], c1: "#EE2B1D", c2: "#EE2B1D" },
+        { id: 4, n: "Niegowić", cat: "c7", c: [49.91, 20.21], c1: "#EE2B1D", c2: "#EE2B1D" }, // Jednokolorowa
         { id: 5, n: "Rożnów", cat: "c3", c: [49.77, 20.68], c1: "#66F94E", c2: "#F9F955" },
         { id: 6, n: "Harklowa", cat: "c5", c: [49.44, 20.18], c1: "#F9D0D7", c2: "#F29079" },
-        { id: 7, n: "Wiedeń", cat: "c6", c: [48.20, 16.37], c1: "#F29079", c2: "#70E1F5" }
+        { id: 7, n: "Wiedeń", cat: "c6", c: [48.20, 16.37], c1: "#F29079", c2: "#70E1F5" },
+        { id: 8, n: "Kraków", cat: "c1", c: [50.06, 19.94], c1: "#C9D980", c2: "#C9D980" } // Jednokolorowa
     ];
 
     const map = L.map('map', { scrollWheelZoom: false }).setView([50.5, 21.0], 6);
@@ -148,17 +156,19 @@
     function init() {
         const grid = document.getElementById('geoGrid');
         locations.forEach(loc => {
+            // Mniejsze kropki na mapie (radius 5)
             const marker = L.circleMarker(loc.c, {
-                radius: 5, fillColor: loc.c1, color: "#fff", weight: 2, fillOpacity: 1
-            }).addTo(map).bindPopup(loc.n);
+                radius: 5, fillColor: loc.c1, color: "#fff", weight: 1.5, fillOpacity: 1
+            }).addTo(map).bindPopup(`<strong>${loc.n}</strong>`);
             
             marker.category = loc.cat;
             markerMap[loc.id] = marker;
 
+            // Mini boxy
             grid.innerHTML += `
                 <div class="geo-box" data-cat="${loc.cat}">
                     <div class="ribbon" style="--c1: ${loc.c1}; --c2: ${loc.c2};"></div>
-                    <div class="box-title">${loc.n}</div>
+                    <div class="box-title" title="${loc.n}">${loc.n}</div>
                     <div class="box-actions">
                         <span class="btn-locate" onclick="highlightMarker(${loc.id})">Namierz</span>
                         <a href="#" class="btn-more">Więcej</a>
@@ -171,7 +181,7 @@
     function highlightMarker(id) {
         const m = markerMap[id];
         if (!m) return;
-        document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        window.scrollTo({ top: document.getElementById('map').offsetTop - 80, behavior: 'smooth' });
         m.openPopup();
         let i = 0;
         const p = setInterval(() => {
