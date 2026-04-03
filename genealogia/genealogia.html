@@ -44,8 +44,8 @@
             margin-top: 20px;
         }
 
-        /* ── KAFELEK ROZBUDOWANY (MAIN) ── */
-        .card-main {
+        /* ── KAFELEK ROZBUDOWANY (KLIKALNY - Drzewo Klanowe) ── */
+        .card-main-link {
             grid-column: 1 / -1;
             background: linear-gradient(to bottom right, var(--cream), var(--parchment));
             border: 1px solid var(--sepia-pale);
@@ -59,8 +59,22 @@
             cursor: pointer;
             text-decoration: none;
         }
-        .card-main::after { content: ""; position: absolute; inset: 15px; border: 1px solid var(--line); pointer-events: none; }
-        .card-main:hover { transform: translateY(-5px); border-color: var(--gold); background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .card-main-link::after { content: ""; position: absolute; inset: 15px; border: 1px solid var(--line); pointer-events: none; }
+        .card-main-link:hover { transform: translateY(-5px); border-color: var(--gold); background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        /* ── KAFELEK STATYCZNY (NIEKLIKALNY - Wywody) ── */
+        .card-static {
+            grid-column: 1 / -1;
+            background: var(--warm-white);
+            border: 1px solid var(--sepia-pale);
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        .card-static::after { content: ""; position: absolute; inset: 15px; border: 1px solid var(--line); pointer-events: none; }
 
         .sub-divider {
             width: 150px;
@@ -86,10 +100,10 @@
             text-decoration: none;
             padding: 6px 12px;
             border: 1px solid var(--line);
-            background: rgba(255,255,255,0.4);
+            background: white;
             transition: 0.3s;
         }
-        .sub-nav a:hover { color: var(--ink); border-color: var(--gold); background: white; }
+        .sub-nav a:hover { color: var(--ink); border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
         /* ── KAFELKI STANDARDOWE ── */
         .gen-card { 
@@ -100,17 +114,16 @@
         .gen-card::after { content: ""; position: absolute; inset: 12px; border: 1px solid var(--line); pointer-events: none; }
         .gen-card:hover { transform: translateY(-5px); border-color: var(--gold); background: white; }
 
-        .gen-card h3, .card-main h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--ink); font-weight: 400; margin-bottom: 5px; z-index: 1; }
-        .gen-card span, .card-main span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); z-index: 1; }
+        h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--ink); font-weight: 400; margin-bottom: 5px; z-index: 1; }
+        span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); z-index: 1; }
         .card-ornament { width: 30px; height: 1px; background: var(--gold); margin-bottom: 15px; transition: 0.4s; }
         
-        .gen-card:hover .card-ornament, .card-main:hover .card-ornament { width: 60px; }
+        .card-main-link:hover .card-ornament, .gen-card:hover .card-ornament { width: 60px; }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; margin-top: 80px; }
 
         @media (max-width: 768px) {
-            .card-main { grid-column: auto; padding: 40px 20px; }
-            .sub-nav { gap: 8px; }
+            .card-main-link, .card-static { grid-column: auto; padding: 40px 20px; }
             .sub-nav a { width: 45%; text-align: center; }
         }
     </style>
@@ -138,13 +151,13 @@
 
 <main>
     <div class="gen-grid">
-        <a href="drzewo-klanowe.html" class="card-main">
+        <a href="drzewo-klanowe.html" class="card-main-link">
             <div class="card-ornament"></div>
             <h3>Drzewo klanowe</h3>
             <span>Pełna linia klanu Ładomirskich i Kraińskich</span>
         </a>
 
-        <div class="card-main" style="background: var(--warm-white);" onclick="window.location.href='wywody.html'">
+        <div class="card-static">
             <div class="card-ornament"></div>
             <h3>Wywody przodków</h3>
             <span>Dokumentacja historyczna i linie rodu</span>
@@ -152,14 +165,14 @@
             <div class="sub-divider"></div>
 
             <div class="sub-nav">
-                <a href="linia-1.html" onclick="event.stopPropagation()">Linia I</a>
-                <a href="linia-2.html" onclick="event.stopPropagation()">Linia II</a>
-                <a href="linia-3.html" onclick="event.stopPropagation()">Linia III</a>
-                <a href="linia-4.html" onclick="event.stopPropagation()">Linia IV</a>
-                <a href="linia-5.html" onclick="event.stopPropagation()">Linia V</a>
-                <a href="linia-6.html" onclick="event.stopPropagation()">Linia VI</a>
-                <a href="linia-7.html" onclick="event.stopPropagation()">Linia VII</a>
-                <a href="linia-8.html" onclick="event.stopPropagation()">Linia VIII</a>
+                <a href="linia-1.html">Linia I</a>
+                <a href="linia-2.html">Linia II</a>
+                <a href="linia-3.html">Linia III</a>
+                <a href="linia-4.html">Linia IV</a>
+                <a href="linia-5.html">Linia V</a>
+                <a href="linia-6.html">Linia VI</a>
+                <a href="linia-7.html">Linia VII</a>
+                <a href="linia-8.html">Linia VIII</a>
             </div>
         </div>
 
