@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aktualności | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
@@ -16,63 +16,68 @@
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
         /* ── HEADER ── */
-        header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
+        header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
         header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
-        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; display: block; }
-        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.1; margin-bottom: 12px; }
+        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }
+        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.1; margin-bottom: 12px; position: relative; z-index: 1; }
 
         /* ── NAV & DRAWER ── */
-        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
-        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
-        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; }
         
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .lang-switcher { display: flex; gap: 5px; }
         .lang-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--sepia); color: var(--cream); font-size: 0.65rem; padding: 4px 8px; cursor: pointer; transition: 0.3s; border-radius: 2px; }
         .lang-btn.active { background: var(--gold); border-color: var(--gold); }
 
-        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 1100; }
-        .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
+        .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
+        .drawer { 
+            position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; 
+            background: var(--ink); z-index: 1050; padding: 50px 0; 
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: -15px 0 40px rgba(0,0,0,0.6); 
+            display: flex; flex-direction: column; overflow-y: auto;
+        }
         .drawer.open { right: 0; }
-        .drawer-links { list-style: none; }
-        .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-        .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; transition: 0.3s; cursor: pointer; }
-        .drawer-links a:hover { color: var(--gold-light); padding-left: 5px; }
+        .drawer-header { padding: 0 40px 35px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 25px; }
+        .drawer-header span { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 8px; opacity: 0.8; }
+        .drawer-header h2 { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-size: 1.8rem; font-weight: 300; letter-spacing: 1px; }
 
-        .has-submenu > a::after { content: ' ▾'; font-size: 0.7rem; color: var(--gold); }
-        .submenu { display: none; list-style: none; padding-left: 15px; margin-top: 10px; }
-        .submenu li { border: none; margin-bottom: 10px; padding-bottom: 0; }
-        .submenu a { font-size: 0.7rem; color: var(--sepia-light); text-transform: none; }
-        .has-submenu.active .submenu { display: block; }
-        
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .drawer-links { list-style: none; padding: 0 25px; }
+        .drawer-links li { margin-bottom: 4px; }
+        .drawer-links a { color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; display: block; transition: 0.3s; border-radius: 2px; }
+        .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
+
+        .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
         .overlay.active { opacity: 1; pointer-events: auto; }
 
         /* ── MAIN CONTENT ── */
         main { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
-        .s-label { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 10px; display: block; }
-        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 8px; color: var(--ink); }
-        .s-line { width: 40px; height: 1px; background: var(--gold); margin-bottom: 40px; }
+        .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; }
+        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); font-weight: 400; }
+        .s-line { width: 50px; height: 1.5px; background: var(--gold); margin-bottom: 45px; }
 
-        .news-item { background: var(--cream); border: 1px solid var(--sepia-pale); padding: 50px; margin-bottom: 40px; position: relative; border-left: 4px solid var(--gold); }
-        .news-date { font-size: .75rem; font-weight: 500; color: var(--gold); letter-spacing: 1px; margin-bottom: 15px; display: block; }
-        .news-content { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--ink-light); text-align: justify; line-height: 1.6; }
-        .news-content p { margin-bottom: 20px; }
+        .news-item { background: var(--cream); border: 1px solid var(--sepia-pale); padding: 60px; margin-bottom: 40px; position: relative; border-left: 5px solid var(--gold); }
+        .news-date { font-size: .8rem; font-weight: 600; color: var(--gold); letter-spacing: 2px; margin-bottom: 25px; display: block; text-transform: uppercase; }
+        .news-content { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--ink-light); text-align: justify; line-height: 1.7; }
+        .news-content p { margin-bottom: 25px; }
         
-        .bank-card { background: var(--parchment); padding: 25px; margin: 30px 0; border: 1px dashed var(--sepia-light); font-family: 'Jost', sans-serif; font-size: 0.95rem; line-height: 1.5; }
-        .bank-card strong { color: var(--sepia); display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
-        .bank-card .bank-group { margin-bottom: 20px; }
+        .bank-card { background: var(--parchment); padding: 35px; margin: 40px 0; border: 1px dashed var(--sepia-light); font-family: 'Jost', sans-serif; font-size: 1rem; line-height: 1.6; }
+        .bank-card strong { color: var(--sepia); display: block; margin-bottom: 8px; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        .bank-card .bank-group { margin-bottom: 25px; }
         .bank-card .bank-group:last-child { margin-bottom: 0; }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; }
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.85rem; letter-spacing: 1px; }
 
-        @media (max-width: 850px) {
-            .news-item { padding: 30px 20px; }
+        @media (max-width: 900px) {
+            .news-item { padding: 40px 25px; }
+            .drawer { width: 100%; right: -100%; }
         }
     </style>
 </head>
@@ -81,8 +86,8 @@
 <div class="overlay" id="overlay"></div>
 
 <header>
-    <span class="header-ornament lang" data-pl="Komunikaty Rodzinne" data-en="Family Announcements" data-es="Anuncios de la familia" data-fr="Annonces familiales">Komunikaty Rodzinne</span>
-    <h1 class="lang" data-pl="Aktualności" data-en="News" data-es="Noticias" data-fr="Actualités">Aktualności</h1>
+    <span class="header-ornament lang" data-pl="Komunikaty Rodzinne" data-en="Family Announcements">Komunikaty Rodzinne</span>
+    <h1 class="lang" data-pl="Aktualności" data-en="News">Aktualności</h1>
 </header>
 
 <nav>
@@ -92,8 +97,6 @@
             <div class="lang-switcher">
                 <button class="lang-btn active" onclick="translatePage('pl', this)">PL</button>
                 <button class="lang-btn" onclick="translatePage('en', this)">EN</button>
-                <button class="lang-btn" onclick="translatePage('es', this)">ES</button>
-                <button class="lang-btn" onclick="translatePage('fr', this)">FR</button>
             </div>
             <button class="menu-btn" id="menuBtn">
                 <span></span><span></span><span></span>
@@ -103,89 +106,100 @@
 </nav>
 
 <aside class="drawer" id="drawer">
+    <div class="drawer-header">
+        <span>Nawigacja Archiwum</span>
+        <h2>Menu Rodowe</h2>
+    </div>
     <ul class="drawer-links">
-    <li><a href="index.html">Strona Główna</a></li>
-    <li><a href="historia.html">Historia Klanu</a></li>
-    <li><a href="genealogia/genealogia.html">Genealogia</a><li>
-    <li><a href="zjazdy/zjazdy.html">Kronika zajazdów</a></li>
-    <li><a href="slownik-biogr/biografie.html">Biografie</a></li>
-    <li><a href="pamiec.html">Pamięć i groby</a></li>
-    <li><a href="slownik-geo/geografia.html">Geografia rodowa</a></li>
-    <li><a href="biblioteka/biblioteczka.html">Biblioteczka</a></li>
-    <li><a href="archiwym/archiwum.html">Archiwum</a></li>
+        <li><a href="index.html">Strona Główna</a></li>
+        <li><a href="historia.html">Historia Klanu</a></li>
+        <li><a href="genealogia/genealogia.html">Genealogia</a></li>
+        <li><a href="zjazdy/zjazdy.html">Kronika Zjazdów</a></li>
+        <li><a href="slownik-biogr/biografie.html">Biografie</a></li>
+        <li><a href="pamiec.html">Pamięć i Groby</a></li>
+        <li><a href="slownik-geo/geografia.html">Geografia Rodowa</a></li>
+        <li><a href="biblioteka/biblioteczka.html">Biblioteczka</a></li>
+        <li><a href="archiwym/archiwum.html">Archiwum Cyfrowe</a></li>
     </ul>
 </aside>
 
 <main>
     <section>
-        <span class="s-label lang" data-pl="Kronika Bieżąca" data-en="Current Chronicle" data-es="Crónica Actual" data-fr="Chronique Actuelle">Kronika Bieżąca</span>
-        <h2 class="s-title lang" data-pl="Najnowsze wpisy" data-en="Latest entries" data-es="Últimas entradas" data-fr="Dernières entrées">Najnowsze wpisy</h2>
+        <span class="s-label lang" data-pl="Kronika Bieżąca" data-en="Current Chronicle">Kronika Bieżąca</span>
+        <h2 class="s-title lang" data-pl="Najnowsze wpisy" data-en="Latest entries">Najnowsze wpisy</h2>
         <div class="s-line"></div>
 
         <article class="news-item">
-            <span class="news-date lang" data-pl="List z dnia 15 grudnia 2022 roku" data-en="Letter dated December 15, 2022" data-es="Carta del 15 de diciembre de 2022" data-fr="Lettre du 15 décembre 2022">List z dnia 15 grudnia 2022 roku</span>
+            <span class="news-date lang" data-pl="List z dnia 15 grudnia 2022 roku" data-en="Letter dated December 15, 2022">List z dnia 15 grudnia 2022 roku</span>
             
             <div class="news-content">
-                <p><strong class="lang" data-pl="Kochani," data-en="Dear ones," data-es="Queridos," data-fr="Chers tous,">Kochani,</strong></p>
+                <p><strong class="lang" data-pl="Kochani," data-en="Dear ones,">Kochani,</strong></p>
                 
                 <p class="lang" 
-                   data-pl="W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań." 
-                   data-en="The day has finally come!!! According to the decisions of the Council of Elders at the last Meeting, I was obliged to set up a family account. On this account, we will be able to collect funds that will help reduce the costs of our future meetings.">
-                   W końcu nadszedł ten dzień!!! Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań.
+                   data-pl="W końcu nadszedł ten dzień!!!" 
+                   data-en="The day has finally come!!!">
+                   W końcu nadszedł ten dzień!!!
                 </p>
 
                 <p class="lang"
-                   data-pl="Środki te będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe. Może to dotyczyć zarówno rodzin wielodzietnych, jak i emerytów oraz innych osób. Idea, która przyświeca tej inicjatywie, to zapewnienie jak największego grona uczestników na kolejnych spotkaniach."
-                   data-en="These funds will be used to support those for whom the cost of attending the Meeting exceeds their budget. This may apply to large families, retirees, and others. The idea behind this initiative is to ensure the largest possible number of participants at future meetings.">
-                   Środki te będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe. Może to dotyczyć zarówno rodzin wielodzietnych, jak i emerytów oraz innych osób. Idea, która przyświeca tej inicjatywie, to zapewnienie jak największego grona uczestników na kolejnych spotkaniach.
+                   data-pl="Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań. Środki te będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe. Może to dotyczyć zarówno rodzin wielodzietnych, jak i emerytów oraz innych osób. Idea, która przyświeca tej inicjatywie, to zapewnienie jak największego grona uczestników na kolejnych spotkaniach."
+                   data-en="In accordance with the agreements of the Council of Elders at the last Meeting, I was obliged to set up a family account. On this account, we will be able to collect funds that will help reduce the costs of our subsequent meetings. These funds will be allocated to support those for whom the cost of participating in the Meeting exceeds their budgetary possibilities. This may apply to large families, retirees, and other individuals. The idea behind this initiative is to ensure the largest possible number of participants at future meetings.">
+                   Zgodnie z ustaleniami Rady Starszych na ostatnim Zjeździe, zostałam zobligowana do założenia konta rodzinnego. Na tymże koncie będziemy mogli zbierać środki, które pomogą w obniżeniu kosztów kolejnych naszych spotkań. Środki te będą przeznaczone na wsparcie tych, dla których koszt uczestniczenia w Zjeździe przekracza możliwości budżetowe. Może to dotyczyć zarówno rodzin wielodzietnych, jak i emerytów oraz innych osób. Idea, która przyświeca tej inicjatywie, to zapewnienie jak największego grona uczestników na kolejnych spotkaniach.
                 </p>
 
                 <p class="lang"
-                   data-pl="A teraz konkrety. Wpłat na konto można dokonywać każdy, który może, w dowolnych kwotach, w dowolnych terminach. Nie ma konieczności deklarowania się, co do wysokości oraz częstotliwości wpłat. Nawet małe kwoty wpłacane przez 2-letni okres do następnego Zjazdu na pewno stworzą spory budżet do dyspozycji. Każdy może zadecydować, jak mu jest wygodniej. Oczywiście podkreślam całkowitą DOBROWOLNOŚĆ tej inicjatywy."
-                   data-en="Now for the details. Anyone can make contributions in any amount and at any time. There is no need to declare the amount or frequency of payments. Even small amounts paid over the 2-year period until the next Meeting will certainly create a substantial budget. Everyone can decide what is more convenient for them. Of course, I emphasize the complete VOLUNTARY nature of this initiative.">
-                   A teraz konkrety. Wpłat na konto można dokonywać każdy, który może, w dowolnych kwotach, w dowolnych terminach. Nie ma konieczności deklarowania się, co do wysokości oraz częstotliwości wpłat. Nawet małe kwoty wpłacane przez 2-letni okres do następnego Zjazdu na pewno stworzą spory budżet do dyspozycji. Każdy może zadecydować, jak mu jest wygodniej. Oczywiście podkreślam całkowitą DOBROWOLNOŚĆ tej inicjatywy.
+                   data-pl="A teraz konkrety."
+                   data-en="And now for the specifics.">
+                   A teraz konkrety.
                 </p>
+
+                <p class="lang"
+                   data-pl="Wpłat na konto można dokonywać każdy, który może, w dowolnych kwotach, w dowolnych terminach. Nie ma konieczności deklarowania się, co do wysokości oraz częstotliwości wpłat. Nawet małe kwoty wpłacane przez 2-letni okres do następnego Zjazdu na pewno stworzą spory budżet do dyspozycji. Każdy może zadecydować, jak mu jest wygodniej. Oczywiście podkreślam całkowitą DOBROWOLNOŚĆ tej inicjatywy."
+                   data-en="Contributions to the account can be made by anyone who can, in any amounts, at any time. There is no need to declare the amount or frequency of payments. Even small amounts paid over a 2-year period until the next Meeting will certainly create a significant budget for use. Everyone can decide what is more convenient for them. Of course, I emphasize the total VOLUNTARY nature of this initiative.">
+                   Wpłat na konto można dokonywać każdy, który może, w dowolnych kwotach, w dowolnych terminach. Nie ma konieczności deklarowania się, co do wysokości oraz częstotliwości wpłat. Nawet małe kwoty wpłacane przez 2-letni okres do następnego Zjazdu na pewno stworzą spory budżet do dyspozycji. Każdy może zadecydować, jak mu jest wygodniej. Oczywiście podkreślam całkowitą DOBROWOLNOŚĆ tej inicjatywy.
+                </p>
+
+                <p class="lang" data-pl="Dane do przelewu:" data-en="Transfer details:">Dane do przelewu:</p>
 
                 <div class="bank-card">
                     <div class="bank-group">
-                        <strong class="lang" data-pl="Przelewy z Polski:" data-en="Transfers from Poland:" data-es="Transferencias desde Polonia:" data-fr="Virements depuis la Pologne :">Przelewy z Polski:</strong>
+                        <strong class="lang" data-pl="--- z Polski" data-en="--- from Poland">--- z Polski</strong>
                         Bank ING<br>
-                        07 1050 1588 1000 0097 6819 4954
+                        Nr konta 07 1050 1588 1000 0097 6819 4954
                     </div>
                     
                     <div class="bank-group">
-                        <strong class="lang" data-pl="Przelewy z zagranicy:" data-en="International transfers:" data-es="Transferencias internacionales:" data-fr="Virements internationaux :">Przelewy z zagranicy:</strong>
+                        <strong class="lang" data-pl="--- z zagranicy" data-en="--- from abroad">--- z zagranicy</strong>
                         IBAN: PL 07 1050 1588 1000 0097 6819 4954<br>
                         Kod BIC SWIFT: INGBPLPW
                     </div>
 
                     <div class="bank-group">
-                        <strong class="lang" data-pl="Tytuł przelewu:" data-en="Transfer subject:" data-es="Concepto:" data-fr="Objet du virement :">Tytuł przelewu:</strong> 
+                        <strong class="lang" data-pl="W tytule przelewu proszę wpisywać:" data-en="In the transfer title, please enter:">W tytule przelewu proszę wpisywać:</strong> 
                         Zjazd Rodzinny
                     </div>
                 </div>
 
-                <p><em class="lang" data-pl="Współwłaściciele oraz pełnomocnicy:" data-en="Co-owners and proxies:" data-es="Copropietarios y apoderados:" data-fr="Co-propriétaires et mandataires :">Współwłaściciele oraz pełnomocnicy:</em><br>
+                <p><em class="lang" data-pl="Współwłaściciele oraz pełnomocnicy:" data-en="Co-owners and proxies:">Współwłaściciele oraz pełnomocnicy:</em><br>
                 Anna Wilk, Łukasz Ładomirski, Marta Kacorzyk, Paweł Meissner</p>
                 
                 <p class="lang"
                    data-pl="W razie jakichkolwiek pytań bardzo proszę o kontakt do mnie."
-                   data-en="If you have any questions, please feel free to contact me.">
+                   data-en="In case of any questions, please contact me.">
                    W razie jakichkolwiek pytań bardzo proszę o kontakt do mnie.
                 </p>
 
-                <p class="lang" data-pl="Ściskam Was serdecznie, Ania" data-en="Warm hugs, Ania" data-es="Un gran abrazo, Ania" data-fr="Je vous embrasse, Ania">Ściskam Was serdecznie, Ania</p>
+                <p class="lang" data-pl="Ściskam Was serdecznie, Ania" data-en="Warm hugs, Ania">Ściskam Was serdecznie, Ania</p>
             </div>
         </article>
     </section>
 </main>
 
 <footer>
-    <p>Klan Ładomirskich i Kraińskich © 2026<br>Pamięć | Tożsamość | Wspólnota</p>
+    <p>Klan Ładomirskich i Kraińskich © 1975 – 2026<br>Pamięć | Tożsamość | Wspólnota</p>
 </footer>
 
 <script>
-    // Automatyczne Tłumaczenie
     function translatePage(lang, btn) {
         const elements = document.querySelectorAll('.lang');
         elements.forEach(el => {
@@ -196,7 +210,6 @@
         btn.classList.add('active');
     }
 
-    // Drawer Logic (Sidebar)
     const menuBtn = document.getElementById('menuBtn');
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('overlay');
@@ -206,9 +219,9 @@
         overlay.classList.toggle('active');
         const spans = menuBtn.querySelectorAll('span');
         if(drawer.classList.contains('open')) {
-            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
             spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(4px, -5px)';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
         } else {
             spans[0].style.transform = 'none';
             spans[1].style.opacity = '1';
@@ -218,10 +231,6 @@
 
     menuBtn.addEventListener('click', toggleSidebar);
     overlay.addEventListener('click', toggleSidebar);
-
-    function toggleSub(el) {
-        el.parentElement.classList.toggle('active');
-    }
 </script>
 
 </body>
