@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kronika Zjazdów | Archiwum L&K</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
@@ -18,69 +18,95 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
   /* ── HEADER ── */
-  header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
+  header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
   header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
-  .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; display: block; }
-  header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.1; }
+  .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }
+  header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem, 7vw, 5.2rem); line-height: 1; margin-bottom: 20px; position: relative; z-index: 1; }
+  .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 650px; margin: 0 auto; position: relative; z-index: 1; line-height: 1.5; }
 
   /* ── NAV ── */
-  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
-  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
-  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
-  .menu-btn span { display: block; width: 28px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
+  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
+  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; }
+  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
+  .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-  /* ── DRAWER ── */
-  .drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: var(--ink); z-index: 1050; padding: 100px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto; }
+  /* ── DRAWER (PASEK BOCZNY) ── */
+  .drawer { 
+    position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; 
+    background: var(--ink); z-index: 1050; padding: 50px 0; 
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    box-shadow: -15px 0 40px rgba(0,0,0,0.6); 
+    display: flex; flex-direction: column; overflow-y: auto;
+  }
+  .drawer::-webkit-scrollbar { width: 4px; }
+  .drawer::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 10px; }
   .drawer.open { right: 0; }
-  .drawer-links { list-style: none; }
-  .drawer-links li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-  .drawer-links a { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: block; transition: 0.3s; cursor: pointer; }
-  .drawer-links a:hover { color: var(--gold-light); }
-  .has-submenu.active .submenu { display: block; }
-  .submenu { display: none; list-style: none; padding-left: 15px; margin-top: 10px; }
-  .submenu a { font-size: 0.7rem; color: var(--sepia-light); text-transform: none; }
-  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
+  .drawer-header { padding: 0 40px 35px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 25px; }
+  .drawer-header span { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 8px; opacity: 0.8; }
+  .drawer-header h2 { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-size: 1.8rem; font-weight: 300; letter-spacing: 1px; }
+  .drawer-links { list-style: none; padding: 0 25px; }
+  .drawer-links li { margin-bottom: 4px; }
+  .drawer-links a { 
+    color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; 
+    text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; 
+    display: block; transition: all 0.3s; position: relative; border-radius: 2px;
+  }
+  .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
+  .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
+  .drawer-links a:hover::before { width: 3px; }
+  .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
+  .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
   .overlay.active { opacity: 1; pointer-events: auto; }
 
   /* ── MAIN CONTENT ── */
   main { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
-  .s-label { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 10px; display: block; text-align: center; }
-  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 40px; color: var(--ink); text-align: center; }
+  .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; text-align: center; }
+  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; }
+  .s-line { width: 60px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; }
 
   /* ── MAPA ── */
   #map { 
-    height: 500px; width: 100%; border: 1px solid var(--sepia-pale); 
+    height: 550px; width: 100%; border: 1px solid var(--sepia-pale); 
     margin-bottom: 30px; border-radius: 2px;
-    filter: sepia(10%) contrast(98%) brightness(98%);
+    filter: sepia(15%) contrast(95%) brightness(98%);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
   }
   .legend { 
-    display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; 
-    margin-bottom: 60px; padding: 20px; background: var(--cream); 
+    display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; 
+    margin-bottom: 60px; padding: 25px; background: var(--cream); 
     border: 1px solid var(--line);
   }
-  .leg-item { display: flex; align-items: center; gap: 8px; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sepia); }
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .leg-item { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--sepia); font-weight: 500; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); }
 
   /* ── GRID ZJAZDÓW ── */
-  .z-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+  .z-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
   .z-card { 
-    background: var(--cream); padding: 40px 30px; border: 1px solid var(--sepia-pale); 
+    background: var(--cream); padding: 50px 35px; border: 1px solid var(--sepia-pale); 
     text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative; display: flex; flex-direction: column; overflow: hidden;
   }
-  .z-card::after { content: ""; position: absolute; inset: 10px; border: 1px solid var(--line); pointer-events: none; transition: 0.4s; }
-  .z-card:hover { transform: translateY(-5px); background-color: var(--parchment); border-color: var(--gold); }
-  .z-card:hover::after { border-color: var(--gold-light); inset: 15px; }
+  .z-card::after { content: ""; position: absolute; inset: 12px; border: 1px solid var(--line); pointer-events: none; transition: 0.4s; }
+  .z-card:hover { transform: translateY(-8px); background-color: #fff; border-color: var(--gold); box-shadow: 0 15px 40px rgba(0,0,0,0.05); }
+  .z-card:hover::after { border-color: var(--gold-light); inset: 18px; }
 
-  .z-card .meta { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; z-index: 1; }
-  .z-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 8px; font-weight: 500; z-index: 1; }
-  .z-card .place { font-size: 0.85rem; color: var(--sepia); font-style: italic; z-index: 1; }
+  .z-card .meta { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 15px; z-index: 1; }
+  .z-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 10px; font-weight: 500; color: var(--ink); z-index: 1; }
+  .z-card .place { font-size: 0.95rem; color: var(--sepia); font-style: italic; z-index: 1; font-weight: 300; }
 
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; margin-top: 100px; }
+  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.85rem; letter-spacing: 1px; margin-top: 100px; }
+
+  @media (max-width: 900px) {
+    .drawer { width: 100%; right: -100%; }
+    main { padding: 50px 24px; }
+    #map { height: 400px; }
+  }
 </style>
 </head>
 <body>
@@ -88,8 +114,9 @@
 <div class="overlay" id="overlay"></div>
 
 <header>
-    <span class="header-ornament">Pół wieku tradycji</span>
+    <span class="header-ornament">Pół wieku tradycji spotkań</span>
     <h1>Kronika Zjazdów</h1>
+    <p class="header-quote">„Spotykamy się nie tylko po to, by wspominać przeszłość, ale by wspólnie budować mosty ku przyszłym pokoleniom.” — Kronika Rodowa L&K</p>
 </header>
 
 <nav>
@@ -100,23 +127,31 @@
 </nav>
 
 <aside class="drawer" id="drawer">
+  <div class="drawer-header">
+    <span>Nawigacja Archiwum</span>
+    <h2>Menu Rodowe</h2>
+  </div>
   <ul class="drawer-links">
     <li><a href="../index.html">Strona Główna</a></li>
     <li><a href="../aktualnosci.html">Aktualności</a></li>
     <li><a href="../historia.html">Historia Klanu</a></li>
-    <li><a href="../genealogia/genealogia.html">Genealogia</a><li>
-    <li><a href="../zjazdy/zjazdy.html">Kronika zajazdów</a></li>
+    <li><a href="../genealogia/genealogia.html">Genealogia</a></li>
+    <li><a href="../zjazdy/zjazdy.html">Kronika Zjazdów</a></li>
     <li><a href="../slownik-biogr/biografie.html">Biografie</a></li>
-    <li><a href="../pamiec/pamiec.html">Pamięć i groby</a></li>
-    <li><a href="../slownik-geo/geografia.html">Geografia rodowa</a></li>
+    <li><a href="../pamiec.html">Pamięć i Groby</a></li>
+    <li><a href="../slownik-geo/geografia.html">Geografia Rodowa</a></li>
     <li><a href="../biblioteka/biblioteczka.html">Biblioteczka</a></li>
-    <li><a href="../archiwym/archiwum.html">Archiwum</a></li>
+    <li><a href="../archiwym/archiwum.html">Archiwum Cyfrowe</a></li>
   </ul>
+  <div class="drawer-footer">
+    <p>Klan L&K © 1975 – 2026</p>
+  </div>
 </aside>
 
 <main>
   <span class="s-label">Historia Rodowa</span>
   <h2 class="s-title">Mapa i Spis Spotkań</h2>
+  <div class="s-line"></div>
   
   <div id="map"></div>
   
@@ -130,7 +165,7 @@
 </main>
 
 <footer>
-  <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+  <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026<br>Pamięć | Tożsamość | Wspólnota</p>
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -190,8 +225,6 @@
   const btn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
   btn.onclick = () => { drw.classList.add('open'); ovr.classList.add('active'); };
   ovr.onclick = () => { drw.classList.remove('open'); ovr.classList.remove('active'); };
-
-  function toggleSub(el) { el.parentElement.classList.toggle('active'); }
 </script>
 </body>
 </html>
