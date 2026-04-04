@@ -35,7 +35,7 @@
   .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
   .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-  /* ── DRAWER ── */
+  /* ── DRAWER (PASEK BOCZNY) ── */
   .drawer { 
     position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; 
     background: var(--ink); z-index: 1050; padding: 50px 0; 
@@ -43,6 +43,8 @@
     box-shadow: -15px 0 40px rgba(0,0,0,0.6); 
     display: flex; flex-direction: column; overflow-y: auto;
   }
+  .drawer::-webkit-scrollbar { width: 4px; }
+  .drawer::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 10px; }
   .drawer.open { right: 0; }
   .drawer-header { padding: 0 40px 35px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 25px; }
   .drawer-header span { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 8px; opacity: 0.8; }
@@ -54,7 +56,11 @@
     text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; 
     display: block; transition: all 0.3s; position: relative; border-radius: 2px;
   }
+  .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
   .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
+  .drawer-links a:hover::before { width: 3px; }
+  .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
   .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
   .overlay.active { opacity: 1; pointer-events: auto; }
 
@@ -64,20 +70,13 @@
   .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; }
   .s-line { width: 60px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; }
 
-  /* ── ULEPSZONA MAPA ── */
+  /* ── MAPA ── */
   #map { 
     height: 550px; width: 100%; border: 1px solid var(--sepia-pale); 
     margin-bottom: 30px; border-radius: 2px;
+    filter: sepia(15%) contrast(95%) brightness(98%);
     box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-    background: var(--parchment);
   }
-  .custom-icon { transition: transform 0.3s ease; }
-  .custom-icon:hover { transform: scale(1.3); z-index: 1000 !important; }
-  
-  /* Stylizacja popupów mapy */
-  .leaflet-popup-content-wrapper { border-radius: 0; background: var(--cream); color: var(--ink); border: 1px solid var(--gold); }
-  .leaflet-popup-tip { background: var(--gold); }
-
   .legend { 
     display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; 
     margin-bottom: 60px; padding: 25px; background: var(--cream); 
@@ -92,10 +91,10 @@
     background: var(--cream); padding: 50px 35px; border: 1px solid var(--sepia-pale); 
     text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative; display: flex; flex-direction: column; overflow: hidden;
-    cursor: pointer;
   }
   .z-card::after { content: ""; position: absolute; inset: 12px; border: 1px solid var(--line); pointer-events: none; transition: 0.4s; }
   .z-card:hover { transform: translateY(-8px); background-color: #fff; border-color: var(--gold); box-shadow: 0 15px 40px rgba(0,0,0,0.05); }
+  .z-card:hover::after { border-color: var(--gold-light); inset: 18px; }
 
   .z-card .meta { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 15px; z-index: 1; }
   .z-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 10px; font-weight: 500; color: var(--ink); z-index: 1; }
@@ -144,6 +143,9 @@
     <li><a href="../biblioteka/biblioteczka.html">Biblioteczka</a></li>
     <li><a href="../archiwym/archiwum.html">Archiwum Cyfrowe</a></li>
   </ul>
+  <div class="drawer-footer">
+    <p>Klan L&K © 1975 – 2026</p>
+  </div>
 </aside>
 
 <main>
@@ -197,47 +199,27 @@
 
   const mapColors = { "Ładomirscy": "#fcc000", "Kraińscy": "#cc0000", "Domańscy": "#2d7a2d" };
 
-  // Inicjalizacja mapy z "antyczną" warstwą CartoDB Voyager (lepiej pasuje do archiwum)
-  const map = L.map('map', { scrollWheelZoom: false, zoomControl: false }).setView([52.1, 19.4], 6);
-  L.control.zoom({ position: 'bottomright' }).addTo(map);
-
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(map);
+  const map = L.map('map', { scrollWheelZoom: false }).setView([52.1, 19.4], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
   const container = document.getElementById('z-container');
-  const markers = [];
-
   zData.forEach((z, i) => {
     const color = mapColors[z.g];
     const icon = L.divIcon({
       className: 'custom-icon',
-      html: `<div style="background:${color}; width:16px; height:16px; border-radius:50%; border:2px solid white; box-shadow:0 3px 6px rgba(0,0,0,0.3);"></div>`,
-      iconSize: [16, 16], iconAnchor: [8, 8]
+      html: `<div style="background:${color}; width:14px; height:14px; border-radius:50%; border:2px solid white; box-shadow:0 2px 4px rgba(0,0,0,0.3);"></div>`,
+      iconSize: [14, 14], iconAnchor: [7, 7]
     });
 
-    const marker = L.marker(z.c, {icon}).addTo(map)
-      .bindPopup(`<div style="font-family:'Jost',sans-serif; padding:5px"><strong style="font-family:'Cormorant Garamond',serif; font-size:1.1rem">${z.n} Zjazd Rodzinny</strong><br><span style="color:var(--sepia)">${z.p}, ${z.d}</span></div>`);
-    
-    markers.push(marker);
+    L.marker(z.c, {icon}).addTo(map)
+      .bindPopup(`<div style="font-family:'Jost',sans-serif; padding:5px"><strong>${z.n} Zjazd Rodzinny</strong><br>${z.p}, ${z.d}</div>`);
 
-    // Tworzenie karty z dodatkową funkcją interakcji
-    const card = document.createElement('div');
-    card.className = 'z-card';
-    card.innerHTML = `
-      <div class="meta" style="color:${color}">${z.d} — ${z.g}</div>
-      <h3>${z.n} Zjazd Rodzinny</h3>
-      <div class="place">${z.p}</div>
-    `;
-    
-    card.onclick = (e) => {
-      map.flyTo(z.c, 10, { duration: 1.5 });
-      marker.openPopup();
-      // Opcjonalnie: odkomentuj poniższe, by karta nadal była linkiem
-      // window.location.href = `zjazd${i+1}.html`;
-    };
-
-    container.appendChild(card);
+    container.innerHTML += `
+      <a href="zjazd${i+1}.html" class="z-card">
+        <div class="meta" style="color:${color}">${z.d} — ${z.g}</div>
+        <h3>${z.n} Zjazd Rodzinny</h3>
+        <div class="place">${z.p}</div>
+      </a>`;
   });
 
   const btn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
