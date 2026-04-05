@@ -41,41 +41,90 @@
   .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.3s; }
   .overlay.active { opacity: 1; pointer-events: auto; }
 
-  main { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
+  main { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
   .s-label { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 10px; display: block; text-align: center; }
   .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 20px; color: var(--ink); text-align: center; }
   
   .quote-box { text-align: center; margin-bottom: 40px; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--sepia); }
-  .quote-box p { font-size: 1.2rem; }
-  .quote-box span { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 5px; }
+  .quote-box p { font-size: 1.1rem; }
+  .quote-box span { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 5px; }
 
   #map { 
-    height: 500px; width: 100%; border: 1px solid var(--sepia-pale); 
-    margin-bottom: 60px; border-radius: 2px;
+    height: 450px; width: 100%; border: 1px solid var(--sepia-pale); 
+    margin-bottom: 40px; border-radius: 2px;
     filter: sepia(10%) contrast(98%) brightness(98%);
+    z-index: 10;
   }
 
-  .g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-  .g-card { 
-    background: var(--cream); padding: 30px 20px 45px 20px; border: 1px solid var(--sepia-pale); 
-    text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    position: relative; display: flex; flex-direction: column; overflow: hidden;
+  /* --- ZOPTYMALIZOWANA SIATKA BOXÓW --- */
+  .g-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    gap: 20px; 
   }
-  .g-card::after { content: ""; position: absolute; inset: 8px; border: 1px solid var(--line); pointer-events: none; transition: 0.4s; }
+
+  .g-card { 
+    background: var(--cream); 
+    padding: 25px 20px; 
+    border: 1px solid var(--sepia-pale); 
+    text-decoration: none; 
+    color: inherit; 
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    min-height: 180px;
+    overflow: hidden;
+  }
+  .g-card::after { content: ""; position: absolute; inset: 8px; border: 1px solid var(--line); pointer-events: none; }
   .g-card:hover { transform: translateY(-5px); background-color: var(--parchment); border-color: var(--gold); }
   
-  .g-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; margin-bottom: 6px; font-weight: 500; z-index: 1; color: var(--ink); line-height: 1.2; }
-  .g-card .cemetery { font-size: 0.8rem; color: var(--sepia); font-style: italic; z-index: 1; margin-bottom: 10px; }
+  .g-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 6px; font-weight: 500; z-index: 1; color: var(--ink); line-height: 1.2; }
+  .g-card .cemetery { font-size: 0.8rem; color: var(--sepia); font-style: italic; z-index: 1; margin-bottom: 20px; flex-grow: 1; }
   
-  .g-card .card-actions { margin-top: auto; display: flex; justify-content: space-between; align-items: center; z-index: 2; }
-  .btn-map { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); font-weight: 500; cursor: pointer; }
-  .btn-more { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-weight: 500; text-decoration: none; position: absolute; bottom: 20px; right: 20px; z-index: 3; }
-  .btn-more:hover { color: var(--gold); }
+  .card-actions { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    z-index: 2; 
+    border-top: 1px solid var(--line);
+    padding-top: 15px;
+  }
+  
+  .btn-map { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); font-weight: 600; cursor: pointer; }
+  .btn-more { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-weight: 600; text-decoration: none; }
+  .btn-more:hover, .btn-map:hover { color: var(--ink); }
 
-  /* Styl przycisku w dymku mapy */
+  /* --- MOBILNA OPTYMALIZACJA BOXÓW (Horyzontalny Snap) --- */
+  @media (max-width: 768px) {
+    main { padding: 40px 15px; }
+    #map { height: 350px; margin-bottom: 30px; }
+    
+    .g-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 15px;
+      padding: 5px 5px 25px 5px;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+    }
+    
+    .g-grid::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+    
+    .g-card {
+      flex: 0 0 82%; /* Pokazuje kawałek następnej karty */
+      scroll-snap-align: center;
+      min-height: 170px;
+      padding: 20px 15px;
+    }
+    
+    .g-card h3 { font-size: 1.1rem; }
+  }
+
   .popup-more { display: inline-block; margin-top: 10px; font-size: 11px; text-transform: uppercase; color: var(--gold); text-decoration: none; font-weight: 600; border-top: 1px solid var(--line); padding-top: 5px; width: 100%; }
-
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; margin-top: 100px; }
+  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; margin-top: 60px; }
 </style>
 </head>
 <body>
@@ -141,7 +190,6 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // Każdy rekord posiada teraz unikalne ID do generowania linków grobX.html
   const gData = [
     { id: 1, p: "Antoni, Albina i Zofa z Włodków Antoniowa Kraińscy", l: "Katowice", c: [50.23883632270827, 19.014169841971263] },
     { id: 2, p: "Amalia z Schützów Gołębiewska", l: "Lwów", c: [49.83260559894966, 24.056187556714455] },
@@ -176,7 +224,7 @@
   const themeColor = "#7a6548";
 
   const map = L.map('map', { 
-    scrollWheelZoom: true,
+    scrollWheelZoom: false,
     smoothWheelZoom: true,
     smoothSensitivity: 1
   }).setView([52.1, 19.4], 6);
@@ -186,11 +234,9 @@
   const container = document.getElementById('g-container');
   
   function locateOnMap(coords) {
-    map.flyTo(coords, 15);
+    map.flyTo(coords, 14);
     const mapEl = document.getElementById('map');
-    const mapRect = mapEl.getBoundingClientRect();
-    const scrollTarget = window.pageYOffset + mapRect.top - (window.innerHeight / 2) + (mapRect.height / 2);
-    window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+    mapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   gData.forEach((g) => {
@@ -200,7 +246,6 @@
       iconSize: [12, 12], iconAnchor: [6, 6]
     });
 
-    // Usunięcie undefined z wyświetlania nekropolii
     const cemeteryInfo = g.i ? `<br><small>${g.i}</small>` : "";
 
     L.marker(g.c, {icon}).addTo(map)
@@ -216,9 +261,9 @@
         <h3>${g.p}</h3>
         <div class="cemetery">${g.l}${g.i ? ', ' + g.i : ''}</div>
         <div class="card-actions">
-            <div class="btn-map" onclick="locateOnMap([${g.c}])">Zlokalizuj na mapie →</div>
+            <div class="btn-map" onclick="locateOnMap([${g.c}])">Lokalizacja →</div>
+            <a href="grob${g.id}.html" class="btn-more">Szczegóły</a>
         </div>
-        <a href="grob${g.id}.html" class="btn-more">Więcej</a>
       </div>`;
   });
 
