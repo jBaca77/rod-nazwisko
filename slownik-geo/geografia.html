@@ -27,7 +27,6 @@
   html { scroll-behavior: smooth; }
   body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-  /* ── HEADER (ZGODNY Z INDEKSEM) ── */
   header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
   header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
   .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }
@@ -35,7 +34,6 @@
   header h1 em { font-style: italic; color: var(--gold-light); }
   .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
 
-  /* ── NAV ── */
   nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
   .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
   .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; }
@@ -43,7 +41,6 @@
   .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
   .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-  /* ── DRAWER (IDENTYCZNY ZE WZOREM) ── */
   .drawer { 
     position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; 
     background: var(--ink); z-index: 1050; padding: 50px 0; 
@@ -76,7 +73,6 @@
   .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
   .overlay.active { opacity: 1; pointer-events: auto; }
 
-  /* ── MAPA I FILTRY ── */
   main { max-width: 1100px; margin: 0 auto; padding: 80px 24px 100px; }
   .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; text-align: center; }
   .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; }
@@ -193,7 +189,19 @@
         <div class="dual-pill" style="--cl: var(--hex2a); --cr: var(--hex2b);"></div><span>Linia 2</span>
     </div>
     <div class="filter-item" onclick="filterMap('c3', this)">
-        <div class="dual-pill" style="--cl: var(--hex3a); --cr: var(--hex3b);"></div><span>Linia 4</span>
+        <div class="dual-pill" style="--cl: var(--hex3a); --cr: var(--hex3b);"></div><span>Linia 3</span>
+    </div>
+    <div class="filter-item" onclick="filterMap('c4', this)">
+        <div class="dual-pill" style="--cl: var(--hex4a); --cr: var(--hex4b);"></div><span>Linia 4</span>
+    </div>
+    <div class="filter-item" onclick="filterMap('c5', this)">
+        <div class="dual-pill" style="--cl: var(--hex5a); --cr: var(--hex5b);"></div><span>Linia 5</span>
+    </div>
+    <div class="filter-item" onclick="filterMap('c6', this)">
+        <div class="dual-pill" style="--cl: var(--hex6a); --cr: var(--hex6b);"></div><span>Linia 6</span>
+    </div>
+    <div class="filter-item" onclick="filterMap('c7', this)">
+        <div class="dual-pill" style="--cl: var(--hex7a); --cr: var(--hex7b);"></div><span>Linia 7</span>
     </div>
   </div>
 
@@ -210,7 +218,11 @@
   const locations = [
     { id: 1, n: "Biejków", cat: "c1", c: [51.68, 20.93], c1: "#C9D980", c2: "#F2F24E" },
     { id: 2, n: "Babin", cat: "c2", c: [49.88, 24.35], c1: "#A8E653", c2: "#F9F955" },
-    { id: 3, n: "Lwów", cat: "c3", c: [49.83, 24.02], c1: "#F9F955", c2: "#F29079" }
+    { id: 3, n: "Rożnów", cat: "c3", c: [49.77, 20.68], c1: "#66F94E", c2: "#F9F955" },
+    { id: 4, n: "Lwów", cat: "c4", c: [49.83, 24.02], c1: "#F9F955", c2: "#F29079" },
+    { id: 5, n: "Przykład 5", cat: "c5", c: [52.23, 21.01], c1: "#F9D0D7", c2: "#F29079" },
+    { id: 6, n: "Przykład 6", cat: "c6", c: [50.06, 19.94], c1: "#F29079", c2: "#70E1F5" },
+    { id: 7, n: "Przykład 7", cat: "c7", c: [51.10, 17.03], c1: "#EE2B1D", c2: "#F29079" }
   ];
 
   const map = L.map('map', {
@@ -267,7 +279,6 @@
     document.querySelectorAll('.geo-box').forEach(b => b.style.display = (cat==='all' || b.dataset.cat===cat) ? 'flex' : 'none');
   }
 
-  // LOGIKA MENU
   const menuBtn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
   function toggleSidebar() {
     drw.classList.toggle('open'); ovr.classList.toggle('active');
