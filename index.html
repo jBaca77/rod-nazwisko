@@ -59,19 +59,25 @@
   }
   .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
   
-  /* Efekt hover oraz podświetlenie aktywnej strony */
-  .drawer-links a:hover, 
-  .drawer-links a.active { 
+  /* Efekt hover */
+  .drawer-links a:hover { 
     color: var(--gold-light); 
     background: rgba(255,255,255,0.04); 
     padding-left: 35px; 
   }
-  .drawer-links a:hover::before,
-  .drawer-links a.active::before { 
+  .drawer-links a:hover::before { 
     width: 3px; 
   }
-  .drawer-links a.active {
-    background: rgba(255,255,255,0.08);
+
+  /* SPECYFICZNE PODŚWIETLENIE TYLKO DLA AKTYWNEJ STRONY */
+  .drawer-links a.active { 
+    color: var(--gold-light) !important; 
+    background: rgba(255,255,255,0.1) !important; 
+    padding-left: 35px; 
+    font-weight: 500;
+  }
+  .drawer-links a.active::before { 
+    width: 3px !important; 
   }
 
   .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
@@ -315,7 +321,6 @@
     drawer.classList.toggle('open');
     overlay.classList.toggle('active');
     
-    // Animacja ikonki menu (hamburger -> X)
     const spans = menuBtn.querySelectorAll('span');
     if(drawer.classList.contains('open')) {
       spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
@@ -345,36 +350,42 @@
   const rodoContent = document.getElementById('rodoContent');
   const rodoIcon = document.getElementById('rodoIcon');
 
-  rodoBtn.addEventListener('click', () => {
-    rodoContent.classList.toggle('open');
-    rodoIcon.innerText = rodoContent.classList.contains('open') ? '−' : '+';
-  });
+  if(rodoBtn) {
+    rodoBtn.addEventListener('click', () => {
+      rodoContent.classList.toggle('open');
+      rodoIcon.innerText = rodoContent.classList.contains('open') ? '−' : '+';
+    });
+  }
 
-  // --- NOWY SKRYPT: PODŚWIETLANIE AKTUALNEJ STRONY ---
+  // --- POPRAWIONA LOGIKA PODŚWIETLANIA ---
   function highlightCurrentPage() {
-    // Pobierz aktualną ścieżkę (np. /historia.html)
     const currentPath = window.location.pathname;
-    // Pobierz samą nazwę pliku
-    const currentPage = currentPath.split("/").pop();
-    // Znajdź wszystkie linki w pasku bocznym
+    let currentPage = currentPath.split("/").pop();
+    
+    // Jeśli ścieżka jest pusta (strona główna), ustaw domyślnie index.html
+    if (currentPage === "" || currentPage === "/") {
+      currentPage = "index.html";
+    }
+
     const links = document.querySelectorAll('#sidebarLinks a');
 
     links.forEach(link => {
-      // Pobierz wartość atrybutu href linku
       const linkHref = link.getAttribute('href');
       
-      // Sprawdź czy link pasuje do aktualnej strony
-      // 1. Dokładne dopasowanie nazwy pliku
-      // 2. Obsługa strony głównej (jeśli ścieżka jest pusta lub /, a link to index.html)
-      if (linkHref === currentPage || 
-         (currentPage === "" && linkHref === "index.html") ||
-         (currentPath.endsWith('/') && linkHref === "index.html")) {
-        link.classList.add('active');
+      // Czyścimy poprzednie podświetlenia
+      link.classList.remove('active');
+
+      // Podświetlaj tylko jeśli link nie jest czystą kotwicą (#kontakt)
+      // I jeśli nazwa pliku w href zgadza się z aktualną stroną
+      if (!linkHref.startsWith('#')) {
+        // Sprawdź czy koniec ścieżki linku zgadza się z nazwą pliku
+        if (linkHref === currentPage || (currentPage === "index.html" && linkHref === "index.html")) {
+          link.classList.add('active');
+        }
       }
     });
   }
 
-  // Uruchom funkcję po załadowaniu dokumentu
   window.addEventListener('DOMContentLoaded', highlightCurrentPage);
 </script>
 
