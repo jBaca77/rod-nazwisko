@@ -34,7 +34,7 @@
   .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
   .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-  /* ── POPRAWIONY DRAWER (PASEK BOCZNY) ── */
+  /* ── DRAWER (PASEK BOCZNY) ── */
   .drawer { 
     position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; 
     background: var(--ink); z-index: 1050; padding: 50px 0; 
@@ -58,8 +58,21 @@
     display: block; transition: all 0.3s; position: relative; border-radius: 2px;
   }
   .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
-  .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
-  .drawer-links a:hover::before { width: 3px; }
+  
+  /* Efekt hover oraz podświetlenie aktywnej strony */
+  .drawer-links a:hover, 
+  .drawer-links a.active { 
+    color: var(--gold-light); 
+    background: rgba(255,255,255,0.04); 
+    padding-left: 35px; 
+  }
+  .drawer-links a:hover::before,
+  .drawer-links a.active::before { 
+    width: 3px; 
+  }
+  .drawer-links a.active {
+    background: rgba(255,255,255,0.08);
+  }
 
   .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
   .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
@@ -152,7 +165,7 @@
     <h2>Menu Rodowe</h2>
   </div>
   
-  <ul class="drawer-links">
+  <ul class="drawer-links" id="sidebarLinks">
     <li><a href="index.html">Strona Główna</a></li>
     <li><a href="aktualnosci.html">Aktualności</a></li>
     <li><a href="historia.html">Historia Klanu</a></li>
@@ -336,6 +349,33 @@
     rodoContent.classList.toggle('open');
     rodoIcon.innerText = rodoContent.classList.contains('open') ? '−' : '+';
   });
+
+  // --- NOWY SKRYPT: PODŚWIETLANIE AKTUALNEJ STRONY ---
+  function highlightCurrentPage() {
+    // Pobierz aktualną ścieżkę (np. /historia.html)
+    const currentPath = window.location.pathname;
+    // Pobierz samą nazwę pliku
+    const currentPage = currentPath.split("/").pop();
+    // Znajdź wszystkie linki w pasku bocznym
+    const links = document.querySelectorAll('#sidebarLinks a');
+
+    links.forEach(link => {
+      // Pobierz wartość atrybutu href linku
+      const linkHref = link.getAttribute('href');
+      
+      // Sprawdź czy link pasuje do aktualnej strony
+      // 1. Dokładne dopasowanie nazwy pliku
+      // 2. Obsługa strony głównej (jeśli ścieżka jest pusta lub /, a link to index.html)
+      if (linkHref === currentPage || 
+         (currentPage === "" && linkHref === "index.html") ||
+         (currentPath.endsWith('/') && linkHref === "index.html")) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  // Uruchom funkcję po załadowaniu dokumentu
+  window.addEventListener('DOMContentLoaded', highlightCurrentPage);
 </script>
 
 </body>
