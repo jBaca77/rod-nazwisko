@@ -5,137 +5,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klan Ładomirskich i Kraińskich | Archiwum Rodzinne</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
-        /* KOMPLETNE STYLE ZASZYTE W PLIKU DLA PEWNOŚCI WYGLĄDU */
         :root {
-            --cream: #f8f4ee;
-            --parchment: #ede8df;
-            --warm-white: #fdfaf6;
-            --ink: #1e1a14;
-            --sepia: #7a6548;
-            --gold: #9b7d4a;
-            --gold-light: #c8a96e;
-            --green-dark: #2c3e2d;
-            --line: rgba(122, 101, 72, 0.2);
+            --cream: #f4f1ea;
+            --parchment: #eaddca;
+            --white: #ffffff;
+            --ink: #1a1714;
+            --sepia: #5d4a36;
+            --gold: #b39156;
+            --gold-light: #d4bc8e;
+            --green-dark: #1e2b1f;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--cream); color: var(--ink); font-family: 'Jost', sans-serif; line-height: 1.6; }
-        h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+        
+        body { 
+            background-color: var(--cream); 
+            color: var(--ink); 
+            font-family: 'Jost', sans-serif; 
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
 
-        /* --- HEADER --- */
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; }
+
+        /* --- WYRAZISTY HEADER --- */
         header {
-            background: var(--green-dark);
+            background: linear-gradient(rgba(30, 43, 31, 0.95), rgba(30, 43, 31, 0.95)), 
+                        url('https://www.transparenttextures.com/patterns/paper-fibers.png');
             color: white;
-            padding: 60px 5%;
+            padding: 100px 5% 120px;
             text-align: center;
-            border-bottom: 5px solid var(--gold);
+            border-bottom: 6px solid var(--gold);
+            position: relative;
         }
+
         .header-ornament {
-            display: block; font-size: 0.9rem; text-transform: uppercase;
-            letter-spacing: 3px; color: var(--gold-light); margin-bottom: 10px;
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold-light);
+            margin-bottom: 20px;
+            font-weight: 600;
         }
-        header h1 { font-size: clamp(2rem, 6vw, 3.5rem); margin-bottom: 15px; }
-        header h1 em { font-style: italic; font-weight: 300; }
+
+        header h1 { 
+            font-size: clamp(2.5rem, 8vw, 4.5rem); 
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        header h1 em { font-style: italic; color: var(--gold-light); font-weight: 300; }
+
         .header-quote {
-            font-family: 'Cormorant Garamond', serif; font-style: italic;
-            font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.8;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.85;
+            position: relative;
+            padding: 0 30px;
         }
 
-        /* --- NAWIGACJA --- */
-        nav { background: var(--ink); position: sticky; top: 0; z-index: 1000; }
+        /* --- NOWOCZESNA NAWIGACJA --- */
+        nav { 
+            background: var(--ink); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
         .nav-inner {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 5%; max-width: 1200px; margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
-        .nav-logo { color: var(--gold-light); text-decoration: none; font-weight: 600; letter-spacing: 1px; }
-        .menu-btn { cursor: pointer; background: none; border: none; display: flex; flex-direction: column; gap: 6px; }
-        .menu-btn span { display: block; width: 25px; height: 2px; background: var(--gold-light); transition: 0.3s; }
 
-        /* --- DRAWER (SIDEBAR) --- */
+        .nav-logo {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            border: 1px solid var(--gold);
+            padding: 5px 15px;
+        }
+
+        .menu-btn {
+            cursor: pointer;
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .menu-btn span {
+            display: block;
+            width: 30px;
+            height: 2px;
+            background: var(--gold-light);
+            transition: var(--transition);
+        }
+
+        /* --- ELEGANCKI DRAWER --- */
         .drawer {
-            position: fixed; top: 0; left: -320px; width: 300px; height: 100%;
-            background: var(--ink); color: white; z-index: 1100; padding: 40px;
-            transition: 0.4s ease; box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+            position: fixed; top: 0; left: -350px; width: 350px; height: 100%;
+            background: #151311; color: white; z-index: 1100; padding: 60px 40px;
+            transition: var(--transition);
         }
         .drawer.open { left: 0; }
-        .drawer-links { list-style: none; margin-top: 30px; }
-        .drawer-links li { margin-bottom: 15px; }
-        .drawer-links a { color: var(--parchment); text-decoration: none; font-size: 1.1rem; transition: 0.3s; }
-        .drawer-links a:hover { color: var(--gold-light); padding-left: 8px; }
-        .overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); display: none; z-index: 1050; backdrop-filter: blur(4px);
+        .drawer-links { list-style: none; margin-top: 50px; }
+        .drawer-links li { margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .drawer-links a { 
+            color: var(--parchment); 
+            text-decoration: none; 
+            font-size: 1.2rem; 
+            font-family: 'Cormorant Garamond', serif;
+            transition: 0.3s;
         }
-        .overlay.active { display: block; }
+        .drawer-links a:hover { color: var(--gold); padding-left: 10px; }
 
         /* --- SEKCJE --- */
-        main { padding: 60px 5%; max-width: 1200px; margin: 0 auto; }
-        section { margin-bottom: 80px; text-align: center; }
-        .s-label { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; }
-        .s-title { font-size: 2.2rem; margin: 10px 0; color: var(--green-dark); }
-        .s-line { width: 50px; height: 2px; background: var(--gold); margin: 15px auto 40px; }
+        main { padding: 80px 5%; max-width: 1300px; margin: 0 auto; }
+        
+        section { margin-bottom: 120px; }
+        
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .s-label { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 10px; }
+        .s-title { font-size: 3rem; color: var(--green-dark); margin-bottom: 20px; }
+        .s-line { width: 80px; height: 3px; background: var(--gold); margin: 0 auto; }
 
-        /* --- GRID KART --- */
+        /* --- GRID KART (Działy) --- */
         .grid-nav {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
         }
+
         .nav-card {
-            background: var(--warm-white); padding: 40px 25px; text-decoration: none;
-            color: inherit; border: 1px solid var(--line); transition: 0.3s ease;
+            background: var(--white);
+            padding: 50px 35px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
         }
-        .nav-card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .nav-card .icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
-        .nav-card h3 { font-size: 1.4rem; color: var(--sepia); margin-bottom: 10px; }
 
-        /* --- POCHODZENIE (2 KOLUMNY) --- */
-        .origin-layout {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left;
-            background: white; padding: 40px; border: 1px solid var(--line);
+        .nav-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: var(--transition);
         }
-        .origin-text p { margin-bottom: 15px; }
-        .timeline { border-left: 2px solid var(--sepia-pale); padding-left: 20px; }
-        .t-item { margin-bottom: 20px; }
-        .t-year { font-weight: 700; color: var(--gold); }
 
-        /* --- BANK --- */
-        .news-box { background: var(--parchment); padding: 40px; }
-        .bank-card {
-            background: white; padding: 25px; margin-top: 20px;
-            border-left: 5px solid var(--gold); display: inline-block; text-align: left;
+        .nav-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--gold-light);
         }
-        .bank-number { font-family: monospace; font-size: 1.2rem; font-weight: bold; color: var(--green-dark); }
 
-        /* --- RODO --- */
-        .rodo-trigger {
-            width: 100%; padding: 15px; background: var(--parchment); border: 1px solid var(--line);
-            display: flex; justify-content: space-between; cursor: pointer; font-family: inherit;
+        .nav-card:hover::before { transform: scaleX(1); }
+
+        .nav-card .icon { 
+            font-size: 3rem; 
+            margin-bottom: 20px; 
+            display: block;
+            filter: grayscale(0.5);
+            transition: 0.3s;
         }
-        .rodo-content { max-height: 0; overflow: hidden; transition: 0.4s; background: white; text-align: left; }
-        .rodo-content.open { max-height: 300px; padding: 20px; border: 1px solid var(--line); border-top: none; }
+        .nav-card:hover .icon { filter: grayscale(0); transform: scale(1.1); }
 
-        footer { background: var(--ink); color: white; padding: 40px; text-align: center; border-top: 5px solid var(--gold); }
+        .nav-card h3 { font-size: 1.8rem; color: var(--sepia); margin-bottom: 15px; }
+        .nav-card p { font-size: 0.95rem; color: #666; }
 
-        @media (max-width: 768px) {
-            .origin-layout { grid-template-columns: 1fr; }
+        /* --- SEKCJA POCHODZENIE --- */
+        .origin-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            background: var(--white);
+            padding: 60px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--parchment);
         }
+
+        .origin-text p { margin-bottom: 20px; font-size: 1.1rem; color: #444; }
+        
+        .timeline {
+            border-left: 1px solid var(--parchment);
+            padding-left: 30px;
+        }
+
+        .t-item { margin-bottom: 35px; position: relative; }
+        .t-item::before {
+            content: "";
+            position: absolute;
+            left: -36px; top: 5px;
+            width: 10px; height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .t-year { font-weight: 700; color: var(--gold); font-size: 1.3rem; margin-bottom: 5px; }
+        .t-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; }
+
+        /* --- STOPKA --- */
+        footer {
+            background: var(--green-dark);
+            color: white;
+            padding: 80px 5%;
+            text-align: center;
+            border-top: 10px solid var(--gold);
+        }
+
+        footer p { opacity: 0.7; letter-spacing: 1px; font-size: 0.9rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .origin-container { grid-template-columns: 1fr; padding: 30px; }
+            header { padding: 60px 5%; }
+            .s-title { font-size: 2.2rem; }
+        }
+
+        /* DODATKOWE OZDOBNIKI */
+        .gold-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .gold-btn:hover { background: var(--gold); color: white; }
     </style>
 </head>
 <body>
 
-    <div class="overlay" id="overlay"></div>
+    <div id="overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; z-index:1050; backdrop-filter: blur(3px);"></div>
 
     <header>
-        <span class="header-ornament">Tradycja Rodzinna od 1975 Roku</span>
+        <span class="header-ornament">Saga Rodu od 1975 Roku</span>
         <h1>Ładomirscy & <em>Kraińscy</em></h1>
-        <p class="header-quote">„Kto nie szanuje i nie ceni swojej przeszłości, ten nie jest godzien szacunku teraźniejszości...”</p>
+        <p class="header-quote">„Rodzina to nie krew. To ludzie, którzy Cię kochają. Ludzie, którzy Cię wspierają.”</p>
     </header>
 
     <nav>
         <div class="nav-inner">
-            <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
+            <a href="index.html" class="nav-logo">ARCHIWUM RODZINNE</a>
             <button class="menu-btn" id="menuBtn">
                 <span></span><span></span><span></span>
             </button>
@@ -143,115 +279,102 @@
     </nav>
 
     <aside class="drawer" id="drawer">
-        <div class="drawer-header">
-            <h2 style="color:var(--gold-light)">Menu Rodowe</h2>
-        </div>
-        <ul class="drawer-links" id="sidebarLinks">
+        <h2 style="color:var(--gold-light); font-size: 2.5rem; margin-bottom: 10px;">Menu</h2>
+        <div style="width:40px; height:2px; background:var(--gold);"></div>
+        <ul class="drawer-links">
             <li><a href="index.html">Strona Główna</a></li>
-            <li><a href="aktualnosci.html">Aktualności</a></li>
-            <li><a href="historia.html">Historia Klanu</a></li>
-            <li><a href="genealogia/genealogia.html">Genealogia</a></li>
+            <li><a href="aktualnosci.html">Aktualności Rodowe</a></li>
+            <li><a href="historia.html">Nasza Historia</a></li>
+            <li><a href="genealogia/genealogia.html">Drzewo Genealogiczne</a></li>
             <li><a href="zjazdy/zjazdy.html">Kronika Zjazdów</a></li>
-            <li><a href="slownik-biogr/biografie.html">Biografie</a></li>
-            <li><a href="pamiec.html">Pamięć i Groby</a></li>
-            <li><a href="slownik-geo/geografia.html">Geografia Rodowa</a></li>
-            <li><a href="biblioteka/biblioteczka.html">Biblioteczka</a></li>
-            <li><a href="archiwym/archiwum.html">Archiwum Cyfrowe</a></li>
+            <li><a href="pamiec.html">Miejsce Pamięci</a></li>
         </ul>
     </aside>
 
     <main>
-        <section id="dzialy">
-            <span class="s-label">Działy Serwisu</span>
-            <h2 class="s-title">Eksploruj Archiwum</h2>
-            <div class="s-line"></div>
+        <section>
+            <div class="section-header">
+                <span class="s-label">Odkryj historię</span>
+                <h2 class="s-title">Działy Archiwum</h2>
+                <div class="s-line"></div>
+            </div>
+            
             <div class="grid-nav">
                 <a href="aktualnosci.html" class="nav-card">
-                    <span class="icon">📰</span>
+                    <span class="icon">📜</span>
                     <h3>Aktualności</h3>
-                    <p>Bieżące informacje i najnowsze wpisy w archiwum.</p>
+                    <p>Co nowego dzieje się w Klanie? Zapowiedzi zjazdów, narodziny i ważne komunikaty.</p>
+                    <span class="gold-btn">Wejdź</span>
                 </a>
                 <a href="historia.html" class="nav-card">
                     <span class="icon">⚜️</span>
-                    <h3>Historia Klanu</h3>
-                    <p>Opracowanie dziejów rodu i fundamenty naszych zjazdów.</p>
+                    <h3>Historia</h3>
+                    <p>Skąd przybyliśmy i jak ślub w Wielichowie stał się początkiem naszej wspólnej drogi.</p>
+                    <span class="gold-btn">Czytaj</span>
                 </a>
                 <a href="genealogia/genealogia.html" class="nav-card">
                     <span class="icon">🌳</span>
                     <h3>Genealogia</h3>
-                    <p>Interaktywne drzewo rodowe i tablice przodków.</p>
+                    <p>Interaktywne drzewo rodowe. Ponad pół wieku powiązań rodzinnych w jednym miejscu.</p>
+                    <span class="gold-btn">Odkryj</span>
                 </a>
                 <a href="zjazdy/zjazdy.html" class="nav-card">
                     <span class="icon">🏰</span>
-                    <h3>Zjazdy Rodzinne</h3>
-                    <p>Kronika wszystkich XXIV zjazdów z dokumentacją.</p>
+                    <h3>Zjazdy</h3>
+                    <p>Od Modlina po Bocheniec. Wspomnienia, zdjęcia i relacje z naszych spotkań.</p>
+                    <span class="gold-btn">Zobacz</span>
                 </a>
             </div>
         </section>
 
-        <section id="pochodzenie">
-            <span class="s-label">Nasze Korzenie</span>
-            <h2 class="s-title">Początki Wspólnoty</h2>
-            <div class="s-line"></div>
-            <div class="origin-layout">
+        <section>
+            <div class="section-header">
+                <span class="s-label">Fundamenty</span>
+                <h2 class="s-title">Korzenie Klanu</h2>
+                <div class="s-line"></div>
+            </div>
+            <div class="origin-container">
                 <div class="origin-text">
-                    <p>Klan Ładomirskich i Kraińskich to wspólnota rodzinna, której fundamentem stały się więzi potomków Zdzisława i Anny.</p>
-                    <p>Wszystko zaczęło się w 1974 roku od ślubu w Wielichowie, który zjednoczył rodzinę.</p>
+                    <p>Nasza wspólna historia nie jest tylko zbiorem dat, ale przede wszystkim opowieścią o ludziach. Klan Ładomirskich i Kraińskich zrodził się z potrzeby pielęgnowania więzi, które w dzisiejszym świecie tak łatwo ulegają zatarciu.</p>
+                    <p>Każdy zjazd, każda rozmowa i każdy wpis w tym archiwum to cegiełka budująca naszą wspólną tożsamość dla przyszłych pokoleń.</p>
                 </div>
                 <div class="timeline">
-                    <div class="t-item"><div class="t-year">1974</div><div class="t-desc">Wielichowo: Ślub Marii i Marka</div></div>
-                    <div class="t-item"><div class="t-year">1975</div><div class="t-desc">I Zjazd Rodziny w Modlinie</div></div>
-                    <div class="t-item"><div class="t-year">2026</div><div class="t-desc">Nadchodzący XXIV Zjazd</div></div>
+                    <div class="t-item">
+                        <div class="t-year">1974</div>
+                        <div class="t-desc">Wielichowo – Ślub, który wszystko zaczął</div>
+                    </div>
+                    <div class="t-item">
+                        <div class="t-year">1975</div>
+                        <div class="t-desc">I Zjazd w Modlinie – narodziny tradycji</div>
+                    </div>
+                    <div class="t-item">
+                        <div class="t-year">2026</div>
+                        <div class="t-desc">XXIV Zjazd w Bochencu – historia trwa nadal</div>
+                    </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="konto">
-            <span class="s-label">Fundusz Rodowy</span>
-            <div class="news-box">
-                <p>Organizacja zjazdów opiera się na dobrowolnych składkach:</p>
-                <div class="bank-card">
-                    <strong>ING Bank Śląski:</strong><br>
-                    <span class="bank-number">07 1050 1588 1000 0097 6819 4954</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="rodo-section">
-            <button class="rodo-trigger" id="rodoBtn">
-                <span>Nota prawna i RODO</span>
-                <span id="rodoIcon">+</span>
-            </button>
-            <div class="rodo-content" id="rodoContent">
-                <p style="padding:20px">Przetwarzanie danych na tej stronie ma charakter wyłącznie osobisty i domowy, służąc podtrzymywaniu tradycji rodowej.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>Klan Ładomirskich i Kraińskich © 1975 – 2026</p>
+        <h2 style="color:var(--gold-light); margin-bottom: 20px;">Klan Ładomirskich i Kraińskich</h2>
+        <p>Pamięć | Tożsamość | Wspólnota</p>
+        <p style="margin-top: 40px; font-size: 0.7rem; opacity: 0.4;">© 1975 – 2026 Archiwum Cyfrowe L&K</p>
     </footer>
 
     <script>
         const menuBtn = document.getElementById('menuBtn');
         const drawer = document.getElementById('drawer');
         const overlay = document.getElementById('overlay');
-        const rodoBtn = document.getElementById('rodoBtn');
-        const rodoContent = document.getElementById('rodoContent');
 
         menuBtn.addEventListener('click', () => {
             drawer.classList.toggle('open');
-            overlay.classList.toggle('active');
+            overlay.style.display = drawer.classList.contains('open') ? 'block' : 'none';
         });
 
         overlay.addEventListener('click', () => {
             drawer.classList.remove('open');
-            overlay.classList.remove('active');
-        });
-
-        rodoBtn.addEventListener('click', () => {
-            rodoContent.classList.toggle('open');
-            document.getElementById('rodoIcon').innerText = rodoContent.classList.contains('open') ? '−' : '+';
+            overlay.style.display = 'none';
         });
     </script>
 </body>
