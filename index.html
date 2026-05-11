@@ -6,7 +6,122 @@
     <title>Klan Ładomirskich i Kraińskich | Archiwum Rodzinne</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* KOMPLETNE STYLE ZASZYTE W PLIKU DLA PEWNOŚCI WYGLĄDU */
+        :root {
+            --cream: #f8f4ee;
+            --parchment: #ede8df;
+            --warm-white: #fdfaf6;
+            --ink: #1e1a14;
+            --sepia: #7a6548;
+            --gold: #9b7d4a;
+            --gold-light: #c8a96e;
+            --green-dark: #2c3e2d;
+            --line: rgba(122, 101, 72, 0.2);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--cream); color: var(--ink); font-family: 'Jost', sans-serif; line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--green-dark);
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+            border-bottom: 5px solid var(--gold);
+        }
+        .header-ornament {
+            display: block; font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 3px; color: var(--gold-light); margin-bottom: 10px;
+        }
+        header h1 { font-size: clamp(2rem, 6vw, 3.5rem); margin-bottom: 15px; }
+        header h1 em { font-style: italic; font-weight: 300; }
+        .header-quote {
+            font-family: 'Cormorant Garamond', serif; font-style: italic;
+            font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.8;
+        }
+
+        /* --- NAWIGACJA --- */
+        nav { background: var(--ink); position: sticky; top: 0; z-index: 1000; }
+        .nav-inner {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; max-width: 1200px; margin: 0 auto;
+        }
+        .nav-logo { color: var(--gold-light); text-decoration: none; font-weight: 600; letter-spacing: 1px; }
+        .menu-btn { cursor: pointer; background: none; border: none; display: flex; flex-direction: column; gap: 6px; }
+        .menu-btn span { display: block; width: 25px; height: 2px; background: var(--gold-light); transition: 0.3s; }
+
+        /* --- DRAWER (SIDEBAR) --- */
+        .drawer {
+            position: fixed; top: 0; left: -320px; width: 300px; height: 100%;
+            background: var(--ink); color: white; z-index: 1100; padding: 40px;
+            transition: 0.4s ease; box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+        }
+        .drawer.open { left: 0; }
+        .drawer-links { list-style: none; margin-top: 30px; }
+        .drawer-links li { margin-bottom: 15px; }
+        .drawer-links a { color: var(--parchment); text-decoration: none; font-size: 1.1rem; transition: 0.3s; }
+        .drawer-links a:hover { color: var(--gold-light); padding-left: 8px; }
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); display: none; z-index: 1050; backdrop-filter: blur(4px);
+        }
+        .overlay.active { display: block; }
+
+        /* --- SEKCJE --- */
+        main { padding: 60px 5%; max-width: 1200px; margin: 0 auto; }
+        section { margin-bottom: 80px; text-align: center; }
+        .s-label { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; }
+        .s-title { font-size: 2.2rem; margin: 10px 0; color: var(--green-dark); }
+        .s-line { width: 50px; height: 2px; background: var(--gold); margin: 15px auto 40px; }
+
+        /* --- GRID KART --- */
+        .grid-nav {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+        }
+        .nav-card {
+            background: var(--warm-white); padding: 40px 25px; text-decoration: none;
+            color: inherit; border: 1px solid var(--line); transition: 0.3s ease;
+        }
+        .nav-card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .nav-card .icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .nav-card h3 { font-size: 1.4rem; color: var(--sepia); margin-bottom: 10px; }
+
+        /* --- POCHODZENIE (2 KOLUMNY) --- */
+        .origin-layout {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left;
+            background: white; padding: 40px; border: 1px solid var(--line);
+        }
+        .origin-text p { margin-bottom: 15px; }
+        .timeline { border-left: 2px solid var(--sepia-pale); padding-left: 20px; }
+        .t-item { margin-bottom: 20px; }
+        .t-year { font-weight: 700; color: var(--gold); }
+
+        /* --- BANK --- */
+        .news-box { background: var(--parchment); padding: 40px; }
+        .bank-card {
+            background: white; padding: 25px; margin-top: 20px;
+            border-left: 5px solid var(--gold); display: inline-block; text-align: left;
+        }
+        .bank-number { font-family: monospace; font-size: 1.2rem; font-weight: bold; color: var(--green-dark); }
+
+        /* --- RODO --- */
+        .rodo-trigger {
+            width: 100%; padding: 15px; background: var(--parchment); border: 1px solid var(--line);
+            display: flex; justify-content: space-between; cursor: pointer; font-family: inherit;
+        }
+        .rodo-content { max-height: 0; overflow: hidden; transition: 0.4s; background: white; text-align: left; }
+        .rodo-content.open { max-height: 300px; padding: 20px; border: 1px solid var(--line); border-top: none; }
+
+        footer { background: var(--ink); color: white; padding: 40px; text-align: center; border-top: 5px solid var(--gold); }
+
+        @media (max-width: 768px) {
+            .origin-layout { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
@@ -29,10 +144,8 @@
 
     <aside class="drawer" id="drawer">
         <div class="drawer-header">
-            <span>Nawigacja Archiwum</span>
-            <h2>Menu Rodowe</h2>
+            <h2 style="color:var(--gold-light)">Menu Rodowe</h2>
         </div>
-        
         <ul class="drawer-links" id="sidebarLinks">
             <li><a href="index.html">Strona Główna</a></li>
             <li><a href="aktualnosci.html">Aktualności</a></li>
@@ -44,22 +157,8 @@
             <li><a href="slownik-geo/geografia.html">Geografia Rodowa</a></li>
             <li><a href="biblioteka/biblioteczka.html">Biblioteczka</a></li>
             <li><a href="archiwym/archiwum.html">Archiwum Cyfrowe</a></li>
-            <li><a href="#kontakt" class="js-close-drawer">Kontakt</a></li>
         </ul>
-
-        <div class="drawer-footer">
-            <p>Klan L&K © 1975 – 2026</p>
-        </div>
     </aside>
-
-    <div class="search-section">
-        <div class="search-inner">
-            <div class="search-row">
-                <input type="text" class="search-input" placeholder="Szukaj (np. Modlin, 1980, Antoni)...">
-                <button class="search-btn">Szukaj</button>
-            </div>
-        </div>
-    </div>
 
     <main>
         <section id="dzialy">
@@ -68,29 +167,24 @@
             <div class="s-line"></div>
             <div class="grid-nav">
                 <a href="aktualnosci.html" class="nav-card">
-                    <div class="icon">📰</div>
+                    <span class="icon">📰</span>
                     <h3>Aktualności</h3>
-                    <p>Bieżące informacje, zapowiedzi zjazdów i najnowsze wpisy w archiwum klanowym.</p>
+                    <p>Bieżące informacje i najnowsze wpisy w archiwum.</p>
                 </a>
                 <a href="historia.html" class="nav-card">
-                    <div class="icon">⚜️</div>
+                    <span class="icon">⚜️</span>
                     <h3>Historia Klanu</h3>
-                    <p>Opracowanie dziejów rodu, historia ślubu w Wielichowie i fundamenty naszych zjazdów.</p>
+                    <p>Opracowanie dziejów rodu i fundamenty naszych zjazdów.</p>
                 </a>
                 <a href="genealogia/genealogia.html" class="nav-card">
-                    <div class="icon">🌳</div>
+                    <span class="icon">🌳</span>
                     <h3>Genealogia</h3>
-                    <p>Interaktywne drzewo rodowe, tablice przodków oraz wywody linii męskich i żeńskich.</p>
+                    <p>Interaktywne drzewo rodowe i tablice przodków.</p>
                 </a>
                 <a href="zjazdy/zjazdy.html" class="nav-card">
-                    <div class="icon">🏰</div>
+                    <span class="icon">🏰</span>
                     <h3>Zjazdy Rodzinne</h3>
-                    <p>Pół wieku tradycji spotkań. Kronika wszystkich XXIV zjazdów z pełną dokumentacją.</p>
-                </a>
-                <a href="pamiec/pamiec.html" class="nav-card">
-                    <div class="icon">🕯️</div>
-                    <h3>Miejsce Pamięci</h3>
-                    <p>Wspomnienie o tych, którzy odeszli. Lokalizacje grobów i nekrologi członków rodziny.</p>
+                    <p>Kronika wszystkich XXIV zjazdów z dokumentacją.</p>
                 </a>
             </div>
         </section>
@@ -101,59 +195,24 @@
             <div class="s-line"></div>
             <div class="origin-layout">
                 <div class="origin-text">
-                    <p>Klan Ładomirskich i Kraińskich to wspólnota rodzinna, której fundamentem stały się więzi krewne potomków Zdzisława Ładomirskiego i Anny z Kraińskich Ładomirskiej.</p>
-                    <p>Wszystko zaczęło się od pamiętnego dnia 28 września 1974 roku. Ślub Marii Ładomirskiej i Marka Szczepaniaka w Wielichowie stał się impulsem do zjednoczenia rodziny rozproszonej po kraju.</p>
-                    <p>Już rok później, w 1975 roku, odbył się pierwszy oficjalny zjazd w Modlinie, zapoczątkowując tradycję, która trwa do dziś i łączy kolejne pokolenia.</p>
+                    <p>Klan Ładomirskich i Kraińskich to wspólnota rodzinna, której fundamentem stały się więzi potomków Zdzisława i Anny.</p>
+                    <p>Wszystko zaczęło się w 1974 roku od ślubu w Wielichowie, który zjednoczył rodzinę.</p>
                 </div>
                 <div class="timeline">
-                    <div class="t-item">
-                        <div class="t-year">1974</div>
-                        <div class="t-desc">Wielichowo: Ślub Marii i Marka</div>
-                    </div>
-                    <div class="t-item">
-                        <div class="t-year">1975</div>
-                        <div class="t-desc">I Zjazd Rodziny w Modlinie</div>
-                    </div>
-                    <div class="t-item">
-                        <div class="t-year">2024</div>
-                        <div class="t-desc">XXIII Zjazd w Borowicach</div>
-                    </div>
-                    <div class="t-item">
-                        <div class="t-year">2026</div>
-                        <div class="t-desc">Nadchodzący XXIV Zjazd – Bocheniec</div>
-                    </div>
+                    <div class="t-item"><div class="t-year">1974</div><div class="t-desc">Wielichowo: Ślub Marii i Marka</div></div>
+                    <div class="t-item"><div class="t-year">1975</div><div class="t-desc">I Zjazd Rodziny w Modlinie</div></div>
+                    <div class="t-item"><div class="t-year">2026</div><div class="t-desc">Nadchodzący XXIV Zjazd</div></div>
                 </div>
             </div>
         </section>
 
         <section id="konto">
             <span class="s-label">Fundusz Rodowy</span>
-            <h2 class="s-title">Wsparcie Zjazdów</h2>
-            <div class="s-line"></div>
             <div class="news-box">
-                <p>Organizacja naszych spotkań opiera się na dobrowolnych składkach. Dzięki nim możemy rezerwować ośrodki i przygotowywać pamiątki zjazdowe.</p>
+                <p>Organizacja zjazdów opiera się na dobrowolnych składkach:</p>
                 <div class="bank-card">
-                    <strong class="bank-label">NUMER KONTA (ING Bank Śląski):</strong><br>
-                    <span class="bank-number">07 1050 1588 1000 0097 6819 4954</span><br>
-                    <small class="bank-title">Tytuł przelewu: Zjazd Rodzinny</small>
-                </div>
-            </div>
-        </section>
-
-        <section id="kontakt">
-            <span class="s-label">Kontakt</span>
-            <h2 class="s-title">Napisz do nas</h2>
-            <div class="s-line"></div>
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <h4>Komitet Organizacyjny</h4>
-                    <p>Pytania dotyczące zjazdów, aktualizacji danych w drzewie genealogicznym oraz przesyłanie nowych materiałów archiwalnych.</p>
-                    <p class="contact-link">E-mail: <a href="mailto:klan@lik.info.pl">klan@lik.info.pl</a></p>
-                </div>
-                <div class="contact-item">
-                    <h4>Serwis Internetowy</h4>
-                    <p>Strona jest cyfrowym przedłużeniem wieloletniej kroniki prowadzonej przez klanowiczów.</p>
-                    <p class="contact-link">Domena: <a href="https://lik.info.pl" target="_blank">www.lik.info.pl</a></p>
+                    <strong>ING Bank Śląski:</strong><br>
+                    <span class="bank-number">07 1050 1588 1000 0097 6819 4954</span>
                 </div>
             </div>
         </section>
@@ -161,19 +220,39 @@
         <section class="rodo-section">
             <button class="rodo-trigger" id="rodoBtn">
                 <span>Nota prawna i RODO</span>
-                <span id="rodoIcon" class="rodo-icon">+</span>
+                <span id="rodoIcon">+</span>
             </button>
             <div class="rodo-content" id="rodoContent">
-                <p>Przetwarzanie danych osobowych na tej stronie ma charakter wyłącznie osobisty i domowy (zgodnie z art. 2 pkt 2 lit. c RODO), służąc integracji rodziny i podtrzymywaniu tradycji. Dane pochodzą z dokumentacji zjazdowej oraz prywatnych zbiorów archiwalnych. Każdy członek rodziny ma prawo do wglądu, edycji lub żądania ograniczenia widoczności swoich danych.</p>
+                <p style="padding:20px">Przetwarzanie danych na tej stronie ma charakter wyłącznie osobisty i domowy, służąc podtrzymywaniu tradycji rodowej.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>Klan Ładomirskich i Kraińskich © 1975 – 2026<br>
-        Pamięć | Tożsamość | Wspólnota</p>
+        <p>Klan Ładomirskich i Kraińskich © 1975 – 2026</p>
     </footer>
 
-    <script src="main.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('overlay');
+        const rodoBtn = document.getElementById('rodoBtn');
+        const rodoContent = document.getElementById('rodoContent');
+
+        menuBtn.addEventListener('click', () => {
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            drawer.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+
+        rodoBtn.addEventListener('click', () => {
+            rodoContent.classList.toggle('open');
+            document.getElementById('rodoIcon').innerText = rodoContent.classList.contains('open') ? '−' : '+';
+        });
+    </script>
 </body>
 </html>
