@@ -3,246 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="XIX Zjazd Rodzinny w Krynicy Morskiej (2015) - interaktywne archiwum zdjęciowe klanu Ładomirskich i Kraińskich. Rozpoznawanie twarzy i oznaczanie członków rodziny.">
     <title>XIX Zjazd: Krynica Morska | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-            --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
-            --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
-            --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
-            --c-ladomirscy: #fcc000; --c-krainscy: #cc0000; --c-domanscy: #2d7a2d;
+            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --line: rgba(122, 101, 72, 0.2);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.8; }
 
-        a:focus-visible, button:focus-visible, .hotspot:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+        /* NAWIGACJA */
+        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
+        .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* ── HEADER & NAV ── */
-        header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
-        header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
-        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }
-        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem, 7vw, 5.2rem); line-height: 1; margin-bottom: 20px; position: relative; z-index: 1; }
-        .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 650px; margin: 0 auto; position: relative; z-index: 1; line-height: 1.5; }
+        /* ARTYKUŁ */
+        .article-header { max-width: 900px; margin: 60px auto 40px; padding: 0 24px; text-align: center; }
+        .meta-top { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); margin-bottom: 15px; display: block; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
 
-        nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; }
-        .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
-        .back-link:hover { color: var(--gold-light); }
-        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; margin-left: 20px; }
-        .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .nav-right { display: flex; align-items: center; }
-
-        /* ── DRAWER ── */
-        .drawer { position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; background: var(--ink); z-index: 1050; padding: 50px 0; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -15px 0 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow-y: auto; }
-        .drawer::-webkit-scrollbar { width: 4px; }
-        .drawer::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 10px; }
-        .drawer.open { right: 0; }
-        .drawer-header { padding: 0 40px 35px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 25px; }
-        .drawer-header span { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 8px; opacity: 0.8; }
-        .drawer-header h2 { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-size: 1.8rem; font-weight: 300; letter-spacing: 1px; }
-        .drawer-links { list-style: none; padding: 0 25px; }
-        .drawer-links li { margin-bottom: 4px; }
-        .drawer-links a { color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; display: block; transition: all 0.3s; position: relative; border-radius: 2px; }
-        .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
-        .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
-        .drawer-links a:hover::before { width: 3px; }
-        .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
-        .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
-        .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
-        .overlay.active { opacity: 1; pointer-events: auto; }
-
-        /* ── MAIN CONTENT ── */
-        main { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
-        .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; text-align: center; }
-        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; }
-        .s-line { width: 60px; height: 1.5px; background: var(--gold); margin: 0 auto 50px; }
-
-        /* INFO PANEL */
-        .info-panel { max-width: 900px; margin: 0 auto 60px; padding: 30px; background: var(--parchment); border-radius: 2px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; border: 1px solid var(--sepia-pale); }
-        .info-item { font-size: 0.95rem; color: var(--ink); }
-        .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1.5px; color: var(--sepia); font-size: 0.7rem; margin-bottom: 4px; }
-
-        /* ── INTERAKTYWNE ZDJĘCIE ── */
-        .photo-analyzer-wrapper { max-width: 100%; margin: 0 auto 60px; }
-        .interactive-frame { border: 1px solid var(--line); padding: 12px; background: white; box-shadow: 0 15px 40px rgba(0,0,0,0.06); border-radius: 2px; margin-bottom: 30px; overflow: hidden; position: relative; }
-        .img-container { position: relative; width: 100%; height: auto; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); transform-origin: center center; }
-        .interactive-frame:hover .img-container { transform: scale(1.02); }
-        .base-img { width: 100%; height: auto; display: block; }
-
-        /* Hotspoty - obszary klikalne na osobach */
-        .hotspot { 
-            position: absolute; 
-            cursor: pointer; 
-            z-index: 10; 
-            border-radius: 50%; 
-            border: 2px solid transparent; 
-            background: rgba(255, 255, 255, 0.0); /* Domyślnie przezroczyste, by było widać numery ze zdjęcia */
-            transition: all 0.2s ease; 
-            width: 2.5%; 
-            height: 4%; 
-            transform: translate(-50%, -50%); 
+        .info-panel { 
+            max-width: 850px; margin: 0 auto 50px; padding: 30px; 
+            background: var(--parchment); border-radius: 4px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
         }
-        .hotspot:hover, .hotspot:focus-visible, .hotspot.active { 
-            background: rgba(255, 255, 255, 0.3); 
-            border-color: var(--gold); 
-            box-shadow: 0 0 10px rgba(155, 125, 74, 0.8); 
-            z-index: 20; 
-        }
+        .info-item { font-size: 0.9rem; }
+        .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
+
+        .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
+        .main-img { width: 100%; height: auto; display: block; }
+
+        /* INTERAKTYWNE ZDJĘCIE */
+        .interactive-frame { border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; border-radius: 4px; }
+        .img-container { position: relative; width: 100%; height: auto; overflow: hidden; }
         
-        /* Tooltip pojawiający się przy najechaniu */
-        .hotspot::after {
-            content: attr(data-id);
-            position: absolute;
-            bottom: 110%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--ink);
-            color: var(--cream);
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s;
-            white-space: nowrap;
-        }
+        .hotspot { position: absolute; cursor: pointer; z-index: 10; border-radius: 50%; border: 2px solid transparent; background: rgba(255, 255, 255, 0.0); transition: all 0.2s ease; width: 2.2%; height: 3.8%; transform: translate(-50%, -50%); }
+        .hotspot:hover, .hotspot:focus-visible, .hotspot.active { background: rgba(255, 255, 255, 0.3); border-color: var(--gold); box-shadow: 0 0 10px rgba(155, 125, 74, 0.8); z-index: 20; }
+        .hotspot::after { content: attr(data-id); position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--cream); padding: 2px 6px; border-radius: 3px; font-size: 0.7rem; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
         .hotspot:hover::after { opacity: 1; }
-
-        /* Panel informacyjny pod zdjęciem */
-        .person-info-display { background: var(--parchment); border-left: 3px solid var(--gold); padding: 25px 30px; min-height: 90px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ink); text-align: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        
+        .person-info-display { margin-top: 20px; background: var(--parchment); border-left: 3px solid var(--gold); padding: 20px 30px; min-height: 90px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ink); text-align: center; transition: all 0.3s; }
         .person-info-display.empty { color: var(--sepia); font-style: italic; font-size: 1.2rem; }
         .person-meta { display: block; font-family: 'Jost', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); margin-top: 5px; font-style: normal; }
+        
+        .zoom-btn { position: absolute; top: 20px; right: 20px; background: rgba(30, 26, 20, 0.85); color: var(--gold-light); border: 1px solid var(--gold); padding: 8px 15px; cursor: pointer; font-family: 'Jost', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; z-index: 30; transition: 0.3s; border-radius: 2px; }
+        .zoom-btn:hover { background: var(--gold); color: white; }
 
-        /* ── WSPOMNIENIA ── */
-        .memories-section { max-width: 800px; margin: 80px auto; padding: 0 24px; }
-        .memory-card { border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; font-style: italic; position: relative; color: var(--ink-light); }
-        .memory-card::before { content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; line-height: 1; }
+        .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
+        .memory-card { border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; font-style: italic; position: relative; }
+        .memory-card::before { content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; }
         .memory-author { display: block; margin-top: 15px; font-style: normal; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--sepia); }
 
-        /* ── GALERIA ── */
-        .gallery-wrapper { max-width: 1200px; margin: 80px auto 0; }
+        /* GALERIA */
+        .gallery-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
         .simple-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); grid-auto-rows: 180px; gap: 8px; }
         .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease; opacity: 0.85; filter: grayscale(20%); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-        /* ── PAGINACJA ── */
-        .zjazdy-pagination { max-width: 800px; margin: 60px auto 40px; padding: 30px 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; }
-        .pagination-btn { flex: 1 1 calc(50% - 6px); text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center; display: flex; align-items: center; justify-content: center; font-weight: 500; }
-        .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; }
-        .pagination-btn:hover, .pagination-btn:focus-visible { border-color: var(--gold); color: var(--ink); background: white; }
+       /* PAGINACJA - NOWY UKŁAD */
+        .zjazdy-pagination { max-width: 800px; margin: 40px auto 80px; padding: 30px 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; }
+        .pagination-btn { flex: 1 1 calc(50% - 6px); /* Dwa przyciski obok siebie */text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center;display: flex;align-items: center;justify-content: center;}
+        /* Przycisk "Wróć do listy" na całą szerokość */
+        .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; /* Delikatne wyróżnienie że to powrót */}
+        .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: white; }
+        
+        /* FIX DLA MOBILE */
+        @media (max-width: 600px) {
+            .pagination-btn { padding: 20px 10px; /* Większe pole dotyku dla kciuka */font-size: 0.7rem; }
+        }
 
-        /* ── LIGHTBOX ── */
-        #lightbox { display: none; position: fixed; z-index: 2000; inset: 0; background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; user-select: none; padding: 15px; }
+        /* LIGHTBOX */
+        #lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; user-select: none; padding: 15px; }
         .lb-container { display: flex; flex-direction: column; align-items: center; max-width: 100%; max-height: 100%; position: relative; }
         .lb-close { margin-bottom: 12px; color: var(--parchment); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; transition: 0.3s; opacity: 0.7; }
-        .lb-close:hover { opacity: 1; color: var(--gold-light); }
-        #lb-img { max-width: 100%; max-height: 75vh; border: 1px solid var(--gold); padding: 6px; background: white; box-shadow: 0 0 40px rgba(0,0,0,0.5); object-fit: contain; }
-        .lb-controls { margin-top: 20px; display: flex; align-items: center; gap: 40px; }
-        .lb-arrow { background: none; border: none; color: var(--gold-light); font-size: 3rem; cursor: pointer; transition: 0.3s; font-family: 'Cormorant Garamond', serif; padding: 0 20px; }
-        .lb-arrow:hover { color: var(--cream); transform: scale(1.1); }
+        #lb-img { max-width: 100%; max-height: 70vh; border: 1px solid var(--gold); padding: 6px; background: white; box-shadow: 0 0 40px rgba(0,0,0,0.5); object-fit: contain; }
+        .lb-controls { margin-top: 15px; display: flex; align-items: center; gap: 40px; }
+        .lb-arrow { background: none; border: none; color: var(--gold-light); font-size: 3rem; cursor: pointer; transition: 0.3s; font-family: 'Cormorant Garamond', serif; }
         .lb-counter { color: var(--gold-light); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-family: 'Jost', sans-serif; }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.85rem; letter-spacing: 2px; margin-top: 60px; }
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 
-        @media (max-width: 900px) {
-            .drawer { width: 100%; right: -100%; }
-            main { padding: 40px 24px; }
-            .person-info-display { font-size: 1.2rem; padding: 20px; }
-            .hotspot { width: 4%; height: 6%; } /* Większe pola dotykowe na mobilkach */
-        }
         @media (max-width: 600px) {
-            .simple-gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 120px; gap: 4px; }
-            .lb-controls { gap: 30px; }
-            .lb-arrow { font-size: 2.5rem; }
-            .pagination-btn { padding: 20px 10px; font-size: 0.7rem; }
+            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
+            .lb-controls { gap: 60px; }
+            .lb-arrow { font-size: 3.5rem; }
+            .article-header { margin: 40px auto 30px; }
         }
     </style>
 </head>
 <body>
 
-<div class="overlay" id="overlay"></div>
-
-<header>
-    <span class="header-ornament">Archiwum Rodzinne • 2015</span>
-    <h1>XIX Zjazd: Krynica Morska</h1>
-    <p class="header-quote">„Każda twarz na fotografii to osobna historia, która czeka, by opowiedzieć ją kolejnym pokoleniom.”</p>
-</header>
-
-<nav aria-label="Główna nawigacja">
+<nav>
     <div class="nav-inner">
-        <a href="../index.html" class="nav-logo" aria-label="Strona główna archiwum">ARCHIWUM L&K</a>
-        <div class="nav-right">
-            <a href="zjazdy.html" class="back-link">← Powrót do listy</a>
-            <button class="menu-btn" id="menuBtn" aria-label="Otwórz menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="zjazdy.html" class="back-link">← Powrót do listy</a>
     </div>
 </nav>
 
-<aside class="drawer" id="drawer" aria-hidden="true">
-    <div class="drawer-header">
-        <span>Nawigacja Archiwum</span>
-        <h2>Menu Rodowe</h2>
+<article>
+    <header class="article-header">
+        <span class="meta-top">Archiwum Rodzinne • 2015</span>
+        <h1>XIX Zjazd: Krynica Morska</h1>
+    </header>
+
+    <div class="info-panel">
+        <div class="info-item"><strong>Data zjazdu</strong> 18-20 września 2016</div>
+        <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynkowo-Szkoleniowy Perkoz - Krynica Morska, ul. Teleexpresu 1</div>
+        <div class="info-item"><strong>Organizatorzy</strong> rodziny Doerffer, Fedorowicz i Meissne (Gdańsk, Olsztyn, Wrocław)</div>
+        <div class="info-item"><strong>Uczestnicy</strong> 198 </div>
     </div>
-    <ul class="drawer-links">
-        <li><a href="../index.html">Strona Główna</a></li>
-        <li><a href="../aktualnosci.html">Aktualności</a></li>
-        <li><a href="../historia.html">Historia Klanu</a></li>
-        <li><a href="../genealogia/genealogia.html">Genealogia</a></li>
-        <li><a href="../zjazdy/zjazdy.html">Kronika Zjazdów</a></li>
-        <li><a href="../slownik-biogr/biografie.html">Biografie</a></li>
-        <li><a href="../pamiec.html">Pamięć i Groby</a></li>
-        <li><a href="../slownik-geo/geografia.html">Geografia Rodowa</a></li>
-        <li><a href="../biblioteka/biblioteczka.html">Biblioteczka</a></li>
-        <li><a href="../archiwum/archiwum.html">Archiwum Cyfrowe</a></li>
-    </ul>
-    <div class="drawer-footer">
-        <p>Klan L&K © 1975 – 2026</p>
-    </div>
-</aside>
 
-<main>
-    <section aria-labelledby="informacje-tytul">
-        <div class="info-panel">
-            <div class="info-item"><strong>Data zjazdu</strong> 18-20 września 2015</div>
-            <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynkowo-Szkoleniowy Perkoz<br>Krynica Morska, ul. Teleexpresu 1</div>
-            <div class="info-item"><strong>Organizatorzy</strong> Rodziny Doerffer, Fedorowicz i Meissner<br>(Gdańsk, Olsztyn, Wrocław)</div>
-            <div class="info-item"><strong>Uczestnicy</strong> 198 (zidentyfikowano ~182 na zdjęciu głównym)</div>
-        </div>
-    </section>
-
-    <section aria-labelledby="zdjecie-tytul">
-        <span class="s-label">Interaktywna Pamiątka</span>
-        <h2 class="s-title" id="zdjecie-tytul">Rozpoznane Postacie na Zdjęciu</h2>
-        <div class="s-line"></div>
-
-        <div class="photo-analyzer-wrapper">
-            <div class="interactive-frame">
-                <div class="img-container" id="hotspot-container">
-                    <img src="../img/zjazdy/zjazdxix/foto_zjazdxix_00.jpg" alt="Zdjęcie grupowe XIX Zjazdu Rodzinnego - Krynica Morska" class="base-img">
-                    </div>
-            </div>
-
-            <div id="person-info" class="person-info-display empty" aria-live="polite">
-                Najedź i kliknij na twarz z numerem na zdjęciu, aby odkryć tożsamość.
+    <div class="hero-container">
+        <div class="interactive-frame">
+            <button class="zoom-btn" onclick="openLightbox(0)">🔍 Powiększ</button>
+            <div class="img-container" id="hotspot-container">
+                <img src="../img/zjazdy/zjazdxix/foto_zjazdxix_00.jpg" alt="Zdjęcie grupowe" class="main-img">
             </div>
         </div>
-    </section>
+        
+        <div id="person-info" class="person-info-display empty">
+            Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.
+        </div>
+        
+        <p style="text-align:center; font-size:0.75rem; color:var(--sepia); margin-top:10px;">
+            <em>*Wskazówka: Przytrzymaj klawisz <strong>SHIFT</strong> i kliknij w twarz, aby w konsoli/alercie odczytać dokładną pozycję {x, y} dla kodu.</em>
+        </p>
+    </div>
 
-    <section class="memories-section" aria-labelledby="wspomnienia-tytul">
-        <span class="s-label">Głosy Przeszłości</span>
-        <h2 class="s-title" id="wspomnienia-tytul">Wspomnienia Uczestników</h2>
-        <div class="s-line"></div>
-
+    <section class="memories-section">
+        <h2 class="section-title">Wspomnienia</h2>
         <div class="memory-card">
             <p>Na morskim zjeździe, w roku 2015, pogoda nie sprzyjała kąpieli, ale grupka odważnych ludzi nie zważając na temperaturę weszła do wody. Do wody weszli: Asiri Gandini, Ida Pestka, Paula Ropelewska, ja i jakiś niezidentyfikowany przez moją pamięć pan.</p>
             <span class="memory-author">— Ł. H-Ł. (23.09.2017)</span>
@@ -251,127 +147,185 @@
             <p>Na zjeździe widzieliśmy liska, który chciał zjeść nam wszystkie kiełbaski :) Była też plaża i super zimne morze, ale i tak w nim pływaliśmy.</p>
             <span class="memory-author">— A. G. (23.09.2017)</span>
         </div>
-        <div class="memory-card">
+         <div class="memory-card">
             <p>Po grillu w piątek, kilku kuzynów wykąpało się w morzu, było ciemno i zastanawialiśmy się czy wrócą. Na szczęście wszystko skończyło się dobrze. Na spotkaniu wspominkowym został puszczony film z jednego ze zjazdów. Była tam moja babcia, to jedyny film jaki z nią mam. Do dziś na samą myśl o tym filmie się wzruszamy.</p>
             <span class="memory-author">— A. W. (23.09.2017)</span>
         </div>
     </section>
 
-    <section class="gallery-wrapper" aria-labelledby="galeria-tytul">
-        <span class="s-label">Archiwum Wizualne</span>
-        <h2 class="s-title" id="galeria-tytul">Fotokronika</h2>
-        <div class="s-line"></div>
+    <div class="gallery-wrapper">
+        <h2 class="section-title">Fotokronika</h2>
         <div class="simple-gallery" id="gallery-container"></div>
-    </section>
+    </div>
 
-    <nav class="zjazdy-pagination" aria-label="Nawigacja zjazdów">
-        <a href="zjazd18.html" class="pagination-btn">← Poprzedni: XVIII Zjazd</a>
-        <a href="zjazd20.html" class="pagination-btn">Następny: XX Zjazd →</a>
-        <a href="zjazdy.html" class="pagination-btn full-width">Powrót do głównej listy zjazdów</a>
-    </nav>
-</main>
+    <div class="zjazdy-pagination">
+    <a href="zjazd18.html" class="pagination-btn">← Poprzedni</a>
+    <a href="zjazd20.html" class="pagination-btn">Następny →</a>
+    <a href="zjazdy.html" class="pagination-btn full-width">Powrót do listy zjazdów</a>
+</div>
 
-<footer>
-    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026<br>Pamięć | Tożsamość | Wspólnota</p>
-</footer>
+</article>
 
-<div id="lightbox" onclick="closeLightbox(event)" aria-hidden="true">
+<div id="lightbox" onclick="closeLightbox(event)">
     <div class="lb-container" onclick="event.stopPropagation()">
-        <span class="lb-close" onclick="closeLightbox(event)" tabindex="0" role="button">Zamknij (X)</span>
+        <span class="lb-close" onclick="closeLightbox(event)">Zamknij (X)</span>
         <img id="lb-img" src="" alt="Powiększenie" onclick="changePhoto(1)">
         <div class="lb-controls">
-            <button class="lb-arrow" onclick="changePhoto(-1)" aria-label="Poprzednie zdjęcie">❮</button>
-            <div class="lb-counter" id="lb-counter" aria-live="polite"></div>
-            <button class="lb-arrow" onclick="changePhoto(1)" aria-label="Następne zdjęcie">❯</button>
+            <button class="lb-arrow" onclick="changePhoto(-1)">❮</button>
+            <div class="lb-counter" id="lb-counter"></div>
+            <button class="lb-arrow" onclick="changePhoto(1)">❯</button>
         </div>
     </div>
 </div>
 
-<script>
-    // ── OBSŁUGA MENU BOCZNEGO ──
-    const btn = document.getElementById('menuBtn'), 
-          drw = document.getElementById('drawer'), 
-          ovr = document.getElementById('overlay');
-    
-    function toggleMenu() {
-        const isOpen = drw.classList.contains('open');
-        if (isOpen) {
-            drw.classList.remove('open'); 
-            ovr.classList.remove('active');
-            btn.setAttribute('aria-expanded', 'false');
-            drw.setAttribute('aria-hidden', 'true');
-        } else {
-            drw.classList.add('open'); 
-            ovr.classList.add('active');
-            btn.setAttribute('aria-expanded', 'true');
-            drw.setAttribute('aria-hidden', 'false');
-        }
-    }
-    btn.onclick = toggleMenu;
-    ovr.onclick = toggleMenu;
+<footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
-    // ── GENEROWANIE HOTSPOTÓW DLA 182 OSÓB ZGODNIE Z UKŁADEM NA ZDJĘCIU ──
-    // Algorytm tworzy wirtualną siatkę odwzorowującą układ "amfiteatralny" osób na wzgórzu.
-    const containerHotspots = document.getElementById('hotspot-container');
-    const totalPeople = 182;
-    
-    // Proporcje układu: im niżej zdjęcia, tym więcej osób w rzędzie, rozchodzące się na boki.
-    // X to lewa/prawa oś, Y to góra/dół.
-    const rowsConfig = [
-        { count: 12, y: 15, startX: 35, endX: 65 },  // Góra (rzędy 1-2)
-        { count: 18, y: 25, startX: 25, endX: 75 },  // Rząd 3
-        { count: 24, y: 35, startX: 18, endX: 82 },  // Rząd 4
-        { count: 28, y: 46, startX: 12, endX: 88 },  // Rząd 5 (środek)
-        { count: 32, y: 58, startX: 8,  endX: 92 },  // Rząd 6
-        { count: 30, y: 70, startX: 10, endX: 90 },  // Rząd 7
-        { count: 22, y: 82, startX: 15, endX: 85 },  // Rząd 8 (siedzący dół)
-        { count: 16, y: 92, startX: 25, endX: 75 }   // Przedni rząd (dzieci/siedzący na trawie)
+<script>
+    const zjazd_folder = 'zjazdxix';
+    const liczba_zdjec = 172; 
+    let currentIdx = 1;
+
+    // ── BAZA OSÓB DO ZDJĘCIA GRUPOWEGO ──
+    const hotspotsData = [
+        // Rząd 1
+        { id: 1, x: 38.0, y: 5.0, name: "[Imię i Nazwisko]" }, { id: 2, x: 42.0, y: 5.5, name: "[Imię i Nazwisko]" }, 
+        { id: 3, x: 48.0, y: 5.0, name: "[Imię i Nazwisko]" }, { id: 4, x: 55.0, y: 6.0, name: "[Imię i Nazwisko]" },
+        // Rząd 2
+        { id: 5, x: 32.0, y: 10.0, name: "[Imię i Nazwisko]" }, { id: 6, x: 36.5, y: 9.5, name: "[Imię i Nazwisko]" }, 
+        { id: 7, x: 40.0, y: 11.0, name: "[Imię i Nazwisko]" }, { id: 8, x: 45.0, y: 10.0, name: "[Imię i Nazwisko]" }, 
+        { id: 9, x: 50.0, y: 10.5, name: "[Imię i Nazwisko]" }, { id: 10, x: 53.0, y: 11.0, name: "[Imię i Nazwisko]" }, 
+        { id: 11, x: 58.0, y: 9.5, name: "[Imię i Nazwisko]" }, { id: 12, x: 62.0, y: 10.0, name: "[Imię i Nazwisko]" },
+        // Rząd 3
+        { id: 13, x: 28.0, y: 15.0, name: "[Imię i Nazwisko]" }, { id: 14, x: 31.0, y: 14.5, name: "[Imię i Nazwisko]" }, 
+        { id: 15, x: 34.0, y: 16.0, name: "[Imię i Nazwisko]" }, { id: 16, x: 37.0, y: 15.0, name: "[Imię i Nazwisko]" }, 
+        { id: 17, x: 41.0, y: 15.5, name: "[Imię i Nazwisko]" }, { id: 18, x: 44.0, y: 14.0, name: "[Imię i Nazwisko]" }, 
+        { id: 19, x: 48.0, y: 16.0, name: "[Imię i Nazwisko]" }, { id: 20, x: 52.0, y: 15.0, name: "[Imię i Nazwisko]" }, 
+        { id: 21, x: 56.0, y: 14.5, name: "[Imię i Nazwisko]" }, { id: 22, x: 60.0, y: 15.5, name: "[Imię i Nazwisko]" }, 
+        { id: 23, x: 64.0, y: 16.0, name: "[Imię i Nazwisko]" }, { id: 24, x: 68.0, y: 15.0, name: "[Imię i Nazwisko]" },
+        // Rząd 4
+        { id: 25, x: 23.0, y: 22.0, name: "[Imię i Nazwisko]" }, { id: 26, x: 26.0, y: 21.0, name: "[Imię i Nazwisko]" }, 
+        { id: 27, x: 29.0, y: 23.0, name: "[Imię i Nazwisko]" }, { id: 28, x: 32.0, y: 21.5, name: "[Imię i Nazwisko]" }, 
+        { id: 29, x: 35.0, y: 22.0, name: "[Imię i Nazwisko]" }, { id: 30, x: 38.0, y: 20.0, name: "[Imię i Nazwisko]" }, 
+        { id: 31, x: 42.0, y: 23.0, name: "[Imię i Nazwisko]" }, { id: 32, x: 46.0, y: 21.0, name: "[Imię i Nazwisko]" }, 
+        { id: 33, x: 50.0, y: 22.5, name: "[Imię i Nazwisko]" }, { id: 34, x: 54.0, y: 22.0, name: "[Imię i Nazwisko]" }, 
+        { id: 35, x: 58.0, y: 21.0, name: "[Imię i Nazwisko]" }, { id: 36, x: 61.0, y: 23.0, name: "[Imię i Nazwisko]" }, 
+        { id: 37, x: 65.0, y: 21.5, name: "[Imię i Nazwisko]" }, { id: 38, x: 69.0, y: 22.0, name: "[Imię i Nazwisko]" }, 
+        { id: 39, x: 73.0, y: 21.0, name: "[Imię i Nazwisko]" }, { id: 40, x: 76.0, y: 23.0, name: "[Imię i Nazwisko]" },
+        // Rząd 5
+        { id: 41, x: 19.0, y: 30.0, name: "[Imię i Nazwisko]" }, { id: 42, x: 22.0, y: 29.0, name: "[Imię i Nazwisko]" }, 
+        { id: 43, x: 25.0, y: 31.0, name: "[Imię i Nazwisko]" }, { id: 44, x: 28.0, y: 30.0, name: "[Imię i Nazwisko]" }, 
+        { id: 45, x: 31.0, y: 29.5, name: "[Imię i Nazwisko]" }, { id: 46, x: 34.0, y: 31.0, name: "[Imię i Nazwisko]" }, 
+        { id: 47, x: 38.0, y: 30.0, name: "[Imię i Nazwisko]" }, { id: 48, x: 42.0, y: 29.0, name: "[Imię i Nazwisko]" }, 
+        { id: 49, x: 46.0, y: 31.0, name: "[Imię i Nazwisko]" }, { id: 50, x: 50.0, y: 30.5, name: "[Imię i Nazwisko]" }, 
+        { id: 51, x: 53.0, y: 29.0, name: "[Imię i Nazwisko]" }, { id: 52, x: 57.0, y: 31.0, name: "[Imię i Nazwisko]" }, 
+        { id: 53, x: 61.0, y: 30.0, name: "[Imię i Nazwisko]" }, { id: 54, x: 65.0, y: 29.5, name: "[Imię i Nazwisko]" }, 
+        { id: 55, x: 69.0, y: 31.0, name: "[Imię i Nazwisko]" }, { id: 56, x: 73.0, y: 30.0, name: "[Imię i Nazwisko]" }, 
+        { id: 57, x: 77.0, y: 29.0, name: "[Imię i Nazwisko]" }, { id: 58, x: 81.0, y: 31.0, name: "[Imię i Nazwisko]" },
+        // Rząd 6
+        { id: 59, x: 15.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 60, x: 18.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
+        { id: 61, x: 21.0, y: 37.0, name: "[Imię i Nazwisko]" }, { id: 62, x: 24.0, y: 38.5, name: "[Imię i Nazwisko]" }, 
+        { id: 63, x: 27.0, y: 37.5, name: "[Imię i Nazwisko]" }, { id: 64, x: 30.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
+        { id: 65, x: 33.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 66, x: 37.0, y: 37.0, name: "[Imię i Nazwisko]" }, 
+        { id: 67, x: 41.0, y: 39.0, name: "[Imię i Nazwisko]" }, { id: 68, x: 44.0, y: 38.5, name: "[Imię i Nazwisko]" }, 
+        { id: 69, x: 48.0, y: 37.0, name: "[Imię i Nazwisko]" }, { id: 70, x: 52.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
+        { id: 71, x: 56.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 72, x: 60.0, y: 37.5, name: "[Imię i Nazwisko]" }, 
+        { id: 73, x: 64.0, y: 39.0, name: "[Imię i Nazwisko]" }, { id: 74, x: 68.0, y: 38.0, name: "[Imię i Nazwisko]" }, 
+        { id: 75, x: 72.0, y: 37.0, name: "[Imię i Nazwisko]" }, { id: 76, x: 76.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
+        { id: 77, x: 80.0, y: 38.5, name: "[Imię i Nazwisko]" }, { id: 78, x: 84.0, y: 37.0, name: "[Imię i Nazwisko]" }, 
+        { id: 79, x: 87.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 80, x: 90.0, y: 39.0, name: "[Imię i Nazwisko]" },
+        // Rząd 7
+        { id: 81, x: 12.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 82, x: 15.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
+        { id: 83, x: 18.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 84, x: 21.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
+        { id: 85, x: 24.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 86, x: 27.0, y: 48.0, name: "[Imię i Nazwisko]" }, 
+        { id: 87, x: 30.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 88, x: 34.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
+        { id: 89, x: 37.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 90, x: 41.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
+        { id: 91, x: 44.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 92, x: 48.0, y: 48.0, name: "[Imię i Nazwisko]" }, 
+        { id: 93, x: 52.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 94, x: 56.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
+        { id: 95, x: 59.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 96, x: 63.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
+        { id: 97, x: 67.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 98, x: 71.0, y: 48.0, name: "[Imię i Nazwisko]" }, 
+        { id: 99, x: 75.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 100, x: 79.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
+        { id: 101, x: 83.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 102, x: 86.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
+        { id: 103, x: 90.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 104, x: 93.0, y: 48.0, name: "[Imię i Nazwisko]" },
+        // Rząd 8
+        { id: 105, x: 10.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 106, x: 13.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
+        { id: 107, x: 16.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 108, x: 19.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
+        { id: 109, x: 22.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 110, x: 25.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
+        { id: 111, x: 28.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 112, x: 31.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
+        { id: 113, x: 34.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 114, x: 38.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
+        { id: 115, x: 42.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 116, x: 46.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
+        { id: 117, x: 50.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 118, x: 54.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
+        { id: 119, x: 57.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 120, x: 61.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
+        { id: 121, x: 65.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 122, x: 69.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
+        { id: 123, x: 73.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 124, x: 77.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
+        { id: 125, x: 81.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 126, x: 85.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
+        { id: 127, x: 89.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 128, x: 93.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
+        { id: 129, x: 96.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 130, x: 98.0, y: 55.0, name: "[Imię i Nazwisko]" },
+        // Rząd 9
+        { id: 131, x: 15.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 132, x: 18.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
+        { id: 133, x: 22.0, y: 65.0, name: "[Imię i Nazwisko]" }, { id: 134, x: 26.0, y: 66.5, name: "[Imię i Nazwisko]" }, 
+        { id: 135, x: 30.0, y: 65.5, name: "[Imię i Nazwisko]" }, { id: 136, x: 34.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
+        { id: 137, x: 38.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 138, x: 42.0, y: 65.0, name: "[Imię i Nazwisko]" }, 
+        { id: 139, x: 46.0, y: 67.0, name: "[Imię i Nazwisko]" }, { id: 140, x: 50.0, y: 66.5, name: "[Imię i Nazwisko]" }, 
+        { id: 141, x: 54.0, y: 65.5, name: "[Imię i Nazwisko]" }, { id: 142, x: 58.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
+        { id: 143, x: 62.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 144, x: 66.0, y: 65.0, name: "[Imię i Nazwisko]" }, 
+        { id: 145, x: 70.0, y: 67.0, name: "[Imię i Nazwisko]" }, { id: 146, x: 74.0, y: 66.5, name: "[Imię i Nazwisko]" }, 
+        { id: 147, x: 78.0, y: 65.5, name: "[Imię i Nazwisko]" }, { id: 148, x: 82.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
+        { id: 149, x: 86.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 150, x: 90.0, y: 65.0, name: "[Imię i Nazwisko]" },
+        // Rząd 10
+        { id: 151, x: 20.0, y: 77.0, name: "[Imię i Nazwisko]" }, { id: 152, x: 24.0, y: 76.0, name: "[Imię i Nazwisko]" }, 
+        { id: 153, x: 28.0, y: 78.0, name: "[Imię i Nazwisko]" }, { id: 154, x: 32.0, y: 77.5, name: "[Imię i Nazwisko]" }, 
+        { id: 155, x: 36.0, y: 76.5, name: "[Imię i Nazwisko]" }, { id: 156, x: 40.0, y: 78.0, name: "[Imię i Nazwisko]" }, 
+        { id: 157, x: 44.0, y: 77.0, name: "[Imię i Nazwisko]" }, { id: 158, x: 48.0, y: 76.0, name: "[Imię i Nazwisko]" }, 
+        { id: 159, x: 52.0, y: 78.0, name: "[Imię i Nazwisko]" }, { id: 160, x: 56.0, y: 77.5, name: "[Imię i Nazwisko]" }, 
+        { id: 161, x: 60.0, y: 76.5, name: "[Imię i Nazwisko]" }, { id: 162, x: 64.0, y: 78.0, name: "[Imię i Nazwisko]" }, 
+        { id: 163, x: 68.0, y: 77.0, name: "[Imię i Nazwisko]" }, { id: 164, x: 72.0, y: 76.0, name: "[Imię i Nazwisko]" }, 
+        { id: 165, x: 76.0, y: 78.0, name: "[Imię i Nazwisko]" }, { id: 166, x: 80.0, y: 77.0, name: "[Imię i Nazwisko]" },
+        // Rząd 11
+        { id: 167, x: 25.0, y: 88.0, name: "[Imię i Nazwisko]" }, { id: 168, x: 30.0, y: 87.0, name: "[Imię i Nazwisko]" }, 
+        { id: 169, x: 35.0, y: 89.0, name: "[Imię i Nazwisko]" }, { id: 170, x: 40.0, y: 88.5, name: "[Imię i Nazwisko]" }, 
+        { id: 171, x: 45.0, y: 87.5, name: "[Imię i Nazwisko]" }, { id: 172, x: 50.0, y: 89.0, name: "[Imię i Nazwisko]" }, 
+        { id: 173, x: 55.0, y: 88.0, name: "[Imię i Nazwisko]" }, { id: 174, x: 60.0, y: 87.0, name: "[Imię i Nazwisko]" }, 
+        { id: 175, x: 65.0, y: 89.0, name: "[Imię i Nazwisko]" }, { id: 176, x: 70.0, y: 88.5, name: "[Imię i Nazwisko]" }
     ];
 
-    let currentPersonId = 1;
+    // GENEROWANIE HOTSPOTÓW
+    const containerHotspots = document.getElementById('hotspot-container');
+    hotspotsData.forEach(person => {
+        const btnObj = document.createElement('button');
+        btnObj.className = 'hotspot';
+        btnObj.style.left = `${person.x}%`;
+        btnObj.style.top = `${person.y}%`;
+        btnObj.setAttribute('data-id', person.id);
+        btnObj.setAttribute('data-name', person.name);
+        btnObj.setAttribute('data-desc', `Osoba ze znacznikiem nr ${person.id}`);
+        containerHotspots.appendChild(btnObj);
+    });
 
-    rowsConfig.forEach(row => {
-        const stepX = row.count > 1 ? (row.endX - row.startX) / (row.count - 1) : 0;
-        
-        for (let i = 0; i < row.count; i++) {
-            if (currentPersonId > totalPeople) break;
-            
-            const xPos = row.count === 1 ? (row.startX + row.endX) / 2 : row.startX + (stepX * i);
-            
-            // Lekkie przesunięcie, aby hotspoty nie leżały idealnie pod sznurek (naturalny efekt tłumu)
-            const randomOffsetX = (Math.random() - 0.5) * 2;
-            const randomOffsetY = (Math.random() - 0.5) * 3;
-            
-            const btnObj = document.createElement('button');
-            btnObj.className = 'hotspot';
-            btnObj.style.left = `${xPos + randomOffsetX}%`;
-            btnObj.style.top = `${row.y + randomOffsetY}%`;
-            
-            // Ustawienie numeru zjazdu jako atrybutów dla skryptu pobierającego tożsamość
-            btnObj.setAttribute('data-id', currentPersonId);
-            btnObj.setAttribute('data-name', `[Wpisz imię i nazwisko]`);
-            btnObj.setAttribute('data-desc', `Numer na zdjęciu: ${currentPersonId}`);
-            btnObj.setAttribute('aria-label', `Pokaż informacje o osobie z numerem ${currentPersonId}`);
-            
-            containerHotspots.appendChild(btnObj);
-            currentPersonId++;
+    // WYSZUKIWANIE WSPÓŁRZĘDNYCH (NARZĘDZIE ADMINA)
+    const interactiveFrame = document.querySelector('.interactive-frame');
+    interactiveFrame.addEventListener('click', function(e) {
+        if (e.shiftKey) {
+            e.preventDefault();
+            const rect = this.getBoundingClientRect();
+            const xPercent = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+            const yPercent = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+            const coordStr = `{ x: ${xPercent}, y: ${yPercent} }`;
+            console.log("Kliknięte współrzędne:", coordStr);
+            alert(`Współrzędne kliknięcia:\n${coordStr}\n\nOtwórz konsolę (F12) by łatwo skopiować.`);
         }
     });
 
-    // ── OBSŁUGA KLIKNIĘĆ W HOTSPOTY NA ZDJĘCIU ──
+    // OBSŁUGA INFO O OSOBIE
     const infoDisplay = document.getElementById('person-info');
-
     containerHotspots.addEventListener('click', function(e) {
+        if (e.shiftKey) return;
         const hotspot = e.target.closest('.hotspot');
         if (!hotspot) return;
         
         e.stopPropagation();
-        
-        // Reset aktywnych punktów
         document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
         hotspot.classList.add('active');
 
-        // Pobranie danych do wyświetlenia
         const name = hotspot.getAttribute('data-name');
         const desc = hotspot.getAttribute('data-desc');
 
@@ -379,26 +333,22 @@
         infoDisplay.innerHTML = `
             <div>
                 <strong>${name}</strong>
-                <span class="person-meta">${desc} - Zidentyfikowano na fotografii</span>
+                <span class="person-meta">${desc} - Zidentyfikowano w archiwum</span>
             </div>
         `;
     });
 
-    // Resetowanie po kliknięciu gdziekolwiek indziej
+    // KLIKNIĘCIE POZA ZDJĘCIEM = RESET
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.hotspot') && !e.target.closest('.interactive-frame')) {
             document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
             infoDisplay.classList.add('empty');
-            infoDisplay.innerHTML = "Najedź i kliknij na twarz z numerem na zdjęciu, aby odkryć tożsamość.";
+            infoDisplay.innerHTML = "Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.";
         }
     });
 
-    // ── SKRYPT GALERII WSPOMNIEŃ I LIGHTBOXA ──
-    const zjazd_folder = 'zjazdxix';
-    const liczba_zdjec = 172; 
-    let currentIdx = 1;
-
-    const galleryContainer = document.getElementById('gallery-container');
+    // ── GALERIA I LIGHTBOX ──
+    const container = document.getElementById('gallery-container');
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-img');
     const lbCounter = document.getElementById('lb-counter');
@@ -406,41 +356,31 @@
     for (let i = 1; i <= liczba_zdjec; i++) {
         const nr = i.toString().padStart(2, '0');
         const path = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
-        
         const div = document.createElement('div');
         div.className = 'gallery-item';
-        div.setAttribute('role', 'button');
-        div.setAttribute('tabindex', '0');
-        div.setAttribute('aria-label', `Otwórz zdjęcie ${nr} w powiększeniu`);
-        
         const img = document.createElement('img');
         img.src = path;
         img.loading = "lazy";
-        img.onerror = function() { this.parentElement.style.display = 'none'; }; // Ukrywa brakujące fotki
-        
+        img.onerror = function() { this.parentElement.style.display = 'none'; };
         div.onclick = () => openLightbox(i);
-        div.onkeydown = (e) => { if(e.key === 'Enter' || e.key === ' ') openLightbox(i); };
-        
         div.appendChild(img);
-        galleryContainer.appendChild(div);
+        container.appendChild(div);
     }
 
     function openLightbox(index) {
         currentIdx = index;
         updateLB();
         lightbox.style.display = 'flex';
-        lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox(e) {
-        if(e) e.stopPropagation();
         lightbox.style.display = 'none';
-        lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = 'auto';
     }
 
     function changePhoto(dir) {
+        if (currentIdx === 0) return; // Zablokowanie nawigacji w lewo/prawo na zdjęciu grupowym
         currentIdx += dir;
         if (currentIdx > liczba_zdjec) currentIdx = 1;
         if (currentIdx < 1) currentIdx = liczba_zdjec;
@@ -448,12 +388,21 @@
     }
 
     function updateLB() {
-        const nr = currentIdx.toString().padStart(2, '0');
-        lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
-        lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
+        const arrows = document.querySelectorAll('.lb-arrow');
+        if (currentIdx === 0) {
+            // WYŚWIETLANIE ZDJĘCIA GRUPOWEGO W LIGHTBOX
+            lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_00.jpg`;
+            lbCounter.innerText = `ZDJĘCIE GRUPOWE`;
+            arrows.forEach(a => a.style.visibility = 'hidden'); // Ukrywamy strzałki gdy powiększone jest zdjęcie grupowe
+        } else {
+            // ZWYKŁA GALERIA
+            const nr = currentIdx.toString().padStart(2, '0');
+            lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+            lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
+            arrows.forEach(a => a.style.visibility = 'visible');
+        }
     }
 
-    // Nawigacja klawiaturą
     document.addEventListener('keydown', (e) => {
         if (lightbox.style.display === 'flex') {
             if (e.key === "ArrowRight") changePhoto(1);
@@ -462,7 +411,6 @@
         }
     });
 
-    // Nawigacja dotykowa
     let tStart = 0;
     let isMultiTouch = false;
 
