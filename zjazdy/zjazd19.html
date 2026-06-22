@@ -6,6 +6,7 @@
     <title>XIX Zjazd: Krynica Morska | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
     <style>
         :root {
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
@@ -37,14 +38,14 @@
 
         .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
         
-        /* KONTROLKI LUPY */
+        /* KONTROLKI LUPY I PANZOOM */
         .controls-bar { display: flex; justify-content: flex-end; margin-bottom: 15px; }
         .zoom-toggle-btn { background: var(--parchment); border: 1px solid var(--gold); color: var(--ink); padding: 8px 18px; font-family: 'Jost', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.3s; border-radius: 2px; display: flex; align-items: center; gap: 8px; font-weight: 500; }
         .zoom-toggle-btn:hover { background: var(--gold-light); color: var(--warm-white); }
         .zoom-toggle-btn.active { background: var(--gold); color: var(--warm-white); box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); }
 
-        .interactive-frame { border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; border-radius: 4px; }
-        .img-container { position: relative; width: 100%; height: auto; overflow: hidden; cursor: crosshair; }
+        .interactive-frame { border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; border-radius: 4px; overflow: hidden; }
+        .img-container { position: relative; width: 100%; height: auto; cursor: crosshair; }
         .main-img { width: 100%; height: auto; display: block; }
 
         /* LUPA (Szkło powiększające) */
@@ -79,10 +80,18 @@
         .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; }
         .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: white; }
         
-        /* FIX DLA MOBILE */
+        /* FIX DLA MOBILE (Logika widoczności narzędzi) */
+        @media (max-width: 768px) {
+            .desktop-only { display: none !important; }
+            .mobile-only { display: flex !important; }
+            .img-magnifier-glass { display: none !important; }
+        }
+        @media (min-width: 769px) {
+            .mobile-only { display: none !important; }
+        }
+
         @media (max-width: 600px) {
             .pagination-btn { padding: 20px 10px; font-size: 0.7rem; }
-            .img-magnifier-glass { width: 90px; height: 90px; }
         }
 
         /* LIGHTBOX */
@@ -129,8 +138,11 @@
     <div class="hero-container">
         
         <div class="controls-bar">
-            <button id="loupe-toggle" class="zoom-toggle-btn">
+            <button id="loupe-toggle" class="zoom-toggle-btn desktop-only">
                 🔍 Włącz Lupę
+            </button>
+            <button id="panzoom-reset" class="zoom-toggle-btn mobile-only">
+                ↺ Resetuj Powiększenie
             </button>
         </div>
 
@@ -144,8 +156,11 @@
             Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.
         </div>
         
-        <p style="text-align:center; font-size:0.75rem; color:var(--sepia); margin-top:10px;">
+        <p class="desktop-only" style="text-align:center; font-size:0.75rem; color:var(--sepia); margin-top:10px;">
             <em>*Wskazówka: Przytrzymaj klawisz <strong>SHIFT</strong> i kliknij w twarz, aby w konsoli/alercie odczytać dokładną pozycję {x, y} dla kodu.</em>
+        </p>
+        <p class="mobile-only" style="text-align:center; font-size:0.75rem; color:var(--sepia); margin-top:10px;">
+            <em>*Wskazówka: Użyj dwóch palców, aby przybliżyć i swobodnie przesuwać zdjęcie. Kliknij w twarz, aby zobaczyć informacje.</em>
         </p>
     </div>
 
@@ -313,7 +328,28 @@
         containerHotspots.appendChild(btnObj);
     });
 
-    // ── LOGIKA LUPY ──
+    // ── INTEGRACJA PANZOOM (TYLKO DLA URZĄDZEŃ MOBILNYCH) ──
+    const pzElem = document.getElementById('hotspot-container');
+    const panzoom = Panzoom(pzElem, {
+        maxScale: 5,
+        contain: 'outside',
+        disablePan: window.innerWidth > 768,
+        disableZoom: window.innerWidth > 768
+    });
+
+    // Nasłuchiwanie zmian rozmiaru (np. odwrócenie ekranu/telefonu) aby poprawnie aktywować/dezaktywować interakcje
+    window.addEventListener('resize', () => {
+        const isDesktop = window.innerWidth > 768;
+        panzoom.setOptions({ disablePan: isDesktop, disableZoom: isDesktop });
+        if(isDesktop) { panzoom.reset(); }
+    });
+
+    // Przycisk "Resetuj Powiększenie" na mobile
+    document.getElementById('panzoom-reset').addEventListener('click', () => {
+        panzoom.reset();
+    });
+
+    // ── LOGIKA KLASYCZNEJ LUPY (TYLKO DLA DESKTOPU) ──
     let isLoupeActive = false;
     const loupeToggleBtn = document.getElementById('loupe-toggle');
     const mainImg = document.getElementById('main-group-img');
@@ -325,6 +361,7 @@
     containerHotspots.appendChild(glass);
 
     loupeToggleBtn.addEventListener('click', function() {
+        if (window.innerWidth <= 768) return; // Zabezpieczenie na wszelki wypadek
         isLoupeActive = !isLoupeActive;
         if (isLoupeActive) {
             this.classList.add('active');
@@ -341,10 +378,10 @@
     });
 
     function moveMagnifier(e) {
-        if (!isLoupeActive) return;
+        if (!isLoupeActive || window.innerWidth <= 768) return;
         
         let pos, x, y;
-        e.preventDefault(); // Zapobiega przewijaniu strony podczas obsługi dotyku w lupie
+        e.preventDefault(); 
         pos = getCursorPos(e);
         x = pos.x;
         y = pos.y;
@@ -358,14 +395,10 @@
         if (y > mainImg.height) y = mainImg.height;
         if (y < 0) y = 0;
 
-        // Jeśli urządzenie dotykowe, przesuwamy kółko lupy fizycznie wyżej, żeby palec nie zasłaniał widoku
-        let isTouch = e.type.includes('touch');
-        let touchOffset = isTouch ? 60 : 0; 
-
         glass.style.left = (x - w) + "px";
-        glass.style.top = (y - h - touchOffset) + "px";
+        glass.style.top = (y - h) + "px";
 
-        // Konfiguracja tła powiększonego - zawsze idealnie wycentrowana na palcu/kursorze, niezależnie od przesunięcia szkła
+        // Konfiguracja tła powiększonego
         glass.style.backgroundSize = (mainImg.width * zoomLevel) + "px " + (mainImg.height * zoomLevel) + "px";
         glass.style.backgroundPosition = "-" + ((x * zoomLevel) - w) + "px -" + ((y * zoomLevel) - h) + "px";
     }
@@ -375,39 +408,24 @@
         e = e || window.event;
         a = mainImg.getBoundingClientRect();
         
-        let clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-        let clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+        let clientX = e.clientX;
+        let clientY = e.clientY;
         
-        // Zoptymalizowane współrzędne relatywne do obrazka
         x = clientX - a.left;
         y = clientY - a.top;
         
         return {x: x, y: y};
     }
 
-    // Eventy dla Lupy z Fade In / Fade Out
+    // Eventy dla klasycznej myszki / desktop
     containerHotspots.addEventListener('mousemove', moveMagnifier);
     containerHotspots.addEventListener('mouseenter', () => { 
-        if(isLoupeActive) {
+        if(isLoupeActive && window.innerWidth > 768) {
             glass.style.display = 'block';
             requestAnimationFrame(() => glass.style.opacity = '1');
         }
     });
     containerHotspots.addEventListener('mouseleave', () => { 
-        glass.style.opacity = '0';
-        setTimeout(() => { if(glass.style.opacity === '0') glass.style.display = 'none'; }, 200);
-    });
-    
-    // Wsparcie dla ekranów dotykowych (z {passive: false} by e.preventDefault zadziałało)
-    containerHotspots.addEventListener('touchmove', moveMagnifier, {passive: false});
-    containerHotspots.addEventListener('touchstart', (e) => {
-        if(isLoupeActive) {
-            glass.style.display = 'block';
-            requestAnimationFrame(() => glass.style.opacity = '1');
-            moveMagnifier(e);
-        }
-    }, {passive: false});
-    containerHotspots.addEventListener('touchend', () => { 
         glass.style.opacity = '0';
         setTimeout(() => { if(glass.style.opacity === '0') glass.style.display = 'none'; }, 200);
     });
@@ -461,7 +479,7 @@
         }, 2000);
     });
 
-    // KLIKNIĘCIE POZA ZDJĘCIEM = RESET
+    // KLIKNIĘCIE POZA ZDJĘCIEM = RESET WIDZIALNOŚCI INFO
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.hotspot') && !e.target.closest('.interactive-frame')) {
             document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
