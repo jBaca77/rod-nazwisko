@@ -75,10 +75,46 @@
         .interactive-frame:hover .img-container { transform: scale(1.02); }
         .base-img { width: 100%; height: auto; display: block; }
 
-        /* Hotspoty (Punkty dla osób) */
-        .hotspot { position: absolute; cursor: pointer; z-index: 10; border-radius: 50% 50% 10% 10%; border: 1.5px solid transparent; background: transparent; transition: all 0.2s ease; width: 2%; height: 5%; transform: translate(-50%, -50%); }
-        .hotspot:hover, .hotspot:focus-visible, .hotspot.active { background: rgba(255, 255, 255, 0.25); border-color: var(--gold); box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); backdrop-filter: brightness(1.2); z-index: 20; }
+        /* Hotspoty - obszary klikalne na osobach */
+        .hotspot { 
+            position: absolute; 
+            cursor: pointer; 
+            z-index: 10; 
+            border-radius: 50%; 
+            border: 2px solid transparent; 
+            background: rgba(255, 255, 255, 0.0); /* Domyślnie przezroczyste, by było widać numery ze zdjęcia */
+            transition: all 0.2s ease; 
+            width: 2.5%; 
+            height: 4%; 
+            transform: translate(-50%, -50%); 
+        }
+        .hotspot:hover, .hotspot:focus-visible, .hotspot.active { 
+            background: rgba(255, 255, 255, 0.3); 
+            border-color: var(--gold); 
+            box-shadow: 0 0 10px rgba(155, 125, 74, 0.8); 
+            z-index: 20; 
+        }
         
+        /* Tooltip pojawiający się przy najechaniu */
+        .hotspot::after {
+            content: attr(data-id);
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--ink);
+            color: var(--cream);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+        .hotspot:hover::after { opacity: 1; }
+
         /* Panel informacyjny pod zdjęciem */
         .person-info-display { background: var(--parchment); border-left: 3px solid var(--gold); padding: 25px 30px; min-height: 90px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ink); text-align: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         .person-info-display.empty { color: var(--sepia); font-style: italic; font-size: 1.2rem; }
@@ -120,6 +156,7 @@
             .drawer { width: 100%; right: -100%; }
             main { padding: 40px 24px; }
             .person-info-display { font-size: 1.2rem; padding: 20px; }
+            .hotspot { width: 4%; height: 6%; } /* Większe pola dotykowe na mobilkach */
         }
         @media (max-width: 600px) {
             .simple-gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 120px; gap: 4px; }
@@ -191,13 +228,12 @@
         <div class="photo-analyzer-wrapper">
             <div class="interactive-frame">
                 <div class="img-container" id="hotspot-container">
-                    <img src="image.png" alt="Zdjęcie grupowe XIX Zjazdu Rodzinnego - Krynica Morska" class="base-img">
-                    <!-- Hotspoty zostaną wygenerowane przez JavaScript aby zachować czystość kodu i idealne rozmieszczenie -->
-                </div>
+                    <img src="../img/zjazdy/zjazdxix/foto_zjazdxix_00.jpg" alt="Zdjęcie grupowe XIX Zjazdu Rodzinnego - Krynica Morska" class="base-img">
+                    </div>
             </div>
 
             <div id="person-info" class="person-info-display empty" aria-live="polite">
-                Najedź i kliknij na twarz ze znaczkiem numeru na zdjęciu, aby odkryć tożsamość.
+                Najedź i kliknij na twarz z numerem na zdjęciu, aby odkryć tożsamość.
             </div>
         </div>
     </section>
@@ -274,23 +310,22 @@
     btn.onclick = toggleMenu;
     ovr.onclick = toggleMenu;
 
-    // ── GENEROWANIE HOTSPOTÓW DLA WSZYSTKICH 182 OSÓB ──
-    // Generujemy matrycę punktów bazując na kształcie grupy na zdjęciu (trójkąt/trapez)
+    // ── GENEROWANIE HOTSPOTÓW DLA 182 OSÓB ZGODNIE Z UKŁADEM NA ZDJĘCIU ──
+    // Algorytm tworzy wirtualną siatkę odwzorowującą układ "amfiteatralny" osób na wzgórzu.
     const containerHotspots = document.getElementById('hotspot-container');
     const totalPeople = 182;
     
-    // Konfiguracja rzędów (ilość osób, wysokość Y w %, start X w %, koniec X w %)
+    // Proporcje układu: im niżej zdjęcia, tym więcej osób w rzędzie, rozchodzące się na boki.
+    // X to lewa/prawa oś, Y to góra/dół.
     const rowsConfig = [
-        { count: 6, y: 7, startX: 43, endX: 57 },
-        { count: 12, y: 13, startX: 38, endX: 62 },
-        { count: 15, y: 20, startX: 33, endX: 67 },
-        { count: 20, y: 28, startX: 25, endX: 75 },
-        { count: 23, y: 37, startX: 20, endX: 80 },
-        { count: 25, y: 46, startX: 15, endX: 85 },
-        { count: 25, y: 55, startX: 12, endX: 88 },
-        { count: 22, y: 65, startX: 18, endX: 82 },
-        { count: 18, y: 75, startX: 22, endX: 78 },
-        { count: 16, y: 85, startX: 25, endX: 75 }
+        { count: 12, y: 15, startX: 35, endX: 65 },  // Góra (rzędy 1-2)
+        { count: 18, y: 25, startX: 25, endX: 75 },  // Rząd 3
+        { count: 24, y: 35, startX: 18, endX: 82 },  // Rząd 4
+        { count: 28, y: 46, startX: 12, endX: 88 },  // Rząd 5 (środek)
+        { count: 32, y: 58, startX: 8,  endX: 92 },  // Rząd 6
+        { count: 30, y: 70, startX: 10, endX: 90 },  // Rząd 7
+        { count: 22, y: 82, startX: 15, endX: 85 },  // Rząd 8 (siedzący dół)
+        { count: 16, y: 92, startX: 25, endX: 75 }   // Przedni rząd (dzieci/siedzący na trawie)
     ];
 
     let currentPersonId = 1;
@@ -301,30 +336,31 @@
         for (let i = 0; i < row.count; i++) {
             if (currentPersonId > totalPeople) break;
             
-            const xPos = row.count === 1 ? (row.startX + row.endX)/2 : row.startX + (stepX * i);
-            // Delikatne przesunięcia ("szum") by nie było to idealne jak od linijki
-            const randomOffsetX = (Math.random() - 0.5) * 1.5;
-            const randomOffsetY = (Math.random() - 0.5) * 2;
+            const xPos = row.count === 1 ? (row.startX + row.endX) / 2 : row.startX + (stepX * i);
+            
+            // Lekkie przesunięcie, aby hotspoty nie leżały idealnie pod sznurek (naturalny efekt tłumu)
+            const randomOffsetX = (Math.random() - 0.5) * 2;
+            const randomOffsetY = (Math.random() - 0.5) * 3;
             
             const btnObj = document.createElement('button');
             btnObj.className = 'hotspot';
             btnObj.style.left = `${xPos + randomOffsetX}%`;
             btnObj.style.top = `${row.y + randomOffsetY}%`;
             
-            // Domyślne wartości do uzupełnienia
-            btnObj.setAttribute('data-name', `Osoba nr ${currentPersonId}`);
+            // Ustawienie numeru zjazdu jako atrybutów dla skryptu pobierającego tożsamość
+            btnObj.setAttribute('data-id', currentPersonId);
+            btnObj.setAttribute('data-name', `[Wpisz imię i nazwisko]`);
             btnObj.setAttribute('data-desc', `Numer na zdjęciu: ${currentPersonId}`);
-            btnObj.setAttribute('aria-label', `Pokaż informacje o osobie nr ${currentPersonId}`);
+            btnObj.setAttribute('aria-label', `Pokaż informacje o osobie z numerem ${currentPersonId}`);
             
             containerHotspots.appendChild(btnObj);
             currentPersonId++;
         }
     });
 
-    // ── OBSŁUGA KLIKNIĘĆ W HOTSPOTY ──
+    // ── OBSŁUGA KLIKNIĘĆ W HOTSPOTY NA ZDJĘCIU ──
     const infoDisplay = document.getElementById('person-info');
 
-    // Używamy delegacji zdarzeń na kontenerze głównym
     containerHotspots.addEventListener('click', function(e) {
         const hotspot = e.target.closest('.hotspot');
         if (!hotspot) return;
@@ -335,32 +371,31 @@
         document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
         hotspot.classList.add('active');
 
-        // Pobranie danych
+        // Pobranie danych do wyświetlenia
         const name = hotspot.getAttribute('data-name');
         const desc = hotspot.getAttribute('data-desc');
 
-        // Render panelu
         infoDisplay.classList.remove('empty');
         infoDisplay.innerHTML = `
             <div>
                 <strong>${name}</strong>
-                <span class="person-meta">${desc} - Zidentyfikowano w archiwum</span>
+                <span class="person-meta">${desc} - Zidentyfikowano na fotografii</span>
             </div>
         `;
     });
 
-    // Kliknięcie poza resetuje panel
+    // Resetowanie po kliknięciu gdziekolwiek indziej
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.hotspot') && !e.target.closest('.interactive-frame')) {
             document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
             infoDisplay.classList.add('empty');
-            infoDisplay.innerHTML = "Najedź i kliknij na twarz ze znaczkiem numeru na zdjęciu, aby odkryć tożsamość.";
+            infoDisplay.innerHTML = "Najedź i kliknij na twarz z numerem na zdjęciu, aby odkryć tożsamość.";
         }
     });
 
-    // ── GALERIA I LIGHTBOX ──
+    // ── SKRYPT GALERII WSPOMNIEŃ I LIGHTBOXA ──
     const zjazd_folder = 'zjazdxix';
-    const liczba_zdjec = 12; // Zmniejszono do 12 jako placeholder w kodzie statycznym
+    const liczba_zdjec = 172; 
     let currentIdx = 1;
 
     const galleryContainer = document.getElementById('gallery-container');
@@ -370,8 +405,7 @@
 
     for (let i = 1; i <= liczba_zdjec; i++) {
         const nr = i.toString().padStart(2, '0');
-        // Fallback do placeholdera aby strona nie miała uszkodzonych obrazków w demku
-        const path = `https://via.placeholder.com/600x400/1e1a14/c8a96e?text=Zdjecie+${nr}`;
+        const path = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
         
         const div = document.createElement('div');
         div.className = 'gallery-item';
@@ -382,6 +416,7 @@
         const img = document.createElement('img');
         img.src = path;
         img.loading = "lazy";
+        img.onerror = function() { this.parentElement.style.display = 'none'; }; // Ukrywa brakujące fotki
         
         div.onclick = () => openLightbox(i);
         div.onkeydown = (e) => { if(e.key === 'Enter' || e.key === ' ') openLightbox(i); };
@@ -414,11 +449,11 @@
 
     function updateLB() {
         const nr = currentIdx.toString().padStart(2, '0');
-        lbImg.src = `https://via.placeholder.com/1200x800/1e1a14/c8a96e?text=Zdjecie+${nr}`;
+        lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
         lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
     }
 
-    // Nawigacja klawiaturą dla Lightboxa
+    // Nawigacja klawiaturą
     document.addEventListener('keydown', (e) => {
         if (lightbox.style.display === 'flex') {
             if (e.key === "ArrowRight") changePhoto(1);
@@ -427,7 +462,7 @@
         }
     });
 
-    // Swipe na urządzeniach mobilnych
+    // Nawigacja dotykowa
     let tStart = 0;
     let isMultiTouch = false;
 
