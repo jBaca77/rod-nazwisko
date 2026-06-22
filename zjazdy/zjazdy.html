@@ -261,20 +261,16 @@
       iconSize: [16, 16], iconAnchor: [8, 8]
     });
 
-    // Zmiana markera - kliknięcie przenosi na podstronę, najechanie pokazuje tooltip
-    const marker = L.marker(z.c, {icon, title: `Kliknij, aby przejść do ${z.n} Zjazdu`}).addTo(map);
+    // Zmiana markera - kliknięcie otwiera popup z informacją i guzikiem do przejścia
+    const marker = L.marker(z.c, {icon, title: `${z.n} Zjazd Rodzinny`}).addTo(map);
     
-    marker.bindTooltip(`
-      <div style="font-family:'Jost',sans-serif; text-align:center; padding: 2px;">
-        <strong style="font-family:'Cormorant Garamond',serif; font-size:1.1rem;">${z.n} Zjazd Rodzinny</strong><br>
-        <span style="color:var(--sepia);">${z.p}, ${z.d}</span><br>
-        <span style="font-size:0.7rem; color:var(--gold); text-transform:uppercase; letter-spacing:1px; margin-top:5px; display:block;">Kliknij by przejść</span>
+    marker.bindPopup(`
+      <div style="font-family:'Jost',sans-serif; text-align:center; padding: 6px 4px;">
+        <strong style="font-family:'Cormorant Garamond',serif; font-size:1.25rem; color:var(--ink); font-weight: 500; display:block; margin-bottom: 2px;">${z.n} Zjazd Rodzinny</strong>
+        <span style="color:var(--sepia); display:block; margin-bottom: 12px; font-size:0.9rem; font-style: italic;">${z.p}, ${z.d}</span>
+        <a href="${targetUrl}" style="background:var(--gold); color:var(--warm-white) !important; text-decoration:none; padding:8px 16px; font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; border-radius:2px; display:inline-block; font-weight:500;">Przejdź do strony</a>
       </div>
-    `, {direction: 'top', offset: [0, -10]});
-
-    marker.on('click', () => {
-      window.location.href = targetUrl;
-    });
+    `, {offset: [0, -5]});
 
     // Kompaktowy panel klikalny dla mniejszej zajętości miejsca
     container.innerHTML += `
