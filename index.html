@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Oficjalne Archiwum Rodzinne Klanu Ładomirskich i Kraińskich. Historia rodu, genealogia, biografie oraz kronika zjazdów rodzinnych organizowanych od 1975 roku.">
 <title>Klan Ładomirskich i Kraińskich | Archiwum Rodzinne</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,6 +19,9 @@
   html { scroll-behavior: smooth; }
   body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
+  /* Focus visible dla dostępności z klawiatury */
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
   /* ── HEADER ── */
   header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
   header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
@@ -32,7 +36,7 @@
   .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; }
   
   .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
-  .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; }
 
   /* ── DRAWER (PASEK BOCZNY) ── */
   .drawer { 
@@ -148,7 +152,7 @@
 </head>
 <body>
 
-<div class="overlay" id="overlay"></div>
+<div class="overlay" id="overlay" aria-hidden="true"></div>
 
 <header>
   <span class="header-ornament">Tradycja Rodzinna od 1975 Roku</span>
@@ -159,13 +163,13 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">ARCHIWUM L&K</a>
-    <button class="menu-btn" id="menuBtn">
+    <button class="menu-btn" id="menuBtn" aria-label="Otwórz menu nawigacyjne" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<aside class="drawer" id="drawer">
+<aside class="drawer" id="drawer" aria-hidden="true">
   <div class="drawer-header">
     <span>Nawigacja Archiwum</span>
     <h2>Menu Rodowe</h2>
@@ -181,7 +185,7 @@
     <li><a href="pamiec.html">Pamięć i Groby</a></li>
     <li><a href="slownik-geo/geografia.html">Geografia Rodowa</a></li>
     <li><a href="biblioteka/biblioteczka.html">Biblioteczka</a></li>
-    <li><a href="archiwym/archiwum.html">Archiwum Cyfrowe</a></li>
+    <li><a href="archiwum/archiwum.html">Archiwum Cyfrowe</a></li>
     <li><a href="#kontakt" onclick="closeAndScroll()">Kontakt</a></li>
   </ul>
 
@@ -192,10 +196,10 @@
 
 <div class="search-section">
   <div class="search-inner">
-    <div class="search-row">
-      <input type="text" class="search-input" placeholder="Szukaj (np. Modlin, 1980, Antoni)...">
-      <button class="search-btn">Szukaj</button>
-    </div>
+    <form class="search-row" action="#" method="GET" role="search">
+      <input type="search" class="search-input" aria-label="Wyszukaj w archiwum" placeholder="Szukaj (np. Modlin, 1980, Antoni)..." required>
+      <button type="submit" class="search-btn">Szukaj</button>
+    </form>
   </div>
 </div>
 
@@ -225,7 +229,7 @@
         <h3>Zjazdy Rodzinne</h3>
         <p>Pół wieku tradycji spotkań. Kronika wszystkich XXIV zjazdów z pełną dokumentacją.</p>
       </a>
-      <a href="pamiec/pamiec.html" class="nav-card">
+      <a href="pamiec.html" class="nav-card">
         <div class="icon">🕯️</div>
         <h3>Miejsce Pamięci</h3>
         <p>Wspomnienie o tych, którzy odeszli. Lokalizacje grobów i nekrologi członków rodziny.</p>
@@ -297,9 +301,9 @@
   </section>
 
   <section class="rodo-section">
-    <button class="rodo-trigger" id="rodoBtn">
+    <button class="rodo-trigger" id="rodoBtn" aria-expanded="false" aria-controls="rodoContent">
       <span>Nota prawna i RODO</span>
-      <span id="rodoIcon" style="font-size: 1.2rem; color: var(--gold);">+</span>
+      <span id="rodoIcon" style="font-size: 1.2rem; color: var(--gold);" aria-hidden="true">+</span>
     </button>
     <div class="rodo-content" id="rodoContent">
       <p>Przetwarzanie danych osobowych na tej stronie ma charakter wyłącznie osobisty i domowy (zgodnie z art. 2 pkt 2 lit. c RODO), służąc integracji rodziny i podtrzymywaniu tradycji. Dane pochodzą z dokumentacji zjazdowej oraz prywatnych zbiorów archiwalnych. Każdy członek rodziny ma prawo do wglądu, edycji lub żądania ograniczenia widoczności swoich danych.</p>
@@ -318,11 +322,16 @@
   const overlay = document.getElementById('overlay');
 
   function toggleSidebar() {
-    drawer.classList.toggle('open');
+    const isOpen = drawer.classList.toggle('open');
     overlay.classList.toggle('active');
     
+    // Accessibility zaktualizowanie stanu aria
+    menuBtn.setAttribute('aria-expanded', isOpen);
+    drawer.setAttribute('aria-hidden', !isOpen);
+    overlay.setAttribute('aria-hidden', !isOpen);
+    
     const spans = menuBtn.querySelectorAll('span');
-    if(drawer.classList.contains('open')) {
+    if(isOpen) {
       spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
       spans[1].style.opacity = '0';
       spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
@@ -339,25 +348,29 @@
   function closeAndScroll() {
     drawer.classList.remove('open');
     overlay.classList.remove('active');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    drawer.setAttribute('aria-hidden', 'true');
+    overlay.setAttribute('aria-hidden', 'true');
     const spans = menuBtn.querySelectorAll('span');
     spans[0].style.transform = 'none';
     spans[1].style.opacity = '1';
     spans[2].style.transform = 'none';
   }
 
-  // RODO Accordion
+  // RODO Accordion z poprawą a11y
   const rodoBtn = document.getElementById('rodoBtn');
   const rodoContent = document.getElementById('rodoContent');
   const rodoIcon = document.getElementById('rodoIcon');
 
   if(rodoBtn) {
     rodoBtn.addEventListener('click', () => {
-      rodoContent.classList.toggle('open');
-      rodoIcon.innerText = rodoContent.classList.contains('open') ? '−' : '+';
+      const isOpen = rodoContent.classList.toggle('open');
+      rodoBtn.setAttribute('aria-expanded', isOpen);
+      rodoIcon.innerText = isOpen ? '−' : '+';
     });
   }
 
-  // --- POPRAWIONA LOGIKA PODŚWIETLANIA ---
+  // Funkcja podświetlania aktywnego linku
   function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     let currentPage = currentPath.split("/").pop();
@@ -379,7 +392,7 @@
       // I jeśli nazwa pliku w href zgadza się z aktualną stroną
       if (!linkHref.startsWith('#')) {
         // Sprawdź czy koniec ścieżki linku zgadza się z nazwą pliku
-        if (linkHref === currentPage || (currentPage === "index.html" && linkHref === "index.html")) {
+        if (linkHref.endsWith(currentPage) || (currentPage === "index.html" && linkHref === "index.html")) {
           link.classList.add('active');
         }
       }
