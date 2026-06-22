@@ -6,7 +6,6 @@
     <title>XIX Zjazd: Krynica Morska | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- Biblioteka Panzoom do obsługi gestów mobilnych -->
     <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
     <style>
         :root {
@@ -53,11 +52,13 @@
         .img-magnifier-glass { position: absolute; border: 2px solid var(--gold); border-radius: 50%; cursor: none; width: 120px; height: 120px; display: none; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.4); pointer-events: none; background-color: var(--warm-white); opacity: 0; transition: opacity 0.2s ease-in-out; }
 
         /* MNIEJSZE PUNKTY KLIKALNE */
-        /* Zmiana: transform usunięty z właściwości transition, żeby uniknąć laga przy płynnym skalowaniu na telefonie */
         .hotspot { position: absolute; cursor: pointer; z-index: 10; border-radius: 50%; border: 2px solid transparent; background: rgba(255, 255, 255, 0.0); transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; width: 1.2%; height: 2.2%; transform: translate(-50%, -50%); }
-        .hotspot:focus-visible, .hotspot.active { background: rgba(255, 255, 255, 0.4); border-color: var(--gold); box-shadow: 0 0 8px rgba(155, 125, 74, 0.8); z-index: 20; }
         
-        .hotspot::after { content: attr(data-id); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--cream); padding: 2px 5px; border-radius: 3px; font-size: 0.65rem; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+        /* SZTUCZKA: Poszerzona niewidzialna strefa kliknięcia/najechania dla każdego punktu na Desktopie */
+        .hotspot::before { content: ''; position: absolute; top: -12px; bottom: -12px; left: -12px; right: -12px; border-radius: 50%; z-index: 1; }
+
+        .hotspot:focus-visible, .hotspot.active { background: rgba(255, 255, 255, 0.4); border-color: var(--gold); box-shadow: 0 0 8px rgba(155, 125, 74, 0.8); z-index: 20; }
+        .hotspot::after { content: attr(data-id); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--cream); padding: 2px 5px; border-radius: 3px; font-size: 0.65rem; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; z-index: 2; }
         .hotspot.active::after { opacity: 1; }
         
         /* Obsługa hover Z WYŁĄCZENIEM urządzeń dotykowych (tzw. sticky hover fix dla mobile) */
@@ -147,11 +148,9 @@
     <div class="hero-container">
         
         <div class="controls-bar">
-            <!-- Lupa widoczna tylko na komputerach -->
             <button id="loupe-toggle" class="zoom-toggle-btn desktop-only">
                 🔍 Włącz Lupę
             </button>
-            <!-- Opcja Panzoom widoczna tylko na mobilkach -->
             <button id="panzoom-reset" class="zoom-toggle-btn mobile-only">
                 ↺ Resetuj Powiększenie
             </button>
@@ -167,7 +166,6 @@
             Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.
         </div>
         
-        <!-- Wskazówka ulega zmianie w zależności od ekranu -->
         <p class="desktop-only" style="text-align:center; font-size:0.75rem; color:var(--sepia); margin-top:10px;">
             <em>*Wskazówka: Przytrzymaj klawisz <strong>SHIFT</strong> i kliknij w twarz, aby w konsoli/alercie odczytać dokładną pozycję {x, y} dla kodu.</em>
         </p>
@@ -227,7 +225,7 @@
     // ── BAZA OSÓB DO ZDJĘCIA GRUPOWEGO ──
     const hotspotsData = [
         // Rząd 1
-        { id: 1, x: 13.5, y: 31.1, name: "[Jerzy Niewęgłowski]" }, { id: 2, x: 42.0, y: 5.5, name: "[Imię i Nazwisko]" }, 
+        { id: 1, x: 14.9, y: 31.2, name: "[Jerzy Niewęgłowski]" }, { id: 2, x: 42.0, y: 5.5, name: "[Imię i Nazwisko]" }, 
         { id: 3, x: 48.0, y: 5.0, name: "[Imię i Nazwisko]" }, { id: 4, x: 55.0, y: 6.0, name: "[Imię i Nazwisko]" },
         // Rząd 2
         { id: 5, x: 32.0, y: 10.0, name: "[Imię i Nazwisko]" }, { id: 6, x: 36.5, y: 9.5, name: "[Imię i Nazwisko]" }, 
@@ -340,6 +338,9 @@
         containerHotspots.appendChild(btnObj);
     });
 
+    const infoDisplay = document.getElementById('person-info');
+    const mainImg = document.getElementById('main-group-img');
+
     // ── INTEGRACJA PANZOOM (TYLKO DLA URZĄDZEŃ MOBILNYCH) ──
     const pzElem = document.getElementById('hotspot-container');
     const panzoom = Panzoom(pzElem, {
@@ -349,7 +350,7 @@
         disableZoom: window.innerWidth > 768
     });
 
-    // NOWY KOD: Odwrotne skalowanie znaczników podczas przybliżania (żeby kółka i cyferki zachowały normalny rozmiar)
+    // Odwrotne skalowanie znaczników podczas przybliżania
     pzElem.addEventListener('panzoomzoom', (e) => {
         const currentScale = e.detail.scale;
         document.querySelectorAll('.hotspot').forEach(h => {
@@ -357,7 +358,6 @@
         });
     });
 
-    // Nasłuchiwanie zmian rozmiaru (np. odwrócenie ekranu/telefonu) aby poprawnie aktywować/dezaktywować interakcje
     window.addEventListener('resize', () => {
         const isDesktop = window.innerWidth > 768;
         panzoom.setOptions({ disablePan: isDesktop, disableZoom: isDesktop });
@@ -367,7 +367,6 @@
         }
     });
 
-    // Przycisk "Resetuj Powiększenie" na mobile
     document.getElementById('panzoom-reset').addEventListener('click', () => {
         panzoom.reset();
         document.querySelectorAll('.hotspot').forEach(h => h.style.transform = 'translate(-50%, -50%) scale(1)');
@@ -376,21 +375,18 @@
     // ── LOGIKA KLASYCZNEJ LUPY (TYLKO DLA DESKTOPU) ──
     let isLoupeActive = false;
     const loupeToggleBtn = document.getElementById('loupe-toggle');
-    const mainImg = document.getElementById('main-group-img');
     const zoomLevel = 2.5;
     
-    // Tworzenie elementu szkła powiększającego
     const glass = document.createElement('div');
     glass.setAttribute('class', 'img-magnifier-glass');
     containerHotspots.appendChild(glass);
 
     loupeToggleBtn.addEventListener('click', function() {
-        if (window.innerWidth <= 768) return; // Zabezpieczenie na wszelki wypadek
+        if (window.innerWidth <= 768) return; 
         isLoupeActive = !isLoupeActive;
         if (isLoupeActive) {
             this.classList.add('active');
             this.innerHTML = "✖ Wyłącz Lupę";
-            // Zabezpieczenie przed niewczytanym zdjęciem
             glass.style.backgroundImage = "url('" + mainImg.src + "')";
             glass.style.backgroundRepeat = "no-repeat";
         } else {
@@ -413,7 +409,6 @@
         let w = glass.offsetWidth / 2;
         let h = glass.offsetHeight / 2;
 
-        // Ograniczenia, by szkło nie wyjechało poza ramkę
         if (x > mainImg.width) x = mainImg.width;
         if (x < 0) x = 0;
         if (y > mainImg.height) y = mainImg.height;
@@ -422,7 +417,6 @@
         glass.style.left = (x - w) + "px";
         glass.style.top = (y - h) + "px";
 
-        // Konfiguracja tła powiększonego
         glass.style.backgroundSize = (mainImg.width * zoomLevel) + "px " + (mainImg.height * zoomLevel) + "px";
         glass.style.backgroundPosition = "-" + ((x * zoomLevel) - w) + "px -" + ((y * zoomLevel) - h) + "px";
     }
@@ -431,17 +425,11 @@
         let a, x = 0, y = 0;
         e = e || window.event;
         a = mainImg.getBoundingClientRect();
-        
-        let clientX = e.clientX;
-        let clientY = e.clientY;
-        
-        x = clientX - a.left;
-        y = clientY - a.top;
-        
+        x = e.clientX - a.left;
+        y = e.clientY - a.top;
         return {x: x, y: y};
     }
 
-    // Eventy dla klasycznej myszki / desktop
     containerHotspots.addEventListener('mousemove', moveMagnifier);
     containerHotspots.addEventListener('mouseenter', () => { 
         if(isLoupeActive && window.innerWidth > 768) {
@@ -454,12 +442,15 @@
         setTimeout(() => { if(glass.style.opacity === '0') glass.style.display = 'none'; }, 200);
     });
 
+
+    // ── GŁÓWNA LOGIKA KLIKANIA (WSPÓLNA DLA PC I MOBILE) ──
+
     // WYSZUKIWANIE WSPÓŁRZĘDNYCH (NARZĘDZIE ADMINA)
     const interactiveFrame = document.querySelector('.interactive-frame');
     interactiveFrame.addEventListener('click', function(e) {
         if (e.shiftKey) {
             e.preventDefault();
-            const rect = this.getBoundingClientRect();
+            const rect = mainImg.getBoundingClientRect();
             const xPercent = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
             const yPercent = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
             const coordStr = `{ x: ${xPercent}, y: ${yPercent} }`;
@@ -468,45 +459,69 @@
         }
     });
 
-    // OBSŁUGA INFO O OSOBIE (HOTSPOT) Z TIMEREM 2 SEKUND
-    const infoDisplay = document.getElementById('person-info');
-    containerHotspots.addEventListener('click', function(e) {
-        if (e.shiftKey) return; // Jeśli trzymasz shift - nie podświetlaj
+    // UNIWERSALNA OBSŁUGA KLIKNIĘĆ (FUZZY HIT TESTING)
+    document.addEventListener('click', function(e) {
+        if (e.shiftKey) return; // Narzędzie admina
+        if (e.target.closest('.controls-bar')) return; // Kliknięcie w przyciski lupy
+        if (e.target.closest('.img-magnifier-glass')) return; // Kliknięcie w samą lupę
         
-        const hotspot = e.target.closest('.hotspot');
-        if (!hotspot) return;
-        
-        e.stopPropagation();
-        
-        // Czyści aktywne podświetlenia i ewentualne otwarte timery
+        let targetHotspot = e.target.closest('.hotspot');
+        const frame = e.target.closest('.interactive-frame');
+
+        // FUZZY HIT TESTING: Jeśli kliknięto w zdjęcie (z lupą lub bez), ale nie idealnie w punkt
+        if (!targetHotspot && frame) {
+            const rect = mainImg.getBoundingClientRect();
+            const clickX = e.clientX;
+            const clickY = e.clientY;
+            
+            let closestDist = Infinity;
+            let closestId = null;
+            
+            hotspotsData.forEach(person => {
+                const personXPx = rect.left + (person.x / 100) * rect.width;
+                const personYPx = rect.top + (person.y / 100) * rect.height;
+                const dist = Math.hypot(clickX - personXPx, clickY - personYPx);
+                
+                if (dist < closestDist) {
+                    closestDist = dist;
+                    closestId = person.id;
+                }
+            });
+
+            // Tolerancja w pikselach: 40px - idealne trafienie nie jest wymagane
+            if (closestId !== null && closestDist <= 40) {
+                targetHotspot = document.querySelector(`.hotspot[data-id="${closestId}"]`);
+            }
+        }
+
+        // Czyszczenie starych podświetleń
         document.querySelectorAll('.hotspot').forEach(h => {
             h.classList.remove('active');
             if(h.timeoutId) clearTimeout(h.timeoutId);
         });
-        
-        hotspot.classList.add('active');
 
-        const name = hotspot.getAttribute('data-name');
-        const desc = hotspot.getAttribute('data-desc');
+        if (targetHotspot) {
+            e.stopPropagation();
+            
+            targetHotspot.classList.add('active');
 
-        infoDisplay.classList.remove('empty');
-        infoDisplay.innerHTML = `
-            <div>
-                <strong>${name}</strong>
-                <span class="person-meta">${desc} - Zidentyfikowano w archiwum</span>
-            </div>
-        `;
-        
-        // Automatyczne usuwanie podświetlenia twarzy po 2 sekundach (działa bezbłędnie z modyfikacją w CSS @media hover)
-        hotspot.timeoutId = setTimeout(() => {
-            hotspot.classList.remove('active');
-        }, 2000);
-    });
+            const name = targetHotspot.getAttribute('data-name');
+            const desc = targetHotspot.getAttribute('data-desc');
 
-    // KLIKNIĘCIE POZA ZDJĘCIEM = RESET WIDZIALNOŚCI INFO
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.hotspot') && !e.target.closest('.interactive-frame')) {
-            document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
+            infoDisplay.classList.remove('empty');
+            infoDisplay.innerHTML = `
+                <div>
+                    <strong>${name}</strong>
+                    <span class="person-meta">${desc} - Zidentyfikowano w archiwum</span>
+                </div>
+            `;
+            
+            targetHotspot.timeoutId = setTimeout(() => {
+                targetHotspot.classList.remove('active');
+            }, 2000);
+
+        } else {
+            // Kliknięcie w tło resetuje tekst
             infoDisplay.classList.add('empty');
             infoDisplay.innerHTML = "Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.";
         }
