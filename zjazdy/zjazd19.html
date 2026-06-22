@@ -6,6 +6,7 @@
     <title>XIX Zjazd: Krynica Morska | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Biblioteka Panzoom do obsługi gestów mobilnych -->
     <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
     <style>
         :root {
@@ -52,10 +53,18 @@
         .img-magnifier-glass { position: absolute; border: 2px solid var(--gold); border-radius: 50%; cursor: none; width: 120px; height: 120px; display: none; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.4); pointer-events: none; background-color: var(--warm-white); opacity: 0; transition: opacity 0.2s ease-in-out; }
 
         /* MNIEJSZE PUNKTY KLIKALNE */
-        .hotspot { position: absolute; cursor: pointer; z-index: 10; border-radius: 50%; border: 2px solid transparent; background: rgba(255, 255, 255, 0.0); transition: all 0.2s ease; width: 1.2%; height: 2.2%; transform: translate(-50%, -50%); }
-        .hotspot:hover, .hotspot:focus-visible, .hotspot.active { background: rgba(255, 255, 255, 0.4); border-color: var(--gold); box-shadow: 0 0 8px rgba(155, 125, 74, 0.8); z-index: 20; }
+        /* Zmiana: transform usunięty z właściwości transition, żeby uniknąć laga przy płynnym skalowaniu na telefonie */
+        .hotspot { position: absolute; cursor: pointer; z-index: 10; border-radius: 50%; border: 2px solid transparent; background: rgba(255, 255, 255, 0.0); transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; width: 1.2%; height: 2.2%; transform: translate(-50%, -50%); }
+        .hotspot:focus-visible, .hotspot.active { background: rgba(255, 255, 255, 0.4); border-color: var(--gold); box-shadow: 0 0 8px rgba(155, 125, 74, 0.8); z-index: 20; }
+        
         .hotspot::after { content: attr(data-id); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--cream); padding: 2px 5px; border-radius: 3px; font-size: 0.65rem; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
-        .hotspot:hover::after { opacity: 1; }
+        .hotspot.active::after { opacity: 1; }
+        
+        /* Obsługa hover Z WYŁĄCZENIEM urządzeń dotykowych (tzw. sticky hover fix dla mobile) */
+        @media (hover: hover) {
+            .hotspot:hover { background: rgba(255, 255, 255, 0.4); border-color: var(--gold); box-shadow: 0 0 8px rgba(155, 125, 74, 0.8); z-index: 20; }
+            .hotspot:hover::after { opacity: 1; }
+        }
         
         .person-info-display { margin-top: 20px; background: var(--parchment); border-left: 3px solid var(--gold); padding: 20px 30px; min-height: 90px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ink); text-align: center; transition: all 0.3s; }
         .person-info-display.empty { color: var(--sepia); font-style: italic; font-size: 1.2rem; }
@@ -138,9 +147,11 @@
     <div class="hero-container">
         
         <div class="controls-bar">
+            <!-- Lupa widoczna tylko na komputerach -->
             <button id="loupe-toggle" class="zoom-toggle-btn desktop-only">
                 🔍 Włącz Lupę
             </button>
+            <!-- Opcja Panzoom widoczna tylko na mobilkach -->
             <button id="panzoom-reset" class="zoom-toggle-btn mobile-only">
                 ↺ Resetuj Powiększenie
             </button>
@@ -156,6 +167,7 @@
             Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.
         </div>
         
+        <!-- Wskazówka ulega zmianie w zależności od ekranu -->
         <p class="desktop-only" style="text-align:center; font-size:0.75rem; color:var(--sepia); margin-top:10px;">
             <em>*Wskazówka: Przytrzymaj klawisz <strong>SHIFT</strong> i kliknij w twarz, aby w konsoli/alercie odczytać dokładną pozycję {x, y} dla kodu.</em>
         </p>
@@ -337,16 +349,28 @@
         disableZoom: window.innerWidth > 768
     });
 
+    // NOWY KOD: Odwrotne skalowanie znaczników podczas przybliżania (żeby kółka i cyferki zachowały normalny rozmiar)
+    pzElem.addEventListener('panzoomzoom', (e) => {
+        const currentScale = e.detail.scale;
+        document.querySelectorAll('.hotspot').forEach(h => {
+            h.style.transform = `translate(-50%, -50%) scale(${1 / currentScale})`;
+        });
+    });
+
     // Nasłuchiwanie zmian rozmiaru (np. odwrócenie ekranu/telefonu) aby poprawnie aktywować/dezaktywować interakcje
     window.addEventListener('resize', () => {
         const isDesktop = window.innerWidth > 768;
         panzoom.setOptions({ disablePan: isDesktop, disableZoom: isDesktop });
-        if(isDesktop) { panzoom.reset(); }
+        if(isDesktop) { 
+            panzoom.reset(); 
+            document.querySelectorAll('.hotspot').forEach(h => h.style.transform = 'translate(-50%, -50%) scale(1)');
+        }
     });
 
     // Przycisk "Resetuj Powiększenie" na mobile
     document.getElementById('panzoom-reset').addEventListener('click', () => {
         panzoom.reset();
+        document.querySelectorAll('.hotspot').forEach(h => h.style.transform = 'translate(-50%, -50%) scale(1)');
     });
 
     // ── LOGIKA KLASYCZNEJ LUPY (TYLKO DLA DESKTOPU) ──
@@ -473,7 +497,7 @@
             </div>
         `;
         
-        // Automatyczne usuwanie podświetlenia twarzy po 2 sekundach
+        // Automatyczne usuwanie podświetlenia twarzy po 2 sekundach (działa bezbłędnie z modyfikacją w CSS @media hover)
         hotspot.timeoutId = setTimeout(() => {
             hotspot.classList.remove('active');
         }, 2000);
