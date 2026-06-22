@@ -82,6 +82,28 @@
     z-index: 1;
   }
   .leaflet-interactive { cursor: pointer !important; }
+  
+  /* Styl dla delikatnego markera z numerem */
+  .map-marker-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    color: #fff;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s;
+  }
+  .leaflet-marker-inner-hover:hover .map-marker-dot {
+    transform: scale(1.15);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+  }
+
   .legend { 
     display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; 
     margin-bottom: 60px; padding: 25px; background: var(--cream); 
@@ -255,15 +277,16 @@
     const color = mapColors[z.g];
     const targetUrl = `zjazd${i+1}.html`;
     
+    // Delikatna kropka z rzymskim numerem zjazdu w środku
     const icon = L.divIcon({
-      className: 'custom-icon',
-      html: `<div style="background:${color}; width:16px; height:16px; border-radius:50%; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.4); transition: transform 0.2s;"></div>`,
-      iconSize: [16, 16], iconAnchor: [8, 8]
+      className: 'leaflet-marker-inner-hover',
+      html: `<div class="map-marker-dot" style="background:${color};">${z.n}</div>`,
+      iconSize: [22, 22], iconAnchor: [11, 11]
     });
 
-    // Zmiana markera - kliknięcie otwiera popup z informacją i guzikiem do przejścia
     const marker = L.marker(z.c, {icon, title: `${z.n} Zjazd Rodzinny`}).addTo(map);
     
+    // Konfiguracja klasycznego dymku informacyjnego z przyciskiem przejścia
     marker.bindPopup(`
       <div style="font-family:'Jost',sans-serif; text-align:center; padding: 6px 4px;">
         <strong style="font-family:'Cormorant Garamond',serif; font-size:1.25rem; color:var(--ink); font-weight: 500; display:block; margin-bottom: 2px;">${z.n} Zjazd Rodzinny</strong>
@@ -272,7 +295,7 @@
       </div>
     `, {offset: [0, -5]});
 
-    // Kompaktowy panel klikalny dla mniejszej zajętości miejsca
+    // Kompaktowy panel na liście poniżej mapy
     container.innerHTML += `
       <a href="${targetUrl}" class="z-row" style="--row-color: ${color}" role="listitem" aria-label="${z.n} Zjazd Rodzinny w ${z.p}">
         <div class="z-row-left">
