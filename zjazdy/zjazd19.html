@@ -36,23 +36,29 @@
         .info-item strong { display: block; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia); font-size: 0.75rem; }
 
         .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
+        
+        /* KONTROLKI LUPY */
+        .controls-bar { display: flex; justify-content: flex-end; margin-bottom: 15px; }
+        .zoom-toggle-btn { background: var(--parchment); border: 1px solid var(--gold); color: var(--ink); padding: 8px 18px; font-family: 'Jost', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.3s; border-radius: 2px; display: flex; align-items: center; gap: 8px; font-weight: 500; }
+        .zoom-toggle-btn:hover { background: var(--gold-light); color: var(--warm-white); }
+        .zoom-toggle-btn.active { background: var(--gold); color: var(--warm-white); box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); }
+
+        .interactive-frame { border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; border-radius: 4px; }
+        .img-container { position: relative; width: 100%; height: auto; overflow: hidden; cursor: crosshair; }
         .main-img { width: 100%; height: auto; display: block; }
 
-        /* INTERAKTYWNE ZDJĘCIE */
-        .interactive-frame { border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; border-radius: 4px; }
-        .img-container { position: relative; width: 100%; height: auto; overflow: hidden; }
-        
-        .hotspot { position: absolute; cursor: pointer; z-index: 10; border-radius: 50%; border: 2px solid transparent; background: rgba(255, 255, 255, 0.0); transition: all 0.2s ease; width: 2.2%; height: 3.8%; transform: translate(-50%, -50%); }
-        .hotspot:hover, .hotspot:focus-visible, .hotspot.active { background: rgba(255, 255, 255, 0.3); border-color: var(--gold); box-shadow: 0 0 10px rgba(155, 125, 74, 0.8); z-index: 20; }
-        .hotspot::after { content: attr(data-id); position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--cream); padding: 2px 6px; border-radius: 3px; font-size: 0.7rem; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
+        /* LUPA (Szkło powiększające) */
+        .img-magnifier-glass { position: absolute; border: 2px solid var(--gold); border-radius: 50%; cursor: none; width: 120px; height: 120px; display: none; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.4); pointer-events: none; background-color: var(--warm-white); }
+
+        /* MNIEJSZE PUNKTY KLIKALNE */
+        .hotspot { position: absolute; cursor: pointer; z-index: 10; border-radius: 50%; border: 2px solid transparent; background: rgba(255, 255, 255, 0.0); transition: all 0.2s ease; width: 1.2%; height: 2.2%; transform: translate(-50%, -50%); }
+        .hotspot:hover, .hotspot:focus-visible, .hotspot.active { background: rgba(255, 255, 255, 0.4); border-color: var(--gold); box-shadow: 0 0 8px rgba(155, 125, 74, 0.8); z-index: 20; }
+        .hotspot::after { content: attr(data-id); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--cream); padding: 2px 5px; border-radius: 3px; font-size: 0.65rem; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; }
         .hotspot:hover::after { opacity: 1; }
         
         .person-info-display { margin-top: 20px; background: var(--parchment); border-left: 3px solid var(--gold); padding: 20px 30px; min-height: 90px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ink); text-align: center; transition: all 0.3s; }
         .person-info-display.empty { color: var(--sepia); font-style: italic; font-size: 1.2rem; }
         .person-meta { display: block; font-family: 'Jost', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); margin-top: 5px; font-style: normal; }
-        
-        .zoom-btn { position: absolute; top: 20px; right: 20px; background: rgba(30, 26, 20, 0.85); color: var(--gold-light); border: 1px solid var(--gold); padding: 8px 15px; cursor: pointer; font-family: 'Jost', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; z-index: 30; transition: 0.3s; border-radius: 2px; }
-        .zoom-btn:hover { background: var(--gold); color: white; }
 
         .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
         .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
@@ -69,14 +75,14 @@
 
        /* PAGINACJA - NOWY UKŁAD */
         .zjazdy-pagination { max-width: 800px; margin: 40px auto 80px; padding: 30px 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; }
-        .pagination-btn { flex: 1 1 calc(50% - 6px); /* Dwa przyciski obok siebie */text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center;display: flex;align-items: center;justify-content: center;}
-        /* Przycisk "Wróć do listy" na całą szerokość */
-        .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; /* Delikatne wyróżnienie że to powrót */}
+        .pagination-btn { flex: 1 1 calc(50% - 6px); text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center; display: flex; align-items: center; justify-content: center; }
+        .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; }
         .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: white; }
         
         /* FIX DLA MOBILE */
         @media (max-width: 600px) {
-            .pagination-btn { padding: 20px 10px; /* Większe pole dotyku dla kciuka */font-size: 0.7rem; }
+            .pagination-btn { padding: 20px 10px; font-size: 0.7rem; }
+            .img-magnifier-glass { width: 90px; height: 90px; }
         }
 
         /* LIGHTBOX */
@@ -121,10 +127,16 @@
     </div>
 
     <div class="hero-container">
+        
+        <div class="controls-bar">
+            <button id="loupe-toggle" class="zoom-toggle-btn">
+                🔍 Włącz Lupę
+            </button>
+        </div>
+
         <div class="interactive-frame">
-            <button class="zoom-btn" onclick="openLightbox(0)">🔍 Powiększ</button>
             <div class="img-container" id="hotspot-container">
-                <img src="../img/zjazdy/zjazdxix/foto_zjazdxix_00.jpg" alt="Zdjęcie grupowe" class="main-img">
+                <img src="../img/zjazdy/zjazdxix/foto_zjazdxix_00.jpg" alt="Zdjęcie grupowe" class="main-img" id="main-group-img">
             </div>
         </div>
         
@@ -188,13 +200,13 @@
     // ── BAZA OSÓB DO ZDJĘCIA GRUPOWEGO ──
     const hotspotsData = [
         // Rząd 1
-        { id: 1, x: 15.0, y: 32.7, name: "[Jerzy NNiewęgłowski]" }, { id: 2, x: 42.0, y: 5.5, name: "[Imię i Nazwisko]" }, 
-        { id: 3, x: 11.0, y: 53.6, name: "[Anntoni Ropelewski]" }, { id: 4, x: 55.0, y: 6.0, name: "[Imię i Nazwisko]" },
+        { id: 1, x: 38.0, y: 5.0, name: "[Imię i Nazwisko]" }, { id: 2, x: 42.0, y: 5.5, name: "[Imię i Nazwisko]" }, 
+        { id: 3, x: 48.0, y: 5.0, name: "[Imię i Nazwisko]" }, { id: 4, x: 55.0, y: 6.0, name: "[Imię i Nazwisko]" },
         // Rząd 2
-        { id: 5, x: 59.2, y: 37.0, name: "[Jacek Maria Niewęgłowski]" }, { id: 6, x: 36.5, y: 9.5, name: "[Imię i Nazwisko]" }, 
-        { id: 7, x: 63.0, y: 37.3, name: "[Grzegorz Maria Niewęgłowski]" }, { id: 8, x: 45.0, y: 10.0, name: "[Imię i Nazwisko]" }, 
-        { id: 9, x: 56.3, y: 41.0, name: "[Magdalena Niewęgłowska]" }, { id: 10, x: 53.0, y: 11.0, name: "[Imię i Nazwisko]" }, 
-        { id: 11, x: 68.6, y: 58.5, name: "[Katarzyna Maria Niewęgłowska]" }, { id: 12, x: 62.0, y: 10.0, name: "[Imię i Nazwisko]" },
+        { id: 5, x: 32.0, y: 10.0, name: "[Imię i Nazwisko]" }, { id: 6, x: 36.5, y: 9.5, name: "[Imię i Nazwisko]" }, 
+        { id: 7, x: 40.0, y: 11.0, name: "[Imię i Nazwisko]" }, { id: 8, x: 45.0, y: 10.0, name: "[Imię i Nazwisko]" }, 
+        { id: 9, x: 50.0, y: 10.5, name: "[Imię i Nazwisko]" }, { id: 10, x: 53.0, y: 11.0, name: "[Imię i Nazwisko]" }, 
+        { id: 11, x: 58.0, y: 9.5, name: "[Imię i Nazwisko]" }, { id: 12, x: 62.0, y: 10.0, name: "[Imię i Nazwisko]" },
         // Rząd 3
         { id: 13, x: 28.0, y: 15.0, name: "[Imię i Nazwisko]" }, { id: 14, x: 31.0, y: 14.5, name: "[Imię i Nazwisko]" }, 
         { id: 15, x: 34.0, y: 16.0, name: "[Imię i Nazwisko]" }, { id: 16, x: 37.0, y: 15.0, name: "[Imię i Nazwisko]" }, 
@@ -301,6 +313,89 @@
         containerHotspots.appendChild(btnObj);
     });
 
+    // ── LOGIKA LUPY ──
+    let isLoupeActive = false;
+    const loupeToggleBtn = document.getElementById('loupe-toggle');
+    const mainImg = document.getElementById('main-group-img');
+    const zoomLevel = 2.5;
+    
+    // Tworzenie elementu szkła powiększającego
+    const glass = document.createElement('div');
+    glass.setAttribute('class', 'img-magnifier-glass');
+    containerHotspots.appendChild(glass);
+
+    loupeToggleBtn.addEventListener('click', function() {
+        isLoupeActive = !isLoupeActive;
+        if (isLoupeActive) {
+            this.classList.add('active');
+            this.innerHTML = "✖ Wyłącz Lupę";
+            // Zabezpieczenie przed niewczytanym zdjęciem
+            glass.style.backgroundImage = "url('" + mainImg.src + "')";
+            glass.style.backgroundRepeat = "no-repeat";
+        } else {
+            this.classList.remove('active');
+            this.innerHTML = "🔍 Włącz Lupę";
+            glass.style.display = "none";
+        }
+    });
+
+    function moveMagnifier(e) {
+        if (!isLoupeActive) return;
+        
+        let pos, x, y;
+        e.preventDefault(); // Zapobiega przewijaniu strony podczas obsługi dotyku w lupie
+        pos = getCursorPos(e);
+        x = pos.x;
+        y = pos.y;
+        
+        let w = glass.offsetWidth / 2;
+        let h = glass.offsetHeight / 2;
+
+        // Ograniczenia, by szkło nie wyjechało poza ramkę
+        if (x > mainImg.width) x = mainImg.width;
+        if (x < 0) x = 0;
+        if (y > mainImg.height) y = mainImg.height;
+        if (y < 0) y = 0;
+
+        glass.style.left = (x - w) + "px";
+        glass.style.top = (y - h) + "px";
+
+        // Konfiguracja tła powiększonego
+        glass.style.backgroundSize = (mainImg.width * zoomLevel) + "px " + (mainImg.height * zoomLevel) + "px";
+        glass.style.backgroundPosition = "-" + ((x * zoomLevel) - w) + "px -" + ((y * zoomLevel) - h) + "px";
+    }
+
+    function getCursorPos(e) {
+        let a, x = 0, y = 0;
+        e = e || window.event;
+        a = mainImg.getBoundingClientRect();
+        
+        let clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        let clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+        
+        x = clientX - a.left;
+        y = clientY - a.top;
+        x = x - window.pageXOffset;
+        y = y - window.pageYOffset;
+        
+        return {x: x, y: y};
+    }
+
+    // Eventy dla Lupy
+    containerHotspots.addEventListener('mousemove', moveMagnifier);
+    containerHotspots.addEventListener('mouseenter', () => { if(isLoupeActive) glass.style.display = 'block'; });
+    containerHotspots.addEventListener('mouseleave', () => { glass.style.display = 'none'; });
+    
+    // Wsparcie dla ekranów dotykowych (z {passive: false} by e.preventDefault zadziałało)
+    containerHotspots.addEventListener('touchmove', moveMagnifier, {passive: false});
+    containerHotspots.addEventListener('touchstart', (e) => {
+        if(isLoupeActive) {
+            glass.style.display = 'block';
+            moveMagnifier(e);
+        }
+    }, {passive: false});
+    containerHotspots.addEventListener('touchend', () => { glass.style.display = 'none'; });
+
     // WYSZUKIWANIE WSPÓŁRZĘDNYCH (NARZĘDZIE ADMINA)
     const interactiveFrame = document.querySelector('.interactive-frame');
     interactiveFrame.addEventListener('click', function(e) {
@@ -315,15 +410,22 @@
         }
     });
 
-    // OBSŁUGA INFO O OSOBIE
+    // OBSŁUGA INFO O OSOBIE (HOTSPOT) Z TIMEREM 2 SEKUND
     const infoDisplay = document.getElementById('person-info');
     containerHotspots.addEventListener('click', function(e) {
-        if (e.shiftKey) return;
+        if (e.shiftKey || isLoupeActive) return; // Jeśli trzymasz shift lub jest aktywna lupa - nie podświetlaj
+        
         const hotspot = e.target.closest('.hotspot');
         if (!hotspot) return;
         
         e.stopPropagation();
-        document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
+        
+        // Czyści aktywne podświetlenia i ewentualne otwarte timery
+        document.querySelectorAll('.hotspot').forEach(h => {
+            h.classList.remove('active');
+            if(h.timeoutId) clearTimeout(h.timeoutId);
+        });
+        
         hotspot.classList.add('active');
 
         const name = hotspot.getAttribute('data-name');
@@ -336,6 +438,11 @@
                 <span class="person-meta">${desc} - Zidentyfikowano w archiwum</span>
             </div>
         `;
+        
+        // Automatyczne usuwanie podświetlenia twarzy po 2 sekundach
+        hotspot.timeoutId = setTimeout(() => {
+            hotspot.classList.remove('active');
+        }, 2000);
     });
 
     // KLIKNIĘCIE POZA ZDJĘCIEM = RESET
@@ -380,7 +487,6 @@
     }
 
     function changePhoto(dir) {
-        if (currentIdx === 0) return; // Zablokowanie nawigacji w lewo/prawo na zdjęciu grupowym
         currentIdx += dir;
         if (currentIdx > liczba_zdjec) currentIdx = 1;
         if (currentIdx < 1) currentIdx = liczba_zdjec;
@@ -388,19 +494,9 @@
     }
 
     function updateLB() {
-        const arrows = document.querySelectorAll('.lb-arrow');
-        if (currentIdx === 0) {
-            // WYŚWIETLANIE ZDJĘCIA GRUPOWEGO W LIGHTBOX
-            lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_00.jpg`;
-            lbCounter.innerText = `ZDJĘCIE GRUPOWE`;
-            arrows.forEach(a => a.style.visibility = 'hidden'); // Ukrywamy strzałki gdy powiększone jest zdjęcie grupowe
-        } else {
-            // ZWYKŁA GALERIA
-            const nr = currentIdx.toString().padStart(2, '0');
-            lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
-            lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
-            arrows.forEach(a => a.style.visibility = 'visible');
-        }
+        const nr = currentIdx.toString().padStart(2, '0');
+        lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+        lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
     }
 
     document.addEventListener('keydown', (e) => {
