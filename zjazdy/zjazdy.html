@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kronika zjazdów i mapa spotkań klanu Ładomirskich i Kraińskich. Pół wieku tradycji, historii i budowania wspólnoty rodowej.">
 <title>Kronika Zjazdów | Archiwum L&K</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
@@ -20,6 +21,8 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 
   /* ── HEADER ── */
   header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
@@ -76,7 +79,9 @@
     margin-bottom: 30px; border-radius: 2px;
     filter: sepia(15%) contrast(95%) brightness(98%);
     box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    z-index: 1;
   }
+  .leaflet-interactive { cursor: pointer !important; }
   .legend { 
     display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; 
     margin-bottom: 60px; padding: 25px; background: var(--cream); 
@@ -85,20 +90,52 @@
   .leg-item { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--sepia); font-weight: 500; }
   .dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); }
 
-  /* ── GRID ZJAZDÓW ── */
-  .z-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-  .z-card { 
-    background: var(--cream); padding: 50px 35px; border: 1px solid var(--sepia-pale); 
-    text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    position: relative; display: flex; flex-direction: column; overflow: hidden;
+  /* ── KOMPAKTOWA LISTA ZJAZDÓW ── */
+  .z-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+  .z-row {
+    background: var(--cream);
+    border: 1px solid var(--sepia-pale);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
   }
-  .z-card::after { content: ""; position: absolute; inset: 12px; border: 1px solid var(--line); pointer-events: none; transition: 0.4s; }
-  .z-card:hover { transform: translateY(-8px); background-color: #fff; border-color: var(--gold); box-shadow: 0 15px 40px rgba(0,0,0,0.05); }
-  .z-card:hover::after { border-color: var(--gold-light); inset: 18px; }
-
-  .z-card .meta { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 15px; z-index: 1; }
-  .z-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 10px; font-weight: 500; color: var(--ink); z-index: 1; }
-  .z-card .place { font-size: 0.95rem; color: var(--sepia); font-style: italic; z-index: 1; font-weight: 300; }
+  .z-row::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--row-color);
+    transition: width 0.3s;
+  }
+  .z-row:hover, .z-row:focus-visible {
+    background-color: #fff;
+    border-color: var(--gold-light);
+    transform: translateX(4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  }
+  .z-row:hover::before, .z-row:focus-visible::before { width: 8px; }
+  
+  .z-row-left { display: flex; align-items: center; gap: 20px; }
+  .z-row-num { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 1.5rem; 
+    color: var(--ink-light); 
+    font-weight: 500;
+    min-width: 45px;
+  }
+  .z-row-title { display: flex; flex-direction: column; }
+  .z-row-title strong { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; line-height: 1.2; margin-bottom: 2px; }
+  .z-row-title span { font-size: 0.85rem; color: var(--sepia); font-style: italic; }
+  
+  .z-row-right { text-align: right; }
+  .z-row-year { font-weight: 500; font-size: 1.1rem; color: var(--ink); }
+  .z-row-clan { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-top: 2px; }
 
   footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.85rem; letter-spacing: 1px; margin-top: 100px; }
 
@@ -106,6 +143,13 @@
     .drawer { width: 100%; right: -100%; }
     main { padding: 50px 24px; }
     #map { height: 400px; }
+    .z-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .z-row { padding: 14px 16px; }
+    .z-row-left { gap: 12px; }
+    .z-row-num { min-width: 35px; font-size: 1.3rem; }
+    .z-row-title strong { font-size: 1.15rem; }
   }
 </style>
 </head>
@@ -119,14 +163,14 @@
     <p class="header-quote">„Spotykamy się nie tylko po to, by wspominać przeszłość, ale by wspólnie budować mosty ku przyszłym pokoleniom.” — Kronika Rodowa L&K</p>
 </header>
 
-<nav>
+<nav aria-label="Główna nawigacja">
   <div class="nav-inner">
-    <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
-    <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
+    <a href="../index.html" class="nav-logo" aria-label="Strona główna archiwum">ARCHIWUM L&K</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Otwórz menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<aside class="drawer" id="drawer">
+<aside class="drawer" id="drawer" aria-hidden="true">
   <div class="drawer-header">
     <span>Nawigacja Archiwum</span>
     <h2>Menu Rodowe</h2>
@@ -149,19 +193,21 @@
 </aside>
 
 <main>
-  <span class="s-label">Historia Rodowa</span>
-  <h2 class="s-title">Mapa i Spis Spotkań</h2>
-  <div class="s-line"></div>
-  
-  <div id="map"></div>
-  
-  <div class="legend">
-    <div class="leg-item"><div class="dot" style="background:var(--c-ladomirscy)"></div><span>Ładomirscy</span></div>
-    <div class="leg-item"><div class="dot" style="background:var(--c-krainscy)"></div><span>Kraińscy</span></div>
-    <div class="leg-item"><div class="dot" style="background:var(--c-domanscy)"></div><span>Domańscy</span></div>
-  </div>
+  <section aria-labelledby="mapa-tytul">
+    <span class="s-label">Historia Rodowa</span>
+    <h2 class="s-title" id="mapa-tytul">Mapa i Spis Spotkań</h2>
+    <div class="s-line"></div>
+    
+    <div id="map" aria-label="Interaktywna mapa zjazdów rodowych"></div>
+    
+    <div class="legend" aria-hidden="true">
+      <div class="leg-item"><div class="dot" style="background:var(--c-ladomirscy)"></div><span>Ładomirscy</span></div>
+      <div class="leg-item"><div class="dot" style="background:var(--c-krainscy)"></div><span>Kraińscy</span></div>
+      <div class="leg-item"><div class="dot" style="background:var(--c-domanscy)"></div><span>Domańscy</span></div>
+    </div>
 
-  <div class="z-grid" id="z-container"></div>
+    <div class="z-grid" id="z-container" role="list"></div>
+  </section>
 </main>
 
 <footer>
@@ -197,34 +243,75 @@
     { n: "XXIV", p: "Bocheniec", d: "2026", c: [50.817, 20.268], g: "Kraińscy" }
   ];
 
-  const mapColors = { "Ładomirscy": "#fcc000", "Kraińscy": "#cc0000", "Domańscy": "#2d7a2d" };
+  const mapColors = { "Ładomirscy": "var(--c-ladomirscy)", "Kraińscy": "var(--c-krainscy)", "Domańscy": "var(--c-domanscy)" };
 
   const map = L.map('map', { scrollWheelZoom: false }).setView([52.1, 19.4], 6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
 
   const container = document.getElementById('z-container');
   zData.forEach((z, i) => {
     const color = mapColors[z.g];
+    const targetUrl = `zjazd${i+1}.html`;
+    
     const icon = L.divIcon({
       className: 'custom-icon',
-      html: `<div style="background:${color}; width:14px; height:14px; border-radius:50%; border:2px solid white; box-shadow:0 2px 4px rgba(0,0,0,0.3);"></div>`,
-      iconSize: [14, 14], iconAnchor: [7, 7]
+      html: `<div style="background:${color}; width:16px; height:16px; border-radius:50%; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.4); transition: transform 0.2s;"></div>`,
+      iconSize: [16, 16], iconAnchor: [8, 8]
     });
 
-    L.marker(z.c, {icon}).addTo(map)
-      .bindPopup(`<div style="font-family:'Jost',sans-serif; padding:5px"><strong>${z.n} Zjazd Rodzinny</strong><br>${z.p}, ${z.d}</div>`);
+    // Zmiana markera - kliknięcie przenosi na podstronę, najechanie pokazuje tooltip
+    const marker = L.marker(z.c, {icon, title: `Kliknij, aby przejść do ${z.n} Zjazdu`}).addTo(map);
+    
+    marker.bindTooltip(`
+      <div style="font-family:'Jost',sans-serif; text-align:center; padding: 2px;">
+        <strong style="font-family:'Cormorant Garamond',serif; font-size:1.1rem;">${z.n} Zjazd Rodzinny</strong><br>
+        <span style="color:var(--sepia);">${z.p}, ${z.d}</span><br>
+        <span style="font-size:0.7rem; color:var(--gold); text-transform:uppercase; letter-spacing:1px; margin-top:5px; display:block;">Kliknij by przejść</span>
+      </div>
+    `, {direction: 'top', offset: [0, -10]});
 
+    marker.on('click', () => {
+      window.location.href = targetUrl;
+    });
+
+    // Kompaktowy panel klikalny dla mniejszej zajętości miejsca
     container.innerHTML += `
-      <a href="zjazd${i+1}.html" class="z-card">
-        <div class="meta" style="color:${color}">${z.d} — ${z.g}</div>
-        <h3>${z.n} Zjazd Rodzinny</h3>
-        <div class="place">${z.p}</div>
+      <a href="${targetUrl}" class="z-row" style="--row-color: ${color}" role="listitem" aria-label="${z.n} Zjazd Rodzinny w ${z.p}">
+        <div class="z-row-left">
+          <div class="z-row-num">${z.n}</div>
+          <div class="z-row-title">
+            <strong>Zjazd Rodzinny</strong>
+            <span>${z.p}</span>
+          </div>
+        </div>
+        <div class="z-row-right">
+          <div class="z-row-year">${z.d}</div>
+          <div class="z-row-clan" style="color: ${color}">${z.g}</div>
+        </div>
       </a>`;
   });
 
   const btn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
-  btn.onclick = () => { drw.classList.add('open'); ovr.classList.add('active'); };
-  ovr.onclick = () => { drw.classList.remove('open'); ovr.classList.remove('active'); };
+  
+  function toggleMenu() {
+    const isOpen = drw.classList.contains('open');
+    if (isOpen) {
+      drw.classList.remove('open'); 
+      ovr.classList.remove('active');
+      btn.setAttribute('aria-expanded', 'false');
+      drw.setAttribute('aria-hidden', 'true');
+    } else {
+      drw.classList.add('open'); 
+      ovr.classList.add('active');
+      btn.setAttribute('aria-expanded', 'true');
+      drw.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  btn.onclick = toggleMenu;
+  ovr.onclick = toggleMenu;
 </script>
 </body>
 </html>
