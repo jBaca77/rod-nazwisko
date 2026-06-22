@@ -200,7 +200,7 @@
     // ── BAZA OSÓB DO ZDJĘCIA GRUPOWEGO ──
     const hotspotsData = [
         // Rząd 1
-        { id: 1, x: 14.9, y: 31.6, name: "[Jerzy Niewęgłowski]" }, { id: 2, x: 42.0, y: 5.5, name: "[Imię i Nazwisko]" }, 
+        { id: 1, x: 14.9, y: 31.2, name: "[Jerzy Niewęgłowski]" }, { id: 2, x: 42.0, y: 5.5, name: "[Imię i Nazwisko]" }, 
         { id: 3, x: 48.0, y: 5.0, name: "[Imię i Nazwisko]" }, { id: 4, x: 55.0, y: 6.0, name: "[Imię i Nazwisko]" },
         // Rząd 2
         { id: 5, x: 32.0, y: 10.0, name: "[Imię i Nazwisko]" }, { id: 6, x: 36.5, y: 9.5, name: "[Imię i Nazwisko]" }, 
@@ -373,10 +373,9 @@
         let clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
         let clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
         
+        // Zoptymalizowane współrzędne relatywne do obrazka
         x = clientX - a.left;
         y = clientY - a.top;
-        x = x - window.pageXOffset;
-        y = y - window.pageYOffset;
         
         return {x: x, y: y};
     }
