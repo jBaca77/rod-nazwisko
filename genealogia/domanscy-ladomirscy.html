@@ -29,7 +29,7 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; }
+        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
 
         /* SVG ikony */
         .svg-defs { display: none; }
@@ -44,107 +44,106 @@
         h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; margin-bottom: 10px; color: var(--ink); }
         .s-line-main { width: 50px; height: 1px; background: var(--gold-light); margin: 15px auto; }
 
-        /* NOWA ARCHITEKTURA Wyrównania wierszy (Równe wysokości) */
-        .tree-wrapper { max-width: 100vw; margin: 0 auto 20px; padding: 40px 20px; overflow-x: auto; }
-        
-        /* Wymuszenie szerokości na poziomie kontenera zapobiega połamaniu struktury drzewa */
-        .tree-container { min-width: 1820px; display: flex; flex-direction: column; align-items: center; padding-bottom: 20px; }
+        /* Zmodyfikowana struktura CSS GRID - Pełna spójność wymiarów w wierszach i brak scrolla */
+        .tree-wrapper { 
+            width: 100%; 
+            padding: clamp(10px, 3vw, 40px) clamp(5px, 2vw, 20px); 
+            display: flex; 
+            justify-content: center;
+        }
 
-        .gen-row {
-            display: flex; gap: 20px; align-items: stretch; justify-content: center; width: 100%; margin-bottom: 15px;
+        .tree-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: clamp(15px, 2.5vw, 30px) clamp(5px, 1.5vw, 15px);
+            width: 100%;
+            max-width: 1500px;
+            align-items: stretch; /* Gwarantuje identyczną wysokość dla wszystkich boksów w tym samym wierszu */
         }
-        .gen-row-tags {
-            display: flex; gap: 20px; align-items: center; justify-content: center; width: 100%; margin-bottom: 25px;
-        }
+
+        .g1-box { grid-column: span 1; }
+        .g1-tag { grid-column: span 2; display: flex; justify-content: center; align-items: center; }
         
-        /* Matematyczne kontenery do centrowania i rozciągania */
-        .couple-space { width: 400px; display: flex; justify-content: space-between; align-items: stretch; flex-shrink: 0; }
-        .couple-space-tag { width: 400px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
+        .g2-box { grid-column: span 2; width: 100%; justify-self: center; }
+        .g2-tag { grid-column: span 4; display: flex; justify-content: center; align-items: center; }
         
-        .single-space { width: 400px; display: flex; justify-content: center; align-items: stretch; flex-shrink: 0; }
+        .g3-box { grid-column: span 4; width: 100%; max-width: 450px; justify-self: center; }
+        .g3-tag { grid-column: span 8; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         
-        .branch-space { width: 860px; display: flex; justify-content: center; align-items: stretch; flex-shrink: 0; }
-        .branch-space-tag { width: 860px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
-        
-        .root-space { width: 1820px; display: flex; justify-content: center; align-items: stretch; flex-shrink: 0; }
-        .root-space-tag { width: 1820px; display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
-        
-        .gap-small { width: 20px; flex-shrink: 0; }
-        .gap-large { width: 60px; flex-shrink: 0; }
-        
-        .box-lvl-1 { width: 190px; }
-        .box-lvl-2 { width: 260px; }
-        .box-lvl-3 { width: 340px; }
+        .g4-box { grid-column: span 8; width: 100%; max-width: 700px; justify-self: center; }
 
         .box {
             position: relative;
             overflow: hidden;
             border: 1px solid var(--sepia-pale); 
             background: var(--cream);
-            padding: 15px 12px; 
+            padding: clamp(8px, 1.5vw, 15px) clamp(4px, 1vw, 12px); 
             text-align: center; 
             font-family: 'Cormorant Garamond', serif;
-            border-left: 3px solid var(--sepia); 
+            border-left: clamp(2px, 0.3vw, 3px) solid var(--sepia); 
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             text-transform: uppercase; font-weight: 600;
             text-decoration: none; color: inherit; transition: 0.3s;
-            height: auto; /* Pozwala na rozciągnięcie w poziomie */
-            flex-shrink: 0;
+            word-wrap: break-word;
         }
 
         .box:hover { border-color: var(--gold); background: white; transform: translateY(-2px); }
 
         .corner-ribbon {
-            position: absolute; top: 0; right: 0; width: 50px; height: 50px;
-            z-index: 1; pointer-events: none;
+            position: absolute; top: 0; right: 0; 
+            width: clamp(25px, 4vw, 50px); 
+            height: clamp(25px, 4vw, 50px);
+            z-index: 1; pointer-events: none; overflow: hidden;
         }
         .corner-ribbon::before {
-            content: ''; position: absolute; top: 5px; right: -20px;
-            width: 70px; height: 16px; background: var(--ribbon-color); 
+            content: ''; position: absolute; 
+            top: clamp(2px, 0.5vw, 5px); right: clamp(-15px, -2vw, -20px);
+            width: clamp(45px, 6vw, 70px); height: clamp(10px, 1.5vw, 16px); 
+            background: var(--ribbon-color); 
             transform: rotate(45deg); display: block;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .img-wrap, .img-double-row, .name-tag, .title-desc, .date-desc, .bio-content { position: relative; z-index: 2; }
+        .img-wrap, .img-double-row, .name-tag, .title-desc, .date-desc, .bio-content { position: relative; z-index: 2; width: 100%; }
 
         .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 6px; }
-        .img-wrap span { font-size: 0.6rem; color: var(--sepia); font-family: 'Jost', sans-serif; text-transform: none; margin-top: 2px; }
-        .img-single { width: 45px; height: 60px; background: transparent; border: 1px solid rgba(0,0,0,0.05); object-fit: contain; }
-        .img-double-row { display: flex; gap: 6px; }
+        .img-wrap span { font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost', sans-serif; text-transform: none; margin-top: 2px; }
+        .img-single { width: clamp(25px, 3.5vw, 45px); height: clamp(35px, 5vw, 60px); background: transparent; border: 1px solid rgba(0,0,0,0.05); object-fit: contain; }
+        .img-double-row { display: flex; gap: 4px; justify-content: center; }
         
-        .name-tag { font-size: 0.85rem; border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 4px; width: 100%; margin-top: 4px; line-height: 1.3; }
+        .name-tag { font-size: clamp(0.55rem, 1vw, 0.85rem); border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 4px; width: 100%; margin-top: 4px; line-height: 1.3; }
         
         .title-desc {
-            font-size: 0.65rem; font-family: 'Jost', sans-serif; text-transform: none;
+            font-size: clamp(0.45rem, 0.7vw, 0.65rem); font-family: 'Jost', sans-serif; text-transform: none;
             color: var(--sepia); font-weight: 400; line-height: 1.3; margin-top: 8px; width: 100%;
         }
 
         .date-desc {
-            font-size: 0.65rem; font-family: 'Jost', sans-serif; text-transform: none;
+            font-size: clamp(0.45rem, 0.7vw, 0.65rem); font-family: 'Jost', sans-serif; text-transform: none;
             color: var(--ink); font-weight: 400; margin-top: auto; width: 100%; line-height: 1.4; padding-top: 10px;
         }
 
         .doc-link {
             display: inline-flex; align-items: center; justify-content: center;
-            color: var(--gold); text-decoration: none; margin: 0 2px; transition: 0.2s;
+            color: var(--gold); text-decoration: none; margin: 0 1px; transition: 0.2s;
         }
         .doc-link:hover { color: var(--ink); transform: scale(1.1); }
-        .doc-link svg { width: 14px; height: 14px; vertical-align: middle; margin-bottom: 2px; }
+        .doc-link svg { width: clamp(10px, 1.2vw, 14px); height: clamp(10px, 1.2vw, 14px); vertical-align: middle; margin-bottom: 2px; }
 
         .marriage-tag {
-            font-family: 'Jost', sans-serif; font-size: 0.75rem; color: var(--sepia);
-            background: var(--parchment); padding: 4px 12px; border-radius: 12px;
-            border: 1px solid var(--line); margin: 0; font-weight: 400; text-align: center;
+            font-family: 'Jost', sans-serif; font-size: clamp(0.5rem, 0.8vw, 0.75rem); color: var(--sepia);
+            background: var(--parchment); padding: clamp(2px, 0.5vw, 4px) clamp(6px, 1vw, 12px); border-radius: 12px;
+            border: 1px solid var(--line); margin: 0; font-weight: 400; text-align: center; white-space: nowrap;
         }
 
-        .interactive-node { width: 40px; height: 40px; perspective: 1000px; cursor: pointer; text-decoration: none; margin: 10px 0; z-index: 5; }
+        .interactive-node { width: clamp(30px, 4vw, 40px); height: clamp(30px, 4vw, 40px); perspective: 1000px; cursor: pointer; text-decoration: none; margin: 10px 0; z-index: 5; }
         .flip-card { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
         .interactive-node:hover .flip-card { transform: rotateY(180deg); }
-        .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center; background: var(--cream); font-size: 10px; color: var(--sepia); border-radius: 50%; font-weight: 600; }
-        .flip-back { transform: rotateY(180deg); background: var(--gold); color: white; font-size: 16px; }
+        .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center; background: var(--cream); font-size: clamp(8px, 1vw, 10px); color: var(--sepia); border-radius: 50%; font-weight: 600; }
+        .flip-back { transform: rotateY(180deg); background: var(--gold); color: white; font-size: clamp(12px, 1.5vw, 16px); }
 
-        .box-potomek { flex-direction: row !important; gap: 20px; text-align: left; padding: 25px !important; width: auto; max-width: 700px; border-left: 5px solid var(--gold); margin-top: 20px; justify-content: center; }
+        .box-potomek { flex-direction: row !important; gap: 20px; text-align: left; padding: clamp(15px, 2vw, 25px) !important; border-left: 5px solid var(--gold); align-items: center; justify-content: center; }
 
         .sub-pagination { max-width: 900px; margin: 60px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; background: white; }
@@ -152,6 +151,19 @@
         .sub-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+        
+        /* Obsługa urządzeń mobilnych - jeśli ekran jest drastycznie mały, przełamujemy strukturę, aby tekst był czytelny */
+        @media (max-width: 768px) {
+            .tree-grid { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+            .box { width: 100%; max-width: 320px; }
+            .g1-tag, .g2-tag, .g3-tag { width: 100%; margin: 5px 0 15px 0; }
+            .img-single { width: 40px; height: 55px; }
+            .name-tag { font-size: 0.9rem; }
+            .title-desc, .date-desc { font-size: 0.75rem; }
+            .marriage-tag { font-size: 0.75rem; white-space: normal; }
+            .box-potomek { flex-direction: column !important; text-align: center; }
+            .box-potomek .bio-content { border-left: none !important; padding-left: 0 !important; border-top: 1px solid var(--line); padding-top: 15px; margin-top: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -176,235 +188,173 @@
 </header>
 
 <div class="tree-wrapper">
-    <div class="tree-container">
+    <div class="tree-grid">
         
-        <!-- GENERACJA 1 (Pradziadkowie) -->
-        <div class="gen-row">
-            
-            <!-- Para 1: Domańscy -->
-            <div class="couple-space">
-                <div class="box box-lvl-1">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-                    <div class="img-wrap"><img src="zdjecia/herby/larysza.png" class="img-single" alt="Larissa"><span>Larissa</span></div>
-                    <div class="name-tag">Feliks Paweł Hilary<br>Domański[cite: 1]</div>
-                    <div class="title-desc">sędzia pokoju okr. siennickiego, wł. dóbr: Grzebowilk, Iłówiec, Kotuszów i Pilichowice[cite: 1]</div>
-                    <div class="date-desc">
-                        (Grzebowilk 1790 <a href="domarch15.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Piotrków Trybunalski 1866 <a href="domarch16.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch17.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch37.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)<br><br>
-                        /2∞ Wa-wa, 1838, Franciszka Starzyńska <a href="domarch20.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>/[cite: 1]
-                    </div>
-                </div>
-                <div class="box box-lvl-1">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-                    <div class="img-wrap"><img src="zdjecia/herby/lada1.png" class="img-single" alt="Łada"><span>Łada</span></div>
-                    <div class="name-tag">Barbara Felicjanna<br>Proszkowska[cite: 1]</div>
-                    <div class="date-desc">
-                        (Biejków 1795 <a href="domarch13.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Warszawa 1837 <a href="domarch14.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
+        <!-- GENERACJA 1 -->
+        <div class="box g1-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+            <div class="img-wrap"><img src="zdjecia/herby/larysza.png" class="img-single" alt="Larissa"><span>Larissa</span></div>
+            <div class="name-tag">Feliks Paweł Hilary<br>Domański</div>
+            <div class="title-desc">sędzia pokoju okr. siennickiego, wł. dóbr: Grzebowilk, Iłówiec, Kotuszów i Pilichowice</div>
+            <div class="date-desc">
+                (Grzebowilk 1790 <a href="domarch15.php" class="doc-link" title="Zarządzenie dokumentu"><svg><use href="#icon-doc"></use></svg></a> - Piotrków Trybunalski 1866 <a href="domarch16.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch17.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch37.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)<br><br>
+                /2∞ Wa-wa, 1838, Franciszka Starzyńska <a href="domarch20.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>/
             </div>
-
-            <div class="gap-small"></div>
-
-            <!-- Para 2: Karczewscy -->
-            <div class="couple-space">
-                <div class="box box-lvl-1">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-                    <div class="img-wrap"><img src="zdjecia/herby/jasienczyk.png" class="img-single" alt="Jasieńczyk"><span>Jasieńczyk</span></div>
-                    <div class="name-tag">Franciszek Salezy W. R.<br>Karczewski[cite: 1]</div>
-                    <div class="title-desc">wł. dóbr Brzozowa, Gulin, Rożenek i Milczany[cite: 1]</div>
-                    <div class="date-desc">
-                        (Ciepielów 1804 <a href="karczarch3.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Budków 1886 <a href="karczarch5.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="karczarch6.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
-                <div class="box box-lvl-1">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-                    <div class="img-wrap"><img src="zdjecia/herby/labedz.png" class="img-single" alt="Łabędź"><span>Łabędź</span></div>
-                    <div class="name-tag">Józefa<br>Dunin-Brzezińska[cite: 1]</div>
-                    <div class="date-desc">
-                        (Dąbrowa Podłężna 1814 <a href="karczarch4.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Wielgie 1874 <a href="karczarch7.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
-            </div>
-
-            <div class="gap-large"></div>
-
-            <!-- Para 3: Ładomirscy -->
-            <div class="couple-space">
-                <div class="box box-lvl-1">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-                    <div class="img-double-row"><div class="img-wrap"><img src="zdjecia/herby/lada2.png" class="img-single" style="width:35px;" alt="Łada"></div><div class="img-wrap"><img src="zdjecia/herby/ladomirski.png" class="img-single" style="width:35px;" alt="Własny"></div></div>
-                    <span style="font-size: 0.6rem; color: var(--sepia); font-family: 'Jost';">Łada / Własny</span>
-                    <div class="name-tag">Maciej <strong>Brutus</strong><br>Ładomirski[cite: 1]</div>
-                    <div class="title-desc">oficjalista w Kozłowie k/Buska<br>dzierż. dóbr Taurów, Koniuszki i Kozłów<br>wł. dóbr Wierzchnia[cite: 1]</div>
-                    <div class="date-desc">
-                        (Filipkowce 1798 - )[cite: 1]
-                    </div>
-                </div>
-                <div class="box box-lvl-1">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-                    <div class="img-wrap"><img src="zdjecia/herby/rola.png" class="img-single" alt="Rola"><span>Rola</span></div>
-                    <div class="name-tag">Karolina Weronika<br>Janicka[cite: 1]</div>
-                    <div class="title-desc">wł. części dóbr Martynów i Hałuszczyńce[cite: 1]</div>
-                    <div class="date-desc">
-                        (Martynów Nowy 1795 <a href="ladarch21.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Markowce 1874 <a href="ladarch46.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
-            </div>
-
-            <div class="gap-small"></div>
-
-            <!-- Para 4: Gołaszewscy -->
-            <div class="couple-space">
-                <div class="box box-lvl-1">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-                    <div class="img-double-row"><div class="img-wrap"><img src="zdjecia/herby/kosciesza1.png" class="img-single" style="width:35px;" alt="Kościesza"></div><div class="img-wrap"><img src="zdjecia/herby/kosciesza.png" class="img-single" style="width:35px;" alt="Własny"></div></div>
-                    <span style="font-size: 0.6rem; color: var(--sepia); font-family: 'Jost';">Kościesza / Własny</span>
-                    <div class="name-tag">Maciej<br>Gołaszewski[cite: 1]</div>
-                    <div class="title-desc">radca sądów we Lwowie, Samborze, Tarnowie i Stanisławowie<br>wł. dóbr Honoratówka[cite: 1]</div>
-                    <div class="date-desc">
-                        (Kałusz 1797 <a href="golaszarch2.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Honoratówka 1873 <a href="golaszarch19.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="golaszarch.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
-                <div class="box box-lvl-1">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-                    <div class="img-double-row"><div class="img-wrap"><img src="zdjecia/herby/tarnawa.png" class="img-single" style="width:35px;" alt="Tarnawa"></div><div class="img-wrap"><img src="zdjecia/herby/przyjaciel.png" class="img-single" style="width:35px;" alt="Przyjaciel"></div></div>
-                    <span style="font-size: 0.6rem; color: var(--sepia); font-family: 'Jost';">Tarnawa / Przyjaciel</span>
-                    <div class="name-tag">Rafała Wiktoria<br>Malczewska[cite: 1]</div>
-                    <div class="date-desc">
-                        (Lwów 1801 <a href="malczarch3.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Honoratówka 1863 <a href="golaszarch1.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="golaszarch.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
-            </div>
-
-        </div> <!-- Koniec Generacji 1 -->
-
-        <!-- ZNACZNIKI ŚLUBÓW G1 -> G2 -->
-        <div class="gen-row-tags">
-            <div class="couple-space-tag"><span class="marriage-tag">∞ 1825 Ługowa Wola, par. Promna <a href="domarch12.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a>[cite: 1]</span></div>
-            <div class="gap-small"></div>
-            <div class="couple-space-tag"><span class="marriage-tag">∞ 1835 Gulin, par. Zakrzew <a href="karczarch2.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a>[cite: 1]</span></div>
-            <div class="gap-large"></div>
-            <div class="couple-space-tag"><span class="marriage-tag">∞ ok. 1824[cite: 1]</span></div>
-            <div class="gap-small"></div>
-            <div class="couple-space-tag"><span class="marriage-tag">∞ 1825 Podbórze, par. Podkamień <a href="golaszarch6.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a>[cite: 1]</span></div>
         </div>
-
-        <!-- GENERACJA 2 (Dziadkowie) -->
-        <div class="gen-row">
-            
-            <div class="single-space">
-                <div class="box box-lvl-2">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-                    <div class="name-tag">Edward Maxymilian<br>Domański[cite: 1]</div>
-                    <div class="title-desc">dzierż. dóbr Jarochy, Żytniów i folw. w Piotrkowie Tryb., urzędn. szp. św. Jana w Warszawie[cite: 1]</div>
-                    <div class="date-desc">
-                        (Iłówiec 1831 <a href="domarch8.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Moszków 1886 <a href="domarch7.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch6.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch5.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
-            </div>
-
-            <div class="gap-small"></div>
-
-            <div class="single-space">
-                <div class="box box-lvl-2">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-                    <div class="name-tag">Teodozja<br>Karczewska[cite: 1]</div>
-                    <div class="date-desc">
-                        (Gulin 1837 <a href="karczarch1.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Warszawa 1873 <a href="domarch11.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch10.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch9.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
-            </div>
-
-            <div class="gap-large"></div>
-
-            <div class="single-space">
-                <div class="box box-lvl-2">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-                    <div class="name-tag">Walenty <strong>Konstanty</strong> Brutus<br>Ładomirski[cite: 1]</div>
-                    <div class="title-desc">dzierż. dóbr Babin i Suchrów, wł. dóbr Tomaszowce, Markowce i Dzieduszyce Małe[cite: 1]</div>
-                    <div class="date-desc">
-                        (Taurów 1832 <a href="ladarch8.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Markowce 1895 <a href="ladarch16.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="ladarch33.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
-            </div>
-
-            <div class="gap-small"></div>
-
-            <div class="single-space">
-                <div class="box box-lvl-2">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-                    <div class="name-tag">Katarzyna Walentyna<br>Gołaszewska[cite: 1]</div>
-                    <div class="date-desc">
-                        (Tarnów-Zamieście 1841 <a href="golaszarch7.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Markowce 1917 <a href="ladarch41.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
-            </div>
-
-        </div> <!-- Koniec Generacji 2 -->
-
-        <!-- ZNACZNIKI ŚLUBÓW G2 -> G3 -->
-        <div class="gen-row-tags">
-            <div class="branch-space-tag"><span class="marriage-tag">∞ 1857 Rożenek, par. Dąbrowa nad Czarną <a href="domarch4.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a>[cite: 1]</span></div>
-            <div class="gap-large"></div>
-            <div class="branch-space-tag"><span class="marriage-tag">∞ 1862 par. Stanisławów <a href="ladarch35.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a>[cite: 1]</span></div>
-        </div>
-
-        <!-- GENERACJA 3 (Rodzice) -->
-        <div class="gen-row">
-            
-            <div class="branch-space">
-                <div class="box box-lvl-3">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-                    <div class="name-tag">Felix<br>Domański[cite: 1]</div>
-                    <div class="title-desc">Obrońca Lwowa<br>wł. dóbr Ubinie ze Strutynem[cite: 1]</div>
-                    <div class="date-desc">
-                        (Warszawa 1868 <a href="domarch3.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Ubinie 1939 <a href="domarch39.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch2.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch1.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)[cite: 1]
-                    </div>
-                </div>
-            </div>
-
-            <div class="gap-large"></div>
-
-            <div class="branch-space">
-                <div class="box box-lvl-3">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-                    <div class="name-tag">Seweryna<br>Ładomirska[cite: 1]</div>
-                    <div class="date-desc">
-                        (Markowce 1875 <a href="ladarch17.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Sokal 1943)[cite: 1]
-                    </div>
-                </div>
-            </div>
-
-        </div> <!-- Koniec Generacji 3 -->
-
-        <!-- ZNACZNIKI ŚLUBÓW G3 -> G4 -->
-        <div class="gen-row-tags">
-            <div class="root-space-tag">
-                <a href="ladarch18.php" class="interactive-node" title="Akt Małżeństwa z 1898 r.">
-                    <div class="flip-card"><div class="flip-front">1898</div><div class="flip-back">∞</div></div>
-                </a>
-                <span class="marriage-tag" style="margin-top: 15px;">∞ 1898 Markowce, par. Tyśmienica <a href="ladarch18.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a>[cite: 1]</span>
+        
+        <div class="box g1-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+            <div class="img-wrap"><img src="zdjecia/herby/lada1.png" class="img-single" alt="Łada"><span>Łada</span></div>
+            <div class="name-tag">Barbara Felicjanna<br>Proszkowska</div>
+            <div class="date-desc">
+                (Biejków 1795 <a href="domarch13.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Warszawa 1837 <a href="domarch14.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
-        <!-- GENERACJA 4 (Potomkowie) -->
-        <div class="gen-row">
-            
-            <div class="root-space">
-                <div class="box box-potomek">
-                    <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-                    <div style="display: flex; flex-direction: column; align-items: center; min-width: 80px;" class="bio-content">
-                        <img src="zdjecia/herby/laryszad.png" class="img-single" style="width:80px; height:105px; border:none; box-shadow:none;" alt="Domańscy">
-                    </div>
-                    <div style="flex: 1; padding-left: 20px; border-left: 1px solid var(--line);" class="bio-content">
-                        <p style="font-size: 1.1rem; font-family: 'Cormorant Garamond', serif; line-height: 1.4; color: var(--ink);">
-                            Stanisław Konstanty, Helena Aleksandra i Edward <strong>Zbigniew</strong><br>z Domanina <strong>Domańscy</strong>[cite: 1]
-                        </p>
-                    </div>
-                </div>
+        <div class="box g1-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+            <div class="img-wrap"><img src="zdjecia/herby/jasienczyk.png" class="img-single" alt="Jasieńczyk"><span>Jasieńczyk</span></div>
+            <div class="name-tag">Franciszek Salezy W. R.<br>Karczewski</div>
+            <div class="title-desc">wł. dóbr Brzozowa, Gulin, Rożenek i Milczany</div>
+            <div class="date-desc">
+                (Ciepielów 1804 <a href="karczarch3.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Budków 1886 <a href="karczarch5.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="karczarch6.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
+        </div>
 
-        </div> <!-- Koniec Generacji 4 -->
+        <div class="box g1-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+            <div class="img-wrap"><img src="zdjecia/herby/labedz.png" class="img-single" alt="Łabędź"><span>Łabędź</span></div>
+            <div class="name-tag">Józefa<br>Dunin-Brzezińska</div>
+            <div class="date-desc">
+                (Dąbrowa Podłężna 1814 <a href="karczarch4.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Wielgie 1874 <a href="karczarch7.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <div class="box g1-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
+            <div class="img-double-row"><div class="img-wrap"><img src="zdjecia/herby/lada2.png" class="img-single" style="width:100%;" alt="Łada"></div><div class="img-wrap"><img src="zdjecia/herby/ladomirski.png" class="img-single" style="width:100%;" alt="Własny"></div></div>
+            <span style="font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost';">Łada / Własny</span>
+            <div class="name-tag">Maciej <strong>Brutus</strong><br>Ładomirski</div>
+            <div class="title-desc">oficjalista w Kozłowie k/Buska<br>dzierż. dóbr Taurów, Koniuszki i Kozłów<br>wł. dóbr Wierzchnia</div>
+            <div class="date-desc">
+                (Filipkowce 1798 - )
+            </div>
+        </div>
+
+        <div class="box g1-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
+            <div class="img-wrap"><img src="zdjecia/herby/rola.png" class="img-single" alt="Rola"><span>Rola</span></div>
+            <div class="name-tag">Karolina Weronika<br>Janicka</div>
+            <div class="title-desc">wł. części dóbr Martynów i Hałuszczyńce</div>
+            <div class="date-desc">
+                (Martynów Nowy 1795 <a href="ladarch21.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Markowce 1874 <a href="ladarch46.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <div class="box g1-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
+            <div class="img-double-row"><div class="img-wrap"><img src="zdjecia/herby/kosciesza1.png" class="img-single" style="width:100%;" alt="Kościesza"></div><div class="img-wrap"><img src="zdjecia/herby/kosciesza.png" class="img-single" style="width:100%;" alt="Własny"></div></div>
+            <span style="font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost';">Kościesza / Własny</span>
+            <div class="name-tag">Maciej<br>Gołaszewski</div>
+            <div class="title-desc">radca sądów we Lwowie, Samborze, Tarnowie i Stanisławowie<br>wł. dóbr Honoratówka</div>
+            <div class="date-desc">
+                (Kałusz 1797 <a href="golaszarch2.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Honoratówka 1873 <a href="golaszarch19.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="golaszarch.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <div class="box g1-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
+            <div class="img-double-row"><div class="img-wrap"><img src="zdjecia/herby/tarnawa.png" class="img-single" style="width:100%;" alt="Tarnawa"></div><div class="img-wrap"><img src="zdjecia/herby/przyjaciel.png" class="img-single" style="width:100%;" alt="Przyjaciel"></div></div>
+            <span style="font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost';">Tarnawa / Przyjaciel</span>
+            <div class="name-tag">Rafała Wiktoria<br>Malczewska</div>
+            <div class="date-desc">
+                (Lwów 1801 <a href="malczarch3.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Honoratówka 1863 <a href="golaszarch1.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="golaszarch.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <!-- TAGI ŚLUBÓW G1 -> G2 -->
+        <div class="g1-tag"><span class="marriage-tag">∞ 1825 Ługowa Wola, par. Promna <a href="domarch12.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a></span></div>
+        <div class="g1-tag"><span class="marriage-tag">∞ 1835 Gulin, par. Zakrzew <a href="karczarch2.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a></span></div>
+        <div class="g1-tag"><span class="marriage-tag">∞ ok. 1824</span></div>
+        <div class="g1-tag"><span class="marriage-tag">∞ 1825 Podbórze, par. Podkamień <a href="golaszarch6.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a></span></div>
+
+        <!-- GENERACJA 2 -->
+        <div class="box g2-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+            <div class="name-tag">Edward Maxymilian<br>Domański</div>
+            <div class="title-desc">dzierż. dóbr Jarochy, Żytniów i folw. w Piotrkowie Tryb., urzędn. szp. św. Jana w Warszawie</div>
+            <div class="date-desc">
+                (Iłówiec 1831 <a href="domarch8.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Moszków 1886 <a href="domarch7.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch6.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch5.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <div class="box g2-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+            <div class="name-tag">Teodozja<br>Karczewska</div>
+            <div class="date-desc">
+                (Gulin 1837 <a href="karczarch1.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Warszawa 1873 <a href="domarch11.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch10.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch9.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <div class="box g2-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
+            <div class="name-tag">Walenty <strong>Konstanty</strong> Brutus<br>Ładomirski</div>
+            <div class="title-desc">dzierż. dóbr Babin i Suchrów, wł. dóbr Tomaszowce, Markowce i Dzieduszyce Małe</div>
+            <div class="date-desc">
+                (Taurów 1832 <a href="ladarch8.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Markowce 1895 <a href="ladarch16.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="ladarch33.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <div class="box g2-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
+            <div class="name-tag">Katarzyna Walentyna<br>Gołaszewska</div>
+            <div class="date-desc">
+                (Tarnów-Zamieście 1841 <a href="golaszarch7.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Markowce 1917 <a href="ladarch41.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <!-- TAGI ŚLUBÓW G2 -> G3 -->
+        <div class="g2-tag"><span class="marriage-tag">∞ 1857 Rożenek, par. Dąbrowa nad Czarną <a href="domarch4.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a></span></div>
+        <div class="g2-tag"><span class="marriage-tag">∞ 1862 par. Stanisławów <a href="ladarch35.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a></span></div>
+
+        <!-- GENERACJA 3 -->
+        <div class="box g3-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+            <div class="name-tag">Felix<br>Domański</div>
+            <div class="title-desc">Obrońca Lwowa<br>wł. dóbr Ubinie ze Strutynem</div>
+            <div class="date-desc">
+                (Warszawa 1868 <a href="domarch3.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Ubinie 1939 <a href="domarch39.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch2.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="domarch1.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <div class="box g3-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
+            <div class="name-tag">Seweryna<br>Ładomirska</div>
+            <div class="date-desc">
+                (Markowce 1875 <a href="ladarch17.php" class="doc-link" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Sokal 1943)
+            </div>
+        </div>
+
+        <!-- TAGI ŚLUBÓW G3 -> G4 -->
+        <div class="g3-tag">
+            <a href="ladarch18.php" class="interactive-node" title="Akt Małżeństwa z 1898 r.">
+                <div class="flip-card"><div class="flip-front">1898</div><div class="flip-back">∞</div></div>
+            </a>
+            <span class="marriage-tag">∞ 1898 Markowce, par. Tyśmienica <a href="ladarch18.php" class="doc-link" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a></span>
+        </div>
+
+        <!-- GENERACJA 4 -->
+        <div class="box g4-box box-potomek">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+            <div style="display: flex; flex-direction: column; align-items: center; min-width: 80px;" class="bio-content">
+                <img src="zdjecia/herby/laryszad.png" class="img-single" style="width:clamp(60px, 8vw, 80px); height:auto; border:none; box-shadow:none;" alt="Domańscy">
+            </div>
+            <div style="flex: 1; padding-left: 20px; border-left: 1px solid var(--line);" class="bio-content">
+                <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-family: 'Cormorant Garamond', serif; line-height: 1.4; color: var(--ink);">
+                    Stanisław Konstanty, Helena Aleksandra i Edward <strong>Zbigniew</strong><br>z Domanina <strong>Domańscy</strong>
+                </p>
+            </div>
+        </div>
 
     </div>
 </div>
