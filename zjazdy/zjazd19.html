@@ -51,53 +51,26 @@
         /* LUPA (Szkło powiększające) */
         .img-magnifier-glass { position: absolute; border: 2px solid var(--gold); border-radius: 50%; cursor: none; width: 120px; height: 120px; display: none; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.4); pointer-events: none; background-color: var(--warm-white); opacity: 0; transition: opacity 0.2s ease-in-out; }
 
-        /* CZYSTY SVG - PUNKTY KLIKALNE */
-        .hotspot-group { outline: none; }
-        .hotspot-svg {
-            fill: rgba(255, 255, 255, 0.0);
+        /* NOWE KLASY - STYL ZAZNACZENIA (JAK W OPENLAYERS) */
+        .ol-polygon {
+            fill: transparent;
             stroke: transparent;
-            stroke-width: 2px;
-            transition: fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease;
-        }
-        .hotspot-text {
-            fill: var(--cream);
-            font-size: 10px;
-            font-family: 'Jost', sans-serif;
-            font-weight: 600;
-            text-anchor: middle;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s;
-            paint-order: stroke;
-            stroke: var(--ink);
-            stroke-width: 3px;
+            stroke-width: 0;
+            cursor: pointer;
+            pointer-events: all; /* Niezbędne do klikania w przezroczysty obszar */
+            transition: stroke 0.2s ease, fill 0.2s ease;
         }
         
-        .hotspot-group:focus-visible .hotspot-svg,
-        .hotspot-group.active .hotspot-svg {
-            fill: rgba(255, 255, 255, 0.4);
-            stroke: var(--gold);
-            filter: drop-shadow(0 0 8px rgba(155, 125, 74, 0.8));
-        }
-        .hotspot-group:focus-visible .hotspot-text,
-        .hotspot-group.active .hotspot-text {
-            opacity: 1;
-        }
-        
-        @media (hover: hover) {
-            .hotspot-group:hover .hotspot-svg {
-                fill: rgba(255, 255, 255, 0.4);
-                stroke: var(--gold);
-                filter: drop-shadow(0 0 8px rgba(155, 125, 74, 0.8));
-            }
-            .hotspot-group:hover .hotspot-text {
-                opacity: 1;
-            }
+        /* Styl "select" z oryginalnej strony */
+        .ol-polygon.active {
+            stroke: #FF0000;
+            stroke-width: 4px;
+            stroke-dasharray: 5, 5;
+            fill: transparent; /* Oryginał: fillOpacity: 0.0 */
         }
         
         .person-info-display { margin-top: 20px; background: var(--parchment); border-left: 3px solid var(--gold); padding: 20px 30px; min-height: 90px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ink); text-align: center; transition: all 0.3s; }
         .person-info-display.empty { color: var(--sepia); font-style: italic; font-size: 1.2rem; }
-        .person-meta { display: block; font-family: 'Jost', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sepia); margin-top: 5px; font-style: normal; }
 
         .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
         .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
@@ -112,7 +85,7 @@
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-       /* PAGINACJA - NOWY UKŁAD */
+       /* PAGINACJA */
         .zjazdy-pagination { max-width: 800px; margin: 40px auto 80px; padding: 30px 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; }
         .pagination-btn { flex: 1 1 calc(50% - 6px); text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center; display: flex; align-items: center; justify-content: center; }
         .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; }
@@ -187,19 +160,19 @@
         <div class="interactive-frame">
             <div class="img-container" id="hotspot-container">
                 <img src="../img/zjazdy/zjazdxix/foto_zjazdxix_00.jpg" alt="Zdjęcie grupowe" class="main-img" id="main-group-img">
-                <!-- SVG wygeneruje się tutaj przez JS -->
+                <!-- Overlay SVG zostanie wygenerowany z pliku GeoJSON -->
             </div>
         </div>
         
         <div id="person-info" class="person-info-display empty">
-            Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.
+            <i>Wskazany uczestnik: <span id="info">brak</span></i>
         </div>
         
         <p class="desktop-only" style="text-align:center; font-size:0.75rem; color:var(--sepia); margin-top:10px;">
-            <em>*Wskazówka: Przytrzymaj klawisz <strong>SHIFT</strong> i kliknij w twarz, aby w konsoli/alercie odczytać dokładną pozycję {x, y} dla kodu.</em>
+            <em>*Wskazówka: Kliknij w osobę na zdjęciu, aby zobaczyć informacje ze starego archiwum.</em>
         </p>
         <p class="mobile-only" style="text-align:center; font-size:0.75rem; color:var(--sepia); margin-top:10px;">
-            <em>*Wskazówka: Użyj dwóch palców, aby przybliżyć i swobodnie przesuwać zdjęcie. Kliknij w twarz, aby zobaczyć informacje.</em>
+            <em>*Wskazówka: Użyj dwóch palców, aby przybliżyć i przesuwać. Kliknij w twarz, by zidentyfikować.</em>
         </p>
     </div>
 
@@ -251,157 +224,79 @@
     const liczba_zdjec = 172; 
     let currentIdx = 1;
 
-    // ── BAZA OSÓB DO ZDJĘCIA GRUPOWEGO ──
-    const hotspotsData = [
-        // Rząd 1
-        { id: 1, x: 14.9, y: 31.2, name: "[Jerzy Niewęgłowski]" }, { id: 2, x: 42.0, y: 5.5, name: "[Imię i Nazwisko]" }, 
-        { id: 3, x: 48.0, y: 5.0, name: "[Imię i Nazwisko]" }, { id: 4, x: 55.0, y: 6.0, name: "[Imię i Nazwisko]" },
-        // Rząd 2
-        { id: 5, x: 32.0, y: 10.0, name: "[Imię i Nazwisko]" }, { id: 6, x: 36.5, y: 9.5, name: "[Imię i Nazwisko]" }, 
-        { id: 7, x: 40.0, y: 11.0, name: "[Imię i Nazwisko]" }, { id: 8, x: 45.0, y: 10.0, name: "[Imię i Nazwisko]" }, 
-        { id: 9, x: 50.0, y: 10.5, name: "[Imię i Nazwisko]" }, { id: 10, x: 53.0, y: 11.0, name: "[Imię i Nazwisko]" }, 
-        { id: 11, x: 58.0, y: 9.5, name: "[Imię i Nazwisko]" }, { id: 12, x: 62.0, y: 10.0, name: "[Imię i Nazwisko]" },
-        // Rząd 3
-        { id: 13, x: 28.0, y: 15.0, name: "[Imię i Nazwisko]" }, { id: 14, x: 31.0, y: 14.5, name: "[Imię i Nazwisko]" }, 
-        { id: 15, x: 34.0, y: 16.0, name: "[Imię i Nazwisko]" }, { id: 16, x: 37.0, y: 15.0, name: "[Imię i Nazwisko]" }, 
-        { id: 17, x: 41.0, y: 15.5, name: "[Imię i Nazwisko]" }, { id: 18, x: 44.0, y: 14.0, name: "[Imię i Nazwisko]" }, 
-        { id: 19, x: 48.0, y: 16.0, name: "[Imię i Nazwisko]" }, { id: 20, x: 52.0, y: 15.0, name: "[Imię i Nazwisko]" }, 
-        { id: 21, x: 56.0, y: 14.5, name: "[Imię i Nazwisko]" }, { id: 22, x: 60.0, y: 15.5, name: "[Imię i Nazwisko]" }, 
-        { id: 23, x: 64.0, y: 16.0, name: "[Imię i Nazwisko]" }, { id: 24, x: 68.0, y: 15.0, name: "[Imię i Nazwisko]" },
-        // Rząd 4
-        { id: 25, x: 23.0, y: 22.0, name: "[Imię i Nazwisko]" }, { id: 26, x: 26.0, y: 21.0, name: "[Imię i Nazwisko]" }, 
-        { id: 27, x: 29.0, y: 23.0, name: "[Imię i Nazwisko]" }, { id: 28, x: 32.0, y: 21.5, name: "[Imię i Nazwisko]" }, 
-        { id: 29, x: 35.0, y: 22.0, name: "[Imię i Nazwisko]" }, { id: 30, x: 38.0, y: 20.0, name: "[Imię i Nazwisko]" }, 
-        { id: 31, x: 42.0, y: 23.0, name: "[Imię i Nazwisko]" }, { id: 32, x: 46.0, y: 21.0, name: "[Imię i Nazwisko]" }, 
-        { id: 33, x: 50.0, y: 22.5, name: "[Imię i Nazwisko]" }, { id: 34, x: 54.0, y: 22.0, name: "[Imię i Nazwisko]" }, 
-        { id: 35, x: 58.0, y: 21.0, name: "[Imię i Nazwisko]" }, { id: 36, x: 61.0, y: 23.0, name: "[Imię i Nazwisko]" }, 
-        { id: 37, x: 65.0, y: 21.5, name: "[Imię i Nazwisko]" }, { id: 38, x: 69.0, y: 22.0, name: "[Imię i Nazwisko]" }, 
-        { id: 39, x: 73.0, y: 21.0, name: "[Imię i Nazwisko]" }, { id: 40, x: 76.0, y: 23.0, name: "[Imię i Nazwisko]" },
-        // Rząd 5
-        { id: 41, x: 19.0, y: 30.0, name: "[Imię i Nazwisko]" }, { id: 42, x: 22.0, y: 29.0, name: "[Imię i Nazwisko]" }, 
-        { id: 43, x: 25.0, y: 31.0, name: "[Imię i Nazwisko]" }, { id: 44, x: 28.0, y: 30.0, name: "[Imię i Nazwisko]" }, 
-        { id: 45, x: 31.0, y: 29.5, name: "[Imię i Nazwisko]" }, { id: 46, x: 34.0, y: 31.0, name: "[Imię i Nazwisko]" }, 
-        { id: 47, x: 38.0, y: 30.0, name: "[Imię i Nazwisko]" }, { id: 48, x: 42.0, y: 29.0, name: "[Imię i Nazwisko]" }, 
-        { id: 49, x: 46.0, y: 31.0, name: "[Imię i Nazwisko]" }, { id: 50, x: 50.0, y: 30.5, name: "[Imię i Nazwisko]" }, 
-        { id: 51, x: 53.0, y: 29.0, name: "[Imię i Nazwisko]" }, { id: 52, x: 57.0, y: 31.0, name: "[Imię i Nazwisko]" }, 
-        { id: 53, x: 61.0, y: 30.0, name: "[Imię i Nazwisko]" }, { id: 54, x: 65.0, y: 29.5, name: "[Imię i Nazwisko]" }, 
-        { id: 55, x: 69.0, y: 31.0, name: "[Imię i Nazwisko]" }, { id: 56, x: 73.0, y: 30.0, name: "[Imię i Nazwisko]" }, 
-        { id: 57, x: 77.0, y: 29.0, name: "[Imię i Nazwisko]" }, { id: 58, x: 81.0, y: 31.0, name: "[Imię i Nazwisko]" },
-        // Rząd 6
-        { id: 59, x: 15.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 60, x: 18.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
-        { id: 61, x: 21.0, y: 37.0, name: "[Imię i Nazwisko]" }, { id: 62, x: 24.0, y: 38.5, name: "[Imię i Nazwisko]" }, 
-        { id: 63, x: 27.0, y: 37.5, name: "[Imię i Nazwisko]" }, { id: 64, x: 30.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
-        { id: 65, x: 33.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 66, x: 37.0, y: 37.0, name: "[Imię i Nazwisko]" }, 
-        { id: 67, x: 41.0, y: 39.0, name: "[Imię i Nazwisko]" }, { id: 68, x: 44.0, y: 38.5, name: "[Imię i Nazwisko]" }, 
-        { id: 69, x: 48.0, y: 37.0, name: "[Imię i Nazwisko]" }, { id: 70, x: 52.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
-        { id: 71, x: 56.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 72, x: 60.0, y: 37.5, name: "[Imię i Nazwisko]" }, 
-        { id: 73, x: 64.0, y: 39.0, name: "[Imię i Nazwisko]" }, { id: 74, x: 68.0, y: 38.0, name: "[Imię i Nazwisko]" }, 
-        { id: 75, x: 72.0, y: 37.0, name: "[Imię i Nazwisko]" }, { id: 76, x: 76.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
-        { id: 77, x: 80.0, y: 38.5, name: "[Imię i Nazwisko]" }, { id: 78, x: 84.0, y: 37.0, name: "[Imię i Nazwisko]" }, 
-        { id: 79, x: 87.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 80, x: 90.0, y: 39.0, name: "[Imię i Nazwisko]" },
-        // Rząd 7
-        { id: 81, x: 12.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 82, x: 15.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
-        { id: 83, x: 18.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 84, x: 21.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
-        { id: 85, x: 24.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 86, x: 27.0, y: 48.0, name: "[Imię i Nazwisko]" }, 
-        { id: 87, x: 30.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 88, x: 34.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
-        { id: 89, x: 37.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 90, x: 41.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
-        { id: 91, x: 44.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 92, x: 48.0, y: 48.0, name: "[Imię i Nazwisko]" }, 
-        { id: 93, x: 52.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 94, x: 56.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
-        { id: 95, x: 59.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 96, x: 63.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
-        { id: 97, x: 67.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 98, x: 71.0, y: 48.0, name: "[Imię i Nazwisko]" }, 
-        { id: 99, x: 75.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 100, x: 79.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
-        { id: 101, x: 83.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 102, x: 86.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
-        { id: 103, x: 90.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 104, x: 93.0, y: 48.0, name: "[Imię i Nazwisko]" },
-        // Rząd 8
-        { id: 105, x: 10.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 106, x: 13.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
-        { id: 107, x: 16.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 108, x: 19.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
-        { id: 109, x: 22.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 110, x: 25.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
-        { id: 111, x: 28.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 112, x: 31.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
-        { id: 113, x: 34.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 114, x: 38.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
-        { id: 115, x: 42.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 116, x: 46.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
-        { id: 117, x: 50.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 118, x: 54.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
-        { id: 119, x: 57.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 120, x: 61.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
-        { id: 121, x: 65.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 122, x: 69.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
-        { id: 123, x: 73.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 124, x: 77.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
-        { id: 125, x: 81.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 126, x: 85.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
-        { id: 127, x: 89.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 128, x: 93.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
-        { id: 129, x: 96.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 130, x: 98.0, y: 55.0, name: "[Imię i Nazwisko]" },
-        // Rząd 9
-        { id: 131, x: 15.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 132, x: 18.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
-        { id: 133, x: 22.0, y: 65.0, name: "[Imię i Nazwisko]" }, { id: 134, x: 26.0, y: 66.5, name: "[Imię i Nazwisko]" }, 
-        { id: 135, x: 30.0, y: 65.5, name: "[Imię i Nazwisko]" }, { id: 136, x: 34.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
-        { id: 137, x: 38.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 138, x: 42.0, y: 65.0, name: "[Imię i Nazwisko]" }, 
-        { id: 139, x: 46.0, y: 67.0, name: "[Imię i Nazwisko]" }, { id: 140, x: 50.0, y: 66.5, name: "[Imię i Nazwisko]" }, 
-        { id: 141, x: 54.0, y: 65.5, name: "[Imię i Nazwisko]" }, { id: 142, x: 58.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
-        { id: 143, x: 62.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 144, x: 66.0, y: 65.0, name: "[Imię i Nazwisko]" }, 
-        { id: 145, x: 70.0, y: 67.0, name: "[Imię i Nazwisko]" }, { id: 146, x: 74.0, y: 66.5, name: "[Imię i Nazwisko]" }, 
-        { id: 147, x: 78.0, y: 65.5, name: "[Imię i Nazwisko]" }, { id: 148, x: 82.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
-        { id: 149, x: 86.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 150, x: 90.0, y: 65.0, name: "[Imię i Nazwisko]" },
-        // Rząd 10
-        { id: 151, x: 20.0, y: 77.0, name: "[Imię i Nazwisko]" }, { id: 152, x: 24.0, y: 76.0, name: "[Imię i Nazwisko]" }, 
-        { id: 153, x: 28.0, y: 78.0, name: "[Imię i Nazwisko]" }, { id: 154, x: 32.0, y: 77.5, name: "[Imię i Nazwisko]" }, 
-        { id: 155, x: 36.0, y: 76.5, name: "[Imię i Nazwisko]" }, { id: 156, x: 40.0, y: 78.0, name: "[Imię i Nazwisko]" }, 
-        { id: 157, x: 44.0, y: 77.0, name: "[Imię i Nazwisko]" }, { id: 158, x: 48.0, y: 76.0, name: "[Imię i Nazwisko]" }, 
-        { id: 159, x: 52.0, y: 78.0, name: "[Imię i Nazwisko]" }, { id: 160, x: 56.0, y: 77.5, name: "[Imię i Nazwisko]" }, 
-        { id: 161, x: 60.0, y: 76.5, name: "[Imię i Nazwisko]" }, { id: 162, x: 64.0, y: 78.0, name: "[Imię i Nazwisko]" }, 
-        { id: 163, x: 68.0, y: 77.0, name: "[Imię i Nazwisko]" }, { id: 164, x: 72.0, y: 76.0, name: "[Imię i Nazwisko]" }, 
-        { id: 165, x: 76.0, y: 78.0, name: "[Imię i Nazwisko]" }, { id: 166, x: 80.0, y: 77.0, name: "[Imię i Nazwisko]" },
-        // Rząd 11
-        { id: 167, x: 25.0, y: 88.0, name: "[Imię i Nazwisko]" }, { id: 168, x: 30.0, y: 87.0, name: "[Imię i Nazwisko]" }, 
-        { id: 169, x: 35.0, y: 89.0, name: "[Imię i Nazwisko]" }, { id: 170, x: 40.0, y: 88.5, name: "[Imię i Nazwisko]" }, 
-        { id: 171, x: 45.0, y: 87.5, name: "[Imię i Nazwisko]" }, { id: 172, x: 50.0, y: 89.0, name: "[Imię i Nazwisko]" }, 
-        { id: 173, x: 55.0, y: 88.0, name: "[Imię i Nazwisko]" }, { id: 174, x: 60.0, y: 87.0, name: "[Imię i Nazwisko]" }, 
-        { id: 175, x: 65.0, y: 89.0, name: "[Imię i Nazwisko]" }, { id: 176, x: 70.0, y: 88.5, name: "[Imię i Nazwisko]" }
-    ];
-
-    // GENEROWANIE HOTSPOTÓW JAKO SVG
-    const svgNS = "http://www.w3.org/2000/svg";
+    const mainImg = document.getElementById('main-group-img');
     const containerHotspots = document.getElementById('hotspot-container');
-
-    const svgOverlay = document.createElementNS(svgNS, "svg");
-    svgOverlay.setAttribute("id", "svg-overlay");
+    const infoDisplay = document.getElementById('person-info');
+    
+    // TWORZENIE WARSTWY SVG DLA GEOJSON
+    const svgOverlay = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svgOverlay.style.position = "absolute";
     svgOverlay.style.top = "0";
     svgOverlay.style.left = "0";
     svgOverlay.style.width = "100%";
     svgOverlay.style.height = "100%";
-    svgOverlay.style.pointerEvents = "none";
     svgOverlay.style.zIndex = "10";
     containerHotspots.appendChild(svgOverlay);
 
-    hotspotsData.forEach(person => {
-        const g = document.createElementNS(svgNS, 'g');
-        g.setAttribute('class', 'hotspot-group');
-        g.setAttribute('data-id', person.id);
-        g.setAttribute('data-name', person.name);
-        g.setAttribute('data-desc', `Osoba ze znacznikiem nr ${person.id}`);
-        g.setAttribute('tabindex', '0');
-        g.style.pointerEvents = "auto";
-        g.style.cursor = "pointer";
-        // Ustawienie środka ciężkości dla poprawnego odwrotnego skalowania
-        g.style.transformOrigin = `${person.x}% ${person.y}%`;
+    // FUNKCJA ŁADUJĄCA DANE GEOJSON PO ZAŁADOWANIU OBRAZKA
+    mainImg.onload = () => {
+        // Skalibruj SVG by zgadzało się 1:1 z pikselami mapy/zdjęcia
+        svgOverlay.setAttribute("viewBox", `0 0 ${mainImg.naturalWidth} ${mainImg.naturalHeight}`);
+        svgOverlay.setAttribute("preserveAspectRatio", "none");
 
-        const circle = document.createElementNS(svgNS, 'circle');
-        circle.setAttribute('cx', person.x + '%');
-        circle.setAttribute('cy', person.y + '%');
-        circle.setAttribute('r', '1.2%');
-        circle.setAttribute('class', 'hotspot-svg');
-        circle.setAttribute('vector-effect', 'non-scaling-stroke');
+        // ŚCIEŻKA DO PLIKU GEOJSON - wymaga skopiowania starego pliku do tego folderu
+        const geojsonUrl = `../img/zjazdy/${zjazd_folder}/zbiorowe.geojson`;
 
-        const text = document.createElementNS(svgNS, 'text');
-        text.setAttribute('x', person.x + '%');
-        text.setAttribute('y', (person.y - 1.8) + '%');
-        text.setAttribute('class', 'hotspot-text');
-        text.setAttribute('vector-effect', 'non-scaling-stroke');
-        text.textContent = person.id;
+        fetch(geojsonUrl)
+            .then(response => {
+                if(!response.ok) throw new Error("Nie znaleziono pliku GeoJSON");
+                return response.json();
+            })
+            .then(data => {
+                if(!data.features) return;
+                
+                data.features.forEach(feature => {
+                    if (feature.geometry && (feature.geometry.type === "Polygon" || feature.geometry.type === "MultiPolygon")) {
+                        const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+                        
+                        // Konwersja koordynatów z OpenLayers (Y zazwyczaj na minusie) do SVG 
+                        let coordsArray = feature.geometry.type === "Polygon" ? feature.geometry.coordinates[0] : feature.geometry.coordinates[0][0];
+                        const points = coordsArray.map(coord => `${coord[0]},${Math.abs(coord[1])}`).join(" ");
 
-        g.appendChild(circle);
-        g.appendChild(text);
-        svgOverlay.appendChild(g);
+                        polygon.setAttribute("points", points);
+                        polygon.setAttribute("class", "ol-polygon");
+                        polygon.setAttribute("vector-effect", "non-scaling-stroke");
+                        
+                        // Zabezpieczenie różnego nazywania właściwości w starych GeoJSON'ach
+                        const textData = feature.properties ? (feature.properties.dane || feature.properties.name) : (feature.attributes ? feature.attributes.dane : "");
+                        polygon.setAttribute("data-info", textData);
+
+                        polygon.addEventListener("click", function(e) {
+                            e.stopPropagation();
+                            
+                            // Reset innych zaznaczeń
+                            document.querySelectorAll('.ol-polygon').forEach(p => p.classList.remove('active'));
+                            this.classList.add('active');
+
+                            infoDisplay.classList.remove('empty');
+                            infoDisplay.innerHTML = `<i>Wskazany uczestnik: <span id="info" style="font-weight: 500;">${this.getAttribute('data-info')}</span></i>`;
+                        });
+
+                        svgOverlay.appendChild(polygon);
+                    }
+                });
+            })
+            .catch(error => console.warn("GeoJSON info: Umieść plik zbiorowe.geojson w folderze aby aktywować zaznaczanie osób. Błąd:", error));
+    };
+
+    // Obsługa kliknięcia poza obrysem (Reset - ukrywanie informacji)
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.ol-polygon') && !e.target.closest('.controls-bar') && !e.target.closest('.img-magnifier-glass')) {
+            document.querySelectorAll('.ol-polygon').forEach(p => p.classList.remove('active'));
+            infoDisplay.classList.add('empty');
+            infoDisplay.innerHTML = `<i>Wskazany uczestnik: <span id="info">brak</span></i>`;
+        }
     });
-
-    const infoDisplay = document.getElementById('person-info');
-    const mainImg = document.getElementById('main-group-img');
 
     // ── INTEGRACJA PANZOOM (TYLKO DLA URZĄDZEŃ MOBILNYCH) ──
     const pzElem = document.getElementById('hotspot-container');
@@ -412,26 +307,14 @@
         disableZoom: window.innerWidth > 768
     });
 
-    // Odwrotne skalowanie znaczników podczas przybliżania (naprawa rozszerzających się punktów)
-    pzElem.addEventListener('panzoomzoom', (e) => {
-        const currentScale = e.detail.scale;
-        document.querySelectorAll('.hotspot-group').forEach(h => {
-            h.style.transform = `scale(${1 / currentScale})`;
-        });
-    });
-
     window.addEventListener('resize', () => {
         const isDesktop = window.innerWidth > 768;
         panzoom.setOptions({ disablePan: isDesktop, disableZoom: isDesktop });
-        if(isDesktop) { 
-            panzoom.reset(); 
-            document.querySelectorAll('.hotspot-group').forEach(h => h.style.transform = 'scale(1)');
-        }
+        if(isDesktop) panzoom.reset(); 
     });
 
     document.getElementById('panzoom-reset').addEventListener('click', () => {
         panzoom.reset();
-        document.querySelectorAll('.hotspot-group').forEach(h => h.style.transform = 'scale(1)');
     });
 
     // ── LOGIKA KLASYCZNEJ LUPY (TYLKO DLA DESKTOPU) ──
@@ -502,90 +385,6 @@
     containerHotspots.addEventListener('mouseleave', () => { 
         glass.style.opacity = '0';
         setTimeout(() => { if(glass.style.opacity === '0') glass.style.display = 'none'; }, 200);
-    });
-
-    // ── GŁÓWNA LOGIKA KLIKANIA (WSPÓLNA DLA PC I MOBILE) ──
-
-    // WYSZUKIWANIE WSPÓŁRZĘDNYCH (NARZĘDZIE ADMINA)
-    const interactiveFrame = document.querySelector('.interactive-frame');
-    interactiveFrame.addEventListener('click', function(e) {
-        if (e.shiftKey) {
-            e.preventDefault();
-            const rect = mainImg.getBoundingClientRect();
-            const xPercent = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
-            const yPercent = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
-            const coordStr = `{ x: ${xPercent}, y: ${yPercent} }`;
-            console.log("Kliknięte współrzędne:", coordStr);
-            alert(`Współrzędne kliknięcia:\n${coordStr}\n\nOtwórz konsolę (F12) by łatwo skopiować.`);
-        }
-    });
-
-    // UNIWERSALNA OBSŁUGA KLIKNIĘĆ (FUZZY HIT TESTING)
-    document.addEventListener('click', function(e) {
-        if (e.shiftKey) return; // Narzędzie admina
-        if (e.target.closest('.controls-bar')) return; // Kliknięcie w przyciski lupy
-        if (e.target.closest('.img-magnifier-glass')) return; // Kliknięcie w samą lupę
-        
-        let targetHotspot = e.target.closest('.hotspot-group');
-        const frame = e.target.closest('.interactive-frame');
-
-        // FUZZY HIT TESTING: Jeśli kliknięto w zdjęcie (z lupą lub bez), ale nie idealnie w punkt
-        if (!targetHotspot && frame) {
-            const rect = mainImg.getBoundingClientRect();
-            const clickX = e.clientX;
-            const clickY = e.clientY;
-            
-            let closestDist = Infinity;
-            let closestId = null;
-            
-            hotspotsData.forEach(person => {
-                const personXPx = rect.left + (person.x / 100) * rect.width;
-                const personYPx = rect.top + (person.y / 100) * rect.height;
-                const dist = Math.hypot(clickX - personXPx, clickY - personYPx);
-                
-                if (dist < closestDist) {
-                    closestDist = dist;
-                    closestId = person.id;
-                }
-            });
-
-            // Tolerancja w pikselach: 40px - idealne trafienie nie jest wymagane
-            if (closestId !== null && closestDist <= 40) {
-                targetHotspot = document.querySelector(`.hotspot-group[data-id="${closestId}"]`);
-            }
-        }
-
-        // Czyszczenie starych podświetleń
-        document.querySelectorAll('.hotspot-group').forEach(h => {
-            h.classList.remove('active');
-            if(h.timeoutId) clearTimeout(h.timeoutId);
-        });
-
-        if (targetHotspot) {
-            e.stopPropagation();
-            
-            targetHotspot.classList.add('active');
-
-            const name = targetHotspot.getAttribute('data-name');
-            const desc = targetHotspot.getAttribute('data-desc');
-
-            infoDisplay.classList.remove('empty');
-            infoDisplay.innerHTML = `
-                <div>
-                    <strong>${name}</strong>
-                    <span class="person-meta">${desc} - Zidentyfikowano w archiwum</span>
-                </div>
-            `;
-            
-            targetHotspot.timeoutId = setTimeout(() => {
-                targetHotspot.classList.remove('active');
-            }, 2000);
-
-        } else {
-            // Kliknięcie w tło resetuje tekst
-            infoDisplay.classList.add('empty');
-            infoDisplay.innerHTML = "Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.";
-        }
     });
 
     // ── GALERIA I LIGHTBOX ──
