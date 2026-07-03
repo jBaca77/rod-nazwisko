@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wywód Przodków I | Archiwum L&K</title>
+    <title>Wywód Przodków I - Linia Domańskich | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -110,6 +110,11 @@
         .sub-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+
+        /* RWD Dodane na polecenie z wytycznych Systemu Designu */
+        @media (max-width: 1200px) {
+            .tree-wrapper { padding: 20px 10px; overflow-x: auto; }
+        }
     </style>
 </head>
 <body>
@@ -118,7 +123,7 @@
 
 <header class="article-header">
     <span class="meta-top">Tablica Genealogiczna I</span>
-    <h1>Linia Główna Rodu</h1>
+    <h1>Linia Domańskich</h1>
     <div class="s-line-main"></div>
 </header>
 
@@ -126,46 +131,49 @@
     <div class="tree-container tight-gap">
         
         <div class="row-flex lvl-top">
-            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 1</span></div><div class="name-tag">Osoba 1</div></div>
-            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 2</span></div><div class="name-tag">Osoba 2</div></div>
-            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 3</span></div><div class="name-tag">Osoba 3</div></div>
-            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 4</span></div><div class="name-tag">Osoba 4</div></div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><div class="img-wrap"><img src="zdjecia/herby/larysza.png" class="img-single" style="object-fit: contain; background: transparent;"><span>Larissa</span></div><div class="name-tag">Feliks P. H.<br>Domański[cite: 1]</div></div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><div class="img-wrap"><img src="zdjecia/herby/lada1.png" class="img-single" style="object-fit: contain; background: transparent;"><span>Łada</span></div><div class="name-tag">Barbara Felicjanna<br>Proszkowska[cite: 1]</div></div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><div class="img-wrap"><img src="zdjecia/herby/jasienczyk.png" class="img-single" style="object-fit: contain; background: transparent;"><span>Jasieńczyk</span></div><div class="name-tag">Franciszek S. W. R.<br>Karczewski[cite: 1]</div></div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><div class="img-wrap"><img src="zdjecia/herby/labedz.png" class="img-single" style="object-fit: contain; background: transparent;"><span>Łabędź</span></div><div class="name-tag">Józefa<br>Dunin-Brzezińska[cite: 1]</div></div>
             
             <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-                <div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Mąż</span></div><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Żona</span></div></div>
-                <div class="name-tag">Para 5</div>
+                <div class="img-double-row"><div class="img-wrap"><img src="zdjecia/herby/lada2.png" class="img-single" style="width:35px; object-fit: contain; background: transparent;"></div><div class="img-wrap"><img src="zdjecia/herby/ladomirski.png" class="img-single" style="width:35px; object-fit: contain; background: transparent;"></div></div>
+                <span style="font-size: 0.6rem; color: var(--sepia); font-family: 'Jost';">Łada / Własny</span>
+                <div class="name-tag">Maciej Brutus<br>Ładomirski[cite: 1]</div>
             </div>
-            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><div class="img-wrap"><img src="" class="img-single"><span>Foto 6</span></div><div class="name-tag">Osoba 6</div></div>
+            <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><div class="img-wrap"><img src="zdjecia/herby/rola.png" class="img-single" style="object-fit: contain; background: transparent;"><span>Rola</span></div><div class="name-tag">Karolina Weronika<br>Janicka[cite: 1]</div></div>
             <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-                <div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div></div>
-                <div class="name-tag">Osoba 7</div>
+                <div class="img-double-row"><div class="img-wrap"><img src="zdjecia/herby/kosciesza1.png" class="img-single" style="width:35px; object-fit: contain; background: transparent;"></div><div class="img-wrap"><img src="zdjecia/herby/kosciesza.png" class="img-single" style="width:35px; object-fit: contain; background: transparent;"></div></div>
+                <span style="font-size: 0.6rem; color: var(--sepia); font-family: 'Jost';">Kościesza / Własny</span>
+                <div class="name-tag">Maciej<br>Gołaszewski[cite: 1]</div>
             </div>
             <div class="box"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-                <div class="img-double-row"><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto A</span></div><div class="img-wrap"><img src="" class="img-single" style="width:35px"><span>Foto B</span></div></div>
-                <div class="name-tag">Osoba 8</div>
+                <div class="img-double-row"><div class="img-wrap"><img src="zdjecia/herby/tarnawa.png" class="img-single" style="width:35px; object-fit: contain; background: transparent;"></div><div class="img-wrap"><img src="zdjecia/herby/przyjaciel.png" class="img-single" style="width:35px; object-fit: contain; background: transparent;"></div></div>
+                <span style="font-size: 0.6rem; color: var(--sepia); font-family: 'Jost';">Tarnawa / Przyjaciel</span>
+                <div class="name-tag">Rafała Wiktoria<br>Malczewska[cite: 1]</div>
             </div>
         </div>
 
         <div class="row-flex">
-            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><span class="date-tag">Dziadek A | 1890</span></a>
-            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><span class="date-tag">Babcia B | 1895</span></a>
-            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><span class="date-tag">Dziadek C | 1888</span></a>
-            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><span class="date-tag">Babcia D | 1900</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><span class="date-tag">Edward Maxymilian Domański | 1831 - 1886[cite: 1]</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><span class="date-tag">Teodozja Karczewska | 1837 - 1873[cite: 1]</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><span class="date-tag">Walenty K. Brutus Ładomirski | 1832 - 1895[cite: 1]</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><span class="date-tag">Katarzyna Walentyna Gołaszewska | 1841 - 1917[cite: 1]</span></a>
         </div>
 
         <div class="row-flex">
-            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><span class="date-tag">Ojciec | 1920</span></a>
-            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><span class="date-tag">Matka | 1925</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div><span class="date-tag">Felix Domański | 1868 - 1939[cite: 1]</span></a>
+            <a href="#" class="box box-short"><div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div><span class="date-tag">Seweryna Ładomirska | 1875 - 1943[cite: 1]</span></a>
         </div>
 
-        <a href="inna_strona.html" class="interactive-node">
-            <div class="flip-card"><div class="flip-front">L&K</div><div class="flip-back">GO</div></div>
+        <a href="#" class="interactive-node">
+            <div class="flip-card"><div class="flip-front">1898</div><div class="flip-back">∞</div></div>
         </a>
 
         <div class="row-flex">
             <a href="#" class="box box-short active">
                 <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-                <span class="date-tag">Jedność | 2026</span>
+                <span class="date-tag">Jedność | 1898[cite: 1]</span>
             </a>
         </div>
 
@@ -173,11 +181,11 @@
             <div class="box box-potomek">
                 <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
                 <div style="display: flex; flex-direction: column; align-items: center; min-width: 80px;" class="bio-content">
-                    <img src="" class="img-single" style="width:80px; height:105px;">
-                    <span class="name-tag" style="border:none; text-align:center;">Nazwa</span>
+                    <img src="zdjecia/herby/laryszad.png" class="img-single" style="width:80px; height:105px; object-fit: contain; background: transparent;">
+                    <span class="name-tag" style="border:none; text-align:center;">Domańscy</span>
                 </div>
                 <div style="flex: 1; padding-left: 20px; border-left: 1px solid rgba(122,101,72,0.1);" class="bio-content">
-                    <p style="font-size: 0.9rem; font-family: 'Jost'; text-transform: none; font-weight: 300;">Wklej tutaj swój tekst nota biograficzna.</p>
+                    <p style="font-size: 0.9rem; font-family: 'Jost'; text-transform: none; font-weight: 300;"><strong>Stanisław Konstanty</strong>, <strong>Helena Aleksandra</strong> i <strong>Edward Zbigniew</strong> z Domanina <strong>DOMAŃSCY</strong>[cite: 1]</p>
                 </div>
             </div>
         </div>
@@ -185,18 +193,23 @@
 </div>
 
 <div class="sub-pagination">
-    <a href="#" class="sub-btn active">Linia I</a>
-    <a href="#" class="sub-btn">Linia II</a>
-    <a href="#" class="sub-btn">Linia III</a>
-    <a href="#" class="sub-btn">Linia IV</a>
-    <a href="#" class="sub-btn">Linia V</a>
-    <a href="#" class="sub-btn">Linia VI</a>
-    <a href="#" class="sub-btn">Linia VII</a>
+    <a href="domanscy.html" class="sub-btn active">Linia Domańskich</a>
+    <a href="golebscy.html" class="sub-btn">Linia Gołębskich</a>
+    <a href="krobiccy.html" class="sub-btn">Linia Krobickich</a>
+    <a href="ladomirscy.html" class="sub-btn">Linia Ładomirskich</a>
+    <a href="fedorowiczowie.html" class="sub-btn">Linia Fedorowiczów</a>
+    <a href="krainscy.html" class="sub-btn">Linia Kraińskich</a>
+    <a href="wiszniewscy.html" class="sub-btn">Linia Wiszniewskich</a>
 </div>
 
 <footer>
     <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
 </footer>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Skrypt obsługi bocznego menu (drawer) zainicjowany.');
+    });
+</script>
 </body>
 </html>
