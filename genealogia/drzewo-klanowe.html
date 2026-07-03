@@ -41,15 +41,14 @@
             width: 100%; height: 75vh;
             background: var(--cream); border: 1px solid var(--sepia-pale);
             box-shadow: inset 0 10px 30px rgba(122, 101, 72, 0.05), 0 10px 40px rgba(0,0,0,0.05);
-            border-radius: 4px; overflow: auto;
+            border-radius: 4px; overflow: scroll; /* Zmienione na scroll */
             position: relative; cursor: grab;
-            display: flex; justify-content: center;
         }
         .tree-canvas {
             transform-origin: top center;
             padding: 50px 100px;
-            transition: transform 0.1s ease-out;
-            display: block;
+            min-width: 100%; /* Wymuszenie szerokości */
+            display: inline-block;
         }
 
         .css-tree ul {
@@ -89,7 +88,6 @@
             text-align: center;
             min-width: 200px;
             max-width: 320px;
-            position: relative; z-index: 10;
         }
         .node strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--gold); margin-bottom: 5px; }
         .node .dates { display: block; font-size: 0.75rem; color: var(--sepia); font-style: italic; }
@@ -124,7 +122,7 @@
     <div class="tree-viewport" id="treeViewport">
         <div class="tree-canvas" id="treeCanvas">
             <div class="css-tree" id="tree-render-area">
-                <div class="loader">Wczytywanie bazy drzewa...</div>
+                <div class="loader">Wczytywanie...</div>
             </div>
         </div>
     </div>
@@ -150,32 +148,27 @@
         return html;
     }
 
-    function loadTreeData() {
-        console.log("Ładowanie drzewa...");
-        fetch('drzewo.json?t=' + Date.now())
-            .then(response => {
-                if (!response.ok) throw new Error('Błąd HTTP: ' + response.status);
-                return response.json();
-            })
-            .then(data => {
-                console.log("Dane załadowane poprawnie.");
-                const rootData = Array.isArray(data) ? data[0] : data;
-                const container = document.getElementById('tree-render-area');
-                container.innerHTML = `<ul>${generateNodeHTML(rootData)}</ul>`;
-                
-                // Opóźnienie, aby zapewnić, że DOM jest gotowy
-                setTimeout(() => {
-                    const viewport = document.getElementById('treeViewport');
-                    const canvas = document.getElementById('treeCanvas');
-                    if(viewport && canvas) {
-                        viewport.scrollLeft = (canvas.scrollWidth - viewport.clientWidth) / 2;
-                    }
-                }, 300);
-            })
-            .catch(error => {
-                console.error("Błąd krytyczny:", error);
-                document.getElementById('tree-render-area').innerHTML = `<p style="padding: 40px; color: red;">Błąd wczytywania: ${error.message}</p>`;
-            });
+    async function loadTreeData() {
+        const renderArea = document.getElementById('tree-render-area');
+        try {
+            const response = await fetch('drzewo.json?t=' + Date.now());
+            if (!response.ok) throw new Error('Błąd HTTP: ' + response.status);
+            
+            const data = await response.json();
+            const rootData = Array.isArray(data) ? data[0] : data;
+            
+            renderArea.innerHTML = `<ul>${generateNodeHTML(rootData)}</ul>`;
+            
+            // Wymuszenie przewinięcia do środka po renderowaniu
+            setTimeout(() => {
+                const viewport = document.getElementById('treeViewport');
+                const canvas = document.getElementById('treeCanvas');
+                viewport.scrollLeft = (canvas.scrollWidth - viewport.clientWidth) / 2;
+            }, 300);
+        } catch (error) {
+            console.error("Błąd wczytywania drzewa:", error);
+            renderArea.innerHTML = `<p style="padding: 20px; color: red;">Wystąpił błąd: ${error.message}. Sprawdź konsolę (F12).</p>`;
+        }
     }
 
     let scale = 1;
@@ -190,11 +183,10 @@
         canvas.style.transform = `scale(1)`;
         document.getElementById('zoomLevel').innerText = '100%';
         const viewport = document.getElementById('treeViewport');
-        const canvas = document.getElementById('treeCanvas');
         viewport.scrollLeft = (canvas.scrollWidth - viewport.clientWidth) / 2;
     }
 
-    window.onload = loadTreeData;
+    document.addEventListener('DOMContentLoaded', loadTreeData);
 </script>
 
 </body>
