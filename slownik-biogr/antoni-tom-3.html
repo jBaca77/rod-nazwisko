@@ -30,98 +30,31 @@
         .meta-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); display: block; margin-bottom: 5px; }
 
         .content-wrap { max-width: 850px; margin: 0 auto; padding: 0 24px; }
+        
         .bio-para { margin-bottom: 25px; text-align: justify; font-size: 1.1rem; }
         .bio-para:first-of-type::first-letter { float: left; font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; line-height: 0.8; padding: 8px 12px 4px 0; color: var(--gold); font-weight: 300; }
         
-        /* Delikatne formatowanie odnośników w tekście */
         .bio-para a { color: var(--gold); text-decoration: none; font-weight: 500; transition: color 0.3s; }
         .bio-para a:hover { color: var(--ink); text-decoration: underline; }
 
         .inline-photo { margin: 45px 0; text-align: center; clear: both; }
         .inline-photo img { max-width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; }
-        .caption { display: block; margin-top: 10px; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--sepia); font-size: 1rem; }
+        .caption { display: block; margin-top: 10px; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--sepia); font-size: 1rem; line-height: 1.4; }
 
-        .descendants { margin-top: 80px; border-top: 2px solid var(--gold-light); padding-top: 40px; }
-        .descendants h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; margin-bottom: 40px; text-align: center; }
+        .img-float-right { float: right; margin: 0 0 15px 25px; border: 1px solid var(--line); padding: 5px; background: white; max-width: 50%; }
+        .img-float-left { float: left; margin: 0 25px 15px 0; border: 1px solid var(--line); padding: 5px; background: white; max-width: 50%; }
 
-        /* UKŁAD DZIECI Z POPRZEDNIEJ WERSJI */
-        .child-item { 
-            background: var(--cream); 
-            border: 1px solid var(--sepia-pale); 
-            border-radius: 6px; 
-            padding: 35px; 
-            margin-bottom: 35px; 
-            transition: all 0.3s ease;
+        .pictogram-link {
+            display: inline-flex; align-items: center; justify-content: center; vertical-align: middle;
+            color: var(--gold); text-decoration: none; transition: all 0.3s ease;
+            background: var(--warm-white); border: 1px solid var(--sepia-pale); border-radius: 4px; padding: 4px;
+            margin: 0 4px;
         }
-        .child-item:hover {
-            border-color: var(--gold);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-            transform: translateY(-2px);
+        .pictogram-link:hover {
+            border-color: var(--gold); background: white; transform: translateY(-2px); box-shadow: 0 2px 4px rgba(0,0,0,0.05); color: var(--gold-light);
         }
-        .child-item h3 { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: 1.8rem; 
-            color: var(--gold); 
-            margin-bottom: 20px; 
-            border-bottom: 1px solid var(--sepia-pale); 
-            padding-bottom: 10px; 
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .pictogram-link svg { width: 16px; height: 16px; }
 
-        .child-layout {
-            display: flex;
-            gap: 35px;
-            align-items: flex-start;
-        }
-        .child-text {
-            flex: 1;
-            font-size: 1.05rem;
-            color: #444;
-            text-align: justify;
-        }
-        .child-text p { margin-bottom: 15px; }
-        .child-text p:last-child { margin-bottom: 0; }
-
-        /* GALERIA PORTRETÓW WEWNĄTRZ KAFELKA */
-        .child-media {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 20px;
-            flex-shrink: 0;
-            width: 100%;
-            max-width: 420px;
-        }
-        .child-media.single { max-width: 240px; grid-template-columns: 1fr; }
-        
-        .child-img-wrapper {
-            background: white;
-            padding: 10px;
-            border: 1px solid var(--line);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            display: flex;
-            flex-direction: column;
-        }
-        .child-img-wrapper img {
-            width: 100%;
-            aspect-ratio: 3/4;
-            object-fit: cover;
-            filter: sepia(15%) grayscale(20%);
-            transition: filter 0.3s ease;
-        }
-        .child-img-wrapper:hover img { filter: sepia(0%) grayscale(0%); }
-        .child-img-caption {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            color: var(--sepia);
-            font-size: 0.9rem;
-            text-align: center;
-            margin-top: 10px;
-            line-height: 1.3;
-        }
-
-        /* NOTATKI I UZUPEŁNIENIA Z POPRZEDNIEJ WERSJI */
         .note-box { 
             background: var(--cream); 
             border: 1px solid var(--sepia-pale); 
@@ -132,6 +65,7 @@
             transition: all 0.3s ease;
             text-align: justify;
             z-index: 1; 
+            clear: both;
         }
         .note-box:hover { border-color: var(--gold); }
         .note-box::before { 
@@ -146,48 +80,28 @@
             z-index: -1; 
         }
 
-        .note-inline {
-            background: var(--parchment);
-            padding: 10px 20px;
-            border-left: 3px solid var(--gold);
-            font-style: italic;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
+        .source-note { background: #f0ede6; padding: 30px; margin: 60px 0 40px; border-left: 4px solid var(--gold); font-size: 1rem; position: relative; text-align: center; clear: both;}
 
-        /* PIKTOGRAMY (LINKI) */
-        .pictogram-link {
-            display: inline-flex; align-items: center; justify-content: center; vertical-align: middle;
-            color: var(--gold); text-decoration: none; transition: all 0.3s ease;
-            background: var(--warm-white); border: 1px solid var(--sepia-pale); border-radius: 4px; padding: 4px;
-            margin: 0 4px;
-        }
-        .pictogram-link:hover {
-            border-color: var(--gold); background: white; transform: translateY(-2px); box-shadow: 0 2px 4px rgba(0,0,0,0.05); color: var(--gold-light);
-        }
-        .pictogram-link svg { width: 16px; height: 16px; }
-
-        .source-note { background: #f0ede6; padding: 30px; margin: 40px 0; border-left: 4px solid var(--gold); font-size: 1rem; position: relative; text-align: center;}
-        .editorial-note { 
-            display: block; margin-top: 20px; font-size: 0.75rem; color: #a09a90; font-style: italic; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 10px;
-        }
-
+        /* STYLIZACJA PODCASTU */
         .podcast-box {
             background: var(--parchment);
             padding: 30px;
             border: 1px solid var(--sepia-pale);
-            border-radius: 6px;
+            border-radius: 4px;
             margin: 40px 0;
             display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
             align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            clear: both;
         }
         .podcast-info { flex: 1; min-width: 250px; }
-        .podcast-audio { width: 100%; max-width: 350px; }
+        .podcast-info h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ink); margin-bottom: 5px; }
+        .podcast-info p { font-size: 0.9rem; color: var(--sepia); margin-bottom: 10px; line-height: 1.4; }
+        .podcast-player { width: 100%; max-width: 350px; }
+        .podcast-player audio { width: 100%; outline: none; }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 100px; }
+        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 100px; clear: both; }
 
         /* Menu boczne ukryte na PC */
         .menu-toggle { display: none; background: none; border: none; color: var(--gold-light); font-size: 1.8rem; cursor: pointer; }
@@ -200,11 +114,6 @@
         .drawer-menu li { margin-bottom: 20px; }
         .drawer-menu a { text-decoration: none; color: var(--ink); font-size: 1.2rem; font-family: 'Cormorant Garamond', serif; transition: color 0.2s; }
 
-        @media (max-width: 900px) {
-            .child-layout { flex-direction: column; }
-            .child-media { max-width: 100%; order: -1; margin-bottom: 10px; }
-            .child-media.single { max-width: 300px; margin: 0 auto 20px auto; }
-        }
         @media (max-width: 800px) { 
             .profile-header { grid-template-columns: 1fr; text-align: center; } 
             .main-photo-frame { max-width: 300px; margin: 0 auto 30px; } 
@@ -213,7 +122,7 @@
             .menu-toggle { display: block; }
         }
         @media (max-width: 600px) {
-            .child-item { padding: 20px; }
+            .img-float-right, .img-float-left { float: none; display: block; margin: 0 auto 20px; max-width: 100%; }
             .note-box { padding: 25px 20px 25px 45px; } 
             .note-box::before { font-size: 4rem; top: 30px; left: 10px; }
         }
@@ -256,28 +165,28 @@
 
     <div class="content-wrap">
         <div class="bio-para">
-            <img src="zdjecia/wiszhoryhlady/1a.jpg" title="Teresa z Kraińskich Wiszniewska" style="float: right; margin: 0 0 15px 25px; height: 164px; border: 1px solid var(--line); padding: 5px; background: white;" alt="Teresa z Kraińskich Wiszniewska">
-            Najmłodsza moja siostra Teresa urodziła się w Wyszatycach 15.10.1888r.[cite: 4] Chowała się i uczyła razem z Anielcią i doskonale się z sobą zgadzały i wesoło z kuzynkami i T. z Frablówki, do której należeli studiujący na Uniwersytecie i Politechnice mili młodzi ludzie, się zabawiały.[cite: 4]
+            <img src="zdjecia/wiszhoryhlady/1a.jpg" title="Teresa z Kraińskich Wiszniewska" class="img-float-right" style="height: 164px;" alt="Teresa z Kraińskich">
+            Najmłodsza moja siostra Teresa urodziła się w Wyszatycach 15.10.1888r. Chowała się i uczyła razem z Anielcią i doskonale się z sobą zgadzały i wesoło z kuzynkami i T. z Frablówki, do której należeli studiujący na Uniwersytecie i Politechnice mili młodzi ludzie, się zabawiały.
         </div>
 
         <div class="bio-para">
             W roku 1907 pojawił się we Lwowie Maria Ludwik Wiszniewski 
-            <a href="wiszarch9.html" class="pictogram-link" title="Przejdź do dokumentu">
+            <a href="wiszarch9.html" class="pictogram-link" title="Otwórz dokument">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
             </a>, syn Marszałka powiatu Drohobyckiego, przemysłowca naftowego, który zdawszy doktorat prawa, studiował w Lipsku i Wrocławiu rolnictwo gdyż ojciec kupił dla niego majątek Horyhlady i Ostrą 
             <a href="horyhlady.html" class="pictogram-link" title="Przejdź do: Horyhlady">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            </a> nad Dniestrem koło Niżniowa.[cite: 4]
+            </a> nad Dniestrem koło Niżniowa.
         </div>
 
         <div class="inline-photo">
-            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <div style="text-align: center; flex: 1; min-width: 250px;">
-                    <img src="zdjecia/wiszhoryhlady/2a.jpg" style="height: 250px; width: 100%; object-fit: cover; border: 1px solid var(--line); padding: 5px; background: white;" alt="dwór w Horyhladach">
+                    <img src="zdjecia/wiszhoryhlady/2a.jpg" style="height: 250px; width: 100%; object-fit: cover;" alt="dwór w Horyhladach">
                     <span class="caption">dwór w Horyhladach</span>
                 </div>
                 <div style="text-align: center; flex: 1; min-width: 250px;">
-                    <img src="zdjecia/wiszhoryhlady/2b.jpg" style="height: 250px; width: 100%; object-fit: cover; border: 1px solid var(--line); padding: 5px; background: white;" alt="Dniestr w okolicy Horyhlad">
+                    <img src="zdjecia/wiszhoryhlady/2b.jpg" style="height: 250px; width: 100%; object-fit: cover;" alt="Dniestr w okolicy Horyhlad">
                     <span class="caption">Dniestr w okolicy Horyhlad</span>
                 </div>
             </div>
@@ -285,212 +194,161 @@
 
         <div class="bio-para">
             Munek był za młodu w szybie naftowym w czasie wybuchu gazów 
-            <a href="wiszarch14.html" class="pictogram-link" title="Przejdź do dokumentu">
+            <a href="wiszarch14.html" class="pictogram-link" title="Otwórz dokument">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            </a>, brat jego wtedy zginą, a jemu pozostały na twarzy ślady poparzenia, ale był miły i poważny, tak że sympatia się zawiązała i 14.02.1908 roku pobrali się we Lwowie, biorąc ślub w kościele św. Marii Magdaleny.[cite: 4] Młodzi wyjechali do Włoch, a potem wrócili do bardzo starannie urządzonych Horyhlad (był i wodociąg).[cite: 4] Zdaje się w 1909 byliśmy razem we Wiedniu, był i ojciec, zaprosił do hotelu Müllera, gdzie zawsze mieszkał, na obiad Władzia Kozłowskiego i Kazimierza Chłędowskiego, bardzo ciekawe i wesołe były przy nim rozmowy.[cite: 4] Wieczorem znowu pamiętam wesołą i doskonałą kolacyjkę u Sachera, pierwsza restauracja Wiednia.[cite: 4]
+            </a>, brat jego wtedy zginą, a jemu pozostały na twarzy ślady poparzenia, ale był miły i poważny, tak że sympatia się zawiązała i 14.02.1908 roku pobrali się we Lwowie, biorąc ślub w kościele św. Marii Magdaleny. Młodzi wyjechali do Włoch, a potem wrócili do bardzo starannie urządzonych Horyhlad (był i wodociąg). Zdaje się w 1909 byliśmy razem we Wiedniu, był i ojciec, zaprosił do hotelu Müllera, gdzie zawsze mieszkał, na obiad Władzia Kozłowskiego i Kazimierza Chłędowskiego, bardzo ciekawe i wesołe były przy nim rozmowy. Wieczorem znowu pamiętam wesołą i doskonałą kolacyjkę u Sachera, pierwsza restauracja Wiednia.
         </div>
 
         <div class="bio-para">
-            W 1909 urodził się syn Jan, a po nim następowały córki: Teresa, Hania i Krystyna, dopiero w 1915 na ruskiej plebani w Ostrej, bo w czasie inwazji nie mogli w domu swym mieszkać, urodził się syn Stanisław.[cite: 4] Potem mieszkali z rok w Niebocku, przybył Tadeusz, a w Dźwiniaczu koło Ustrzyk, który razem z Ojcem Teresa nabyła od p. Słotwińskiego, urodził się Andrzej.[cite: 4] Do 1923 r. chowali swoją gromadkę w Dźwiniaczu, mając miłe sąsiedztwo Edmundów Kraińskich w Leszczowatym i Zatorskich w Wańkowej, a i myśmy tam czasem dojeżdżali.[cite: 4] Zdaje się w 1922 postanowił Munek wrócić do Horyhlad, by tamtejszego gospodarstwa pilnować, gdyż w górskim Dźwiniaczu zbiory były marne, a na żyznych ziemiach nad Dniestrem, uprawianych cudzymi rękoma, dochód był mały.[cite: 4]
+            W 1909 urodził się syn Jan, a po nim następowały córki: Teresa, Hania i Krystyna, dopiero w 1915 na ruskiej plebani w Ostrej, bo w czasie inwazji nie mogli w domu swym mieszkać, urodził się syn Stanisław. Potem mieszkali z rok w Niebocku, przybył Tadeusz, a w Dźwiniaczu koło Ustrzyk, który razem z Ojcem Teresa nabyła od p. Słotwińskiego, urodził się Andrzej. Do 1923 r. chowali swoją gromadkę w Dźwiniaczu, mając miłe sąsiedztwo Edmundów Kraińskich w Leszczowatym i Zatorskich w Wańkowej, a i myśmy tam czasem dojeżdżali. Zdaje się w 1922 postanowił Munek wrócić do Horyhlad, by tamtejszego gospodarstwa pilnować, gdyż w górskim Dźwiniaczu zbiory były marne, a na żyznych ziemiach nad Dniestrem, uprawianych cudzymi rękoma, dochód był mały.
         </div>
 
         <div class="inline-photo">
-            <img src="zdjecia/wiszhoryhlady/3a.jpg" alt="Zdjęcie z Horyhlad" style="max-width: 100%; border: 1px solid var(--line); padding: 5px; background: white;">
+            <img src="zdjecia/wiszhoryhlady/3a.jpg" alt="Horyhlady" style="max-width: 100%;">
         </div>
 
         <div class="bio-para">
-            Pojechaliśmy do Horyhlad z Markowiec z Tadeuszem Sroczyńskim, doskonałym budowniczym, opracowali plan przerobienia domu, który miał mało ale b. dużych pokoi, a tu trzeba było pomieścić liczną rodzinę.[cite: 4] Dwa pokoje podzieliło się, każdy na trzy ubikacje, jedną przeznaczając na łazienkę.[cite: 4] Z drugiej strony domu, przy korytarzu do spiżarni i kuchni, przybudowany został kredens i łazienka dla państwa domu ze zbiornikiem na wodę i wygódką.[cite: 4] Na wysokim strychu, wycinając okna w dachu, stworzyło się 5 czy 6 pokoików gościnnych dzielonych szalowanymi ścianami.[cite: 4] Schody na górę otwarte w jadalnym pokoju i kanalizację ja zaprojektowałem i zniwelowałem.[cite: 4]
+            Pojechaliśmy do Horyhlad z Markowiec z Tadeuszem Sroczyńskim, doskonałym budowniczym, opracowali plan przerobienia domu, który miał mało ale b. dużych pokoi, a tu trzeba było pomieścić liczną rodzinę. Dwa pokoje podzieliło się, każdy na trzy ubikacje, jedną przeznaczając na łazienkę. Z drugiej strony domu, przy korytarzu do spiżarni i kuchni, przybudowany został kredens i łazienka dla państwa domu ze zbiornikiem na wodę i wygódką. Na wysokim strychu, wycinając okna w dachu, stworzyło się 5 czy 6 pokoików gościnnych dzielonych szalowanymi ścianami. Schody na górę otwarte w jadalnym pokoju i kanalizację ja zaprojektowałem i zniwelowałem.
         </div>
 
         <div class="bio-para">
-            Do tak wygodnie przerobionego domu, przeniosła się cała rodzina z Dżwiniacza i spokojnie tam żyli lat kilkanaście, aż do wybuchu ostatniej wojny.[cite: 4] Panny uczyły się u Niepokalanek, z chłopakami matka mieszkała we Lwowie, w lecie prowadzono letnisko w Horyhladach, sprowadzając miłą rodzinę i gości.[cite: 4]
+            Do tak wygodnie przerobionego domu, przeniosła się cała rodzina z Dżwiniacza i spokojnie tam żyli lat kilkanaście, aż do wybuchu ostatniej wojny. Panny uczyły się u Niepokalanek, z chłopakami matka mieszkała we Lwowie, w lecie prowadzono letnisko w Horyhladach, sprowadzając miłą rodzinę i gości.
         </div>
 
         <div class="inline-photo">
-            <img src="zdjecia/wiszhoryhlady/3b.jpg" alt="Rodzina" style="max-width: 100%; border: 1px solid var(--line); padding: 5px; background: white;">
+            <img src="zdjecia/wiszhoryhlady/3b.jpg" alt="Rodzina" style="max-width: 100%;">
             <span class="caption">na ławce - Krystyna, Dzidzia Weiss, Hania, Wika Weiss, Lidia Petrino, Tereska i za nią Tychna Gryglaszewska<br>na trawie - Staś, Tadzio i Andrzej<br>Lwów 1928</span>
         </div>
 
         <div class="bio-para">
-            Munek dzielnie gospodarował, buraki cukrowe miewał dobre, ale odstawa do Niżniowa była trudna, pszenica często zawodziła, aż gdy się przerzucił na rzepak, zaczął mieć świetne rezultaty, tak że zaczął myśleć o zewnętrznej stronie domu, który miał tylko z frontu dużą oszkloną werandę, a poza tym był bardzo pospolity.[cite: 4] Zdaje się, że w lutym 1939 woziłem do Horyhlad zdolnego studenta architektury .........., który zrobił dużo zdjęć i pomiarów, jak i szkiców przerobienia frontu, ale wojna przeszkodziła ostatecznemu opracowaniu i wykonaniu tych planów.[cite: 4]
+            <img src="zdjecia/wiszhoryhlady/jan1.jpg" title="Jan Wiszniewski" class="img-float-left" alt="Jan Wiszniewski">
+            Jaś ukończył wyższe studia handlowe i zabrał się do pracy. Panny Teresa i Krystyna też skończyły wyższą szkołę handlu zagranicznego, a Mania szkołę hotelarską w Krakowie.
+        </div>
+
+        <div class="bio-para">
+            <img src="zdjecia/wiszhoryhlady/stas1.jpg" title="Stanisław Wiszniewski" class="img-float-right" alt="Stanisław Wiszniewski">
+            Staś poszedł do podchorążówki sanitarnej w Warszawie, którą ukończył przed samą wojną. Tadzio, po praktyce rolniczej u p. Janeckiego, dzierżawcy Grabownicy k/Nowego Miasta w Przemyskim, poszedł na rolnictwo w Poznaniu, a Andrzeja wojna zastała na praktyce gospodarskiej w Perespie u Edmundów Kraińskich.
+        </div>
+
+        <div class="bio-para">
+            W roku 1935 czy 6-tym Jaś ożenił się z Wandą Romaszkan, do której należała część pasażu Mikolasza i jego drogerii, i mieli syna Tomasza.
+        </div>
+
+        <div class="bio-para">
+            <img src="zdjecia/wiszhoryhlady/was1.jpg" title="Józef Wąsowski" class="img-float-left" alt="Józef Wąsowski">
+            Teresa wyszła za swego brata ciotecznego Wąsowskiego. Osiedli pod lasem w Dźwiniaczu, budując sobie domek i zakładając fermę srebrnych lisów. Mieli dwoje dzieci Macieja i Teresę.
+        </div>
+
+        <div class="bio-para">
+            Munek dzielnie gospodarował, buraki cukrowe miewał dobre, ale odstawa do Niżniowa była trudna, pszenica często zawodziła, aż gdy się przerzucił na rzepak, zaczął mieć świetne rezultaty, tak że zaczął myśleć o zewnętrznej stronie domu, który miał tylko z frontu dużą oszkloną werandę, a poza tym był bardzo pospolity.
+        </div>
+
+        <div class="bio-para">
+            Zdaje się, że w lutym 1939 woziłem do Horyhlad zdolnego studenta architektury .........., który zrobił dużo zdjęć i pomiarów, jak i szkiców przerobienia frontu, ale wojna przeszkodziła ostatecznemu opracowaniu i wykonaniu tych planów.
         </div>
 
         <div class="inline-photo">
-            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <div style="text-align: center; flex: 1;">
-                    <img src="zdjecia/wiszhoryhlady/4a.jpg" style="height: 200px; object-fit: cover; border: 1px solid var(--line); padding: 5px; background: white;" alt="Krystyna, Anna i Teresa">
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <div style="text-align: center; flex: 1; min-width: 250px;">
+                    <img src="zdjecia/wiszhoryhlady/4a.jpg" style="height: 250px; width: 100%; object-fit: cover;" alt="Krystyna, Anna i Teresa z domu Wiszniewskie">
                     <span class="caption">Krystyna, Anna i Teresa<br>z domu Wiszniewskie<br>Zabrze 1947</span>
                 </div>
-                <div style="text-align: center; flex: 1;">
-                    <img src="zdjecia/wiszhoryhlady/4b.jpg" style="height: 200px; object-fit: cover; border: 1px solid var(--line); padding: 5px; background: white;" alt="Andrzej, Jan, Tadeusz i Stanisław Wiszniewscy">
+                <div style="text-align: center; flex: 1; min-width: 250px;">
+                    <img src="zdjecia/wiszhoryhlady/4b.jpg" style="height: 250px; width: 100%; object-fit: cover;" alt="Andrzej, Jan, Tadeusz i Stanisław Wiszniewscy">
                     <span class="caption">Andrzej, Jan, Tadeusz i Stanisław Wiszniewscy</span>
                 </div>
-                <div style="text-align: center; flex: 1;">
-                    <img src="zdjecia/wiszhoryhlady/4c.jpg" style="height: 200px; object-fit: cover; border: 1px solid var(--line); padding: 5px; background: white;" alt="Wiszniewscy">
+                <div style="text-align: center; flex: 1; min-width: 250px;">
+                    <img src="zdjecia/wiszhoryhlady/4c.jpg" style="height: 250px; width: 100%; object-fit: cover;" alt="Jan, Tadeusz, Stanisław i Andrzej">
                     <span class="caption">Jan, Tadeusz, Stanisław (&#8595;) i Andrzej<br>z wujem Ludwikiem Zakrzewskim (po lewej) i ojcem Ludwikiem Wiszniewskim (po prawej)<br>Warszawa marzec 1939</span>
                 </div>
             </div>
         </div>
 
         <div class="bio-para">
-            17 września 1939 znalazłem się w Horyhladach z siostrą Andzią i synem Antkiem własnym małym Fiatem 508, którym 09.09. wyjechałem ze Stasiem, Antkiem i Geniem Markiewiczem na wschód przed Niemcami, a ty zaszły nas Sowiety.[cite: 4] W poniedziałek 18.09. próbowaliśmy wracać do Markowiec, ale Niżniów już się palił, a przy moście leżeli ranni.[cite: 4] Wróciliśmy, by oddawszy wiernej służbie co cenniejsze rzeczy w przechowanie, rano 19.09. wyruszyć boczną drogą na Tłumacz.[cite: 4] Fiata ciągnęły konie, bo na stromą ścianę nie mógł wyjechać.[cite: 4] Koło Tłumacza spotkaliśmy uciekających, że bitwa na rynku.[cite: 4] Wobec tego zostawiłem wóz na drodze i tylko z małym tobołkiem i Antkiem, obchodząc Tłumacz bokiem, dostaliśmy się do Czarnołoziec Rylskich, i tam przenocowaliśmy.[cite: 4] Przyszliśmy do Markowiec 20.09. do już zupełnie rozgrabionego domu a rodzina schroniła się na Kosówkę.[cite: 4]
+            17 września 1939 znalazłem się w Horyhladach z siostrą Andzią i synem Antkiem własnym małym Fiatem 508, którym 09.09. wyjechałem ze Stasiem, Antkiem i Geniem Markiewiczem na wschód przed Niemcami, a ty zaszły nas Sowiety. W poniedziałek 18.09. próbowaliśmy wracać do Markowiec, ale Niżniów już się palił, a przy moście leżeli ranni. Wróciliśmy, by oddawszy wiernej służbie co cenniejsze rzeczy w przechowanie, rano 19.09. wyruszyć boczną drogą na Tłumacz. Fiata ciągnęły konie, bo na stromą ścianę nie mógł wyjechać. Koło Tłumacza spotkaliśmy uciekających, że bitwa na rynku. Wobec tego zostawiłem wóz na drodze i tylko z małym tobołkiem i Antkiem, obchodząc Tłumacz bokiem, dostaliśmy się do Czarnołoziec Rylskich, i tam przenocowaliśmy. Przyszliśmy do Markowiec 20.09. do już zupełnie rozgrabionego domu a rodzina schroniła się na Kosówkę.
         </div>
 
         <div class="bio-para">
-            Teresa z Andzią i pannami wróciła do Horyhlad.[cite: 4] Munia zaaresztowano do Tłumacza, potem Stanisławowa, a w końcu na Cherzon, gdzie słuch o nim zaginął.[cite: 4] Pewnie go wykończyli, bo wywołany z celi już nie wrócił.[cite: 4] Teresa z córkami ściągnęła do Lwowa, a w maju 1940 z synową i jej matką do Jabłonki.[cite: 4]
+            Teresa z Andzią i pannami wróciła do Horyhlad. Munia zaaresztowano do Tłumacza, potem Stanisławowa, a w końcu na Cherzon, gdzie słuch o nim zaginął. Pewnie go wykończyli, bo wywołany z celi już nie wrócił. Teresa z córkami ściągnęła do Lwowa, a w maju 1940 z synową i jej matką do Jabłonki.
         </div>
 
-        <section class="descendants">
-            <h2>Losy Następnego Pokolenia</h2>
+        <div class="bio-para">
+            Staś pracował przy rentgenie we Lwowie, potem w Warszawie i Radzyminie, gdzie się ożenił z panną Zasławską, lekarzem, córką lekarza powiatowego, mającą dom i ogród przy stacji w Radzyminie. Po nadejściu Sowietów, Staś wezwany niby to do chorego, powrócił z obozu w Rosji dopiero za trzy lata, zastając trzyletnią córkę, której nie znał 
+            <a href="wiszarch10.html" class="pictogram-link" title="Otwórz dokument">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </a>. Obydwoje pracują jako lekarze, mają trzy córki i syna. Dobrze im się powodzi. Krystyna teraz bawi u nich, pomaga w gospodarstwie i przy dzieciach.
+        </div>
 
-            <div class="child-item">
-                <h3>1. Jan Wiszniewski</h3>
-                <div class="child-layout">
-                    <div class="child-text">
-                        <p>Jaś ukończył wyższe studia handlowe i zabrał się do pracy.[cite: 4] W roku 1935 czy 6-tym Jaś ożenił się z Wandą Romaszkan, do której należała część pasażu Mikolasza i jego drogerii, i mieli syna Tomasza.[cite: 4]</p>
-                        <p>Jaś, jako lotnik, dostał się na zachód 
-                            <a href="wiszarch15.html" class="pictogram-link" title="Otwórz dokument">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                            </a>.[cite: 4] Latał na bombowcu i spadł z nim nad Bremą.[cite: 4] Wdowa troszkę prowadziła sklep w Krakowie, potem szyła, a po wojnie, gdy mogła dostać 15 funtów miesięcznie dla siebie i na wychowanie syna, przedostała się do Londynu.[cite: 4] Tomasz jest na trzecim roku Politechniki w Londynie, a matka jego Wanda, która dorabiała szyciem, pojechała teraz do USA.[cite: 4]</p>
-                    </div>
-                    <div class="child-media">
-                        <div class="child-img-wrapper">
-                            <img src="zdjecia/wiszhoryhlady/jan1.jpg" alt="Jan Wiszniewski">
-                            <span class="child-img-caption">Jan Wiszniewski</span>
-                        </div>
-                        <div class="child-img-wrapper">
-                            <img src="zdjecia/wiszhoryhlady/jan2.jpg" alt="Jan Wiszniewski">
-                            <span class="child-img-caption">Jan Wiszniewski</span>
-                        </div>
-                        <div class="child-img-wrapper">
-                            <img src="zdjecia/wiszhoryhlady/jan3.jpg" alt="Andrzej przy grobie Jana">
-                            <span class="child-img-caption">Andrzej przy grobie Jana, Hanower</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="bio-para">
+            <img src="zdjecia/wiszhoryhlady/jan2.jpg" title="Jan Wiszniewski" class="img-float-left" alt="Jan Wiszniewski">
+            <img src="zdjecia/wiszhoryhlady/jan3.jpg" title="Andrzej przy grobie Jana" class="img-float-right" alt="Andrzej przy grobie Jana, Hanower">
+            Jaś, jako lotnik, dostał się na zachód 
+            <a href="wiszarch15.html" class="pictogram-link" title="Otwórz dokument">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </a>. Latał na bombowcu i spadł z nim nad Bremą. Wdowa troszkę prowadziła sklep w Krakowie, potem szyła, a po wojnie, gdy mogła dostać 15 funtów miesięcznie dla siebie i na wychowanie syna, przedostała się do Londynu. Tomasz jest na trzecim roku Politechniki w Londynie, a matka jego Wanda, która dorabiała szyciem, pojechała teraz do USA.
+        </div>
 
-            <div class="child-item">
-                <h3>2. Teresa i Hania</h3>
-                <div class="child-layout">
-                    <div class="child-text">
-                        <p>Panny Teresa i Krystyna też skończyły wyższą szkołę handlu zagranicznego, a Mania szkołę hotelarską w Krakowie.[cite: 4] Teresa wyszła za swego brata ciotecznego Wąsowskiego.[cite: 4] Osiedli pod lasem w Dźwiniaczu, budując sobie domek i zakładając fermę srebrnych lisów.[cite: 4] Mieli dwoje dzieci Macieja i Teresę.[cite: 4]</p>
-                        <p>Wąsowski, mąż Teresy, dostał się także na zachód, służył w pancernej brygadzie Maczka i przy lądowaniu w Normandii w 1944 roku zginął.[cite: 4] Teresa wychowała dzieci, pracując jako księgowa w Zabrzu w młynarstwie, a potem w młynie w Chorzelowie.[cite: 4] Od roku przeszła na instruktorkę kilimkarstwa w Pińczowie, ale nie mogąc tam dostać odpowiedniego mieszkania, przeniosła się do Rytra i chce znaleźć pracę w objawiającym teraz inicjatywę twórczą powiecie nowosądeckim.[cite: 4]</p>
-                        <p>Hania jej się trzyma (Hania zmarła 06.10.1960r.).[cite: 4] W 1959 kupiły dom w Nowym Sączu ul. Darowskiej 7 - mieszkają tam z matką.[cite: 4] Syn Maciej skończył kursa miernicze, pracuje w kieleckim.[cite: 4] Córka Teresa pracowała w zespole adwokackim.[cite: 4] Wyszła za mąż za Żabińskiego.[cite: 4] Maciej ożenił się w 1964 w Nowym Sączu.[cite: 4]</p>
-                    </div>
-                    <div class="child-media single">
-                        <div class="child-img-wrapper">
-                            <img src="zdjecia/wiszhoryhlady/was1.jpg" alt="Józef Wąsowski">
-                            <span class="child-img-caption">Józef Wąsowski</span>
-                        </div>
-                        <div class="child-img-wrapper">
-                            <img src="zdjecia/wiszhoryhlady/was2.jpg" alt="grób Józefa Wąsowskiego">
-                            <span class="child-img-caption">grób Józefa Wąsowskiego w Jort we Francji</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="bio-para">
+            <img src="zdjecia/wiszhoryhlady/was2.jpg" title="grób Józefa Wąsowskiego" class="img-float-left" alt="grób Józefa Wąsowskiego w Jort we Francji">
+            Wąsowski, mąż Teresy, dostał się także na zachód, służył w pancernej brygadzie Maczka i przy lądowaniu w Normandii w 1944 roku zginął. Teresa wychowała dzieci, pracując jako księgowa w Zabrzu w młynarstwie, a potem w młynie w Chorzelowie. Od roku przeszła na instruktorkę kilimkarstwa w Pińczowie, ale nie mogąc tam dostać odpowiedniego mieszkania, przeniosła się do Rytra i chce znaleźć pracę w objawiającym teraz inicjatywę twórczą powiecie nowosądeckim.
+        </div>
 
-            <div class="child-item">
-                <h3>3. Krystyna</h3>
-                <div class="child-layout">
-                    <div class="child-text">
-                        <p>Krystyna była bardzo cenioną księgową w Mostostalu, potem w Samopomocy Chłopskiej w Tuszowie Narodowym, a teraz bawi w Radzyminie, ma pracę i pomaga Stasiom.[cite: 4]</p>
-                    </div>
-                </div>
-            </div>
+        <div class="bio-para">
+            Hania jej się trzyma (Hania zmarła 06.10.1960r.). W 1959 kupiły dom w Nowym Sączu ul. Darowskiej 7 - mieszkają tam z matką. Syn Maciej skończył kursa miernicze, pracuje w kieleckim. Córka Teresa pracowała w zespole adwokackim. Wyszła za mąż za Żabińskiego. Maciej ożenił się w 1964 w Nowym Sączu.
+        </div>
 
-            <div class="child-item">
-                <h3>4. Stanisław Wiszniewski</h3>
-                <div class="child-layout">
-                    <div class="child-text">
-                        <p>Staś poszedł do podchorążówki sanitarnej w Warszawie, którą ukończył przed samą wojną.[cite: 4] Staś pracował przy rentgenie we Lwowie, potem w Warszawie i Radzyminie, gdzie się ożenił z panną Zasławską, lekarzem, córką lekarza powiatowego, mającą dom i ogród przy stacji w Radzyminie.[cite: 4]</p>
-                        <p>Po nadejściu Sowietów, Staś wezwany niby to do chorego, powrócił z obozu w Rosji dopiero za trzy lata, zastając trzyletnią córkę, której nie znał 
-                            <a href="wiszarch10.html" class="pictogram-link" title="Otwórz dokument">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                            </a>.[cite: 4] Obydwoje pracują jako lekarze, mają trzy córki i syna.[cite: 4] Dobrze im się powodzi.[cite: 4] Krystyna teraz bawi u nich, pomaga w gospodarstwie i przy dzieciach.[cite: 4]</p>
-                    </div>
-                    <div class="child-media single">
-                        <div class="child-img-wrapper">
-                            <img src="zdjecia/wiszhoryhlady/stas1.jpg" alt="Stanisław Wiszniewski">
-                            <span class="child-img-caption">Stanisław Wiszniewski</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="bio-para">
+            Krystyna była bardzo cenioną księgową w Mostostalu, potem w Samopomocy Chłopskiej w Tuszowie Narodowym, a teraz bawi w Radzyminie, ma pracę i pomaga Stasiom.
+        </div>
 
-            <div class="child-item">
-                <h3>5. Tadeusz Wiszniewski</h3>
-                <div class="child-layout">
-                    <div class="child-text">
-                        <p>Tadzio, po praktyce rolniczej u p. Janeckiego, dzierżawcy Grabownicy k/Nowego Miasta w Przemyskim, poszedł na rolnictwo w Poznaniu...[cite: 4] Tadeusz 
-                            <a href="pdfy/Wspomnienia_Tadeusza_Wiszniewskiego_pl.pdf" class="pictogram-link" title="Zobacz PDF: Wspomnienia" target="_blank">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M9 15v-6h2.5a1.5 1.5 0 0 1 0 3H9"></path></svg>
-                            </a> 
-                        zabrał się do gospodarowania w Ligenschafcie i był dobrym administratorem koło Białej Rawskiej, a matka mu w domu gospodarowała.[cite: 4]</p>
-                        <p>Aresztowany z powodu jakiejś wsypy, dostał się do obozu w Oświęcimiu, a potem w Buchenwaldzie skąd pędzony w szeregach, gdzie ciągle kogoś strzelano, w rów uciekł, w jakiejś dziurze przesiedział, dostał cywilne ubranie i umieścił się w tłumie witających Amerykanów.[cite: 4] Odratowany i odżywiony dostał się do Anglii do szkoły rolniczej i tak dobrze ją ukończył, że go posunięto na studium rolnicze trzyletnie do Cambridge, po którego ukończeniu zrobił kontrakt paruletni na Złote Wybrzeże, gdzie uczył murzynów gospodarować.[cite: 4]</p>
-                        <p>Na półrocznym urlopie wypoczynkowym w Europie, pojechał z bratankiem Tomaszem na narty do Szwajcarii.[cite: 4] Poznał się tam z wdową Gordon z domu Fellone /przypis – Rosamond Daisy Fellowes 1v. Gladstone/ i z nią się zaręczył, a potem mimo niechęci jej matki, księżnej francuskiej ożenił się i zabrał ją do Afryki.[cite: 4] Na urodzenie córki wróciła do Europy, oddała ją pod opiekę swej siostry, żony dyplomaty w Danii i do końca kontraktu była z Tadziem na Złotym wybrzeżu.[cite: 4] Po ostatnim urlopie, pojechali już z córką do Kanady, gdzie kupili sobie farmę 120 akrów z domem, laskiem i jeziorkiem, 50 km od Toronto, koło Neumarket.[cite: 4] On dojeżdża autem do Toronto, gdzie z inż. Łępickim, ożenionym n jego kuzynką Zakrzewską, budują jednorodzinne domy w ogrodach i sprzedając je dobrze zarabiają.[cite: 4]</p>
-                        <p>W lipcu 1957 matka poleciała z Hanią ich odwiedzić.[cite: 4] Zabawiły trzy miesiące, bardzo im się tam podobało i dobrze było.[cite: 4] Wróciły przez Montreal (2 godziny) by naszą Marynkę Życką i jej dwoje dzieci odwiedzić.[cite: 4] W londynie zabawiły cztery dni oglądając Wandę, Tomasza i Edmundów Kraińskich, którzy właśnie tam byli u syna Jurka.[cite: 4]</p>
-                    </div>
-                    <div class="child-media">
-                        <div class="child-img-wrapper">
-                            <img src="zdjecia/wiszhoryhlady/tad0.jpg" alt="Tadeusz Wiszniewski">
-                            <span class="child-img-caption">Tadeusz Wiszniewski</span>
-                        </div>
-                        <div class="child-img-wrapper">
-                            <img src="zdjecia/wiszhoryhlady/tad1.jpg" alt="Tadeusz w KL Auschwitz - Oświęcim">
-                            <span class="child-img-caption">Tadeusz w KL Auschwitz - Oświęcim</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="bio-para">
+            <img src="zdjecia/wiszhoryhlady/tad0.jpg" title="Tadeusz Wiszniewski" class="img-float-left" alt="Tadeusz Wiszniewski">
+            <img src="zdjecia/wiszhoryhlady/tad1.jpg" title="Tadeusz w KL Auschwitz" class="img-float-right" alt="Tadeusz w KL Auschwitz - Oświęcim">
+            Tadeusz 
+            <a href="pdfy/Wspomnienia_Tadeusza_Wiszniewskiego_pl.pdf" class="pictogram-link" title="Pobierz PDF: Nota biograficzna" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M9 15v-6h2.5a1.5 1.5 0 0 1 0 3H9"></path></svg>
+            </a> 
+            zabrał się do gospodarowania w Ligenschafcie i był dobrym administratorem koło Białej Rawskiej, a matka mu w domu gospodarowała. Aresztowany z powodu jakiejś wsypy, dostał się do obozu w Oświęcimiu, a potem w Buchenwaldzie skąd pędzony w szeregach, gdzie ciągle kogoś strzelano, w rów uciekł, w jakiejś dziurze przesiedział, dostał cywilne ubranie i umieścił się w tłumie witających Amerykanów. Odratowany i odżywiony dostał się do Anglii do szkoły rolniczej i tak dobrze ją ukończył, że go posunięto na studium rolnicze trzyletnie do Cambridge, po którego ukończeniu zrobił kontrakt paruletni na Złote Wybrzeże, gdzie uczył murzynów gospodarować. Na półrocznym urlopie wypoczynkowym w Europie, pojechał z bratankiem Tomaszem na narty do Szwajcarii. Poznał się tam z wdową Gordon z domu Fellone /przypis – Rosamond Daisy Fellowes 1v. Gladstone/ i z nią się zaręczył, a potem mimo niechęci jej matki, księżnej francuskiej ożenił się i zabrał ją do Afryki. Na urodzenie córki wróciła do Europy, oddała ją pod opiekę swej siostry, żony dyplomaty w Danii i do końca kontraktu była z Tadziem na Złotym wybrzeżu. Po ostatnim urlopie, pojechali już z córką do Kanady, gdzie kupili sobie farmę 120 akrów z domem, laskiem i jeziorkiem, 50 km od Toronto, koło Neumarket. On dojeżdża autem do Toronto, gdzie z inż. Łępickim, ożenionym n jego kuzynką Zakrzewską, budują jednorodzinne domy w ogrodach i sprzedając je dobrze zarabiają.
+        </div>
 
-            <div class="child-item">
-                <h3>6. Andrzej Wiszniewski</h3>
-                <div class="child-layout">
-                    <div class="child-text">
-                        <p>Andrzeja wojna zastała na praktyce gospodarskiej w Perespie u Edmundów Kraińskich.[cite: 4] Andrzej w czasie okupacji pomagał w gospodarstwie w Zameczku Drużbackim (ona kuzynka – Marylka Konopczanka z Modlnicy).[cite: 4] Potem u wuja Zakrzewskiego (Araba) koło Grójca, a po 1945 osiadł z matką w Zabrzu (pracując) najprzód przy cukierkach, potem przy mięsie w końcu skończył wyższe studium handlowe w Krakowie 
-                            <a href="wiszarch12.html" class="pictogram-link" title="Otwórz dokument">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                            </a> i ma posadę w planowaniu na kopalni węgla Wirek.[cite: 4]</p>
-                        <p>Ożenił się z b. miłą Heleną (nazywają ją Hania) Dudziak, która pracowała w mleczarstwie w Gliwicach.[cite: 4] Mają syna i córkę.[cite: 4] Domem im się zajmuje jej matka, a od powrotu z Kanady mieszka tam i Teresa.[cite: 4]</p>
-                    </div>
-                    <div class="child-media">
-                        <div class="child-img-wrapper">
-                            <img src="zdjecia/wiszhoryhlady/andrz1.jpg" alt="Jędruś">
-                            <span class="child-img-caption">Andrzej (Jędruś)</span>
-                        </div>
-                        <div class="child-img-wrapper">
-                            <img src="zdjecia/wiszhoryhlady/arab1.jpg" alt="Ludwik Zakrzewski zw. Arabem">
-                            <span class="child-img-caption">Ludwik Zakrzewski zw. Arabem</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="bio-para">
+            W lipcu 1957 matka poleciała z Hanią ich odwiedzić. Zabawiły trzy miesiące, bardzo im się tam podobało i dobrze było. Wróciły przez Montreal (2 godziny) by naszą Marynkę Życką i jej dwoje dzieci odwiedzić. W londynie zabawiły cztery dni oglądając Wandę, Tomasza i Edmundów Kraińskich, którzy właśnie tam byli u syna Jurka.
+        </div>
+
+        <div class="bio-para">
+            <img src="zdjecia/wiszhoryhlady/andrz1.jpg" title="Jędruś" class="img-float-left" alt="Jędruś">
+            <img src="zdjecia/wiszhoryhlady/arab1.jpg" title="Ludwik Zakrzewski zw. Arabem" class="img-float-right" alt="Ludwik Zakrzewski zw. Arabem">
+            Andrzej w czasie okupacji pomagał w gospodarstwie w Zameczku Drużbackim (ona kuzynka – Marylka Konopczanka z Modlnicy). Potem u wuja Zakrzewskiego (Araba) koło Grójca, a po 1945 osiadł z matką w Zabrzu (pracując) najprzód przy cukierkach, potem przy mięsie w końcu skończył wyższe studium handlowe w Krakowie 
+            <a href="wiszarch12.html" class="pictogram-link" title="Otwórz dokument">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </a> 
+            i ma posadę w planowaniu na kopalni węgla Wirek. Ożenił się z b. miłą Heleną (nazywają ją Hania) Dudziak, która pracowała w mleczarstwie w Gliwicach. Mają syna i córkę. Domem im się zajmuje jej matka, a od powrotu z Kanady mieszka tam i Teresa.
+        </div>
 
         <div class="note-box">
             <strong>Uzupełnienie.</strong><br><br>
-            <img src="zdjecia/wiszhoryhlady/5.jpg" title="Teresa z Kraińskich Wiszniewska" style="float: left; margin: 0 15px 5px 0; height: 114px; border: 1px solid var(--line); padding: 5px; background: white;" alt="Teresa z Kraińskich Wiszniewska">
-            3 maja 1965 zmarła w Nowym Sączu, na kuracji w tamtejszym szpitalu, Teresa z Kraińskich Wiszniewska, najmłodsza moja siostra, ur. 15.10.1888r.[cite: 4] Na jej pogrzebie 05.05.65r. byłem, dostawszy wiadomość telefoniczną w Okocimiu od Z. Włodkowej, gdyż byłem w jej sprawach.[cite: 4] Na pogrzebie byli synowie: dr. Stanisław, Tadzio, który właśnie przyjechał odwiedzić matkę z Kanady i jeszcze z nią porozmawiał, Andrzej z żoną, córka Teresa Wąsowska, jej syn z żoną, z którymi matka mieszkała, i jej córka Teresa Żabińska z mężem ze Śląska.[cite: 4] Kola Janiszewska i jej córka Teresa bawiąca u Niepokalanek w internacie.[cite: 4] Byszewscy z Lipinek i trochę znajomych z Nowego Sącza.[cite: 4] 06.05. byłem na mszy św. za zmarłą w Klasztorze.[cite: 4]<br><br>
-            09.05.65r. zmarł nagle dr. Stanisław w Radzyminie.[cite: 4]
+            <img src="zdjecia/wiszhoryhlady/5.jpg" title="Teresa z Kraińskich Wiszniewska" class="img-float-left" style="height: 114px;" alt="Teresa z Kraińskich Wiszniewska">
+            3 maja 1965 zmarła w Nowym Sączu, na kuracji w tamtejszym szpitalu, Teresa z Kraińskich Wiszniewska, najmłodsza moja siostra, ur. 15.10.1888r. Na jej pogrzebie 05.05.65r. byłem, dostawszy wiadomość telefoniczną w Okocimiu od Z. Włodkowej, gdyż byłem w jej sprawach. Na pogrzebie byli synowie: dr. Stanisław, Tadzio, który właśnie przyjechał odwiedzić matkę z Kanady i jeszcze z nią porozmawiał, Andrzej z żoną, córka Teresa Wąsowska, jej syn z żoną, z którymi matka mieszkała, i jej córka Teresa Żabińska z mężem ze Śląska. Kola Janiszewska i jej córka Teresa bawiąca u Niepokalanek w internacie. Byszewscy z Lipinek i trochę znajomych z Nowego Sącza. 06.05. byłem na mszy św. za zmarłą w Klasztorze.<br><br>
+            09.05.65r. zmarł nagle dr. Stanisław w Radzyminie.
         </div>
 
         <div class="note-box">
             <strong>Fragment listu Antoniego Kraińskiego do Andrzeja Wiszniewskiego.</strong><br>
-            Warszawa 3 V 71<br>
-            Kochany Andrzeju!... Prosisz o wiadomości o swoim Dziadku – nie wiele ich mam, ale co wiem to napiszę.[cite: 4] Więcej powinny mieć Twoje kuzynki Rappe-Żurowska i Byszewska, więc spróbuj z nich co potrafisz wyciągnąć.[cite: 4] ... Serdeczności AK[cite: 4]<br><br>
-            L. Wiszniewski - zdaje mi się imię Leonard.[cite: 4] W Galicji pisał się czas jakiś Wiśniewski dla ukrycia się.[cite: 4] Po powstaniu 1863r. przedostał się przez Rumunię do Drohobycza i wkrótce wyrobił sobie tam poważne stanowisko.[cite: 4] Dobrze i bardzo uczciwie, a przy tym szczęśliwie prowadząc interesa naftowe ludzkie, a potem swoje.[cite: 4] Ożenił się z panną Zakrzewską szczegółów nie znam, miał z nią 3 czy 4 córki, wszystkie zamężne, i dwóch synów, którzy byli w szybie naftowym podczas wybuchu gazów.[cite: 4] Jeden zmarł, a Waszego Ojca poparzonego utrzymano przy życiu.[cite: 4] Zostały mu tylko blizny na twarzy z przeszczepów skóry.[cite: 4]<br><br>
-            Dziadek twój był Marszałkiem powiatowym w Drohobyczu, - przyjaźnił się z tamtejszym Księdzem Dziekanem.[cite: 4] Około 1900 r. tyle majątku się dorobił, że kupił dla Twego Ojca Horychlady i Ostre i doskonale je zagospodarował - dał zrobić wodociągi i założył piękny sad karłowy i wszystkie budynki gospodarskie doprowadził do porządku.[cite: 4] Twój Ojciec studiował prawo we Lwowie, ale potem we Wrocławiu i Lipsku rolnictwo.[cite: 4] Koło 1906r. objął gospodarstwo a 15 II 1908 r. ożenił się.[cite: 4]<br><br>
-            Pan Leonard kupił potem doskonały majątek w sokalskim - Świtarzów i osadził tam najmłodszą swoją córkę Augustynowiczową później Wiktorową.[cite: 4] Gdy go jednak jakiś adwokat z Krakowa, zdaje się Hofmokl-Ostrowski wprowadził w trudności finansowe - sprzedając mu jako las wycięte piaski między Rudnikiem a Tarnobrzegiem - musiał Świtarzów sprzedać.[cite: 4] Wszystkie zobowiązania finansowe sam uregulował.[cite: 4] W Drohobyczu i Lwowie znany był z solidności finansowej tak że przyjmowano w bankach weksle z jednym jego podpisem.[cite: 4]<br><br>
-            Dużo więcej wiadomości nie mam, bo z Twoim Ojcem o tych sprawach nie mówiliśmy, a wprawdzie Twoja Babka przebywała z Wami między 1915-17r. w Niebocku, to o tych sprawach rodzinnych nie rozmawialiśmy.[cite: 4] Gdy w tym czasie mój Ojciec uzupełniał posagi swoich córek i kupił na spółkę z Twoją Matką Dźwiniacz Dolny, koło Ustrzyk - Matka Twoja z Wami tam zamieszkała.[cite: 4]<br><br>
-            W 1923 r. sprawy powojenne w Horychladach się ułożyły - Twój Ojciec, Roman Żurowski, Tadeusz Sroczyński i ja pojechaliśmy tam.[cite: 4] Wtedy to powstał projekt uzupełnienia i przebudowy domu.[cite: 4] Ja projektowałem część wodociągową i kanalizacyjną, która zdaje się do końca dobrze działała.[cite: 4] Zaprojektowałem podział 2-ch ogromnych pokoi na 5 mniejszych i łazienkę, którą Ty jako dziecko używałeś.[cite: 4] Sroczyński zaprojektował pokoje strychowe i dał doskonałego majstra z Jarosławia, który wszystkie ścianki działowe zrobił z żerdzi obijanych słomą maczaną w glinie.[cite: 4] Jeszcze raz byłem w Horychladach zdaje się 1937 r. czy 8 r. z studentem architektury we Lwowie - nazywał się Taboncourte - celem zaprojektowania zewnętrznej formy domu, ale na to już czasu brakło ...[cite: 4]
+            Warszawa 3 V 71<br><br>
+            Kochany Andrzeju!... Prosisz o wiadomości o swoim Dziadku – nie wiele ich mam, ale co wiem to napiszę. Więcej powinny mieć Twoje kuzynki Rappe-Żurowska i Byszewska, więc spróbuj z nich co potrafisz wyciągnąć. ... Serdeczności AK<br><br>
+            L. Wiszniewski - zdaje mi się imię Leonard. W Galicji pisał się czas jakiś Wiśniewski dla ukrycia się. Po powstaniu 1863r. przedostał się przez Rumunię do Drohobycza i wkrótce wyrobił sobie tam poważne stanowisko. Dobrze i bardzo uczciwie, a przy tym szczęśliwie prowadząc interesa naftowe ludzkie, a potem swoje.<br><br>
+            Ożenił się z panną Zakrzewską szczegółów nie znam, miał z nią 3 czy 4 córki, wszystkie zamężne, i dwóch synów, którzy byli w szybie naftowym podczas wybuchu gazów. Jeden zmarł, a Waszego Ojca poparzonego utrzymano przy życiu. Zostały mu tylko blizny na twarzy z przeszczepów skóry.<br><br>
+            Dziadek twój był Marszałkiem powiatowym w Drohobyczu, - przyjaźnił się z tamtejszym Księdzem Dziekanem. Około 1900 r. tyle majątku się dorobił, że kupił dla Twego Ojca Horychlady i Ostre i doskonale je zagospodarował - dał zrobić wodociągi i założył piękny sad karłowy i wszystkie budynki gospodarskie doprowadził do porządku. Twój Ojciec studiował prawo we Lwowie, ale potem we Wrocławiu i Lipsku rolnictwo. Koło 1906r. objął gospodarstwo a 15 II 1908 r. ożenił się.<br><br>
+            Pan Leonard kupił potem doskonały majątek w sokalskim - Świtarzów i osadził tam najmłodszą swoją córkę Augustynowiczową później Wiktorową. Gdy go jednak jakiś adwokat z Krakowa, zdaje się Hofmokl-Ostrowski wprowadził w trudności finansowe - sprzedając mu jako las wycięte piaski między Rudnikiem a Tarnobrzegiem - musiał Świtarzów sprzedać. Wszystkie zobowiązania finansowe sam uregulował. W Drohobyczu i Lwowie znany był z solidności finansowej tak że przyjmowano w bankach weksle z jednym jego podpisem.<br><br>
+            Dużo więcej wiadomości nie mam, bo z Twoim Ojcem o tych sprawach nie mówiliśmy, a wprawdzie Twoja Babka przebywała z Wami między 1915-17r. w Niebocku, to o tych sprawach rodzinnych nie rozmawialiśmy. Gdy w tym czasie mój Ojciec uzupełniał posagi swoich córek i kupił na spółkę z Twoją Matką Dźwiniacz Dolny, koło Ustrzyk - Matka Twoja z Wami tam zamieszkała.<br><br>
+            W 1923 r. sprawy powojenne w Horychladach się ułożyły - Twój Ojciec, Roman Żurowski, Tadeusz Sroczyński i ja pojechaliśmy tam. Wtedy to powstał projekt uzupełnienia i przebudowy domu. Ja projektowałem część wodociągową i kanalizacyjną, która zdaje się do końca dobrze działała. Zaprojektowałem podział 2-ch ogromnych pokoi na 5 mniejszych i łazienkę, którą Ty jako dziecko używałeś. Sroczyński zaprojektował pokoje strychowe i dał doskonałego majstra z Jarosławia, który wszystkie ścianki działowe zrobił z żerdzi obijanych słomą maczaną w glinie. Jeszcze raz byłem w Horychladach zdaje się 1937 r. czy 8 r. z studentem architektury we Lwowie - nazywał się Taboncourte - celem zaprojektowania zewnętrznej formy domu, ale na to już czasu brakło ...
         </div>
 
-        <section class="podcast-box">
+        <div class="podcast-box">
             <div class="podcast-info">
-                <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); margin-bottom: 10px;">Nagranie Audio</h4>
-                <p style="font-size: 0.95rem; margin-bottom: 5px; color: var(--ink);"><strong>Rody i rodziny Mazowsza: Wiszniewscy z Horyhlad nad Dniestrem</strong>[cite: 4]</p>
-                <p style="font-size: 0.85rem; color: var(--sepia); margin-bottom: 10px;">red. Piotr Łoś, 16.05.2020r., Radio dla Ciebie 
+                <h4>Nagranie Audio</h4>
+                <p><strong>Rody i rodziny Mazowsza: Wiszniewscy z Horyhlad nad Dniestrem</strong></p>
+                <p style="font-size: 0.85rem; color: var(--sepia);">
+                    red. Piotr Łoś, 16.05.2020r., Radio dla Ciebie 
                     <a href="https://www.rdc.pl/podcast/rody-i-rodziny-mazowsza_ggLWmcihBmWFwcvhfAos?episode=6bNDBw0DQh8oGTy72XlH" target="_blank" class="pictogram-link" title="Odsłuchaj podcast w portalu RDC">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
