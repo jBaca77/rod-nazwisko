@@ -2,125 +2,287 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Drzewo Klanowe | Archiwum L&K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
     <style>
         :root {
             --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; 
-            --gold-light: #c8a96e; --line: #b09a7e;
+            --ink: #1e1a14; --gold: #9b7d4a; --gold-light: #c8a96e; 
+            --sepia: #7a6548; --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; 
+            --line: rgba(122, 101, 72, 0.2);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Jost', sans-serif; background-color: var(--warm-white); color: var(--ink); line-height: 1.5; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; }
 
-        nav { background-color: var(--ink); padding: 15px 24px; color: var(--gold-light); font-family: 'Cormorant Garamond', serif; letter-spacing: 2px; }
-        main { padding: 40px 20px; }
+        /* ── NAV ── */
+        nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        .nav-inner { 
+            max-width: 1200px; margin: 0 auto; display: flex; 
+            align-items: center; justify-content: space-between; 
+            padding: 16px 24px; 
+        }
+        
+        .nav-logo { 
+            font-family: 'Cormorant Garamond', serif; color: var(--gold-light); 
+            text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; font-weight: 400;
+            border-right: 1px solid rgba(200, 169, 110, 0.3); padding-right: 20px;
+        }
 
-        .tree-viewport {
-            width: 100%; height: 80vh;
+        .nav-back-link {
+            display: flex; align-items: center; gap: 8px; color: var(--gold-light);
+            text-decoration: none; font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 2px; transition: 0.3s;
+        }
+        .nav-back-link:hover { color: var(--cream); }
+
+        /* ── MAIN CONTENT ── */
+        main { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+        
+        .intro-section { text-align: center; margin-bottom: 50px; }
+        .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); display: block; margin-bottom: 15px; }
+        .intro-section h1 { 
+            font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 3.8rem); 
+            font-weight: 300; margin-bottom: 25px; color: var(--ink);
+        }
+        .intro-description { 
+            max-width: 700px; margin: 0 auto; font-family: 'Cormorant Garamond', serif; 
+            font-style: italic; font-size: 1.3rem; color: var(--sepia); line-height: 1.6;
+        }
+        .intro-author { 
+            display: block; font-size: 0.9rem; text-transform: uppercase; 
+            letter-spacing: 1px; color: var(--sepia-light); margin-top: 10px; 
+        }
+        .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 30px auto; opacity: 0.6; }
+
+        /* ── KONTENER DRZEWA ── */
+        .tree-container {
             background: var(--cream);
-            overflow: auto;
-            border: 1px solid var(--sepia);
-            padding: 50px;
-            display: flex;
-            align-items: center;
-        }
-
-        /* STRUKTURA DRZEWA */
-        .css-tree ul {
-            display: flex;
-            flex-direction: column;
-            list-style: none;
-            padding-left: 30px;
-        }
-        .css-tree li {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
+            border: 1px solid var(--sepia-pale);
+            padding: 12px;
+            box-shadow: 0 15px 45px rgba(122, 101, 72, 0.08);
             position: relative;
+            margin-bottom: 20px;
         }
-        /* Poziome linie do osoby */
-        .css-tree li::before {
-            content: ''; position: absolute; left: -30px; top: 50%;
-            width: 30px; height: 1px; background: var(--line);
+        .tree-container::after {
+            content: ""; position: absolute; inset: 8px;
+            border: 1px solid var(--line); pointer-events: none;
         }
-        /* Pionowa linia łącząca rodzeństwo */
-        .css-tree ul::before {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-            width: 1px; background: var(--line);
-        }
-        /* Pierwsza i ostatnia linia dziecka */
-        .css-tree li:first-child { margin-top: 0; }
-        .css-tree li:last-child { margin-bottom: 0; }
 
-        .node {
-            background: var(--warm-white);
-            border: 1px solid var(--sepia);
-            border-left: 4px solid var(--gold);
-            padding: 12px 15px;
-            min-width: 200px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        .viewer-box {
+            position: relative;
+            height: 75vh;
+            width: 100%;
+            background: #525659;
+            z-index: 1;
+            overflow: auto; 
+            border-radius: 2px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            cursor: grab;
+            touch-action: none; /* Wyłączamy domyślne gesty przeglądarki, by obsłużyć je w JS */
         }
-        .node strong { display: block; color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; }
-        .node .dates { font-size: 0.75rem; color: var(--ink-light); }
-        .node .marriage { font-size: 0.75rem; color: var(--sepia); border-top: 1px solid #eee; margin-top: 5px; padding-top: 5px; }
+        .viewer-box:active { cursor: grabbing; }
+
+        #pdf-canvas {
+            display: block;
+            margin: 0;
+            transform-origin: top left;
+        }
+
+        /* ── NOWA SEKCJA STEROWANIA POD RAMKĄ ── */
+        .control-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            background: var(--parchment);
+            padding: 15px;
+            border: 1px solid var(--sepia-pale);
+        }
+
+        .zoom-btn {
+            background: var(--ink);
+            color: var(--gold-light);
+            border: 1px solid var(--gold);
+            width: 50px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        .zoom-btn:hover { background: var(--gold); color: white; }
+        
+        .zoom-info {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--sepia);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* ── PRZYCISK POBIERANIA ── */
+        .action-area { text-align: center; padding-bottom: 40px; }
+        .btn-download {
+            display: inline-flex; align-items: center; padding: 16px 32px;
+            background-color: var(--ink); color: var(--gold-light);
+            text-decoration: none; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 2px; transition: all 0.4s; border: 1px solid var(--ink);
+        }
+        .btn-download:hover {
+            background-color: var(--gold); color: var(--cream); border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+        .btn-download svg { margin-right: 12px; }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.75rem; letter-spacing: 1px; }
 
         @media (max-width: 768px) {
-            .tree-viewport { padding: 10px; }
-            .node { min-width: 150px; }
+            .viewer-box { height: 60vh; }
         }
     </style>
 </head>
 <body>
 
-<nav>ARCHIWUM L&K</nav>
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+        <a href="genealogia.html" class="nav-back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Wstecz
+        </a>
+    </div>
+</nav>
 
 <main>
-    <h1 style="text-align:center; font-family: 'Cormorant Garamond', serif; margin-bottom: 30px;">Drzewo Klanowe</h1>
+    <section class="intro-section">
+        <span class="s-label">Księgi i Rodowody</span>
+        <h1>Drzewo Klanowe</h1>
+        <p class="intro-description">
+            „Rodzina to nie tylko krew. To pamięć o tych, którzy byli przed nami, i fundament dla tych, którzy przyjdą po nas.”
+            <span class="intro-author">Autor Nieznany</span>
+        </p>
+        <div class="s-line"></div>
+    </section>
     
-    <div class="tree-viewport" id="treeViewport">
-        <div class="css-tree" id="tree-render-area">
-            Wczytywanie danych...
+    <div class="tree-container">
+        <div class="viewer-box" id="viewer-container">
+            <canvas id="pdf-canvas"></canvas>
         </div>
+    </div>
+
+    <div class="control-bar">
+        <button class="zoom-btn" onclick="changeZoom(-0.25)" title="Pomniejsz">−</button>
+        <div class="zoom-info" id="zoom-percent">120%</div>
+        <button class="zoom-btn" onclick="changeZoom(0.25)" title="Powiększ">+</button>
+    </div>
+
+    <div class="action-area">
+        <a href="../img/Dokumenty/drzewo_kol_20_08_2024.pdf" download class="btn-download">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Pobierz pełne drzewo (PDF)
+        </a>
     </div>
 </main>
 
+<footer>
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
+</footer>
+
 <script>
-    function generateNodeHTML(person) {
-        let html = `<li><div class="node">`;
-        html += `<strong>${person.name}</strong>`;
-        if (person.dates) html += `<span class="dates">${person.dates}</span>`;
-        if (person.marriage) html += `<span class="marriage">⚭ ${person.marriage}</span>`;
-        html += `</div>`;
-        
-        if (person.children && person.children.length > 0) {
-            html += `<ul>`;
-            person.children.forEach(child => html += generateNodeHTML(child));
-            html += `</ul>`;
-        }
-        html += `</li>`;
-        return html;
+    const url = '../img/Dokumenty/drzewo_kol_20_08_2024.pdf';
+    let pdfDoc = null, scale = 1.2, canvas = document.getElementById('pdf-canvas'), ctx = canvas.getContext('2d'), container = document.getElementById('viewer-container');
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    function renderPage() {
+        pdfDoc.getPage(1).then(page => {
+            const viewport = page.getViewport({ scale: scale });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            page.render({ canvasContext: ctx, viewport: viewport });
+            document.getElementById('zoom-percent').innerText = Math.round(scale * 100) + "%";
+        });
     }
 
-    async function loadTreeData() {
-        const container = document.getElementById('tree-render-area');
-        try {
-            const response = await fetch('drzewo.json?t=' + Date.now());
-            if (!response.ok) throw new Error('Brak danych');
-            const data = await response.json();
-            const rootData = Array.isArray(data) ? data[0] : data;
-            
-            container.innerHTML = `<ul>${generateNodeHTML(rootData)}</ul>`;
-        } catch (err) {
-            container.innerHTML = "Błąd wczytywania.";
-            console.error(err);
-        }
+    function changeZoom(delta) {
+        scale = Math.min(Math.max(scale + delta, 0.3), 4);
+        renderPage();
     }
 
-    window.onload = loadTreeData;
+    pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+        pdfDoc = pdfDoc_;
+        renderPage();
+    });
+
+    // --- STEROWANIE MYSZKĄ (Panning) ---
+    let isMouseDown = false, startX, startY, scrollLeft, scrollTop;
+    container.onmousedown = (e) => {
+        isMouseDown = true;
+        startX = e.pageX - container.offsetLeft; startY = e.pageY - container.offsetTop;
+        scrollLeft = container.scrollLeft; scrollTop = container.scrollTop;
+    };
+    window.onmouseup = () => isMouseDown = false;
+    container.onmousemove = (e) => {
+        if (!isMouseDown) return;
+        e.preventDefault();
+        container.scrollLeft = scrollLeft - (e.pageX - container.offsetLeft - startX) * 1.5;
+        container.scrollTop = scrollTop - (e.pageY - container.offsetTop - startY) * 1.5;
+    };
+
+    // --- STEROWANIE KÓŁKIEM (Ctrl + Scroll) ---
+    container.addEventListener('wheel', (e) => {
+        if (e.ctrlKey) {
+            e.preventDefault();
+            changeZoom(e.deltaY > 0 ? -0.1 : 0.1);
+        }
+    }, { passive: false });
+
+    // --- STEROWANIE DOTYKIEM (Gesty & Pinch-to-zoom) ---
+    let initialDist = null;
+    container.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+            startX = e.touches[0].pageX - container.offsetLeft;
+            startY = e.touches[0].pageY - container.offsetTop;
+            scrollLeft = container.scrollLeft;
+            scrollTop = container.scrollTop;
+        } else if (e.touches.length === 2) {
+            initialDist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+        }
+    }, { passive: false });
+
+    container.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1) {
+            const x = e.touches[0].pageX - container.offsetLeft;
+            const y = e.touches[0].pageY - container.offsetTop;
+            container.scrollLeft = scrollLeft - (x - startX);
+            container.scrollTop = scrollTop - (y - startY);
+        } else if (e.touches.length === 2 && initialDist) {
+            e.preventDefault();
+            const currentDist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+            const diff = currentDist / initialDist;
+            if (Math.abs(diff - 1) > 0.05) { // Próg czułości
+                changeZoom(diff > 1 ? 0.05 : -0.05);
+                initialDist = currentDist;
+            }
+        }
+    }, { passive: false });
 </script>
 
 </body>
