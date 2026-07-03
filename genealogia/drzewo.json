@@ -1,0 +1,425 @@
+{
+  "name": "Klan Ładomirskich i Kraińskich",
+  "isRoot": true,
+  "children": [
+    {
+      "name": "Seweryna Domańska",
+      "dates": "*1875 †1943",
+      "marriage": "Feliks Domański *1868 †1939",
+      "children": [
+        {
+          "name": "Stanisław Konstanty Domański",
+          "dates": "*1899 †1959",
+          "marriage": "Anna Katarzyna Józefa Gawlińska *1896 †1952",
+          "children": [
+            {
+              "name": "Krystyna Henryka Domańska",
+              "dates": "*1924 †1945"
+            },
+            {
+              "name": "Andrzej Feliks Domański",
+              "dates": "*1926 †1979",
+              "marriage": "Maria Chłodnicka *1928 †1998",
+              "children": [
+                {
+                  "name": "Tomasz Domański",
+                  "dates": "*1954",
+                  "marriage": "Renata Spieszny *1955",
+                  "children": [
+                    {
+                      "name": "Andrzej Jan Domański",
+                      "dates": "*1981",
+                      "marriage": "Anna Szymaniak *1980",
+                      "children": [
+                        {
+                          "name": "Weronika Domańska",
+                          "dates": "*2020"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Stanisław Kazimierz Domański",
+                      "dates": "*1983",
+                      "marriage": "Agata Maria Szewczyk *1986",
+                      "children": [
+                        {
+                          "name": "Krzysztof Domański",
+                          "dates": "*2013"
+                        },
+                        {
+                          "name": "Barbara Domańska",
+                          "dates": "*2016"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Jadwiga Beata Frąckiewicz",
+          "dates": "*1930 †2002",
+          "marriage": "Zygmunt Leon Frąckiewicz *1924 †2003",
+          "children": [
+            {
+              "name": "Anna Małgorzata Jachner - Miśkiewicz",
+              "dates": "*1956",
+              "marriage": "1m. Andrzej Krzysztof Jachner *1956, 2m. Paweł Miśkiewicz *1963",
+              "children": [
+                {
+                  "name": "Christine Duque",
+                  "dates": "*1979",
+                  "marriage": "José Luis Duque *1979",
+                  "children": [
+                    {
+                      "name": "Maïa Duque",
+                      "dates": "*2009"
+                    },
+                    {
+                      "name": "Emeryk Duque",
+                      "dates": "*2013"
+                    }
+                  ]
+                },
+                {
+                  "name": "Michael Jachner",
+                  "dates": "*1982"
+                },
+                {
+                  "name": "Maria Miśkiewicz - Konowrocka",
+                  "dates": "*1988",
+                  "marriage": "Michał Konowrocki *1988",
+                  "children": [
+                    {
+                      "name": "Nela Konowrocka",
+                      "dates": "*2023"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Magdalena Zofia Wiśnioch",
+              "dates": "*1958",
+              "marriage": "Jerzy Tadeusz Wiśnioch *1954",
+              "children": [
+                {
+                  "name": "Piotr Stanisław Wiśnioch",
+                  "dates": "*1983",
+                  "marriage": "Anna Sampolska *1984",
+                  "children": [
+                    {
+                      "name": "Jan Ignacy Wiśnioch",
+                      "dates": "*2014"
+                    },
+                    {
+                      "name": "Łucja Gabriela Wiśnioch",
+                      "dates": "*2016"
+                    },
+                    {
+                      "name": "Krzysztof Jerzy Wiśnioch",
+                      "dates": "*2019"
+                    }
+                  ]
+                },
+                {
+                  "name": "Agata Maria Wiśnioch",
+                  "dates": "*1988"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Jacek Maria Domański",
+          "dates": "*1935 †2021",
+          "marriage": "Eleonora Frankiewicz *1941",
+          "children": [
+            {
+              "name": "Anna Beata",
+              "dates": "*1964",
+              "marriage": "1m. Postolko, 2m. Wacław Franciszek Steczko *1961",
+              "children": [
+                {
+                  "name": "Katarzyna Zofia Żurowska",
+                  "dates": "*1991",
+                  "marriage": "Piotr Żurowski *1989",
+                  "children": [
+                    {
+                      "name": "Karol Zbyszko Żurowski",
+                      "dates": "*2018"
+                    },
+                    {
+                      "name": "Leonard Cezary Żurowski",
+                      "dates": "*2019"
+                    }
+                  ]
+                },
+                {
+                  "name": "Paweł Janusz Postolko",
+                  "dates": "*1992",
+                  "marriage": "Dorota Iga Nowakowska *1993"
+                }
+              ]
+            },
+            {
+              "name": "Marta Krystyna Kacorzyk",
+              "dates": "*1967",
+              "marriage": "1m. Piotr Bazela *1965, 2m. Rafał Ludwik Kacorzyk *1967",
+              "children": [
+                {
+                  "name": "Anna Maria Gulbis",
+                  "dates": "*1989",
+                  "marriage": "Karlis Gulbis *1983",
+                  "children": [
+                    {
+                      "name": "Louis Gulbis",
+                      "dates": "*2018"
+                    },
+                    {
+                      "name": "Bianka Gulbis",
+                      "dates": "*2021"
+                    }
+                  ]
+                },
+                {
+                  "name": "Karolina Bazela",
+                  "dates": "*1994"
+                },
+                {
+                  "name": "Zuzanna Kacorzyk",
+                  "dates": "*2002"
+                },
+                {
+                  "name": "Zofia Kacorzyk",
+                  "dates": "*2004"
+                }
+              ]
+            },
+            {
+              "name": "Jan Jacek Domański",
+              "dates": "*1975",
+              "marriage": "Agnieszka Zaremba *1974",
+              "children": [
+                {
+                  "name": "Lidia Domańska",
+                  "dates": "*2006"
+                },
+                {
+                  "name": "Hanna Domańska",
+                  "dates": "*2009"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Helena Aleksandra Kopacz",
+          "dates": "*1901 †1974",
+          "marriage": "Kazimierz Henryk Kopacz *1898 †1978",
+          "children": [
+            {
+              "name": "Andrzej Seweryn Kopacz",
+              "dates": "*1927 †1975",
+              "marriage": "Irena Martyniak *1928 †1987",
+              "children": [
+                {
+                  "name": "Marek Kazimierz Kopacz",
+                  "dates": "*1948 †1972"
+                },
+                {
+                  "name": "Anna Maria Matyjaszek",
+                  "dates": "*1954",
+                  "marriage": "Marek Matyjaszek *1951",
+                  "children": [
+                    {
+                      "name": "Konrad Matyjaszek",
+                      "dates": "*1981"
+                    },
+                    {
+                      "name": "Magdalena Beauchamp",
+                      "dates": "*1985",
+                      "marriage": "John Beauchamp *1981",
+                      "children": [
+                        {
+                          "name": "Idzi Kazimierz Beauchamp",
+                          "dates": "*2014"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Krzysztof Maria Kopacz",
+              "dates": "*1931 †1980",
+              "marriage": "Ewa Helena Goral *1932 †1998",
+              "children": [
+                {
+                  "name": "Jacek Maria Kopacz",
+                  "dates": "*1958",
+                  "marriage": "Barbara Matowska *1959",
+                  "children": [
+                    {
+                      "name": "Jerzy Kopacz",
+                      "dates": "*1985"
+                    },
+                    {
+                      "name": "Zofia Kopacz",
+                      "dates": "*1988"
+                    },
+                    {
+                      "name": "Kinga Kopacz",
+                      "dates": "*1991"
+                    }
+                  ]
+                },
+                {
+                  "name": "Grzegorz Piotr Kopacz",
+                  "dates": "*1959",
+                  "marriage": "Renata Jolanta Kwolek *1962",
+                  "children": [
+                    {
+                      "name": "Marta Kopacz",
+                      "dates": "*1988"
+                    },
+                    {
+                      "name": "Agnieszka Kopacz",
+                      "dates": "*1992"
+                    },
+                    {
+                      "name": "Justyna Kopacz",
+                      "dates": "*1993 †1993"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Edward Zbigniew Domański",
+          "dates": "*1907 †1943",
+          "marriage": "Daria Stefania Płoszczańska *1912 †2006",
+          "children": [
+            {
+              "name": "Teresa Seweryna Kosmalska",
+              "dates": "*1935",
+              "marriage": "Andrzej Kosmalski *1935 †2022",
+              "children": [
+                {
+                  "name": "Piotr Kosmalski",
+                  "dates": "*1956",
+                  "marriage": "Irena Kocurek *1956",
+                  "children": [
+                    {
+                      "name": "Łukasz Kosmalski",
+                      "dates": "*1983",
+                      "marriage": "Małgorzata Monika Lis *1984",
+                      "children": [
+                        {
+                          "name": "Katarzyna Kosmalska",
+                          "dates": "*2016"
+                        },
+                        {
+                          "name": "Michał Kosmalski",
+                          "dates": "*2017"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Małgorzata Stefania Bruszewska",
+              "dates": "*1938 †2023",
+              "marriage": "Janusz Bruszewski *1939",
+              "children": [
+                {
+                  "name": "Marcin Edward Bruszewski",
+                  "dates": "*1970",
+                  "marriage": "Małgorzata Fido *1970",
+                  "children": [
+                    {
+                      "name": "Ignacy Jan Bruszewski",
+                      "dates": "*2010"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Władysław Marian Walenty Kraiński",
+      "dates": "*1841 †1926",
+      "marriage": "Maria Emilia Zofia Trzecieska *1853 †1932",
+      "children": [
+        {
+          "name": "Anna Maria Ładomirska",
+          "dates": "*1875 †1959",
+          "marriage": "Zdzisław Fabian Ładomirski *1864 †1950",
+          "children": [
+            {
+              "name": "Anna Ładomirska",
+              "dates": "*1916 †2015"
+            }
+          ]
+        },
+        {
+          "name": "Zofia Maria Walentyna Fedorowicz",
+          "dates": "*1876 †1966",
+          "marriage": "Aleksander Arian Teofil Fedorowicz *1875 †1951",
+          "children": [
+            {
+              "name": "Jerzy Andrzej Maria Fedorowicz",
+              "dates": "*1903 †1939",
+              "marriage": "Maria Stefania Kosielska *1907 †1979",
+              "children": [
+                {
+                  "name": "Anna Maria Fedorowicz",
+                  "dates": "*1933 †2023"
+                },
+                {
+                  "name": "Andrzej Aleksander Bronisław Fedorowicz",
+                  "dates": "*1934",
+                  "marriage": "Josette Michèle Lévi *1945",
+                  "children": [
+                    {
+                      "name": "Alexander Fedorowicz",
+                      "dates": "*1973",
+                      "children": [
+                        {
+                          "name": "Adriel Alexander Fedorowicz",
+                          "dates": "*2005"
+                        },
+                        {
+                          "name": "Fabian Fedorowicz",
+                          "dates": "*2007"
+                        },
+                        {
+                          "name": "Sasha Fedorowicz",
+                          "dates": "*2015"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Valérie J. Fedorowicz",
+                      "dates": "*1975"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
