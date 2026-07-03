@@ -57,16 +57,15 @@
             stroke: transparent;
             stroke-width: 0;
             cursor: pointer;
-            pointer-events: all; /* Niezbędne do klikania w przezroczysty obszar */
+            pointer-events: all;
             transition: stroke 0.2s ease, fill 0.2s ease;
         }
         
-        /* Styl "select" z oryginalnej strony */
         .ol-polygon.active {
             stroke: #FF0000;
             stroke-width: 4px;
             stroke-dasharray: 5, 5;
-            fill: transparent; /* Oryginał: fillOpacity: 0.0 */
+            fill: transparent;
         }
         
         .person-info-display { margin-top: 20px; background: var(--parchment); border-left: 3px solid var(--gold); padding: 20px 30px; min-height: 90px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ink); text-align: center; transition: all 0.3s; }
@@ -240,61 +239,60 @@
 
     // FUNKCJA ŁADUJĄCA DANE GEOJSON PO ZAŁADOWANIU OBRAZKA
     mainImg.onload = () => {
-        // Skalibruj SVG by zgadzało się 1:1 z pikselami mapy/zdjęcia
-        svgOverlay.setAttribute("viewBox", `0 0 ${mainImg.naturalWidth} ${mainImg.naturalHeight}`);
+        svgOverlay.setAttribute("viewBox", "0 0 " + mainImg.naturalWidth + " " + mainImg.naturalHeight);
         svgOverlay.setAttribute("preserveAspectRatio", "none");
 
-        // ŚCIEŻKA DO PLIKU GEOJSON - wymaga skopiowania starego pliku do tego folderu
-        const geojsonUrl = `../img/zjazdy/${zjazd_folder}/zbiorowe.geojson`;
+        const geojsonUrl = "../img/zjazdy/" + zjazd_folder + "/zbiorowe.geojson";
 
         fetch(geojsonUrl)
-            .then(response => {
+            .then(function(response) {
                 if(!response.ok) throw new Error("Nie znaleziono pliku GeoJSON");
                 return response.json();
             })
-            .then(data => {
+            .then(function(data) {
                 if(!data.features) return;
                 
-                data.features.forEach(feature => {
+                data.features.forEach(function(feature) {
                     if (feature.geometry && (feature.geometry.type === "Polygon" || feature.geometry.type === "MultiPolygon")) {
                         const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
                         
-                        // Konwersja koordynatów z OpenLayers (Y zazwyczaj na minusie) do SVG 
                         let coordsArray = feature.geometry.type === "Polygon" ? feature.geometry.coordinates[0] : feature.geometry.coordinates[0][0];
-                        const points = coordsArray.map(coord => `${coord[0]},${Math.abs(coord[1])}`).join(" ");
+                        const points = coordsArray.map(function(coord) { 
+                            return coord[0] + "," + Math.abs(coord[1]);
+                        }).join(" ");
 
                         polygon.setAttribute("points", points);
                         polygon.setAttribute("class", "ol-polygon");
                         polygon.setAttribute("vector-effect", "non-scaling-stroke");
                         
-                        // Zabezpieczenie różnego nazywania właściwości w starych GeoJSON'ach
                         const textData = feature.properties ? (feature.properties.dane || feature.properties.name) : (feature.attributes ? feature.attributes.dane : "");
                         polygon.setAttribute("data-info", textData);
 
                         polygon.addEventListener("click", function(e) {
                             e.stopPropagation();
                             
-                            // Reset innych zaznaczeń
-                            document.querySelectorAll('.ol-polygon').forEach(p => p.classList.remove('active'));
+                            document.querySelectorAll('.ol-polygon').forEach(function(p) { p.classList.remove('active'); });
                             this.classList.add('active');
 
                             infoDisplay.classList.remove('empty');
-                            infoDisplay.innerHTML = `<i>Wskazany uczestnik: <span id="info" style="font-weight: 500;">${this.getAttribute('data-info')}</span></i>`;
+                            infoDisplay.innerHTML = "<i>Wskazany uczestnik: <span id='info' style='font-weight: 500;'>" + this.getAttribute('data-info') + "</span></i>";
                         });
 
                         svgOverlay.appendChild(polygon);
                     }
                 });
             })
-            .catch(error => console.warn("GeoJSON info: Umieść plik zbiorowe.geojson w folderze aby aktywować zaznaczanie osób. Błąd:", error));
+            .catch(function(error) {
+                console.warn("GeoJSON info: Umieść plik zbiorowe.geojson w folderze aby aktywować zaznaczanie osób. Błąd:", error);
+            });
     };
 
     // Obsługa kliknięcia poza obrysem (Reset - ukrywanie informacji)
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.ol-polygon') && !e.target.closest('.controls-bar') && !e.target.closest('.img-magnifier-glass')) {
-            document.querySelectorAll('.ol-polygon').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.ol-polygon').forEach(function(p) { p.classList.remove('active'); });
             infoDisplay.classList.add('empty');
-            infoDisplay.innerHTML = `<i>Wskazany uczestnik: <span id="info">brak</span></i>`;
+            infoDisplay.innerHTML = "<i>Wskazany uczestnik: <span id='info'>brak</span></i>";
         }
     });
 
@@ -307,13 +305,13 @@
         disableZoom: window.innerWidth > 768
     });
 
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', function() {
         const isDesktop = window.innerWidth > 768;
         panzoom.setOptions({ disablePan: isDesktop, disableZoom: isDesktop });
         if(isDesktop) panzoom.reset(); 
     });
 
-    document.getElementById('panzoom-reset').addEventListener('click', () => {
+    document.getElementById('panzoom-reset').addEventListener('click', function() {
         panzoom.reset();
     });
 
@@ -338,7 +336,7 @@
             this.classList.remove('active');
             this.innerHTML = "🔍 Włącz Lupę";
             glass.style.opacity = '0';
-            setTimeout(() => { if(glass.style.opacity === '0') glass.style.display = 'none'; }, 200);
+            setTimeout(function() { if(glass.style.opacity === '0') glass.style.display = 'none'; }, 200);
         }
     });
 
@@ -376,15 +374,15 @@
     }
 
     containerHotspots.addEventListener('mousemove', moveMagnifier);
-    containerHotspots.addEventListener('mouseenter', () => { 
+    containerHotspots.addEventListener('mouseenter', function() { 
         if(isLoupeActive && window.innerWidth > 768) {
             glass.style.display = 'block';
-            requestAnimationFrame(() => glass.style.opacity = '1');
+            requestAnimationFrame(function() { glass.style.opacity = '1'; });
         }
     });
-    containerHotspots.addEventListener('mouseleave', () => { 
+    containerHotspots.addEventListener('mouseleave', function() { 
         glass.style.opacity = '0';
-        setTimeout(() => { if(glass.style.opacity === '0') glass.style.display = 'none'; }, 200);
+        setTimeout(function() { if(glass.style.opacity === '0') glass.style.display = 'none'; }, 200);
     });
 
     // ── GALERIA I LIGHTBOX ──
@@ -395,14 +393,14 @@
 
     for (let i = 1; i <= liczba_zdjec; i++) {
         const nr = i.toString().padStart(2, '0');
-        const path = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
+        const path = "../img/zjazdy/" + zjazd_folder + "/foto_" + zjazd_folder + "_" + nr + ".jpg";
         const div = document.createElement('div');
         div.className = 'gallery-item';
         const img = document.createElement('img');
         img.src = path;
         img.loading = "lazy";
         img.onerror = function() { this.parentElement.style.display = 'none'; };
-        div.onclick = () => openLightbox(i);
+        div.onclick = (function(index) { return function() { openLightbox(index); }; })(i);
         div.appendChild(img);
         container.appendChild(div);
     }
@@ -428,11 +426,11 @@
 
     function updateLB() {
         const nr = currentIdx.toString().padStart(2, '0');
-        lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
-        lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
+        lbImg.src = "../img/zjazdy/" + zjazd_folder + "/foto_" + zjazd_folder + "_" + nr + ".jpg";
+        lbCounter.innerText = currentIdx + " / " + liczba_zdjec;
     }
 
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', function(e) {
         if (lightbox.style.display === 'flex') {
             if (e.key === "ArrowRight") changePhoto(1);
             if (e.key === "ArrowLeft") changePhoto(-1);
@@ -443,7 +441,7 @@
     let tStart = 0;
     let isMultiTouch = false;
 
-    lightbox.addEventListener('touchstart', e => {
+    lightbox.addEventListener('touchstart', function(e) {
         if (e.touches.length > 1) {
             isMultiTouch = true;
         } else {
@@ -452,7 +450,7 @@
         }
     }, {passive: true});
 
-    lightbox.addEventListener('touchend', e => {
+    lightbox.addEventListener('touchend', function(e) {
         if (isMultiTouch) return;
         let tEnd = e.changedTouches[0].screenX;
         const threshold = 60;
