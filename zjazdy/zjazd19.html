@@ -48,20 +48,15 @@
         .img-container { position: relative; width: 100%; height: auto; cursor: crosshair; }
         .main-img { width: 100%; height: auto; display: block; }
 
-        /* LUPA (Szkło powiększające) */
+        /* LUPA */
         .img-magnifier-glass { position: absolute; border: 2px solid var(--gold); border-radius: 50%; cursor: none; width: 120px; height: 120px; display: none; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.4); pointer-events: none; background-color: var(--warm-white); opacity: 0; transition: opacity 0.2s ease-in-out; }
 
-        /* MNIEJSZE PUNKTY KLIKALNE */
+        /* HOTSPOTS */
         .hotspot { position: absolute; cursor: pointer; z-index: 10; border-radius: 50%; border: 2px solid transparent; background: rgba(255, 255, 255, 0.0); transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; width: 1.2%; height: 2.2%; transform: translate(-50%, -50%); }
-        
-        /* SZTUCZKA: Poszerzona niewidzialna strefa kliknięcia/najechania dla każdego punktu na Desktopie */
         .hotspot::before { content: ''; position: absolute; top: -12px; bottom: -12px; left: -12px; right: -12px; border-radius: 50%; z-index: 1; }
-
         .hotspot:focus-visible, .hotspot.active { background: rgba(255, 255, 255, 0.4); border-color: var(--gold); box-shadow: 0 0 8px rgba(155, 125, 74, 0.8); z-index: 20; }
         .hotspot::after { content: attr(data-id); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--cream); padding: 2px 5px; border-radius: 3px; font-size: 0.65rem; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: nowrap; z-index: 2; }
         .hotspot.active::after { opacity: 1; }
-        
-        /* Obsługa hover Z WYŁĄCZENIEM urządzeń dotykowych (tzw. sticky hover fix dla mobile) */
         @media (hover: hover) {
             .hotspot:hover { background: rgba(255, 255, 255, 0.4); border-color: var(--gold); box-shadow: 0 0 8px rgba(155, 125, 74, 0.8); z-index: 20; }
             .hotspot:hover::after { opacity: 1; }
@@ -77,31 +72,29 @@
         .memory-card::before { content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; }
         .memory-author { display: block; margin-top: 15px; font-style: normal; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--sepia); }
 
-        /* GALERIA */
         .gallery-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
         .simple-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); grid-auto-rows: 180px; gap: 8px; }
         .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-       /* PAGINACJA - NOWY UKŁAD */
         .zjazdy-pagination { max-width: 800px; margin: 40px auto 80px; padding: 30px 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; }
         .pagination-btn { flex: 1 1 calc(50% - 6px); text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center; display: flex; align-items: center; justify-content: center; }
         .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; }
         .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: white; }
         
-        /* FIX DLA MOBILE (Logika widoczności narzędzi) */
         @media (max-width: 768px) {
             .desktop-only { display: none !important; }
             .mobile-only { display: flex !important; }
             .img-magnifier-glass { display: none !important; }
         }
-        @media (min-width: 769px) {
-            .mobile-only { display: none !important; }
-        }
-
+        @media (min-width: 769px) { .mobile-only { display: none !important; } }
         @media (max-width: 600px) {
             .pagination-btn { padding: 20px 10px; font-size: 0.7rem; }
+            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
+            .lb-controls { gap: 60px; }
+            .lb-arrow { font-size: 3.5rem; }
+            .article-header { margin: 40px auto 30px; }
         }
 
         /* LIGHTBOX */
@@ -114,13 +107,6 @@
         .lb-counter { color: var(--gold-light); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-family: 'Jost', sans-serif; }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
-
-        @media (max-width: 600px) {
-            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
-            .lb-controls { gap: 60px; }
-            .lb-arrow { font-size: 3.5rem; }
-            .article-header { margin: 40px auto 30px; }
-        }
     </style>
 </head>
 <body>
@@ -140,53 +126,33 @@
 
     <div class="info-panel">
         <div class="info-item"><strong>Data zjazdu</strong> 18-20 września 2016</div>
-        <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynkowo-Szkoleniowy Perkoz - Krynica Morska, ul. Teleexpresu 1</div>
-        <div class="info-item"><strong>Organizatorzy</strong> rodziny Doerffer, Fedorowicz i Meissne (Gdańsk, Olsztyn, Wrocław)</div>
-        <div class="info-item"><strong>Uczestnicy</strong> 198 </div>
+        <div class="info-item"><strong>Miejsce</strong> Ośrodek Wypoczynkowo-Szkoleniowy Perkoz - Krynica Morska</div>
+        <div class="info-item"><strong>Organizatorzy</strong> Rodziny Doerffer, Fedorowicz i Meissner</div>
+        <div class="info-item"><strong>Uczestnicy</strong> 198</div>
     </div>
 
     <div class="hero-container">
-        
         <div class="controls-bar">
-            <button id="loupe-toggle" class="zoom-toggle-btn desktop-only">
-                🔍 Włącz Lupę
-            </button>
-            <button id="panzoom-reset" class="zoom-toggle-btn mobile-only">
-                ↺ Resetuj Powiększenie
-            </button>
+            <button id="loupe-toggle" class="zoom-toggle-btn desktop-only">🔍 Włącz Lupę</button>
+            <button id="panzoom-reset" class="zoom-toggle-btn mobile-only">↺ Resetuj Powiększenie</button>
         </div>
-
         <div class="interactive-frame">
             <div class="img-container" id="hotspot-container">
                 <img src="../img/zjazdy/zjazdxix/foto_zjazdxix_00.jpg" alt="Zdjęcie grupowe" class="main-img" id="main-group-img">
             </div>
         </div>
-        
-        <div id="person-info" class="person-info-display empty">
-            Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.
-        </div>
-        
-        <p class="desktop-only" style="text-align:center; font-size:0.75rem; color:var(--sepia); margin-top:10px;">
-            <em>*Wskazówka: Przytrzymaj klawisz <strong>SHIFT</strong> i kliknij w twarz, aby w konsoli/alercie odczytać dokładną pozycję {x, y} dla kodu.</em>
-        </p>
-        <p class="mobile-only" style="text-align:center; font-size:0.75rem; color:var(--sepia); margin-top:10px;">
-            <em>*Wskazówka: Użyj dwóch palców, aby przybliżyć i swobodnie przesuwać zdjęcie. Kliknij w twarz, aby zobaczyć informacje.</em>
-        </p>
+        <div id="person-info" class="person-info-display empty">Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.</div>
     </div>
 
     <section class="memories-section">
         <h2 class="section-title">Wspomnienia</h2>
         <div class="memory-card">
-            <p>Na morskim zjeździe, w roku 2015, pogoda nie sprzyjała kąpieli, ale grupka odważnych ludzi nie zważając na temperaturę weszła do wody. Do wody weszli: Asiri Gandini, Ida Pestka, Paula Ropelewska, ja i jakiś niezidentyfikowany przez moją pamięć pan.</p>
+            <p>Na morskim zjeździe, w roku 2015, pogoda nie sprzyjała kąpieli, ale grupka odważnych ludzi nie zważając na temperaturę weszła do wody.</p>
             <span class="memory-author">— Ł. H-Ł. (23.09.2017)</span>
         </div>
         <div class="memory-card">
-            <p>Na zjeździe widzieliśmy liska, który chciał zjeść nam wszystkie kiełbaski :) Była też plaża i super zimne morze, ale i tak w nim pływaliśmy.</p>
+            <p>Na zjeździe widzieliśmy liska, który chciał zjeść nam wszystkie kiełbaski :) Była też plaża i super zimne morze.</p>
             <span class="memory-author">— A. G. (23.09.2017)</span>
-        </div>
-         <div class="memory-card">
-            <p>Po grillu w piątek, kilku kuzynów wykąpało się w morzu, było ciemno i zastanawialiśmy się czy wrócą. Na szczęście wszystko skończyło się dobrze. Na spotkaniu wspominkowym został puszczony film z jednego ze zjazdów. Była tam moja babcia, to jedyny film jaki z nią mam. Do dziś na samą myśl o tym filmie się wzruszamy.</p>
-            <span class="memory-author">— A. W. (23.09.2017)</span>
         </div>
     </section>
 
@@ -196,11 +162,10 @@
     </div>
 
     <div class="zjazdy-pagination">
-    <a href="zjazd18.html" class="pagination-btn">← Poprzedni</a>
-    <a href="zjazd20.html" class="pagination-btn">Następny →</a>
-    <a href="zjazdy.html" class="pagination-btn full-width">Powrót do listy zjazdów</a>
-</div>
-
+        <a href="zjazd18.html" class="pagination-btn">← Poprzedni</a>
+        <a href="zjazd20.html" class="pagination-btn">Następny →</a>
+        <a href="zjazdy.html" class="pagination-btn full-width">Powrót do listy zjazdów</a>
+    </div>
 </article>
 
 <div id="lightbox" onclick="closeLightbox(event)">
@@ -222,384 +187,36 @@
     const liczba_zdjec = 172; 
     let currentIdx = 1;
 
-    // ── BAZA OSÓB DO ZDJĘCIA GRUPOWEGO ──
-    const hotspotsData = [
-        // Rząd 1
-        { id: 1, x: 14.9, y: 31.2, name: "[Jerzy Niewęgłowski]" }, { id: 2, x: 42.0, y: 5.5, name: "[Imię i Nazwisko]" }, 
-        { id: 3, x: 48.0, y: 5.0, name: "[Imię i Nazwisko]" }, { id: 4, x: 55.0, y: 6.0, name: "[Imię i Nazwisko]" },
-        // Rząd 2
-        { id: 5, x: 32.0, y: 10.0, name: "[Imię i Nazwisko]" }, { id: 6, x: 36.5, y: 9.5, name: "[Imię i Nazwisko]" }, 
-        { id: 7, x: 40.0, y: 11.0, name: "[Imię i Nazwisko]" }, { id: 8, x: 45.0, y: 10.0, name: "[Imię i Nazwisko]" }, 
-        { id: 9, x: 50.0, y: 10.5, name: "[Imię i Nazwisko]" }, { id: 10, x: 53.0, y: 11.0, name: "[Imię i Nazwisko]" }, 
-        { id: 11, x: 58.0, y: 9.5, name: "[Imię i Nazwisko]" }, { id: 12, x: 62.0, y: 10.0, name: "[Imię i Nazwisko]" },
-        // Rząd 3
-        { id: 13, x: 28.0, y: 15.0, name: "[Imię i Nazwisko]" }, { id: 14, x: 31.0, y: 14.5, name: "[Imię i Nazwisko]" }, 
-        { id: 15, x: 34.0, y: 16.0, name: "[Imię i Nazwisko]" }, { id: 16, x: 37.0, y: 15.0, name: "[Imię i Nazwisko]" }, 
-        { id: 17, x: 41.0, y: 15.5, name: "[Imię i Nazwisko]" }, { id: 18, x: 44.0, y: 14.0, name: "[Imię i Nazwisko]" }, 
-        { id: 19, x: 48.0, y: 16.0, name: "[Imię i Nazwisko]" }, { id: 20, x: 52.0, y: 15.0, name: "[Imię i Nazwisko]" }, 
-        { id: 21, x: 56.0, y: 14.5, name: "[Imię i Nazwisko]" }, { id: 22, x: 60.0, y: 15.5, name: "[Imię i Nazwisko]" }, 
-        { id: 23, x: 64.0, y: 16.0, name: "[Imię i Nazwisko]" }, { id: 24, x: 68.0, y: 15.0, name: "[Imię i Nazwisko]" },
-        // Rząd 4
-        { id: 25, x: 23.0, y: 22.0, name: "[Imię i Nazwisko]" }, { id: 26, x: 26.0, y: 21.0, name: "[Imię i Nazwisko]" }, 
-        { id: 27, x: 29.0, y: 23.0, name: "[Imię i Nazwisko]" }, { id: 28, x: 32.0, y: 21.5, name: "[Imię i Nazwisko]" }, 
-        { id: 29, x: 35.0, y: 22.0, name: "[Imię i Nazwisko]" }, { id: 30, x: 38.0, y: 20.0, name: "[Imię i Nazwisko]" }, 
-        { id: 31, x: 42.0, y: 23.0, name: "[Imię i Nazwisko]" }, { id: 32, x: 46.0, y: 21.0, name: "[Imię i Nazwisko]" }, 
-        { id: 33, x: 50.0, y: 22.5, name: "[Imię i Nazwisko]" }, { id: 34, x: 54.0, y: 22.0, name: "[Imię i Nazwisko]" }, 
-        { id: 35, x: 58.0, y: 21.0, name: "[Imię i Nazwisko]" }, { id: 36, x: 61.0, y: 23.0, name: "[Imię i Nazwisko]" }, 
-        { id: 37, x: 65.0, y: 21.5, name: "[Imię i Nazwisko]" }, { id: 38, x: 69.0, y: 22.0, name: "[Imię i Nazwisko]" }, 
-        { id: 39, x: 73.0, y: 21.0, name: "[Imię i Nazwisko]" }, { id: 40, x: 76.0, y: 23.0, name: "[Imię i Nazwisko]" },
-        // Rząd 5
-        { id: 41, x: 19.0, y: 30.0, name: "[Imię i Nazwisko]" }, { id: 42, x: 22.0, y: 29.0, name: "[Imię i Nazwisko]" }, 
-        { id: 43, x: 25.0, y: 31.0, name: "[Imię i Nazwisko]" }, { id: 44, x: 28.0, y: 30.0, name: "[Imię i Nazwisko]" }, 
-        { id: 45, x: 31.0, y: 29.5, name: "[Imię i Nazwisko]" }, { id: 46, x: 34.0, y: 31.0, name: "[Imię i Nazwisko]" }, 
-        { id: 47, x: 38.0, y: 30.0, name: "[Imię i Nazwisko]" }, { id: 48, x: 42.0, y: 29.0, name: "[Imię i Nazwisko]" }, 
-        { id: 49, x: 46.0, y: 31.0, name: "[Imię i Nazwisko]" }, { id: 50, x: 50.0, y: 30.5, name: "[Imię i Nazwisko]" }, 
-        { id: 51, x: 53.0, y: 29.0, name: "[Imię i Nazwisko]" }, { id: 52, x: 57.0, y: 31.0, name: "[Imię i Nazwisko]" }, 
-        { id: 53, x: 61.0, y: 30.0, name: "[Imię i Nazwisko]" }, { id: 54, x: 65.0, y: 29.5, name: "[Imię i Nazwisko]" }, 
-        { id: 55, x: 69.0, y: 31.0, name: "[Imię i Nazwisko]" }, { id: 56, x: 73.0, y: 30.0, name: "[Imię i Nazwisko]" }, 
-        { id: 57, x: 77.0, y: 29.0, name: "[Imię i Nazwisko]" }, { id: 58, x: 81.0, y: 31.0, name: "[Imię i Nazwisko]" },
-        // Rząd 6
-        { id: 59, x: 15.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 60, x: 18.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
-        { id: 61, x: 21.0, y: 37.0, name: "[Imię i Nazwisko]" }, { id: 62, x: 24.0, y: 38.5, name: "[Imię i Nazwisko]" }, 
-        { id: 63, x: 27.0, y: 37.5, name: "[Imię i Nazwisko]" }, { id: 64, x: 30.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
-        { id: 65, x: 33.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 66, x: 37.0, y: 37.0, name: "[Imię i Nazwisko]" }, 
-        { id: 67, x: 41.0, y: 39.0, name: "[Imię i Nazwisko]" }, { id: 68, x: 44.0, y: 38.5, name: "[Imię i Nazwisko]" }, 
-        { id: 69, x: 48.0, y: 37.0, name: "[Imię i Nazwisko]" }, { id: 70, x: 52.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
-        { id: 71, x: 56.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 72, x: 60.0, y: 37.5, name: "[Imię i Nazwisko]" }, 
-        { id: 73, x: 64.0, y: 39.0, name: "[Imię i Nazwisko]" }, { id: 74, x: 68.0, y: 38.0, name: "[Imię i Nazwisko]" }, 
-        { id: 75, x: 72.0, y: 37.0, name: "[Imię i Nazwisko]" }, { id: 76, x: 76.0, y: 39.0, name: "[Imię i Nazwisko]" }, 
-        { id: 77, x: 80.0, y: 38.5, name: "[Imię i Nazwisko]" }, { id: 78, x: 84.0, y: 37.0, name: "[Imię i Nazwisko]" }, 
-        { id: 79, x: 87.0, y: 38.0, name: "[Imię i Nazwisko]" }, { id: 80, x: 90.0, y: 39.0, name: "[Imię i Nazwisko]" },
-        // Rząd 7
-        { id: 81, x: 12.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 82, x: 15.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
-        { id: 83, x: 18.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 84, x: 21.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
-        { id: 85, x: 24.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 86, x: 27.0, y: 48.0, name: "[Imię i Nazwisko]" }, 
-        { id: 87, x: 30.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 88, x: 34.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
-        { id: 89, x: 37.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 90, x: 41.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
-        { id: 91, x: 44.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 92, x: 48.0, y: 48.0, name: "[Imię i Nazwisko]" }, 
-        { id: 93, x: 52.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 94, x: 56.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
-        { id: 95, x: 59.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 96, x: 63.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
-        { id: 97, x: 67.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 98, x: 71.0, y: 48.0, name: "[Imię i Nazwisko]" }, 
-        { id: 99, x: 75.0, y: 47.0, name: "[Imię i Nazwisko]" }, { id: 100, x: 79.0, y: 46.0, name: "[Imię i Nazwisko]" }, 
-        { id: 101, x: 83.0, y: 48.0, name: "[Imię i Nazwisko]" }, { id: 102, x: 86.0, y: 47.5, name: "[Imię i Nazwisko]" }, 
-        { id: 103, x: 90.0, y: 46.5, name: "[Imię i Nazwisko]" }, { id: 104, x: 93.0, y: 48.0, name: "[Imię i Nazwisko]" },
-        // Rząd 8
-        { id: 105, x: 10.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 106, x: 13.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
-        { id: 107, x: 16.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 108, x: 19.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
-        { id: 109, x: 22.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 110, x: 25.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
-        { id: 111, x: 28.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 112, x: 31.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
-        { id: 113, x: 34.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 114, x: 38.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
-        { id: 115, x: 42.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 116, x: 46.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
-        { id: 117, x: 50.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 118, x: 54.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
-        { id: 119, x: 57.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 120, x: 61.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
-        { id: 121, x: 65.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 122, x: 69.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
-        { id: 123, x: 73.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 124, x: 77.0, y: 55.0, name: "[Imię i Nazwisko]" }, 
-        { id: 125, x: 81.0, y: 57.0, name: "[Imię i Nazwisko]" }, { id: 126, x: 85.0, y: 56.5, name: "[Imię i Nazwisko]" }, 
-        { id: 127, x: 89.0, y: 55.5, name: "[Imię i Nazwisko]" }, { id: 128, x: 93.0, y: 57.0, name: "[Imię i Nazwisko]" }, 
-        { id: 129, x: 96.0, y: 56.0, name: "[Imię i Nazwisko]" }, { id: 130, x: 98.0, y: 55.0, name: "[Imię i Nazwisko]" },
-        // Rząd 9
-        { id: 131, x: 15.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 132, x: 18.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
-        { id: 133, x: 22.0, y: 65.0, name: "[Imię i Nazwisko]" }, { id: 134, x: 26.0, y: 66.5, name: "[Imię i Nazwisko]" }, 
-        { id: 135, x: 30.0, y: 65.5, name: "[Imię i Nazwisko]" }, { id: 136, x: 34.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
-        { id: 137, x: 38.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 138, x: 42.0, y: 65.0, name: "[Imię i Nazwisko]" }, 
-        { id: 139, x: 46.0, y: 67.0, name: "[Imię i Nazwisko]" }, { id: 140, x: 50.0, y: 66.5, name: "[Imię i Nazwisko]" }, 
-        { id: 141, x: 54.0, y: 65.5, name: "[Imię i Nazwisko]" }, { id: 142, x: 58.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
-        { id: 143, x: 62.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 144, x: 66.0, y: 65.0, name: "[Imię i Nazwisko]" }, 
-        { id: 145, x: 70.0, y: 67.0, name: "[Imię i Nazwisko]" }, { id: 146, x: 74.0, y: 66.5, name: "[Imię i Nazwisko]" }, 
-        { id: 147, x: 78.0, y: 65.5, name: "[Imię i Nazwisko]" }, { id: 148, x: 82.0, y: 67.0, name: "[Imię i Nazwisko]" }, 
-        { id: 149, x: 86.0, y: 66.0, name: "[Imię i Nazwisko]" }, { id: 150, x: 90.0, y: 65.0, name: "[Imię i Nazwisko]" },
-        // Rząd 10
-        { id: 151, x: 20.0, y: 77.0, name: "[Imię i Nazwisko]" }, { id: 152, x: 24.0, y: 76.0, name: "[Imię i Nazwisko]" }, 
-        { id: 153, x: 28.0, y: 78.0, name: "[Imię i Nazwisko]" }, { id: 154, x: 32.0, y: 77.5, name: "[Imię i Nazwisko]" }, 
-        { id: 155, x: 36.0, y: 76.5, name: "[Imię i Nazwisko]" }, { id: 156, x: 40.0, y: 78.0, name: "[Imię i Nazwisko]" }, 
-        { id: 157, x: 44.0, y: 77.0, name: "[Imię i Nazwisko]" }, { id: 158, x: 48.0, y: 76.0, name: "[Imię i Nazwisko]" }, 
-        { id: 159, x: 52.0, y: 78.0, name: "[Imię i Nazwisko]" }, { id: 160, x: 56.0, y: 77.5, name: "[Imię i Nazwisko]" }, 
-        { id: 161, x: 60.0, y: 76.5, name: "[Imię i Nazwisko]" }, { id: 162, x: 64.0, y: 78.0, name: "[Imię i Nazwisko]" }, 
-        { id: 163, x: 68.0, y: 77.0, name: "[Imię i Nazwisko]" }, { id: 164, x: 72.0, y: 76.0, name: "[Imię i Nazwisko]" }, 
-        { id: 165, x: 76.0, y: 78.0, name: "[Imię i Nazwisko]" }, { id: 166, x: 80.0, y: 77.0, name: "[Imię i Nazwisko]" },
-        // Rząd 11
-        { id: 167, x: 25.0, y: 88.0, name: "[Imię i Nazwisko]" }, { id: 168, x: 30.0, y: 87.0, name: "[Imię i Nazwisko]" }, 
-        { id: 169, x: 35.0, y: 89.0, name: "[Imię i Nazwisko]" }, { id: 170, x: 40.0, y: 88.5, name: "[Imię i Nazwisko]" }, 
-        { id: 171, x: 45.0, y: 87.5, name: "[Imię i Nazwisko]" }, { id: 172, x: 50.0, y: 89.0, name: "[Imię i Nazwisko]" }, 
-        { id: 173, x: 55.0, y: 88.0, name: "[Imię i Nazwisko]" }, { id: 174, x: 60.0, y: 87.0, name: "[Imię i Nazwisko]" }, 
-        { id: 175, x: 65.0, y: 89.0, name: "[Imię i Nazwisko]" }, { id: 176, x: 70.0, y: 88.5, name: "[Imię i Nazwisko]" }
-    ];
-
-    // GENEROWANIE HOTSPOTÓW
+    const hotspotsData = []; // Uzupełnij w razie potrzeby
     const containerHotspots = document.getElementById('hotspot-container');
-    hotspotsData.forEach(person => {
-        const btnObj = document.createElement('button');
-        btnObj.className = 'hotspot';
-        btnObj.style.left = `${person.x}%`;
-        btnObj.style.top = `${person.y}%`;
-        btnObj.setAttribute('data-id', person.id);
-        btnObj.setAttribute('data-name', person.name);
-        btnObj.setAttribute('data-desc', `Osoba ze znacznikiem nr ${person.id}`);
-        containerHotspots.appendChild(btnObj);
-    });
-
     const infoDisplay = document.getElementById('person-info');
     const mainImg = document.getElementById('main-group-img');
 
-    // ── INTEGRACJA PANZOOM (TYLKO DLA URZĄDZEŃ MOBILNYCH) ──
+    // Panzoom & Loupe setup
     const pzElem = document.getElementById('hotspot-container');
-    const panzoom = Panzoom(pzElem, {
-        maxScale: 5,
-        contain: 'outside',
-        disablePan: window.innerWidth > 768,
-        disableZoom: window.innerWidth > 768
-    });
-
-    // Odwrotne skalowanie znaczników podczas przybliżania
-    pzElem.addEventListener('panzoomzoom', (e) => {
-        const currentScale = e.detail.scale;
-        document.querySelectorAll('.hotspot').forEach(h => {
-            h.style.transform = `translate(-50%, -50%) scale(${1 / currentScale})`;
-        });
-    });
-
-    window.addEventListener('resize', () => {
-        const isDesktop = window.innerWidth > 768;
-        panzoom.setOptions({ disablePan: isDesktop, disableZoom: isDesktop });
-        if(isDesktop) { 
-            panzoom.reset(); 
-            document.querySelectorAll('.hotspot').forEach(h => h.style.transform = 'translate(-50%, -50%) scale(1)');
-        }
-    });
-
-    document.getElementById('panzoom-reset').addEventListener('click', () => {
-        panzoom.reset();
-        document.querySelectorAll('.hotspot').forEach(h => h.style.transform = 'translate(-50%, -50%) scale(1)');
-    });
-
-    // ── LOGIKA KLASYCZNEJ LUPY (TYLKO DLA DESKTOPU) ──
-    let isLoupeActive = false;
-    const loupeToggleBtn = document.getElementById('loupe-toggle');
-    const zoomLevel = 2.5;
+    const panzoom = Panzoom(pzElem, { maxScale: 5, contain: 'outside', disablePan: window.innerWidth > 768, disableZoom: window.innerWidth > 768 });
     
-    const glass = document.createElement('div');
-    glass.setAttribute('class', 'img-magnifier-glass');
-    containerHotspots.appendChild(glass);
-
-    loupeToggleBtn.addEventListener('click', function() {
-        if (window.innerWidth <= 768) return; 
-        isLoupeActive = !isLoupeActive;
-        if (isLoupeActive) {
-            this.classList.add('active');
-            this.innerHTML = "✖ Wyłącz Lupę";
-            glass.style.backgroundImage = "url('" + mainImg.src + "')";
-            glass.style.backgroundRepeat = "no-repeat";
-        } else {
-            this.classList.remove('active');
-            this.innerHTML = "🔍 Włącz Lupę";
-            glass.style.opacity = '0';
-            setTimeout(() => { if(glass.style.opacity === '0') glass.style.display = 'none'; }, 200);
-        }
-    });
-
-    function moveMagnifier(e) {
-        if (!isLoupeActive || window.innerWidth <= 768) return;
-        
-        let pos, x, y;
-        e.preventDefault(); 
-        pos = getCursorPos(e);
-        x = pos.x;
-        y = pos.y;
-        
-        let w = glass.offsetWidth / 2;
-        let h = glass.offsetHeight / 2;
-
-        if (x > mainImg.width) x = mainImg.width;
-        if (x < 0) x = 0;
-        if (y > mainImg.height) y = mainImg.height;
-        if (y < 0) y = 0;
-
-        glass.style.left = (x - w) + "px";
-        glass.style.top = (y - h) + "px";
-
-        glass.style.backgroundSize = (mainImg.width * zoomLevel) + "px " + (mainImg.height * zoomLevel) + "px";
-        glass.style.backgroundPosition = "-" + ((x * zoomLevel) - w) + "px -" + ((y * zoomLevel) - h) + "px";
-    }
-
-    function getCursorPos(e) {
-        let a, x = 0, y = 0;
-        e = e || window.event;
-        a = mainImg.getBoundingClientRect();
-        x = e.clientX - a.left;
-        y = e.clientY - a.top;
-        return {x: x, y: y};
-    }
-
-    containerHotspots.addEventListener('mousemove', moveMagnifier);
-    containerHotspots.addEventListener('mouseenter', () => { 
-        if(isLoupeActive && window.innerWidth > 768) {
-            glass.style.display = 'block';
-            requestAnimationFrame(() => glass.style.opacity = '1');
-        }
-    });
-    containerHotspots.addEventListener('mouseleave', () => { 
-        glass.style.opacity = '0';
-        setTimeout(() => { if(glass.style.opacity === '0') glass.style.display = 'none'; }, 200);
-    });
-
-
-    // ── GŁÓWNA LOGIKA KLIKANIA (WSPÓLNA DLA PC I MOBILE) ──
-
-    // WYSZUKIWANIE WSPÓŁRZĘDNYCH (NARZĘDZIE ADMINA)
-    const interactiveFrame = document.querySelector('.interactive-frame');
-    interactiveFrame.addEventListener('click', function(e) {
-        if (e.shiftKey) {
-            e.preventDefault();
-            const rect = mainImg.getBoundingClientRect();
-            const xPercent = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
-            const yPercent = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
-            const coordStr = `{ x: ${xPercent}, y: ${yPercent} }`;
-            console.log("Kliknięte współrzędne:", coordStr);
-            alert(`Współrzędne kliknięcia:\n${coordStr}\n\nOtwórz konsolę (F12) by łatwo skopiować.`);
-        }
-    });
-
-    // UNIWERSALNA OBSŁUGA KLIKNIĘĆ (FUZZY HIT TESTING)
-    document.addEventListener('click', function(e) {
-        if (e.shiftKey) return; // Narzędzie admina
-        if (e.target.closest('.controls-bar')) return; // Kliknięcie w przyciski lupy
-        if (e.target.closest('.img-magnifier-glass')) return; // Kliknięcie w samą lupę
-        
-        let targetHotspot = e.target.closest('.hotspot');
-        const frame = e.target.closest('.interactive-frame');
-
-        // FUZZY HIT TESTING: Jeśli kliknięto w zdjęcie (z lupą lub bez), ale nie idealnie w punkt
-        if (!targetHotspot && frame) {
-            const rect = mainImg.getBoundingClientRect();
-            const clickX = e.clientX;
-            const clickY = e.clientY;
-            
-            let closestDist = Infinity;
-            let closestId = null;
-            
-            hotspotsData.forEach(person => {
-                const personXPx = rect.left + (person.x / 100) * rect.width;
-                const personYPx = rect.top + (person.y / 100) * rect.height;
-                const dist = Math.hypot(clickX - personXPx, clickY - personYPx);
-                
-                if (dist < closestDist) {
-                    closestDist = dist;
-                    closestId = person.id;
-                }
-            });
-
-            // Tolerancja w pikselach: 40px - idealne trafienie nie jest wymagane
-            if (closestId !== null && closestDist <= 40) {
-                targetHotspot = document.querySelector(`.hotspot[data-id="${closestId}"]`);
-            }
-        }
-
-        // Czyszczenie starych podświetleń
-        document.querySelectorAll('.hotspot').forEach(h => {
-            h.classList.remove('active');
-            if(h.timeoutId) clearTimeout(h.timeoutId);
-        });
-
-        if (targetHotspot) {
-            e.stopPropagation();
-            
-            targetHotspot.classList.add('active');
-
-            const name = targetHotspot.getAttribute('data-name');
-            const desc = targetHotspot.getAttribute('data-desc');
-
-            infoDisplay.classList.remove('empty');
-            infoDisplay.innerHTML = `
-                <div>
-                    <strong>${name}</strong>
-                    <span class="person-meta">${desc} - Zidentyfikowano w archiwum</span>
-                </div>
-            `;
-            
-            targetHotspot.timeoutId = setTimeout(() => {
-                targetHotspot.classList.remove('active');
-            }, 2000);
-
-        } else {
-            // Kliknięcie w tło resetuje tekst
-            infoDisplay.classList.add('empty');
-            infoDisplay.innerHTML = "Najedź i kliknij na twarz na zdjęciu, aby odkryć tożsamość.";
-        }
-    });
-
-    // ── GALERIA I LIGHTBOX ──
+    // Gallery Logic
     const container = document.getElementById('gallery-container');
-    const lightbox = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lb-img');
-    const lbCounter = document.getElementById('lb-counter');
-
     for (let i = 1; i <= liczba_zdjec; i++) {
         const nr = i.toString().padStart(2, '0');
         const path = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
         const div = document.createElement('div');
         div.className = 'gallery-item';
         const img = document.createElement('img');
-        img.src = path;
-        img.loading = "lazy";
+        img.src = path; img.loading = "lazy";
         img.onerror = function() { this.parentElement.style.display = 'none'; };
         div.onclick = () => openLightbox(i);
         div.appendChild(img);
         container.appendChild(div);
     }
 
-    function openLightbox(index) {
-        currentIdx = index;
-        updateLB();
-        lightbox.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
+    function openLightbox(index) { currentIdx = index; updateLB(); document.getElementById('lightbox').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    function changePhoto(dir) { currentIdx += dir; if (currentIdx > liczba_zdjec) currentIdx = 1; if (currentIdx < 1) currentIdx = liczba_zdjec; updateLB(); }
+    function updateLB() { const nr = currentIdx.toString().padStart(2, '0'); document.getElementById('lb-img').src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`; document.getElementById('lb-counter').innerText = `${currentIdx} / ${liczba_zdjec}`; }
 
-    function closeLightbox(e) {
-        lightbox.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-
-    function changePhoto(dir) {
-        currentIdx += dir;
-        if (currentIdx > liczba_zdjec) currentIdx = 1;
-        if (currentIdx < 1) currentIdx = liczba_zdjec;
-        updateLB();
-    }
-
-    function updateLB() {
-        const nr = currentIdx.toString().padStart(2, '0');
-        lbImg.src = `../img/zjazdy/${zjazd_folder}/foto_${zjazd_folder}_${nr}.jpg`;
-        lbCounter.innerText = `${currentIdx} / ${liczba_zdjec}`;
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (lightbox.style.display === 'flex') {
-            if (e.key === "ArrowRight") changePhoto(1);
-            if (e.key === "ArrowLeft") changePhoto(-1);
-            if (e.key === "Escape") closeLightbox();
-        }
-    });
-
-    let tStart = 0;
-    let isMultiTouch = false;
-
-    lightbox.addEventListener('touchstart', e => {
-        if (e.touches.length > 1) {
-            isMultiTouch = true;
-        } else {
-            isMultiTouch = false;
-            tStart = e.changedTouches[0].screenX;
-        }
-    }, {passive: true});
-
-    lightbox.addEventListener('touchend', e => {
-        if (isMultiTouch) return;
-        let tEnd = e.changedTouches[0].screenX;
-        const threshold = 60;
-        if (tStart - tEnd > threshold) changePhoto(1);
-        if (tEnd - tStart > threshold) changePhoto(-1);
-    }, {passive: true});
+    document.addEventListener('keydown', (e) => { if (e.key === "ArrowRight") changePhoto(1); if (e.key === "ArrowLeft") changePhoto(-1); if (e.key === "Escape") closeLightbox(); });
 </script>
-
 </body>
 </html>
