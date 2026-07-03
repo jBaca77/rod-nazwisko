@@ -32,7 +32,6 @@
         .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); display: block; margin-bottom: 15px; }
         .intro-section h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 300; margin-bottom: 25px; color: var(--ink); }
         .intro-description { max-width: 700px; margin: 0 auto; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: var(--sepia); line-height: 1.6; }
-        .intro-author { display: block; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--sepia-light); margin-top: 10px; }
         .s-line { width: 60px; height: 1px; background: var(--gold-light); margin: 30px auto; opacity: 0.6; }
 
         /* ── KONTROLKI DRZEWA ── */
@@ -52,15 +51,15 @@
         }
         .tree-viewport:active { cursor: grabbing; }
 
-        /* Płaszczyzna poruszania się wewnątrz kontenera */
         .tree-canvas {
             transform-origin: top center;
             padding: 50px 100px;
             transition: transform 0.1s ease-out;
             will-change: transform;
+            display: block;
         }
 
-        /* ── NOWOCZESNE DRZEWO CSS (UL/LI) ── */
+        /* ── NOWOCZESNE DRZEWO CSS ── */
         .css-tree ul {
             padding-top: 40px; position: relative;
             display: flex; justify-content: center; gap: 20px;
@@ -70,8 +69,6 @@
             display: flex; flex-direction: column; align-items: center;
             position: relative; padding: 40px 10px 0 10px;
         }
-
-        /* Linie łączące */
         .css-tree li::before, .css-tree li::after {
             content: ''; position: absolute; top: 0; right: 50%;
             border-top: 2px solid var(--gold-light);
@@ -81,29 +78,18 @@
             right: auto; left: 50%;
             border-left: 2px solid var(--gold-light);
         }
-        .css-tree li:only-child::after, .css-tree li:only-child::before {
-            display: none;
-        }
+        .css-tree li:only-child::after, .css-tree li:only-child::before { display: none; }
         .css-tree li:only-child { padding-top: 0; }
-        .css-tree li:first-child::before, .css-tree li:last-child::after {
-            border: 0 none;
-        }
-        .css-tree li:last-child::before {
-            border-right: 2px solid var(--gold-light);
-            border-radius: 0 4px 0 0;
-        }
-        .css-tree li:first-child::after {
-            border-radius: 4px 0 0 0;
-        }
-
-        /* Pionowe linie w dół do dzieci */
+        .css-tree li:first-child::before, .css-tree li:last-child::after { border: 0 none; }
+        .css-tree li:last-child::before { border-right: 2px solid var(--gold-light); border-radius: 0 4px 0 0; }
+        .css-tree li:first-child::after { border-radius: 4px 0 0 0; }
         .css-tree ul ul::before {
             content: ''; position: absolute; top: 0; left: 50%;
             border-left: 2px solid var(--gold-light);
             width: 0; height: 40px; z-index: 1;
         }
 
-        /* ── KAFELKI OSOB (WĘZŁY) ── */
+        /* ── KAFELKI OSOB ── */
         .css-tree .node {
             background-color: var(--warm-white);
             border: 1px solid var(--sepia-pale);
@@ -117,38 +103,14 @@
             min-width: 200px;
             max-width: 320px;
             position: relative; z-index: 10;
-            transition: all 0.3s ease;
         }
-        .css-tree .node:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(122, 101, 72, 0.2);
-            border-color: var(--gold-light);
-        }
-        
-        .node strong {
-            display: block; font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem; font-weight: 600; color: var(--gold);
-            line-height: 1.2; margin-bottom: 5px;
-        }
+        .node strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--gold); line-height: 1.2; margin-bottom: 5px; }
         .node .dates { display: block; font-size: 0.75rem; color: var(--sepia); font-style: italic; letter-spacing: 1px; }
-        .node .marriage {
-            display: block; margin-top: 10px; padding-top: 10px;
-            border-top: 1px dashed var(--line);
-            font-size: 0.8rem; color: var(--ink-light); line-height: 1.4;
-        }
-        .node .m-icon { color: var(--gold-light); font-size: 0.9rem; margin-right: 4px;}
-
-        /* Korzeń główny */
+        .node .marriage { display: block; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 0.8rem; line-height: 1.4; }
+        .node .m-icon { color: var(--gold-light); margin-right: 4px;}
         .css-tree .root-node { border-left-width: 6px; border-color: var(--ink); background: var(--parchment); }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.3); text-align: center; padding: 60px 24px; font-size: 0.75rem; letter-spacing: 1px; }
-
-        .loader { padding: 40px; text-align: center; color: var(--sepia); font-style: italic; }
-
-        @media (max-width: 768px) {
-            main { padding: 40px 15px; }
-            .tree-viewport { height: 65vh; }
-        }
     </style>
 </head>
 <body>
@@ -156,10 +118,6 @@
 <nav>
     <div class="nav-inner">
         <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
-        <a href="genealogia.html" class="nav-back-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Wstecz
-        </a>
     </div>
 </nav>
 
@@ -167,9 +125,6 @@
     <section class="intro-section">
         <span class="s-label">Księgi i Rodowody</span>
         <h1>Drzewo Klanowe</h1>
-        <p class="intro-description">
-            Nowoczesna wizualizacja genealogiczna. Możesz swobodnie przybliżać, oddalać i przesuwać obszar drzewa.
-        </p>
         <div class="s-line"></div>
     </section>
 
@@ -177,18 +132,14 @@
         <button class="zoom-btn" onclick="zoomTree(-0.2)">−</button>
         <div class="zoom-info" id="zoomLevel">100%</div>
         <button class="zoom-btn" onclick="zoomTree(0.2)">+</button>
-        <button class="zoom-btn" onclick="resetZoom()" style="font-size: 1rem; width: auto; padding: 0 15px;">RESET</button>
+        <button class="zoom-btn" onclick="resetZoom()">RESET</button>
     </div>
 
-    <!-- Główny kontener widoku drzewa -->
     <div class="tree-viewport" id="treeViewport">
-        <!-- Płaszczyzna (Canvas), która jest skalowana i przesuwana -->
         <div class="tree-canvas" id="treeCanvas">
-            
             <div class="css-tree" id="tree-render-area">
                 <div class="loader">Wczytywanie bazy drzewa...</div>
             </div>
-
         </div>
     </div>
 </main>
@@ -198,19 +149,15 @@
 </footer>
 
 <script>
-    // --- GENEROWANIE DRZEWA Z JSON ---
     function generateNodeHTML(person) {
         let html = `<li><div class="node ${person.isRoot ? 'root-node' : ''}">`;
         html += `<strong>${person.name}</strong>`;
         if (person.dates) html += `<span class="dates">${person.dates}</span>`;
         if (person.marriage) html += `<span class="marriage"><span class="m-icon">⚭</span>${person.marriage}</span>`;
         html += `</div>`;
-        
         if (person.children && person.children.length > 0) {
             html += `<ul>`;
-            person.children.forEach(child => {
-                html += generateNodeHTML(child);
-            });
+            person.children.forEach(child => html += generateNodeHTML(child));
             html += `</ul>`;
         }
         html += `</li>`;
@@ -218,114 +165,45 @@
     }
 
     function loadTreeData() {
-        // Skrypt szuka pliku drzewo.json w tym samym folderze co plik HTML
         fetch('drzewo.json')
             .then(response => {
-                if (!response.ok) throw new Error('Brak pliku drzewo.json');
+                if (!response.ok) throw new Error('Błąd HTTP: ' + response.status);
                 return response.json();
             })
             .then(data => {
-                // Jeśli struktura zaczyna się od tablicy, weź pierwszy element
                 const rootData = Array.isArray(data) ? data[0] : data;
-                document.getElementById('tree-render-area').innerHTML = `<ul>${generateNodeHTML(rootData)}</ul>`;
+                const container = document.getElementById('tree-render-area');
+                container.innerHTML = `<ul>${generateNodeHTML(rootData)}</ul>`;
                 
-                // Wyśrodkuj po załadowaniu
-                setTimeout(() => {
+                // Centrowanie po renderowaniu
+                requestAnimationFrame(() => {
                     const viewport = document.getElementById('treeViewport');
                     const canvas = document.getElementById('treeCanvas');
                     viewport.scrollLeft = (canvas.scrollWidth - viewport.clientWidth) / 2;
-                }, 100);
+                });
             })
             .catch(error => {
-                document.getElementById('tree-render-area').innerHTML = `<p style="padding: 40px; color: var(--sepia); text-align: center;">Nie udało się wczytać danych drzewa.<br><span style="font-size: 0.8rem">(${error.message}). Upewnij się, że plik drzewo.json znajduje się w odpowiednim folderze.</span></p>`;
-                console.error(error);
+                console.error("Błąd ładowania drzewa:", error);
+                document.getElementById('tree-render-area').innerHTML = `<p style="padding: 40px; color: var(--sepia);">Nie udało się wczytać danych drzewa. Sprawdź konsolę (F12).</p>`;
             });
     }
 
-    // Załaduj dane drzewa
-    loadTreeData();
-
-    // --- SYSTEM PANNINGU I ZOOMU ---
-    const viewport = document.getElementById('treeViewport');
-    const canvas = document.getElementById('treeCanvas');
-    const zoomText = document.getElementById('zoomLevel');
-    
     let scale = 1;
-    let isDragging = false;
-    let startX, startY;
-    let scrollLeft, scrollTop;
-
-    function updateZoomText() { zoomText.innerText = Math.round(scale * 100) + '%'; }
-
+    const canvas = document.getElementById('treeCanvas');
     function zoomTree(delta) {
-        scale += delta;
-        if (scale < 0.3) scale = 0.3;
-        if (scale > 2.5) scale = 2.5;
+        scale = Math.min(Math.max(scale + delta, 0.3), 2.5);
         canvas.style.transform = `scale(${scale})`;
-        updateZoomText();
+        document.getElementById('zoomLevel').innerText = Math.round(scale * 100) + '%';
     }
-
     function resetZoom() {
         scale = 1;
         canvas.style.transform = `scale(1)`;
-        updateZoomText();
+        document.getElementById('zoomLevel').innerText = '100%';
+        const viewport = document.getElementById('treeViewport');
         viewport.scrollLeft = (canvas.scrollWidth - viewport.clientWidth) / 2;
-        viewport.scrollTop = 0;
     }
 
-    // Zoom kółkiem
-    viewport.addEventListener('wheel', (e) => {
-        if (e.ctrlKey) {
-            e.preventDefault();
-            zoomTree(e.deltaY < 0 ? 0.1 : -0.1);
-        }
-    }, { passive: false });
-
-    // Drag-to-Scroll (Mysz)
-    viewport.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.pageX - viewport.offsetLeft;
-        startY = e.pageY - viewport.offsetTop;
-        scrollLeft = viewport.scrollLeft;
-        scrollTop = viewport.scrollTop;
-    });
-
-    viewport.addEventListener('mouseleave', () => isDragging = false);
-    window.addEventListener('mouseup', () => isDragging = false);
-
-    viewport.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        e.preventDefault();
-        const x = e.pageX - viewport.offsetLeft;
-        const y = e.pageY - viewport.offsetTop;
-        viewport.scrollLeft = scrollLeft - (x - startX) * 1.5;
-        viewport.scrollTop = scrollTop - (y - startY) * 1.5;
-    });
-
-    // Pinch-to-zoom (Dotyk)
-    let initialDist = null;
-    viewport.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 1) {
-            startX = e.touches[0].pageX - viewport.offsetLeft;
-            startY = e.touches[0].pageY - viewport.offsetTop;
-            scrollLeft = viewport.scrollLeft;
-            scrollTop = viewport.scrollTop;
-        } else if (e.touches.length === 2) {
-            initialDist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
-        }
-    }, { passive: false });
-
-    viewport.addEventListener('touchmove', (e) => {
-        if (e.touches.length === 2 && initialDist) {
-            e.preventDefault(); 
-            const currentDist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
-            const diff = currentDist / initialDist;
-            if (Math.abs(diff - 1) > 0.05) { 
-                zoomTree(diff > 1 ? 0.05 : -0.05);
-                initialDist = currentDist;
-            }
-        }
-    }, { passive: false });
+    loadTreeData();
 </script>
 
 </body>
