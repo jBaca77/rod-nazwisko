@@ -8,8 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-            --ink: #1e1a14; --sepia: #7a6548; --gold: #9b7d4a; --gold-light: #c8a96e;
+            --cream: #f8f4ee; 
+            --parchment: #ede8df; 
+            --warm-white: #fdfaf6;
+            --ink: #1e1a14; 
+            --ink-light: #3d3628;
+            --sepia: #7a6548; 
+            --sepia-light: #b09a7e; 
+            --sepia-pale: #e8ddd0;
+            --gold: #9b7d4a; 
+            --gold-light: #c8a96e; 
+            --green-dark: #2c3e2d;
             --line: rgba(122, 101, 72, 0.2);
         }
 
@@ -71,14 +80,56 @@
 
         /* NOTATKI I UZUPEŁNIENIA */
         .note-box { 
-            background: white; 
-            border: 1px solid var(--line); 
+            background: var(--cream); 
+            border: 1px solid var(--sepia-pale); 
             padding: 30px; 
             margin: 50px 0; 
             font-style: italic; 
             position: relative;
+            transition: all 0.3s ease;
+        }
+        .note-box:hover {
+            border-color: var(--gold);
         }
         .note-box::before { content: "“"; font-family: serif; font-size: 4rem; color: var(--parchment); position: absolute; top: -10px; left: 10px; }
+
+        /* PODPIS AUTORA */
+        .author-signature {
+            text-align: right; 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.8rem; 
+            color: var(--ink); 
+            margin-top: 60px; 
+            padding-top: 20px; 
+            border-top: 1px solid var(--line);
+        }
+
+        /* PIKTOGRAMY (LINKI) */
+        .pictogram-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: var(--cream);
+            border: 1px solid var(--sepia-pale);
+            border-radius: 4px;
+            padding: 4px;
+        }
+        .pictogram-link:hover {
+            border-color: var(--gold);
+            background: var(--warm-white);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            color: var(--gold-light);
+        }
+        .pictogram-link svg {
+            width: 14px;
+            height: 14px;
+        }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; border-top: 1px solid var(--gold); }
 
@@ -86,6 +137,7 @@
         @media (max-width: 600px) {
             h1 { font-size: 2rem; }
             .img-placeholder { padding: 8px; }
+            .children-list { padding: 20px; }
         }
     </style>
 </head>
@@ -108,7 +160,7 @@
     <div class="content-container">
         
         <div class="biography-text">
-            <p>Zofia z Kraińskich Fedorowicz i Aleksander Fedorowicz. Zofia Fedorowicz od 1877 r. chowała się razem z Andzią w Wyszatycach. Z usposobienia powolniejsza, nauki wszystkie pobierały razem prócz fortepianu i śpiewu, do których nie miała uzdolnień. Po wyjściu Andzi za mąż była z rodzicami i Jadwigą w Scheveningen i zwiedzała Hagę, potem z ojcem i Czesią Dydyńską, późniejszą Zygmuntową Baczyńską była w ziemie na riwierze francuskiej. Gdy rodzice przenieśli się na zimę 1897/98 do Lwowa i Jadwiga wróciła do klasztoru, gdzie kończyła nauki, zaczęły bywać w towarzystwie lwowskim i w ładnym mieszkaniu przy ul. Kraszewskiego 17 były i u nas wtorki, na których w karnawale wesoło tańczono w kilkanaście par przy fortepianie.</p>
+            <p>Zofia Fedorowicz od 1877 r. chowała się razem z Andzią w Wyszatycach. Z usposobienia powolniejsza, nauki wszystkie pobierały razem prócz fortepianu i śpiewu, do których nie miała uzdolnień. Po wyjściu Andzi za mąż była z rodzicami i Jadwigą w Scheveningen i zwiedzała Hagę, potem z ojcem i Czesią Dydyńską, późniejszą Zygmuntową Baczyńską była w ziemie na riwierze francuskiej. Gdy rodzice przenieśli się na zimę 1897/98 do Lwowa i Jadwiga wróciła do klasztoru, gdzie kończyła nauki, zaczęły bywać w towarzystwie lwowskim i w ładnym mieszkaniu przy ul. Kraszewskiego 17 były i u nas wtorki, na których w karnawale wesoło tańczono w kilkanaście par przy fortepianie.</p>
 
             <div class="image-entry">
                 <div class="img-placeholder">
@@ -160,7 +212,7 @@
             </div>
 
             <div class="child-item">
-                <h3>3. Tadeusz</h3>
+                <h3>3. Tadeusz <a href="tadfedor.html" class="pictogram-link" title="Przejdź do: Tadeusz Fedorowicz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></a></h3>
                 <div class="image-entry" style="float: right; max-width: 300px; margin: 0 0 20px 20px;">
                     <div class="img-placeholder">
                         <img src="img/tadeusz_fedorowicz.jpg" alt="Ks. Tadeusz Fedorowicz" onerror="this.src='https://via.placeholder.com/300x400?text=Ks.+Tadeusz+Fedorowicz'">
@@ -191,6 +243,8 @@
                 <h3>5. Janek</h3>
                 <p>Jankowi nauki szły ciężko, skończył szkołę rolniczą w Czernichowie i zaczął ojcu w gospodarstwie pomagać. Z wybuchem ostatniej wojny wzięto go na roboty przy drogach na Wołyniu słuch o nim zaginął, ale z Andersem dostał się do Persji, a potem na zachód i w Londynie fizycznie pracując zarabiał na życie. Ożenił się z p. Cieńską, córką „Nikiego” i Dzieduszyckiej z Jezupola, która mając skończony angielski uniwersytet w Bejrucie ma doskonałe posady. Teraz przy liniach lotniczych, on pracuje w garażach. Kupili sobie domek z ogródkiem, a teraz maszynę do robienia swetrów. Powodzi im się dobrze, zapraszają rodzeństwo by ich odwiedzali. We wrześniu 1957 Anielcia tam była.</p>
             </div>
+
+            <p class="note-box" style="margin-top: 0; margin-bottom: 45px;">Panny uczyły się w Sacre-Coeur we Lwowie.</p>
 
             <div class="child-item">
                 <h3>6. Marysia</h3>
@@ -224,10 +278,15 @@
             <p>T. Bartmańscy wyjechali do Kamionki Strumiłłowej na dorywcze zajęcia, ale bardzo ciężko im było, ona poroniła, potem byli w Kościelnikach u siostry Tomasza, Wodzickiej, tam zastało ich „wyswobodzenie”, usunęli się do Krakowa, ona urodziła bliźniaki, które wkrótce zmarły. W 1945 czy 46 przenieśli się do Wrocławia, on skończył prawo i był asystentem i jako taki dostał na Oporowie dom o dwu mieszkaniach z ładnym ogródkiem, który po małych naprawach (700 zł) zamieszkali, nabyli i dotąd zajmują oni ... ... dół, a Małeccy z Andrzejem i Hanią Fedorowiczami górę. Tomasz zdał doktorat praw. Uczył w rozmaitych uczelniach, a teraz jest profesorem Politechniki, wykłada bezpieczeństwo pracy. Anielcia pracuje w administracji uniwersyteckiej. Wcale dobrze im się powodzi. Kupują dużo ładnych książek i wyjeżdżają na krajoznawcze wycieczki. Matka jego mieszka z nimi.</p>
         </section>
 
-        <section class="note-box" style="margin-top: 80px; border-color: var(--ink);">
-            <strong>Uzupełnienie z notatki Antoniego Kraińskiego (15.07.1965 r.)</strong><br><br>
-            Zmarł w szpitalu w Warszawie ks. Ali Fedorowicz, proboszcz Izabelina-Lasek, po dość długiej i ciężkiej chorobie. Byłem 17.07. na pogrzebie. Było 2 biskupów, dużo księży, cała parafia, lało. Z rodziny były siostry z mężami i dziećmi, z Ładomirskich Anka, Antoś z żoną, Teleżyński z córką, Inka z Tych i dużo krewnych i znajomych z Warszawy.
+        <section class="note-box" style="margin-top: 80px;">
+            <strong>Uzupełnienie z notatki Antoniego Kraińskiego</strong><br><br>
+            15.07.1965 r. zmarł w szpitalu w Warszawie ks. Ali Fedorowicz, proboszcz Izabelina-Lasek, po dość długiej i ciężkiej chorobie. Byłem 17.07. na pogrzebie. Było 2 biskupów, dużo księży, cała parafia, lało. Z rodziny były siostry z mężami i dziećmi, z Ładomirskich Anka, Antoś z żoną, Teleżyński z córką, Inka z Tych i dużo krewnych i znajomych z Warszawy.
         </section>
+
+        <div class="author-signature">
+            Antoni Kraiński
+        </div>
+
     </div>
 
     <div style="height: 100px;"></div>
@@ -237,5 +296,18 @@
     <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
 </footer>
 
+<script>
+    // Inicjalizacja bocznego menu (drawer)
+    document.addEventListener('DOMContentLoaded', () => {
+        const drawerToggle = document.querySelector('.drawer-toggle');
+        const drawer = document.querySelector('.drawer');
+        
+        if(drawerToggle && drawer) {
+            drawerToggle.addEventListener('click', () => {
+                drawer.classList.toggle('active');
+            });
+        }
+    });
+</script>
 </body>
 </html>
