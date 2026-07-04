@@ -32,34 +32,30 @@
         /* ── MAIN CONTENT ── */
         main { max-width: 1100px; margin: 0 auto; padding: 60px 24px 120px; }
         
-        /* ── WPROWADZENIE (Zastępuje zielony header) ── */
-        .intro-section { text-align: center; margin-bottom: 60px; }
+        /* ── WPROWADZENIE ── */
+        .intro-section { text-align: center; margin-bottom: 70px; }
         .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; text-align: center; }
         .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 15px; color: var(--ink); font-weight: 400; text-align: center; line-height: 1.1; }
         .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 25px; }
         .intro-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: var(--sepia); max-width: 600px; margin: 0 auto; }
 
-        /* ── PANEL SUWAKA (SLIDER) ── */
-        .slider-panel {
+        /* ── KONTENER SUWAKA (Lekki, bez boksu) ── */
+        .slider-wrapper {
             max-width: 700px;
-            margin: 0 auto 50px;
-            padding: 40px 50px;
-            background: var(--parchment);
-            border: 1px dashed var(--sepia-light);
+            margin: 0 auto 60px;
             text-align: center;
-            border-radius: 2px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            padding: 0 10px;
         }
         
-        .slider-panel .s-title { font-size: 2rem; margin-bottom: 15px; }
-        .slider-panel .s-line { margin-bottom: 35px; }
+        .slider-wrapper .s-title { font-size: 2rem; margin-bottom: 15px; }
+        .slider-wrapper .s-line { margin-bottom: 35px; }
 
         #wyswietlanyRok {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
             color: var(--ink);
             display: block;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-weight: 500;
         }
 
@@ -124,7 +120,6 @@
 
         /* RWD */
         @media (max-width: 768px) {
-            .slider-panel { padding: 30px 20px; }
             #wyswietlanyRok { font-size: 1.8rem; }
         }
     </style>
@@ -148,13 +143,13 @@
         <p class="intro-quote">„Umarłych wieczność dotąd trwa, dokąd pamięcią im się płaci.”</p>
     </div>
 
-    <div class="slider-panel">
+    <div class="slider-wrapper">
         <span class="s-label">Filtrowanie</span>
         <h2 class="s-title">Wyszukaj według lat</h2>
         <div class="s-line"></div>
 
         <span id="wyswietlanyRok">Okres: 1975 - 1980</span>
-        <!-- Skok zmieniony na 1 (step="1") by suwak przesuwał się płynnie bez rwania -->
+        <!-- Skok suwaka to 1, dla zachowania płynności -->
         <input type="range" id="rokSlider" min="1970" max="2025" step="1" value="1975">
     </div>
 
