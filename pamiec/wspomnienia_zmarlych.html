@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wspomnienia</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .slider-container { text-align: center; margin: 30px; }
+        .grid-wspomnienia { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .karta { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        .foto { width: 100%; height: 250px; background-size: cover; background-position: center; }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <h2>Odeszli na zawsze – wybierz okres</h2>
+        <input type="range" id="rokSlider" min="1975" max="2025" step="5" value="1975" style="width: 80%;">
+        <h3 id="wyswietlanyRok">Okres: 1975 - 1980</h3>
+    </div>
+
+    <div id="listaOsob" class="grid-wspomnienia"></div>
+
+    <script src="wspomnienia.js"></script>
+    <script>
+        const slider = document.getElementById('rokSlider');
+        const display = document.getElementById('wyswietlanyRok');
+        const lista = document.getElementById('listaOsob');
+
+        function renderuj(startRok) {
+            const endRok = startRok + 5;
+            display.innerText = `Okres: ${startRok} - ${endRok}`;
+            
+            const przefiltrowani = osoby.filter(osoba => osoba.rok >= startRok && osoba.rok <= endRok);
+            
+            lista.innerHTML = przefiltrowani.map(osoba => `
+                <div class="karta">
+                    <div class="foto" style="background-image: url('zdjecia/pamiec/zdjecia/${osoba.foto}')"></div>
+                    <p><strong>${osoba.imie}</strong><br>${osoba.rok}</p>
+                </div>
+            `).join('');
+        }
+
+        slider.addEventListener('input', (e) => {
+            renderuj(parseInt(e.target.value));
+        });
+
+        // Startowe wyświetlenie
+        renderuj(1975);
+    </script>
+</body>
+</html>
