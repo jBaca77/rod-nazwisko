@@ -39,7 +39,7 @@
         .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 25px; }
         .intro-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: var(--sepia); max-width: 600px; margin: 0 auto; }
 
-        /* ── KONTENER SUWAKA (Lekki, bez boksu) ── */
+        /* ── KONTENER SUWAKA ── */
         .slider-wrapper {
             max-width: 700px;
             margin: 0 auto 60px;
@@ -50,17 +50,50 @@
         .slider-wrapper .s-title { font-size: 2rem; margin-bottom: 15px; }
         .slider-wrapper .s-line { margin-bottom: 35px; }
 
+        /* Nawigacja Rokiem (strzałki + tekst) */
+        .rok-display-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .arrow-btn {
+            background: none; border: none; font-size: 2.5rem; color: var(--sepia-light); 
+            cursor: pointer; transition: color 0.3s, transform 0.2s; 
+            padding: 0 15px; font-family: 'Jost', sans-serif; font-weight: 300;
+            line-height: 1; display: flex; align-items: center; justify-content: center;
+        }
+        
+        .arrow-btn:hover { color: var(--gold); transform: scale(1.15); }
+        .arrow-btn:active { transform: scale(0.95); }
+
         #wyswietlanyRok {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
             color: var(--ink);
             display: block;
-            margin-bottom: 20px;
             font-weight: 500;
+            min-width: 280px; /* Zabezpiecza przed skakaniem szerokości layoutu */
         }
 
-        /* Stylowy input range - ultra smooth */
-        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 15px 0; }
+        /* Oś czasu z suwakiem i podziałkami */
+        .range-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .range-label {
+            font-size: 0.85rem;
+            color: var(--sepia-light);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* Stylowy input range */
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 0; }
         input[type=range]:focus { outline: none; }
         
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: var(--sepia-pale); border-radius: 4px; transition: 0.3s; }
@@ -81,10 +114,18 @@
             margin-top: 40px;
         }
 
+        /* Efekt Fade-In dla kart */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .osoba-karta {
             background: var(--cream); padding: 40px 20px; border: 1px solid var(--sepia-pale);
             text-align: center; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative; display: flex; flex-direction: column; align-items: center;
+            opacity: 0; /* Stan wyjściowy animacji */
+            animation: fadeUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
 
         .osoba-karta::after {
@@ -92,7 +133,8 @@
         }
 
         .osoba-karta:hover {
-            transform: translateY(-8px); background-color: #fff; border-color: var(--gold); box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            transform: translateY(-8px) !important; /* Nadpisuje transform z fadeUp */
+            background-color: #fff; border-color: var(--gold); box-shadow: 0 15px 40px rgba(0,0,0,0.05);
         }
 
         .osoba-karta:hover::after { border-color: var(--gold-light); inset: 15px; }
@@ -114,13 +156,19 @@
         .osoba-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--ink); margin-bottom: 5px; font-weight: 500; line-height: 1.1; }
         .osoba-info .lata { font-family: 'Jost', sans-serif; font-size: 0.8rem; color: var(--sepia); text-transform: uppercase; letter-spacing: 3px; font-weight: 400; margin-top: 5px; }
 
-        .brak-danych { grid-column: 1 / -1; text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--sepia-light); font-style: italic; padding: 60px 20px; }
+        .brak-danych { 
+            grid-column: 1 / -1; text-align: center; font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.4rem; color: var(--sepia-light); font-style: italic; padding: 60px 20px;
+            animation: fadeUp 0.6s ease forwards;
+        }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 
         /* RWD */
         @media (max-width: 768px) {
-            #wyswietlanyRok { font-size: 1.8rem; }
+            #wyswietlanyRok { font-size: 1.8rem; min-width: 230px; }
+            .arrow-btn { font-size: 2rem; padding: 0 10px; }
+            .range-wrapper { gap: 10px; }
         }
     </style>
 </head>
@@ -148,9 +196,17 @@
         <h2 class="s-title">Wyszukaj według lat</h2>
         <div class="s-line"></div>
 
-        <span id="wyswietlanyRok">Okres: 1975 - 1980</span>
-        <!-- Skok suwaka to 1, dla zachowania płynności -->
-        <input type="range" id="rokSlider" min="1970" max="2025" step="1" value="1975">
+        <div class="rok-display-wrapper">
+            <button id="btnPrev" class="arrow-btn" aria-label="Poprzedni rok">&#8249;</button>
+            <span id="wyswietlanyRok">Okres: 1975 - 1980</span>
+            <button id="btnNext" class="arrow-btn" aria-label="Następny rok">&#8250;</button>
+        </div>
+
+        <div class="range-wrapper">
+            <span class="range-label">1970</span>
+            <input type="range" id="rokSlider" min="1970" max="2025" step="1" value="1975">
+            <span class="range-label">2025</span>
+        </div>
     </div>
 
     <div id="listaOsob">
@@ -171,6 +227,8 @@
     const slider = document.getElementById('rokSlider');
     const display = document.getElementById('wyswietlanyRok');
     const lista = document.getElementById('listaOsob');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
 
     function renderuj(startRok) {
         const endRok = startRok + 5;
@@ -183,8 +241,9 @@
             if (przefiltrowani.length === 0) {
                 lista.innerHTML = "<p class='brak-danych'>Brak danych dla tego okresu.</p>";
             } else {
-                lista.innerHTML = przefiltrowani.map(osoba => `
-                    <div class="osoba-karta">
+                // Generowanie kart z kaskadowym opóźnieniem animacji (stagger effect)
+                lista.innerHTML = przefiltrowani.map((osoba, index) => `
+                    <div class="osoba-karta" style="animation-delay: ${index * 0.08}s;">
                         <div class="osoba-foto-ramka">
                             <div class="osoba-foto" style="background-image: url('zdjecia/pamiec/zdjecia/${osoba.foto}')"></div>
                         </div>
@@ -198,9 +257,31 @@
         }
     }
 
+    // Obsługa zdarzeń na suwaku
     if(slider) {
         slider.addEventListener('input', (e) => {
             renderuj(parseInt(e.target.value));
+        });
+    }
+
+    // Obsługa przycisków < i >
+    if(btnPrev && btnNext && slider) {
+        btnPrev.addEventListener('click', () => {
+            let aktualnaWartosc = parseInt(slider.value);
+            let minWartosc = parseInt(slider.min);
+            if(aktualnaWartosc > minWartosc) {
+                slider.value = aktualnaWartosc - 1;
+                renderuj(aktualnaWartosc - 1);
+            }
+        });
+
+        btnNext.addEventListener('click', () => {
+            let aktualnaWartosc = parseInt(slider.value);
+            let maxWartosc = parseInt(slider.max);
+            if(aktualnaWartosc < maxWartosc) {
+                slider.value = aktualnaWartosc + 1;
+                renderuj(aktualnaWartosc + 1);
+            }
         });
     }
 
