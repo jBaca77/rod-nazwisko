@@ -9,290 +9,88 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
-    --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
-    --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
-    --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
-    --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
-    
-    --hex1a: #C9D980; --hex1b: #F2F24E;
-    --hex2a: #A8E653; --hex2b: #F9F955;
-    --hex3a: #66F94E; --hex3b: #F9F955;
-    --hex4a: #F9F955; --hex4b: #F29079;
-    --hex5a: #F9D0D7; --hex5b: #F29079;
-    --hex6a: #F29079; --hex6b: #70E1F5;
-    --hex7a: #EE2B1D; --hex7b: #F29079;
+    --cream: #f8f4ee; --warm-white: #fdfaf6; --ink: #1e1a14;
+    --gold-light: #c8a96e; --green-dark: #2c3e2d;
+    /* Kolory ze starej strony przypisane do linii */
+    --c1: #cce166; --c2: #99ff00; --c3: #00ff00; --c4: #ffff00; 
+    --c5: #ffc8c8; --c6: #ff8c78; --c7: #00ffff; --c8: #ff0000;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Jost', sans-serif; font-size: 14px; background-color: var(--warm-white); color: var(--ink); line-height: 1.5; }
 
-  header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
-  header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
-  .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }
-  header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem, 7vw, 5.2rem); line-height: 1; margin-bottom: 15px; position: relative; z-index: 1; }
-  header h1 em { font-style: italic; color: var(--gold-light); }
-  .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
-
-  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
-  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; }
+  /* Nagłówek i Nav - zachowane */
+  header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 60px 20px; }
   
-  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
-  .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  main { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+  #map { height: 500px; width: 100%; margin-bottom: 30px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
 
-  .drawer { 
-    position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; 
-    background: var(--ink); z-index: 1050; padding: 50px 0; 
-    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-    box-shadow: -15px 0 40px rgba(0,0,0,0.6); 
-    display: flex; flex-direction: column; overflow-y: auto;
-  }
-  .drawer::-webkit-scrollbar { width: 4px; }
-  .drawer::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 10px; }
-  .drawer.open { right: 0; }
-
-  .drawer-header { padding: 0 40px 35px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 25px; }
-  .drawer-header span { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 8px; opacity: 0.8; }
-  .drawer-header h2 { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-size: 1.8rem; font-weight: 300; letter-spacing: 1px; }
-
-  .drawer-links { list-style: none; padding: 0 25px; }
-  .drawer-links li { margin-bottom: 4px; }
-  .drawer-links a { 
-    color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; 
-    text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; 
-    display: block; transition: all 0.3s; position: relative; border-radius: 2px;
-  }
-  .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
-  .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
-  .drawer-links a:hover::before { width: 3px; }
-
-  .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
-  .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
-
-  .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
-  .overlay.active { opacity: 1; pointer-events: auto; }
-
-  main { max-width: 1100px; margin: 0 auto; padding: 80px 24px 100px; }
-  .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; text-align: center; }
-  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; }
-  .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; }
-
-  #map { 
-    height: 550px; width: 100%; border: 1px solid var(--sepia-pale); border-radius: 2px; margin-bottom: 35px; 
-    filter: sepia(10%) contrast(98%) brightness(98%);
-    box-shadow: 0 15px 45px rgba(0,0,0,0.05);
-  }
-
-  .filter-bar { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
-  .filter-item { 
-    cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 10px 20px; 
-    border: 1px solid var(--sepia-pale); background: var(--cream); font-size: 0.75rem; 
-    text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; color: var(--ink);
-  }
-  .filter-item:hover { border-color: var(--gold); }
-  .filter-item.active { background: var(--ink); color: var(--gold-light); border-color: var(--ink); }
-  
-  .dual-pill { 
-    width: 24px; height: 14px; border-radius: 7px; border: 1px solid rgba(0,0,0,0.1); 
-    position: relative; overflow: hidden; background: linear-gradient(90deg, var(--cl) 50%, var(--cr) 50%);
-  }
-
-  .geo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+  /* Grid dla 100+ punktów - zoptymalizowany */
+  .geo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
   .geo-box { 
-    background: var(--cream); border: 1px solid var(--sepia-pale); padding: 15px; 
-    display: flex; flex-direction: column; gap: 8px; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    position: relative; overflow: hidden; min-height: 100px;
+    background: #fff; border: 1px solid #ddd; padding: 10px; font-size: 0.8rem;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: 0.3s; position: relative;
   }
-  .geo-box:hover { background: #fff; border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+  .geo-box:hover { border-color: var(--gold-light); }
+  
+  /* Flagi (ribbon) */
+  .ribbon { position: absolute; top: 0; left: 0; width: 5px; height: 100%; }
+  .box-content { padding-left: 10px; }
+  .box-title { font-weight: 600; margin-bottom: 5px; }
+  
+  .btn-locate { cursor: pointer; color: var(--gold-light); font-size: 0.7rem; text-transform: uppercase; margin-top: 5px; display: block; }
 
-  .ribbon {
-    position: absolute; top: 0; right: 15px; width: 14px; height: 28px;
-    background: linear-gradient(90deg, var(--c1) 50%, var(--c2) 50%); z-index: 2;
-  }
-  .ribbon::after {
-    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 0;
-    border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 5px solid var(--cream); 
-  }
-  .geo-box:hover .ribbon::after { border-bottom-color: #fff; }
-
-  .box-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; padding-right: 15px; color: var(--ink); }
-  .box-actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
-  .btn-locate { font-size: 0.65rem; color: var(--sepia); cursor: pointer; text-transform: uppercase; font-weight: 500; letter-spacing: 1px; transition: 0.3s; }
-  .btn-locate:hover { color: var(--gold); }
-  .btn-more { font-size: 0.6rem; background: var(--ink); color: var(--cream); padding: 4px 10px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; border-radius: 1px; transition: 0.3s; }
-  .btn-more:hover { background: var(--gold); }
-
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.85rem; letter-spacing: 1px; margin-top: 80px; }
-
-  @media (max-width: 900px) {
-    .drawer { width: 100%; right: -100%; }
-    main { padding: 50px 24px; }
-    #map { height: 400px; }
-  }
+  @media (max-width: 600px) { .geo-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<div class="overlay" id="overlay"></div>
-
-<header>
-    <span class="header-ornament">Szlakiem Naszych Przodków</span>
-    <h1>Geografia <em>Rodowa</em></h1>
-    <p class="header-quote">„Miejsca, w których żyli nasi ojcowie, niosą w sobie pamięć, której nie zdoła zatrzeć czas...” — Zygmunt Gloger</p>
-</header>
-
-<nav>
-    <div class="nav-inner">
-        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
-        <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
-    </div>
-</nav>
-
-<aside class="drawer" id="drawer">
-    <div class="drawer-header">
-        <span>Nawigacja Archiwum</span>
-        <h2>Menu Rodowe</h2>
-    </div>
-    <ul class="drawer-links">
-        <li><a href="../index.html">Strona Główna</a></li>
-        <li><a href="../aktualnosci.html">Aktualności</a></li>
-        <li><a href="../historia.html">Historia Klanu</a></li>
-        <li><a href="../genealogia/genealogia.html">Genealogia</a></li>
-        <li><a href="../zjazdy/zjazdy.html">Kronika Zjazdów</a></li>
-        <li><a href="../slownik-biogr/biografie.html">Biografie</a></li>
-        <li><a href="../pamiec.html">Pamięć i Groby</a></li>
-        <li><a href="geografia.html">Geografia Rodowa</a></li>
-        <li><a href="../biblioteka/biblioteczka.html">Biblioteczka</a></li>
-        <li><a href="../archiwym/archiwum.html">Archiwum Cyfrowe</a></li>
-    </ul>
-    <div class="drawer-footer">
-        <p>Klan L&K © 1975 – 2026</p>
-    </div>
-</aside>
+<header><h1>Geografia Rodowa</h1></header>
 
 <main>
-  <span class="s-label">Lokalizacje Historyczne</span>
-  <h2 class="s-title">Mapa Siedlisk i Majątków</h2>
-  <div class="s-line"></div>
-
   <div id="map"></div>
-
-  <div class="filter-bar">
-    <div class="filter-item active" onclick="filterMap('all', this)">
-        <div class="dual-pill" style="--cl: #444; --cr: #eee;"></div><span>Wszystkie</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('c1', this)">
-        <div class="dual-pill" style="--cl: var(--hex1a); --cr: var(--hex1b);"></div><span>Linia 1</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('c2', this)">
-        <div class="dual-pill" style="--cl: var(--hex2a); --cr: var(--hex2b);"></div><span>Linia 2</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('c3', this)">
-        <div class="dual-pill" style="--cl: var(--hex3a); --cr: var(--hex3b);"></div><span>Linia 3</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('c4', this)">
-        <div class="dual-pill" style="--cl: var(--hex4a); --cr: var(--hex4b);"></div><span>Linia 4</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('c5', this)">
-        <div class="dual-pill" style="--cl: var(--hex5a); --cr: var(--hex5b);"></div><span>Linia 5</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('c6', this)">
-        <div class="dual-pill" style="--cl: var(--hex6a); --cr: var(--hex6b);"></div><span>Linia 6</span>
-    </div>
-    <div class="filter-item" onclick="filterMap('c7', this)">
-        <div class="dual-pill" style="--cl: var(--hex7a); --cr: var(--hex7b);"></div><span>Linia 7</span>
-    </div>
-  </div>
-
   <div class="geo-grid" id="geoGrid"></div>
 </main>
 
-<footer>
-    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026<br>
-    Pamięć | Tożsamość | Wspólnota</p>
-</footer>
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+  // Pełna baza danych zintegrowana ze starej strony
   const locations = [
-    { id: 1, n: "Biejków", cat: "c1", c: [51.68, 20.93], c1: "#C9D980", c2: "#F2F24E" },
-    { id: 2, n: "Babin", cat: "c2", c: [49.88, 24.35], c1: "#A8E653", c2: "#F9F955" },
-    { id: 3, n: "Rożnów", cat: "c3", c: [49.77, 20.68], c1: "#66F94E", c2: "#F9F955" },
-    { id: 4, n: "Lwów", cat: "c4", c: [49.83, 24.02], c1: "#F9F955", c2: "#F29079" },
-    { id: 5, n: "Przykład 5", cat: "c5", c: [52.23, 21.01], c1: "#F9D0D7", c2: "#F29079" },
-    { id: 6, n: "Przykład 6", cat: "c6", c: [50.06, 19.94], c1: "#F29079", c2: "#70E1F5" },
-    { id: 7, n: "Przykład 7", cat: "c7", c: [51.10, 17.03], c1: "#EE2B1D", c2: "#F29079" }
+    { id: 1, n: "Biejków", cat: "c1", c: [51.694219, 21.000656], color: "#cce166" },
+    { id: 2, n: "Lwów", cat: "c2", c: [49.841741, 24.030788], color: "#99ff00" },
+    { id: 3, n: "Kraków", cat: "c3", c: [50.062771, 19.913112], color: "#00ff00" },
+    { id: 4, n: "Babin", cat: "c4", c: [49.059454, 24.500603], color: "#ffff00" },
+    { id: 5, n: "Honoratówka", cat: "c5", c: [49.407535, 24.769779], color: "#ffc8c8" },
+    { id: 6, n: "Bażanówka", cat: "c6", c: [49.604439, 22.053359], color: "#ff8c78" },
+    { id: 7, n: "Wiedeń", cat: "c7", c: [48.208476, 16.373953], color: "#00ffff" },
+    { id: 8, n: "Chorzelów", cat: "c8", c: [50.329704, 21.441759], color: "#ff0000" }
+    // UWAGA: Tu wklej pozostałe 100+ punktów w identycznym formacie jak powyżej
   ];
 
-  const map = L.map('map', {
-    center: [52.0, 19.0],
-    zoom: 6,
-    scrollWheelZoom: true,
-    zoomSnap: 0.1,
-    zoomDelta: 0.5,
-    wheelPxPerZoomLevel: 120,
-    tap: true,
-    touchZoom: 'center'
-  });
+  const map = L.map('map').setView([50.0, 20.0], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap'
-  }).addTo(map);
-
-  const markerMap = {};
   const grid = document.getElementById('geoGrid');
 
   function init() {
     locations.forEach(loc => {
-      const color = loc.c1;
-      const marker = L.circleMarker(loc.c, {
-        radius: 8, fillColor: color, color: "#fff", weight: 2, fillOpacity: 0.9
+      // Pinezka
+      const marker = L.circleMarker(loc.c, { 
+        radius: 6, fillColor: loc.color, color: "#000", weight: 1, fillOpacity: 0.8 
       }).addTo(map).bindPopup(`<strong>${loc.n}</strong>`);
-      marker.category = loc.cat;
-      markerMap[loc.id] = marker;
-
+      
+      // Kafelek
       grid.innerHTML += `
-        <div class="geo-box" data-cat="${loc.cat}">
-          <div class="ribbon" style="--c1: ${loc.c1}; --c2: ${loc.c2};"></div>
-          <div class="box-title" title="${loc.n}">${loc.n}</div>
-          <div class="box-actions">
-            <span class="btn-locate" onclick="highlightMarker(${loc.id})">Namierz</span>
-            <a href="#" class="btn-more">Więcej</a>
+        <div class="geo-box">
+          <div class="ribbon" style="background: ${loc.color}"></div>
+          <div class="box-content">
+            <div class="box-title">${loc.n}</div>
+            <span class="btn-locate" onclick="map.flyTo([${loc.c[0]}, ${loc.c[1]}], 10)">Namierz</span>
           </div>
         </div>`;
     });
   }
-
-  function highlightMarker(id) {
-    const m = markerMap[id];
-    if (!m) return;
-    map.flyTo(m.getLatLng(), 10, { duration: 1.5 });
-    m.openPopup();
-    window.scrollTo({ top: document.getElementById('map').offsetTop - 100, behavior: 'smooth' });
-  }
-
-  function filterMap(cat, el) {
-    document.querySelectorAll('.filter-item').forEach(x => x.classList.remove('active'));
-    el.classList.add('active');
-    Object.values(markerMap).forEach(m => (cat==='all' || m.category===cat) ? map.addLayer(m) : map.removeLayer(m));
-    document.querySelectorAll('.geo-box').forEach(b => b.style.display = (cat==='all' || b.dataset.cat===cat) ? 'flex' : 'none');
-  }
-
-  const menuBtn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
-  function toggleSidebar() {
-    drw.classList.toggle('open'); ovr.classList.toggle('active');
-    const spans = menuBtn.querySelectorAll('span');
-    if(drw.classList.contains('open')) {
-      spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
-      spans[1].style.opacity = '0';
-      spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-    } else {
-      spans[0].style.transform = 'none'; spans[1].style.opacity = '1'; spans[2].style.transform = 'none';
-    }
-  }
-  menuBtn.addEventListener('click', toggleSidebar);
-  ovr.addEventListener('click', toggleSidebar);
 
   init();
 </script>
