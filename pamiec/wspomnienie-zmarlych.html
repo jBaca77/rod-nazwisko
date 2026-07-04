@@ -176,9 +176,7 @@
 
 <nav>
     <div class="nav-inner">
-        <!-- Odnośnik powrotu do strony głównej -->
         <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
-        <!-- Odnośnik powrotu do podstrony Pamięć -->
         <a href="pamiec.html" class="back-link">← Powrót</a>
     </div>
 </nav>
@@ -197,14 +195,19 @@
         <div class="s-line"></div>
 
         <div class="rok-display-wrapper">
+            <!-- Strzałka w lewo -->
             <button id="btnPrev" class="arrow-btn" aria-label="Poprzedni rok">&#8249;</button>
             <span id="wyswietlanyRok">Okres: 1975 - 1980</span>
+            <!-- Strzałka w prawo -->
             <button id="btnNext" class="arrow-btn" aria-label="Następny rok">&#8250;</button>
         </div>
 
         <div class="range-wrapper">
+            <!-- Etykieta początkowa -->
             <span class="range-label">1970</span>
+            <!-- Główny suwak -->
             <input type="range" id="rokSlider" min="1970" max="2025" step="1" value="1975">
+            <!-- Etykieta końcowa -->
             <span class="range-label">2025</span>
         </div>
     </div>
@@ -219,7 +222,6 @@
 </footer>
 
 <script>
-    // Sprawdzenie czy baza danych się załadowała
     if (typeof osoby === 'undefined') {
         console.error("BŁĄD: Plik wspomnienia.js nie został załadowany!");
     }
@@ -234,14 +236,13 @@
         const endRok = startRok + 5;
         display.innerText = `Okres: ${startRok} - ${endRok}`;
         
-        // Upewniamy się, że tablica 'osoby' istnieje przed filtrowaniem
         if (typeof osoby !== 'undefined') {
             const przefiltrowani = osoby.filter(osoba => osoba.rokZgonu >= startRok && osoba.rokZgonu <= endRok);
             
             if (przefiltrowani.length === 0) {
                 lista.innerHTML = "<p class='brak-danych'>Brak danych dla tego okresu.</p>";
             } else {
-                // Generowanie kart z kaskadowym opóźnieniem animacji (stagger effect)
+                // Dodano style="animation-delay..." do stworzenia kaskadowego Fade-In
                 lista.innerHTML = przefiltrowani.map((osoba, index) => `
                     <div class="osoba-karta" style="animation-delay: ${index * 0.08}s;">
                         <div class="osoba-foto-ramka">
@@ -257,14 +258,14 @@
         }
     }
 
-    // Obsługa zdarzeń na suwaku
+    // Obsługa suwaka dotykowego/myszką
     if(slider) {
         slider.addEventListener('input', (e) => {
             renderuj(parseInt(e.target.value));
         });
     }
 
-    // Obsługa przycisków < i >
+    // Obsługa strzałek do nawigacji po jednym roku
     if(btnPrev && btnNext && slider) {
         btnPrev.addEventListener('click', () => {
             let aktualnaWartosc = parseInt(slider.value);
@@ -285,7 +286,7 @@
         });
     }
 
-    // Startowe wyświetlenie
+    // Startowe uruchomienie
     renderuj(1975);
 </script>
 </body>
