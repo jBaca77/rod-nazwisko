@@ -29,7 +29,7 @@
   nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); } 
   .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; } 
   .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; } 
-   
+    
   .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; } 
   .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); } 
 
@@ -113,7 +113,8 @@
   @media (max-width: 900px) { 
     .drawer { width: 100%; right: -100%; } 
     main { padding: 50px 24px; } 
-    .map-layout { flex-direction: column; }
+    .map-layout { flex-direction: column; } 
+    .map-column { width: 100%; }
     .sidebar-column { height: 400px; width: 100%; }
     #map { height: 350px; } 
   } 
@@ -215,6 +216,11 @@
    const markerMap = {}; 
    const grid = document.getElementById('geoGrid'); 
 
+   // Powrót do początkowego wyglądu po zamknięciu dymka
+   map.on('popupclose', function() {
+     map.flyTo([52.0, 19.0], 6, { duration: 1.0 });
+   });
+
    function init() { 
      gData.forEach(g => { 
        const marker = L.circleMarker(g.c, { 
@@ -234,6 +240,9 @@
            </div> 
          </div>`; 
      }); 
+
+     // Wymuszenie poprawnego przeliczenia kafelków dla urządzeń mobilnych
+     setTimeout(() => { map.invalidateSize(); }, 300);
    } 
 
    function highlightMarker(id) { 
@@ -242,6 +251,9 @@
      map.flyTo(m.getLatLng(), 15, { duration: 1.0 }); 
      m.openPopup(); 
    } 
+
+   // Aktualizacja rozmiaru mapy przy obracaniu urządzenia
+   window.addEventListener('resize', () => { map.invalidateSize(); });
 
    const menuBtn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay'); 
    function toggleSidebar() { drw.classList.toggle('open'); ovr.classList.toggle('active'); } 
