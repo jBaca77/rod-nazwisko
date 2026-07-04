@@ -78,7 +78,7 @@
   .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; } 
   .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; } 
 
-  /* Layout Mapy i Sidebar - ZAKTUALIZOWANO PROPORCJE */
+  /* Layout Mapy i Sidebar */
   .map-layout { display: flex; gap: 30px; align-items: flex-start; }
   .map-column { flex: 3; }
   .sidebar-column { flex: 1; height: 550px; overflow-y: auto; background: var(--parchment); padding: 10px; border: 1px solid var(--sepia-pale); }
@@ -230,7 +230,9 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
 <script> 
    const locations = [
-    { id: 1, n: "Biejków", rod: "Ładomirscy", cat: "c1", c: [51.694219, 21.000656], c1: "#C9D980", c2: "#F2F24E" },
+    // Aby dodać link do konkretnej podstrony, dodaj w obiekcie pole 'url', np.:
+    // { id: 1, n: "Biejków", rod: "Ładomirscy", cat: "c1", c: [51.694219, 21.000656], c1: "#C9D980", c2: "#F2F24E", url: "biejkow.html" },
+    { id: 1, n: "Biejków", rod: "Ładomirscy", cat: "c1", c: [51.694219, 21.000656], c1: "#C9D980", c2: "#F2F24E", url: "biejkow.html" },
     { id: 2, n: "Brzozowa", rod: "Ładomirscy", cat: "c1", c: [50.966193, 21.665876], c1: "#C9D980", c2: "#F2F24E" },
     { id: 3, n: "Budków", rod: "Ładomirscy", cat: "c1", c: [51.268229, 20.136429], c1: "#C9D980", c2: "#F2F24E" },
     { id: 4, n: "Ciepielów", rod: "Ładomirscy", cat: "c1", c: [51.247574, 21.573597], c1: "#C9D980", c2: "#F2F24E" },
@@ -244,7 +246,7 @@
     { id: 12, n: "Piotrków Tryb.", rod: "Ładomirscy", cat: "c1", c: [51.408269, 19.696224], c1: "#C9D980", c2: "#F2F24E" },
     { id: 13, n: "Rożenek i Ciechomin", rod: "Ładomirscy", cat: "c1", c: [51.290132, 20.026883], c1: "#C9D980", c2: "#F2F24E" },
     { id: 14, n: "Ubinie", rod: "Ładomirscy", cat: "c1", c: [49.926852, 24.424482], c1: "#C9D980", c2: "#F2F24E" },
-    { id: 15, n: "Warszawa", rod: "Ładomirscy", cat: "c1", c: [52.247516, 21.013536], c1: "#C9D980", c2: "#F2F24E" },
+    { id: 15, n: "Warszawa", rod: "Ładomirscy", cat: "c1", c: [52.247516, 21.013536], c1: "#C9D980", c2: "#F2F24E", url: "warszawa.html" },
     { id: 16, n: "Wielgie", rod: "Ładomirscy", cat: "c1", c: [51.241274, 21.494594], c1: "#C9D980", c2: "#F2F24E" },
     { id: 17, n: "Żytniów", rod: "Ładomirscy", cat: "c1", c: [51.014624, 18.568705], c1: "#C9D980", c2: "#F2F24E" },
     { id: 18, n: "Lwów", rod: "Kraińscy", cat: "c2", c: [49.841741, 24.030788], c1: "#A8E653", c2: "#F9F955" },
@@ -348,6 +350,9 @@
        marker.category = loc.cat; 
        markerMap[loc.id] = marker; 
 
+       // Jeśli w obiekcie location istnieje pole 'url', przycisk się pojawi
+       const moreButton = loc.url ? `<a href="${loc.url}" class="btn-more">Więcej</a>` : '';
+
        grid.innerHTML += ` 
          <div class="geo-box" data-cat="${loc.cat}"> 
            <div class="ribbon" style="--c1: ${loc.c1}; --c2: ${loc.c2};"></div> 
@@ -355,7 +360,7 @@
            <div class="box-rod">${loc.rod}</div>
            <div class="box-actions"> 
              <span class="btn-locate" onclick="highlightMarker(${loc.id})">Namierz</span> 
-             <a href="#" class="btn-more">Więcej</a> 
+             ${moreButton}
            </div> 
          </div>`; 
      }); 
