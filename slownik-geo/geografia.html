@@ -73,14 +73,14 @@
   .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; } 
   .overlay.active { opacity: 1; pointer-events: auto; } 
 
-  main { max-width: 1100px; margin: 0 auto; padding: 80px 24px 100px; } 
+  main { max-width: 1200px; margin: 0 auto; padding: 80px 24px 100px; } 
   .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; text-align: center; } 
   .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; } 
   .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; } 
 
-  /* Layout Mapy i Sidebar */
+  /* Layout Mapy i Sidebar - ZAKTUALIZOWANO PROPORCJE */
   .map-layout { display: flex; gap: 30px; align-items: flex-start; }
-  .map-column { flex: 2; }
+  .map-column { flex: 3; }
   .sidebar-column { flex: 1; height: 550px; overflow-y: auto; background: var(--parchment); padding: 10px; border: 1px solid var(--sepia-pale); }
   .sidebar-column::-webkit-scrollbar { width: 4px; }
   .sidebar-column::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 2px; }
@@ -107,7 +107,7 @@
 
   .geo-grid { display: grid; grid-template-columns: 1fr; gap: 8px; } 
   .geo-box { 
-    background: #fff; border: 1px solid var(--sepia-pale); padding: 10px 15px; 
+    background: #fff; border: 1px solid var(--sepia-pale); padding: 6px 10px; 
     position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 2px;
     transition: all 0.3s;
   } 
@@ -122,8 +122,8 @@
     border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 5px solid #fff; 
   }
 
-  .box-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1rem; color: var(--ink); padding-right: 25px; } 
-  .box-rod { font-family: 'Jost', sans-serif; font-size: 0.65rem; color: var(--sepia); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; } 
+  .box-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 0.9rem; color: var(--ink); padding-right: 25px; } 
+  .box-rod { font-family: 'Jost', sans-serif; font-size: 0.55rem; color: var(--sepia); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; } 
   .box-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--line); } 
   .btn-locate { font-size: 0.6rem; color: var(--sepia); cursor: pointer; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; transition: 0.3s; } 
   .btn-locate:hover { color: var(--gold); } 
