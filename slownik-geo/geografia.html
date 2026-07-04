@@ -78,8 +78,15 @@
   .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; } 
   .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; } 
 
+  /* Layout Mapy i Sidebar */
+  .map-layout { display: flex; gap: 30px; align-items: flex-start; }
+  .map-column { flex: 2; }
+  .sidebar-column { flex: 1; height: 550px; overflow-y: auto; background: var(--parchment); padding: 15px; border: 1px solid var(--sepia-pale); }
+  .sidebar-column::-webkit-scrollbar { width: 4px; }
+  .sidebar-column::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 2px; }
+
   #map { 
-    height: 550px; width: 100%; border: 1px solid var(--sepia-pale); border-radius: 2px; margin-bottom: 35px; 
+    height: 550px; width: 100%; border: 1px solid var(--sepia-pale); border-radius: 2px; margin-bottom: 20px; 
     filter: sepia(10%) contrast(98%) brightness(98%); 
     box-shadow: 0 15px 45px rgba(0,0,0,0.05); 
   } 
@@ -98,27 +105,22 @@
     position: relative; overflow: hidden; background: linear-gradient(90deg, var(--cl) 50%, var(--cr) 50%); 
   } 
 
-  .geo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; } 
+  .geo-grid { display: grid; grid-template-columns: 1fr; gap: 10px; } 
   .geo-box { 
-    background: var(--cream); border: 1px solid var(--sepia-pale); padding: 15px; 
-    display: flex; flex-direction: column; gap: 4px; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-    position: relative; overflow: hidden; min-height: 110px; 
+    background: #fff; border: 1px solid var(--sepia-pale); padding: 15px; 
+    position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px;
+    transition: all 0.3s;
   } 
-  .geo-box:hover { background: #fff; border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); } 
+  .geo-box:hover { border-color: var(--gold); transform: translateX(5px); } 
 
   .ribbon { 
-    position: absolute; top: 0; right: 15px; width: 14px; height: 28px; 
-    background: linear-gradient(90deg, var(--c1) 50%, var(--c2) 50%); z-index: 2; 
+    position: absolute; top: 0; left: 0; bottom: 0; width: 6px; 
+    background: linear-gradient(180deg, var(--c1) 50%, var(--c2) 50%); z-index: 2; 
   } 
-  .ribbon::after { 
-    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 0; 
-    border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 5px solid var(--cream); 
-  } 
-  .geo-box:hover .ribbon::after { border-bottom-color: #fff; } 
 
-  .box-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; padding-right: 15px; color: var(--ink); } 
-  .box-rod { font-family: 'Jost', sans-serif; font-size: 0.7rem; color: var(--sepia); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; } 
-  .box-actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); } 
+  .box-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; color: var(--ink); padding-left: 10px; } 
+  .box-rod { font-family: 'Jost', sans-serif; font-size: 0.7rem; color: var(--sepia); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; padding-left: 10px; } 
+  .box-actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line); padding-left: 10px; } 
   .btn-locate { font-size: 0.65rem; color: var(--sepia); cursor: pointer; text-transform: uppercase; font-weight: 500; letter-spacing: 1px; transition: 0.3s; } 
   .btn-locate:hover { color: var(--gold); } 
   .btn-more { font-size: 0.6rem; background: var(--ink); color: var(--cream); padding: 4px 10px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; border-radius: 1px; transition: 0.3s; } 
@@ -129,7 +131,9 @@
   @media (max-width: 900px) { 
     .drawer { width: 100%; right: -100%; } 
     main { padding: 50px 24px; } 
-    #map { height: 400px; } 
+    .map-layout { flex-direction: column; }
+    .sidebar-column { height: 400px; width: 100%; }
+    #map { height: 350px; } 
   } 
 </style> 
 </head> 
@@ -177,36 +181,41 @@
   <h2 class="s-title">Mapa Siedlisk i Majątków</h2> 
   <div class="s-line"></div> 
 
-  <div id="map"></div> 
-
-  <div class="filter-bar"> 
-    <div class="filter-item active" onclick="filterMap('all', this)"> 
-        <div class="dual-pill" style="--cl: #444; --cr: #eee;"></div><span>Wszystkie</span> 
-    </div> 
-    <div class="filter-item" onclick="filterMap('c1', this)"> 
-        <div class="dual-pill" style="--cl: var(--hex1a); --cr: var(--hex1b);"></div><span>Linia 1</span> 
-    </div> 
-    <div class="filter-item" onclick="filterMap('c2', this)"> 
-        <div class="dual-pill" style="--cl: var(--hex2a); --cr: var(--hex2b);"></div><span>Linia 2</span> 
-    </div> 
-    <div class="filter-item" onclick="filterMap('c3', this)"> 
-        <div class="dual-pill" style="--cl: var(--hex3a); --cr: var(--hex3b);"></div><span>Linia 3</span> 
-    </div> 
-    <div class="filter-item" onclick="filterMap('c4', this)"> 
-        <div class="dual-pill" style="--cl: var(--hex4a); --cr: var(--hex4b);"></div><span>Linia 4</span> 
-    </div> 
-    <div class="filter-item" onclick="filterMap('c5', this)"> 
-        <div class="dual-pill" style="--cl: var(--hex5a); --cr: var(--hex5b);"></div><span>Linia 5</span> 
-    </div> 
-    <div class="filter-item" onclick="filterMap('c6', this)"> 
-        <div class="dual-pill" style="--cl: var(--hex6a); --cr: var(--hex6b);"></div><span>Linia 6</span> 
-    </div> 
-    <div class="filter-item" onclick="filterMap('c7', this)"> 
-        <div class="dual-pill" style="--cl: var(--hex7a); --cr: var(--hex7b);"></div><span>Linia 7</span> 
-    </div> 
-  </div> 
-
-  <div class="geo-grid" id="geoGrid"></div> 
+  <div class="map-layout">
+    <div class="map-column">
+      <div id="map"></div> 
+      <div class="filter-bar"> 
+        <div class="filter-item active" onclick="filterMap('all', this)"> 
+            <div class="dual-pill" style="--cl: #444; --cr: #eee;"></div><span>Wszystkie</span> 
+        </div> 
+        <div class="filter-item" onclick="filterMap('c1', this)"> 
+            <div class="dual-pill" style="--cl: var(--hex1a); --cr: var(--hex1b);"></div><span>Linia 1</span> 
+        </div> 
+        <div class="filter-item" onclick="filterMap('c2', this)"> 
+            <div class="dual-pill" style="--cl: var(--hex2a); --cr: var(--hex2b);"></div><span>Linia 2</span> 
+        </div> 
+        <div class="filter-item" onclick="filterMap('c3', this)"> 
+            <div class="dual-pill" style="--cl: var(--hex3a); --cr: var(--hex3b);"></div><span>Linia 3</span> 
+        </div> 
+        <div class="filter-item" onclick="filterMap('c4', this)"> 
+            <div class="dual-pill" style="--cl: var(--hex4a); --cr: var(--hex4b);"></div><span>Linia 4</span> 
+        </div> 
+        <div class="filter-item" onclick="filterMap('c5', this)"> 
+            <div class="dual-pill" style="--cl: var(--hex5a); --cr: var(--hex5b);"></div><span>Linia 5</span> 
+        </div> 
+        <div class="filter-item" onclick="filterMap('c6', this)"> 
+            <div class="dual-pill" style="--cl: var(--hex6a); --cr: var(--hex6b);"></div><span>Linia 6</span> 
+        </div> 
+        <div class="filter-item" onclick="filterMap('c7', this)"> 
+            <div class="dual-pill" style="--cl: var(--hex7a); --cr: var(--hex7b);"></div><span>Linia 7</span> 
+        </div> 
+      </div> 
+    </div>
+    
+    <div class="sidebar-column">
+      <div class="geo-grid" id="geoGrid"></div> 
+    </div>
+  </div>
 </main> 
 
 <footer> 
@@ -216,9 +225,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
 <script> 
-  // ZINTEGROWANE DANE
- const locations = [
-    // Grupa c1 (ikonaa)
+   const locations = [
     { id: 1, n: "Biejków", rod: "Ładomirscy", cat: "c1", c: [51.694219, 21.000656], c1: "#C9D980", c2: "#F2F24E" },
     { id: 2, n: "Brzozowa", rod: "Ładomirscy", cat: "c1", c: [50.966193, 21.665876], c1: "#C9D980", c2: "#F2F24E" },
     { id: 3, n: "Budków", rod: "Ładomirscy", cat: "c1", c: [51.268229, 20.136429], c1: "#C9D980", c2: "#F2F24E" },
@@ -236,14 +243,10 @@
     { id: 15, n: "Warszawa", rod: "Ładomirscy", cat: "c1", c: [52.247516, 21.013536], c1: "#C9D980", c2: "#F2F24E" },
     { id: 16, n: "Wielgie", rod: "Ładomirscy", cat: "c1", c: [51.241274, 21.494594], c1: "#C9D980", c2: "#F2F24E" },
     { id: 17, n: "Żytniów", rod: "Ładomirscy", cat: "c1", c: [51.014624, 18.568705], c1: "#C9D980", c2: "#F2F24E" },
-    
-    // Grupa c2 (ikonab)
     { id: 18, n: "Lwów", rod: "Kraińscy", cat: "c2", c: [49.841741, 24.030788], c1: "#A8E653", c2: "#F9F955" },
     { id: 19, n: "Noviny pod Ralskem", rod: "Kraińscy", cat: "c2", c: [50.6920, 14.7466], c1: "#A8E653", c2: "#F9F955" },
     { id: 20, n: "Sławentyn", rod: "Kraińscy", cat: "c2", c: [49.304612, 24.870408], c1: "#A8E653", c2: "#F9F955" },
     { id: 21, n: "Szumlany i Marianów", rod: "Kraińscy", cat: "c2", c: [49.277306, 24.886273], c1: "#A8E653", c2: "#F9F955" },
-
-    // Grupa c3 (ikonac)
     { id: 22, n: "Bierówka", rod: "Rod", cat: "c3", c: [49.771293, 21.57388], c1: "#66F94E", c2: "#F9F955" },
     { id: 23, n: "Bochnia", rod: "Rod", cat: "c3", c: [49.969327, 20.430478], c1: "#66F94E", c2: "#F9F955" },
     { id: 24, n: "Gródek nad Dunajcem", rod: "Rod", cat: "c3", c: [49.746877, 20.732338], c1: "#66F94E", c2: "#F9F955" },
@@ -260,8 +263,6 @@
     { id: 35, n: "Tłumacz", rod: "Rod", cat: "c3", c: [48.865569, 25.004132], c1: "#66F94E", c2: "#F9F955" },
     { id: 36, n: "Zakopane", rod: "Rod", cat: "c3", c: [49.296785, 19.948523], c1: "#66F94E", c2: "#F9F955" },
     { id: 37, n: "Złoczów", rod: "Rod", cat: "c3", c: [49.807526, 24.903221], c1: "#66F94E", c2: "#F9F955" },
-
-    // Grupa c4 (ikonad, ikonacd)
     { id: 38, n: "Babin", rod: "Rod", cat: "c4", c: [49.059454, 24.500603], c1: "#F9F955", c2: "#F29079" },
     { id: 39, n: "Dzieduszyce Małe", rod: "Rod", cat: "c4", c: [49.14716, 24.02330], c1: "#F9F955", c2: "#F29079" },
     { id: 40, n: "Filipkowce", rod: "Rod", cat: "c4", c: [48.63865, 26.084807], c1: "#F9F955", c2: "#F29079" },
@@ -281,8 +282,6 @@
     { id: 54, n: "Taurów", rod: "Rod", cat: "c4", c: [49.536809, 25.278447], c1: "#F9F955", c2: "#F29079" },
     { id: 55, n: "Tomaszowce", rod: "Rod", cat: "c4", c: [49.137781, 24.444104], c1: "#F9F955", c2: "#F29079" },
     { id: 56, n: "Wierzchnia", rod: "Rod", cat: "c4", c: [49.09885, 24.30100], c1: "#F9F955", c2: "#F29079" },
-
-    // Grupa c5 (ikonae)
     { id: 57, n: "Biletówka i Leżanówka", rod: "Rod", cat: "c5", c: [49.302425, 26.064852], c1: "#F9D0D7", c2: "#F29079" },
     { id: 58, n: "Chersoń", rod: "Rod", cat: "c5", c: [46.656125, 32.603787], c1: "#F9D0D7", c2: "#F29079" },
     { id: 59, n: "Irkuck", rod: "Rod", cat: "c5", c: [52.283755, 104.259347], c1: "#F9D0D7", c2: "#F29079" },
@@ -292,8 +291,6 @@
     { id: 63, n: "Stambuł (Konstantynopol)", rod: "Rod", cat: "c5", c: [41.015201, 28.975952], c1: "#F9D0D7", c2: "#F29079" },
     { id: 64, n: "Szyły", rod: "Rod", cat: "c5", c: [49.693054, 25.983598], c1: "#F9D0D7", c2: "#F29079" },
     { id: 65, n: "Viareggio", rod: "Rod", cat: "c5", c: [43.865893, 10.250789], c1: "#F9D0D7", c2: "#F29079" },
-
-    // Grupa c6 (ikonaf, ikonaf2)
     { id: 66, n: "Bażanówka", rod: "Rod", cat: "c6", c: [49.604439, 22.053359], c1: "#F29079", c2: "#70E1F5" },
     { id: 67, n: "Hermanowice", rod: "Rod", cat: "c6", c: [49.723799, 22.814545], c1: "#F29079", c2: "#70E1F5" },
     { id: 68, n: "Jabłonka", rod: "Rod", cat: "c6", c: [49.692467, 22.106093], c1: "#F29079", c2: "#70E1F5" },
@@ -315,8 +312,6 @@
     { id: 84, n: "Wiedeń", rod: "Rod", cat: "c6", c: [48.208476, 16.373953], c1: "#F29079", c2: "#70E1F5" },
     { id: 85, n: "Wieliczka", rod: "Rod", cat: "c6", c: [49.982251, 20.060226], c1: "#F29079", c2: "#70E1F5" },
     { id: 86, n: "Zręczyce", rod: "Rod", cat: "c6", c: [49.891372, 20.220672], c1: "#F29079", c2: "#70E1F5" },
-
-    // Grupa c7 (ikonag)
     { id: 87, n: "Chorzelów", rod: "Rod", cat: "c7", c: [50.329704, 21.441759], c1: "#EE2B1D", c2: "#F29079" },
     { id: 88, n: "Dąbrowa Tarnowska", rod: "Rod", cat: "c7", c: [50.174998, 20.986328], c1: "#EE2B1D", c2: "#F29079" },
     { id: 89, n: "Drohobycz", rod: "Rod", cat: "c7", c: [49.3514, 23.506351], c1: "#EE2B1D", c2: "#F29079" },
@@ -333,82 +328,57 @@
     { id: 100, n: "Zarszyn", rod: "Rod", cat: "c7", c: [49.581083, 22.014232], c1: "#EE2B1D", c2: "#F29079" }
 ];
 
-  const map = L.map('map', { 
-    center: [52.0, 19.0], 
-    zoom: 6, 
-    scrollWheelZoom: true, 
-    zoomSnap: 0.1, 
-    zoomDelta: 0.5, 
-    wheelPxPerZoomLevel: 120, 
-    tap: true, 
-    touchZoom: 'center' 
-  }); 
+   const map = L.map('map', { center: [52.0, 19.0], zoom: 6 }); 
+   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map); 
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
-    attribution: '&copy; OpenStreetMap' 
-  }).addTo(map); 
+   const markerMap = {}; 
+   const grid = document.getElementById('geoGrid'); 
 
-  const markerMap = {}; 
-  const grid = document.getElementById('geoGrid'); 
+   function init() { 
+     locations.forEach(loc => { 
+       const marker = L.circleMarker(loc.c, { 
+         radius: 8, fillColor: loc.c1, color: "#fff", weight: 2, fillOpacity: 0.9 
+       }).addTo(map).bindPopup(`<strong>${loc.n}</strong><br>${loc.rod}`); 
+       
+       marker.on('popupclose', () => map.flyTo([52.0, 19.0], 6, { duration: 1.5 }));
+       marker.category = loc.cat; 
+       markerMap[loc.id] = marker; 
 
-  function init() { 
-    locations.forEach(loc => { 
-      const marker = L.circleMarker(loc.c, { 
-        radius: 8, fillColor: loc.c1, color: "#fff", weight: 2, fillOpacity: 0.9 
-      }).addTo(map).bindPopup(`<strong>${loc.n}</strong><br>${loc.rod}`); 
-      
-      // Zdarzenie: Po zamknięciu popupu mapa wraca do widoku ogólnego
-      marker.on('popupclose', () => {
-        map.flyTo([52.0, 19.0], 6, { duration: 1.5 });
-      });
+       grid.innerHTML += ` 
+         <div class="geo-box" data-cat="${loc.cat}"> 
+           <div class="ribbon" style="--c1: ${loc.c1}; --c2: ${loc.c2};"></div> 
+           <div class="box-title" title="${loc.n}">${loc.n}</div> 
+           <div class="box-rod">${loc.rod}</div>
+           <div class="box-actions"> 
+             <span class="btn-locate" onclick="highlightMarker(${loc.id})">Namierz</span> 
+             <a href="#" class="btn-more">Więcej</a> 
+           </div> 
+         </div>`; 
+     }); 
+   } 
 
-      marker.category = loc.cat; 
-      markerMap[loc.id] = marker; 
+   function highlightMarker(id) { 
+     const m = markerMap[id]; 
+     if (!m) return; 
+     map.flyTo(m.getLatLng(), 10, { duration: 1.5 }); 
+     m.openPopup(); 
+   } 
 
-      grid.innerHTML += ` 
-        <div class="geo-box" data-cat="${loc.cat}"> 
-          <div class="ribbon" style="--c1: ${loc.c1}; --c2: ${loc.c2};"></div> 
-          <div class="box-title" title="${loc.n}">${loc.n}</div> 
-          <div class="box-rod">${loc.rod}</div>
-          <div class="box-actions"> 
-            <span class="btn-locate" onclick="highlightMarker(${loc.id})">Namierz</span> 
-            <a href="#" class="btn-more">Więcej</a> 
-          </div> 
-        </div>`; 
-    }); 
-  } 
+   function filterMap(cat, el) { 
+     document.querySelectorAll('.filter-item').forEach(x => x.classList.remove('active')); 
+     el.classList.add('active'); 
+     Object.values(markerMap).forEach(m => (cat==='all' || m.category===cat) ? map.addLayer(m) : map.removeLayer(m)); 
+     document.querySelectorAll('.geo-box').forEach(b => b.style.display = (cat==='all' || b.dataset.cat===cat) ? 'flex' : 'none'); 
+   } 
 
-  function highlightMarker(id) { 
-    const m = markerMap[id]; 
-    if (!m) return; 
-    map.flyTo(m.getLatLng(), 10, { duration: 1.5 }); 
-    m.openPopup(); 
-    window.scrollTo({ top: document.getElementById('map').offsetTop - 100, behavior: 'smooth' }); 
-  } 
+   const menuBtn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay'); 
+   function toggleSidebar() { 
+     drw.classList.toggle('open'); ovr.classList.toggle('active'); 
+   } 
+   menuBtn.addEventListener('click', toggleSidebar); 
+   ovr.addEventListener('click', toggleSidebar); 
 
-  function filterMap(cat, el) { 
-    document.querySelectorAll('.filter-item').forEach(x => x.classList.remove('active')); 
-    el.classList.add('active'); 
-    Object.values(markerMap).forEach(m => (cat==='all' || m.category===cat) ? map.addLayer(m) : map.removeLayer(m)); 
-    document.querySelectorAll('.geo-box').forEach(b => b.style.display = (cat==='all' || b.dataset.cat===cat) ? 'flex' : 'none'); 
-  } 
-
-  const menuBtn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay'); 
-  function toggleSidebar() { 
-    drw.classList.toggle('open'); ovr.classList.toggle('active'); 
-    const spans = menuBtn.querySelectorAll('span'); 
-    if(drw.classList.contains('open')) { 
-      spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)'; 
-      spans[1].style.opacity = '0'; 
-      spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)'; 
-    } else { 
-      spans[0].style.transform = 'none'; spans[1].style.opacity = '1'; spans[2].style.transform = 'none'; 
-    } 
-  } 
-  menuBtn.addEventListener('click', toggleSidebar); 
-  ovr.addEventListener('click', toggleSidebar); 
-
-  init(); 
+   init(); 
 </script> 
 </body> 
 </html>
