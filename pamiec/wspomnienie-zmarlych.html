@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oś Czasu Pamięci | Archiwum L&K</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- TUTAJ ŁADUJESZ SWÓJ PLIK JS Z BAZĄ DANYCH -->
     <script src="wspomnienia.js"></script>
@@ -22,53 +22,60 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-        /* ── NAWIGACJA (jak w kodzie 3 - bez paska bocznego) ── */
+        /* ── NAWIGACJA ── */
         nav { background-color: var(--ink); padding: 16px 24px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
         .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.2rem; letter-spacing: 2px; }
         .back-link { color: var(--cream); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
         .back-link:hover { color: var(--gold-light); }
 
-        /* ── HEADER ── */
-        header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
-        header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
-        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }
-        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem, 7vw, 5.2rem); line-height: 1; margin-bottom: 15px; position: relative; z-index: 1; }
-        .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
-
         /* ── MAIN CONTENT ── */
-        main { max-width: 1100px; margin: 0 auto; padding: 80px 24px 120px; }
+        main { max-width: 1100px; margin: 0 auto; padding: 60px 24px 120px; }
+        
+        /* ── WPROWADZENIE (Zastępuje zielony header) ── */
+        .intro-section { text-align: center; margin-bottom: 60px; }
         .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; text-align: center; }
-        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); font-weight: 400; text-align: center; }
-        .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; }
+        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 15px; color: var(--ink); font-weight: 400; text-align: center; line-height: 1.1; }
+        .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 25px; }
+        .intro-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: var(--sepia); max-width: 600px; margin: 0 auto; }
 
         /* ── PANEL SUWAKA (SLIDER) ── */
         .slider-panel {
             max-width: 700px;
             margin: 0 auto 50px;
-            padding: 40px;
+            padding: 40px 50px;
             background: var(--parchment);
             border: 1px dashed var(--sepia-light);
             text-align: center;
             border-radius: 2px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
         }
         
+        .slider-panel .s-title { font-size: 2rem; margin-bottom: 15px; }
+        .slider-panel .s-line { margin-bottom: 35px; }
+
         #wyswietlanyRok {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
             color: var(--ink);
             display: block;
             margin-bottom: 25px;
+            font-weight: 500;
         }
 
-        /* Stylowy input range */
-        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 10px 0; }
+        /* Stylowy input range - ultra smooth */
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 15px 0; }
         input[type=range]:focus { outline: none; }
-        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: var(--sepia-pale); border-radius: 2px; }
-        input[type=range]::-webkit-slider-thumb { height: 22px; width: 22px; border-radius: 50%; background: var(--gold); cursor: pointer; -webkit-appearance: none; margin-top: -9px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: 0.2s; }
-        input[type=range]::-webkit-slider-thumb:hover { background: var(--ink); transform: scale(1.1); }
-        input[type=range]::-moz-range-track { width: 100%; height: 4px; cursor: pointer; background: var(--sepia-pale); border-radius: 2px; }
-        input[type=range]::-moz-range-thumb { height: 22px; width: 22px; border-radius: 50%; background: var(--gold); cursor: pointer; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+        
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: var(--sepia-pale); border-radius: 4px; transition: 0.3s; }
+        input[type=range]::-webkit-slider-thumb { height: 26px; width: 26px; border-radius: 50%; background: var(--gold); cursor: grab; -webkit-appearance: none; margin-top: -10px; box-shadow: 0 4px 12px rgba(155, 125, 74, 0.3); transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.25s; }
+        input[type=range]::-webkit-slider-thumb:hover { background: var(--ink); transform: scale(1.15); }
+        input[type=range]::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.05); }
+
+        input[type=range]::-moz-range-track { width: 100%; height: 6px; cursor: pointer; background: var(--sepia-pale); border-radius: 4px; transition: 0.3s; }
+        input[type=range]::-moz-range-thumb { height: 26px; width: 26px; border-radius: 50%; background: var(--gold); cursor: grab; border: none; box-shadow: 0 4px 12px rgba(155, 125, 74, 0.3); transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.25s; }
+        input[type=range]::-moz-range-thumb:hover { background: var(--ink); transform: scale(1.15); }
+        input[type=range]::-moz-range-thumb:active { cursor: grabbing; transform: scale(1.05); }
 
         /* ── KARTY OSÓB ── */
         #listaOsob {
@@ -114,6 +121,12 @@
         .brak-danych { grid-column: 1 / -1; text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--sepia-light); font-style: italic; padding: 60px 20px; }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+
+        /* RWD */
+        @media (max-width: 768px) {
+            .slider-panel { padding: 30px 20px; }
+            #wyswietlanyRok { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -123,25 +136,26 @@
         <!-- Odnośnik powrotu do strony głównej -->
         <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
         <!-- Odnośnik powrotu do podstrony Pamięć -->
-        <a href="pamiec.html" class="back-link">← Powrót do pamięci</a>
+        <a href="pamiec.html" class="back-link">← Powrót</a>
     </div>
 </nav>
 
-<header>
-    <span class="header-ornament">Oś Czasu Pamięci</span>
-    <h1>Wspomnienie Zmarłych</h1>
-    <p class="header-quote">„Umarłych wieczność dotąd trwa, dokąd pamięcią im się płaci.”</p>
-</header>
-
 <main>
-    <span class="s-label">Filtrowanie</span>
-    <h2 class="s-title">Wyszukaj według lat</h2>
-    <div class="s-line"></div>
+    <div class="intro-section">
+        <span class="s-label">Oś Czasu Pamięci</span>
+        <h1 class="s-title">Wspomnienie Zmarłych</h1>
+        <div class="s-line"></div>
+        <p class="intro-quote">„Umarłych wieczność dotąd trwa, dokąd pamięcią im się płaci.”</p>
+    </div>
 
     <div class="slider-panel">
+        <span class="s-label">Filtrowanie</span>
+        <h2 class="s-title">Wyszukaj według lat</h2>
+        <div class="s-line"></div>
+
         <span id="wyswietlanyRok">Okres: 1975 - 1980</span>
-        <!-- Atrybuty suwaka -->
-        <input type="range" id="rokSlider" min="1970" max="2025" step="5" value="1975">
+        <!-- Skok zmieniony na 1 (step="1") by suwak przesuwał się płynnie bez rwania -->
+        <input type="range" id="rokSlider" min="1970" max="2025" step="1" value="1975">
     </div>
 
     <div id="listaOsob">
@@ -169,7 +183,6 @@
         
         // Upewniamy się, że tablica 'osoby' istnieje przed filtrowaniem
         if (typeof osoby !== 'undefined') {
-            // Używamy "rokZgonu", bo tak masz w pliku JS
             const przefiltrowani = osoby.filter(osoba => osoba.rokZgonu >= startRok && osoba.rokZgonu <= endRok);
             
             if (przefiltrowani.length === 0) {
