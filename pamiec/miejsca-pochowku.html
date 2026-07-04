@@ -85,7 +85,7 @@
 <nav> 
     <div class="nav-inner"> 
         <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a> 
-        <a href="javascript:history.back()" class="btn-back">&#8592; Wróć</a>
+        <a href="pamiec.html" class="btn-back">&#8592; Wróć</a>
     </div> 
 </nav> 
 
@@ -183,6 +183,11 @@
     if (!m) return; 
     map.flyTo(m.getLatLng(), 14, { duration: 1.0 }); 
     m.openPopup(); 
+    
+    // Przewijanie do mapy na urządzeniach mobilnych
+    if (window.innerWidth <= 900) {
+      document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   } 
 
   window.addEventListener('resize', () => { 
