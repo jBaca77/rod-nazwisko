@@ -63,8 +63,15 @@
   .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
   .drawer-links a:hover::before { width: 3px; }
   
-  .drawer-links a.active { color: var(--gold-light); background: rgba(255,255,255,0.04); }
-  .drawer-links a.active::before { width: 3px; }
+  /* Aktywna zakładka w menu */
+  .drawer-links a.active {
+    color: var(--gold-light);
+    background: rgba(255,255,255,0.06);
+    padding-left: 35px;
+  }
+  .drawer-links a.active::before {
+    width: 3px;
+  }
 
   .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
   .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
@@ -78,28 +85,107 @@
   .s-line { width: 60px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; }
 
   /* ── MAPA ── */
-  #map { height: 550px; width: 100%; border: 1px solid var(--sepia-pale); margin-bottom: 30px; border-radius: 2px; filter: sepia(15%) contrast(95%) brightness(98%); box-shadow: 0 10px 40px rgba(0,0,0,0.05); z-index: 1; }
+  #map { 
+    height: 550px; width: 100%; border: 1px solid var(--sepia-pale); 
+    margin-bottom: 30px; border-radius: 2px;
+    filter: sepia(15%) contrast(95%) brightness(98%);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    z-index: 1;
+  }
   .leaflet-interactive { cursor: pointer !important; }
-  .map-marker-dot { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 9px; font-weight: 500; color: #fff; transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s; }
-  .leaflet-marker-inner-hover:hover .map-marker-dot { transform: scale(1.15); box-shadow: 0 4px 10px rgba(0,0,0,0.35); }
+  
+  /* Styl dla delikatnego markera z numerem */
+  .map-marker-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    color: #fff;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s;
+  }
+  .leaflet-marker-inner-hover:hover .map-marker-dot {
+    transform: scale(1.15);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+  }
 
-  .legend { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 60px; padding: 25px; background: var(--cream); border: 1px solid var(--line); }
+  .legend { 
+    display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; 
+    margin-bottom: 60px; padding: 25px; background: var(--cream); 
+    border: 1px solid var(--line);
+  }
   .leg-item { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--sepia); font-weight: 500; }
   .dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); }
 
   /* ── KOMPAKTOWA LISTA ZJAZDÓW ── */
   .z-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-  .z-row { background: var(--cream); border: 1px solid var(--sepia-pale); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); position: relative; overflow: hidden; margin-top: 15px; }
-  .z-row::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--row-color); transition: width 0.3s; }
-  .z-row:hover, .z-row:focus-visible { background-color: #fff; border-color: var(--gold-light); transform: translateX(4px); box-shadow: 0 8px 20px rgba(0,0,0,0.04); }
+  .z-row {
+    background: var(--cream);
+    border: 1px solid var(--sepia-pale);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .z-row::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--row-color);
+    transition: width 0.3s;
+  }
+  .z-row:hover, .z-row:focus-visible {
+    background-color: #fff;
+    border-color: var(--gold-light);
+    transform: translateX(4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  }
   .z-row:hover::before, .z-row:focus-visible::before { width: 8px; }
   
-  /* Odznaka Jubileuszowa - Przesunięta i zoptymalizowana */
-  .badge-lecie { position: absolute; top: -2px; left: 45px; background: var(--gold); color: var(--warm-white); font-family: 'Cormorant Garamond', serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 1px 8px; border-radius: 0 0 4px 4px; display: flex; align-items: center; gap: 4px; z-index: 2; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  .badge-lecie svg { width: 8px; height: 8px; fill: currentColor; }
+  /* Odznaka Jubileuszowa wewnątrz wiersza */
+  .badge-lecie {
+    background: var(--gold);
+    color: var(--warm-white);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .badge-lecie svg {
+    width: 10px;
+    height: 10px;
+    fill: currentColor;
+  }
 
   .z-row-left { display: flex; align-items: center; gap: 20px; }
-  .z-row-num { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--ink-light); font-weight: 500; min-width: 45px; }
+  .z-row-num { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 1.5rem; 
+    color: var(--ink-light); 
+    font-weight: 500;
+    min-width: 45px;
+  }
   .z-row-title { display: flex; flex-direction: column; }
   .z-row-title strong { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; line-height: 1.2; margin-bottom: 2px; }
   .z-row-title span { font-size: 0.85rem; color: var(--sepia); font-style: italic; }
@@ -110,8 +196,20 @@
 
   footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.85rem; letter-spacing: 1px; margin-top: 100px; }
 
-  @media (max-width: 900px) { .drawer { width: 100%; right: -100%; } main { padding: 50px 24px; } #map { height: 400px; } .z-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 480px) { .z-row { padding: 14px 16px; } .z-row-left { gap: 12px; } .z-row-num { min-width: 35px; font-size: 1.3rem; } .z-row-title strong { font-size: 1.15rem; } }
+  @media (max-width: 900px) {
+    .drawer { width: 100%; right: -100%; }
+    main { padding: 50px 24px; }
+    #map { height: 400px; }
+    .z-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .z-row { padding: 14px 12px; }
+    .z-row-left { gap: 10px; }
+    .z-row-num { min-width: 30px; font-size: 1.2rem; }
+    .z-row-title strong { font-size: 1.1rem; }
+    .badge-lecie { font-size: 0.6rem; padding: 2px 6px; letter-spacing: 1px; }
+    .badge-lecie svg { width: 8px; height: 8px; }
+  }
 </style>
 </head>
 <body>
@@ -205,16 +303,27 @@
   ];
 
   const mapColors = { "Ładomirscy": "var(--c-ladomirscy)", "Kraińscy": "var(--c-krainscy)", "Domańscy": "var(--c-domanscy)" };
+
   const map = L.map('map', { scrollWheelZoom: false }).setView([52.1, 19.4], 6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
 
   const container = document.getElementById('z-container');
   zData.forEach((z, i) => {
     const color = mapColors[z.g];
     const targetUrl = `zjazd${i+1}.html`;
-    const icon = L.divIcon({ className: 'leaflet-marker-inner-hover', html: `<div class="map-marker-dot" style="background:${color};">${z.n}</div>`, iconSize: [22, 22], iconAnchor: [11, 11] });
+    
+    // Delikatna kropka z rzymskim numerem zjazdu w środku
+    const icon = L.divIcon({
+      className: 'leaflet-marker-inner-hover',
+      html: `<div class="map-marker-dot" style="background:${color};">${z.n}</div>`,
+      iconSize: [22, 22], iconAnchor: [11, 11]
+    });
+
     const marker = L.marker(z.c, {icon, title: `${z.n} Zjazd Rodzinny`}).addTo(map);
     
+    // Konfiguracja klasycznego dymku informacyjnego z przyciskiem przejścia
     marker.bindPopup(`
       <div style="font-family:'Jost',sans-serif; text-align:center; padding: 6px 4px;">
         <strong style="font-family:'Cormorant Garamond',serif; font-size:1.25rem; color:var(--ink); font-weight: 500; display:block; margin-bottom: 2px;">${z.n} Zjazd Rodzinny</strong>
@@ -223,16 +332,23 @@
       </div>
     `, {offset: [0, -5]});
 
+    // Sprawdzenie i generowanie odznak jubileuszowych
     let badgeHTML = '';
-    if (z.n === 'IV') badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>10-lecie</div>`;
-    else if (z.n === 'IX') badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>10-lecie</div>`;
-    else if (z.n === 'XIV') badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>30-lecie</div>`;
-    else if (z.n === 'XIX') badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>40-lecie</div>`;
-    else if (z.n === 'XXIII') badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>50-lecie</div>`;
+    if (z.n === 'IV') {
+      badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>10-lecie</div>`;
+    } else if (z.n === 'IX') {
+      badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>20-lecie</div>`;
+    } else if (z.n === 'XIV') {
+      badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>30-lecie</div>`;
+    } else if (z.n === 'XIX') {
+      badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>40-lecie</div>`;
+    } else if (z.n === 'XXIII') {
+      badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>50-lecie</div>`;
+    }
 
+    // Kompaktowy panel na liście poniżej mapy z odznaką w środku
     container.innerHTML += `
       <a href="${targetUrl}" class="z-row" style="--row-color: ${color}" role="listitem" aria-label="${z.n} Zjazd Rodzinny w ${z.p}">
-        ${badgeHTML}
         <div class="z-row-left">
           <div class="z-row-num">${z.n}</div>
           <div class="z-row-title">
@@ -240,6 +356,7 @@
             <span>${z.p}</span>
           </div>
         </div>
+        ${badgeHTML}
         <div class="z-row-right">
           <div class="z-row-year">${z.d}</div>
           <div class="z-row-clan" style="color: ${color}">${z.g}</div>
@@ -248,12 +365,24 @@
   });
 
   const btn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');
+  
   function toggleMenu() {
     const isOpen = drw.classList.contains('open');
-    if (isOpen) { drw.classList.remove('open'); ovr.classList.remove('active'); btn.setAttribute('aria-expanded', 'false'); drw.setAttribute('aria-hidden', 'true'); }
-    else { drw.classList.add('open'); ovr.classList.add('active'); btn.setAttribute('aria-expanded', 'true'); drw.setAttribute('aria-hidden', 'false'); }
+    if (isOpen) {
+      drw.classList.remove('open'); 
+      ovr.classList.remove('active');
+      btn.setAttribute('aria-expanded', 'false');
+      drw.setAttribute('aria-hidden', 'true');
+    } else {
+      drw.classList.add('open'); 
+      ovr.classList.add('active');
+      btn.setAttribute('aria-expanded', 'true');
+      drw.setAttribute('aria-hidden', 'false');
+    }
   }
-  btn.onclick = toggleMenu; ovr.onclick = toggleMenu;
+
+  btn.onclick = toggleMenu;
+  ovr.onclick = toggleMenu;
 </script>
 </body>
 </html>
