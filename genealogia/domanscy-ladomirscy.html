@@ -107,7 +107,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .img-wrap, .img-double-row, .name-tag, .title-desc, .date-desc, .bio-content { position: relative; z-index: 2; width: 100%; }
+        .img-wrap, .img-double-row, .name-tag, .title-desc, .date-desc { position: relative; z-index: 2; width: 100%; }
 
         .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 6px; }
         .img-wrap span { font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost', sans-serif; text-transform: none; margin-top: 2px; }
@@ -145,7 +145,10 @@
         .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center; background: var(--cream); font-size: clamp(8px, 1vw, 10px); color: var(--sepia); border-radius: 50%; font-weight: 600; }
         .flip-back { transform: rotateY(180deg); background: var(--gold); color: white; font-size: clamp(12px, 1.5vw, 16px); }
 
-        .box-potomek { flex-direction: row !important; gap: 10px; text-align: left; padding: clamp(15px, 2vw, 25px) !important; border-left: 5px solid var(--gold); align-items: center; justify-content: center; }
+        /* Wymuszony podział przestrzeni na 1/3 (herb) i 2/3 (tekst) */
+        .box-potomek { flex-direction: row !important; text-align: left; padding: clamp(15px, 2vw, 25px) !important; border-left: 5px solid var(--gold); align-items: center; justify-content: space-between; }
+        .potomek-img { flex: 0 0 33.333%; width: 33.333%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-right: 15px; position: relative; z-index: 2; }
+        .potomek-text { flex: 0 0 66.666%; width: 66.666%; padding-left: 15px; border-left: 1px solid var(--line); position: relative; z-index: 2; }
 
         .sub-pagination { max-width: 900px; margin: 60px auto 100px; padding: 40px 24px; border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .sub-btn { text-decoration: none; color: var(--sepia); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--line); transition: 0.3s; background: white; }
@@ -154,16 +157,19 @@
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
         
-        /* Zmodyfikowana sekcja dla urządzeń mobilnych - wymuszenie zachowania kształtu drzewa */
+        /* Zmodyfikowana sekcja dla urządzeń mobilnych - wymuszenie zachowania proporcji i kształtu drzewa */
         @media (max-width: 768px) {
             .tree-wrapper {
-                justify-content: flex-start; /* Zapobiega obcinaniu lewego marginesu podczas scrollowania */
+                justify-content: flex-start;
                 padding-bottom: 30px;
             }
             .tree-grid {
-                min-width: 1000px; /* Wymusza sztywną szerokość, zachowując siatkę CSS */
+                min-width: 1000px; 
                 padding: 0 15px;
             }
+            .box-potomek { flex-direction: column !important; text-align: center; }
+            .potomek-img { width: 100%; padding-right: 0; }
+            .potomek-text { width: 100%; border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 15px; margin-top: 15px; }
         }
     </style>
 </head>
@@ -194,7 +200,7 @@
         <!-- GENERACJA 1 -->
         <div class="box g1-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div class="img-wrap"><img src="../img/genealogia/laryszaa.png" class="img-single" alt="Larissa"><span>Larissa</span></div>
+            <div class="img-wrap"><img src="../img/genealogia/larysza.png" class="img-single" alt="Larissa"><span>Larissa</span></div>
             <div class="name-tag">Feliks Paweł Hilary<br>Domański</div>
             <div class="title-desc">sędzia pokoju okr. siennickiego, wł. dóbr: Grzebowilk, Iłówiec, Kotuszów i Pilichowice</div>
             <div class="date-desc">
@@ -347,10 +353,10 @@
         <!-- GENERACJA 4 -->
         <div class="box g4-box box-potomek">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div style="display: flex; flex-direction: column; align-items: center; min-width: 30px;" class="bio-content">
-                <img src="../img/genealogia/laryszad.png" class="img-single" style="width:clamp(30px, 4vw, 40px); height:auto; border:none; box-shadow:none;" alt="Domańscy">
+            <div class="potomek-img">
+                <img src="../img/genealogia/laryszad.png" class="img-single" style="width:clamp(40px, 6vw, 65px); height:auto; border:none; box-shadow:none;" alt="Domańscy">
             </div>
-            <div style="flex: 1; padding-left: 10px; border-left: 1px solid var(--line);" class="bio-content">
+            <div class="potomek-text">
                 <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-family: 'Cormorant Garamond', serif; line-height: 1.4; color: var(--ink);">
                     Stanisław Konstanty, Helena Aleksandra i Edward <strong>Zbigniew</strong><br>z Domanina <strong>Domańscy</strong>
                 </p>
