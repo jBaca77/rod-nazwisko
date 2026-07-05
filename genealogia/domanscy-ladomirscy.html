@@ -44,12 +44,14 @@
         h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; margin-bottom: 10px; color: var(--ink); }
         .s-line-main { width: 50px; height: 1px; background: var(--gold-light); margin: 15px auto; }
 
-        /* Zmodyfikowana struktura CSS GRID - Pełna spójność wymiarów w wierszach i brak scrolla */
+        /* Zmodyfikowana struktura CSS GRID - Pełna spójność wymiarów w wierszach i scroll horyzontalny na małych ekranach */
         .tree-wrapper { 
             width: 100%; 
             padding: clamp(10px, 3vw, 40px) clamp(5px, 2vw, 20px); 
             display: flex; 
             justify-content: center;
+            overflow-x: auto; /* Zezwala na poziome przewijanie jeśli siatka przekracza ekran */
+            -webkit-overflow-scrolling: touch; /* Płynne przewijanie na urządzeniach Apple */
         }
 
         .tree-grid {
@@ -152,17 +154,16 @@
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
         
-        /* Obsługa urządzeń mobilnych - jeśli ekran jest drastycznie mały, przełamujemy strukturę, aby tekst był czytelny */
+        /* Zmodyfikowana sekcja dla urządzeń mobilnych - wymuszenie zachowania kształtu drzewa */
         @media (max-width: 768px) {
-            .tree-grid { display: flex; flex-direction: column; gap: 10px; align-items: center; }
-            .box { width: 100%; max-width: 320px; }
-            .g1-tag, .g2-tag, .g3-tag { width: 100%; margin: 5px 0 15px 0; }
-            .img-single { width: 40px; height: 55px; }
-            .name-tag { font-size: 0.9rem; }
-            .title-desc, .date-desc { font-size: 0.75rem; }
-            .marriage-tag { font-size: 0.75rem; white-space: normal; }
-            .box-potomek { flex-direction: column !important; text-align: center; }
-            .box-potomek .bio-content { border-left: none !important; padding-left: 0 !important; border-top: 1px solid var(--line); padding-top: 15px; margin-top: 15px; }
+            .tree-wrapper {
+                justify-content: flex-start; /* Zapobiega obcinaniu lewego marginesu podczas scrollowania */
+                padding-bottom: 30px;
+            }
+            .tree-grid {
+                min-width: 1000px; /* Wymusza sztywną szerokość, zachowując siatkę CSS */
+                padding: 0 15px;
+            }
         }
     </style>
 </head>
@@ -361,13 +362,13 @@
 
 <!-- Paginacja do pozostałych linii -->
 <div class="sub-pagination">
-    <a href="domanscy.html" class="sub-btn active">Linia Domańskich</a>
-    <a href="golebscy.html" class="sub-btn">Linia Gołębskich</a>
-    <a href="krobiccy.html" class="sub-btn">Linia Krobickich</a>
-    <a href="ladomirscy.html" class="sub-btn">Linia Ładomirskich</a>
-    <a href="fedorowiczowie.html" class="sub-btn">Linia Fedorowiczów</a>
-    <a href="krainscy.html" class="sub-btn">Linia Kraińskich</a>
-    <a href="wiszniewscy.html" class="sub-btn">Linia Wiszniewskich</a>
+    <a href="domanscy-ladomirscy.html" class="sub-btn active">Domańscy | Ładomirscy</a>
+    <a href="golebscy-ladomirscy.html" class="sub-btn">Gołębscy | Ładomirscy</a>
+    <a href="krobiccy-ladomirscy.html" class="sub-btn">Krobiccy  | Ładomirscy</a>
+    <a href="ladomirscy-krainscy.html" class="sub-btn">Ładomirscy | Kraińscy</a>
+    <a href="fedorowiczowie-krainscy.html" class="sub-btn">Fedorowiczowie | Kraińscy</a>
+    <a href="krainscy-wlodkowie.html" class="sub-btn">Kraińscy | Włodkowie</a>
+    <a href="wiszniewscy-kraińscy.html" class="sub-btn">Wiszniewscy | Kraińscy</a>
 </div>
 
 <footer>
