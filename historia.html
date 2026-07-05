@@ -68,20 +68,46 @@
 
         /* ── MAIN CONTENT ── */
         main { max-width: 900px; margin: 0 auto; padding: 80px 24px 100px; }
-        .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; }
-        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); font-weight: 400; }
-        .s-line { width: 50px; height: 1.5px; background: var(--gold); margin-bottom: 45px; }
-
+        
         .story-section p { font-family: 'Jost', sans-serif; font-size: 1.1rem; color: var(--ink-light); text-align: justify; margin-bottom: 25px; line-height: 1.8; font-weight: 300; }
         
-        .story-section h2 { 
-            font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; 
-            margin: 50px 0 25px; color: var(--sepia); position: relative;
-            padding-bottom: 15px; font-weight: 400;
+        /* ── TIMELINE ── */
+        .timeline {
+            position: relative;
+            margin: 40px 0 60px 20px;
+            padding-left: 45px;
+            border-left: 2px solid var(--gold);
         }
-        .story-section h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 1px; background: var(--gold-light); }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 70px;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -52px; /* 45px padding + 1px border + 6px radius */
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--warm-white), 0 0 0 6px var(--sepia-light);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .timeline-item:hover::before {
+            transform: scale(1.3);
+            background-color: var(--gold-light);
+            box-shadow: 0 0 0 4px var(--warm-white), 0 0 0 6px var(--gold);
+        }
 
-        .image-container { margin: 50px 0; text-align: center; background: var(--cream); padding: 25px; border: 1px solid var(--sepia-pale); }
+        .s-label { font-size: .75rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 10px; display: block; font-weight: 500;}
+        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.6rem); margin-bottom: 25px; color: var(--ink); font-weight: 400; line-height: 1.1; }
+
+        .image-container { margin: 40px 0; text-align: center; background: var(--cream); padding: 25px; border: 1px solid var(--sepia-pale); transition: border-color 0.3s; }
+        .image-container:hover { border-color: var(--gold); }
         .image-container img { max-width: 100%; height: auto; display: block; margin: 0 auto; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
         .img-label { display: block; margin-top: 18px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--sepia); font-weight: 500; }
 
@@ -97,6 +123,16 @@
             .drawer { width: 100%; right: -100%; }
             main { padding: 50px 24px; }
             .dictionary-box { padding: 30px; }
+        }
+
+        @media (max-width: 600px) {
+            .timeline {
+                margin-left: 5px;
+                padding-left: 25px;
+            }
+            .timeline-item::before {
+                left: -32px; /* 25px + 1px + 6px */
+            }
         }
     </style>
 </head>
@@ -144,52 +180,66 @@
 </aside>
 
 <main>
-    <section class="story-section">
-        <span class="s-label">Wielichowo 1974</span>
-        <h2 class="s-title" style="border:none; margin:0; padding:0;">Początek drogi</h2>
-        <div class="s-line"></div>
+    <section class="story-section timeline">
 
-        <p>Była polska złota jesień, dzień 28 września roku 1974.[cite: 1] W Wielichowie, w Wielkopolsce, na ślubnym kobiercu, w kościele pw. św. Marii Magdaleny, stanęli: Maria Ładomirska, panna lat 24 i Marek Szczepaniak, kawaler lat 26.[cite: 1] Po zaślubinach Młodzi oraz zaproszeni goście udali się do Pałacu IUNGu.[cite: 1] Tamże wieczorem odbyło się huczne wesele.[cite: 1]</p>
-        
-        <div class="image-container">
-            <img src="./img/historia/mloda_para_1974.jpg" alt="Młoda Para Wielichowo 1974" onerror="this.src='https://placehold.co/600x400?text=Młoda+Para+1974'">
-            <span class="img-label">Młoda para — Wielichowo 1974</span>
-        </div>
-
-        <p>Moi rodzice, Jerzy i Marta z Ładomirskich małżonkowie Niewęgłowscy o mały włos na powyższe uroczystości by nie dotarli, gdyż w tym samym dniu w Radochowie, w Kotlinie Kłodzkiej, wraz z dyrektorem Kombinatu Trzebieszowice Jerzym Janickim omawiali możliwość realizacji swojej idei budowy w Radochowie ośrodka hodowli pstrągów.[cite: 1] Szczęśliwie jednak rozmowy zakończyły się na tyle wcześnie, aby możliwym stało się pokonanie 250 km dzielących południe Polski z Wielichowem i wzięcie przez nich udziału choćby w weselu.[cite: 1]</p>
-
-        <h2>Dlaczego to istotne?</h2>
-        <p>Otóż tak się złożyło, że ojciec mój, w rodzinie oraz wśród koleżeństwa po fachu rybackim zwany Jackiem, był świeżo po lekturze artykułu o zjazdach rodzinnych organizowanych przez cieszyński ród Guziurów, do którego to należał jego kolega ze studiów.[cite: 1] To właśnie ta idea spotkań rodzinnych, na gruncie uprawionym dyskusjami prowadzonymi w trakcie organizacji ślubu oraz w czasie samego wesela, zaowocowała decyzją zorganizowania zjazdu rodziny Ładomirskich.[cite: 1]</p>
-        
-        <p>Wieczoru owego nie tylko podjęto decyzję, ale także ukonstytuowano zespół organizacyjny oraz ustalono zasady finansowania.[cite: 1] Zorganizowania pierwszego zjazdu podjął się wuj Tomasz Ładomirski zaś „skarbniczką” została praciotka Anna Ładomirska.[cite: 1] Aby ułatwić krewnym odłożenie środków na opłaty zjazdowe praciotka Anna jako skarbniczka niebawem otworzyła subkonto, na które każdy członek rodziny mógł deponować wg uznania i w dowolnym czasie oszczędności, z których później pokrywał koszty swojego udziału w zjeździe.[cite: 1]</p>
-
-        <h2>Narodziny Klanu</h2>
-        <p>Równo rok później tj. we wrześniu roku 1975 w Modlinie pod Warszawą decyzja doczekała się realizacji.[cite: 1] Odbył się I Zjazd Rodziny Ładomirskich.[cite: 1]</p>
-        
-        <div class="image-container">
-            <img src="./img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Uczestnicy I Zjazdu" onerror="this.src='https://placehold.co/800x400?text=I+Zjazd+w+Modlinie'">
-            <span class="img-label">Uczestnicy I Zjazdu w Modlinie</span>
-        </div>
-
-        <p>Na pierwszy Zjazd przybyli potomkowie Zdzisława i Anny z Kraińskich małżonków Ładomirskich.[cite: 1] Z odwiedzinami wpadł nań także z pobliskiej Warszawy, bratanek Anny z Kraińskich Ładomirskiej, prawuj Stanisław Kraiński.[cite: 1] Wizyta ta, choć krótka okazała się być brzemienną w skutkach.[cite: 1] Gdy 5 lat później ruszyły prace nad organizacją drugiego zjazdu, ze strony potomków rodzeństwa Zdzisława Ładomirskiego oraz rodzeństwa Anny z Kraińskich Ładomirskiej padło pytanie – a my?[cite: 1] My także jesteśmy przecież rodziną![cite: 1] Tak, więc Zjazd nr II odbył się już w rozszerzonym gronie tj. przybyli nań zarówno potomkowie Ładomirskich jak i Kraińskich.[cite: 1] W ten też sposób nieformalnie narodził się Klan.[cite: 1]</p>
-
-        <p>Istniejące od lat więzy rodzinne zyskały zewnętrzną formę cyklicznych, zjazdów.[cite: 1] Zjazdów, które okazały się mieć ogromne znaczenie dla podtrzymywania i konsolidacji tychże więzów.[cite: 1] Dzięki nim, mimo upływającego czasu, pojawiania się kolejnych pokoleń oraz przeróżnych migracji członków rodziny po kraju i świecie potomkowie Zdzisława i Anny oraz ich krewni nie stracili z sobą kontaktu.[cite: 1]</p>
-
-        <p>Zjazdy od numeru III odbywają się co dwa lata, we wrześniu lub październiku.[cite: 1]</p>
-
-        <p>Przez te blisko już 40 lat Klan nie wypracował żadnej formalnej struktury, choć były do tego przymiarki.[cite: 1] Spontaniczność, wsparta odrobiną zwyczajowego już nadzoru wuja Tomasza Ładomirskiego (pierwszego organizatora), okazuje się w zupełności wystarczającą a może i optymalną formułą jego funkcjonowania.[cite: 1]</p>
-
-        <div class="author-note">
-            <p><strong>Hubert Niewęgłowski</strong>, Radochów 2012 r.[cite: 1]</p>
-        </div>
-
-        <div class="dictionary-box">
-            <h3>Słownik języka polskiego[cite: 1]</h3>
-            <div class="dictionary-content">
-                <p><strong>KLAN</strong> - (1) związek osób oparty na pokrewieństwie bądź powinowactwie; (2) grupa osób popierających się, mających wspólne interesy, w jakiś sposób związanych ze sobą.[cite: 1]</p>
+        <div class="timeline-item">
+            <span class="s-label">28 września 1974</span>
+            <h2 class="s-title">Początek drogi</h2>
+            <p>Była polska złota jesień, dzień 28 września roku 1974. W Wielichowie, w Wielkopolsce, na ślubnym kobiercu, w kościele pw. św. Marii Magdaleny, stanęli: Maria Ładomirska, panna lat 24 i Marek Szczepaniak, kawaler lat 26. Po zaślubinach Młodzi oraz zaproszeni goście udali się do Pałacu IUNGu. Tamże wieczorem odbyło się huczne wesele.</p>
+            
+            <div class="image-container">
+                <img src="./img/historia/mloda_para_1974.jpg" alt="Młoda Para Wielichowo 1974" onerror="this.src='https://placehold.co/600x400?text=Młoda+Para+1974'">
+                <span class="img-label">Młoda para — Wielichowo 1974</span>
             </div>
+
+            <p>Moi rodzice, Jerzy i Marta z Ładomirskich małżonkowie Niewęgłowscy o mały włos na powyższe uroczystości by nie dotarli, gdyż w tym samym dniu w Radochowie, w Kotlinie Kłodzkiej, wraz z dyrektorem Kombinatu Trzebieszowice Jerzym Janickim omawiali możliwość realizacji swojej idei budowy w Radochowie ośrodka hodowli pstrągów. Szczęśliwie jednak rozmowy zakończyły się na tyle wcześnie, aby możliwym stało się pokonanie 250 km dzielących południe Polski z Wielichowem i wzięcie przez nich udziału choćby w weselu.</p>
         </div>
+
+        <div class="timeline-item">
+            <span class="s-label">Jesień 1974</span>
+            <h2 class="s-title">Dlaczego to istotne?</h2>
+            <p>Otóż tak się złożyło, że ojciec mój, w rodzinie oraz wśród koleżeństwa po fachu rybackim zwany Jackiem, był świeżo po lekturze artykułu o zjazdach rodzinnych organizowanych przez cieszyński ród Guziurów, do którego to należał jego kolega ze studiów. To właśnie ta idea spotkań rodzinnych, na gruncie uprawionym dyskusjami prowadzonymi w trakcie organizacji ślubu oraz w czasie samego wesela, zaowocowała decyzją zorganizowania zjazdu rodziny Ładomirskich.</p>
+            
+            <p>Wieczoru owego nie tylko podjęto decyzję, ale także ukonstytuowano zespół organizacyjny oraz ustalono zasady finansowania. Zorganizowania pierwszego zjazdu podjął się wuj Tomasz Ładomirski zaś „skarbniczką” została praciotka Anna Ładomirska. Aby ułatwić krewnym odłożenie środków na opłaty zjazdowe praciotka Anna jako skarbniczka niebawem otworzyła subkonto, na które każdy członek rodziny mógł deponować wg uznania i w dowolnym czasie oszczędności, z których później pokrywał koszty swojego udziału w zjeździe.</p>
+        </div>
+
+        <div class="timeline-item">
+            <span class="s-label">Wrzesień 1975</span>
+            <h2 class="s-title">I Zjazd w Modlinie</h2>
+            <p>Równo rok później tj. we wrześniu roku 1975 w Modlinie pod Warszawą decyzja doczekała się realizacji. Odbył się I Zjazd Rodziny Ładomirskich.</p>
+            
+            <div class="image-container">
+                <img src="./img/zjazdy/zjazdi/foto_zjazdi_00.jpg" alt="Uczestnicy I Zjazdu" onerror="this.src='https://placehold.co/800x400?text=I+Zjazd+w+Modlinie'">
+                <span class="img-label">Uczestnicy I Zjazdu w Modlinie</span>
+            </div>
+
+            <p>Na pierwszy Zjazd przybyli potomkowie Zdzisława i Anny z Kraińskich małżonków Ładomirskich. Z odwiedzinami wpadł nań także z pobliskiej Warszawy, bratanek Anny z Kraińskich Ładomirskiej, prawuj Stanisław Kraiński. Wizyta ta, choć krótka okazała się być brzemienną w skutkach.</p>
+        </div>
+
+        <div class="timeline-item">
+            <span class="s-label">Od 1980 roku</span>
+            <h2 class="s-title">Narodziny Klanu</h2>
+            <p>Gdy 5 lat później ruszyły prace nad organizacją drugiego zjazdu, ze strony potomków rodzeństwa Zdzisława Ładomirskiego oraz rodzeństwa Anny z Kraińskich Ładomirskiej padło pytanie – a my? My także jesteśmy przecież rodziną! Tak, więc Zjazd nr II odbył się już w rozszerzonym gronie tj. przybyli nań zarówno potomkowie Ładomirskich jak i Kraińskich. W ten też sposób nieformalnie narodził się Klan.</p>
+
+            <p>Istniejące od lat więzy rodzinne zyskały zewnętrzną formę cyklicznych, zjazdów. Zjazdów, które okazały się mieć ogromne znaczenie dla podtrzymywania i konsolidacji tychże więzów. Dzięki nim, mimo upływającego czasu, pojawiania się kolejnych pokoleń oraz przeróżnych migracji członków rodziny po kraju i świecie potomkowie Zdzisława i Anny oraz ich krewni nie stracili z sobą kontaktu.</p>
+
+            <p>Zjazdy od numeru III odbywają się co dwa lata, we wrześniu lub październiku.</p>
+
+            <p>Przez te blisko już 40 lat Klan nie wypracował żadnej formalnej struktury, choć były do tego przymiarki. Spontaniczność, wsparta odrobiną zwyczajowego już nadzoru wuja Tomasza Ładomirskiego (pierwszego organizatora), okazuje się w zupełności wystarczającą a może i optymalną formułą jego funkcjonowania.</p>
+        </div>
+
     </section>
+
+    <div class="author-note">
+        <p><strong>Hubert Niewęgłowski</strong>, Radochów 2012 r.</p>
+    </div>
+
+    <div class="dictionary-box">
+        <h3>Słownik języka polskiego</h3>
+        <div class="dictionary-content">
+            <p><strong>KLAN</strong> - (1) związek osób oparty na pokrewieństwie bądź powinowactwie; (2) grupa osób popierających się, mających wspólne interesy, w jakiś sposób związanych ze sobą.</p>
+        </div>
+    </div>
 </main>
 
 <footer>
