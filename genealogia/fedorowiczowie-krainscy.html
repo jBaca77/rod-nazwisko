@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wywód Przodków I | Archiwum L&K</title>
+    <title>Wywód Przodków - Fedorowiczowie i Kraińscy | Archiwum L&K</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
             --gold-light: #c8a96e; 
             --green-dark: #2c3e2d; 
             --line: rgba(122, 101, 72, 0.2);
-            /* Definicja nowych kolorów wstążek dla tej linii */
+            /* Kolory wstążek dla tej linii */
             --color-left: #F9D0D7;
             --color-right: #F29079;
         }
@@ -85,7 +85,7 @@
             font-family: 'Cormorant Garamond', serif;
             border-left: clamp(2px, 0.3vw, 3px) solid var(--sepia); 
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             text-transform: uppercase; font-weight: 600;
             text-decoration: none; color: inherit; transition: 0.3s;
             word-wrap: break-word;
@@ -112,15 +112,36 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .img-wrap, .img-double-row, .name-tag, .title-desc, .date-tag, .bio-content { position: relative; z-index: 2; width: 100%; }
+        .img-wrap, .img-double-row, .name-tag, .title-desc, .date-tag, .bio-content, .date-desc { position: relative; z-index: 2; width: 100%; }
 
         .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 6px; }
         .img-wrap span { font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost', sans-serif; text-transform: none; margin-top: 2px; }
-        .img-single { width: clamp(35px, 4vw, 50px); height: clamp(45px, 6vw, 70px); background: #eee; border: 1px solid rgba(0,0,0,0.05); object-fit: cover; }
+        .img-single { width: clamp(35px, 4vw, 50px); height: clamp(45px, 6vw, 70px); background: transparent; border: 1px solid rgba(0,0,0,0.05); object-fit: contain; }
         
         .name-tag { font-size: clamp(0.55rem, 1vw, 0.85rem); border-top: 1px solid rgba(122, 101, 72, 0.1); padding-top: 4px; width: 100%; margin-top: 4px; line-height: 1.3; }
         
-        .date-tag { font-family: 'Jost', sans-serif; font-size: clamp(0.6rem, 0.8vw, 0.75rem); font-weight: 400; white-space: nowrap; color: var(--ink); }
+        .title-desc {
+            font-size: clamp(0.45rem, 0.7vw, 0.65rem); font-family: 'Jost', sans-serif; text-transform: none;
+            color: var(--sepia); font-weight: 400; line-height: 1.3; margin-top: 8px; width: 100%;
+        }
+
+        .date-desc {
+            font-size: clamp(0.45rem, 0.7vw, 0.65rem); font-family: 'Jost', sans-serif; text-transform: none;
+            color: var(--ink); font-weight: 400; margin-top: auto; width: 100%; line-height: 1.4; padding-top: 10px;
+        }
+
+        .doc-link {
+            display: inline-flex; align-items: center; justify-content: center;
+            color: var(--gold); text-decoration: none; margin: 0 1px; transition: 0.2s;
+        }
+        .doc-link:hover { color: var(--ink); transform: scale(1.1); }
+        .doc-link svg { width: clamp(10px, 1.2vw, 14px); height: clamp(10px, 1.2vw, 14px); vertical-align: middle; margin-bottom: 2px; }
+
+        .marriage-tag {
+            font-family: 'Jost', sans-serif; font-size: clamp(0.5rem, 0.8vw, 0.75rem); color: var(--sepia);
+            background: var(--parchment); padding: clamp(2px, 0.5vw, 4px) clamp(6px, 1vw, 12px); border-radius: 12px;
+            border: 1px solid var(--line); margin: 0; font-weight: 400; text-align: center; white-space: nowrap;
+        }
 
         .interactive-node { width: clamp(30px, 4vw, 40px); height: clamp(30px, 4vw, 40px); perspective: 1000px; cursor: pointer; text-decoration: none; margin: 10px 0; z-index: 5; }
         .flip-card { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
@@ -176,117 +197,46 @@
 </nav>
 
 <header class="article-header">
-    <span class="meta-top">Tablica Genealogiczna I</span>
-    <h1>Linia Główna Rodu</h1>
+    <span class="meta-top">Tablica Genealogiczna</span>
+    <h1>Linia Fedorowiczów i Kraińskich</h1>
     <div class="s-line-main"></div>
 </header>
 
 <div class="tree-wrapper">
     <div class="tree-grid">
-        
-        <!-- GENERACJA 1 -->
-        <div class="box g1-box">
+
+        <!-- GENERACJA 3 (Rodzice) -->
+        <div class="box g3-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div class="img-wrap"><img src="" class="img-single" alt=""><span>Foto 1</span></div>
-            <div class="name-tag">Osoba 1</div>
-        </div>
-        <div class="box g1-box">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div class="img-wrap"><img src="" class="img-single" alt=""><span>Foto 2</span></div>
-            <div class="name-tag">Osoba 2</div>
-        </div>
-        <div class="box g1-box">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div class="name-tag">Osoba 3</div>
-        </div>
-        <div class="box g1-box">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div class="img-wrap"><img src="" class="img-single" alt=""><span>Foto 4</span></div>
-            <div class="name-tag">Osoba 4</div>
+            <div class="name-tag">Aleksander Arian Teofil<br>Fedorowicz</div>
+            <div class="title-desc">dzierżawca dóbr Jackowce<br>wł. dóbr Klebanówka, Szyły i Kamionki<br>zał. spólki handlowo-zbożowej "Fedbork" w Tarnopolu<br>założyciel garbarni "Pellis" we Lwowie</div>
+            <div class="date-desc">
+                (Klebanówka 1875 <a href="fedarch5.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Gościno 1951, poch. Laski <a href="fedarch4.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
         </div>
 
-        <div class="box g1-box">
+        <div class="box g3-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="img-wrap"><img src="" class="img-single" alt=""><span>Para 5</span></div>
-            <div class="name-tag">Para 5</div>
-        </div>
-        <div class="box g1-box">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="img-wrap"><img src="" class="img-single" alt=""><span>Foto 6</span></div>
-            <div class="name-tag">Osoba 6</div>
-        </div>
-        <div class="box g1-box">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="img-wrap"><img src="" class="img-single" alt=""><span>Foto 7</span></div>
-            <div class="name-tag">Osoba 7</div>
-        </div>
-        <div class="box g1-box">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="img-wrap"><img src="" class="img-single" alt=""><span>Foto 8</span></div>
-            <div class="name-tag">Osoba 8</div>
+            <div class="name-tag">Zofia Maria Walentyna<br>Kraińska</div>
+            <div class="date-desc">
+                (Miejsce Piastowe 1876 - Laski 1966 <a href="fedarch4.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
         </div>
 
-        <!-- Łączniki G1 do G2 (Można tu wstawić tagi ślubów) -->
-        <div class="g1-tag"></div>
-        <div class="g1-tag"></div>
-        <div class="g1-tag"></div>
-        <div class="g1-tag"></div>
-
-        <!-- GENERACJA 2 -->
-        <a href="#" class="box g2-box box-short">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <span class="date-tag">Dziadek A | 1890</span>
-        </a>
-        <a href="#" class="box g2-box box-short">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <span class="date-tag">Babcia B | 1895</span>
-        </a>
-        <a href="#" class="box g2-box box-short">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <span class="date-tag">Dziadek C | 1888</span>
-        </a>
-        <a href="#" class="box g2-box box-short">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <span class="date-tag">Babcia D | 1900</span>
-        </a>
-
-        <!-- Łączniki G2 do G3 -->
-        <div class="g2-tag"></div>
-        <div class="g2-tag"></div>
-
-        <!-- GENERACJA 3 -->
-        <a href="#" class="box g3-box box-short">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <span class="date-tag">Ojciec | 1920</span>
-        </a>
-        <a href="#" class="box g3-box box-short">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <span class="date-tag">Matka | 1925</span>
-        </a>
-
-        <!-- Łącznik G3 do G4 (Interaktywny Node) -->
+        <!-- TAG ŚLUBU G3 -> G4 -->
         <div class="g3-tag">
-            <a href="inna_strona.html" class="interactive-node">
-                <div class="flip-card"><div class="flip-front">L&K</div><div class="flip-back">GO</div></div>
-            </a>
+            <span class="marriage-tag">∞ 1902 Wyszatyce</span>
         </div>
 
-        <!-- GENERACJA 4 (Jedność) -->
-        <div class="box g4-box box-short active" style="margin-bottom: 20px;">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <span class="date-tag">Jedność | 2026</span>
-        </div>
-
-        <!-- GENERACJA 4 (Potomek z proporcjami 1/3 i 2/3) -->
+        <!-- GENERACJA 4 (Potomkowie) -->
         <div class="box g4-box box-potomek">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
             <div class="potomek-img">
-                <img src="" class="img-single" style="width:clamp(40px, 6vw, 65px); height:auto; border:none; box-shadow:none;" alt="">
-                <span class="name-tag" style="border:none; text-align:center;">Nazwa</span>
+                <img src="../img/genealogia/oginiecd.png" class="img-single" style="width:clamp(40px, 6vw, 65px); height:auto; border:none; box-shadow:none;" alt="Oginiec">
             </div>
             <div class="potomek-text">
-                <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-family: 'Jost', sans-serif; text-transform: none; font-weight: 300; color: var(--ink);">
-                    Wklej tutaj swój tekst nota biograficzna.
+                <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-family: 'Cormorant Garamond', serif; line-height: 1.4; color: var(--ink);">
+                    Jerzy Andrzej Maria, Andrzej Antoni Maria,<br>Włodzimierz Teofil, Tadeusz Aleksander Maria,<br>Olga Maria Zofia, Jan Józef Teofil, Maria,<br>Aleksander Antoni Maria i Aniela<br><strong>Fedorowiczowie-Jackowscy</strong>
                 </p>
             </div>
         </div>
@@ -294,12 +244,13 @@
     </div>
 </div>
 
+<!-- Dolne Menu Nawigacyjne Linii -->
 <div class="sub-pagination">
-    <a href="domanscy-ladomirscy.html" class="sub-btn active">Domańscy | Ładomirscy</a>
+    <a href="domanscy-ladomirscy.html" class="sub-btn">Domańscy | Ładomirscy</a>
     <a href="golebscy-ladomirscy.html" class="sub-btn">Gołębscy | Ładomirscy</a>
-    <a href="krobiccy-ladomirscy.html" class="sub-btn">Krobiccy  | Ładomirscy</a>
+    <a href="krobiccy-ladomirscy.html" class="sub-btn">Krobiccy | Ładomirscy</a>
     <a href="ladomirscy-krainscy.html" class="sub-btn">Ładomirscy | Kraińscy</a>
-    <a href="fedorowiczowie-krainscy.html" class="sub-btn">Fedorowiczowie | Kraińscy</a>
+    <a href="fedorowiczowie-krainscy.html" class="sub-btn active">Fedorowiczowie | Kraińscy</a>
     <a href="krainscy-wlodkowie.html" class="sub-btn">Kraińscy | Włodkowie</a>
     <a href="wiszniewscy-krainscy.html" class="sub-btn">Wiszniewscy | Kraińscy</a>
 </div>
