@@ -59,6 +59,10 @@
         .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
         .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
         .drawer-links a:hover::before { width: 3px; }
+        
+        /* Aktywny link w menu */
+        .drawer-links a.active { color: var(--gold-light) !important; background: rgba(255,255,255,0.1) !important; padding-left: 35px; font-weight: 500; }
+        .drawer-links a.active::before { width: 3px !important; }
 
         .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
         .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
@@ -161,7 +165,7 @@
         <h2>Menu Rodowe</h2>
     </div>
     
-    <ul class="drawer-links">
+    <ul class="drawer-links" id="sidebarLinks">
         <li><a href="index.html">Strona Główna</a></li>
         <li><a href="aktualnosci.html">Aktualności</a></li>
         <li><a href="historia.html">Historia Klanu</a></li>
@@ -270,6 +274,27 @@
 
     menuBtn.addEventListener('click', toggleSidebar);
     overlay.addEventListener('click', toggleSidebar);
+
+    // Podświetlanie aktualnej strony w menu (drawer)
+    function highlightCurrentPage() {
+        const currentPath = window.location.pathname;
+        let currentPage = currentPath.split("/").pop();
+        if (currentPage === "" || currentPage === "/") currentPage = "index.html";
+        
+        const links = document.querySelectorAll('#sidebarLinks a');
+        links.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            link.classList.remove('active');
+            
+            if (!linkHref.startsWith('#')) {
+                if (linkHref.endsWith(currentPage) || (currentPage === "index.html" && linkHref === "index.html")) {
+                    link.classList.add('active');
+                }
+            }
+        });
+    }
+    
+    window.addEventListener('DOMContentLoaded', highlightCurrentPage);
 </script>
 
 </body>
