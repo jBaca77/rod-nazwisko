@@ -38,43 +38,29 @@
         .hero-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
         .main-img { width: 100%; height: auto; border: 1px solid var(--line); padding: 10px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
-        /* WSPOMNIENIA */
+        /* WSPOMNIENIA (Puste dla tego zjazdu, style zachowane w razie potrzeby) */
         .memories-section { max-width: 800px; margin: 60px auto; padding: 0 24px; }
         .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
-        .memory-card { 
-            border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; 
-            font-style: italic; position: relative;
-        }
-        .memory-card::before { 
-            content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; 
-            color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; 
-        }
+        .memory-card { border-left: 3px solid var(--gold); padding: 10px 0 10px 30px; margin-bottom: 50px; font-style: italic; position: relative; }
+        .memory-card::before { content: "“"; font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold-light); position: absolute; left: -15px; top: -30px; opacity: 0.25; }
         .memory-author { display: block; margin-top: 15px; font-style: normal; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: var(--sepia); }
 
         /* GALERIA MINIATUR */
         .gallery-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
-        .simple-gallery { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-            grid-auto-rows: 180px; gap: 8px; 
-        }
+        .simple-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); grid-auto-rows: 180px; gap: 8px; }
         .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
-        .gallery-item img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); 
-        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-        /* PAGINACJA */
+        /* PAGINACJA - NOWY UKŁAD */
         .zjazdy-pagination { max-width: 800px; margin: 40px auto 80px; padding: 30px 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; }
         .pagination-btn { flex: 1 1 calc(50% - 6px); text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center; display: flex; align-items: center; justify-content: center;}
         .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; }
         .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: white; }
 
+        /* FIX DLA MOBILE */
         @media (max-width: 600px) {
             .pagination-btn { padding: 20px 10px; font-size: 0.7rem; }
-            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
-            .article-header { margin: 40px auto 30px; }
         }
 
         /* LIGHTBOX */
@@ -87,6 +73,13 @@
         .lb-counter { color: var(--gold-light); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-family: 'Jost', sans-serif; }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
+
+        @media (max-width: 600px) {
+            .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
+            .lb-controls { gap: 60px; }
+            .lb-arrow { font-size: 3.5rem; }
+            .article-header { margin: 40px auto 30px; }
+        }
     </style>
 </head>
 <body>
@@ -105,20 +98,17 @@
     </header>
 
     <div class="info-panel">
-        <div class="info-item"><strong>Data zjazdu</strong> 30 sierpnia - 1 września 2024</div>
+        <div class="info-item"><strong>Data zjazdu</strong> 30 sierpnia - 01 września 2024</div>
         <div class="info-item"><strong>Miejsce</strong> Ośrodek Wczasowo-Kolonijny HOTTUR<br>Borowice 18</div>
         <div class="info-item"><strong>Organizatorzy</strong> Jadwiga, Teresa, Jan i Łukasz Ładomirscy z rodzinami</div>
-        <div class="info-item"><strong>Uczestnicy</strong> ok. 160 osób</div>
+        <div class="info-item"><strong>Uczestnicy</strong> ok. 160</div>
     </div>
 
     <div class="hero-container">
-        <img src="../img/zjazdy/zjazdiii/foto_zjazdiii_00.jpg" alt="Uczestnicy XXIII Zjazdu w Borowicach" class="main-img">
+        <img src="../img/zjazdy/zjazdxxiii/foto_zjazdxxiii_00.jpg" alt="Uczestnicy XXIII Zjazdu w Borowicach" class="main-img">
     </div>
 
-    <section class="memories-section">
-        <h2 class="section-title">WSPOMNIENIA</h2>
-        <!-- Miejsce na wspomnienia -->
-    </section>
+    <!-- Sekcja WSPOMNIENIA pominięta, ponieważ stara wersja strony dla tego zjazdu nie zawierała żadnych wpisów -->
 
     <div class="gallery-wrapper">
         <h2 class="section-title">FOTOKRONIKA</h2>
@@ -147,8 +137,8 @@
 <footer><p>KLAN ŁADOMIRSKICH I KRAIŃSKICH</p></footer>
 
 <script>
-    const zjazd_folder = 'zjazdiii';
-    const liczba_zdjec = 93; 
+    const zjazd_folder = 'zjazdxxiii';
+    const liczba_zdjec = 162; 
     let currentIdx = 1;
 
     const container = document.getElementById('gallery-container');
@@ -202,6 +192,26 @@
             if (e.key === "Escape") closeLightbox();
         }
     });
+
+    let tStart = 0;
+    let isMultiTouch = false;
+
+    lightbox.addEventListener('touchstart', e => {
+        if (e.touches.length > 1) {
+            isMultiTouch = true;
+        } else {
+            isMultiTouch = false;
+            tStart = e.changedTouches[0].screenX;
+        }
+    }, {passive: true});
+
+    lightbox.addEventListener('touchend', e => {
+        if (isMultiTouch) return;
+        let tEnd = e.changedTouches[0].screenX;
+        const threshold = 60;
+        if (tStart - tEnd > threshold) changePhoto(1);
+        if (tEnd - tStart > threshold) changePhoto(-1);
+    }, {passive: true});
 </script>
 
 </body>
