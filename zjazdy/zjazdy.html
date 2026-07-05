@@ -62,6 +62,17 @@
   .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
   .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
   .drawer-links a:hover::before { width: 3px; }
+  
+  /* Aktywna zakładka w menu */
+  .drawer-links a.active {
+    color: var(--gold-light);
+    background: rgba(255,255,255,0.06);
+    padding-left: 35px;
+  }
+  .drawer-links a.active::before {
+    width: 3px;
+  }
+
   .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
   .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
   .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
@@ -143,6 +154,33 @@
   }
   .z-row:hover::before, .z-row:focus-visible::before { width: 8px; }
   
+  /* Odznaka Jubileuszowa */
+  .badge-lecie {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--warm-white);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border-radius: 0 0 6px 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    z-index: 2;
+  }
+  .badge-lecie svg {
+    width: 10px;
+    height: 10px;
+    fill: currentColor;
+  }
+
   .z-row-left { display: flex; align-items: center; gap: 20px; }
   .z-row-num { 
     font-family: 'Cormorant Garamond', serif; 
@@ -202,7 +240,7 @@
     <li><a href="../aktualnosci.html">Aktualności</a></li>
     <li><a href="../historia.html">Historia Klanu</a></li>
     <li><a href="../genealogia/genealogia.html">Genealogia</a></li>
-    <li><a href="../zjazdy/zjazdy.html">Kronika Zjazdów</a></li>
+    <li><a href="../zjazdy/zjazdy.html" class="active">Kronika Zjazdów</a></li>
     <li><a href="../slownik-biogr/biografie.html">Biografie</a></li>
     <li><a href="../pamiec.html">Pamięć i Groby</a></li>
     <li><a href="../slownik-geo/geografia.html">Geografia Rodowa</a></li>
@@ -295,9 +333,22 @@
       </div>
     `, {offset: [0, -5]});
 
+    // Sprawdzenie i generowanie odznak jubileuszowych
+    let badgeHTML = '';
+    if (z.n === 'IV') {
+      badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>10-lecie</div>`;
+    } else if (z.n === 'IX') {
+      badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>20-lecie</div>`;
+    } else if (z.n === 'XIV') {
+      badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>30-lecie</div>`;
+    } else if (z.n === 'XXIII') {
+      badgeHTML = `<div class="badge-lecie"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.1 4.5 2.3 7.6-6.2-4.7-6.2 4.7 2.3-7.6-6.1-4.5h7.6z"/></svg>50-lecie</div>`;
+    }
+
     // Kompaktowy panel na liście poniżej mapy
     container.innerHTML += `
       <a href="${targetUrl}" class="z-row" style="--row-color: ${color}" role="listitem" aria-label="${z.n} Zjazd Rodzinny w ${z.p}">
+        ${badgeHTML}
         <div class="z-row-left">
           <div class="z-row-num">${z.n}</div>
           <div class="z-row-title">
