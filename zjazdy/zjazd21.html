@@ -56,50 +56,49 @@
         .simple-gallery { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-            grid-auto-rows: 180px; gap: 12px; 
+            grid-auto-rows: 180px; gap: 8px; 
         }
         .gallery-item { overflow: hidden; cursor: pointer; border-radius: 2px; background: var(--ink); border: 1px solid var(--line); }
         .gallery-item img { 
             width: 100%; height: 100%; object-fit: cover; 
-            transition: all 0.5s ease; opacity: 0.8; filter: grayscale(30%); 
+            transition: all 0.5s ease; opacity: 0.85; filter: grayscale(20%); 
         }
         .gallery-item:hover img { opacity: 1; filter: none; transform: scale(1.08); }
 
-        /* PAGINACJA */
-        .zjazdy-pagination { 
-            max-width: 800px; margin: 0 auto 80px; padding: 40px 24px; 
-            border-top: 1px solid var(--line); display: flex; 
-            justify-content: center; gap: 20px; flex-wrap: wrap;
+        /* PAGINACJA - NOWY UKŁAD */
+        .zjazdy-pagination { max-width: 800px; margin: 40px auto 80px; padding: 30px 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; }
+        .pagination-btn { flex: 1 1 calc(50% - 6px); /* Dwa przyciski obok siebie */text-decoration: none; color: var(--sepia); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 16px 10px; border: 1px solid var(--line); transition: 0.3s; background: var(--parchment); text-align: center;display: flex;align-items: center;justify-content: center;}
+        /* Przycisk "Wróć do listy" na całą szerokość */
+        .pagination-btn.full-width { flex: 1 1 100%; background: transparent; border-style: dashed; /* Delikatne wyróżnienie że to powrót */}
+        .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: white; }
+
+        /* FIX DLA MOBILE */
+        @media (max-width: 600px) {
+            .pagination-btn { padding: 20px 10px; /* Większe pole dotyku dla kciuka */font-size: 0.7rem; }
         }
-        .pagination-btn {
-            text-decoration: none; color: var(--sepia); font-size: 0.75rem; 
-            text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px;
-            border: 1px solid var(--line); transition: 0.3s; background: transparent;
-        }
-        .pagination-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--parchment); }
 
         /* LIGHTBOX */
         #lightbox {
             display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 13, 10, 0.98); justify-content: center; align-items: center; 
-            user-select: none; padding: 20px;
+            user-select: none; padding: 15px;
         }
         .lb-container {
             display: flex; flex-direction: column; align-items: center;
-            max-width: 95%; max-height: 95%; position: relative;
+            max-width: 100%; max-height: 100%; position: relative;
         }
         .lb-close {
-            margin-bottom: 15px; color: var(--parchment); font-size: 0.9rem;
+            margin-bottom: 12px; color: var(--parchment); font-size: 0.85rem;
             text-transform: uppercase; letter-spacing: 3px; cursor: pointer;
-            transition: 0.3s; padding: 5px 10px;
+            transition: 0.3s; opacity: 0.7;
         }
         #lb-img { 
             max-width: 100%; max-height: 70vh; border: 1px solid var(--gold); 
-            padding: 8px; background: white; box-shadow: 0 0 40px rgba(0,0,0,0.5); 
+            padding: 6px; background: white; box-shadow: 0 0 40px rgba(0,0,0,0.5); 
             object-fit: contain;
         }
         .lb-controls {
-            margin-top: 20px; display: flex; align-items: center; gap: 40px;
+            margin-top: 15px; display: flex; align-items: center; gap: 40px;
         }
         .lb-arrow {
             background: none; border: none; color: var(--gold-light);
@@ -107,13 +106,12 @@
             font-family: 'Cormorant Garamond', serif; line-height: 1;
         }
         .lb-counter {
-            color: var(--gold-light); font-size: 0.8rem; letter-spacing: 2px;
+            color: var(--gold-light); font-size: 0.75rem; letter-spacing: 2px;
             text-transform: uppercase; font-family: 'Jost', sans-serif;
         }
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 2px; }
 
-        /* MOBILE FIXES */
         @media (max-width: 600px) {
             .simple-gallery { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 2px; }
             .lb-controls { gap: 60px; }
@@ -171,9 +169,9 @@
     </div>
 
     <div class="zjazdy-pagination">
-        <a href="zjazd20.html" class="pagination-btn">← Poprzedni Zjazd</a>
-        <a href="zjazdy.html" class="pagination-btn">Wróć do listy</a>
-        <a href="zjazd22.html" class="pagination-btn">Następny Zjazd →</a>
+        <a href="zjazd20.html" class="pagination-btn">← Poprzedni</a>
+        <a href="zjazd22.html" class="pagination-btn">Następny →</a>
+        <a href="zjazdy.html" class="pagination-btn full-width">Powrót do listy zjazdów</a>
     </div>
 </article>
 
