@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wywód Przodków - Wiszniewscy i Kraińscy | Archiwum L&K</title>
+    <title>Wywód Przodków - Gołębscy i Ładomirscy | Archiwum L&K</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -92,6 +92,9 @@
             min-height: 120px;
         }
 
+        .box-short { min-height: 45px !important; padding: 10px 15px !important; font-size: 0.85rem; }
+        .box-short.active { border-color: var(--gold); background: white; }
+
         .box:hover { border-color: var(--gold); background: white; transform: translateY(-2px); }
 
         .corner-ribbon {
@@ -109,7 +112,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .img-wrap, .img-double-row, .name-tag, .title-desc, .date-desc, .bio-content { position: relative; z-index: 2; width: 100%; }
+        .img-wrap, .img-double-row, .name-tag, .title-desc, .date-tag, .bio-content, .date-desc { position: relative; z-index: 2; width: 100%; }
 
         .img-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 6px; }
         .img-wrap span { font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost', sans-serif; text-transform: none; margin-top: 2px; }
@@ -195,8 +198,8 @@
 </nav>
 
 <header class="article-header">
-    <span class="meta-top">Tablica Genealogiczna VII</span>
-    <h1>Linia Wiszniewskich i Kraińskich</h1>
+    <span class="meta-top">Tablica Genealogiczna</span>
+    <h1>Linia Gołębskich i Ładomirskich</h1>
     <div class="s-line-main"></div>
 </header>
 
@@ -207,198 +210,184 @@
         <div class="box g1-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
             <div class="img-double-row">
-                <div class="img-wrap"><img src="../img/genealogia/ramult.png" class="img-single" style="width:100%;" alt="Ramułt odm."></div>
-                <div class="img-wrap"><img src="../img/genealogia/ramult1.png" class="img-single" style="width:100%;" alt="Ramułt"></div>
+                <div class="img-wrap"><img src="../img/genealogia/pobog.png" class="img-single" style="width:100%;" alt="Pobóg"></div>
+                <div class="img-wrap"><img src="../img/genealogia/ogonczyk.png" class="img-single" style="width:100%;" alt="Ogończyk"></div>
             </div>
-            <span style="font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost';">Ramułt odm. / Ramułt</span>
-            <div class="name-tag">Jan-Kanty Franciszek-Ksawery<br>Wiszniewski</div>
+            <span style="font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: #c9302c; font-family: 'Jost'; font-weight: 500;">? POBÓG v OGOŃCZYK ?</span>
+            <div class="name-tag">Jan Alojzy<br>Gołębski</div>
             <div class="title-desc">
-                <span style="color: #c9302c;">oficer wojsk napoleońskich</span><br>
-                pisarz i ławnik w Sądzie Pow. w Owruczu<br>
-                posesor zastawny dóbr Woniajki<br>
-                wł. dóbr Kamień, Jackowicze i Serkowszczyzna
+                kupiec, obywatel m. Lwowa<br>
+                wł. dóbr Sławentyn i Krasnolesie
             </div>
             <div class="date-desc">
-                (Zarszyn 1793 <a href="wiszarch29.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - przed 1853)
-            </div>
-        </div>
-
-        <div class="box g1-box">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div class="img-wrap"><img src="../img/genealogia/dabrowa.png" class="img-single" alt="Dąbrowa"><span>Dąbrowa</span></div>
-            <div class="name-tag">Róża<br>Ciechanowska</div>
-            <div class="date-desc">
-                (ok. 1812 - po 1869)
-            </div>
-        </div>
-
-        <div class="box g1-box">
-            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div class="img-double-row">
-                <div class="img-wrap"><img src="../img/genealogia/jastrzebiec.png" class="img-single" style="width:100%;" alt="Jastrzębiec"></div>
-                <div class="img-wrap"><img src="../img/genealogia/trzaska.png" class="img-single" style="width:100%;" alt="Trzaska"></div>
-            </div>
-            <span style="font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost';">Jastrzębiec / Trzaska</span>
-            <div class="name-tag">Jan<br>Zakrzewski</div>
-            <div class="title-desc">wł. dóbr Niedzieliska</div>
-            <div class="date-desc">
-                <span style="color: #c9302c;">(Roztoczki 1805 - ?)</span>
+                (Lwów 1788 <a href="golebarch6.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Lwów 1876 <a href="golebarch7.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="golebarch8.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)<br><br>
+                /2∞ Lwów, 1830, Filipina Lunda <a href="golebarch14.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>/
             </div>
         </div>
 
         <div class="box g1-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
             <div class="img-wrap"><img src="../img/genealogia/nic.png" class="img-single" style="opacity: 0.2;" alt=""><span>&nbsp;</span></div>
-            <div class="name-tag">Elżbieta<br>Czerny</div>
-            <div class="title-desc">wł. dóbr Niedzieliska</div>
+            <div class="name-tag">Amalia Fryderyka<br>Schütz (Szyc)</div>
             <div class="date-desc">
-                (Olchowce/Sanok 1819 - ?)<br><br>
-                /∞ par. Świrz 1850 Antoni Michalewski/
+                (ok. 1795 - Lwów 1823 <a href="golebarch5.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="golebarch10.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <div class="box g1-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+            <div class="img-wrap"><img src="../img/genealogia/nic.png" class="img-single" style="opacity: 0.2;" alt=""><span>&nbsp;</span></div>
+            <div class="name-tag">Wincenty Agapit<br>Kürschner (Kirschner)</div>
+            <div class="title-desc">kupiec, obywatel m. Lwowa</div>
+            <div class="date-desc">
+                (Noviny pod Ralskem 1797 <a href="kirarch3.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a><br>
+                - Lwów 1861 <a href="kirarch4.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+            </div>
+        </div>
+
+        <div class="box g1-box">
+            <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
+            <div class="img-wrap"><img src="../img/genealogia/nic.png" class="img-single" style="opacity: 0.2;" alt=""><span>&nbsp;</span></div>
+            <div class="name-tag">Ludwika<br>Hennemann</div>
+            <div class="date-desc">
+                (Lwów ok. 1801 - Lwów 1855 <a href="kirarch5.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
         <div class="box g1-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="img-wrap"><img src="../img/genealogia/jelita.png" class="img-single" alt="Jelita"><span>Jelita</span></div>
-            <div class="name-tag">Władysław Jerzy Wojciech<br>Kraiński</div>
-            <div class="title-desc">wł. dóbr Hermanowice</div>
+            <div class="img-double-row">
+                <div class="img-wrap"><img src="../img/genealogia/lada2.png" class="img-single" style="width:100%;" alt="Łada"></div>
+                <div class="img-wrap"><img src="../img/genealogia/ladomirski.png" class="img-single" style="width:100%;" alt="Własny"></div>
+            </div>
+            <span style="font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost';">Łada / Własny</span>
+            <div class="name-tag">Maciej <strong>Brutus</strong><br>Ładomirski</div>
+            <div class="title-desc">oficjalista w Kozłowie k/Buska<br>dzierż. dóbr Taurów, Koniuszki i Kozłów<br>wł. dóbr Wierzchnia</div>
             <div class="date-desc">
-                (Hermanowice 1797 <a href="kraarch.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> -<br>Hermanowice 1840)
+                (Filipkowce 1798 - )
             </div>
         </div>
 
         <div class="box g1-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="img-wrap"><img src="../img/genealogia/brochwicz.png" class="img-single" alt="Brochwicz"><span>Brochwicz</span></div>
-            <div class="name-tag">Aniela<br>Wiktor</div>
+            <div class="img-wrap"><img src="../img/genealogia/rola.png" class="img-single" alt="Rola"><span>Rola</span></div>
+            <div class="name-tag">Karolina Weronika<br>Janicka</div>
+            <div class="title-desc">wł. części dóbr Martynów i Hałuszczyńce</div>
             <div class="date-desc">
-                (Wola Sękowa 1816 - Hermanowice 1887 <a href="kraarch6.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)<br><br>
-                /2∞ Nowotaniec, 1844, Eugeniusz Kraiński <a href="kraarch12.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>/
+                (Martynów Nowy 1795 <a href="ladarch21.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Markowce 1874 <a href="ladarch46.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
         <div class="box g1-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="img-wrap"><img src="../img/genealogia/strzemie.png" class="img-single" alt="Strzemię"><span>Strzemię</span></div>
-            <div class="name-tag">Teofil <strong>Tytus</strong> Tomasz<br>Trzecieski</div>
-            <div class="title-desc">
-                wł. dóbr Polanka, Miejsce, Siedliszcze i in.<br>
-                pionier przemysłu naftowego<br>
-                współzał. pierwszyej kopalni i rafinerii ropy
+            <div class="img-double-row">
+                <div class="img-wrap"><img src="../img/genealogia/kosciesza1.png" class="img-single" style="width:100%;" alt="Kościesza"></div>
+                <div class="img-wrap"><img src="../img/genealogia/kosciesza.png" class="img-single" style="width:100%;" alt="Własny"></div>
             </div>
+            <span style="font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost';">Kościesza / Własny</span>
+            <div class="name-tag">Maciej<br>Gołaszewski</div>
+            <div class="title-desc">radca sądów we Lwowie, Samborze,<br>Tarnowie i Stanisławowie<br>wł. dóbr Honoratówka</div>
             <div class="date-desc">
-                (Bażanówka 1811 - Polanka 1878 <a href="trzecarch1.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+                (Kałusz 1797 <a href="golaszarch2.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Honoratówka 1873 <a href="golaszarch19.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="golaszarch.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
         <div class="box g1-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="img-wrap"><img src="../img/genealogia/szreniawa.png" class="img-single" alt="Szreniawa"><span>Szreniawa</span></div>
-            <div class="name-tag">Anna Antonina Zofia<br>Węgleńska</div>
+            <div class="img-double-row">
+                <div class="img-wrap"><img src="../img/genealogia/tarnawa.png" class="img-single" style="width:100%;" alt="Tarnawa"></div>
+                <div class="img-wrap"><img src="../img/genealogia/przyjaciel.png" class="img-single" style="width:100%;" alt="Przyjaciel"></div>
+            </div>
+            <span style="font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--sepia); font-family: 'Jost';">Tarnawa / Przyjaciel</span>
+            <div class="name-tag">Rafała Wiktoria<br>Malczewska</div>
             <div class="date-desc">
-                (Lwów 1821 <a href="trzecarch2.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Polanka 1857 <a href="trzecarch1.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+                (Lwów 1801 <a href="malczarch3.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Honoratówka 1863 <a href="golaszarch1.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="golaszarch.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
         <!-- TAGI ŚLUBÓW G1 -> G2 -->
-        <div class="g1-tag"><span class="marriage-tag">∞ ok. 1829 <span style="color: #c9302c;">par. Owrucz</span></span></div>
-        <div class="g1-tag"><span class="marriage-tag">—</span></div>
-        <div class="g1-tag"><span class="marriage-tag">∞ 1840 Wola Sękowa, par. Nowotaniec <a href="kraarch2.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span></div>
-        <div class="g1-tag"><span class="marriage-tag">∞ 1845 Siedliszcze, par. Pawłów <a href="trzecarch.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span></div>
+        <div class="g1-tag"><span class="marriage-tag">∞ 1814 Lwów, par. Bożego Ciała <a href="golebarch13.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span></div>
+        <div class="g1-tag"><span class="marriage-tag">∞ 1824 Lwów, par. Bożego Ciała <a href="kirarch2.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span></div>
+        <div class="g1-tag"><span class="marriage-tag">∞ ok. 1824</span></div>
+        <div class="g1-tag"><span class="marriage-tag">∞ 1825 Podbórze, par. Podkamień <a href="golaszarch6.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span></div>
 
         <!-- GENERACJA 2 -->
         <div class="box g2-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div class="name-tag">Leonard<br>Wiszniewski</div>
-            <div class="title-desc">
-                powstaniec styczniowy<br>
-                przeds. bud. dróg i kolei w Mołdawii<br>
-                właściciel kopalni ropy<br>
-                poseł do Sejmu Krajowego<br>
-                marszałek pow. drohobyckiego
-            </div>
+            <div class="name-tag">Marceli Jan Chrzciciel<br>Gołębski</div>
+            <div class="title-desc">wł. dóbr Sławentyn i Krasnolesie</div>
             <div class="date-desc">
-                (Woniajki /Красностав/ 1835 <a href="wiszarch28.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a><br>
-                - Dąbrowa Tarnowska 1914 <a href="wiszarch5.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="wiszarch4.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+                (Lwów 1819 <a href="golebarch9.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Sławentyn 1890 <a href="golebarch4.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
         <div class="box g2-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div class="name-tag">Ludmiła<br>Czerny-Zakrzewska</div>
+            <div class="name-tag">Antonina Józefa<br>Kirschner (Kirszner)</div>
             <div class="date-desc">
-                (Niedzieliska ok. 1848 -<br>
-                Pointe Claire k/Montrealu 1934 <a href="wiszarch16.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="wiszarch25.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+                (Lwów 1833 <a href="kirarch1.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Sławentyn 1907 <a href="golebarch3.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
         <div class="box g2-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="name-tag">Władysław Marian Walenty<br>Kraiński</div>
-            <div class="title-desc">
-                wł. dóbr Niebocko, Wyszatyce i Jabłonka<br>
-                poseł do Sejmu Krajowego<br>
-                członek Izby Panów<br>
-                prezes Tow. Kr. Ziem. we Lwowie
-            </div>
+            <div class="name-tag">Walenty <strong>Konstanty</strong> Brutus<br>Ładomirski</div>
+            <div class="title-desc">dzierż. dóbr Babin i Suchrów,<br>wł. dóbr Tomaszowce, Markowce i Dzieduszyce Małe</div>
             <div class="date-desc">
-                (Sękowa Wola 1841 <a href="kraarch3.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a><br>
-                - Niebocko 1926 <a href="kraarch9.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="kraarch5.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+                (Taurów 1832 <a href="ladarch8.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a><br>
+                - Markowce 1895 <a href="ladarch16.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="ladarch33.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
         <div class="box g2-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="name-tag">Maria Emilia Zofia<br>Trzecieska</div>
+            <div class="name-tag">Katarzyna Walentyna<br>Gołaszewska</div>
             <div class="date-desc">
-                (Polanka 1853<br>- Markowce 1932 <a href="kraarch11.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="kraarch8.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+                (Tarnów-Zamieście 1841 <a href="golaszarch7.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a><br>
+                - Markowce 1917 <a href="ladarch41.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
         <!-- TAGI ŚLUBÓW G2 -> G3 -->
-        <div class="g2-tag"><span class="marriage-tag">∞ 1869 Lwów, par. św. Antoniego <a href="wiszarch26.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span></div>
-        <div class="g2-tag"><span class="marriage-tag">∞ 1873 Miejsce Piastowe</span></div>
+        <div class="g2-tag"><span class="marriage-tag">∞ 1852 Lwów, par. Bożego Ciała <a href="golebarch11.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span></div>
+        <div class="g2-tag"><span class="marriage-tag">∞ 1862 par. Stanisławów <a href="ladarch35.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span></div>
 
         <!-- GENERACJA 3 (Rodzice) -->
         <div class="box g3-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
-            <div class="name-tag">Maria <strong>Ludwik</strong> Błażej<br>Wiszniewski</div>
-            <div class="title-desc">wł. dóbr Horyhlady i Ostra</div>
+            <div class="name-tag">Jan <strong>Kazimierz</strong><br>Gołębski</div>
+            <div class="title-desc">wł. dóbr Szumlany i Marianów<br>mierniczy i urządzeniowiec lasów prywatnych</div>
             <div class="date-desc">
-                (Bagienica / Dąbrowa Tarnowska 1879 <a href="wiszarch9.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> -<br>
-                prawd. Chersoń 1940)
+                (Sławentyn 1868 - Lipica Górna / Sławentyn 1935 <a href="golebarch12.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> <a href="golebarch2.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
         <div class="box g3-box">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-right);"></div>
-            <div class="name-tag">Teresa Maria Walentyna<br>Kraińska</div>
-            <div class="title-desc">wł. dóbr Dźwiniacz Dolny</div>
+            <div class="name-tag">Helena Karolina<br>Ładomirska</div>
             <div class="date-desc">
-                (Wyszatyce 1888 - Nowy Sącz 1965 <a href="wiszarch33.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
+                (Markowce 1873 <a href="ladarch36.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a> - Sławentyn 1918 <a href="golebarch.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a>)
             </div>
         </div>
 
         <!-- TAG ŚLUBU G3 -> G4 -->
         <div class="g3-tag">
-            <a href="wiszarch17.php" target="_blank" class="interactive-node" title="Akt Małżeństwa z 1908 r.">
-                <div class="flip-card"><div class="flip-front">1908</div><div class="flip-back">∞</div></div>
+            <a href="ladarch19.php" target="_blank" class="interactive-node" title="Akt Małżeństwa z 1895 r.">
+                <div class="flip-card"><div class="flip-front">1895</div><div class="flip-back">∞</div></div>
             </a>
-            <span class="marriage-tag">∞ 1908 Lwów, par. św. Marii Magdaleny <a href="wiszarch17.php" class="doc-link" target="_blank" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a></span>
+            <span class="marriage-tag">∞ 1895 Markowce, par. Tyśmienica <a href="ladarch19.php" class="doc-link" target="_blank" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a></span>
         </div>
 
         <!-- GENERACJA 4 (Potomkowie) -->
         <div class="box g4-box box-potomek">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
             <div class="potomek-img">
-                <img src="../img/genealogia/ramultd.png" class="img-single" style="width:clamp(40px, 6vw, 65px); height:auto; border:none; box-shadow:none;" alt="Ramułt">
+                <img src="../img/genealogia/pobogd.png" class="img-single" style="width:clamp(40px, 6vw, 65px); height:auto; border:none; box-shadow:none;" alt="Pobóg">
             </div>
             <div class="potomek-text">
                 <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-family: 'Cormorant Garamond', serif; line-height: 1.4; color: var(--ink);">
-                    Jan Leonard Maria, Teresa Maria Anna, Anna Maria,<br>
-                    Krystyna Maria, Stanisław Maria, Tadeusz Maria<br>
-                    i Andrzej Maria<br>
-                    <strong>Wiszniewscy</strong>
+                    Konstanty, Stefan, Maria i Jerzy<br>
+                    <strong>GOŁĘBSCY</strong>
                 </p>
             </div>
         </div>
@@ -409,12 +398,12 @@
 <!-- Dolne Menu Nawigacyjne Linii -->
 <div class="sub-pagination">
     <a href="domanscy-ladomirscy.html" class="sub-btn">Domańscy | Ładomirscy</a>
-    <a href="golebscy-ladomirscy.html" class="sub-btn">Gołębscy | Ładomirscy</a>
+    <a href="golebscy-ladomirscy.html" class="sub-btn active">Gołębscy | Ładomirscy</a>
     <a href="krobiccy-ladomirscy.html" class="sub-btn">Krobiccy | Ładomirscy</a>
     <a href="ladomirscy-krainscy.html" class="sub-btn">Ładomirscy | Kraińscy</a>
     <a href="fedorowiczowie-krainscy.html" class="sub-btn">Fedorowiczowie | Kraińscy</a>
     <a href="krainscy-wlodkowie.html" class="sub-btn">Kraińscy | Włodkowie</a>
-    <a href="wiszniewscy-krainscy.html" class="sub-btn active">Wiszniewscy | Kraińscy</a>
+    <a href="wiszniewscy-krainscy.html" class="sub-btn">Wiszniewscy | Kraińscy</a>
 </div>
 
 <footer>
