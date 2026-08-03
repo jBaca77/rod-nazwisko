@@ -120,67 +120,62 @@
   }
   .legend-box strong { color: var(--unverified); font-weight: 500; }
 
-  /* ── MAIN CONTENT (FLEXBOX LAYOUT) ── */
-  main { width: 100%; max-width: 1500px; margin: 0 auto; padding: 0 20px 80px; }
+  /* ── MAIN CONTENT (SMART ROW LAYOUT) ── */
+  main { width: 100%; max-width: 1600px; margin: 0 auto; padding: 0 20px 80px; }
 
-  .gen-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    color: var(--gold);
-    text-align: center;
-    margin: 50px 0 20px;
-    position: relative;
-  }
-  .gen-title::before, .gen-title::after {
-    content: '';
-    display: inline-block;
-    width: clamp(20px, 5vw, 60px);
-    height: 1px;
-    background: var(--gold);
-    vertical-align: middle;
-    margin: 0 15px;
-  }
-
+  /* Rząd kafelków (1, 3, 5, 6, 7 boxów) */
   .tier-row {
     display: flex;
-    flex-wrap: wrap; /* Zapewnia brak poziomego przewijania - boksy zawijają się w dół */
+    flex-wrap: wrap; /* Zapewnia brak paska przewijania, boxy spadają w dół na małych ekranach */
     justify-content: center;
     align-items: stretch;
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 20px;
+    margin-bottom: 50px;
     width: 100%;
   }
 
-  /* Grupowanie merytoryczne potomków */
-  .sub-group {
+  /* Grupowanie merytoryczne (Ramka z podpisem kogo to są dzieci) */
+  .branch-group {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: stretch;
     gap: 15px;
-    border: 1px solid var(--sepia-pale);
-    background: var(--warm-white);
-    padding: 30px 15px 20px;
+    padding: 35px 15px 15px;
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--gold);
     border-radius: 6px;
     position: relative;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.02);
-    margin-bottom: 20px;
+    background: rgba(253, 250, 246, 0.4);
     flex: 1 1 auto;
+    min-width: 280px; /* Minimalna szerokość ramki grupującej */
   }
-  .sub-group-title {
+  
+  .branch-group.unverified-group {
+    border-top-color: var(--unverified);
+  }
+
+  .branch-title {
     position: absolute;
-    top: -12px;
+    top: -14px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--warm-white);
-    padding: 0 15px;
+    padding: 2px 15px;
     font-size: 0.75rem;
-    color: var(--sepia);
+    color: var(--ink);
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-weight: 500;
+    font-weight: 600;
     white-space: nowrap;
-    border: 1px solid var(--sepia-pale);
+    border: 1px solid var(--gold);
     border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  .unverified-group .branch-title {
+    border-color: var(--unverified);
+    color: var(--unverified);
   }
 
   /* ── NODE CARDS ── */
@@ -189,17 +184,17 @@
     border: 1px solid var(--sepia-pale);
     border-top: 4px solid var(--gold);
     border-radius: 4px;
-    padding: 18px 20px;
+    padding: 18px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     
-    /* Elastyczność - dopasowują się do treści, ale nie są zablokowane sztywno */
-    flex: 0 1 auto;
-    width: auto;
-    max-width: 320px; /* Chroni przed zbyt mocnym rozciągnięciem pojedynczego boksu */
-    min-width: 200px;
+    /* Elastyczność - boxy dopasowują się do treści wewnątrz flexboxa */
+    flex: 1 1 180px; 
+    max-width: 320px; /* Chroni przed zbyt mocnym rozciągnięciem */
     
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     text-align: center;
-    position: relative;
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   .node-card:hover {
@@ -210,9 +205,7 @@
   
   .root-card {
     max-width: 600px;
-    margin: 0 auto;
-    border-top: none;
-    border-bottom: 4px solid var(--gold);
+    flex: 1 1 100%;
   }
 
   .nc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 6px; }
@@ -224,36 +217,38 @@
     background: var(--parchment);
     padding: 10px;
     border-radius: 2px;
-    margin-top: 12px; 
+    margin-top: auto; /* Zawsze spycha małżonka na dół karty, wyrównując wizualnie siatkę */
     font-size: 0.8rem;
     font-weight: 400; 
     color: var(--ink); 
     line-height: 1.3; 
-    text-align: center;
     border-top: 1px dashed rgba(0,0,0,0.1);
   }
   .nc-spouse strong { font-weight: 600; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; display: block; margin-bottom: 4px; color: var(--ink); }
 
   .root-img {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     height: auto;
     border-radius: 2px;
-    margin-top: 15px;
+    margin: 15px auto 0;
     border: 1px solid var(--line);
+    display: block;
   }
 
   /* Wyróżnienia niepewnych danych */
   .unverified-card { border-top-color: var(--unverified) !important; }
   .unverified-text { color: var(--unverified) !important; }
+  .unverified-card .nc-name, .unverified-card .nc-dates, .unverified-card .nc-bio, .unverified-card .nc-spouse, .unverified-card .nc-spouse strong { color: var(--unverified); }
 
   /* ── FOOTER ── */
   footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 1px; margin-top: 40px; }
 
   /* ── MEDIA QUERIES DLA MOBILE ── */
-  @media (max-width: 600px) {
-    .node-card { width: 100%; max-width: 100%; padding: 14px 16px; }
-    .sub-group { padding: 30px 10px 15px; }
+  @media (max-width: 768px) {
+    .node-card { flex: 1 1 100%; max-width: 100%; }
+    .branch-title { font-size: 0.65rem; white-space: normal; text-align: center; max-width: 90%; top: -20px; line-height: 1.2; padding: 4px 10px; }
+    .branch-group { padding: 35px 10px 10px; }
   }
 </style>
 </head>
@@ -289,139 +284,145 @@
     </div>
   </div>
 
-  <!-- WIERSZ 1: ROOT (1 BOX) -->
+  <!-- WIERSZ 1 (1 BOX) -->
   <div class="tier-row">
-    <div class="node-card root-card">
-      <div class="nc-name">Antoni z Ładomirowa Ładomirski <small>h. Łada</small></div>
-      <div class="nc-dates">zmarł między 16.05.1738 a 03.05.1740</div>
-      <div class="nc-bio">
-        dzierżawcy dóbr Podniebyle i Długie <a href="ladarch1.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a><br>
-        właściciele części dóbr Niewodna i Smarżowa
-      </div>
-      <div class="nc-spouse">
-        <strong>ż. Ewa Zofia Sporczyk</strong>
-        <span class="unverified-text">ur. ok. 1700 | zm. 07.08.1761 Krosno <a href="ladarch43.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span>
-      </div>
-      <img src="zdjecia/ladarch/antoni_zofia_1726.jpg" alt="Antoni i Ewa Zofia Ładomirscy" class="root-img" loading="lazy">
-    </div>
-  </div>
-
-  <div class="gen-title">Dzieci Antoniego i Ewy Zofii</div>
-
-  <!-- WIERSZ 2: DZIECI CZ. 1 (3 BOXY) -->
-  <div class="tier-row">
-    <div class="node-card">
-      <div class="nc-name">Józef Ładomirski</div>
-      <div class="nc-dates unverified-text">zm. na Syberii po 1774</div>
-      <div class="nc-bio">towarzysz chorągwi pancernej<br>cześnik żytomierski</div>
-      <div class="nc-spouse"><strong>ż. Teresa Witosławska</strong></div>
-    </div>
-    
-    <div class="node-card">
-      <div class="nc-name">Barbara Ładomirska</div>
-      <div class="nc-dates">śl. przed 1737</div>
-      <div class="nc-spouse">
-        <strong>m. Jan Bańkowski</strong>
-        proboszcz g-k par. w Rzepniku
-      </div>
-    </div>
-    
-    <div class="node-card">
-      <div class="nc-name">Jakub Joachim Ładomirski</div>
-      <div class="nc-dates">chrz. 01.04.1720 Tarnowiec k/Jasła<br>zmarł przed rokiem 1778</div>
-      <div class="nc-bio">gubernator / ekonom sędziszowski<br>cześnik pilzneński</div>
-      <div class="nc-spouse">
-        <strong>ż. Rozalia Płoskońska</strong>
-        /2v Jakub Jakielski <a href="ladarch31.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>/
-      </div>
-    </div>
-  </div>
-
-  <!-- WIERSZ 3: DZIECI CZ. 2 (5 BOXÓW) -->
-  <div class="tier-row">
-    <div class="node-card">
-      <div class="nc-name">Kazimierz Ładomirski</div>
-      <div class="nc-dates">
-        ur. 1757 | zm. 07.07.1819 Filipkowce <a href="ladarch10.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
-        poch. Krzywcze <a href="ladarch9.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
-      </div>
-      <div class="nc-bio">dzierż. wójtostwa w Śniatynie<br>śl. 17.02.1786 par. Krzywcze</div>
-      <div class="nc-spouse">
-        <strong>ż. Eleonora Ludwika Anna Golejewska</strong>
-        ur. 21.02.1757, metr. 1758 par. Podkamień <a href="golejarch1.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
-        dziedz. cz. Filipkowiec<br>
-        zm. 12.05.1820 Filipkowce <a href="ladarch22.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a> | poch. Krzywcze <a href="ladarch9.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
-      </div>
-    </div>
-
-    <div class="node-card unverified-card">
-      <div class="nc-name unverified-text">Ignacy Ładomirski</div>
-      <div class="nc-spouse">
-        <strong class="unverified-text">ż. Katarzyna Trzecieska</strong>
-      </div>
-    </div>
-
-    <div class="node-card unverified-card">
-      <div class="nc-name unverified-text">Franciszka Ładomirska</div>
-      <div class="nc-spouse">
-        <strong class="unverified-text">m. Jacek Borysławski</strong>
-        <span class="unverified-text">podkomorzy<br>ur. ok. 1746 | zm. 15.03.1812 Korostowce <a href="borysarch2.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>poch. w Meżyrowie</span>
-      </div>
-    </div>
-
-    <div class="node-card unverified-card">
-      <div class="nc-name unverified-text">Anna Ładomirska</div>
-      <div class="nc-dates unverified-text">ur. ok. 1767 | zm. 20.06.1806 Jazowsko</div>
-      <div class="nc-bio unverified-text">śl. 05.02.1789 Fara Krosno</div>
-      <div class="nc-spouse">
-        <strong class="unverified-text">m. Adam Iwelski</strong>
-        <span class="unverified-text">ur. ok. 1765 | zm. 17.11.1829 par. Borzęcin<br>/2v Marianna Łączkowska 19.04.1807 Jazowsko/</span>
-      </div>
-    </div>
-
-    <div class="node-card">
-      <div class="nc-name">Jan Ładomirski</div>
-      <div class="nc-dates">
-        ur. 13.03.1768 Zasów | chrz. 17.07.1768 W-wa <a href="ladarch2.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
-        zm. 02.05.1843 Koniuszki <a href="ladarch44.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a> | poch. 04.05.1843
-      </div>
-      <div class="nc-bio">dzierż. dóbr Gusztynek, Bereżanka i Olesza<br>śl. 27.04.1794 parafia Krzywcze</div>
-      <div class="nc-spouse">
-        <strong>ż. Łucja Barbara Teresa Golejewska</strong>
-        ur. 15.12.1763 Orelec <a href="golejarch2.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
-        dziedziczka cz. Filipkowiec<br>
-        zm. 04.02.1833 Filipkowce | poch. 06.02.1833 Krzywcze <a href="ladarch3.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="gen-title">Wnuki Antoniego i Ewy Zofii</div>
-
-  <!-- WIERSZ 4: WNUKI (5 BOXÓW PODZIELONYCH MERYTORYCZNIE) -->
-  <div class="tier-row">
-    
-    <!-- Linia Franciszki -->
-    <div class="sub-group">
-      <div class="sub-group-title">Dzieci Franciszki (z d. Ładomirskiej)</div>
-      <div class="node-card unverified-card">
-        <div class="nc-name unverified-text">Joanna Borysławska</div>
-        <div class="nc-dates unverified-text">wł. Jankułowa | zm. 1864 | poch. Ozarzyńce</div>
-        <div class="nc-bio unverified-text">śl. 24.03.1812 Korostowce <a href="borysarch1.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a></div>
+    <div class="branch-group" style="border: none; background: transparent; padding: 0; box-shadow: none;">
+      <div class="node-card root-card">
+        <div class="nc-name">Antoni z Ładomirowa Ładomirski <small>h. Łada</small></div>
+        <div class="nc-dates">zmarł między 16.05.1738 a 03.05.1740</div>
+        <div class="nc-bio">
+          dzierżawcy dóbr Podniebyle i Długie <a href="ladarch1.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a><br>
+          właściciele części dóbr Niewodna i Smarżowa
+        </div>
         <div class="nc-spouse">
-          <strong class="unverified-text">m. Julian Górski</strong>
-          <span class="unverified-text">wł. dóbr Śledzie<br>ur. 14.10.1784 | zm. 9.2.1853 | poch. Ozarzyńce <a href="gorarch1.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>/min. 5-cioro dzieci/</span>
+          <strong>ż. Ewa Zofia Sporczyk</strong>
+          <span class="unverified-text">ur. ok. 1700 | zm. 07.08.1761 Krosno <a href="ladarch43.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span>
+        </div>
+        <img src="zdjecia/ladarch/antoni_zofia_1726.jpg" alt="Antoni i Ewa Zofia Ładomirscy" class="root-img" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <!-- WIERSZ 2 (3 BOXY) -->
+  <div class="tier-row">
+    <div class="branch-group">
+      <div class="branch-title">Dzieci Antoniego</div>
+      
+      <div class="node-card">
+        <div class="nc-name">Józef Ładomirski</div>
+        <div class="nc-dates unverified-text">zm. na Syberii po 1774</div>
+        <div class="nc-bio">towarzysz chorągwi pancernej<br>cześnik żytomierski</div>
+        <div class="nc-spouse"><strong>ż. Teresa Witosławska</strong></div>
+      </div>
+      
+      <div class="node-card">
+        <div class="nc-name">Barbara Ładomirska</div>
+        <div class="nc-dates">śl. przed 1737</div>
+        <div class="nc-spouse">
+          <strong>m. Jan Bańkowski</strong>
+          proboszcz g-k par. w Rzepniku
+        </div>
+      </div>
+      
+      <div class="node-card">
+        <div class="nc-name">Jakub Joachim Ładomirski</div>
+        <div class="nc-dates">chrz. 01.04.1720 Tarnowiec k/Jasła<br>zmarł przed rokiem 1778</div>
+        <div class="nc-bio">gubernator / ekonom sędziszowski<br>cześnik pilzneński</div>
+        <div class="nc-spouse">
+          <strong>ż. Rozalia Płoskońska</strong>
+          /2v Jakub Jakielski <a href="ladarch31.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>/
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- WIERSZ 3 (5 BOXÓW) -->
+  <div class="tier-row">
+    <div class="branch-group">
+      <div class="branch-title">Dzieci Antoniego (Ciąg Dalszy)</div>
+
+      <div class="node-card">
+        <div class="nc-name">Kazimierz Ładomirski</div>
+        <div class="nc-dates">
+          ur. 1757 | zm. 07.07.1819 Filipkowce <a href="ladarch10.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
+          poch. Krzywcze <a href="ladarch9.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
+        </div>
+        <div class="nc-bio">dzierż. wójtostwa w Śniatynie<br>śl. 17.02.1786 par. Krzywcze</div>
+        <div class="nc-spouse">
+          <strong>ż. Eleonora Ludwika Anna Golejewska</strong>
+          ur. 21.02.1757, metr. 1758 par. Podkamień <a href="golejarch1.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
+          dziedz. cz. Filipkowiec<br>
+          zm. 12.05.1820 Filipkowce <a href="ladarch22.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a> | poch. Krzywcze <a href="ladarch9.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
+        </div>
+      </div>
+
+      <div class="node-card unverified-card">
+        <div class="nc-name">Ignacy Ładomirski</div>
+        <div class="nc-spouse"><strong>ż. Katarzyna Trzecieska</strong></div>
+      </div>
+
+      <div class="node-card unverified-card">
+        <div class="nc-name">Franciszka Ładomirska</div>
+        <div class="nc-spouse">
+          <strong>m. Jacek Borysławski</strong>
+          podkomorzy<br>ur. ok. 1746 | zm. 15.03.1812 Korostowce <a href="borysarch2.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>poch. w Meżyrowie
+        </div>
+      </div>
+
+      <div class="node-card unverified-card">
+        <div class="nc-name">Anna Ładomirska</div>
+        <div class="nc-dates">ur. ok. 1767 | zm. 20.06.1806 Jazowsko</div>
+        <div class="nc-bio">śl. 05.02.1789 Fara Krosno</div>
+        <div class="nc-spouse">
+          <strong>m. Adam Iwelski</strong>
+          ur. ok. 1765 | zm. 17.11.1829 par. Borzęcin<br>/2v Marianna Łączkowska 19.04.1807 Jazowsko/
+        </div>
+      </div>
+
+      <div class="node-card">
+        <div class="nc-name">Jan Ładomirski</div>
+        <div class="nc-dates">
+          ur. 13.03.1768 Zasów | chrz. 17.07.1768 W-wa <a href="ladarch2.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
+          zm. 02.05.1843 Koniuszki <a href="ladarch44.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a> | poch. 04.05.1843
+        </div>
+        <div class="nc-bio">dzierż. dóbr Gusztynek, Bereżanka i Olesza<br>śl. 27.04.1794 parafia Krzywcze</div>
+        <div class="nc-spouse">
+          <strong>ż. Łucja Barbara Teresa Golejewska</strong>
+          ur. 15.12.1763 Orelec <a href="golejarch2.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
+          dziedziczka cz. Filipkowiec<br>
+          zm. 04.02.1833 Filipkowce | poch. 06.02.1833 Krzywcze <a href="ladarch3.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WIERSZ 4 (5 BOXÓW PODZIELONYCH NA DWA BLOKI) -->
+  <div class="tier-row">
+    
+    <div class="branch-group unverified-group" style="flex: 2 1 400px;">
+      <div class="branch-title">Dzieci Franciszki</div>
+      
+      <div class="node-card unverified-card">
+        <div class="nc-name">Joanna Borysławska</div>
+        <div class="nc-dates">wł. Jankułowa | zm. 1864 | poch. Ozarzyńce</div>
+        <div class="nc-bio">śl. 24.03.1812 Korostowce <a href="borysarch1.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a></div>
+        <div class="nc-spouse">
+          <strong>m. Julian Górski</strong>
+          wł. dóbr Śledzie<br>ur. 14.10.1784 | zm. 9.2.1853 | poch. Ozarzyńce <a href="gorarch1.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>/min. 5-cioro dzieci/
         </div>
       </div>
       
       <div class="node-card unverified-card">
-        <div class="nc-name unverified-text">Wincenty Borysławski</div>
-        <div class="nc-dates unverified-text">zm. 1812</div>
+        <div class="nc-name">Wincenty Borysławski</div>
+        <div class="nc-dates">zm. 1812</div>
       </div>
     </div>
 
-    <!-- Linia Jana -->
-    <div class="sub-group">
-      <div class="sub-group-title">Dzieci Jana Ładomirskiego</div>
+    <div class="branch-group" style="flex: 3 1 600px;">
+      <div class="branch-title">Dzieci Jana</div>
+      
       <div class="node-card">
         <div class="nc-name">Gracjan Teofil Jacek Ładomirski</div>
         <div class="nc-dates">
@@ -431,8 +432,7 @@
         <div class="nc-bio">wł. cz. Filipkowiec | śl. 13.11.1822 <a href="ladarch39.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a></div>
         <div class="nc-spouse">
           <strong>ż. Elżbieta Małgorzata Zub-Więkniewicz</strong>
-          ur. i chrz. z wody 10.07.1800 Martynów N.<br>
-          cer. chrz. 04.12.1820 Martynów N. <a href="ladarch47.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
+          ur. i chrz. z wody 10.07.1800 Martynów N. | cer. chrz. 04.12.1820 <a href="ladarch47.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
           wł. części dóbr Martynów N i Siwka<br>
           /2v Baltazar Czarkowski 14.02.1833 <a href="ladarch25.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>/
         </div>
@@ -448,30 +448,22 @@
         </div>
         <div class="nc-spouse">
           <strong>ż. Karolina Weronika Janicka</strong>
-          ur. 31.01.1795 Demianów<br>
-          chrz. 30.03.1796 Martynów Nowy <a href="ladarch21.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
-          wł. cz. dóbr Martynów S. i Hałuszczyńce<br>
-          zm. 26.05.1874 Markowce <a href="ladarch46.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
+          ur. 31.01.1795 Demianów | chrz. 30.03.1796 Martynów N. <a href="ladarch21.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
+          wł. cz. dóbr Martynów S. i Hałuszczyńce | zm. 26.05.1874 Markowce <a href="ladarch46.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
         </div>
       </div>
 
       <div class="node-card">
         <div class="nc-name">Józefa Ładomirska</div>
-        <div class="nc-dates">
-          ur. ok. marca 1807 | zm. 20.04.1807 Olesza<br>
-          poch. Monasterzyska <a href="ladarch42.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
-        </div>
+        <div class="nc-dates">ur. ok. marca 1807 | zm. 20.04.1807 Olesza<br>poch. Monasterzyska <a href="ladarch42.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a></div>
       </div>
     </div>
-
   </div>
 
-  <div class="gen-title">Prawnuki Antoniego</div>
-
-  <!-- WIERSZ 5: PRAWNUKI (6 BOXÓW) -->
+  <!-- WIERSZ 5 (6 BOXÓW) -->
   <div class="tier-row">
-    <div class="sub-group">
-      <div class="sub-group-title">Dzieci Macieja Brutusa Ładomirskiego</div>
+    <div class="branch-group">
+      <div class="branch-title">Dzieci Macieja Brutusa</div>
       
       <div class="node-card">
         <div class="nc-name">Franciszek Ksawery Ładomirski</div>
@@ -482,7 +474,7 @@
       </div>
       
       <div class="node-card">
-        <div class="nc-name">Pryska Ferdynanda Marianna<br>Ładomirska</div>
+        <div class="nc-name">Pryska Ferdynanda Marianna Ładomirska</div>
         <div class="nc-dates">
           ur. 18.01.1825 Filipkowce <a href="ladarch24.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
           zm. 10.03.1832 Martynów Nowy <a href="ladarch26.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
@@ -490,7 +482,7 @@
       </div>
       
       <div class="node-card">
-        <div class="nc-name">Filipina Zefiryna Józefina<br>Ładomirska</div>
+        <div class="nc-name">Filipina Zefiryna Józefina Ładomirska</div>
         <div class="nc-dates">
           ur. 23.08.1825 Taurów <a href="ladarch12.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a> | chrz. 28.08.1825 Kozłów<br>
           zm. 02.11.1898 Stanisławów <a href="ladarch38.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a> <a href="ladarch14.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
@@ -532,15 +524,14 @@
           zm. 16.10.1917 Markowce <a href="ladarch41.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
         </div>
       </div>
+      
     </div>
   </div>
 
-  <div class="gen-title">Praprawnuki Antoniego</div>
-
-  <!-- WIERSZ 6: PRAPRAWNUKI (7 BOXÓW) -->
+  <!-- WIERSZ 6 (7 BOXÓW) -->
   <div class="tier-row">
-    <div class="sub-group">
-      <div class="sub-group-title">Dzieci Walentego Konstantego Brutusa</div>
+    <div class="branch-group">
+      <div class="branch-title">Dzieci Walentego Konstantego Brutusa</div>
       
       <div class="node-card">
         <div class="nc-name">Emeryk Stanisław Ładomirski</div>
@@ -598,8 +589,7 @@
         </div>
         <div class="nc-spouse">
           <strong>m. Kazimierz Gołębski</strong>
-          ur. 28.03.1868 Sławentyn | zm. 19.01.1935 Lipica Górna <a href="golebarch12.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
-          poch. Sławentyn <a href="golebarch2.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
+          ur. 28.03.1868 Sławentyn | zm. 19.01.1935 Lipica Górna <a href="golebarch12.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a> | poch. Sławentyn <a href="golebarch2.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
         </div>
       </div>
       
@@ -622,7 +612,7 @@
 </main>
 
 <footer>
-  <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026<br>Pamięć | Tożsamość | Wspólnota</p>
+  <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026</p>
 </footer>
 
 </body>
