@@ -1,166 +1,343 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drzewo Genealogiczne | Archiwum L&K</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tablice genealogiczne klanu Kraińskich. Poznaj historię i powiązania rodzinne (15 pokoleń).">
+<title>Drzewo Kraińskich | Archiwum L&K</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;
+    --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;
+    --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;
+    --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);
+  }
 
-    <style>
-        :root {
-            --cream: #f8f4ee;
-            --warm-white: #fdfaf6;
-            --ink: #1e1a14;
-            --gold: #9b7d4a;
-            --gold-light: #c8a96e; 
-            --sepia: #7a6548;
-            --sepia-pale: #e8ddd0; 
-            --line-color: #d8cfc3;
-        }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { 
+    font-family: 'Jost', sans-serif; 
+    font-weight: 300; 
+    background-color: var(--warm-white); 
+    color: var(--ink); 
+    line-height: 1.7; 
+    overflow-x: hidden; 
+    -webkit-font-smoothing: antialiased; 
+  }
 
-        body {
-            margin: 0;
-            padding: 40px 20px;
-            background: var(--warm-white);
-            font-family: 'Jost', sans-serif;
-            color: var(--ink);
-        }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 
-        .tree {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 0 10px;
-            max-width: 1200px;
-            margin: auto;
-        }
+  /* ── HEADER ── */
+  header { 
+    background-color: var(--green-dark); 
+    color: var(--cream); 
+    text-align: center; 
+    padding: 120px 24px 100px; 
+    position: relative; 
+    overflow: hidden; 
+  }
+  header::before { 
+    content: ''; 
+    position: absolute; 
+    inset: 0; 
+    background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), 
+                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); 
+    pointer-events: none; 
+  }
+  .header-ornament { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 13px; 
+    letter-spacing: .4em; 
+    text-transform: uppercase; 
+    color: var(--gold-light); 
+    margin-bottom: 25px; 
+    display: block; 
+    position: relative; 
+    z-index: 1; 
+  }
+  header h1 { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-weight: 300; 
+    font-size: clamp(2.8rem, 7vw, 5.2rem); 
+    line-height: 1; 
+    margin-bottom: 20px; 
+    position: relative; 
+    z-index: 1; 
+  }
+  .header-quote { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-style: italic; 
+    font-size: 1.2rem; 
+    color: rgba(248,244,238,.7); 
+    max-width: 650px; 
+    margin: 0 auto; 
+    position: relative; 
+    z-index: 1; 
+    line-height: 1.5; 
+  }
 
-        /* STYL KAFELKA */
-        .box {
-            border: 1px solid var(--sepia-pale);
-            background: var(--cream);
-            padding: 8px;
-            text-align: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            border-left: 3px solid var(--sepia);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-            z-index: 2;
-            min-height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-transform: uppercase;
-        }
+  /* ── NAV ── */
+  nav { 
+    background-color: var(--ink); 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    box-shadow: 0 4px 30px rgba(0,0,0,.4); 
+  }
+  .nav-inner { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 16px 24px; 
+  }
+  .nav-logo { 
+    font-family: 'Cormorant Garamond', serif; 
+    color: var(--gold-light); 
+    text-decoration: none; 
+    font-size: 1.3rem; 
+    letter-spacing: 3px; 
+    font-weight: 400; 
+  }
+  .menu-btn { 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 6px; 
+    z-index: 1100; 
+    padding: 5px; 
+  }
+  .menu-btn span { 
+    display: block; 
+    width: 30px; 
+    height: 1.5px; 
+    background: var(--gold-light); 
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+  }
 
-        .node { position: relative; display: flex; flex-direction: column; justify-content: center; }
+  /* ── DRAWER (PASEK BOCZNY) ── */
+  .drawer { 
+    position: fixed; 
+    top: 0; 
+    right: -340px; 
+    width: 340px; 
+    height: 100vh; 
+    background: var(--ink); 
+    z-index: 1050; 
+    padding: 50px 0; 
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    box-shadow: -15px 0 40px rgba(0,0,0,0.6); 
+    display: flex; 
+    flex-direction: column; 
+    overflow-y: auto;
+  }
+  .drawer::-webkit-scrollbar { width: 4px; }
+  .drawer::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 10px; }
+  .drawer.open { right: 0; }
+  .drawer-header { padding: 0 40px 35px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 25px; }
+  .drawer-header span { 
+    font-family: 'Cormorant Garamond', serif; 
+    color: var(--gold-light); 
+    text-transform: uppercase; 
+    letter-spacing: 4px; 
+    font-size: 0.7rem; 
+    display: block; 
+    margin-bottom: 8px; 
+    opacity: 0.8; 
+  }
+  .drawer-header h2 { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-size: 1.8rem; font-weight: 300; letter-spacing: 1px; }
+  .drawer-links { list-style: none; padding: 0 25px; }
+  .drawer-links li { margin-bottom: 4px; }
+  .drawer-links a { 
+    color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; 
+    text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; 
+    display: block; transition: all 0.3s; position: relative; border-radius: 2px;
+  }
+  .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
+  .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
+  .drawer-links a:hover::before { width: 3px; }
+  .drawer-links a.active { color: var(--gold-light); background: rgba(255,255,255,0.06); padding-left: 35px; }
+  .drawer-links a.active::before { width: 3px; }
+  
+  .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
+  
+  .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
+  .overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* LINIE PIONOWE */
-        .node.child::after, .node.pass::after {
-            content: ""; position: absolute; left: 50%; top: 100%;
-            width: 1px; height: 20px; background: var(--line-color);
-            transform: translateX(-50%); z-index: 1;
-        }
+  /* ── MAIN CONTENT ── */
+  main { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
+  .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; text-align: center; }
+  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; }
+  .s-line { width: 60px; height: 1.5px; background: var(--gold); margin: 0 auto 40px; }
 
-        .node.parent::before, .node.pass::before {
-            content: ""; position: absolute; left: 50%; bottom: 100%;
-            width: 1px; height: 20px; background: var(--line-color);
-            transform: translateX(-50%); z-index: 1;
-        }
+  /* ── PDF DOWNLOAD BUTTON ── */
+  .download-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+  .btn-pdf {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--gold);
+    color: var(--warm-white);
+    padding: 14px 28px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 4px 15px rgba(155, 125, 74, 0.2);
+  }
+  .btn-pdf:hover, .btn-pdf:focus-visible {
+    background-color: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(155, 125, 74, 0.3);
+  }
+  .btn-pdf svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
 
-        /* LINIA POZIOMA (ŁĄCZENIE PAR) */
-        .pair::before {
-            content: ""; position: absolute; top: -20px;
-            left: 25%; right: 25%; height: 1px; background: var(--line-color);
-        }
+  /* ── IMAGE WRAPPER ── */
+  .tree-wrapper {
+    background: var(--cream);
+    border: 1px solid var(--sepia-pale);
+    padding: 24px;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+  .tree-wrapper:hover {
+    border-color: var(--gold-light);
+  }
+  .tree-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+  }
 
-        /* PION OD POZIOMEJ LINII DO RODZICA */
-        .pair::after {
-            content: ""; position: absolute; top: -20px; left: 50%;
-            width: 1px; height: 20px; background: var(--line-color);
-            transform: translateX(-50%);
-        }
+  /* ── FOOTER ── */
+  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.85rem; letter-spacing: 1px; margin-top: 100px; }
 
-        .spacer { grid-column: 1 / -1; height: 40px; }
-        .row { display: contents; }
-
-        /* GRID SPANY */
-        .lvl-8 .node { grid-column: span 1; }
-        .lvl-4 .node { grid-column: span 2; }
-        .lvl-2 .node { grid-column: span 4; }
-        .lvl-1 .node { grid-column: span 8; }
-
-        .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; letter-spacing: 2px; }
-        .s-line { width: 50px; height: 1px; background: var(--gold-light); margin: 15px auto; }
-    </style>
+  /* ── MEDIA QUERIES ── */
+  @media (max-width: 900px) {
+    .drawer { width: 100%; right: -100%; }
+    main { padding: 50px 24px; }
+    .tree-wrapper { padding: 16px; }
+  }
+  @media (max-width: 480px) {
+    .btn-pdf { width: 100%; justify-content: center; text-align: center; font-size: 0.75rem; padding: 14px 20px; }
+    .tree-wrapper { padding: 10px; }
+  }
+</style>
 </head>
-
 <body>
 
-<div class="header">
-    <h1>Wywód Przodków</h1>
+<div class="overlay" id="overlay"></div>
+
+<header>
+    <span class="header-ornament">Tablice Genealogiczne</span>
+    <h1>Drzewo Kraińskich</h1>
+    <p class="header-quote">„Poznać swoje korzenie, to zrozumieć, kim jesteśmy i dokąd zmierzamy.”</p>
+</header>
+
+<nav aria-label="Główna nawigacja">
+  <div class="nav-inner">
+    <a href="glowna.php" class="nav-logo" aria-label="Strona główna archiwum">ARCHIWUM L&K</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Otwórz menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-header">
+    <span>Nawigacja Archiwum</span>
+    <h2>Menu Rodowe</h2>
+  </div>
+  <ul class="drawer-links">
+    <li><a href="glowna.php">Strona Główna</a></li>
+    <li><a href="poczatek.php">Zawiązanie Klanu</a></li>
+    <li><a href="zjazdy.php">Zjazdy</a></li>
+    <li><a href="drzewo.php" class="active">Tablice Genealogiczne</a></li>
+    <li><a href="groby.php">Groby</a></li>
+    <li><a href="pamiecf.php">Wspomnienie Zmarłych</a></li>
+    <li><a href="biografie.php">Słownik Biograficzny</a></li>
+    <li><a href="geografia.php">Słownik Geograficzny</a></li>
+    <li><a href="biblioteczka.php">Biblioteczka</a></li>
+    <li><a href="archiwum.php">Archiwum Cyfrowe</a></li>
+    <li><a href="kontakt.php">Kontakt</a></li>
+  </ul>
+  <div class="drawer-footer">
+    <p>Klan L&K © 1975 – 2026</p>
+  </div>
+</aside>
+
+<main>
+  <section aria-labelledby="drzewo-tytul">
+    <span class="s-label">Linia Rodowa</span>
+    <h2 class="s-title" id="drzewo-tytul">Drzewo Klanu Kraińskich</h2>
     <div class="s-line"></div>
-</div>
-
-<div class="tree">
-
-    <div class="row lvl-8">
-        <div class="node child"><div class="box">1</div></div>
-        <div class="node child"><div class="box">2</div></div>
-        <div class="node child"><div class="box">3</div></div>
-        <div class="node child"><div class="box">4</div></div>
-        <div class="node child"><div class="box">5</div></div>
-        <div class="node child"><div class="box">6</div></div>
-        <div class="node child"><div class="box">7</div></div>
-        <div class="node child"><div class="box">8</div></div>
+    
+    <div class="download-wrapper">
+      <a href="pdfy/drzewo_15_pok_Krainskich.pdf" class="btn-pdf" target="_blank" rel="noopener noreferrer" aria-label="Pobierz dokument w formacie PDF">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        </svg>
+        Pobierz Drzewo PDF (15 Pokoleń)
+      </a>
     </div>
 
-    <div class="spacer"></div>
-
-    <div class="row lvl-4">
-        <div class="node pair parent pass"><div class="box">A</div></div>
-        <div class="node pair parent pass"><div class="box">B</div></div>
-        <div class="node pair parent pass"><div class="box">C</div></div>
-        <div class="node pair parent pass"><div class="box">D</div></div>
+    <div class="tree-wrapper">
+      <!-- Obraz drzewa - jeśli używałeś wcześniej skryptów lightbox do powiększania, możemy je tu w przyszłości łatwo wdrożyć -->
+      <a href="zdjecia/drzewo_kr.jpg" target="_blank" rel="noopener" title="Kliknij, aby powiększyć w nowej karcie">
+        <img src="zdjecia/drzewo_kr.jpg" alt="Zeskanowane drzewo genealogiczne klanu Kraińskich" class="tree-image" loading="lazy">
+      </a>
     </div>
+  </section>
+</main>
 
-    <div class="spacer"></div>
+<footer>
+  <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026<br>Pamięć | Tożsamość | Wspólnota</p>
+</footer>
 
-    <div class="row lvl-4">
-        <div class="node child pass"><div class="box">A2</div></div>
-        <div class="node child pass"><div class="box">B2</div></div>
-        <div class="node child pass"><div class="box">C2</div></div>
-        <div class="node child pass"><div class="box">D2</div></div>
-    </div>
+<script>
+  const btn = document.getElementById('menuBtn');
+  const drw = document.getElementById('drawer');
+  const ovr = document.getElementById('overlay');
+  
+  function toggleMenu() {
+    const isOpen = drw.classList.contains('open');
+    if (isOpen) {
+      drw.classList.remove('open'); 
+      ovr.classList.remove('active');
+      btn.setAttribute('aria-expanded', 'false');
+      drw.setAttribute('aria-hidden', 'true');
+    } else {
+      drw.classList.add('open'); 
+      ovr.classList.add('active');
+      btn.setAttribute('aria-expanded', 'true');
+      drw.setAttribute('aria-hidden', 'false');
+    }
+  }
 
-    <div class="spacer"></div>
-
-    <div class="row lvl-2">
-        <div class="node pair parent pass"><div class="box">Para 1</div></div>
-        <div class="node pair parent pass"><div class="box">Para 2</div></div>
-    </div>
-
-    <div class="spacer"></div>
-
-    <div class="row lvl-2">
-        <div class="node child pass"><div class="box">Para 1.2</div></div>
-        <div class="node child pass"><div class="box">Para 2.2</div></div>
-    </div>
-
-    <div class="spacer"></div>
-
-    <div class="row lvl-1">
-        <div class="node pair parent pass"><div class="box">Jedność</div></div>
-    </div>
-
-    <div class="spacer"></div>
-
-    <div class="row lvl-1">
-        <div class="node parent"><div class="box">Finał</div></div>
-    </div>
-
-</div>
-
+  btn.addEventListener('click', toggleMenu);
+  ovr.addEventListener('click', toggleMenu);
+</script>
 </body>
 </html>
