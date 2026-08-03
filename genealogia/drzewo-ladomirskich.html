@@ -126,14 +126,14 @@
     display: flex;
     flex-wrap: nowrap; /* Wymuszenie 1 linii by zachować 1-3-5-5-6-7 */
     justify-content: center;
-    align-items: stretch; /* Naciąga wrappery, aby linie idealnie stykały się w pionie */
+    align-items: stretch; /* Naciąga kolumny by spody były równe */
     width: 100%;
-    margin-bottom: 50px; /* Przestrzeń na linie łączące */
+    margin-bottom: 50px; /* Miejsce na rury połączeniowe */
     position: relative;
   }
 
   .node-wrapper {
-    flex: 1 1 0;
+    flex: 1 1 0; /* Boxy wymuszają równy podział ekranu */
     min-width: 0;
     max-width: 250px;
     position: relative;
@@ -142,35 +142,42 @@
     flex-direction: column;
     align-items: center;
   }
-  
   .root-wrapper { flex: 0 1 400px; max-width: 500px; }
 
   /* ── PERFEKCYJNE LINIE ŁĄCZĄCE (CSS ROUTING) ── */
   
-  /* Odcinki poziome nad rzędem */
   .h-line { position: absolute; top: -25px; height: 2px; background: var(--gold-light); z-index: 1; }
-  .h-line.red { background: var(--unverified); z-index: 2; }
+  
+  /* Matematyka torów (Idealnie łączy środki kafelków flexboxa) */
+  .row-2-track { left: calc(16.666% - 1px); width: calc(66.666% + 2px); }
+  .row-3-track-gold-1 { left: calc(10% - 1px); width: calc(6.666% + 2px); }
+  .row-3-track-red-1 { left: calc(16.666% - 1px); width: calc(33.333% + 2px); background: var(--unverified); z-index: 2; }
+  .row-3-track-gold-2 { left: calc(83.333% - 1px); width: calc(6.666% + 2px); }
+  .row-4-track-red-1 { left: calc(30% - 1px); width: calc(20% + 2px); background: var(--unverified); z-index: 2; }
+  .row-4-track-gold-1 { left: calc(70% - 1px); width: calc(20% + 2px); }
+  .row-5-track-gold-1 { left: calc(8.333% - 1px); width: calc(16.666% + 2px); }
+  .row-5-track-gold-2 { left: calc(41.666% - 1px); width: calc(50% + 2px); }
+  .row-6-track-gold-1 { left: calc(7.142% - 1px); width: calc(85.714% + 2px); }
 
-  /* Pionowe łącza od poziomej linii w dół do kafelka */
-  .line-up { position: absolute; top: -25px; width: 2px; height: 25px; background: var(--gold-light); z-index: 1; }
-  .line-up.red { background: var(--unverified); }
+  /* Pionowe wtyczki */
+  .line-up { position: absolute; top: -25px; left: 50%; width: 2px; height: 25px; background: var(--gold-light); z-index: 1; transform: translateX(-50%); }
+  .line-up.red { background: var(--unverified); z-index: 2; }
 
-  /* Pionowe wypełnienie od spodu kafelka do dołu rzędu */
   .line-fill { width: 2px; background: var(--gold-light); flex: 1 1 0; min-height: 0; z-index: 1; }
-  .line-fill.red { background: var(--unverified); }
+  .line-fill.red { background: var(--unverified); z-index: 2; }
 
-  /* Pionowe złącze wychodzące z rzędu w dół (do następnej h-line) */
-  .line-down { position: absolute; bottom: -25px; width: 2px; height: 25px; background: var(--gold-light); z-index: 1; }
-  .line-down.red { background: var(--unverified); }
+  .line-down { position: absolute; bottom: -25px; left: 50%; width: 2px; height: 25px; background: var(--gold-light); z-index: 1; transform: translateX(-50%); }
+  .line-down.red { background: var(--unverified); z-index: 2; }
 
-  /* ── NODE CARDS (Elastyczna typografia, naturalna wysokość) ── */
+  /* ── NODE CARDS ── */
   .node-card {
     background: var(--cream);
     border: 1px solid var(--sepia-pale);
     border-radius: 4px;
     padding: clamp(4px, 0.8vw, 16px);
     width: 100%;
-    flex: 0 0 auto; /* Kafelek zachowuje swoją treść, a .line-fill łata przerwę poniżej */
+    max-width: 260px;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -189,9 +196,10 @@
     transform: translateY(-2px);
   }
 
+  /* Ekstremalne skalowanie w dół dla telefonów */
   .nc-name { 
     font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(0.55rem, 1.2vw, 1.25rem); 
+    font-size: clamp(0.5rem, 1.1vw, 1.25rem); 
     font-weight: 600; color: var(--ink); 
     line-height: 1.1; margin-bottom: 4px; 
   }
@@ -231,7 +239,6 @@
     border: 1px solid var(--line);
   }
 
-  /* Elementy niezweryfikowane (Czerwone) */
   .unverified-card { border-color: rgba(214, 64, 64, 0.4); }
   .unverified-card .nc-name, 
   .unverified-card .nc-dates, 
@@ -289,7 +296,6 @@
         </div>
         <img src="zdjecia/ladarch/antoni_zofia_1726.jpg" alt="Antoni i Ewa Zofia Ładomirscy" class="root-img" loading="lazy">
       </div>
-      <!-- Łącznik spadający do Row 2 -->
       <div class="line-fill"></div>
       <div class="line-down"></div>
     </div>
@@ -297,10 +303,8 @@
 
   <!-- WIERSZ 2 (3 BOXY) -->
   <div class="tier-row">
-    <!-- Linia zbiorcza od Antoniego (łączy od środka 1 do środka 3) -->
-    <div class="h-line" style="left: 16.666%; width: 66.666%;"></div>
+    <div class="h-line row-2-track"></div>
 
-    <!-- 1. Józef -->
     <div class="node-wrapper">
       <div class="line-up"></div>
       <div class="node-card">
@@ -313,7 +317,6 @@
       <div class="line-down"></div>
     </div>
     
-    <!-- 2. Barbara -->
     <div class="node-wrapper">
       <div class="line-up"></div>
       <div class="node-card">
@@ -326,7 +329,6 @@
       </div>
     </div>
     
-    <!-- 3. Jakub -->
     <div class="node-wrapper">
       <div class="line-up"></div>
       <div class="node-card">
@@ -345,12 +347,10 @@
 
   <!-- WIERSZ 3 (5 BOXÓW) -->
   <div class="tier-row">
-    <!-- H-Line 1: Złota linia od Józefa -> Kazimierz, Ignacy, Franciszka (od 10% do 50%) -->
-    <div class="h-line" style="left: 10%; width: 40%;"></div>
-    <!-- H-Line 2: Złota linia od Jakuba -> Jan (od 83.333% do 90%) -->
-    <div class="h-line" style="left: 83.333%; width: 6.666%;"></div>
+    <div class="h-line row-3-track-gold-1"></div>
+    <div class="h-line row-3-track-red-1"></div>
+    <div class="h-line row-3-track-gold-2"></div>
 
-    <!-- 1. Kazimierz -->
     <div class="node-wrapper">
       <div class="line-up"></div>
       <div class="node-card">
@@ -371,7 +371,6 @@
       <div class="line-down"></div>
     </div>
 
-    <!-- 2. Ignacy -->
     <div class="node-wrapper">
       <div class="line-up red"></div>
       <div class="node-card unverified-card">
@@ -380,7 +379,6 @@
       </div>
     </div>
 
-    <!-- 3. Franciszka -->
     <div class="node-wrapper">
       <div class="line-up red"></div>
       <div class="node-card unverified-card">
@@ -394,7 +392,7 @@
       <div class="line-down red"></div>
     </div>
 
-    <!-- 4. Anna (Bez połączenia z góry) -->
+    <!-- Anna (Bez łączenia) -->
     <div class="node-wrapper">
       <div class="node-card unverified-card">
         <div class="nc-name">Anna Ładomirska</div>
@@ -407,7 +405,6 @@
       </div>
     </div>
 
-    <!-- 5. Jan -->
     <div class="node-wrapper">
       <div class="line-up"></div>
       <div class="node-card">
@@ -429,14 +426,11 @@
     </div>
   </div>
 
-  <!-- WIERSZ 4 (5 BOXÓW) - ZAMIANA MIEJSC GRACJANA Z JOANNĄ -->
+  <!-- WIERSZ 4 (5 BOXÓW) -->
   <div class="tier-row">
-    <!-- H-Line 1: Czerwona linia od Franciszki -> Wincenty i Joanna (od 30% do 50%) -->
-    <div class="h-line red" style="left: 30%; width: 20%;"></div>
-    <!-- H-Line 2: Złota linia od Jana -> Maciej i Józefa (od 70% do 90%) -->
-    <div class="h-line" style="left: 70%; width: 20%;"></div>
+    <div class="h-line row-4-track-red-1"></div>
+    <div class="h-line row-4-track-gold-1"></div>
 
-    <!-- 1. Gracjan Teofil Jacek (Złota, prosto w dół od Kazimierza) -->
     <div class="node-wrapper">
       <div class="line-up"></div>
       <div class="node-card">
@@ -457,7 +451,6 @@
       <div class="line-down"></div>
     </div>
 
-    <!-- 2. Wincenty (Czerwona) -->
     <div class="node-wrapper">
       <div class="line-up red"></div>
       <div class="node-card unverified-card">
@@ -466,7 +459,6 @@
       </div>
     </div>
 
-    <!-- 3. Joanna (Czerwona) -->
     <div class="node-wrapper">
       <div class="line-up red"></div>
       <div class="node-card unverified-card">
@@ -480,7 +472,6 @@
       </div>
     </div>
 
-    <!-- 4. Maciej Brutus (Złota) -->
     <div class="node-wrapper">
       <div class="line-up"></div>
       <div class="node-card">
@@ -501,7 +492,6 @@
       <div class="line-down"></div>
     </div>
 
-    <!-- 5. Józefa (Złota) -->
     <div class="node-wrapper">
       <div class="line-up"></div>
       <div class="node-card">
@@ -513,10 +503,8 @@
 
   <!-- WIERSZ 5 (6 BOXÓW) -->
   <div class="tier-row">
-    <!-- H-Line 1: Złota linia od Gracjana -> Ksawery, Pryska (od 8.333% do 25%) -->
-    <div class="h-line" style="left: 8.333%; width: 16.666%;"></div>
-    <!-- H-Line 2: Złota linia od Macieja Brutusa -> Pozostałe 4 (od 41.666% do 91.666%) -->
-    <div class="h-line" style="left: 41.666%; width: 50%;"></div>
+    <div class="h-line row-5-track-gold-1"></div>
+    <div class="h-line row-5-track-gold-2"></div>
 
     <div class="node-wrapper">
       <div class="line-up"></div>
@@ -601,8 +589,7 @@
 
   <!-- WIERSZ 6 (7 BOXÓW) -->
   <div class="tier-row" style="margin-bottom: 0;">
-    <!-- H-Line 1: Złota linia od Walentego -> 7 dzieci (od 7.142% do 92.857%) -->
-    <div class="h-line" style="left: 7.142%; width: 85.715%;"></div>
+    <div class="h-line row-6-track-gold-1"></div>
 
     <div class="node-wrapper">
       <div class="line-up"></div>
