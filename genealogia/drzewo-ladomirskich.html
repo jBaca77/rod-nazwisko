@@ -126,77 +126,60 @@
     display: flex;
     flex-wrap: nowrap; /* Wymuszenie 1 linii by zachować 1-3-5-5-6-7 */
     justify-content: center;
-    align-items: stretch; /* Kafelki naciągają się do tej samej wysokości, by poprowadzić czyste linie */
+    align-items: stretch; /* Ściąga wewnętrzne wrappery do tej samej wysokości */
     width: 100%;
-    margin-bottom: 50px; /* Miejsce na linie łączące */
+    margin-bottom: 50px; /* Przestrzeń na linie łączące */
     position: relative;
   }
 
   .node-wrapper {
     flex: 1 1 0;
-    min-width: 0; /* Zabezpiecza przed wypychaniem kontenera na boki */
+    min-width: 0;
     max-width: 250px;
     position: relative;
-    padding: 0 4px; /* Mikro przerwy między kafelkami */
+    padding: 0 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  .root-wrapper {
-    flex: 0 1 400px; /* Antoni nie musi rozciągać się na cały ekran */
-  }
+  .root-wrapper { flex: 0 1 400px; max-width: 600px; }
 
-  /* ── LINIE ŁĄCZĄCE (PERFEKCYJNA MATEMATYKA CSS) ── */
+  /* ── PERFEKCYJNE LINIE ŁĄCZĄCE (CSS ROUTING) ── */
   
-  .has-drop-down::after {
-    content: ''; 
-    flex: 1 1 0; /* Wypełnia przestrzeń poniżej kafelka jeśli jest krótszy od innych */
-    width: 2px; 
-    background: var(--line-color, var(--gold-light));
-    min-height: 0;
-  }
-  .has-drop-down::before {
-    content: ''; position: absolute;
-    top: 100%; left: 50%; width: 2px; height: 25px;
-    background: var(--line-color, var(--gold-light));
-    transform: translateX(-50%);
-    z-index: 2;
-  }
+  /* Odcinki poziome zawieszone między rzędami */
+  .h-line { position: absolute; height: 2px; background: var(--gold-light); z-index: 1; }
+  .h-line.line-red { background: var(--unverified) !important; }
 
-  .has-drop-up > .node-card::before {
-    content: ''; position: absolute;
-    bottom: 100%; left: 50%; width: 2px; height: 25px;
-    background: var(--line-color, var(--gold-light));
-    transform: translateX(-50%);
-    z-index: 2;
+  /* Pionowe linie opadające w dół (drop-down) */
+  .drop-line {
+    width: 2px; background: var(--gold-light);
+    flex-grow: 1; /* Automatycznie wypełnia pustą przestrzeń jeśli karta jest krótsza */
+    position: relative; z-index: 2;
   }
+  .drop-line.line-red { background: var(--unverified) !important; }
+  .drop-line.line-red::after { background: var(--unverified) !important; }
 
-  .drop-red { --line-color: var(--unverified); }
+  .d-20::after { content:''; position:absolute; top:100%; left:0; width:100%; height:20px; background:inherit; }
+  .d-25::after { content:''; position:absolute; top:100%; left:0; width:100%; height:25px; background:inherit; }
+  .d-30::after { content:''; position:absolute; top:100%; left:0; width:100%; height:30px; background:inherit; }
 
-  /* Linie Poziome Rzędów */
-  .row-2::before { content:''; position:absolute; top:-25px; left:16.66%; right:16.66%; height:2px; background:var(--gold-light); }
-  .row-3::before { content:''; position:absolute; top:-25px; left:10%; right:10%; height:2px; background:var(--gold-light); }
+  /* Pionowe linie rosnące w górę (drop-up) */
+  .u-20::before { content:''; position:absolute; bottom:100%; left:calc(50% - 1px); width:2px; height:20px; background:var(--gold-light); z-index:2; }
+  .u-25::before { content:''; position:absolute; bottom:100%; left:calc(50% - 1px); width:2px; height:25px; background:var(--gold-light); z-index:2; }
+  .u-30::before { content:''; position:absolute; bottom:100%; left:calc(50% - 1px); width:2px; height:30px; background:var(--gold-light); z-index:2; }
   
-  /* Rząd 4: Rozdzielenie na ród Franciszki (Czerwony) i Jana (Złoty) */
-  .row-4::before { content:''; position:absolute; top:-25px; left:10%; width:calc(40% - 2px); height:2px; background:var(--unverified); z-index: 1; }
-  .row-4::after { content:''; position:absolute; top:-25px; left:calc(50% + 2px); right:10%; height:2px; background:var(--gold-light); z-index: 0; }
+  .u-20.line-red::before, .u-25.line-red::before, .u-30.line-red::before { background: var(--unverified) !important; }
 
-  .row-5::before { content:''; position:absolute; top:-25px; left:8.33%; right:8.33%; height:2px; background:var(--gold-light); }
-  .row-6::before { content:''; position:absolute; top:-25px; left:7.14%; right:7.14%; height:2px; background:var(--gold-light); }
 
-  /* Mikro-odstępy rozwiązujące kolizję Franciszki z Gracjanem w centrum ekranu */
-  .node-franciszka::before, .node-franciszka::after { left: calc(50% - 2px) !important; }
-  .node-gracjan > .node-card::before { left: calc(50% + 2px) !important; }
-
-  /* ── NODE CARDS ── */
+  /* ── NODE CARDS (Pierwotny układ kafelka) ── */
   .node-card {
     background: var(--cream);
     border: 1px solid var(--sepia-pale);
     border-radius: 4px;
-    padding: clamp(2px, 0.8vw, 16px);
+    padding: clamp(4px, 0.8vw, 16px);
     width: 100%;
-    flex: 0 0 auto;
+    flex: 0 0 auto; /* Pozwala na naturalną wysokość, .drop-line załata resztę */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -215,10 +198,10 @@
     transform: translateY(-2px);
   }
 
-  /* Ekstremalne skalowanie w dół by pomieścić tekst 7 kolumn bez scrolla na telefonie */
+  /* Ekstremalne skalowanie w dół dla telefonów */
   .nc-name { 
     font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(0.5rem, 1.2vw, 1.25rem); 
+    font-size: clamp(0.55rem, 1.2vw, 1.25rem); 
     font-weight: 600; color: var(--ink); 
     line-height: 1.1; margin-bottom: 4px; 
   }
@@ -228,24 +211,24 @@
     display: block; margin-top: 2px; 
   }
   .nc-dates, .nc-bio { 
-    font-size: clamp(0.4rem, 0.9vw, 0.8rem); 
+    font-size: clamp(0.45rem, 0.9vw, 0.8rem); 
     color: var(--sepia); margin-bottom: 4px; 
   }
   .nc-bio { color: var(--ink-light); }
   
   .nc-spouse { 
     background: var(--parchment);
-    padding: clamp(2px, 0.8vw, 10px);
+    padding: clamp(3px, 0.8vw, 10px);
     border-radius: 2px;
     margin-top: auto; 
     width: 100%;
-    font-size: clamp(0.4rem, 0.9vw, 0.8rem);
+    font-size: clamp(0.45rem, 0.9vw, 0.8rem);
     color: var(--ink); 
     border: 1px solid var(--sepia-pale);
   }
   .nc-spouse strong { 
     font-weight: 600; font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(0.45rem, 1vw, 1.05rem); 
+    font-size: clamp(0.55rem, 1vw, 1.05rem); 
     display: block; margin-bottom: 2px; 
   }
 
@@ -302,8 +285,8 @@
   </div>
 
   <!-- WIERSZ 1 (1 BOX) -->
-  <div class="tier-row row-1">
-    <div class="node-wrapper root-wrapper has-drop-down">
+  <div class="tier-row">
+    <div class="node-wrapper root-wrapper">
       <div class="node-card root-card">
         <div class="nc-name">Antoni z Ładomirowa Ładomirski <small>h. Łada</small></div>
         <div class="nc-dates">zmarł między 16.05.1738 a 03.05.1740</div>
@@ -317,21 +300,28 @@
         </div>
         <img src="zdjecia/ladarch/antoni_zofia_1726.jpg" alt="Antoni i Ewa Zofia Ładomirscy" class="root-img" loading="lazy">
       </div>
+      <!-- Dropdown z Antoniego (-25px by połaczyć z poziomą linią w następnym wierszu) -->
+      <div class="drop-line d-25"></div>
     </div>
   </div>
 
   <!-- WIERSZ 2 (3 BOXY) -->
-  <div class="tier-row row-2">
-    <div class="node-wrapper has-drop-up">
+  <div class="tier-row">
+    <!-- Linia zbiorcza od Antoniego: obejmuje dzieci 1 do 3 -->
+    <div class="h-line" style="top: -25px; left: calc(16.6666% - 1px); width: calc(66.6666% + 2px);"></div>
+
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Józef Ładomirski</div>
         <div class="nc-dates unverified-text">zm. na Syberii po 1774</div>
         <div class="nc-bio">towarzysz chorągwi pancernej<br>cześnik żytomierski</div>
         <div class="nc-spouse"><strong>ż. Teresa Witosławska</strong></div>
       </div>
+      <!-- Józef ojcem Kazimierza, Ignacego, Franciszki -->
+      <div class="drop-line d-25"></div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Barbara Ładomirska</div>
         <div class="nc-dates">śl. przed 1737</div>
@@ -342,7 +332,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up has-drop-down">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Jakub Joachim Ładomirski</div>
         <div class="nc-dates">chrz. 01.04.1720 Tarnowiec k/Jasła<br>zmarł przed rokiem 1778</div>
@@ -352,12 +342,19 @@
           /2v Jakub Jakielski <a href="ladarch31.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>/
         </div>
       </div>
+      <!-- Jakub ojcem Jana -->
+      <div class="drop-line d-25"></div>
     </div>
   </div>
 
   <!-- WIERSZ 3 (5 BOXÓW) -->
-  <div class="tier-row row-3">
-    <div class="node-wrapper has-drop-up">
+  <div class="tier-row">
+    <!-- Połączenia od Józefa -->
+    <div class="h-line" style="top: -25px; left: calc(10% - 1px); width: calc(40% + 2px);"></div>
+    <!-- Połączenie od Jakuba -->
+    <div class="h-line" style="top: -25px; left: calc(83.3333% - 1px); width: calc(6.6666% + 2px);"></div>
+
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Kazimierz Ładomirski</div>
         <div class="nc-dates">
@@ -372,16 +369,17 @@
           zm. 12.05.1820 Filipkowce <a href="ladarch22.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a> | poch. Krzywcze <a href="ladarch9.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
         </div>
       </div>
+      <div class="drop-line d-20"></div> <!-- D-20 aby ominąć zderzenie linii poniżej -->
     </div>
 
-    <div class="node-wrapper has-drop-up drop-red">
+    <div class="node-wrapper u-25 line-red">
       <div class="node-card unverified-card">
         <div class="nc-name">Ignacy Ładomirski</div>
         <div class="nc-spouse"><strong>ż. Katarzyna Trzecieska</strong></div>
       </div>
     </div>
 
-    <div class="node-wrapper has-drop-up drop-red has-drop-down node-franciszka">
+    <div class="node-wrapper u-25 line-red">
       <div class="node-card unverified-card">
         <div class="nc-name">Franciszka Ładomirska</div>
         <div class="nc-spouse">
@@ -389,9 +387,10 @@
           podkomorzy<br>ur. ok. 1746 | zm. 15.03.1812 Korostowce <a href="borysarch2.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>poch. w Meżyrowie
         </div>
       </div>
+      <div class="drop-line d-30 line-red"></div> <!-- D-30 niżej, oddzielone tory -->
     </div>
 
-    <div class="node-wrapper has-drop-up drop-red">
+    <div class="node-wrapper">
       <div class="node-card unverified-card">
         <div class="nc-name">Anna Ładomirska</div>
         <div class="nc-dates">ur. ok. 1767 | zm. 20.06.1806 Jazowsko</div>
@@ -403,7 +402,7 @@
       </div>
     </div>
 
-    <div class="node-wrapper has-drop-up has-drop-down node-jan">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Jan Ładomirski</div>
         <div class="nc-dates">
@@ -418,12 +417,19 @@
           zm. 04.02.1833 Filipkowce | poch. 06.02.1833 Krzywcze <a href="ladarch3.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
         </div>
       </div>
+      <div class="drop-line d-25"></div>
     </div>
   </div>
 
   <!-- WIERSZ 4 (5 BOXÓW) -->
-  <div class="tier-row row-4">
-    <div class="node-wrapper has-drop-up drop-red">
+  <div class="tier-row">
+    <!-- Równoległe tory, żeby się nie zderzały (Kazimierz na -30px, Franciszka na -20px) -->
+    <div class="h-line" style="top: -30px; left: calc(10% - 1px); width: calc(40% + 2px);"></div>
+    <div class="h-line line-red" style="top: -20px; left: calc(10% - 1px); width: calc(40% + 2px);"></div>
+    <!-- Linia od Jana -->
+    <div class="h-line" style="top: -25px; left: calc(70% - 1px); width: calc(20% + 2px);"></div>
+
+    <div class="node-wrapper u-20 line-red">
       <div class="node-card unverified-card">
         <div class="nc-name">Joanna Borysławska</div>
         <div class="nc-dates">wł. Jankułowa | zm. 1864 | poch. Ozarzyńce</div>
@@ -435,14 +441,14 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up drop-red">
+    <div class="node-wrapper u-20 line-red">
       <div class="node-card unverified-card">
         <div class="nc-name">Wincenty Borysławski</div>
         <div class="nc-dates">zm. 1812</div>
       </div>
     </div>
 
-    <div class="node-wrapper has-drop-up node-gracjan">
+    <div class="node-wrapper u-30">
       <div class="node-card">
         <div class="nc-name">Gracjan Teofil Jacek Ładomirski</div>
         <div class="nc-dates">
@@ -457,9 +463,10 @@
           /2v Baltazar Czarkowski 14.02.1833 <a href="ladarch25.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>/
         </div>
       </div>
+      <div class="drop-line d-20"></div>
     </div>
 
-    <div class="node-wrapper has-drop-up has-drop-down">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Maciej Brutus Ładomirski</div>
         <div class="nc-dates">ur. 24.02.1798 Filipkowce | chrz. 21.04.1815 Krzywcze</div>
@@ -474,9 +481,10 @@
           wł. cz. dóbr Martynów S. i Hałuszczyńce | zm. 26.05.1874 Markowce <a href="ladarch46.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
         </div>
       </div>
+      <div class="drop-line d-30"></div>
     </div>
 
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Józefa Ładomirska</div>
         <div class="nc-dates">ur. ok. marca 1807 | zm. 20.04.1807 Olesza<br>poch. Monasterzyska <a href="ladarch42.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a></div>
@@ -485,8 +493,12 @@
   </div>
 
   <!-- WIERSZ 5 (6 BOXÓW) -->
-  <div class="tier-row row-5">
-    <div class="node-wrapper has-drop-up drop-red">
+  <div class="tier-row">
+    <!-- Od Gracjana na -30px, Od Macieja Brutusa na -20px -->
+    <div class="h-line" style="top: -30px; left: calc(8.3333% - 1px); width: calc(41.6666% + 2px);"></div>
+    <div class="h-line" style="top: -20px; left: calc(41.6666% - 1px); width: calc(50% + 2px);"></div>
+
+    <div class="node-wrapper u-30">
       <div class="node-card unverified-card">
         <div class="nc-name">Franciszek Ksawery Ładomirski</div>
         <div class="nc-dates">
@@ -496,7 +508,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-30">
       <div class="node-card">
         <div class="nc-name">Pryska Ferdynanda Marianna Ładomirska</div>
         <div class="nc-dates">
@@ -506,7 +518,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-20">
       <div class="node-card">
         <div class="nc-name">Filipina Zefiryna Józefina Ładomirska</div>
         <div class="nc-dates">
@@ -517,7 +529,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-20">
       <div class="node-card">
         <div class="nc-name">Kaliksta Joanna Ładomirska</div>
         <div class="nc-dates">
@@ -527,7 +539,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-20">
       <div class="node-card">
         <div class="nc-name">Leonard Adolf Ładomirski</div>
         <div class="nc-dates">
@@ -537,7 +549,7 @@
       </div>
     </div>
 
-    <div class="node-wrapper has-drop-up has-drop-down">
+    <div class="node-wrapper u-20">
       <div class="node-card">
         <div class="nc-name">Walenty Konstanty Brutus Ładomirski</div>
         <div class="nc-dates">
@@ -556,12 +568,16 @@
           zm. 16.10.1917 Markowce <a href="ladarch41.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
         </div>
       </div>
+      <div class="drop-line d-25"></div>
     </div>
   </div>
 
   <!-- WIERSZ 6 (7 BOXÓW) -->
-  <div class="tier-row row-6">
-    <div class="node-wrapper has-drop-up">
+  <div class="tier-row" style="margin-bottom: 0;">
+    <!-- Od Walentego do wszystkich 7 boxów -->
+    <div class="h-line" style="top: -25px; left: calc(7.1428% - 1px); width: calc(85.7142% + 2px);"></div>
+
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Emeryk Stanisław Ładomirski</div>
         <div class="nc-dates">
@@ -571,7 +587,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Zdzisław Fabian Ładomirski</div>
         <div class="nc-dates">
@@ -585,7 +601,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Jan Dominik Ładomirski</div>
         <div class="nc-dates">
@@ -594,7 +610,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Zofia Waleria Ładomirska</div>
         <div class="nc-dates">
@@ -609,7 +625,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Marian Maciej Ładomirski</div>
         <div class="nc-dates">
@@ -618,7 +634,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Helena Karolina Ładomirska</div>
         <div class="nc-dates">
@@ -633,7 +649,7 @@
       </div>
     </div>
     
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper u-25">
       <div class="node-card">
         <div class="nc-name">Seweryna Ładomirska</div>
         <div class="nc-dates">
