@@ -22,7 +22,7 @@
     font-weight: 300; 
     background-color: var(--warm-white); 
     color: var(--ink); 
-    line-height: 1.5; 
+    line-height: 1.4; 
     overflow-x: hidden; /* BEZWZGLĘDNY BRAK POZIOMEGO SCROLLA */
     -webkit-font-smoothing: antialiased; 
   }
@@ -36,7 +36,7 @@
     display: inline-flex; 
     align-items: center; 
     vertical-align: middle; 
-    margin: 0 4px; 
+    margin: 0 2px; 
     transition: 0.3s; 
   }
   .doc-link:hover { color: var(--ink); transform: scale(1.15); }
@@ -79,35 +79,35 @@
   /* ── ARTICLE HEADER ── */
   .article-header { 
     max-width: 900px; 
-    margin: 50px auto 20px; 
+    margin: 40px auto 10px; 
     text-align: center; 
-    padding: 0 24px;
+    padding: 0 10px;
   }
   .meta-top { 
     font-size: 0.75rem; 
     text-transform: uppercase; 
     letter-spacing: 3px; 
     color: var(--sepia); 
-    margin-bottom: 12px; 
+    margin-bottom: 8px; 
     display: block; 
   }
   h1 { 
     font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(1.8rem, 4vw, 2.8rem); 
+    font-size: clamp(1.4rem, 3vw, 2.5rem); 
     font-weight: 400; 
     margin-bottom: 10px; 
     color: var(--ink); 
-    line-height: 1.3;
+    line-height: 1.2;
   }
 
   /* ── LEGEND ── */
   .legend-box {
-    margin: 30px auto 50px;
-    padding: 10px 24px;
+    margin: 10px auto 40px;
+    padding: 8px 20px;
     background: var(--parchment);
     border-left: 3px solid var(--unverified);
     display: inline-block;
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 1vw, 0.85rem);
     border-radius: 0 4px 4px 0;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
@@ -126,40 +126,85 @@
     display: flex;
     flex-wrap: nowrap; /* Wymuszenie 1 linii by zachować 1-3-5-5-6-7 */
     justify-content: center;
-    align-items: flex-start; /* Kafelki zachowują własną wysokość do góry */
+    align-items: stretch; /* Kafelki naciągają się do tej samej wysokości, by poprowadzić czyste linie */
     width: 100%;
-    margin-bottom: 50px; /* Miejsce na linie */
+    margin-bottom: 50px; /* Miejsce na linie łączące */
     position: relative;
   }
 
-  /* Konstrukcja siatki i kafelka */
   .node-wrapper {
-    flex: 1 1 0; /* Zapewnia równe kurczenie się by zapobiec scrollowi */
-    min-width: 0;
-    max-width: 250px; /* Kafelki nie rozrosną się powyżej 250px */
+    flex: 1 1 0;
+    min-width: 0; /* Zabezpiecza przed wypychaniem kontenera na boki */
+    max-width: 250px;
     position: relative;
-    padding: 0 8px; /* Przerwa pomiędzy sąsiadami */
+    padding: 0 4px; /* Mikro przerwy między kafelkami */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
   
   .root-wrapper {
-    flex: 0 1 600px;
-    max-width: 600px;
+    flex: 0 1 400px; /* Antoni nie musi rozciągać się na cały ekran */
   }
 
-  /* ── PIERWOTNY WYGLĄD NODE CARDS ── */
+  /* ── LINIE ŁĄCZĄCE (PERFEKCYJNA MATEMATYKA CSS) ── */
+  
+  .has-drop-down::after {
+    content: ''; 
+    flex: 1 1 0; /* Wypełnia przestrzeń poniżej kafelka jeśli jest krótszy od innych */
+    width: 2px; 
+    background: var(--line-color, var(--gold-light));
+    min-height: 0;
+  }
+  .has-drop-down::before {
+    content: ''; position: absolute;
+    top: 100%; left: 50%; width: 2px; height: 25px;
+    background: var(--line-color, var(--gold-light));
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .has-drop-up > .node-card::before {
+    content: ''; position: absolute;
+    bottom: 100%; left: 50%; width: 2px; height: 25px;
+    background: var(--line-color, var(--gold-light));
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .drop-red { --line-color: var(--unverified); }
+
+  /* Linie Poziome Rzędów */
+  .row-2::before { content:''; position:absolute; top:-25px; left:16.66%; right:16.66%; height:2px; background:var(--gold-light); }
+  .row-3::before { content:''; position:absolute; top:-25px; left:10%; right:10%; height:2px; background:var(--gold-light); }
+  
+  /* Rząd 4: Rozdzielenie na ród Franciszki (Czerwony) i Jana (Złoty) */
+  .row-4::before { content:''; position:absolute; top:-25px; left:10%; width:calc(40% - 2px); height:2px; background:var(--unverified); z-index: 1; }
+  .row-4::after { content:''; position:absolute; top:-25px; left:calc(50% + 2px); right:10%; height:2px; background:var(--gold-light); z-index: 0; }
+
+  .row-5::before { content:''; position:absolute; top:-25px; left:8.33%; right:8.33%; height:2px; background:var(--gold-light); }
+  .row-6::before { content:''; position:absolute; top:-25px; left:7.14%; right:7.14%; height:2px; background:var(--gold-light); }
+
+  /* Mikro-odstępy rozwiązujące kolizję Franciszki z Gracjanem w centrum ekranu */
+  .node-franciszka::before, .node-franciszka::after { left: calc(50% - 2px) !important; }
+  .node-gracjan > .node-card::before { left: calc(50% + 2px) !important; }
+
+  /* ── NODE CARDS ── */
   .node-card {
     background: var(--cream);
     border: 1px solid var(--sepia-pale);
     border-radius: 4px;
-    padding: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    padding: clamp(2px, 0.8vw, 16px);
     width: 100%;
-    height: fit-content; /* NATURALNA WYSOKOŚĆ - kafelki nie są równe */
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     position: relative;
     z-index: 2;
     transition: all 0.3s ease;
@@ -169,61 +214,49 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     transform: translateY(-2px);
   }
-  
-  .nc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 6px; }
-  .nc-name small { font-family: 'Jost', sans-serif; font-size: 0.65em; font-weight: 400; color: var(--sepia); letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 4px; }
-  .nc-dates { font-size: 0.8rem; color: var(--sepia); margin-bottom: 6px; line-height: 1.3; }
-  .nc-bio { font-size: 0.8rem; color: var(--ink-light); margin-bottom: 6px; line-height: 1.4; }
+
+  /* Ekstremalne skalowanie w dół by pomieścić tekst 7 kolumn bez scrolla na telefonie */
+  .nc-name { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: clamp(0.5rem, 1.2vw, 1.25rem); 
+    font-weight: 600; color: var(--ink); 
+    line-height: 1.1; margin-bottom: 4px; 
+  }
+  .nc-name small { 
+    font-family: 'Jost', sans-serif; font-size: clamp(0.35rem, 0.7vw, 0.65em); font-weight: 400; 
+    color: var(--sepia); letter-spacing: 0.5px; text-transform: uppercase; 
+    display: block; margin-top: 2px; 
+  }
+  .nc-dates, .nc-bio { 
+    font-size: clamp(0.4rem, 0.9vw, 0.8rem); 
+    color: var(--sepia); margin-bottom: 4px; 
+  }
+  .nc-bio { color: var(--ink-light); }
   
   .nc-spouse { 
     background: var(--parchment);
-    padding: 10px;
+    padding: clamp(2px, 0.8vw, 10px);
     border-radius: 2px;
-    margin-top: 15px; 
-    font-size: 0.8rem;
-    font-weight: 400; 
+    margin-top: auto; 
+    width: 100%;
+    font-size: clamp(0.4rem, 0.9vw, 0.8rem);
     color: var(--ink); 
-    line-height: 1.3; 
-    text-align: center;
     border: 1px solid var(--sepia-pale);
   }
-  .nc-spouse strong { font-weight: 600; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; display: block; margin-bottom: 4px; color: var(--ink); }
+  .nc-spouse strong { 
+    font-weight: 600; font-family: 'Cormorant Garamond', serif; 
+    font-size: clamp(0.45rem, 1vw, 1.05rem); 
+    display: block; margin-bottom: 2px; 
+  }
 
   .root-img {
     width: 100%;
-    max-width: 350px;
+    max-width: 300px;
     height: auto;
     border-radius: 2px;
-    margin: 15px auto 0;
+    margin: 10px auto 0;
     border: 1px solid var(--line);
-    display: block;
   }
-
-  /* ── OBECNE LINIE ŁĄCZĄCE (Zostawione bez modyfikacji logiki) ── */
-  .row-2::before { content:''; position:absolute; top:-25px; left:16.66%; right:16.66%; height:2px; background:var(--gold-light); }
-  .row-3::before { content:''; position:absolute; top:-25px; left:10%; right:10%; height:2px; background:var(--gold-light); }
-  .row-4::before { content:''; position:absolute; top:-25px; left:10%; width:40%; height:2px; background:var(--unverified); z-index: 1; }
-  .row-4::after { content:''; position:absolute; top:-25px; left:50%; width:40%; height:2px; background:var(--gold-light); z-index: 0; }
-  .row-5::before { content:''; position:absolute; top:-25px; left:8.33%; right:8.33%; height:2px; background:var(--gold-light); }
-  .row-6::before { content:''; position:absolute; top:-25px; left:7.14%; right:7.14%; height:2px; background:var(--gold-light); }
-
-  .has-drop-down::after {
-    content: ''; position: absolute;
-    bottom: -50px; left: 50%; width: 2px; height: 50px;
-    background: var(--line-color, var(--gold-light));
-    transform: translateX(-50%);
-    z-index: 2;
-  }
-  .drop-red.has-drop-down::after { --line-color: var(--unverified); }
-
-  .has-drop-up::before {
-    content: ''; position: absolute;
-    top: -25px; left: 50%; width: 2px; height: 25px;
-    background: var(--line-color, var(--gold-light));
-    transform: translateX(-50%);
-    z-index: 2;
-  }
-  .drop-red.has-drop-up::before { --line-color: var(--unverified); }
 
   /* Elementy niezweryfikowane (Czerwone) */
   .unverified-card { border-color: rgba(214, 64, 64, 0.4); }
@@ -234,7 +267,7 @@
   .unverified-card .nc-spouse strong { color: var(--unverified) !important; }
   .unverified-text { color: var(--unverified) !important; }
 
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 1px; margin-top: 40px; }
+  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 40px 24px; font-size: 0.8rem; letter-spacing: 1px; margin-top: 20px; }
 </style>
 </head>
 <body>
@@ -280,7 +313,7 @@
         </div>
         <div class="nc-spouse">
           <strong>ż. Ewa Zofia Sporczyk</strong>
-          <span class="unverified-text">ur. ok. 1700 | zm. 07.08.1761 Krosno <a href="ladarch43.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span>
+          <span style="color: var(--unverified);">ur. ok. 1700 | zm. 07.08.1761 Krosno <a href="ladarch43.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span>
         </div>
         <img src="zdjecia/ladarch/antoni_zofia_1726.jpg" alt="Antoni i Ewa Zofia Ładomirscy" class="root-img" loading="lazy">
       </div>
@@ -348,7 +381,7 @@
       </div>
     </div>
 
-    <div class="node-wrapper has-drop-up drop-red has-drop-down">
+    <div class="node-wrapper has-drop-up drop-red has-drop-down node-franciszka">
       <div class="node-card unverified-card">
         <div class="nc-name">Franciszka Ładomirska</div>
         <div class="nc-spouse">
@@ -370,7 +403,7 @@
       </div>
     </div>
 
-    <div class="node-wrapper has-drop-up has-drop-down">
+    <div class="node-wrapper has-drop-up has-drop-down node-jan">
       <div class="node-card">
         <div class="nc-name">Jan Ładomirski</div>
         <div class="nc-dates">
@@ -409,7 +442,7 @@
       </div>
     </div>
 
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper has-drop-up node-gracjan">
       <div class="node-card">
         <div class="nc-name">Gracjan Teofil Jacek Ładomirski</div>
         <div class="nc-dates">
@@ -453,7 +486,7 @@
 
   <!-- WIERSZ 5 (6 BOXÓW) -->
   <div class="tier-row row-5">
-    <div class="node-wrapper has-drop-up">
+    <div class="node-wrapper has-drop-up drop-red">
       <div class="node-card unverified-card">
         <div class="nc-name">Franciszek Ksawery Ładomirski</div>
         <div class="nc-dates">
