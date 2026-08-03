@@ -139,16 +139,12 @@
     box-shadow: 0 10px 40px rgba(0,0,0,0.03);
     text-align: center;
     transition: border-color 0.3s;
-    overflow-x: auto; /* Wymuszenie poziomego paska przewijania */
-    -webkit-overflow-scrolling: touch; /* Płynne przewijanie na iOS */
   }
   .tree-wrapper:hover {
     border-color: var(--gold-light);
   }
   .tree-image {
-    min-width: 1500px; /* Wymusza duży, czytelny rozmiar grafiki */
-    width: 100%; /* Dla ekranów większych niż 1500px zrówna się z dostępnym miejscem */
-    max-width: none; /* Nadpisuje ewentualne domyślne limity */
+    width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -199,7 +195,6 @@
     <div class="tree-wrapper">
       <!-- Obraz drzewa -->
       <a href="../img/genealogia/drzewo_kr.jpg" target="_blank" rel="noopener" title="Kliknij, aby powiększyć w nowej karcie">
-        <!-- Poprawiona ścieżka do pliku, żeby wyświetlał się na stronie -->
         <img src="../img/genealogia/drzewo_kr.jpg" alt="Zeskanowane drzewo genealogiczne klanu Kraińskich" class="tree-image" loading="lazy">
       </a>
     </div>
