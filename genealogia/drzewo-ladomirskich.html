@@ -22,7 +22,7 @@
     font-weight: 300; 
     background-color: var(--warm-white); 
     color: var(--ink); 
-    line-height: 1.4; 
+    line-height: 1.5; 
     overflow-x: hidden; /* BEZWZGLĘDNY BRAK POZIOMEGO SCROLLA */
     -webkit-font-smoothing: antialiased; 
   }
@@ -36,7 +36,7 @@
     display: inline-flex; 
     align-items: center; 
     vertical-align: middle; 
-    margin: 0 2px; 
+    margin: 0 4px; 
     transition: 0.3s; 
   }
   .doc-link:hover { color: var(--ink); transform: scale(1.15); }
@@ -79,35 +79,35 @@
   /* ── ARTICLE HEADER ── */
   .article-header { 
     max-width: 900px; 
-    margin: 40px auto 10px; 
+    margin: 50px auto 20px; 
     text-align: center; 
-    padding: 0 10px;
+    padding: 0 24px;
   }
   .meta-top { 
     font-size: 0.75rem; 
     text-transform: uppercase; 
     letter-spacing: 3px; 
     color: var(--sepia); 
-    margin-bottom: 8px; 
+    margin-bottom: 12px; 
     display: block; 
   }
   h1 { 
     font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(1.4rem, 3vw, 2.5rem); 
+    font-size: clamp(1.8rem, 4vw, 2.8rem); 
     font-weight: 400; 
     margin-bottom: 10px; 
     color: var(--ink); 
-    line-height: 1.2;
+    line-height: 1.3;
   }
 
   /* ── LEGEND ── */
   .legend-box {
-    margin: 10px auto 40px;
-    padding: 8px 20px;
+    margin: 30px auto 50px;
+    padding: 10px 24px;
     background: var(--parchment);
     border-left: 3px solid var(--unverified);
     display: inline-block;
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-size: 0.85rem;
     border-radius: 0 4px 4px 0;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
@@ -124,67 +124,44 @@
 
   .tier-row {
     display: flex;
-    flex-wrap: nowrap; /* Wymuszenie 1,3,5,5,6,7 w 1 linii */
+    flex-wrap: nowrap; /* Wymuszenie 1 linii by zachować 1-3-5-5-6-7 */
     justify-content: center;
+    align-items: flex-start; /* Kafelki zachowują własną wysokość do góry */
     width: 100%;
-    margin-bottom: 40px; /* Przestrzeń na linie łączące */
+    margin-bottom: 50px; /* Miejsce na linie */
     position: relative;
   }
 
-  /* Linie łączące - matematyka szerokości oparta na procentach */
-  .row-2::before { content:''; position:absolute; top:-20px; left:16.66%; right:16.66%; height:2px; background:var(--gold-light); }
-  .row-3::before { content:''; position:absolute; top:-20px; left:10%; right:10%; height:2px; background:var(--gold-light); }
-  .row-4::before { content:''; position:absolute; top:-20px; left:10%; width:40%; height:2px; background:var(--unverified); z-index: 1; } /* Linia Franciszki (czerwona) */
-  .row-4::after { content:''; position:absolute; top:-20px; left:50%; width:40%; height:2px; background:var(--gold-light); z-index: 0; } /* Linia Jana (złota) */
-  .row-5::before { content:''; position:absolute; top:-20px; left:8.33%; right:8.33%; height:2px; background:var(--gold-light); }
-  .row-6::before { content:''; position:absolute; top:-20px; left:7.14%; right:7.14%; height:2px; background:var(--gold-light); }
-
+  /* Konstrukcja siatki i kafelka */
   .node-wrapper {
-    flex: 1 1 0;
-    min-width: 0; /* Zabezpiecza przed wypychaniem kontenera na boki */
+    flex: 1 1 0; /* Zapewnia równe kurczenie się by zapobiec scrollowi */
+    min-width: 0;
+    max-width: 250px; /* Kafelki nie rozrosną się powyżej 250px */
     position: relative;
-    padding: 0 4px; /* Mikro przerwy między kafelkami */
+    padding: 0 8px; /* Przerwa pomiędzy sąsiadami */
+    display: flex;
+    justify-content: center;
   }
   
   .root-wrapper {
-    flex: 0 1 400px; /* Antoni nie musi rozciągać się na 100% ekranu */
+    flex: 0 1 600px;
+    max-width: 600px;
   }
 
-  /* Pionowe spadki z rodzica (W DÓŁ) */
-  .has-drop-down::after {
-    content: ''; position: absolute;
-    bottom: -40px; left: 50%; width: 2px; height: 40px;
-    background: var(--line-color, var(--gold-light));
-    transform: translateX(-50%);
-    z-index: 2;
-  }
-  .drop-red.has-drop-down::after { --line-color: var(--unverified); }
-
-  /* Pionowe podłączenia do dziecka (W GÓRĘ) */
-  .has-drop-up::before {
-    content: ''; position: absolute;
-    top: -20px; left: 50%; width: 2px; height: 20px;
-    background: var(--line-color, var(--gold-light));
-    transform: translateX(-50%);
-    z-index: 2;
-  }
-  .drop-red.has-drop-up::before { --line-color: var(--unverified); }
-
-  /* ── NODE CARDS ── */
+  /* ── PIERWOTNY WYGLĄD NODE CARDS ── */
   .node-card {
     background: var(--cream);
     border: 1px solid var(--sepia-pale);
     border-radius: 4px;
-    padding: clamp(6px, 1vw, 12px);
-    height: 100%;
+    padding: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    width: 100%;
+    height: fit-content; /* NATURALNA WYSOKOŚĆ - kafelki nie są równe */
     display: flex;
     flex-direction: column;
-    align-items: center;
     text-align: center;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    position: relative;
+    z-index: 2;
     transition: all 0.3s ease;
   }
   .node-card:hover {
@@ -192,49 +169,61 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     transform: translateY(-2px);
   }
-
-  /* Elastyczna typografia by uniknąć wylewania się tekstu */
-  .nc-name { 
-    font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(0.6rem, 1.2vw, 1.25rem); 
-    font-weight: 600; color: var(--ink); 
-    line-height: 1.1; margin-bottom: 4px; 
-  }
-  .nc-name small { 
-    font-family: 'Jost', sans-serif; font-size: 0.65em; font-weight: 400; 
-    color: var(--sepia); letter-spacing: 0.5px; text-transform: uppercase; 
-    display: block; margin-top: 2px; 
-  }
-  .nc-dates, .nc-bio { 
-    font-size: clamp(0.5rem, 0.9vw, 0.8rem); 
-    color: var(--sepia); margin-bottom: 4px; 
-  }
-  .nc-bio { color: var(--ink-light); }
+  
+  .nc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 6px; }
+  .nc-name small { font-family: 'Jost', sans-serif; font-size: 0.65em; font-weight: 400; color: var(--sepia); letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 4px; }
+  .nc-dates { font-size: 0.8rem; color: var(--sepia); margin-bottom: 6px; line-height: 1.3; }
+  .nc-bio { font-size: 0.8rem; color: var(--ink-light); margin-bottom: 6px; line-height: 1.4; }
   
   .nc-spouse { 
     background: var(--parchment);
-    padding: clamp(4px, 0.8vw, 8px);
+    padding: 10px;
     border-radius: 2px;
-    margin-top: auto; 
-    width: 100%;
-    font-size: clamp(0.5rem, 0.9vw, 0.8rem);
+    margin-top: 15px; 
+    font-size: 0.8rem;
+    font-weight: 400; 
     color: var(--ink); 
+    line-height: 1.3; 
+    text-align: center;
     border: 1px solid var(--sepia-pale);
   }
-  .nc-spouse strong { 
-    font-weight: 600; font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(0.7rem, 1vw, 1.05rem); 
-    display: block; margin-bottom: 2px; 
-  }
+  .nc-spouse strong { font-weight: 600; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; display: block; margin-bottom: 4px; color: var(--ink); }
 
   .root-img {
     width: 100%;
-    max-width: 300px;
+    max-width: 350px;
     height: auto;
     border-radius: 2px;
-    margin: 10px auto 0;
+    margin: 15px auto 0;
     border: 1px solid var(--line);
+    display: block;
   }
+
+  /* ── OBECNE LINIE ŁĄCZĄCE (Zostawione bez modyfikacji logiki) ── */
+  .row-2::before { content:''; position:absolute; top:-25px; left:16.66%; right:16.66%; height:2px; background:var(--gold-light); }
+  .row-3::before { content:''; position:absolute; top:-25px; left:10%; right:10%; height:2px; background:var(--gold-light); }
+  .row-4::before { content:''; position:absolute; top:-25px; left:10%; width:40%; height:2px; background:var(--unverified); z-index: 1; }
+  .row-4::after { content:''; position:absolute; top:-25px; left:50%; width:40%; height:2px; background:var(--gold-light); z-index: 0; }
+  .row-5::before { content:''; position:absolute; top:-25px; left:8.33%; right:8.33%; height:2px; background:var(--gold-light); }
+  .row-6::before { content:''; position:absolute; top:-25px; left:7.14%; right:7.14%; height:2px; background:var(--gold-light); }
+
+  .has-drop-down::after {
+    content: ''; position: absolute;
+    bottom: -50px; left: 50%; width: 2px; height: 50px;
+    background: var(--line-color, var(--gold-light));
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  .drop-red.has-drop-down::after { --line-color: var(--unverified); }
+
+  .has-drop-up::before {
+    content: ''; position: absolute;
+    top: -25px; left: 50%; width: 2px; height: 25px;
+    background: var(--line-color, var(--gold-light));
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  .drop-red.has-drop-up::before { --line-color: var(--unverified); }
 
   /* Elementy niezweryfikowane (Czerwone) */
   .unverified-card { border-color: rgba(214, 64, 64, 0.4); }
@@ -243,8 +232,9 @@
   .unverified-card .nc-bio, 
   .unverified-card .nc-spouse, 
   .unverified-card .nc-spouse strong { color: var(--unverified) !important; }
+  .unverified-text { color: var(--unverified) !important; }
 
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 40px 24px; font-size: 0.8rem; letter-spacing: 1px; margin-top: 20px; }
+  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.8rem; letter-spacing: 1px; margin-top: 40px; }
 </style>
 </head>
 <body>
@@ -290,7 +280,7 @@
         </div>
         <div class="nc-spouse">
           <strong>ż. Ewa Zofia Sporczyk</strong>
-          <span style="color: var(--unverified);">ur. ok. 1700 | zm. 07.08.1761 Krosno <a href="ladarch43.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span>
+          <span class="unverified-text">ur. ok. 1700 | zm. 07.08.1761 Krosno <a href="ladarch43.php" class="doc-link" target="_blank" title="Dokument"><svg><use href="#icon-doc"></use></svg></a></span>
         </div>
         <img src="zdjecia/ladarch/antoni_zofia_1726.jpg" alt="Antoni i Ewa Zofia Ładomirscy" class="root-img" loading="lazy">
       </div>
@@ -302,7 +292,7 @@
     <div class="node-wrapper has-drop-up">
       <div class="node-card">
         <div class="nc-name">Józef Ładomirski</div>
-        <div class="nc-dates" style="color: var(--unverified);">zm. na Syberii po 1774</div>
+        <div class="nc-dates unverified-text">zm. na Syberii po 1774</div>
         <div class="nc-bio">towarzysz chorągwi pancernej<br>cześnik żytomierski</div>
         <div class="nc-spouse"><strong>ż. Teresa Witosławska</strong></div>
       </div>
@@ -464,9 +454,9 @@
   <!-- WIERSZ 5 (6 BOXÓW) -->
   <div class="tier-row row-5">
     <div class="node-wrapper has-drop-up">
-      <div class="node-card">
-        <div class="nc-name" style="color: var(--unverified);">Franciszek Ksawery Ładomirski</div>
-        <div class="nc-dates" style="color: var(--unverified);">
+      <div class="node-card unverified-card">
+        <div class="nc-name">Franciszek Ksawery Ładomirski</div>
+        <div class="nc-dates">
           ur. 21.12.1823 Filipkowce <a href="ladarch23.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a><br>
           zm. 19.03.1832 Martynów Nowy <a href="ladarch26.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>
         </div>
