@@ -97,40 +97,62 @@
   /* ── MAIN CONTENT ── */
   main { max-width: 1200px; margin: 0 auto; padding: 20px 24px 80px; }
 
-  /* ── PDF DOWNLOAD BUTTON ── */
-  .download-wrapper {
+  /* ── AKCJE / PRZYCISKI ── */
+  .actions-wrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
   }
-  .btn-pdf {
+  .btn-action {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    background-color: var(--gold);
-    color: var(--warm-white);
-    padding: 14px 28px;
+    gap: 10px;
+    padding: 12px 24px;
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 500;
     letter-spacing: 2px;
     text-transform: uppercase;
     border-radius: 2px;
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    border: 1px solid var(--gold);
+  }
+  .btn-pdf {
+    background-color: var(--gold);
+    color: var(--warm-white);
     box-shadow: 0 4px 15px rgba(155, 125, 74, 0.2);
   }
   .btn-pdf:hover, .btn-pdf:focus-visible {
     background-color: var(--gold-light);
+    border-color: var(--gold-light);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(155, 125, 74, 0.3);
   }
-  .btn-pdf svg {
-    width: 20px;
-    height: 20px;
+  .btn-outline {
+    background-color: transparent;
+    color: var(--gold);
+  }
+  .btn-outline:hover, .btn-outline:focus-visible {
+    background-color: var(--gold);
+    color: var(--warm-white);
+    transform: translateY(-2px);
+  }
+  .btn-outline.active {
+    background-color: var(--ink);
+    border-color: var(--ink);
+    color: var(--warm-white);
+  }
+  .btn-action svg {
+    width: 18px;
+    height: 18px;
     fill: currentColor;
   }
 
-  /* ── IMAGE WRAPPER ── */
+  /* ── IMAGE WRAPPER & ZOOM ── */
   .tree-wrapper {
     background: var(--cream);
     border: 1px solid var(--sepia-pale);
@@ -138,18 +160,27 @@
     border-radius: 4px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.03);
     text-align: center;
-    transition: border-color 0.3s;
   }
-  .tree-wrapper:hover {
-    border-color: var(--gold-light);
+  .zoom-container {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    cursor: default;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+    background: var(--warm-white);
+  }
+  .zoom-container.is-zooming {
+    cursor: crosshair;
   }
   .tree-image {
-    width: 100%;
+    width: 100%; /* Zdjecie naturalnie w 100% pasuje do ekranu */
     height: auto;
     display: block;
     margin: 0 auto;
-    border-radius: 2px;
-    border: 1px solid var(--line);
+    transition: transform 0.15s ease-out; /* Płynne podążanie za myszką */
+    transform-origin: 50% 50%;
   }
 
   /* ── FOOTER ── */
@@ -161,7 +192,8 @@
     .tree-wrapper { padding: 16px; }
   }
   @media (max-width: 480px) {
-    .btn-pdf { width: 100%; justify-content: center; text-align: center; font-size: 0.75rem; padding: 14px 20px; }
+    .actions-wrapper { flex-direction: column; gap: 10px; }
+    .btn-action { width: 100%; justify-content: center; text-align: center; font-size: 0.75rem; padding: 14px 20px; }
     .tree-wrapper { padding: 10px; }
   }
 </style>
@@ -183,20 +215,27 @@
 
 <main>
   <section aria-labelledby="drzewo-tytul">
-    <div class="download-wrapper">
-      <a href="pdfy/drzewo_15_pok_Krainskich.pdf" class="btn-pdf" target="_blank" rel="noopener noreferrer" aria-label="Pobierz dokument w formacie PDF">
+    
+    <div class="actions-wrapper">
+      <button id="zoomToggleBtn" class="btn-action btn-outline" aria-pressed="false">
+        <svg id="zoomIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/>
+        </svg>
+        <span id="zoomText">Włącz przybliżanie</span>
+      </button>
+
+      <a href="pdfy/drzewo_15_pok_Krainskich.pdf" class="btn-action btn-pdf" target="_blank" rel="noopener noreferrer">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
         </svg>
-        Pobierz Drzewo PDF (15 Pokoleń)
+        Pobierz PDF (15 Pokoleń)
       </a>
     </div>
 
     <div class="tree-wrapper">
-      <!-- Obraz drzewa -->
-      <a href="../img/genealogia/drzewo_kr.jpg" target="_blank" rel="noopener" title="Kliknij, aby powiększyć w nowej karcie">
-        <img src="../img/genealogia/drzewo_kr.jpg" alt="Zeskanowane drzewo genealogiczne klanu Kraińskich" class="tree-image" loading="lazy">
-      </a>
+      <div id="zoomContainer" class="zoom-container">
+        <img id="treeImg" src="../img/genealogia/drzewo_kr.jpg" alt="Zeskanowane drzewo genealogiczne klanu Kraińskich" class="tree-image" loading="lazy">
+      </div>
     </div>
   </section>
 </main>
@@ -205,5 +244,59 @@
   <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026<br>Pamięć | Tożsamość | Wspólnota</p>
 </footer>
 
+<script>
+  const zoomToggleBtn = document.getElementById('zoomToggleBtn');
+  const zoomText = document.getElementById('zoomText');
+  const zoomIcon = document.getElementById('zoomIcon');
+  const zoomContainer = document.getElementById('zoomContainer');
+  const treeImage = document.getElementById('treeImg');
+
+  let isZoomEnabled = false;
+
+  // Ikona lupy z plusem (Włącz) i lupy z minusem (Wyłącz)
+  const iconPlus = '<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/>';
+  const iconMinus = '<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/>';
+
+  zoomToggleBtn.addEventListener('click', () => {
+    isZoomEnabled = !isZoomEnabled;
+    zoomToggleBtn.setAttribute('aria-pressed', isZoomEnabled);
+    
+    if (isZoomEnabled) {
+      zoomToggleBtn.classList.add('active');
+      zoomContainer.classList.add('is-zooming');
+      zoomText.textContent = 'Wyłącz przybliżanie';
+      zoomIcon.innerHTML = iconMinus;
+    } else {
+      zoomToggleBtn.classList.remove('active');
+      zoomContainer.classList.remove('is-zooming');
+      zoomText.textContent = 'Włącz przybliżanie';
+      zoomIcon.innerHTML = iconPlus;
+      
+      // Reset przybliżenia
+      treeImage.style.transform = 'scale(1)';
+      treeImage.style.transformOrigin = 'center center';
+    }
+  });
+
+  zoomContainer.addEventListener('mousemove', (e) => {
+    if (!isZoomEnabled) return;
+    
+    // Obliczanie współrzędnych myszki wewnątrz kontenera (procentowo)
+    const rect = zoomContainer.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    // Ustawienie punktu centralnego przybliżenia i samej skali (tutaj: 3-krotne)
+    treeImage.style.transformOrigin = `${x}% ${y}%`;
+    treeImage.style.transform = 'scale(3)'; 
+  });
+
+  zoomContainer.addEventListener('mouseleave', () => {
+    if (!isZoomEnabled) return;
+    // Płynny powrót po wyjechaniu myszką poza obszar zdjęcia
+    treeImage.style.transform = 'scale(1)';
+    treeImage.style.transformOrigin = 'center center';
+  });
+</script>
 </body>
 </html>
