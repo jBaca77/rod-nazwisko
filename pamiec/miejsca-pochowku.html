@@ -207,10 +207,6 @@
   const markerMap = {}; 
   const grid = document.getElementById('geoGrid'); 
 
-  map.on('popupclose', function() {
-    map.flyTo(initialCenter, initialZoom, { duration: 1.0 });
-  });
-
   function init() { 
     gData.forEach(g => { 
       const marker = L.circleMarker(g.c, { 
