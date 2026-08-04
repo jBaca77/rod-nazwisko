@@ -17,6 +17,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body { 
     font-family: 'Jost', sans-serif; 
     font-weight: 300; 
@@ -30,6 +31,87 @@
   a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
   a { text-decoration: none; }
 
+  /* ── NAV ── */
+  nav { 
+    background-color: var(--ink); 
+    padding: 16px 24px; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    border-bottom: 1px solid var(--gold); 
+  }
+  .nav-inner { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+  }
+  .nav-logo { 
+    font-family: 'Cormorant Garamond', serif; 
+    color: var(--gold-light); 
+    text-decoration: none; 
+    font-size: 1.3rem; 
+    letter-spacing: 3px; 
+    font-weight: 400; 
+  }
+  .back-link { 
+    color: var(--cream); 
+    text-decoration: none; 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    transition: color 0.3s; 
+  }
+  .back-link:hover { 
+    color: var(--gold-light); 
+  }
+
+  /* ── ARTICLE HEADER ── */
+  .article-header { 
+    max-width: 900px; 
+    margin: 60px auto 20px; 
+    text-align: center; 
+    padding: 0 24px;
+  }
+  .meta-top { 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+    letter-spacing: 3px; 
+    color: var(--sepia); 
+    margin-bottom: 15px; 
+    display: block; 
+  }
+  h1 { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: clamp(2.2rem, 5vw, 3.5rem); 
+    font-weight: 400; 
+    margin-bottom: 10px; 
+    color: var(--ink); 
+    line-height: 1.1;
+  }
+  .header-subtitle {
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: clamp(1.1rem, 2vw, 1.4rem); 
+    color: var(--ink-light);
+    font-weight: 500;
+    line-height: 1.3;
+    margin-top: 15px;
+  }
+  .header-note {
+    font-family: 'Jost', sans-serif; 
+    font-size: 0.85rem; 
+    letter-spacing: 1px; 
+    color: var(--unverified); 
+    margin-top: 20px;
+  }
+  .s-line-main { 
+    width: 50px; 
+    height: 1px; 
+    background: var(--gold-light); 
+    margin: 20px auto; 
+  }
+
   /* ── SVG ICONS ── */
   .svg-defs { display: none; }
   .doc-link { 
@@ -42,22 +124,6 @@
   }
   .doc-link:hover { color: var(--ink); transform: scale(1.15); }
   .doc-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-  /* ── GÓRNY PANEL (Z KODU KRAIŃSKICH) ── */
-  #top-panel-wrapper { width: 100%; margin: 0 auto 40px; padding: 0 10px; }
-  #khaki { background-color: var(--parchment); border-radius: 10px; margin-bottom: 20px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05); }
-  #ccc a, #ddd a { display: block; padding: 12px; transition: 0.3s; }
-  #ccc a:hover, #ddd a:hover { opacity: 0.6; }
-  #eee { margin: 0; font-weight: 500; color: var(--ink); font-size: clamp(0.7rem, 1vw, 0.85rem); letter-spacing: 1px; }
-  
-  .header-title { 
-    font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(1.4rem, 3vw, 2rem); 
-    color: var(--ink); 
-    line-height: 1.3; 
-    margin: 30px 0 20px; 
-    font-weight: 600; 
-  }
 
   /* ── DRZEWO - GŁÓWNY KONTENER ── */
   main { 
@@ -100,7 +166,7 @@
   /* ── NODE CARDS ── */
   .node-card {
     background: var(--cream);
-    border: 1px solid var(--sepia-pale);
+    border: 1px solid var(--sepia-pale); /* Usunięto czerwoną linię bazową */
     border-radius: 4px;
     padding: clamp(4px, 0.8vw, 16px);
     width: 100%;
@@ -166,7 +232,7 @@
     border: 1px solid var(--line);
   }
 
-  .unverified-card { border-color: rgba(214, 64, 64, 0.4); }
+  /* Usunięto obramowanie unverified, działa tylko na kolor tekstu */
   .unverified-card .nc-name, 
   .unverified-card .nc-dates, 
   .unverified-card .nc-bio, 
@@ -188,122 +254,21 @@
   </symbol>
 </svg>
 
-<!-- ── GÓRNY PANEL STEROWANIA (Z KRAIŃSKICH) ── -->
-<div id="top-panel-wrapper">
-  <table rules="NONE" border="0" cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-      <tr>
-          <td align="center">
-              <a href="glowna.php">
-                  <div style="width: 100%; max-width: 1120px; text-align: center;">
-                      <img src="lik2.svg" alt="Logo L&K" style="margin: 35px auto;">
-                  </div>
-              </a>
-          </td>
-      </tr>
-      <tr style="height:10px;"><td></td></tr>
-  </table>
+<!-- ── GÓRNY PANEL NAWIGACYJNY ── -->
+<nav aria-label="Główna nawigacja">
+  <div class="nav-inner">
+     <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
+     <a href="drzewo.php" class="back-link">← Powrót</a>
+  </div>
+</nav>
 
-  <table id="khaki" style="width: 100%; max-width: 1100px;" border="0" align="center" cellpadding="0" cellspacing="0">
-      <tr><td colspan="4" height="10"></td></tr>
-      <tr>
-          <td align="center" id="ccc">
-              <a href="poczatek.php">
-                  <p id="eee">ZAWIĄZANIE<br>KLANU</p>
-              </a>
-          </td>
-          <td align="center" id="ccc">
-              <a href="zjazdy.php">
-                  <p id="eee">ZJAZDY</p>
-              </a>
-          </td>
-          <td align="center" id="ccc">
-              <a href="drzewo.php">
-                  <p id="eee">TABLICE<br>GENEALOGICZNE</p>
-              </a>
-          </td>
-          <td align="center" id="ccc">
-              <a href="groby.php">
-                  <p id="eee">GROBY</p>
-              </a>
-          </td>
-          <td align="center" id="ccc">
-              <a href="pamiecf.php">
-                  <p id="eee">WSPOMNIENIE<br>ZMARŁYCH</p>
-              </a>
-          </td>
-      </tr>
-      <tr><td colspan="4" height="10"></td></tr>
-      <tr>
-          <td align="center" id="ccc">
-              <a href="biografie.php">
-                  <p id="eee">SŁOWNIK<br>BIOGRAFICZNY</p>
-              </a>
-          </td>
-          <td align="center" id="ccc">
-              <a href="geografia.php">
-                  <p id="eee">SŁOWNIK<br>GEOGRAFICZNY</p>
-              </a>
-          </td>
-          <td align="center" id="ccc">
-              <a href="biblioteczka.php">
-                  <p id="eee">BIBLIOTECZKA</p>
-              </a>
-          </td>
-          <td align="center" id="ccc">
-              <a href="archiwum.php">
-                  <p id="eee">ARCHIWUM</p>
-              </a>
-          </td>
-          <td align="center" id="ccc">
-              <a href="kontakt.php">
-                  <p id="eee">KONTAKT</p>
-              </a>
-          </td>
-      </tr>
-      <tr><td colspan="4" height="10"></td></tr>
-  </table>
-
-  <table id="khaki" style="width: 100%; max-width: 1100px;" border="0" align="center" cellpadding="0" cellspacing="0">
-      <tr align="center">
-          <td align="center" id="ddd">
-              <a href="drzewo.php">
-                  <p id="eee">DRZEWO KLANOWE</p>
-              </a>
-          </td>
-          <td align="center" id="ddd">
-              <a href="wywody2.php">
-                  <p id="eee">WYWODY PRZODKÓW</p>
-              </a>
-          </td>
-          <td align="center" id="ddd">
-              <a href="drzewo_kr.php">
-                  <p id="eee">DRZEWO KRAIŃSKICH</p>
-              </a>
-          </td>
-          <td align="center" id="ddd">
-              <a href="drzewo_lad.php">
-                  <p id="eee">DRZEWO ŁADOMIRSKICH</p>
-              </a>
-          </td>
-      </tr>
-  </table>
-
-  <table rules="NONE" border="0" cellpadding="0" cellspacing="0" align="center" style="width: 100%;">
-      <tr>
-          <td align="center">
-              <h1 class="header-title">
-                  POTOMKOWIE <br>
-                  IMĆ PAŃSTWA ANTONIEGO I EWY ZOFII ZE SPORCZYKÓW <br>
-                  PRAWYCH MAŁŻONKÓW ŁADOMIRSKICH
-                  <br>
-                  <span style="font-family: 'Jost', sans-serif; font-size: 0.85rem; letter-spacing: 1px; color: var(--unverified); display: block; margin-top: 15px; text-transform: none; font-weight: 400;">
-                      /Kolorem czerwonym podano informacje prawdopodobne, wymagające weryfikacji/
-                  </span>
-              </h1>
-          </td>
-      </tr>
-  </table>
-</div>
+<header class="article-header">
+  <span class="meta-top">Tablice Genealogiczne</span>
+  <h1>Drzewo Klanu Ładomirskich</h1>
+  <div class="s-line-main"></div>
+  <p class="header-subtitle">POTOMKOWIE IMĆ PAŃSTWA ANTONIEGO I EWY ZOFII ZE SPORCZYKÓW PRAWYCH MAŁŻONKÓW ŁADOMIRSKICH</p>
+  <p class="header-note">/Kolorem czerwonym podano informacje prawdopodobne, wymagające weryfikacji/</p>
+</header>
 
 <!-- ── DRZEWO HTML ── -->
 <main>
@@ -374,18 +339,18 @@
           /2v Jakub Jakielski <a href="ladarch31.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>/
         </div>
       </div>
-      <!-- Spadek dla Jana -->
+      <!-- Spadek dla Jana i Anny -->
       <div class="line-fill"></div>
       <div class="line-down"></div>
     </div>
   </div>
 
-  <!-- WIERSZ 3 (5 BOXÓW) - ZAMIANA JANA I ANNY -->
+  <!-- WIERSZ 3 (5 BOXÓW) -->
   <div class="tier-row">
     <!-- Linia Józef -> Kazimierz, Ignacy, Franciszka (10% do 50%) -->
     <div class="h-line" style="left: calc(10% - 1px); width: calc(40% + 2px);"></div>
-    <!-- Linia Jakub -> Jan (od 70% do 83.333%) -->
-    <div class="h-line" style="left: calc(70% - 1px); width: calc(13.333% + 2px);"></div>
+    <!-- Linia Jakub -> Jan i Anna (od 70% do 90%) - POPRAWIONE z 13.333% na 20% aby domknąć linię z Anną -->
+    <div class="h-line" style="left: calc(70% - 1px); width: calc(20% + 2px);"></div>
 
     <!-- 1. Kazimierz -->
     <div class="node-wrapper">
@@ -409,7 +374,7 @@
       <div class="line-down"></div>
     </div>
 
-    <!-- 2. Ignacy (Odcięty w dół) -->
+    <!-- 2. Ignacy -->
     <div class="node-wrapper">
       <div class="line-up"></div>
       <div class="node-card unverified-card">
@@ -455,8 +420,9 @@
       <div class="line-down"></div>
     </div>
 
-    <!-- 5. Anna (Odcięta na górze i na dole) -->
+    <!-- 5. Anna -->
     <div class="node-wrapper">
+      <div class="line-up"></div>
       <div class="node-card unverified-card">
         <div class="nc-name">Anna Ładomirska</div>
         <div class="nc-dates">ur. ok. 1767 | zm. 20.06.1806 Jazowsko</div>
@@ -469,16 +435,16 @@
     </div>
   </div>
 
-  <!-- WIERSZ 4 (5 BOXÓW) - ZAMIANA GRACJANA Z JOANNĄ -->
+  <!-- WIERSZ 4 (5 BOXÓW) -->
   <div class="tier-row">
-    <!-- Linia zapobiegawcza dla Gracjana (w razie zaokrągleń CSS) z 10% do 10% -->
+    <!-- Linia zapobiegawcza dla Gracjana z 10% do 10% -->
     <div class="h-line" style="left: calc(10% - 1px); width: 2px;"></div>
     <!-- Linia Franciszka -> Wincenty i Joanna (od 30% do 50%) -->
     <div class="h-line" style="left: calc(30% - 1px); width: calc(20% + 2px);"></div>
     <!-- Linia Jan -> Maciej i Józefa (od 70% do 90%) -->
     <div class="h-line" style="left: calc(70% - 1px); width: calc(20% + 2px);"></div>
 
-    <!-- 1. Gracjan (Od Kazimierza, idzie prosto w dół do dzieci) -->
+    <!-- 1. Gracjan -->
     <div class="node-wrapper">
       <div class="line-up"></div>
       <div class="node-card">
