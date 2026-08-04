@@ -30,6 +30,19 @@
 
   a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 
+  /* ── SVG ICONS ── */
+  .svg-defs { display: none; }
+  .doc-link { 
+    color: var(--gold); 
+    display: inline-flex; 
+    align-items: center; 
+    vertical-align: middle; 
+    margin: 0 2px; 
+    transition: 0.3s; 
+  }
+  .doc-link:hover { color: var(--ink); transform: scale(1.15); }
+  .doc-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
   /* ── NAV ── */
   nav { 
     background-color: var(--ink); 
@@ -40,7 +53,7 @@
     border-bottom: 1px solid var(--gold); 
   }
   .nav-inner { 
-    max-width: 1200px; 
+    max-width: 1400px; 
     margin: 0 auto; 
     display: flex; 
     justify-content: space-between; 
@@ -165,36 +178,30 @@
 
   .zoom-container {
     position: relative;
-    overflow: hidden;
-    display: block;
     width: 100%;
     cursor: default;
-    border-radius: 4px;
-    border: 1px solid var(--line);
-    background: var(--warm-white);
-    padding: 20px 0 60px;
   }
   .zoom-container.is-zooming { cursor: crosshair; }
 
-  #treeImg {
+  #treeHtml {
     width: 100%;
     transition: transform 0.15s ease-out;
-    transform-origin: 50% 50%;
+    transform-origin: 50% 0%; /* Startowanie od góry aby drzewo nie uciekło za ekran */
   }
 
-  /* ── DRZEWO - GŁÓWNY KONTENER ── */
+  /* ── DRZEWO - GŁÓWNA STRUKTURA ── */
   .tier-row {
     display: flex;
-    flex-wrap: nowrap; /* Sztywne trzymanie rzędów 1-3-5-5-6-7 */
+    flex-wrap: nowrap; /* Wymuszenie 1 linii by zachować 1-3-5-5-6-7 */
     justify-content: center;
-    align-items: stretch; /* Ciągnie w dół, aby spody boxów były równe */
+    align-items: stretch; /* Naciąga kolumny, aby spody boxów były równe */
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 50px; /* Miejsce na rury połączeniowe */
     position: relative;
   }
 
   .node-wrapper {
-    flex: 1 1 0;
+    flex: 1 1 0; /* Równomierny podział */
     min-width: 0;
     max-width: 250px;
     position: relative;
@@ -206,34 +213,37 @@
   .root-wrapper { flex: 0 1 400px; max-width: 500px; }
 
   /* ── PERFEKCYJNE LINIE ŁĄCZĄCE (MATEMATYKA CSS) ── */
+  
   .h-line { position: absolute; top: -25px; height: 2px; background: var(--gold-light); z-index: 1; }
   .h-line.red { background: var(--unverified); z-index: 2; }
 
-  /* Obliczone trasy poziome: trafiają precyzyjnie w osie kafelków */
+  /* Trasy poziome: przeliczone by trafiały precyzyjnie w osie kafelków */
   .row-2-track { left: calc(16.6666% - 1px); width: calc(66.6666% + 2px); }
   
-  .row-3-track-gold-1 { left: calc(10% - 1px); width: calc(40% + 2px); } /* Józef -> Kazimierz, Ignacy, Franciszka */
-  .row-3-track-gold-2 { left: calc(83.3333% - 1px); width: calc(6.6666% + 2px); } /* Jakub -> Jan */
+  .row-3-track-gold-1 { left: calc(10% - 1px); width: calc(6.6666% + 2px); } /* Kazimierz <-> Józef */
+  .row-3-track-red-1 { left: calc(16.6666% - 1px); width: calc(33.3333% + 2px); } /* Józef <-> Ignacy, Franciszka */
+  .row-3-track-gold-2 { left: calc(83.3333% - 1px); width: calc(6.6666% + 2px); } /* Jakub <-> Jan */
 
-  .row-4-track-red { left: calc(30% - 1px); width: calc(20% + 2px); } /* Franciszka -> Wincenty, Joanna */
-  .row-4-track-gold { left: calc(70% - 1px); width: calc(20% + 2px); } /* Jan -> Maciej, Józefa */
+  .row-4-track-red { left: calc(30% - 1px); width: calc(20% + 2px); } /* Franciszka <-> Wincenty, Joanna */
+  .row-4-track-gold { left: calc(70% - 1px); width: calc(20% + 2px); } /* Jan <-> Maciej, Józefa */
 
-  .row-5-track-gold-1 { left: calc(8.3333% - 1px); width: calc(16.6666% + 2px); } /* Gracjan -> Ksawery, Pryska */
-  .row-5-track-gold-2 { left: calc(41.6666% - 1px); width: calc(50% + 2px); } /* Maciej -> Fil, Kal, Leo, Walenty */
+  .row-5-track-gold-1 { left: calc(8.3333% - 1px); width: calc(16.6666% + 2px); } /* Gracjan <-> Ksawery, Pryska */
+  .row-5-track-gold-2 { left: calc(41.6666% - 1px); width: calc(50% + 2px); } /* Maciej <-> 4 dzieci */
 
-  .row-6-track-gold { left: calc(7.1428% - 1px); width: calc(85.7142% + 2px); } /* Walenty -> 7 dzieci */
+  .row-6-track-gold { left: calc(7.1428% - 1px); width: calc(85.7142% + 2px); } /* Walenty <-> 7 dzieci */
 
-  /* Pionowe łącza formujące idealne rogi */
-  .line-up { position: absolute; top: -25px; left: 50%; width: 2px; height: 25px; background: var(--gold-light); z-index: 1; transform: translateX(-50%); }
+  /* Pionowe wtyczki tworzące równe zagięcia */
+  .line-up { position: absolute; top: -25px; left: calc(50% - 1px); width: 2px; height: 25px; background: var(--gold-light); z-index: 1; }
   .line-up.red { background: var(--unverified); z-index: 2; }
 
-  /* Wypełnienie pod kafelkiem do linii następnego rzędu */
   .line-fill { width: 2px; background: var(--gold-light); flex: 1 1 0; min-height: 0; z-index: 1; }
   .line-fill.red { background: var(--unverified); z-index: 2; }
 
-  /* Złącze opadające do poziomej rury */
-  .line-down { position: absolute; bottom: -25px; left: 50%; width: 2px; height: 25px; background: var(--gold-light); z-index: 1; transform: translateX(-50%); }
+  .line-down { position: absolute; bottom: -25px; left: calc(50% - 1px); width: 2px; height: 25px; background: var(--gold-light); z-index: 1; }
   .line-down.red { background: var(--unverified); z-index: 2; }
+
+  /* Bufory do pozycjonowania kart niepołączonych z góry (Anna) */
+  .spacer-25 { flex: 0 0 25px; width: 100%; }
 
   /* ── NODE CARDS ── */
   .node-card {
@@ -242,7 +252,8 @@
     border-radius: 4px;
     padding: clamp(4px, 0.8vw, 16px);
     width: 100%;
-    flex: 0 0 auto;
+    max-width: 260px;
+    flex: 0 0 auto; /* Naturalna wysokość wewnątrz kolumny, ewentualne luki zaszpachluje .line-fill */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -261,6 +272,7 @@
     transform: translateY(-2px);
   }
 
+  /* Ekstremalne skalowanie w dół dla telefonów - zapobiega łamaniu layoutu */
   .nc-name { 
     font-family: 'Cormorant Garamond', serif; 
     font-size: clamp(0.45rem, 1.1vw, 1.25rem); 
@@ -290,7 +302,7 @@
   }
   .nc-spouse strong { 
     font-weight: 600; font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(0.5rem, 1vw, 1.05rem); 
+    font-size: clamp(0.45rem, 1vw, 1.05rem); 
     display: block; margin-bottom: 2px; 
   }
 
@@ -312,11 +324,6 @@
 
   footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.85rem; letter-spacing: 1px; margin-top: 50px; }
 
-  /* Doc Links Icons */
-  .doc-link { color: var(--gold); display: inline-flex; align-items: center; vertical-align: middle; margin: 0 2px; transition: 0.3s; }
-  .doc-link:hover { color: var(--ink); transform: scale(1.15); }
-  .doc-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
   @media (max-width: 480px) {
     .actions-wrapper { flex-direction: column; gap: 10px; }
     .btn-action { width: 100%; justify-content: center; text-align: center; font-size: 0.75rem; padding: 14px 20px; }
@@ -337,8 +344,8 @@
 
 <nav aria-label="Główna nawigacja">
   <div class="nav-inner">
-     <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>
-     <a href="genealogia.html" class="back-link">← Powrót</a>
+     <a href="glowna.php" class="nav-logo">ARCHIWUM L&K</a>
+     <a href="drzewo.php" class="back-link">← Powrót</a>
   </div>
 </nav>
 
@@ -374,9 +381,9 @@
       </div>
     </div>
 
-    <!-- ZOOM CONTAINER OTACZAJĄCY DRZEWO HTML -->
+    <!-- ZOOM CONTAINER OTACZAJĄCY STRUKTURĘ HTML -->
     <div id="zoomContainer" class="zoom-container">
-      <div id="treeImg">
+      <div id="treeHtml">
 
         <!-- WIERSZ 1 (1 BOX) -->
         <div class="tier-row">
@@ -394,6 +401,7 @@
               </div>
               <img src="zdjecia/ladarch/antoni_zofia_1726.jpg" alt="Antoni i Ewa Zofia Ładomirscy" class="root-img" loading="lazy">
             </div>
+            <!-- Łącznik pionowy na dół -->
             <div class="line-fill"></div>
             <div class="line-down"></div>
           </div>
@@ -401,6 +409,7 @@
 
         <!-- WIERSZ 2 (3 BOXY) -->
         <div class="tier-row">
+          <!-- Linia pozioma Antoni -> Dzieci -->
           <div class="h-line row-2-track"></div>
 
           <!-- 1. Józef -->
@@ -412,6 +421,7 @@
               <div class="nc-bio">towarzysz chorągwi pancernej<br>cześnik żytomierski</div>
               <div class="nc-spouse"><strong>ż. Teresa Witosławska</strong></div>
             </div>
+            <!-- Z Józefa do Dzieci -->
             <div class="line-fill"></div>
             <div class="line-down"></div>
           </div>
@@ -441,6 +451,7 @@
                 /2v Jakub Jakielski <a href="ladarch31.php" class="doc-link" target="_blank"><svg><use href="#icon-doc"></use></svg></a>/
               </div>
             </div>
+            <!-- Z Jakuba do Jana -->
             <div class="line-fill"></div>
             <div class="line-down"></div>
           </div>
@@ -448,7 +459,11 @@
 
         <!-- WIERSZ 3 (5 BOXÓW) -->
         <div class="tier-row">
+          <!-- Od Józefa do Kazimierza (Złota) -->
           <div class="h-line row-3-track-gold-1"></div>
+          <!-- Od Józefa do Ignacego i Franciszki (Czerwona) -->
+          <div class="h-line red row-3-track-red-1"></div>
+          <!-- Od Jakuba do Jana (Złota) -->
           <div class="h-line row-3-track-gold-2"></div>
 
           <!-- 1. Kazimierz -->
@@ -472,7 +487,7 @@
             <div class="line-down"></div> <!-- Idzie wprost do Gracjana -->
           </div>
 
-          <!-- 2. Ignacy -->
+          <!-- 2. Ignacy (Czerwona) -->
           <div class="node-wrapper">
             <div class="line-up red"></div>
             <div class="node-card unverified-card">
@@ -481,7 +496,7 @@
             </div>
           </div>
 
-          <!-- 3. Franciszka -->
+          <!-- 3. Franciszka (Czerwona) -->
           <div class="node-wrapper">
             <div class="line-up red"></div>
             <div class="node-card unverified-card">
@@ -495,8 +510,9 @@
             <div class="line-down red"></div>
           </div>
 
-          <!-- 4. Anna (Odłączona) -->
+          <!-- 4. Anna (Odcięta z góry) -->
           <div class="node-wrapper">
+            <div class="spacer-25"></div> <!-- Zachowanie równej wysokości kart -->
             <div class="node-card unverified-card">
               <div class="nc-name">Anna Ładomirska</div>
               <div class="nc-dates">ur. ok. 1767 | zm. 20.06.1806 Jazowsko</div>
@@ -530,12 +546,14 @@
           </div>
         </div>
 
-        <!-- WIERSZ 4 (5 BOXÓW) - GRACJAN ZAMIENIONY Z JOANNĄ -->
+        <!-- WIERSZ 4 (5 BOXÓW) -->
         <div class="tier-row">
+          <!-- Od Franciszki do Wincentego i Joanny (Czerwona) -->
           <div class="h-line red row-4-track-red"></div>
+          <!-- Od Jana do Macieja i Józefy (Złota) -->
           <div class="h-line row-4-track-gold"></div>
 
-          <!-- 1. Gracjan (Złota prosto z góry) -->
+          <!-- 1. Gracjan (Złota - łączy się wprost z pionem od Kazimierza) -->
           <div class="node-wrapper">
             <div class="line-up"></div>
             <div class="node-card">
@@ -612,10 +630,11 @@
 
         <!-- WIERSZ 5 (6 BOXÓW) -->
         <div class="tier-row">
+          <!-- Od Gracjana do Franciszka K. i Pryski -->
           <div class="h-line row-5-track-gold-1"></div>
+          <!-- Od Macieja do 4 dzieci -->
           <div class="h-line row-5-track-gold-2"></div>
 
-          <!-- Z Gracjana (Dzieci 1, 2) -->
           <div class="node-wrapper">
             <div class="line-up"></div>
             <div class="node-card unverified-card">
@@ -638,7 +657,6 @@
             </div>
           </div>
           
-          <!-- Z Macieja (Dzieci 3, 4, 5, 6) -->
           <div class="node-wrapper">
             <div class="line-up"></div>
             <div class="node-card">
@@ -700,6 +718,7 @@
 
         <!-- WIERSZ 6 (7 BOXÓW) -->
         <div class="tier-row" style="margin-bottom: 0;">
+          <!-- Od Walentego do wszystkich 7 dzieci -->
           <div class="h-line row-6-track-gold"></div>
 
           <div class="node-wrapper">
@@ -812,11 +831,10 @@
   const zoomText = document.getElementById('zoomText');
   const zoomIcon = document.getElementById('zoomIcon');
   const zoomContainer = document.getElementById('zoomContainer');
-  const treeImage = document.getElementById('treeImg');
+  const treeHtml = document.getElementById('treeHtml');
 
   let isZoomEnabled = false;
 
-  // Ikona lupy z plusem (Włącz) i lupy z minusem (Wyłącz)
   const iconPlus = '<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/>';
   const iconMinus = '<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/>';
 
@@ -835,30 +853,24 @@
       zoomText.textContent = 'Włącz przybliżanie';
       zoomIcon.innerHTML = iconPlus;
       
-      // Reset przybliżenia
-      treeImage.style.transform = 'scale(1)';
-      treeImage.style.transformOrigin = 'center center';
+      treeHtml.style.transform = 'scale(1)';
     }
   });
 
   zoomContainer.addEventListener('mousemove', (e) => {
     if (!isZoomEnabled) return;
     
-    // Obliczanie współrzędnych myszki wewnątrz kontenera (procentowo)
     const rect = zoomContainer.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     
-    // Ustawienie punktu centralnego przybliżenia i skali powiększenia (x2 dla HTML by tekst był ostry)
-    treeImage.style.transformOrigin = `${x}% ${y}%`;
-    treeImage.style.transform = 'scale(2)'; 
+    treeHtml.style.transformOrigin = `${x}% ${y}%`;
+    treeHtml.style.transform = 'scale(1.8)'; 
   });
 
   zoomContainer.addEventListener('mouseleave', () => {
     if (!isZoomEnabled) return;
-    // Płynny powrót po wyjechaniu myszką
-    treeImage.style.transform = 'scale(1)';
-    treeImage.style.transformOrigin = 'center center';
+    treeHtml.style.transform = 'scale(1)';
   });
 </script>
 </body>
