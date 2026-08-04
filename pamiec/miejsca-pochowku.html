@@ -193,13 +193,13 @@
   const initialCenter = [52.0, 19.0];
   const initialZoom = window.innerWidth <= 900 ? 5 : 6;
   
-  // NOWA KONFIGURACJA MAPY - Optymalizacja pod gładziki (touchpady)
+  // ZBALANSOWANA KONFIGURACJA MAPY (Gładzik + Kółko Myszy)
   const map = L.map('map', { 
     center: initialCenter, 
     zoom: initialZoom,
-    zoomSnap: 0,              // TO JEST KLUCZOWE: Całkowicie wyłącza skokowe przyciąganie do pełnych wartości
-    zoomDelta: 0.25,          // Mniejszy krok zoomu przy korzystaniu z przycisków +/- na mapie
-    wheelPxPerZoomLevel: 120  // Zwiększenie tej wartości (domyślnie 60) sprawia, że mapa reaguje łagodniej na gładzik
+    zoomSnap: 0.25,          // Wypośrodkowanie: płynniejsze dla gładzika, ale wciąż stabilne dla myszki
+    zoomDelta: 0.5,          // Zmniejsza domyślny skok przy nawigacji z przycisków
+    wheelPxPerZoomLevel: 60  // Powrót do domyślnego mnożnika, aby usunąć brak responsywności
   }); 
   
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map); 
