@@ -140,7 +140,6 @@
     { id: 26, p: "kaplica grobowa Sulima Włodków z Dąbrowicy", l: "Niegowici", c: [49.940033, 20.239058] },
     { id: 27, p: "krypta z trumnami zmarłych z rodziny Götz-Okocimskich", l: "Okocim", c: [49.948805, 20.602759] },
     { id: 28, p: "krypta s.Marii Anieli (Jadwiga Kraińska)", l: "Szymanów", c: [52.163478, 20.380888] },
-    // Dodane nowo wyciągnięte rekordy z Google Maps
     { id: 29, p: "Gołębski, Szczerba, Gruszecki", l: "Bytom", c: [50.354185, 18.918094] },
     { id: 30, p: "Ładomirski", l: "Canberra", c: [-35.217088, 149.134745] },
     { id: 31, p: "Domański, Gawliński", l: "Chorzelów", c: [50.332339, 21.442899] },
@@ -194,13 +193,13 @@
   const initialCenter = [52.0, 19.0];
   const initialZoom = window.innerWidth <= 900 ? 5 : 6;
   
-  // Konfiguracja dla płynniejszego przybliżania (scroll trackpad)
+  // NOWA KONFIGURACJA MAPY - Optymalizacja pod gładziki (touchpady)
   const map = L.map('map', { 
     center: initialCenter, 
     zoom: initialZoom,
-    zoomSnap: 0.25,
-    zoomDelta: 0.5,
-    wheelPxPerZoomLevel: 60
+    zoomSnap: 0,              // TO JEST KLUCZOWE: Całkowicie wyłącza skokowe przyciąganie do pełnych wartości
+    zoomDelta: 0.25,          // Mniejszy krok zoomu przy korzystaniu z przycisków +/- na mapie
+    wheelPxPerZoomLevel: 120  // Zwiększenie tej wartości (domyślnie 60) sprawia, że mapa reaguje łagodniej na gładzik
   }); 
   
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map); 
