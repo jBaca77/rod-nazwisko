@@ -34,7 +34,7 @@
   /* ── NAV ── */
   nav { 
     background-color: var(--ink); 
-    padding: 16px 24px; 
+    padding: 24px; /* Zwiększono padding, aby header był wyższy */
     position: sticky; 
     top: 0; 
     z-index: 1000; 
@@ -349,8 +349,8 @@
   <div class="tier-row">
     <!-- Linia Józef -> Kazimierz, Ignacy, Franciszka (10% do 50%) -->
     <div class="h-line" style="left: calc(10% - 1px); width: calc(40% + 2px);"></div>
-    <!-- Linia Jakub -> Jan i Anna (od 70% do 90%) - POPRAWIONE z 13.333% na 20% aby domknąć linię z Anną -->
-    <div class="h-line" style="left: calc(70% - 1px); width: calc(20% + 2px);"></div>
+    <!-- Linia Jakub -> Jan (od 70% do 83.333%) - Linia do Anny została usunięta -->
+    <div class="h-line" style="left: calc(70% - 1px); width: calc(13.333% + 2px);"></div>
 
     <!-- 1. Kazimierz -->
     <div class="node-wrapper">
@@ -420,9 +420,9 @@
       <div class="line-down"></div>
     </div>
 
-    <!-- 5. Anna -->
+    <!-- 5. Anna (odłączona od linii) -->
     <div class="node-wrapper">
-      <div class="line-up"></div>
+      <!-- Usunięto .line-up -->
       <div class="node-card unverified-card">
         <div class="nc-name">Anna Ładomirska</div>
         <div class="nc-dates">ur. ok. 1767 | zm. 20.06.1806 Jazowsko</div>
