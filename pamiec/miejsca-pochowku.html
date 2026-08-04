@@ -193,16 +193,54 @@
   const initialCenter = [52.0, 19.0];
   const initialZoom = window.innerWidth <= 900 ? 5 : 6;
   
-  // ZBALANSOWANA KONFIGURACJA MAPY (Gładzik + Kółko Myszy)
+  // 1. Inicjalizacja z wyłączonym wbudowanym, skokowym zoomem z rolki myszy
   const map = L.map('map', { 
     center: initialCenter, 
     zoom: initialZoom,
-    zoomSnap: 0.25,          // Wypośrodkowanie: płynniejsze dla gładzika, ale wciąż stabilne dla myszki
-    zoomDelta: 0.5,          // Zmniejsza domyślny skok przy nawigacji z przycisków
-    wheelPxPerZoomLevel: 60  // Powrót do domyślnego mnożnika, aby usunąć brak responsywności
+    zoomSnap: 0,             // Konieczne, by mapa przyjmowała wartości ułamkowe
+    scrollWheelZoom: false   // Wyłączamy problematyczny wbudowany system
   }); 
   
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map); 
+
+  // =========================================================================
+  // WŁASNY SILNIK CIĄGŁEGO I PŁYNNEGO ZOOMA (idealny dla Gładzików i Kółka)
+  // =========================================================================
+  let targetZoom = initialZoom;
+  let mousePoint = map.getCenter();
+
+  // Śledzimy pozycję kursora, by zbliżać tam, gdzie użytkownik celuje
+  map.on('mousemove', function(e) {
+    mousePoint = e.latlng;
+  });
+
+  // Utrzymujemy synchronizację zooma, kiedy użytkownik kliknie "Namierz"
+  // lub użyje przycisków mapy (+ / -)
+  map.on('zoom', function() {
+    targetZoom = map.getZoom();
+  });
+
+  const mapDiv = document.getElementById('map');
+  mapDiv.addEventListener('wheel', function(e) {
+    e.preventDefault(); // Zatrzymuje przewijanie całej strony www
+    
+    if (!mousePoint) return;
+    
+    // Ustawiamy bardzo precyzyjną czułość.
+    // Gładzik wysyła bardzo małe deltaY (np. 3), kółko myszy duże (np. 100)
+    const sensitivity = 0.01; 
+    
+    targetZoom -= e.deltaY * sensitivity;
+    
+    // Ograniczenia oddalenia i przybliżenia, żeby nie uciec w kosmos
+    const minZ = 3;
+    const maxZ = 18;
+    targetZoom = Math.max(minZ, Math.min(maxZ, targetZoom));
+    
+    // Aplikujemy docelowy zoom bez korzystania z szarpiącej animacji klatkowej
+    map.setZoomAround(mousePoint, targetZoom, { animate: false });
+  }, { passive: false });
+  // =========================================================================
 
   const markerMap = {}; 
   const grid = document.getElementById('geoGrid'); 
