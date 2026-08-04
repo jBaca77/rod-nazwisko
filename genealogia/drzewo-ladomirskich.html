@@ -298,7 +298,8 @@
   <!-- WIERSZ 2 (3 BOXY) -->
   <div class="tier-row">
     <!-- Linia łącząca Dzieci Antoniego (środek boku 1 do środek boku 3) -->
-    <div class="h-line" style="left: calc(16.666% - 1px); width: calc(66.666% + 2px);"></div>
+    <!-- Korekta wcięcia z lewej oraz z prawej strony (zmiana procentów) -->
+    <div class="h-line" style="left: calc(25% - 1px); width: calc(50% + 2px);"></div>
 
     <!-- 1. Józef -->
     <div class="node-wrapper">
@@ -347,10 +348,11 @@
 
   <!-- WIERSZ 3 (5 BOXÓW) -->
   <div class="tier-row">
-    <!-- Linia Józef -> Kazimierz, Ignacy, Franciszka (10% do 50%) -->
-    <div class="h-line" style="left: calc(10% - 1px); width: calc(40% + 2px);"></div>
-    <!-- Linia Jakub -> Jan (od 70% do 83.333%) - Linia do Anny została usunięta -->
-    <div class="h-line" style="left: calc(70% - 1px); width: calc(13.333% + 2px);"></div>
+    <!-- Linia Józef -> Kazimierz, Ignacy, Franciszka -->
+    <!-- Korekta początku linii dla Kazimierza -->
+    <div class="h-line" style="left: calc(20% - 1px); width: calc(30% + 2px);"></div>
+    
+    <!-- UWAGA: Linia Jakub -> Jan -> Anna została stąd całkowicie usunięta -->
 
     <!-- 1. Kazimierz -->
     <div class="node-wrapper">
@@ -439,10 +441,14 @@
   <div class="tier-row">
     <!-- Linia zapobiegawcza dla Gracjana z 10% do 10% -->
     <div class="h-line" style="left: calc(10% - 1px); width: 2px;"></div>
-    <!-- Linia Franciszka -> Wincenty i Joanna (od 30% do 50%) -->
-    <div class="h-line" style="left: calc(30% - 1px); width: calc(20% + 2px);"></div>
-    <!-- Linia Jan -> Maciej i Józefa (od 70% do 90%) -->
-    <div class="h-line" style="left: calc(70% - 1px); width: calc(20% + 2px);"></div>
+    
+    <!-- Linia Franciszka -> Wincenty i Joanna -->
+    <!-- Korekta by linia dla Wincentego nie wychodziła tak bardzo na lewo -->
+    <div class="h-line" style="left: calc(38% - 1px); width: calc(12% + 2px);"></div>
+    
+    <!-- Linia Jan -> Maciej i Józefa -->
+    <!-- Korekta by dociągała z lewej do połączenia z Janem i z prawej nie wychodziła za daleko dla Józefy -->
+    <div class="h-line" style="left: calc(62% - 1px); width: calc(18% + 2px);"></div>
 
     <!-- 1. Gracjan -->
     <div class="node-wrapper">
