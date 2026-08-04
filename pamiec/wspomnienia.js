@@ -93,19 +93,19 @@ const osoby = [
         imie: "Władysław (Walter) Krobicki",
         lata: "1900-1982",
         rokZgonu: 1982,
-        foto: ""
+        foto: "../img/pamiec/krobicki_wladyslaw.jpg"
     },
     {
         imie: "Andrzej Maria Ładomirski",
         lata: "1910-1985",
         rokZgonu: 1985,
-        foto: ""
+        foto: "../img/pamiec/andrzej_ladomirski.jpg"
     },
     {
         imie: "Filip Ładomirski",
         lata: "1985-1985",
         rokZgonu: 1985,
-        foto: ""
+        foto: "../img/pamiec/aniolek.jpg"
     },
     {
         imie: "Horst Gaedke",
@@ -165,7 +165,7 @@ const osoby = [
         imie: "Zdzisław Maria Ładomirski",
         lata: "1908-1992",
         rokZgonu: 1992,
-        foto: ""
+        foto: "../img/pamiec/zdzislaw_ladomirski.jpg"
     },
     {
         imie: "Zofia z Siemaszków Gołębska",
@@ -177,13 +177,13 @@ const osoby = [
         imie: "Marcin Stanisław Jaruzelski",
         lata: "1909-1992",
         rokZgonu: 1992,
-        foto: ""
+        foto: "../img/pamiec/marcin_jaruzelski.jpg"
     },
     {
         imie: "Justyna Kopacz",
         lata: "1993-1993",
         rokZgonu: 1993,
-        foto: ""
+        foto: "../img/pamiec/aniolek.jpg"
     },
     {
         imie: "Anna z Trąbczyńskich Ładomirska",
@@ -315,25 +315,25 @@ const osoby = [
         imie: "Wojciech Stanisław Janiszewski",
         lata: "1909-2001",
         rokZgonu: 2001,
-        foto: ""
+        foto: "../img/pamiec/wojciech_janiszewski.jpg"
     },
     {
         imie: "Bolesław Krobicki",
         lata: "1925-2001",
         rokZgonu: 2001,
-        foto: ""
+        foto: "../img/pamiec/boleslaw_krobicki.jpg"
     },
     {
         imie: "ks. Tadeusz Aleksander Maria Fedorowicz",
         lata: "1907-2002",
         rokZgonu: 2002,
-        foto: ""
+        foto: "../img/pamiec/tadeusz_fedorowicz.jpg"
     },
     {
         imie: "Jadwiga Beata z Domańskich Frąckiewicz",
         lata: "1930-2002",
         rokZgonu: 2002,
-        foto: ""
+        foto: "../img/pamiec/jadwiga_frackiewicz.jpg"
     },
     {
         imie: "Adam Tadeusz Wincenty Piller",
@@ -465,25 +465,25 @@ const osoby = [
         imie: "Karolina z Kraińskich Janiszewska",
         lata: "1920-2011",
         rokZgonu: 2011,
-        foto: ""
+        foto: "../img/pamiec/karolina_janiszewska.jpg"
     },
     {
         imie: "Jan Sykstus Maria Kraiński",
         lata: "1927-2012",
         rokZgonu: 2012,
-        foto: ""
+        foto: "../img/pamiec/jan_krainski.jpg"
     },
     {
         imie: "Krystyna z Wiszniewskich Pukało",
         lata: "1955-2012",
         rokZgonu: 2012,
-        foto: ""
+        foto: "../img/pamiec/krystyna_pukalo.jpg"
     },
     {
         imie: "Tadeusz Piotr Pukało",
         lata: "1954-2012",
         rokZgonu: 2012,
-        foto: ""
+        foto: "../img/pamiec/tadeusz_pukalo.jpg"
     },
     {
         imie: "Krystyna z Szydlarskich Bartmańska",
@@ -615,25 +615,25 @@ const osoby = [
         imie: "Elżbieta Róża Maria z Czartoryskich Kraińska",
         lata: "1926-2021",
         rokZgonu: 2021,
-        foto: ""
+        foto: "../img/pamiec/elzbieta_krainska.jpg"
     },
     {
         imie: "Jacek Maria Domański",
         lata: "1935-2021",
         rokZgonu: 2021,
-        foto: ""
+        foto: "../img/pamiec/jacek_domanski.jpg"
     },
     {
         imie: "Jerzy Krobicki",
         lata: "1946-2021",
         rokZgonu: 2021,
-        foto: ""
+        foto: "../img/pamiec/jerzy_krobicki.jpg"
     },
     {
         imie: "Józef Schnitzer",
         lata: "1950-2021",
         rokZgonu: 2021,
-        foto: ""
+        foto: "../img/pamiec/jozef_schnitzer.jpg"
     },
     {
         imie: "Marta Maria z Ładomirskich Niewęgłowska",
