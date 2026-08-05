@@ -196,48 +196,48 @@
       <div id="map"></div>  
 
       <div class="filter-bar">
-        <div class="filter-item active" onclick="filterMap('all', this)">
+        <div class="filter-item active" id="filter-all" onclick="filterMap('all', this)">
             <div class="dual-pill" style="--cl: #444; --cr: #eee;"></div>
             <span class="f-name">Wszystkie Rodziny</span>
         </div>
 
-        <div class="filter-item" onclick="filterMap(['c1', 'c4'], this)">
+        <div class="filter-item" id="filter-c1-c4" onclick="filterMap(['c1', 'c4'], this)">
             <div class="dual-pill" style="--cl: #cce166; --cr: #ffff00;"></div>
             <span class="f-name">Domańscy i Ładomirscy</span>
             <a href="../genealogia/domanscy-ladomirscy.html" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
         </div>
 
-        <div class="filter-item" onclick="filterMap(['c2', 'c4'], this)">
+        <div class="filter-item" id="filter-c2-c4" onclick="filterMap(['c2', 'c4'], this)">
             <div class="dual-pill" style="--cl: #99ff00; --cr: #ffff00;"></div>
             <span class="f-name">Gołębscy i Ładomirscy</span>
             <a href="../genealogia/golebscy-ladomirscy.html" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
         </div>
 
-        <div class="filter-item" onclick="filterMap(['c3', 'c4'], this)">
+        <div class="filter-item" id="filter-c3-c4" onclick="filterMap(['c3', 'c4'], this)">
             <div class="dual-pill" style="--cl: #00ff00; --cr: #ffff00;"></div>
             <span class="f-name">Krobiccy i Ładomirscy</span>
             <a href="../genealogia/krobiccy-ladomirscy.html" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
         </div>
 
-        <div class="filter-item" onclick="filterMap(['c4', 'c6'], this)">
+        <div class="filter-item" id="filter-c4-c6" onclick="filterMap(['c4', 'c6'], this)">
             <div class="dual-pill" style="--cl: #ffff00; --cr: #ff8c78;"></div>
             <span class="f-name">Ładomirscy i Kraińscy</span>
             <a href="../genealogia/ladomirscy-krainscy.html" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
         </div>
 
-        <div class="filter-item" onclick="filterMap(['c5', 'c6'], this)">
+        <div class="filter-item" id="filter-c5-c6" onclick="filterMap(['c5', 'c6'], this)">
             <div class="dual-pill" style="--cl: #ffc8c8; --cr: #ff8c78;"></div>
             <span class="f-name">Fedorowiczowie i Kraińscy</span>
             <a href="../genealogia/fedorowiczowie-krainscy.html" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
         </div>
 
-        <div class="filter-item" onclick="filterMap(['c6', 'c8'], this)">
+        <div class="filter-item" id="filter-c6-c8" onclick="filterMap(['c6', 'c8'], this)">
             <div class="dual-pill" style="--cl: #ff8c78; --cr: #00ffff;"></div>
             <span class="f-name">Kraińscy i Włodkowie</span>
             <a href="../genealogia/krainscy-wlodkowie.html" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
         </div>
 
-        <div class="filter-item" onclick="filterMap(['c7', 'c6'], this)">
+        <div class="filter-item" id="filter-c7-c6" onclick="filterMap(['c7', 'c6'], this)">
             <div class="dual-pill" style="--cl: #ff0000; --cr: #ff8c78;"></div>
             <span class="f-name">Wiszniewscy i Kraińscy</span>
             <a href="../genealogia/wiszniewscy-krainscy.html" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
@@ -502,7 +502,20 @@
        });
    }
    
-   window.addEventListener('DOMContentLoaded', highlightCurrentPage);
+   window.addEventListener('DOMContentLoaded', () => {
+       highlightCurrentPage();
+
+       // Automatyczne włączenie filtra na podstawie parametru z URL
+       const urlParams = new URLSearchParams(window.location.search);
+       const filterParam = urlParams.get('filter');
+       
+       if (filterParam) {
+           const targetFilterEl = document.getElementById('filter-' + filterParam);
+           if (targetFilterEl) {
+               targetFilterEl.click();
+           }
+       }
+   });
 
    init();  
 </script>  
