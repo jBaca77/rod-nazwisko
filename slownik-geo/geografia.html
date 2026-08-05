@@ -58,6 +58,9 @@
   .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }  
   .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }  
   .drawer-links a:hover::before { width: 3px; }  
+  /* DODANE - Aktywny link w menu */
+  .drawer-links a.active { color: var(--gold-light) !important; background: rgba(255,255,255,0.1) !important; padding-left: 35px; font-weight: 500; }
+  .drawer-links a.active::before { width: 3px !important; }
 
   .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }  
   .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }  
@@ -82,27 +85,29 @@
     box-shadow: 0 15px 45px rgba(0,0,0,0.05);  
   }  
 
-  /* Udoskonalony wygląd filtrów z przyciskiem "Wywód" w środku */ 
-  .filter-bar { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }  
+  /* POPRAWIONY WYGLĄD FILTRÓW */ 
+  .filter-bar { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }  
   .filter-item {  
-    cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 6px 8px 6px 12px;  
+    cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 16px;  
     border: 1px solid var(--sepia-pale); background: var(--cream); font-size: 0.75rem;  
-    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; color: var(--ink); border-radius: 4px; 
+    text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; color: var(--ink); 
+    border-radius: 2px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
   }  
-  .filter-item:hover { border-color: var(--gold); }  
-  .filter-item.active { background: var(--ink); color: var(--gold-light); border-color: var(--ink); }  
+  .filter-item:hover { background: var(--parchment); border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.05); }  
+  .filter-item.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }  
     
   .dual-pill {  
-    width: 24px; height: 14px; border-radius: 7px; border: 1px solid rgba(0,0,0,0.1);  
+    width: 24px; height: 14px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.2);  
     position: relative; overflow: hidden; background: linear-gradient(90deg, var(--cl) 50%, var(--cr) 50%);  
   }  
 
-  .f-name { margin-right: 5px; } 
+  .f-name { margin-right: 5px; font-weight: 500; } 
 
   .btn-wywod-small { 
-    background: rgba(0, 0, 0, 0.08); color: var(--ink); font-size: 0.6rem;  
-    padding: 3px 8px; border-radius: 2px; text-decoration: none;  
+    background: rgba(122, 101, 72, 0.1); color: var(--ink-light); font-size: 0.6rem;  
+    padding: 4px 10px; border-radius: 2px; text-decoration: none;  
     text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; border: 1px solid transparent; 
+    font-weight: 600;
   } 
   .filter-item.active .btn-wywod-small { background: rgba(255,255,255,0.15); color: var(--gold-light); } 
   .btn-wywod-small:hover { background: var(--gold); color: #fff; border-color: var(--gold); } 
@@ -165,7 +170,7 @@
         <span>Nawigacja Archiwum</span>  
         <h2>Menu Rodowe</h2>  
     </div>  
-    <ul class="drawer-links">  
+    <ul class="drawer-links" id="sidebarLinks">  
         <li><a href="../index.html">Strona Główna</a></li>  
         <li><a href="../aktualnosci.html">Aktualności</a></li>  
         <li><a href="../historia.html">Historia Klanu</a></li>  
@@ -358,12 +363,13 @@
     { id: 100, n: "Zarszyn", rod: "Wiszniewscy", cat: "c7", c: [49.581083, 22.014232], c1: "#ff0000", c2: "#ff0000" } 
 ]; 
 
+   // Zmodyfikowane parametry dla ultra-płynnego zoomu z touchpada
    const map = L.map('map', {  
      center: [52.0, 19.0],  
      zoom: 6, 
-     zoomSnap: 0, 
-     zoomDelta: 0.25, 
-     wheelPxPerZoomLevel: 150 
+     zoomSnap: 0.1, 
+     zoomDelta: 0.5, 
+     wheelPxPerZoomLevel: 60 // Zmniejszono ze 150 na 60 dla szybszego i płynniejszego przybliżania
    });  
     
    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);  
@@ -410,31 +416,64 @@
    }  
 
    function filterMap(cats, el) {  
-     // Usuń aktywną klasę ze wszystkich przycisków
      document.querySelectorAll('.filter-item').forEach(x => x.classList.remove('active'));  
-     // Dodaj aktywną klasę do klikniętego przycisku
      el.classList.add('active');  
      
-     // Filtrowanie markerów na mapie
      Object.values(markerMap).forEach(m => {
-         // Sprawdzamy czy wybrano 'all' LUB czy kategoria markera jest w naszej tablicy 'cats'
          const isVisible = cats === 'all' || cats.includes(m.category);
          isVisible ? map.addLayer(m) : map.removeLayer(m);
      });  
      
-     // Filtrowanie bocznego panelu
      document.querySelectorAll('.geo-box').forEach(b => {
          const isVisible = cats === 'all' || cats.includes(b.dataset.cat);
          b.style.display = isVisible ? 'flex' : 'none';
      });  
    }  
 
-   const menuBtn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');  
+   // Dodano nową logikę podświetlania i animacji ikony z aktualnosci.html
+   const menuBtn = document.getElementById('menuBtn');
+   const drw = document.getElementById('drawer');
+   const ovr = document.getElementById('overlay');  
+
    function toggleSidebar() {  
-     drw.classList.toggle('open'); ovr.classList.toggle('active');  
+     drw.classList.toggle('open'); 
+     ovr.classList.toggle('active');  
+     
+     const spans = menuBtn.querySelectorAll('span');
+     if(drw.classList.contains('open')) {
+         spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+         spans[1].style.opacity = '0';
+         spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+     } else {
+         spans[0].style.transform = 'none';
+         spans[1].style.opacity = '1';
+         spans[2].style.transform = 'none';
+     }
    }  
+
    menuBtn.addEventListener('click', toggleSidebar);  
    ovr.addEventListener('click', toggleSidebar);  
+
+   // Funkcja podświetlająca aktualną stronę w menu (Drawer)
+   function highlightCurrentPage() {
+       const currentPath = window.location.pathname;
+       let currentPage = currentPath.split("/").pop();
+       if (currentPage === "" || currentPage === "/") currentPage = "index.html";
+       
+       const links = document.querySelectorAll('#sidebarLinks a');
+       links.forEach(link => {
+           const linkHref = link.getAttribute('href');
+           link.classList.remove('active');
+           
+           if (!linkHref.startsWith('#')) {
+               if (linkHref.endsWith(currentPage) || (currentPage === "index.html" && linkHref === "index.html")) {
+                   link.classList.add('active');
+               }
+           }
+       });
+   }
+   
+   window.addEventListener('DOMContentLoaded', highlightCurrentPage);
 
    init();  
 </script>  
