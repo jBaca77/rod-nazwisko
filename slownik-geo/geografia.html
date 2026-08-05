@@ -1,433 +1,432 @@
-<!DOCTYPE html> 
-<html lang="pl"> 
-<head> 
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title>Geografia Rodowa | Archiwum L&K</title> 
-<link rel="preconnect" href="https://fonts.googleapis.com"> 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"> 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> 
-<style> 
-  :root { 
-    --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6;  
-    --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548;  
-    --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a;  
-    --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2);  
-  }  
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }  
-  html { scroll-behavior: smooth; }  
-  body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }  
-
-  header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }  
-  header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }  
-  .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }  
-  header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem, 7vw, 5.2rem); line-height: 1; margin-bottom: 15px; position: relative; z-index: 1; }  
-  header h1 em { font-style: italic; color: var(--gold-light); }  
-  .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }  
-
-  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }  
-  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }  
-  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; }  
-    
-  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }  
-  .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }  
-
-  .drawer {  
-    position: fixed; top: 0; right: -340px; width: 340px; height: 100vh;  
-    background: var(--ink); z-index: 1050; padding: 50px 0;  
-    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);  
-    box-shadow: -15px 0 40px rgba(0,0,0,0.6);  
-    display: flex; flex-direction: column; overflow-y: auto;  
-  }  
-  .drawer::-webkit-scrollbar { width: 4px; }  
-  .drawer::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 10px; }  
-  .drawer.open { right: 0; }  
-
-  .drawer-header { padding: 0 40px 35px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 25px; }  
-  .drawer-header span { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 8px; opacity: 0.8; }  
-  .drawer-header h2 { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-size: 1.8rem; font-weight: 300; letter-spacing: 1px; }  
-
-  .drawer-links { list-style: none; padding: 0 25px; }  
-  .drawer-links li { margin-bottom: 4px; }  
-  .drawer-links a {  
-    color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem;  
-    text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px;  
-    display: block; transition: all 0.3s; position: relative; border-radius: 2px;  
-  }  
-  .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }  
-  .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }  
-  .drawer-links a:hover::before { width: 3px; }  
-
-  .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }  
-  .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }  
-
-  .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }  
-  .overlay.active { opacity: 1; pointer-events: auto; }  
-
-  main { max-width: 1200px; margin: 0 auto; padding: 80px 24px 100px; }  
-  .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; text-align: center; }  
-  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; }  
-  .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; }  
-
-  .map-layout { display: flex; gap: 30px; align-items: flex-start; } 
-  .map-column { flex: 3; } 
-  .sidebar-column { flex: 1; height: 550px; overflow-y: auto; background: var(--parchment); padding: 10px; border: 1px solid var(--sepia-pale); } 
-  .sidebar-column::-webkit-scrollbar { width: 4px; } 
-  .sidebar-column::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 2px; } 
-
-  #map {  
-    height: 550px; width: 100%; border: 1px solid var(--sepia-pale); border-radius: 2px; margin-bottom: 20px;  
-    filter: sepia(10%) contrast(98%) brightness(98%);  
-    box-shadow: 0 15px 45px rgba(0,0,0,0.05);  
-  }  
-
-  /* Filtry - zaktualizowany wygląd, guzik w środku */ 
-  .filter-bar { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }  
-  .filter-item {  
-    cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 6px 8px 6px 12px;  
-    border: 1px solid var(--sepia-pale); background: var(--cream); font-size: 0.75rem;  
-    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; color: var(--ink); border-radius: 4px; 
-  }  
-  .filter-item:hover { border-color: var(--gold); }  
-  .filter-item.active { background: var(--ink); color: var(--gold-light); border-color: var(--ink); }  
-    
-  .dual-pill {  
-    width: 24px; height: 14px; border-radius: 7px; border: 1px solid rgba(0,0,0,0.1);  
-    position: relative; overflow: hidden; background: linear-gradient(90deg, var(--cl) 50%, var(--cr) 50%);  
-  }  
-
-  .f-name { margin-right: 5px; } 
-
-  /* Wygląd guzika WYWÓD w panelu filtra */
-  .btn-wywod-small { 
-    background: rgba(0, 0, 0, 0.08); color: var(--ink); font-size: 0.6rem;  
-    padding: 3px 8px; border-radius: 2px; text-decoration: none;  
-    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; border: 1px solid transparent; 
-  } 
-  .filter-item.active .btn-wywod-small { background: rgba(255,255,255,0.15); color: var(--gold-light); } 
-  .btn-wywod-small:hover { background: var(--gold); color: #fff; border-color: var(--gold); } 
-
-  .geo-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }  
-  .geo-box {  
-    background: #fff; border: 1px solid var(--sepia-pale); padding: 6px 10px;  
-    position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 2px; 
-    transition: all 0.3s; 
-  }  
-  .geo-box:hover { border-color: var(--gold); transform: translateX(5px); }  
-
-  .ribbon {  
-    position: absolute; top: 0; right: 15px; width: 14px; height: 28px;  
-    background: linear-gradient(90deg, var(--c1) 50%, var(--c2) 50%); z-index: 2; border: 1px solid rgba(0,0,0,0.1); border-top: none; 
-  }  
-  .ribbon::after {  
-    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 0;  
-    border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 5px solid #fff;  
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geografia Rodowa | Archiwum L&K</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root {
+    --cream: #f8f4ee; --parchment: #ede8df; --warm-white: #fdfaf6; 
+    --ink: #1e1a14; --ink-light: #3d3628; --sepia: #7a6548; 
+    --sepia-light: #b09a7e; --sepia-pale: #e8ddd0; --gold: #9b7d4a; 
+    --gold-light: #c8a96e; --green-dark: #2c3e2d; --line: rgba(122, 101, 72, 0.2); 
   } 
 
-  .box-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 0.9rem; color: var(--ink); padding-right: 25px; }  
-  .box-rod { font-family: 'Jost', sans-serif; font-size: 0.55rem; color: var(--sepia); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }  
-  .box-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--line); }  
-  .btn-locate { font-size: 0.6rem; color: var(--sepia); cursor: pointer; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; transition: 0.3s; }  
-  .btn-locate:hover { color: var(--gold); }  
-  .btn-more { font-size: 0.6rem; background: var(--ink); color: var(--cream); padding: 2px 8px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; border-radius: 1px; transition: 0.3s; }  
-  .btn-more:hover { background: var(--gold); }  
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; } 
+  html { scroll-behavior: smooth; } 
+  body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; } 
 
-  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.85rem; letter-spacing: 1px; margin-top: 80px; }  
+  header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; } 
+  header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; } 
+  .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; } 
+  header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem, 7vw, 5.2rem); line-height: 1; margin-bottom: 15px; position: relative; z-index: 1; } 
+  header h1 em { font-style: italic; color: var(--gold-light); } 
+  .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 600px; margin: 0 auto; position: relative; z-index: 1; } 
 
-  @media (max-width: 900px) {  
-    .drawer { width: 100%; right: -100%; }  
-    main { padding: 50px 24px; }  
-    .map-layout { flex-direction: column; } 
-    .sidebar-column { height: 400px; width: 100%; } 
-    #map { height: 350px; }  
-  }  
-</style>  
-</head>  
-<body>  
+  nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); } 
+  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; } 
+  .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; } 
+    
+  .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; } 
+  .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); } 
 
-<div class="overlay" id="overlay"></div>  
+  .drawer { 
+    position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; 
+    background: var(--ink); z-index: 1050; padding: 50px 0; 
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    box-shadow: -15px 0 40px rgba(0,0,0,0.6); 
+    display: flex; flex-direction: column; overflow-y: auto; 
+  } 
+  .drawer::-webkit-scrollbar { width: 4px; } 
+  .drawer::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 10px; } 
+  .drawer.open { right: 0; } 
 
-<header>  
-    <span class="header-ornament">Szlakiem Naszych Przodków</span>  
-    <h1>Geografia <em>Rodowa</em></h1>  
-    <p class="header-quote">„Miejsca, w których żyli nasi ojcowie, niosą w sobie pamięć, której nie zdoła zatrzeć czas...” — Zygmunt Gloger</p>  
-</header>  
+  .drawer-header { padding: 0 40px 35px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 25px; } 
+  .drawer-header span { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 8px; opacity: 0.8; } 
+  .drawer-header h2 { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-size: 1.8rem; font-weight: 300; letter-spacing: 1px; } 
 
-<nav>  
-    <div class="nav-inner">  
-        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a>  
-        <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>  
-    </div>  
-</nav>  
+  .drawer-links { list-style: none; padding: 0 25px; } 
+  .drawer-links li { margin-bottom: 4px; } 
+  .drawer-links a { 
+    color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; 
+    text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; 
+    display: block; transition: all 0.3s; position: relative; border-radius: 2px; 
+  } 
+  .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; } 
+  .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; } 
+  .drawer-links a:hover::before { width: 3px; } 
 
-<aside class="drawer" id="drawer">  
-    <div class="drawer-header">  
-        <span>Nawigacja Archiwum</span>  
-        <h2>Menu Rodowe</h2>  
-    </div>  
-    <ul class="drawer-links">  
-        <li><a href="../index.html">Strona Główna</a></li>  
-        <li><a href="../aktualnosci.html">Aktualności</a></li>  
-        <li><a href="../historia.html">Historia Klanu</a></li>  
-        <li><a href="../genealogia/genealogia.html">Genealogia</a></li>  
-        <li><a href="../zjazdy/zjazdy.html">Kronika Zjazdów</a></li>  
-        <li><a href="../slownik-biogr/biografie.html">Biografie</a></li>  
-        <li><a href="../pamiec/pamiec.html">Pamięć i Groby</a></li>  
-        <li><a href="geografia.html">Geografia Rodowa</a></li>  
-        <li><a href="../biblioteka/biblioteczka.html">Biblioteczka</a></li>  
-        <li><a href="../archiwym/archiwum.html">Archiwum Cyfrowe</a></li>  
-    </ul>  
-    <div class="drawer-footer">  
-        <p>Klan L&K © 1975 – 2026</p>  
-    </div>  
-</aside>  
+  .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); } 
+  .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; } 
 
-<main>  
-  <span class="s-label">Lokalizacje Historyczne</span>  
-  <h2 class="s-title">Mapa Siedlisk i Majątków</h2>  
-  <div class="s-line"></div>  
+  .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; } 
+  .overlay.active { opacity: 1; pointer-events: auto; } 
 
-  <div class="map-layout"> 
-    <div class="map-column"> 
-      <div id="map"></div>  
+  main { max-width: 1200px; margin: 0 auto; padding: 80px 24px 100px; } 
+  .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; text-align: center; } 
+  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); text-align: center; font-weight: 400; } 
+  .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; } 
 
-      <!-- Filtry dopasowane w 100% z podwójnymi nazwami, kolorami i guzikami do podstron! --> 
-      <div class="filter-bar">  
-        <div class="filter-item active" onclick="filterMap('all', this)">  
-            <div class="dual-pill" style="--cl: #444; --cr: #eee;"></div> 
-            <span class="f-name">Wszystkie Rodziny</span>  
-        </div>  
+  .map-layout { display: flex; gap: 30px; align-items: flex-start; }
+  .map-column { flex: 3; }
+  .sidebar-column { flex: 1; height: 550px; overflow-y: auto; background: var(--parchment); padding: 10px; border: 1px solid var(--sepia-pale); }
+  .sidebar-column::-webkit-scrollbar { width: 4px; }
+  .sidebar-column::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 2px; }
 
-        <div class="filter-item" onclick="filterMap('c1', this)">  
-            <div class="dual-pill" style="--cl: #cce166; --cr: #ffff00;"></div> 
-            <span class="f-name">Domańscy i Ładomirscy</span>  
-            <a href="geografiaa.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a> 
-        </div>  
+  #map { 
+    height: 550px; width: 100%; border: 1px solid var(--sepia-pale); border-radius: 2px; margin-bottom: 20px; 
+    filter: sepia(10%) contrast(98%) brightness(98%); 
+    box-shadow: 0 15px 45px rgba(0,0,0,0.05); 
+  } 
 
-        <div class="filter-item" onclick="filterMap('c2', this)">  
-            <div class="dual-pill" style="--cl: #99ff00; --cr: #ffff00;"></div> 
-            <span class="f-name">Gołębscy i Ładomirscy</span>  
-            <a href="geografiab.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a> 
-        </div>  
+  /* Udoskonalony wygląd filtrów z przyciskiem "Wywód" w środku */
+  .filter-bar { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; } 
+  .filter-item { 
+    cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 6px 8px 6px 12px; 
+    border: 1px solid var(--sepia-pale); background: var(--cream); font-size: 0.75rem; 
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; color: var(--ink); border-radius: 4px;
+  } 
+  .filter-item:hover { border-color: var(--gold); } 
+  .filter-item.active { background: var(--ink); color: var(--gold-light); border-color: var(--ink); } 
+    
+  .dual-pill { 
+    width: 24px; height: 14px; border-radius: 7px; border: 1px solid rgba(0,0,0,0.1); 
+    position: relative; overflow: hidden; background: linear-gradient(90deg, var(--cl) 50%, var(--cr) 50%); 
+  } 
 
-        <div class="filter-item" onclick="filterMap('c3', this)">  
-            <div class="dual-pill" style="--cl: #00ff00; --cr: #ffff00;"></div> 
-            <span class="f-name">Krobiccy i Ładomirscy</span>  
-            <a href="geografiac.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a> 
-        </div>  
+  .f-name { margin-right: 5px; }
 
-        <div class="filter-item" onclick="filterMap('c4', this)">  
-            <div class="dual-pill" style="--cl: #ffff00; --cr: #ff8c78;"></div> 
-            <span class="f-name">Ładomirscy i Kraińscy</span>  
-            <a href="geografiad.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a> 
-        </div>  
+  .btn-wywod-small {
+    background: rgba(0, 0, 0, 0.08); color: var(--ink); font-size: 0.6rem; 
+    padding: 3px 8px; border-radius: 2px; text-decoration: none; 
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; border: 1px solid transparent;
+  }
+  .filter-item.active .btn-wywod-small { background: rgba(255,255,255,0.15); color: var(--gold-light); }
+  .btn-wywod-small:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
 
-        <div class="filter-item" onclick="filterMap('c5', this)">  
-            <div class="dual-pill" style="--cl: #ffc8c8; --cr: #ff8c78;"></div> 
-            <span class="f-name">Fedorowiczowie i Kraińscy</span>  
-            <a href="geografiae.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a> 
-        </div>  
+  .geo-grid { display: grid; grid-template-columns: 1fr; gap: 8px; } 
+  .geo-box { 
+    background: #fff; border: 1px solid var(--sepia-pale); padding: 6px 10px; 
+    position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 2px;
+    transition: all 0.3s;
+  } 
+  .geo-box:hover { border-color: var(--gold); transform: translateX(5px); } 
 
-        <div class="filter-item" onclick="filterMap('c6', this)">  
-            <div class="dual-pill" style="--cl: #ff8c78; --cr: #00ffff;"></div> 
-            <span class="f-name">Kraińscy i Włodkowie</span>  
-            <a href="geografiaf.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a> 
-        </div>  
+  .ribbon { 
+    position: absolute; top: 0; right: 15px; width: 14px; height: 28px; 
+    background: linear-gradient(90deg, var(--c1) 50%, var(--c2) 50%); z-index: 2; border: 1px solid rgba(0,0,0,0.1); border-top: none;
+  } 
+  .ribbon::after { 
+    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 0; 
+    border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 5px solid #fff; 
+  }
 
-        <div class="filter-item" onclick="filterMap('c7', this)">  
-            <div class="dual-pill" style="--cl: #ff0000; --cr: #ff8c78;"></div> 
-            <span class="f-name">Wiszniewscy i Kraińscy</span>  
-            <a href="geografiag.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a> 
-        </div>  
-      </div>  
+  .box-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 0.9rem; color: var(--ink); padding-right: 25px; } 
+  .box-rod { font-family: 'Jost', sans-serif; font-size: 0.55rem; color: var(--sepia); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; } 
+  .box-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--line); } 
+  .btn-locate { font-size: 0.6rem; color: var(--sepia); cursor: pointer; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; transition: 0.3s; } 
+  .btn-locate:hover { color: var(--gold); } 
+  .btn-more { font-size: 0.6rem; background: var(--ink); color: var(--cream); padding: 2px 8px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; border-radius: 1px; transition: 0.3s; } 
+  .btn-more:hover { background: var(--gold); } 
 
+  footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 80px 24px; font-size: 0.85rem; letter-spacing: 1px; margin-top: 80px; } 
+
+  @media (max-width: 900px) { 
+    .drawer { width: 100%; right: -100%; } 
+    main { padding: 50px 24px; } 
+    .map-layout { flex-direction: column; }
+    .sidebar-column { height: 400px; width: 100%; }
+    #map { height: 350px; } 
+  } 
+</style> 
+</head> 
+<body> 
+
+<div class="overlay" id="overlay"></div> 
+
+<header> 
+    <span class="header-ornament">Szlakiem Naszych Przodków</span> 
+    <h1>Geografia <em>Rodowa</em></h1> 
+    <p class="header-quote">„Miejsca, w których żyli nasi ojcowie, niosą w sobie pamięć, której nie zdoła zatrzeć czas...” — Zygmunt Gloger</p> 
+</header> 
+
+<nav> 
+    <div class="nav-inner"> 
+        <a href="../index.html" class="nav-logo">ARCHIWUM L&K</a> 
+        <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button> 
     </div> 
+</nav> 
+
+<aside class="drawer" id="drawer"> 
+    <div class="drawer-header"> 
+        <span>Nawigacja Archiwum</span> 
+        <h2>Menu Rodowe</h2> 
+    </div> 
+    <ul class="drawer-links"> 
+        <li><a href="../index.html">Strona Główna</a></li> 
+        <li><a href="../aktualnosci.html">Aktualności</a></li> 
+        <li><a href="../historia.html">Historia Klanu</a></li> 
+        <li><a href="../genealogia/genealogia.html">Genealogia</a></li> 
+        <li><a href="../zjazdy/zjazdy.html">Kronika Zjazdów</a></li> 
+        <li><a href="../slownik-biogr/biografie.html">Biografie</a></li> 
+        <li><a href="../pamiec/pamiec.html">Pamięć i Groby</a></li> 
+        <li><a href="geografia.html">Geografia Rodowa</a></li> 
+        <li><a href="../biblioteka/biblioteczka.html">Biblioteczka</a></li> 
+        <li><a href="../archiwym/archiwum.html">Archiwum Cyfrowe</a></li> 
+    </ul> 
+    <div class="drawer-footer"> 
+        <p>Klan L&K © 1975 – 2026</p> 
+    </div> 
+</aside> 
+
+<main> 
+  <span class="s-label">Lokalizacje Historyczne</span> 
+  <h2 class="s-title">Mapa Siedlisk i Majątków</h2> 
+  <div class="s-line"></div> 
+
+  <div class="map-layout">
+    <div class="map-column">
+      <div id="map"></div> 
+
+      <!-- Filtry dopasowane w 100% z podwójnymi nazwami, kolorami i guzikami do podstron! -->
+      <div class="filter-bar"> 
+        <div class="filter-item active" onclick="filterMap('all', this)"> 
+            <div class="dual-pill" style="--cl: #444; --cr: #eee;"></div>
+            <span class="f-name">Wszystkie Rodziny</span> 
+        </div> 
+
+        <div class="filter-item" onclick="filterMap('c1', this)"> 
+            <div class="dual-pill" style="--cl: #cce166; --cr: #ffff00;"></div>
+            <span class="f-name">Domańscy i Ładomirscy</span> 
+            <a href="geografiaa.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
+        </div> 
+
+        <div class="filter-item" onclick="filterMap('c2', this)"> 
+            <div class="dual-pill" style="--cl: #99ff00; --cr: #ffff00;"></div>
+            <span class="f-name">Gołębscy i Ładomirscy</span> 
+            <a href="geografiab.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
+        </div> 
+
+        <div class="filter-item" onclick="filterMap('c3', this)"> 
+            <div class="dual-pill" style="--cl: #00ff00; --cr: #ffff00;"></div>
+            <span class="f-name">Krobiccy i Ładomirscy</span> 
+            <a href="geografiac.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
+        </div> 
+
+        <div class="filter-item" onclick="filterMap('c4', this)"> 
+            <div class="dual-pill" style="--cl: #ffff00; --cr: #ff8c78;"></div>
+            <span class="f-name">Ładomirscy i Kraińscy</span> 
+            <a href="geografiad.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
+        </div> 
+
+        <div class="filter-item" onclick="filterMap('c5', this)"> 
+            <div class="dual-pill" style="--cl: #ffc8c8; --cr: #ff8c78;"></div>
+            <span class="f-name">Fedorowiczowie i Kraińscy</span> 
+            <a href="geografiae.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
+        </div> 
+
+        <div class="filter-item" onclick="filterMap('c6', this)"> 
+            <div class="dual-pill" style="--cl: #ff8c78; --cr: #00ffff;"></div>
+            <span class="f-name">Kraińscy i Włodkowie</span> 
+            <a href="geografiaf.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
+        </div> 
+
+        <div class="filter-item" onclick="filterMap('c7', this)"> 
+            <div class="dual-pill" style="--cl: #ff0000; --cr: #ff8c78;"></div>
+            <span class="f-name">Wiszniewscy i Kraińscy</span> 
+            <a href="geografiag.php" class="btn-wywod-small" onclick="event.stopPropagation()">Wywód</a>
+        </div> 
+      </div> 
+
+    </div>
+    
+    <div class="sidebar-column">
+      <div class="geo-grid" id="geoGrid"></div> 
+    </div>
+  </div>
+</main> 
+
+<footer> 
+    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026<br> 
+    Pamięć | Tożsamość | Wspólnota</p> 
+</footer> 
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
+<script> 
+   // Przyciski "więcej" dodane tylko do 4 autoryzowanych miejscowości. Reszta usunięta.
+   const locations = [
+    { id: 1, n: "Biejków", rod: "Domańscy", cat: "c1", c: [51.694219, 21.000656], c1: "#cce166", c2: "#cce166" },
+    { id: 2, n: "Brzozowa", rod: "Domańscy", cat: "c1", c: [50.966193, 21.665876], c1: "#cce166", c2: "#cce166" },
+    { id: 3, n: "Budków", rod: "Domańscy", cat: "c1", c: [51.268229, 20.136429], c1: "#cce166", c2: "#cce166" },
+    { id: 4, n: "Ciepielów", rod: "Domańscy", cat: "c1", c: [51.247574, 21.573597], c1: "#cce166", c2: "#cce166" },
+    { id: 5, n: "Grzebowilk i Iłówiec", rod: "Domańscy", cat: "c1", c: [52.115889, 21.541872], c1: "#cce166", c2: "#cce166" },
+    { id: 6, n: "Gulin i Dąbrowa Podł.", rod: "Domańscy", cat: "c1", c: [51.469627, 21.012216], c1: "#cce166", c2: "#cce166" },
+    { id: 7, n: "Jarochy", rod: "Domańscy", cat: "c1", c: [51.831215, 20.841241], c1: "#cce166", c2: "#cce166" },
+    { id: 8, n: "Kotuszów i Borowiec", rod: "Domańscy", cat: "c1", c: [51.322654, 19.99844], c1: "#cce166", c2: "#cce166" },
+    { id: 9, n: "Milczany", rod: "Domańscy", cat: "c1", c: [50.694855, 21.692709], c1: "#cce166", c2: "#cce166" },
+    { id: 10, n: "Moszków i Szmitków", rod: "Domańscy", cat: "c1", c: [50.47003, 24.156645], c1: "#cce166", c2: "#cce166" },
+    { id: 11, n: "Pilichowice", rod: "Domańscy", cat: "c1", c: [51.248883, 20.138031], c1: "#cce166", c2: "#cce166" },
+    { id: 12, n: "Piotrków Tryb.", rod: "Domańscy", cat: "c1", c: [51.408269, 19.696224], c1: "#cce166", c2: "#cce166" },
+    { id: 13, n: "Rożenek i Ciechomin", rod: "Domańscy", cat: "c1", c: [51.290132, 20.026883], c1: "#cce166", c2: "#cce166" },
+    { id: 14, n: "Ubinie", rod: "Domańscy", cat: "c1", c: [49.926852, 24.424482], c1: "#cce166", c2: "#cce166", url: "ubinie.php" }, // DODANY LINK
+    { id: 15, n: "Warszawa", rod: "Domańscy", cat: "c1", c: [52.247516, 21.013536], c1: "#cce166", c2: "#cce166" },
+    { id: 16, n: "Wielgie", rod: "Domańscy", cat: "c1", c: [51.241274, 21.494594], c1: "#cce166", c2: "#cce166" },
+    { id: 17, n: "Żytniów", rod: "Domańscy", cat: "c1", c: [51.014624, 18.568705], c1: "#cce166", c2: "#cce166" },
+    { id: 18, n: "Lwów", rod: "Gołębscy", cat: "c2", c: [49.841741, 24.030788], c1: "#99ff00", c2: "#99ff00" },
+    { id: 19, n: "Noviny pod Ralskem", rod: "Gołębscy", cat: "c2", c: [50.6920, 14.7466], c1: "#99ff00", c2: "#99ff00" },
+    { id: 20, n: "Sławentyn", rod: "Gołębscy", cat: "c2", c: [49.304612, 24.870408], c1: "#99ff00", c2: "#99ff00" },
+    { id: 21, n: "Szumlany i Marianów", rod: "Gołębscy", cat: "c2", c: [49.277306, 24.886273], c1: "#99ff00", c2: "#99ff00" },
+    { id: 22, n: "Bierówka", rod: "Krobiccy", cat: "c3", c: [49.771293, 21.57388], c1: "#00ff00", c2: "#00ff00" },
+    { id: 23, n: "Bochnia", rod: "Krobiccy", cat: "c3", c: [49.969327, 20.430478], c1: "#00ff00", c2: "#00ff00" },
+    { id: 24, n: "Gródek nad Dunajcem", rod: "Krobiccy", cat: "c3", c: [49.746877, 20.732338], c1: "#00ff00", c2: "#00ff00" },
+    { id: 25, n: "Harklowa", rod: "Krobiccy", cat: "c3", c: [49.477014, 20.167879], c1: "#00ff00", c2: "#00ff00" },
+    { id: 26, n: "Horná Lehota", rod: "Krobiccy", cat: "c3", c: [49.255162, 19.400542], c1: "#00ff00", c2: "#00ff00" },
+    { id: 27, n: "Kołomyja", rod: "Krobiccy", cat: "c3", c: [48.525516, 25.039414], c1: "#00ff00", c2: "#00ff00" },
+    { id: 28, n: "Kraków", rod: "Krobiccy", cat: "c3", c: [50.062771, 19.913112], c1: "#00ff00", c2: "#00ff00" },
+    { id: 29, n: "Lwówa", rod: "Krobiccy", cat: "c3", c: [49.842051, 23.908550], c1: "#00ff00", c2: "#00ff00" },
+    { id: 30, n: "Łapsze Niżne", rod: "Krobiccy", cat: "c3", c: [49.399227, 20.239016], c1: "#00ff00", c2: "#00ff00" },
+    { id: 31, n: "Podole-Górowa", rod: "Krobiccy", cat: "c3", c: [49.75239, 20.80011], c1: "#00ff00", c2: "#00ff00" },
+    { id: 32, n: "Rożnów", rod: "Krobiccy", cat: "c3", c: [49.771482, 20.695777], c1: "#00ff00", c2: "#00ff00" },
+    { id: 33, n: "Siedlce", rod: "Krobiccy", cat: "c3", c: [49.687788, 20.775520], c1: "#00ff00", c2: "#00ff00" },
+    { id: 34, n: "Szczawnica", rod: "Krobiccy", cat: "c3", c: [49.426956, 20.47687], c1: "#00ff00", c2: "#00ff00" },
+    { id: 35, n: "Tłumacz", rod: "Krobiccy", cat: "c3", c: [48.865569, 25.004132], c1: "#00ff00", c2: "#00ff00" },
+    { id: 36, n: "Zakopane", rod: "Krobiccy", cat: "c3", c: [49.296785, 19.948523], c1: "#00ff00", c2: "#00ff00" },
+    { id: 37, n: "Złoczów", rod: "Krobiccy", cat: "c3", c: [49.807526, 24.903221], c1: "#00ff00", c2: "#00ff00" },
+    { id: 38, n: "Babin", rod: "Ładomirscy", cat: "c4", c: [49.059454, 24.500603], c1: "#ffff00", c2: "#ffff00" },
+    { id: 39, n: "Dzieduszyce Małe", rod: "Ładomirscy", cat: "c4", c: [49.14716, 24.02330], c1: "#ffff00", c2: "#ffff00" },
+    { id: 40, n: "Filipkowce", rod: "Ładomirscy", cat: "c4", c: [48.63865, 26.084807], c1: "#ffff00", c2: "#ffff00" },
+    { id: 41, n: "Gusztynek i Bereżanka", rod: "Ładomirscy", cat: "c4", c: [48.817133, 26.214768], c1: "#ffff00", c2: "#ffff00" },
+    { id: 42, n: "Hałuszczyńce", rod: "Ładomirscy", cat: "c4", c: [49.525842, 25.898871], c1: "#ffff00", c2: "#ffff00" },
+    { id: 43, n: "Honoratówka", rod: "Ładomirscy", cat: "c4", c: [49.407535, 24.769779], c1: "#ffff00", c2: "#00ff00" }, 
+    { id: 44, n: "Kałusz", rod: "Ładomirscy", cat: "c4", c: [49.0248, 24.37115], c1: "#ffff00", c2: "#00ff00" }, 
+    { id: 45, n: "Koniuszki", rod: "Ładomirscy", cat: "c4", c: [49.320461, 24.599971], c1: "#ffff00", c2: "#ffff00" },
+    { id: 46, n: "Kozłów", rod: "Ładomirscy", cat: "c4", c: [49.961199, 24.528348], c1: "#ffff00", c2: "#ffff00" },
+    { id: 47, n: "Lwówb", rod: "Ładomirscy", cat: "c4", c: [49.833667, 24.143754], c1: "#ffff00", c2: "#00ff00" }, 
+    { id: 48, n: "Markowce", rod: "Ładomirscy", cat: "c4", c: [48.835649, 24.798425], c1: "#ffff00", c2: "#ffff00", url: "Markowce.php" }, // DODANY LINK
+    { id: 49, n: "Martynów Stary", rod: "Ładomirscy", cat: "c4", c: [49.20509, 24.567055], c1: "#ffff00", c2: "#ffff00" },
+    { id: 50, n: "Podbórze", rod: "Ładomirscy", cat: "c4", c: [49.48007, 24.444033], c1: "#ffff00", c2: "#00ff00" }, 
+    { id: 51, n: "Sambor", rod: "Ładomirscy", cat: "c4", c: [49.517791, 23.196749], c1: "#ffff00", c2: "#00ff00" }, 
+    { id: 52, n: "Suchrów", rod: "Ładomirscy", cat: "c4", c: [49.371194, 24.369014], c1: "#ffff00", c2: "#ffff00" },
+    { id: 53, n: "Tarnów", rod: "Ładomirscy", cat: "c4", c: [50.01254, 20.98835], c1: "#ffff00", c2: "#00ff00" }, 
+    { id: 54, n: "Taurów", rod: "Ładomirscy", cat: "c4", c: [49.536809, 25.278447], c1: "#ffff00", c2: "#ffff00" },
+    { id: 55, n: "Tomaszowce", rod: "Ładomirscy", cat: "c4", c: [49.137781, 24.444104], c1: "#ffff00", c2: "#ffff00" },
+    { id: 56, n: "Wierzchnia", rod: "Ładomirscy", cat: "c4", c: [49.09885, 24.30100], c1: "#ffff00", c2: "#ffff00" },
+    { id: 57, n: "Biletówka i Leżanówka", rod: "Fedorowicze", cat: "c5", c: [49.302425, 26.064852], c1: "#ffc8c8", c2: "#ffc8c8" },
+    { id: 58, n: "Chersoń", rod: "Fedorowicze", cat: "c5", c: [46.656125, 32.603787], c1: "#ffc8c8", c2: "#ffc8c8" },
+    { id: 59, n: "Irkuck", rod: "Fedorowicze", cat: "c5", c: [52.283755, 104.259347], c1: "#ffc8c8", c2: "#ffc8c8" },
+    { id: 60, n: "Jackowce (Szewczenkowe)", rod: "Fedorowicze", cat: "c5", c: [49.601573, 25.983286], c1: "#ffc8c8", c2: "#ffc8c8" },
+    { id: 61, n: "Kamionki", rod: "Fedorowicze", cat: "c5", c: [49.544417, 26.020434], c1: "#ffc8c8", c2: "#ffc8c8" },
+    { id: 62, n: "Klebanówka", rod: "Fedorowicze", cat: "c5", c: [49.586017, 26.009027], c1: "#ffc8c8", c2: "#ffc8c8" },
+    { id: 63, n: "Stambuł (Konstantynopol)", rod: "Fedorowicze", cat: "c5", c: [41.015201, 28.975952], c1: "#ffc8c8", c2: "#ffc8c8" },
+    { id: 64, n: "Szyły", rod: "Fedorowicze", cat: "c5", c: [49.693054, 25.983598], c1: "#ffc8c8", c2: "#ffc8c8" },
+    { id: 65, n: "Viareggio", rod: "Fedorowicze", cat: "c5", c: [43.865893, 10.250789], c1: "#ffc8c8", c2: "#ffc8c8" },
+    { id: 66, n: "Bażanówka", rod: "Kraińscy", cat: "c6", c: [49.604439, 22.053359], c1: "#ff8c78", c2: "#ff8c78" },
+    { id: 67, n: "Hermanowice", rod: "Kraińscy", cat: "c6", c: [49.723799, 22.814545], c1: "#ff8c78", c2: "#ff8c78" },
+    { id: 68, n: "Jabłonka", rod: "Kraińscy", cat: "c6", c: [49.692467, 22.106093], c1: "#ff8c78", c2: "#ff8c78" },
+    { id: 69, n: "Miejsce Piastowe", rod: "Kraińscy", cat: "c6", c: [49.634438, 21.781061], c1: "#ff8c78", c2: "#ff8c78", url: "Miejsce.php" }, // DODANY LINK
+    { id: 70, n: "Niebocko", rod: "Kraińscy", cat: "c6", c: [49.6766, 22.1106], c1: "#ff8c78", c2: "#ff8c78" },
+    { id: 71, n: "Polanka", rod: "Kraińscy", cat: "c6", c: [49.702607, 21.724661], c1: "#ff8c78", c2: "#ff8c78" },
+    { id: 72, n: "Sękowa Wola", rod: "Kraińscy", cat: "c6", c: [49.506751, 22.003877], c1: "#ff8c78", c2: "#ff8c78" },
+    { id: 73, n: "Siedliszcze", rod: "Kraińscy", cat: "c6", c: [51.194526, 23.164099], c1: "#ff8c78", c2: "#ff8c78" },
+    { id: 74, n: "Wyszatyce", rod: "Kraińscy", cat: "c6", c: [49.840617, 22.884564], c1: "#ff8c78", c2: "#ff8c78" },
+    { id: 75, n: "Dąbrowica-Chrostowa", rod: "Kraińscy", cat: "c6", c: [49.912311, 20.304067], c1: "#00ffff", c2: "#00ffff" },
+    { id: 76, n: "Hiezing", rod: "Kraińscy", cat: "c6", c: [48.185711, 16.301768], c1: "#00ffff", c2: "#00ffff" },
+    { id: 77, n: "Krakówa", rod: "Kraińscy", cat: "c6", c: [50.062859, 19.971835], c1: "#00ffff", c2: "#00ffff" },
+    { id: 78, n: "Langenenslingen", rod: "Kraińscy", cat: "c6", c: [48.148051, 9.378432], c1: "#00ffff", c2: "#00ffff" },
+    { id: 79, n: "Niegowić", rod: "Kraińscy", cat: "c6", c: [49.937083, 20.237097], c1: "#00ffff", c2: "#00ffff" },
+    { id: 80, n: "Okocim", rod: "Kraińscy", cat: "c6", c: [49.949548, 20.600878], c1: "#00ffff", c2: "#00ffff" },
+    { id: 81, n: "Podstolice", rod: "Kraińscy", cat: "c6", c: [49.958431, 19.997595], c1: "#00ffff", c2: "#00ffff" },
+    { id: 82, n: "Praga", rod: "Kraińscy", cat: "c6", c: [50.08769, 14.421137], c1: "#00ffff", c2: "#00ffff" },
+    { id: 83, n: "Sygneczów", rod: "Kraińscy", cat: "c6", c: [49.971634, 20.011818], c1: "#00ffff", c2: "#00ffff" },
+    { id: 84, n: "Wiedeń", rod: "Kraińscy", cat: "c6", c: [48.208476, 16.373953], c1: "#00ffff", c2: "#00ffff" },
+    { id: 85, n: "Wieliczka", rod: "Kraińscy", cat: "c6", c: [49.982251, 20.060226], c1: "#00ffff", c2: "#00ffff" },
+    { id: 86, n: "Zręczyce", rod: "Kraińscy", cat: "c6", c: [49.891372, 20.220672], c1: "#00ffff", c2: "#00ffff" },
+    { id: 87, n: "Chorzelów", rod: "Wiszniewscy", cat: "c7", c: [50.329704, 21.441759], c1: "#ff0000", c2: "#ff0000" },
+    { id: 88, n: "Dąbrowa Tarnowska", rod: "Wiszniewscy", cat: "c7", c: [50.174998, 20.986328], c1: "#ff0000", c2: "#ff0000" },
+    { id: 89, n: "Drohobycz", rod: "Wiszniewscy", cat: "c7", c: [49.3514, 23.506351], c1: "#ff0000", c2: "#ff0000" },
+    { id: 90, n: "Dźwiniacz Dolny", rod: "Wiszniewscy", cat: "c7", c: [49.470204, 22.557321], c1: "#ff0000", c2: "#ff0000" },
+    { id: 91, n: "Horyhlady i Ostra", rod: "Wiszniewscy", cat: "c7", c: [48.879809, 25.143279], c1: "#ff0000", c2: "#ff0000", url: "horyhlady.php" }, // DODANY LINK
+    { id: 92, n: "Jackowicze", rod: "Wiszniewscy", cat: "c7", c: [51.292373, 28.835579], c1: "#ff0000", c2: "#ff0000" },
+    { id: 93, n: "Kamień", rod: "Wiszniewscy", cat: "c7", c: [51.279597, 28.895338], c1: "#ff0000", c2: "#ff0000" },
+    { id: 94, n: "Niedzieliska", rod: "Wiszniewscy", cat: "c7", c: [49.626744, 24.489769], c1: "#ff0000", c2: "#ff0000" },
+    { id: 95, n: "Olchowce", rod: "Wiszniewscy", cat: "c7", c: [49.552458, 22.232949], c1: "#ff0000", c2: "#ff0000" },
+    { id: 96, n: "Pointe-Claire", rod: "Wiszniewscy", cat: "c7", c: [45.443155, -73.836394], c1: "#ff0000", c2: "#ff0000" },
+    { id: 97, n: "Roztoczki", rod: "Wiszniewscy", cat: "c7", c: [48.974222, 23.791638], c1: "#ff0000", c2: "#ff0000" },
+    { id: 98, n: "Serkowszczyzna", rod: "Wiszniewscy", cat: "c7", c: [51.347829, 28.524369], c1: "#ff0000", c2: "#ff0000" },
+    { id: 99, n: "Woniajki /Красностав/", rod: "Wiszniewscy", cat: "c7", c: [51.034816, 28.316132], c1: "#ff0000", c2: "#ff0000" },
+    { id: 100, n: "Zarszyn", rod: "Wiszniewscy", cat: "c7", c: [49.581083, 22.014232], c1: "#ff0000", c2: "#ff0000" }
+];
+
+   // Parametry mapy zmodyfikowane dla idealnie płynnego touchpada
+   const map = L.map('map', { 
+     center: [52.0, 19.0], 
+     zoom: 6,
+     zoomSnap: 0,
+     zoomDelta: 0.25,
+     wheelPxPerZoomLevel: 150
+   }); 
+   
+   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map); 
+
+   const markerMap = {}; 
+   const grid = document.getElementById('geoGrid'); 
+
+   function init() { 
+     locations.forEach(loc => { 
+       const customIcon = L.divIcon({
+          className: 'custom-map-marker',
+          html: `<div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; background: linear-gradient(90deg, ${loc.c1} 50%, ${loc.c2} 50%); box-shadow: 0 0 5px rgba(0,0,0,0.4);"></div>`,
+          iconSize: [20, 20],
+          iconAnchor: [10, 10]
+       });
+
+       const marker = L.marker(loc.c, { icon: customIcon })
+         .addTo(map)
+         .bindPopup(`<strong>${loc.n}</strong><br>${loc.rod}`); 
        
-    <div class="sidebar-column"> 
-      <div class="geo-grid" id="geoGrid"></div>  
-    </div> 
-  </div> 
-</main>  
+       marker.category = loc.cat; 
+       markerMap[loc.id] = marker; 
 
-<footer>  
-    <p>KLAN ŁADOMIRSKICH I KRAIŃSKICH © 1975 – 2026<br>  
-    Pamięć | Tożsamość | Wspólnota</p>  
-</footer>  
+       const moreButton = loc.url ? `<a href="${loc.url}" class="btn-more">Więcej</a>` : '';
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>  
-<script>  
-   // Twoja oryginalna baza z niezmienionymi kolorami (w tym rzadkie, dwukolorowe znaczniki).
-   const locations = [ 
-    { id: 1, n: "Biejków", rod: "Domańscy", cat: "c1", c: [51.694219, 21.000656], c1: "#C9D980", c2: "#F2F24E", url: "biejkow.html" }, 
-    { id: 2, n: "Brzozowa", rod: "Domańscy", cat: "c1", c: [50.966193, 21.665876], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 3, n: "Budków", rod: "Domańscy", cat: "c1", c: [51.268229, 20.136429], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 4, n: "Ciepielów", rod: "Domańscy", cat: "c1", c: [51.247574, 21.573597], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 5, n: "Grzebowilk i Iłówiec", rod: "Domańscy", cat: "c1", c: [52.115889, 21.541872], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 6, n: "Gulin i Dąbrowa Podł.", rod: "Domańscy", cat: "c1", c: [51.469627, 21.012216], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 7, n: "Jarochy", rod: "Domańscy", cat: "c1", c: [51.831215, 20.841241], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 8, n: "Kotuszów i Borowiec", rod: "Domańscy", cat: "c1", c: [51.322654, 19.99844], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 9, n: "Milczany", rod: "Domańscy", cat: "c1", c: [50.694855, 21.692709], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 10, n: "Moszków i Szmitków", rod: "Domańscy", cat: "c1", c: [50.47003, 24.156645], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 11, n: "Pilichowice", rod: "Domańscy", cat: "c1", c: [51.248883, 20.138031], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 12, n: "Piotrków Tryb.", rod: "Domańscy", cat: "c1", c: [51.408269, 19.696224], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 13, n: "Rożenek i Ciechomin", rod: "Domańscy", cat: "c1", c: [51.290132, 20.026883], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 14, n: "Ubinie", rod: "Domańscy", cat: "c1", c: [49.926852, 24.424482], c1: "#C9D980", c2: "#F2F24E", url: "ubinie.php" }, // DODANY LINK 
-    { id: 15, n: "Warszawa", rod: "Domańscy", cat: "c1", c: [52.247516, 21.013536], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 16, n: "Wielgie", rod: "Domańscy", cat: "c1", c: [51.241274, 21.494594], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 17, n: "Żytniów", rod: "Domańscy", cat: "c1", c: [51.014624, 18.568705], c1: "#C9D980", c2: "#F2F24E" }, 
-    { id: 18, n: "Lwów", rod: "Gołębscy", cat: "c2", c: [49.841741, 24.030788], c1: "#A8E653", c2: "#F9F955" }, 
-    { id: 19, n: "Noviny pod Ralskem", rod: "Gołębscy", cat: "c2", c: [50.6920, 14.7466], c1: "#A8E653", c2: "#F9F955" }, 
-    { id: 20, n: "Sławentyn", rod: "Gołębscy", cat: "c2", c: [49.304612, 24.870408], c1: "#A8E653", c2: "#F9F955" }, 
-    { id: 21, n: "Szumlany i Marianów", rod: "Gołębscy", cat: "c2", c: [49.277306, 24.886273], c1: "#A8E653", c2: "#F9F955" }, 
-    { id: 22, n: "Bierówka", rod: "Krobiccy", cat: "c3", c: [49.771293, 21.57388], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 23, n: "Bochnia", rod: "Krobiccy", cat: "c3", c: [49.969327, 20.430478], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 24, n: "Gródek nad Dunajcem", rod: "Krobiccy", cat: "c3", c: [49.746877, 20.732338], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 25, n: "Harklowa", rod: "Krobiccy", cat: "c3", c: [49.477014, 20.167879], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 26, n: "Horná Lehota", rod: "Krobiccy", cat: "c3", c: [49.255162, 19.400542], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 27, n: "Kołomyja", rod: "Krobiccy", cat: "c3", c: [48.525516, 25.039414], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 28, n: "Kraków", rod: "Krobiccy", cat: "c3", c: [50.062771, 19.913112], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 29, n: "Lwówa", rod: "Krobiccy", cat: "c3", c: [49.842051, 23.908550], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 30, n: "Łapsze Niżne", rod: "Krobiccy", cat: "c3", c: [49.399227, 20.239016], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 31, n: "Podole-Górowa", rod: "Krobiccy", cat: "c3", c: [49.75239, 20.80011], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 32, n: "Rożnów", rod: "Krobiccy", cat: "c3", c: [49.771482, 20.695777], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 33, n: "Siedlce", rod: "Krobiccy", cat: "c3", c: [49.687788, 20.775520], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 34, n: "Szczawnica", rod: "Krobiccy", cat: "c3", c: [49.426956, 20.47687], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 35, n: "Tłumacz", rod: "Krobiccy", cat: "c3", c: [48.865569, 25.004132], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 36, n: "Zakopane", rod: "Krobiccy", cat: "c3", c: [49.296785, 19.948523], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 37, n: "Złoczów", rod: "Krobiccy", cat: "c3", c: [49.807526, 24.903221], c1: "#66F94E", c2: "#F9F955" }, 
-    { id: 38, n: "Babin", rod: "Ładomirscy", cat: "c4", c: [49.059454, 24.500603], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 39, n: "Dzieduszyce Małe", rod: "Ładomirscy", cat: "c4", c: [49.14716, 24.02330], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 40, n: "Filipkowce", rod: "Ładomirscy", cat: "c4", c: [48.63865, 26.084807], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 41, n: "Gusztynek i Bereżanka", rod: "Ładomirscy", cat: "c4", c: [48.817133, 26.214768], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 42, n: "Hałuszczyńce", rod: "Ładomirscy", cat: "c4", c: [49.525842, 25.898871], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 43, n: "Honoratówka", rod: "Ładomirscy", cat: "c4", c: [49.407535, 24.769779], c1: "#F9F955", c2: "#00ff00" },  // Dwu-kolorowy wg starej bazy
-    { id: 44, n: "Kałusz", rod: "Ładomirscy", cat: "c4", c: [49.0248, 24.37115], c1: "#F9F955", c2: "#00ff00" },  // Dwu-kolorowy wg starej bazy
-    { id: 45, n: "Koniuszki", rod: "Ładomirscy", cat: "c4", c: [49.320461, 24.599971], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 46, n: "Kozłów", rod: "Ładomirscy", cat: "c4", c: [49.961199, 24.528348], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 47, n: "Lwówb", rod: "Ładomirscy", cat: "c4", c: [49.833667, 24.143754], c1: "#F9F955", c2: "#00ff00" },  // Dwu-kolorowy wg starej bazy
-    { id: 48, n: "Markowce", rod: "Ładomirscy", cat: "c4", c: [48.835649, 24.798425], c1: "#F9F955", c2: "#F29079", url: "Markowce.php" }, // DODANY LINK 
-    { id: 49, n: "Martynów Stary", rod: "Ładomirscy", cat: "c4", c: [49.20509, 24.567055], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 50, n: "Podbórze", rod: "Ładomirscy", cat: "c4", c: [49.48007, 24.444033], c1: "#F9F955", c2: "#00ff00" },  // Dwu-kolorowy wg starej bazy
-    { id: 51, n: "Sambor", rod: "Ładomirscy", cat: "c4", c: [49.517791, 23.196749], c1: "#F9F955", c2: "#00ff00" },  // Dwu-kolorowy wg starej bazy
-    { id: 52, n: "Suchrów", rod: "Ładomirscy", cat: "c4", c: [49.371194, 24.369014], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 53, n: "Tarnów", rod: "Ładomirscy", cat: "c4", c: [50.01254, 20.98835], c1: "#F9F955", c2: "#00ff00" },  // Dwu-kolorowy wg starej bazy
-    { id: 54, n: "Taurów", rod: "Ładomirscy", cat: "c4", c: [49.536809, 25.278447], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 55, n: "Tomaszowce", rod: "Ładomirscy", cat: "c4", c: [49.137781, 24.444104], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 56, n: "Wierzchnia", rod: "Ładomirscy", cat: "c4", c: [49.09885, 24.30100], c1: "#F9F955", c2: "#F29079" }, 
-    { id: 57, n: "Biletówka i Leżanówka", rod: "Fedorowicze", cat: "c5", c: [49.302425, 26.064852], c1: "#F9D0D7", c2: "#F29079" }, 
-    { id: 58, n: "Chersoń", rod: "Fedorowicze", cat: "c5", c: [46.656125, 32.603787], c1: "#F9D0D7", c2: "#F29079" }, 
-    { id: 59, n: "Irkuck", rod: "Fedorowicze", cat: "c5", c: [52.283755, 104.259347], c1: "#F9D0D7", c2: "#F29079" }, 
-    { id: 60, n: "Jackowce (Szewczenkowe)", rod: "Fedorowicze", cat: "c5", c: [49.601573, 25.983286], c1: "#F9D0D7", c2: "#F29079" }, 
-    { id: 61, n: "Kamionki", rod: "Fedorowicze", cat: "c5", c: [49.544417, 26.020434], c1: "#F9D0D7", c2: "#F29079" }, 
-    { id: 62, n: "Klebanówka", rod: "Fedorowicze", cat: "c5", c: [49.586017, 26.009027], c1: "#F9D0D7", c2: "#F29079" }, 
-    { id: 63, n: "Stambuł (Konstantynopol)", rod: "Fedorowicze", cat: "c5", c: [41.015201, 28.975952], c1: "#F9D0D7", c2: "#F29079" }, 
-    { id: 64, n: "Szyły", rod: "Fedorowicze", cat: "c5", c: [49.693054, 25.983598], c1: "#F9D0D7", c2: "#F29079" }, 
-    { id: 65, n: "Viareggio", rod: "Fedorowicze", cat: "c5", c: [43.865893, 10.250789], c1: "#F9D0D7", c2: "#F29079" }, 
-    { id: 66, n: "Bażanówka", rod: "Kraińscy", cat: "c6", c: [49.604439, 22.053359], c1: "#F29079", c2: "#70E1F5" }, 
-    { id: 67, n: "Hermanowice", rod: "Kraińscy", cat: "c6", c: [49.723799, 22.814545], c1: "#F29079", c2: "#70E1F5" }, 
-    { id: 68, n: "Jabłonka", rod: "Kraińscy", cat: "c6", c: [49.692467, 22.106093], c1: "#F29079", c2: "#70E1F5" }, 
-    { id: 69, n: "Miejsce Piastowe", rod: "Kraińscy", cat: "c6", c: [49.634438, 21.781061], c1: "#F29079", c2: "#70E1F5", url: "Miejsce.php" }, // DODANY LINK 
-    { id: 70, n: "Niebocko", rod: "Kraińscy", cat: "c6", c: [49.6766, 22.1106], c1: "#F29079", c2: "#70E1F5" }, 
-    { id: 71, n: "Polanka", rod: "Kraińscy", cat: "c6", c: [49.702607, 21.724661], c1: "#F29079", c2: "#70E1F5" }, 
-    { id: 72, n: "Sękowa Wola", rod: "Kraińscy", cat: "c6", c: [49.506751, 22.003877], c1: "#F29079", c2: "#70E1F5" }, 
-    { id: 73, n: "Siedliszcze", rod: "Kraińscy", cat: "c6", c: [51.194526, 23.164099], c1: "#F29079", c2: "#70E1F5" }, 
-    { id: 74, n: "Wyszatyce", rod: "Kraińscy", cat: "c6", c: [49.840617, 22.884564], c1: "#F29079", c2: "#70E1F5" }, 
-    { id: 75, n: "Dąbrowica-Chrostowa", rod: "Kraińscy", cat: "c6", c: [49.912311, 20.304067], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 76, n: "Hiezing", rod: "Kraińscy", cat: "c6", c: [48.185711, 16.301768], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 77, n: "Krakówa", rod: "Kraińscy", cat: "c6", c: [50.062859, 19.971835], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 78, n: "Langenenslingen", rod: "Kraińscy", cat: "c6", c: [48.148051, 9.378432], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 79, n: "Niegowić", rod: "Kraińscy", cat: "c6", c: [49.937083, 20.237097], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 80, n: "Okocim", rod: "Kraińscy", cat: "c6", c: [49.949548, 20.600878], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 81, n: "Podstolice", rod: "Kraińscy", cat: "c6", c: [49.958431, 19.997595], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 82, n: "Praga", rod: "Kraińscy", cat: "c6", c: [50.08769, 14.421137], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 83, n: "Sygneczów", rod: "Kraińscy", cat: "c6", c: [49.971634, 20.011818], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 84, n: "Wiedeń", rod: "Kraińscy", cat: "c6", c: [48.208476, 16.373953], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 85, n: "Wieliczka", rod: "Kraińscy", cat: "c6", c: [49.982251, 20.060226], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 86, n: "Zręczyce", rod: "Kraińscy", cat: "c6", c: [49.891372, 20.220672], c1: "#70E1F5", c2: "#70E1F5" }, 
-    { id: 87, n: "Chorzelów", rod: "Wiszniewscy", cat: "c7", c: [50.329704, 21.441759], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 88, n: "Dąbrowa Tarnowska", rod: "Wiszniewscy", cat: "c7", c: [50.174998, 20.986328], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 89, n: "Drohobycz", rod: "Wiszniewscy", cat: "c7", c: [49.3514, 23.506351], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 90, n: "Dźwiniacz Dolny", rod: "Wiszniewscy", cat: "c7", c: [49.470204, 22.557321], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 91, n: "Horyhlady i Ostra", rod: "Wiszniewscy", cat: "c7", c: [48.879809, 25.143279], c1: "#EE2B1D", c2: "#F29079", url: "horyhlady.php" }, // DODANY LINK 
-    { id: 92, n: "Jackowicze", rod: "Wiszniewscy", cat: "c7", c: [51.292373, 28.835579], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 93, n: "Kamień", rod: "Wiszniewscy", cat: "c7", c: [51.279597, 28.895338], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 94, n: "Niedzieliska", rod: "Wiszniewscy", cat: "c7", c: [49.626744, 24.489769], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 95, n: "Olchowce", rod: "Wiszniewscy", cat: "c7", c: [49.552458, 22.232949], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 96, n: "Pointe-Claire", rod: "Wiszniewscy", cat: "c7", c: [45.443155, -73.836394], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 97, n: "Roztoczki", rod: "Wiszniewscy", cat: "c7", c: [48.974222, 23.791638], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 98, n: "Serkowszczyzna", rod: "Wiszniewscy", cat: "c7", c: [51.347829, 28.524369], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 99, n: "Woniajki /Красностав/", rod: "Wiszniewscy", cat: "c7", c: [51.034816, 28.316132], c1: "#EE2B1D", c2: "#F29079" }, 
-    { id: 100, n: "Zarszyn", rod: "Wiszniewscy", cat: "c7", c: [49.581083, 22.014232], c1: "#EE2B1D", c2: "#F29079" } 
-]; 
+       grid.innerHTML += ` 
+         <div class="geo-box" data-cat="${loc.cat}"> 
+           <div class="ribbon" style="--c1: ${loc.c1}; --c2: ${loc.c2};"></div> 
+           <div class="box-title" title="${loc.n}">${loc.n}</div> 
+           <div class="box-rod">${loc.rod}</div>
+           <div class="box-actions"> 
+             <span class="btn-locate" onclick="highlightMarker(${loc.id})">Namierz</span> 
+             ${moreButton}
+           </div> 
+         </div>`; 
+     }); 
+   } 
 
-   // Konfiguracja Leaflet dla perfekcyjnie płynnego touchpada i myszy
-   const map = L.map('map', {  
-     center: [52.0, 19.0],  
-     zoom: 6, 
-     zoomSnap: 0, 
-     wheelPxPerZoomLevel: 60,
-     scrollWheelZoom: 'center'
-   });  
-    
-   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);  
+   function highlightMarker(id) { 
+     const m = markerMap[id]; 
+     if (!m) return; 
+     map.flyTo(m.getLatLng(), 10, { duration: 0.8 }); 
+     m.openPopup(); 
+   } 
 
-   const markerMap = {};  
-   const grid = document.getElementById('geoGrid');  
+   function filterMap(cat, el) { 
+     document.querySelectorAll('.filter-item').forEach(x => x.classList.remove('active')); 
+     el.classList.add('active'); 
+     Object.values(markerMap).forEach(m => (cat==='all' || m.category===cat) ? map.addLayer(m) : map.removeLayer(m)); 
+     document.querySelectorAll('.geo-box').forEach(b => b.style.display = (cat==='all' || b.dataset.cat===cat) ? 'flex' : 'none'); 
+   } 
 
-   function init() {  
-     locations.forEach(loc => {  
-       const customIcon = L.divIcon({ 
-          className: 'custom-map-marker', 
-          html: `<div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; background: linear-gradient(90deg, ${loc.c1} 50%, ${loc.c2} 50%); box-shadow: 0 0 5px rgba(0,0,0,0.4);"></div>`, 
-          iconSize: [20, 20], 
-          iconAnchor: [10, 10] 
-       }); 
+   const menuBtn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay'); 
+   function toggleSidebar() { 
+     drw.classList.toggle('open'); ovr.classList.toggle('active'); 
+   } 
+   menuBtn.addEventListener('click', toggleSidebar); 
+   ovr.addEventListener('click', toggleSidebar); 
 
-       const marker = L.marker(loc.c, { icon: customIcon }) 
-         .addTo(map) 
-         .bindPopup(`<strong>${loc.n}</strong><br>${loc.rod}`);  
-        
-       marker.category = loc.cat;  
-       markerMap[loc.id] = marker;  
-
-       const moreButton = loc.url ? `<a href="${loc.url}" class="btn-more">Więcej</a>` : ''; 
-
-       grid.innerHTML += `  
-         <div class="geo-box" data-cat="${loc.cat}">  
-           <div class="ribbon" style="--c1: ${loc.c1}; --c2: ${loc.c2};"></div>  
-           <div class="box-title" title="${loc.n}">${loc.n}</div>  
-           <div class="box-rod">${loc.rod}</div> 
-           <div class="box-actions">  
-             <span class="btn-locate" onclick="highlightMarker(${loc.id})">Namierz</span>  
-             ${moreButton} 
-           </div>  
-         </div>`;  
-     });  
-   }  
-
-   function highlightMarker(id) {  
-     const m = markerMap[id];  
-     if (!m) return;  
-     map.flyTo(m.getLatLng(), 10, { duration: 0.8 });  
-     m.openPopup();  
-   }  
-
-   function filterMap(cat, el) {  
-     document.querySelectorAll('.filter-item').forEach(x => x.classList.remove('active'));  
-     el.classList.add('active');  
-     Object.values(markerMap).forEach(m => (cat==='all' || m.category===cat) ? map.addLayer(m) : map.removeLayer(m));  
-     document.querySelectorAll('.geo-box').forEach(b => b.style.display = (cat==='all' || b.dataset.cat===cat) ? 'flex' : 'none');  
-   }  
-
-   const menuBtn = document.getElementById('menuBtn'), drw = document.getElementById('drawer'), ovr = document.getElementById('overlay');  
-   function toggleSidebar() {  
-     drw.classList.toggle('open'); ovr.classList.toggle('active');  
-   }  
-   menuBtn.addEventListener('click', toggleSidebar);  
-   ovr.addEventListener('click', toggleSidebar);  
-
-   init();  
-</script>  
-</body>  
-</html>
+   init(); 
+</script> 
+</body> 
+</html> 
