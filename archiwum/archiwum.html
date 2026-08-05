@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archiwum Dokumentów Różnych | Ładomirscy i Kraińscy</title>
-    <meta name="description" content="Archiwum klanu Ładomirskich i Kraińskich. Zbiór dokumentów, metryk i wspomnień.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     
@@ -18,150 +17,179 @@
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--warm-white); color: var(--ink); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
         /* ── HEADER ── */
-        header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
+        header { background-color: var(--green-dark); color: var(--cream); text-align: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
         header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,.025) 40px, rgba(255,255,255,.025) 41px); pointer-events: none; }
-        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 25px; display: block; position: relative; z-index: 1; }
-        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.2rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; position: relative; z-index: 1; text-transform: uppercase; }
-        .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(248,244,238,.7); max-width: 650px; margin: 0 auto; position: relative; z-index: 1; line-height: 1.5; }
+        .header-ornament { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; display: block; position: relative; z-index: 1; }
+        header h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 15px; position: relative; z-index: 1; text-transform: uppercase; }
+        .header-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: rgba(248,244,238,.7); max-width: 650px; margin: 0 auto; position: relative; z-index: 1; line-height: 1.5; }
 
         /* ── NAV ── */
         nav { background-color: var(--ink); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,.4); }
-        .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
+        .nav-inner { max-width: 1500px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
         .nav-logo { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-decoration: none; font-size: 1.3rem; letter-spacing: 3px; font-weight: 400; }
         
         .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; z-index: 1100; padding: 5px; }
         .menu-btn span { display: block; width: 30px; height: 1.5px; background: var(--gold-light); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        /* ── DRAWER (PASEK BOCZNY) ── */
+        /* ── DRAWER (PASEK BOCZNY GŁÓWNY) ── */
         .drawer { 
             position: fixed; top: 0; right: -340px; width: 340px; height: 100vh; 
             background: var(--ink); z-index: 1050; padding: 50px 0; 
             transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            box-shadow: -15px 0 40px rgba(0,0,0,0.6); 
-            display: flex; flex-direction: column; overflow-y: auto;
+            box-shadow: -15px 0 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow-y: auto;
         }
-        .drawer::-webkit-scrollbar { width: 4px; }
-        .drawer::-webkit-scrollbar-thumb { background: var(--sepia); border-radius: 10px; }
         .drawer.open { right: 0; }
-
         .drawer-header { padding: 0 40px 35px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 25px; }
         .drawer-header span { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 8px; opacity: 0.8; }
         .drawer-header h2 { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-size: 1.8rem; font-weight: 300; letter-spacing: 1px; }
-
         .drawer-links { list-style: none; padding: 0 25px; }
         .drawer-links li { margin-bottom: 4px; }
-        .drawer-links a { 
-            color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; 
-            text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; 
-            display: block; transition: all 0.3s; position: relative; border-radius: 2px;
-        }
+        .drawer-links a { color: rgba(248,244,238, 0.85); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 14px 25px; display: block; transition: all 0.3s; position: relative; border-radius: 2px; }
         .drawer-links a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 50%; background: var(--gold); transition: 0.3s; }
         .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
         .drawer-links a:hover::before { width: 3px; }
-
-        .drawer-footer { margin-top: auto; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
-        .drawer-footer p { font-size: 0.6rem; color: var(--sepia-light); letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
-
         .overlay { position: fixed; inset: 0; background: rgba(10, 8, 6, 0.75); backdrop-filter: blur(6px); z-index: 1040; opacity: 0; pointer-events: none; transition: 0.4s; }
         .overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* ── GŁÓWNA TREŚĆ - NAGŁÓWEK SEKCJ ── */
-        .archive-header { max-width: 1400px; margin: 0 auto; padding: 80px 24px 20px; text-align: center; }
-        .s-label { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: var(--sepia-light); margin-bottom: 12px; display: block; }
-        .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 10px; color: var(--ink); font-weight: 400; }
-        .s-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 45px; }
-
-        /* ── UKŁAD KART MASONRY (Wiele kolumn) ── */
-        .archive-container {
-            column-count: 3;
-            column-gap: 30px;
-            max-width: 1400px;
+        /* ── GŁÓWNY UKŁAD STRONY (ZBIORY) ── */
+        .workspace {
+            display: flex;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 0 24px 100px;
+            padding: 40px 24px 80px;
+            gap: 30px;
+            align-items: flex-start;
         }
-        
-        .family-card {
-            break-inside: avoid;
+
+        /* ── LEWA KOLUMNA: MENU DRZEWKOWE ── */
+        .archive-sidebar {
+            width: 320px;
+            flex-shrink: 0;
             background: var(--cream);
             border: 1px solid var(--sepia-pale);
-            border-top: 4px solid var(--gold-light);
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            transition: 0.3s;
-        }
-        .family-card:hover {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            border-color: var(--gold-light);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border-radius: 4px;
+            position: sticky;
+            top: 90px;
+            height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
-        .family-title {
+        .sidebar-header {
+            padding: 25px 20px;
+            background: var(--parchment);
+            border-bottom: 1px solid var(--sepia-pale);
+            text-align: center;
+        }
+        .sidebar-header h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--ink);
-            margin-bottom: 15px;
-            border-bottom: 1px solid var(--line);
-            padding-bottom: 10px;
+            font-weight: 600;
         }
+        .sidebar-header p { font-size: 0.75rem; color: var(--sepia); text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
 
-        .person-group {
-            margin-bottom: 18px;
+        .tree-menu {
+            padding: 15px 20px;
+            overflow-y: auto;
+            flex-grow: 1;
         }
-        .person-group:last-child {
-            margin-bottom: 0;
-        }
-        .person-name {
-            font-family: 'Jost', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--ink-light);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-        .person-name::before {
-            content: '';
-            display: inline-block;
-            width: 4px;
-            height: 4px;
-            background-color: var(--gold);
-            margin-right: 8px;
-            border-radius: 50%;
-        }
+        /* Custom scrollbar dla menu */
+        .tree-menu::-webkit-scrollbar { width: 6px; }
+        .tree-menu::-webkit-scrollbar-track { background: transparent; }
+        .tree-menu::-webkit-scrollbar-thumb { background: var(--sepia-pale); border-radius: 10px; }
+        .tree-menu::-webkit-scrollbar-thumb:hover { background: var(--sepia-light); }
 
-        .doc-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            padding-left: 12px;
+        /* Detale Rodziny */
+        .family-node { margin-bottom: 8px; }
+        .family-node > summary {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600;
+            color: var(--ink); padding: 8px 0; cursor: pointer; border-bottom: 1px solid var(--line);
+            list-style: none; display: flex; justify-content: space-between; align-items: center; transition: 0.2s;
         }
+        .family-node > summary::-webkit-details-marker { display: none; }
+        .family-node > summary::after { content: '+'; font-family: 'Jost', sans-serif; font-size: 1.2rem; color: var(--gold); transition: 0.3s; }
+        .family-node[open] > summary { color: var(--gold-light); border-bottom-color: transparent; padding-bottom: 4px; }
+        .family-node[open] > summary::after { content: '−'; transform: rotate(180deg); }
+
+        /* Detale Osoby */
+        .person-node { margin-top: 4px; margin-left: 10px; }
+        .person-node > summary {
+            font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 500;
+            color: var(--ink-light); padding: 5px 0; cursor: pointer; list-style: none;
+            display: flex; align-items: center; transition: 0.2s;
+        }
+        .person-node > summary::-webkit-details-marker { display: none; }
+        .person-node > summary::before { content: '▸'; color: var(--sepia-light); font-size: 0.9rem; margin-right: 8px; transition: 0.2s; }
+        .person-node[open] > summary { color: var(--ink); }
+        .person-node[open] > summary::before { content: '▾'; color: var(--gold); }
+
+        /* Linki do dokumentów */
+        .doc-links { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; margin: 4px 0 12px 0; border-left: 1px solid var(--sepia-pale); margin-left: 5px; }
         .doc-links a {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: rgba(255,255,255,0.7);
-            border: 1px solid var(--line);
-            padding: 5px 12px;
-            border-radius: 3px;
-            color: var(--sepia);
-            text-decoration: none;
-            transition: 0.2s;
+            font-size: 0.85rem; color: var(--sepia); text-decoration: none; padding: 4px 10px; border-radius: 3px; transition: 0.2s; position: relative;
         }
-        .doc-links a:hover {
+        .doc-links a:hover, .doc-links a.active { color: var(--ink); background: var(--parchment); }
+        .doc-links a::before { content: '•'; position: absolute; left: -2px; color: var(--gold); opacity: 0; transition: 0.2s; }
+        .doc-links a:hover::before, .doc-links a.active::before { opacity: 1; left: 2px; }
+        
+        .direct-links { padding-left: 10px; border-left: none; margin-top: 5px; }
+
+        /* ── PRAWA KOLUMNA: CZYTNIK DOKUMENTÓW ── */
+        .viewer-area {
+            flex-grow: 1;
             background: white;
-            border-color: var(--gold);
-            color: var(--ink);
-            transform: translateY(-2px);
+            border: 1px solid var(--sepia-pale);
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            position: relative;
+            min-height: 800px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
-        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 60px 24px; font-size: 0.85rem; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .viewer-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--warm-white);
+            z-index: 2;
+            text-align: center;
+            padding: 40px;
+            transition: opacity 0.4s ease;
+        }
+        .viewer-placeholder .ornament { font-size: 2rem; color: var(--gold-light); margin-bottom: 20px; }
+        .viewer-placeholder h3 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--ink); margin-bottom: 10px; font-weight: 400; }
+        .viewer-placeholder p { color: var(--sepia); max-width: 400px; }
 
-        @media (max-width: 1100px) { .archive-container { column-count: 2; } }
-        @media (max-width: 700px) { .archive-container { column-count: 1; } }
-        @media (max-width: 900px) { .drawer { width: 100%; right: -100%; } }
+        iframe {
+            width: 100%;
+            flex-grow: 1;
+            border: none;
+            background: white;
+            z-index: 1;
+        }
+
+        footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 40px 24px; font-size: 0.85rem; letter-spacing: 1px; border-top: 1px solid var(--ink-light); }
+
+        /* Responsywność */
+        @media (max-width: 1000px) {
+            .workspace { flex-direction: column; padding: 30px 15px; }
+            .archive-sidebar { width: 100%; position: static; height: auto; max-height: 500px; }
+            .viewer-area { min-height: 600px; width: 100%; }
+        }
+        @media (max-width: 900px) {
+            .drawer { width: 100%; right: -100%; }
+        }
     </style>
 </head>
 <body>
@@ -169,9 +197,9 @@
 <div class="overlay" id="overlay"></div>
 
 <header>
-    <span class="header-ornament">Ładomirscy i Kraińscy</span>
-    <h1>Archiwum Dokumentów<br>Różnych</h1>
-    <p class="header-quote">Ślady przeszłości zapisane w metrykach, listach i grobowcach — dziedzictwo przekazywane z pokolenia na pokolenie. Wybierz dokument, aby otworzyć go w nowej karcie.</p>
+    <span class="header-ornament">Kolekcja Cyfrowa</span>
+    <h1>Archiwum Dokumentów</h1>
+    <p class="header-quote">Ślady przeszłości zapisane w metrykach, listach i grobowcach — dziedzictwo przekazywane z pokolenia na pokolenie.</p>
 </header>
 
 <nav>
@@ -188,7 +216,6 @@
         <span>Nawigacja Główna</span>
         <h2>Menu Archiwum</h2>
     </div>
-    
     <ul class="drawer-links">
         <li><a href="glowna.php">Strona Główna</a></li>
         <li><a href="poczatek.php">Zawiązanie Klanu</a></li>
@@ -202,1509 +229,1362 @@
         <li><a href="archiwum.php">Archiwum</a></li>
         <li><a href="kontakt.php">Kontakt</a></li>
     </ul>
-
     <div class="drawer-footer">
         <p>Klan L&K © 1975 – 2026</p>
     </div>
 </aside>
 
-<div class="archive-header">
-    <span class="s-label">Katalog Zbiorów</span>
-    <h2 class="s-title">Księgi Rodowe</h2>
-    <div class="s-line"></div>
-</div>
+<div class="workspace">
+    <!-- LEWA STRONA: DRZEWO NAWIGACYJNE -->
+    <aside class="archive-sidebar">
+        <div class="sidebar-header">
+            <h3>Spis Zbiorów</h3>
+            <p>Wybierz ród i dokument</p>
+        </div>
+        <div class="tree-menu">
+            
+            <!-- BARTMAŃSKI -->
+            <details class="family-node">
+                <summary>BARTMAŃSKI</summary>
+                <details class="person-node">
+                    <summary>Tomasz A.</summary>
+                    <div class="doc-links"><a href="bartarch.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Aniela</summary>
+                    <div class="doc-links"><a href="bartarch.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+            </details>
 
-<div class="archive-container">
+            <!-- BORYSŁAWSKI -->
+            <details class="family-node">
+                <summary>BORYSŁAWSKI</summary>
+                <details class="person-node">
+                    <summary>Jacek</summary>
+                    <div class="doc-links"><a href="borysarch2.php" target="documentViewer">1812 metr. zgonu</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Joanna</summary>
+                    <div class="doc-links"><a href="borysarch1.php" target="documentViewer">1812 metr. śl.</a></div>
+                </details>
+            </details>
 
-    <!-- BARTMAŃSKI -->
-    <div class="family-card">
-        <div class="family-title">Bartmański</div>
-        <div class="person-group">
-            <div class="person-name">Tomasz A.</div>
-            <div class="doc-links">
-                <a href="bartarch.php" target="_blank">Grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Aniela</div>
-            <div class="doc-links">
-                <a href="bartarch.php" target="_blank">Grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- DOMAŃSKI -->
+            <details class="family-node">
+                <summary>DOMAŃSKI</summary>
+                <details class="person-node">
+                    <summary>M. Nikodem</summary>
+                    <div class="doc-links"><a href="domarch23.php" target="documentViewer">1822 ogłoszenie</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna</summary>
+                    <div class="doc-links"><a href="domarch18.php" target="documentViewer">1825 metr. zgonu</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Feliks P. H.</summary>
+                    <div class="doc-links">
+                        <a href="domarch15.php" target="documentViewer">1790 metr. chrztu</a>
+                        <a href="domarch12.php" target="documentViewer">1825 metr. śl.</a>
+                        <a href="domarch20.php" target="documentViewer">1838 metr. śl.</a>
+                        <a href="domarch16.php" target="documentViewer">1866 metr. zgonu</a>
+                        <a href="domarch17.php" target="documentViewer">1866 nekrolog</a>
+                        <a href="domarch37.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Barbara F.</summary>
+                    <div class="doc-links">
+                        <a href="domarch13.php" target="documentViewer">1795/1805 metr. chrztu</a>
+                        <a href="domarch12.php" target="documentViewer">1825 metr. śl.</a>
+                        <a href="domarch14.php" target="documentViewer">1837 metr. zgonu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Franciszka W. K.</summary>
+                    <div class="doc-links">
+                        <a href="domarch19.php" target="documentViewer">1814/16 metr. ur.</a>
+                        <a href="domarch20.php" target="documentViewer">1838 metr. śl.</a>
+                        <a href="domarch21.php" target="documentViewer">1873 metr. zgonu</a>
+                        <a href="domarch22.php" target="documentViewer">1873 nekrolog</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Edward M.</summary>
+                    <div class="doc-links">
+                        <a href="domarch8.php" target="documentViewer">1831 metr. chrztu</a>
+                        <a href="domarch4.php" target="documentViewer">1857 metr. śl.</a>
+                        <a href="domarch7.php" target="documentViewer">1886 metr. zgonu</a>
+                        <a href="domarch6.php" target="documentViewer">1886 nekrologi</a>
+                        <a href="domarch5.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Teodozja</summary>
+                    <div class="doc-links">
+                        <a href="karczarch1.php" target="documentViewer">1837 metr. chrztu</a>
+                        <a href="domarch4.php" target="documentViewer">1857 metr. śl.</a>
+                        <a href="domarch11.php" target="documentViewer">1873 metr. zgonu</a>
+                        <a href="domarch10.php" target="documentViewer">1873 nekrolog</a>
+                        <a href="domarch9.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia L</summary>
+                    <div class="doc-links">
+                        <a href="domarch24.php" target="documentViewer">1858 metr. chrztu</a>
+                        <a href="domarch25.php" target="documentViewer">1858 metr. zgonu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Jadwiga T.</summary>
+                    <div class="doc-links"><a href="domarch26.php" target="documentViewer">1859 metr. chrztu</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Marianna F.</summary>
+                    <div class="doc-links">
+                        <a href="domarch27.php" target="documentViewer">1861 metr. chrztu</a>
+                        <a href="domarch28.php" target="documentViewer">1869 metr. zgonu</a>
+                        <a href="domarch9.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Henryka D.</summary>
+                    <div class="doc-links">
+                        <a href="domarch29.php" target="documentViewer">1863 metr. chrztu</a>
+                        <a href="domarch30.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia E. S.</summary>
+                    <div class="doc-links">
+                        <a href="domarch31.php" target="documentViewer">1865 metr. chrztu</a>
+                        <a href="domarch32.php" target="documentViewer">1886 metr. śl.</a>
+                        <a href="domarch33.php" target="documentViewer">1886 wesele</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Feliks</summary>
+                    <div class="doc-links">
+                        <a href="domarch3.php" target="documentViewer">1868 metr. chrztu</a>
+                        <a href="ladarch18.php" target="documentViewer">1898 ślub</a>
+                        <a href="domarch39.php" target="documentViewer">1939 metr. zgonu</a>
+                        <a href="domarch2.php" target="documentViewer">1939 nekrolog</a>
+                        <a href="domarch1.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Seweryna</summary>
+                    <div class="doc-links">
+                        <a href="ladarch17.php" target="documentViewer">1875 metr. chrztu</a>
+                        <a href="ladarch18.php" target="documentViewer">1898 ślub</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Stanisław K.</summary>
+                    <div class="doc-links"><a href="domarch40.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna K. J.</summary>
+                    <div class="doc-links"><a href="domarch40.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Maria</summary>
+                    <div class="doc-links">
+                        <a href="domarch34.php" target="documentViewer">1870 metr. chrztu</a>
+                        <a href="domarch38.php" target="documentViewer">1874 metr. zgonu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Jadwiga F.</summary>
+                    <div class="doc-links">
+                        <a href="domarch35.php" target="documentViewer">1872 metr. chrztu</a>
+                        <a href="domarch36.php" target="documentViewer">1873 metr. zgonu</a>
+                        <a href="domarch9.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- BORYSŁAWSKI -->
-    <div class="family-card">
-        <div class="family-title">Borysławski</div>
-        <div class="person-group">
-            <div class="person-name">Jacek</div>
-            <div class="doc-links">
-                <a href="borysarch2.php" target="_blank">1812 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Joanna</div>
-            <div class="doc-links">
-                <a href="borysarch1.php" target="_blank">1812 metr. śl.</a>
-            </div>
-        </div>
-    </div>
+            <!-- FEDOROWICZ -->
+            <details class="family-node">
+                <summary>FEDOROWICZ</summary>
+                <details class="person-node">
+                    <summary>Arian</summary>
+                    <div class="doc-links"><a href="fedarch.php" target="documentViewer">1818 metr. chrztu</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Tadeusz Adolf</summary>
+                    <div class="doc-links">
+                        <a href="fedarch2.php" target="documentViewer">1849 metr. chrztu</a>
+                        <a href="fedarch6.php" target="documentViewer">1919 metr. zgonu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Kazimierz Eug.</summary>
+                    <div class="doc-links"><a href="fedarch3.php" target="documentViewer">1854 metr. chrztu</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Aleksander A. T.</summary>
+                    <div class="doc-links">
+                        <a href="fedarch5.php" target="documentViewer">1875 metr. chrztu</a>
+                        <a href="fedarch4.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia</summary>
+                    <div class="doc-links"><a href="fedarch4.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Jerzy A. M.</summary>
+                    <div class="doc-links"><a href="fedarch7.php" target="documentViewer">Mogiła</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Maria S.</summary>
+                    <div class="doc-links"><a href="fedarch9.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Andrzej A. M.</summary>
+                    <div class="doc-links"><a href="fedarch8.php" target="documentViewer">Grób</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>ks. Tadeusz A. M.</summary>
+                    <div class="doc-links"><a href="fedarch4.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>s. Olga M. Z.</summary>
+                    <div class="doc-links"><a href="fedarch11.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Jan J. T.</summary>
+                    <div class="doc-links"><a href="fedarch4.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Ewa A.</summary>
+                    <div class="doc-links"><a href="fedarch4.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Maria</summary>
+                    <div class="doc-links"><a href="meisarch.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>ks. Aleksander A. M.</summary>
+                    <div class="doc-links"><a href="fedarch10.php" target="documentViewer">Grób</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Aniela</summary>
+                    <div class="doc-links"><a href="bartarch.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+            </details>
 
-    <!-- DOMAŃSKI -->
-    <div class="family-card">
-        <div class="family-title">Domański</div>
-        <div class="person-group">
-            <div class="person-name">M. Nikodem</div>
-            <div class="doc-links">
-                <a href="domarch23.php" target="_blank">1822 ogłoszenie</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna</div>
-            <div class="doc-links">
-                <a href="domarch18.php" target="_blank">1825 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Feliks P. H.</div>
-            <div class="doc-links">
-                <a href="domarch15.php" target="_blank">1790 metr. chrztu</a>
-                <a href="domarch12.php" target="_blank">1825 metr. śl</a>
-                <a href="domarch20.php" target="_blank">1838 metr. śl</a>
-                <a href="domarch16.php" target="_blank">1866 metr. zgonu</a>
-                <a href="domarch17.php" target="_blank">1866 nekrolog</a>
-                <a href="domarch37.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Barbara F.</div>
-            <div class="doc-links">
-                <a href="domarch13.php" target="_blank">1795/1805 metr. chrztu</a>
-                <a href="domarch12.php" target="_blank">1825 metr. śl</a>
-                <a href="domarch14.php" target="_blank">1837 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Franciszka W. K.</div>
-            <div class="doc-links">
-                <a href="domarch19.php" target="_blank">1814/16 metr. ur.</a>
-                <a href="domarch20.php" target="_blank">1838 metr. śl</a>
-                <a href="domarch21.php" target="_blank">1873 metr. zgonu</a>
-                <a href="domarch22.php" target="_blank">1873 nekrolog</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Edward M.</div>
-            <div class="doc-links">
-                <a href="domarch8.php" target="_blank">1831 metr. chrztu</a>
-                <a href="domarch4.php" target="_blank">1857 metr. śl</a>
-                <a href="domarch7.php" target="_blank">1886 metr. zgonu</a>
-                <a href="domarch6.php" target="_blank">1886 nekrologi</a>
-                <a href="domarch5.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Teodozja</div>
-            <div class="doc-links">
-                <a href="karczarch1.php" target="_blank">1837 metr. chrztu</a>
-                <a href="domarch4.php" target="_blank">1857 metr. śl</a>
-                <a href="domarch11.php" target="_blank">1873 metr. zgonu</a>
-                <a href="domarch10.php" target="_blank">1873 nekrolog</a>
-                <a href="domarch9.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia L</div>
-            <div class="doc-links">
-                <a href="domarch24.php" target="_blank">1858 metr. chrztu</a>
-                <a href="domarch25.php" target="_blank">1858 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jadwiga T.</div>
-            <div class="doc-links">
-                <a href="domarch26.php" target="_blank">1859 metr. chrztu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Marianna F.</div>
-            <div class="doc-links">
-                <a href="domarch27.php" target="_blank">1861 metr. chrztu</a>
-                <a href="domarch28.php" target="_blank">1869 metr. zgonu</a>
-                <a href="domarch9.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Henryka D.</div>
-            <div class="doc-links">
-                <a href="domarch29.php" target="_blank">1863 metr. chrztu</a>
-                <a href="domarch30.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia E. S.</div>
-            <div class="doc-links">
-                <a href="domarch31.php" target="_blank">1865 metr. chrztu</a>
-                <a href="domarch32.php" target="_blank">1886 metr. śl.</a>
-                <a href="domarch33.php" target="_blank">1886 wesele</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Feliks</div>
-            <div class="doc-links">
-                <a href="domarch3.php" target="_blank">1868 metr. chrztu</a>
-                <a href="ladarch18.php" target="_blank">1898 ślub</a>
-                <a href="domarch39.php" target="_blank">1939 metr. zgonu</a>
-                <a href="domarch2.php" target="_blank">1939 nekrolog</a>
-                <a href="domarch1.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Seweryna</div>
-            <div class="doc-links">
-                <a href="ladarch17.php" target="_blank">1875 metr. chrztu</a>
-                <a href="ladarch18.php" target="_blank">1898 ślub</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Stanisław K.</div>
-            <div class="doc-links">
-                <a href="domarch40.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna K. J.</div>
-            <div class="doc-links">
-                <a href="domarch40.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maria</div>
-            <div class="doc-links">
-                <a href="domarch34.php" target="_blank">1870 metr. chrztu</a>
-                <a href="domarch38.php" target="_blank">1874 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jadwiga F.</div>
-            <div class="doc-links">
-                <a href="domarch35.php" target="_blank">1872 metr. chrztu</a>
-                <a href="domarch36.php" target="_blank">1873 metr. zgonu</a>
-                <a href="domarch9.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- GOLEJEWSKI -->
+            <details class="family-node">
+                <summary>GOLEJEWSKI</summary>
+                <details class="person-node">
+                    <summary>El. Lud. Anna</summary>
+                    <div class="doc-links">
+                        <a href="golejarch1.php" target="documentViewer">1757 metr. chrztu</a>
+                        <a href="ladarch22.php" target="documentViewer">1820 metr. zgonu</a>
+                        <a href="ladarch9.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Łu. Barbara Ter.</summary>
+                    <div class="doc-links">
+                        <a href="golejarch2.php" target="documentViewer">1763 metr. chrztu</a>
+                        <a href="ladarch3.php" target="documentViewer">1833 metr. zgonu</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- FEDOROWICZ -->
-    <div class="family-card">
-        <div class="family-title">Fedorowicz</div>
-        <div class="person-group">
-            <div class="person-name">Arian</div>
-            <div class="doc-links">
-                <a href="fedarch.php" target="_blank">1818 metr. chrztu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Tadeusz Adolf</div>
-            <div class="doc-links">
-                <a href="fedarch2.php" target="_blank">1849 metr. chrztu</a>
-                <a href="fedarch6.php" target="_blank">1919 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Kazimierz Eug.</div>
-            <div class="doc-links">
-                <a href="fedarch3.php" target="_blank">1854 metr. chrztu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Aleksander A. T.</div>
-            <div class="doc-links">
-                <a href="fedarch5.php" target="_blank">1875 metr. chrztu</a>
-                <a href="fedarch4.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia</div>
-            <div class="doc-links">
-                <a href="fedarch4.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jerzy A. M.</div>
-            <div class="doc-links">
-                <a href="fedarch7.php" target="_blank">mogiła</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maria S.</div>
-            <div class="doc-links">
-                <a href="fedarch9.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Andrzej A. M.</div>
-            <div class="doc-links">
-                <a href="fedarch8.php" target="_blank">grób</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">ks. Tadeusz A. M.</div>
-            <div class="doc-links">
-                <a href="fedarch4.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">s. Olga M. Z.</div>
-            <div class="doc-links">
-                <a href="fedarch11.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jan J. T.</div>
-            <div class="doc-links">
-                <a href="fedarch4.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Ewa A.</div>
-            <div class="doc-links">
-                <a href="fedarch4.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maria</div>
-            <div class="doc-links">
-                <a href="meisarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">ks. Aleksander A. M.</div>
-            <div class="doc-links">
-                <a href="fedarch10.php" target="_blank">grób</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Aniela</div>
-            <div class="doc-links">
-                <a href="bartarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- GOŁASZEWSKI -->
+            <details class="family-node">
+                <summary>GOŁASZEWSKI</summary>
+                <div class="doc-links direct-links">
+                    <a href="golaszarch9.php" target="documentViewer">Drzewo genealogiczne</a>
+                </div>
+                <details class="person-node">
+                    <summary>Mateusz</summary>
+                    <div class="doc-links">
+                        <a href="golaszarch5.php" target="documentViewer">1809 testament</a>
+                        <a href="golaszarch4.php" target="documentViewer">1810 opieczętow.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Maciej</summary>
+                    <div class="doc-links">
+                        <a href="golaszarch2.php" target="documentViewer">1797 metr. chrztu</a>
+                        <a href="golaszarch3.php" target="documentViewer">1817-20 prawo na UL</a>
+                        <a href="golaszarch6.php" target="documentViewer">1825 metr. śl.</a>
+                        <a href="golaszarch8.php" target="documentViewer">1841 list herbowy</a>
+                        <a href="golaszarch19.php" target="documentViewer">1873 metr. zgonu</a>
+                        <a href="golaszarch.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Rafała Wiktoria</summary>
+                    <div class="doc-links">
+                        <a href="malczarch3.php" target="documentViewer">1801 metr. chrztu</a>
+                        <a href="golaszarch6.php" target="documentViewer">1825 metr. śl.</a>
+                        <a href="golaszarch1.php" target="documentViewer">1863 metr. zgonu</a>
+                        <a href="golaszarch.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Teofila Józ.</summary>
+                    <div class="doc-links">
+                        <a href="krobarch6.php" target="documentViewer">1849 metr. śl.</a>
+                        <a href="krobarch7.php" target="documentViewer">1905 metr. zgonu</a>
+                        <a href="krobarch.php" target="documentViewer">1905 nekrologi</a>
+                        <a href="krobarch8.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Helena Kat. Marc.</summary>
+                    <div class="doc-links">
+                        <a href="golaszarch15.php" target="documentViewer">1834 metr. chrztu</a>
+                        <a href="golaszarch16.php" target="documentViewer">1856 metr. śl.</a>
+                        <a href="golaszarch17.php" target="documentViewer">1912 metr. zgonu</a>
+                        <a href="golaszarch18.php" target="documentViewer">1912 nekrologi</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Romana Maria</summary>
+                    <div class="doc-links">
+                        <a href="golaszarch11.php" target="documentViewer">1838 metr. chrztu</a>
+                        <a href="golaszarch12.php" target="documentViewer">1859 metr. śl.</a>
+                        <a href="golaszarch13.php" target="documentViewer">1908 metr. zgonu</a>
+                        <a href="golaszarch14.php" target="documentViewer">1908 nekrolog</a>
+                        <a href="golaszarch10.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Katarzyna Walent.</summary>
+                    <div class="doc-links">
+                        <a href="golaszarch7.php" target="documentViewer">1841 metr. chrztu</a>
+                        <a href="ladarch35.php" target="documentViewer">1862 metr. śl.</a>
+                        <a href="ladarch41.php" target="documentViewer">1917 metr. zgonu</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- GOLEJEWSKI -->
-    <div class="family-card">
-        <div class="family-title">Golejewski</div>
-        <div class="person-group">
-            <div class="person-name">El. Lud. Anna</div>
-            <div class="doc-links">
-                <a href="golejarch1.php" target="_blank">1757 metr. chrztu</a>
-                <a href="ladarch22.php" target="_blank">1820 metr. zgonu</a>
-                <a href="ladarch9.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Łu. Barbara Ter.</div>
-            <div class="doc-links">
-                <a href="golejarch2.php" target="_blank">1763 metr. chrztu</a>
-                <a href="ladarch3.php" target="_blank">1833 metr. zgonu</a>
-            </div>
-        </div>
-    </div>
+            <!-- GOŁĘBSKI -->
+            <details class="family-node">
+                <summary>GOŁĘBSKI</summary>
+                <details class="person-node">
+                    <summary>Jan Alojzy</summary>
+                    <div class="doc-links">
+                        <a href="golebarch6.php" target="documentViewer">1823 metr. chrztu</a>
+                        <a href="golebarch13.php" target="documentViewer">1814 metr. śl.</a>
+                        <a href="golebarch14.php" target="documentViewer">1830 metr. śl.</a>
+                        <a href="golebarch7.php" target="documentViewer">1876 metr. zgonu</a>
+                        <a href="golebarch8.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Amalia</summary>
+                    <div class="doc-links">
+                        <a href="golebarch13.php" target="documentViewer">1814 metr. śl.</a>
+                        <a href="golebarch5.php" target="documentViewer">1823 metr. zgonu</a>
+                        <a href="golebarch10.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Marceli Jan</summary>
+                    <div class="doc-links">
+                        <a href="golebarch9.php" target="documentViewer">1819 metr. chrztu</a>
+                        <a href="golebarch11.php" target="documentViewer">1852 metr. śl.</a>
+                        <a href="golebarch4.php" target="documentViewer">1890 nekrolog</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Antonina Józefa</summary>
+                    <div class="doc-links">
+                        <a href="kirarch1.php" target="documentViewer">1833 metr. chrztu</a>
+                        <a href="golebarch11.php" target="documentViewer">1852 metr. śl.</a>
+                        <a href="golebarch3.php" target="documentViewer">1907 nekrologi</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Kazimierz</summary>
+                    <div class="doc-links">
+                        <a href="ladarch19.php" target="documentViewer">1895 metr. śl.</a>
+                        <a href="golebarch12.php" target="documentViewer">1935 metr. zgonu</a>
+                        <a href="golebarch2.php" target="documentViewer">1935 wspomnienie</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Helena</summary>
+                    <div class="doc-links">
+                        <a href="ladarch36.php" target="documentViewer">1873 metr. chrztu</a>
+                        <a href="ladarch19.php" target="documentViewer">1895 metr. śl.</a>
+                        <a href="golebarch.php" target="documentViewer">1918 nekrologi</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna</summary>
+                    <div class="doc-links"><a href="golebarch19.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Krystyna</summary>
+                    <div class="doc-links"><a href="golebarch19.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia</summary>
+                    <div class="doc-links"><a href="golebarch20.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Maria</summary>
+                    <div class="doc-links"><a href="golebarch20.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+            </details>
 
-    <!-- GOŁASZEWSKI -->
-    <div class="family-card">
-        <div class="family-title">Gołaszewski</div>
-        <div class="person-group">
-            <div class="doc-links" style="margin-bottom: 10px;">
-                <a href="golaszarch9.php" target="_blank">Drzewo Genealogiczne</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Mateusz</div>
-            <div class="doc-links">
-                <a href="golaszarch5.php" target="_blank">1809 testament</a>
-                <a href="golaszarch4.php" target="_blank">1810 opieczętow.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maciej</div>
-            <div class="doc-links">
-                <a href="golaszarch2.php" target="_blank">1797 metr. chrztu</a>
-                <a href="golaszarch3.php" target="_blank">1817-20 prawo na UL</a>
-                <a href="golaszarch6.php" target="_blank">1825 metr. śl.</a>
-                <a href="golaszarch8.php" target="_blank">1841 list herbowy</a>
-                <a href="golaszarch19.php" target="_blank">1873 metr. zgonu</a>
-                <a href="golaszarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Rafała Wiktoria</div>
-            <div class="doc-links">
-                <a href="malczarch3.php" target="_blank">1801 metr. chrztu</a>
-                <a href="golaszarch6.php" target="_blank">1825 metr. śl.</a>
-                <a href="golaszarch1.php" target="_blank">1863 metr. zgonu</a>
-                <a href="golaszarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Teofila Józ.</div>
-            <div class="doc-links">
-                <a href="krobarch6.php" target="_blank">1849 metr. śl.</a>
-                <a href="krobarch7.php" target="_blank">1905 metr. zgonu</a>
-                <a href="krobarch.php" target="_blank">1905 nekrologi</a>
-                <a href="krobarch8.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Helena Kat. Marc.</div>
-            <div class="doc-links">
-                <a href="golaszarch15.php" target="_blank">1834 metr. chrztu</a>
-                <a href="golaszarch16.php" target="_blank">1856 metr. śl.</a>
-                <a href="golaszarch17.php" target="_blank">1912 metr. zgonu</a>
-                <a href="golaszarch18.php" target="_blank">1912 nekrologi</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Romana Maria</div>
-            <div class="doc-links">
-                <a href="golaszarch11.php" target="_blank">1838 metr. chrztu</a>
-                <a href="golaszarch12.php" target="_blank">1859 metr. śl.</a>
-                <a href="golaszarch13.php" target="_blank">1908 metr. zgonu</a>
-                <a href="golaszarch14.php" target="_blank">1908 nekrolog</a>
-                <a href="golaszarch10.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Katarzyna Walent.</div>
-            <div class="doc-links">
-                <a href="golaszarch7.php" target="_blank">1841 metr. chrztu</a>
-                <a href="ladarch35.php" target="_blank">1862 metr. śl.</a>
-                <a href="ladarch41.php" target="_blank">1917 metr. zgonu</a>
-            </div>
-        </div>
-    </div>
+            <!-- GÓRSKI -->
+            <details class="family-node">
+                <summary>GÓRSKI</summary>
+                <details class="person-node">
+                    <summary>Julian</summary>
+                    <div class="doc-links">
+                        <a href="borysarch1.php" target="documentViewer">1812 metr. śl.</a>
+                        <a href="gorarch1.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- GOŁĘBSKI -->
-    <div class="family-card">
-        <div class="family-title">Gołębski</div>
-        <div class="person-group">
-            <div class="person-name">Jan Alojzy</div>
-            <div class="doc-links">
-                <a href="golebarch6.php" target="_blank">1823 metr. chrztu</a>
-                <a href="golebarch13.php" target="_blank">1814 metr. śl.</a>
-                <a href="golebarch14.php" target="_blank">1830 metr. śl.</a>
-                <a href="golebarch7.php" target="_blank">1876 metr. zgonu</a>
-                <a href="golebarch8.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Amalia</div>
-            <div class="doc-links">
-                <a href="golebarch13.php" target="_blank">1814 metr. śl.</a>
-                <a href="golebarch5.php" target="_blank">1823 metr. zgonu</a>
-                <a href="golebarch10.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Marceli Jan</div>
-            <div class="doc-links">
-                <a href="golebarch9.php" target="_blank">1819 metr. chrztu</a>
-                <a href="golebarch11.php" target="_blank">1852 metr. śl.</a>
-                <a href="golebarch4.php" target="_blank">1890 nekrolog</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Antonina Józefa</div>
-            <div class="doc-links">
-                <a href="kirarch1.php" target="_blank">1833 metr. chrztu</a>
-                <a href="golebarch11.php" target="_blank">1852 metr. śl.</a>
-                <a href="golebarch3.php" target="_blank">1907 nekrologi</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Kazimierz</div>
-            <div class="doc-links">
-                <a href="ladarch19.php" target="_blank">1895 metr. śl.</a>
-                <a href="golebarch12.php" target="_blank">1935 metr. zgonu</a>
-                <a href="golebarch2.php" target="_blank">1935 wspomnienie</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Helena</div>
-            <div class="doc-links">
-                <a href="ladarch36.php" target="_blank">1873 metr. chrztu</a>
-                <a href="ladarch19.php" target="_blank">1895 metr. śl.</a>
-                <a href="golebarch.php" target="_blank">1918 nekrologi</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna</div>
-            <div class="doc-links">
-                <a href="golebarch19.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Krystyna</div>
-            <div class="doc-links">
-                <a href="golebarch19.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia</div>
-            <div class="doc-links">
-                <a href="golebarch20.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maria</div>
-            <div class="doc-links">
-                <a href="golebarch20.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- GÖTZ-OKOCIMSKI -->
+            <details class="family-node">
+                <summary>GÖTZ-OKOCIMSKI</summary>
+                <details class="person-node">
+                    <summary>Antoni</summary>
+                    <div class="doc-links"><a href="goetzarch6.php" target="documentViewer">1813 metr. śl.</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Józefa</summary>
+                    <div class="doc-links"><a href="goetzarch6.php" target="documentViewer">1813 metr. śl.</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Jan</summary>
+                    <div class="doc-links">
+                        <a href="goetzarch5.php" target="documentViewer">1815 metr. chrztu</a>
+                        <a href="goetzarch2.php" target="documentViewer">1856 metr. śl.</a>
+                        <a href="goetzarch9.php" target="documentViewer">1893 metr. zgonu</a>
+                        <a href="goetzarch8.php" target="documentViewer">1893 klepsydry</a>
+                        <a href="goetzarch1.php" target="documentViewer">Epitafium</a>
+                        <a href="goetzarch3.php" target="documentViewer">Krypta</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Albina K.</summary>
+                    <div class="doc-links">
+                        <a href="goetzarch.php" target="documentViewer">1834 metr. chrztu</a>
+                        <a href="goetzarch2.php" target="documentViewer">1856 metr. śl.</a>
+                        <a href="goetzarch7.php" target="documentViewer">1914 metr. zgonu</a>
+                        <a href="goetzarch3.php" target="documentViewer">Krypta</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Albina T. M.</summary>
+                    <div class="doc-links">
+                        <a href="goetzarch4.php" target="documentViewer">1860 metr. chrztu</a>
+                        <a href="goetzarch10.php" target="documentViewer">1879 metr. śl.</a>
+                        <a href="wlodarch5.php" target="documentViewer">1937 zgon</a>
+                        <a href="wlodarch3.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- GÓRSKI -->
-    <div class="family-card">
-        <div class="family-title">Górski</div>
-        <div class="person-group">
-            <div class="person-name">Julian</div>
-            <div class="doc-links">
-                <a href="borysarch1.php" target="_blank">1812 metr. śl.</a>
-                <a href="gorarch1.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- HOŁUBOWICZ -->
+            <details class="family-node">
+                <summary>HOŁUBOWICZ</summary>
+                <details class="person-node">
+                    <summary>Jan</summary>
+                    <div class="doc-links">
+                        <a href="holubarch4.php" target="documentViewer">1797 metr. śl.</a>
+                        <a href="holubarch3.php" target="documentViewer">1838 metr. zgomu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna</summary>
+                    <div class="doc-links">
+                        <a href="holubarch4.php" target="documentViewer">1797 metr. śl.</a>
+                        <a href="holubarch.php" target="documentViewer">1828 metr. zgomu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Antonina</summary>
+                    <div class="doc-links">
+                        <a href="holubarch2.php" target="documentViewer">1799 metr. chrztu</a>
+                        <a href="krobarch5.php" target="documentViewer">1818 metr. śl.</a>
+                        <a href="krobarch16.php" target="documentViewer">1867 metr. zgomu</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- GÖTZ-OKOCIMSKI -->
-    <div class="family-card">
-        <div class="family-title">Götz-Okocimski</div>
-        <div class="person-group">
-            <div class="person-name">Antoni</div>
-            <div class="doc-links">
-                <a href="goetzarch6.php" target="_blank">1813 metr. śl.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Józefa</div>
-            <div class="doc-links">
-                <a href="goetzarch6.php" target="_blank">1813 metr. śl.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jan</div>
-            <div class="doc-links">
-                <a href="goetzarch5.php" target="_blank">1815 metr. chrztu</a>
-                <a href="goetzarch2.php" target="_blank">1856 metr. śl.</a>
-                <a href="goetzarch9.php" target="_blank">1893 metr. zgonu</a>
-                <a href="goetzarch8.php" target="_blank">1893 klepsydry</a>
-                <a href="goetzarch1.php" target="_blank">epitafium</a>
-                <a href="goetzarch3.php" target="_blank">krypta</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Albina K.</div>
-            <div class="doc-links">
-                <a href="goetzarch.php" target="_blank">1834 metr. chrztu</a>
-                <a href="goetzarch2.php" target="_blank">1856 metr. śl.</a>
-                <a href="goetzarch7.php" target="_blank">1914 metr. zgonu</a>
-                <a href="goetzarch3.php" target="_blank">krypta</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Albina T. M.</div>
-            <div class="doc-links">
-                <a href="goetzarch4.php" target="_blank">1860 metr. chrztu</a>
-                <a href="goetzarch10.php" target="_blank">1879 metr. śl.</a>
-                <a href="wlodarch5.php" target="_blank">1937 zgon</a>
-                <a href="wlodarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- KARCZEWSKI -->
+            <details class="family-node">
+                <summary>KARCZEWSKI</summary>
+                <details class="person-node">
+                    <summary>Franciszek S. W. R.</summary>
+                    <div class="doc-links">
+                        <a href="karczarch3.php" target="documentViewer">1804 metr. chrztu</a>
+                        <a href="karczarch2.php" target="documentViewer">1835 metr. śl.</a>
+                        <a href="karczarch5.php" target="documentViewer">1886 metr. zgonu</a>
+                        <a href="karczarch6.php" target="documentViewer">1886 nekrologi</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Józefa</summary>
+                    <div class="doc-links">
+                        <a href="karczarch4.php" target="documentViewer">1814 metr. chrztu</a>
+                        <a href="karczarch2.php" target="documentViewer">1835 metr. śl.</a>
+                        <a href="karczarch7.php" target="documentViewer">1874 metr. zgonu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Teodozja</summary>
+                    <div class="doc-links">
+                        <a href="karczarch1.php" target="documentViewer">1837 metr. chrztu</a>
+                        <a href="domarch4.php" target="documentViewer">1857 metr. śl.</a>
+                        <a href="domarch11.php" target="documentViewer">1873 metr. zgonu</a>
+                        <a href="domarch10.php" target="documentViewer">1873 nekrolog</a>
+                        <a href="domarch9.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- HOŁUBOWICZ -->
-    <div class="family-card">
-        <div class="family-title">Hołubowicz</div>
-        <div class="person-group">
-            <div class="person-name">Jan</div>
-            <div class="doc-links">
-                <a href="holubarch4.php" target="_blank">1797 metr. śl.</a>
-                <a href="holubarch3.php" target="_blank">1838 metr. zgomu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna</div>
-            <div class="doc-links">
-                <a href="holubarch4.php" target="_blank">1797 metr. śl.</a>
-                <a href="holubarch.php" target="_blank">1828 metr. zgomu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Antonina</div>
-            <div class="doc-links">
-                <a href="holubarch2.php" target="_blank">1799 metr. chrztu</a>
-                <a href="krobarch5.php" target="_blank">1818 metr. śl.</a>
-                <a href="krobarch16.php" target="_blank">1867 metr. zgomu</a>
-            </div>
-        </div>
-    </div>
+            <!-- KIRSCHNER -->
+            <details class="family-node">
+                <summary>KIRSCHNER</summary>
+                <details class="person-node">
+                    <summary>Wincenty Agapit</summary>
+                    <div class="doc-links">
+                        <a href="kirarch3.php" target="documentViewer">1797 metr. chrztu</a>
+                        <a href="kirarch2.php" target="documentViewer">1824 metr. śl.</a>
+                        <a href="kirarch4.php" target="documentViewer">1861 metr. zgonu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Ludwika</summary>
+                    <div class="doc-links"><a href="kirarch5.php" target="documentViewer">1855 metr. zgonu</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Antonina Józefa</summary>
+                    <div class="doc-links">
+                        <a href="kirarch1.php" target="documentViewer">1833 metr. chrztu</a>
+                        <a href="golebarch11.php" target="documentViewer">1852 metr. śl.</a>
+                        <a href="golebarch3.php" target="documentViewer">1907 nekrologi</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- KARCZEWSKI -->
-    <div class="family-card">
-        <div class="family-title">Karczewski</div>
-        <div class="person-group">
-            <div class="person-name">Franciszek S. W. R.</div>
-            <div class="doc-links">
-                <a href="karczarch3.php" target="_blank">1804 metr. chrztu</a>
-                <a href="karczarch2.php" target="_blank">1835 metr. śl.</a>
-                <a href="karczarch5.php" target="_blank">1886 metr. zgonu</a>
-                <a href="karczarch6.php" target="_blank">1886 nekrologi</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Józefa</div>
-            <div class="doc-links">
-                <a href="karczarch4.php" target="_blank">1814 metr. chrztu</a>
-                <a href="karczarch2.php" target="_blank">1835 metr. śl.</a>
-                <a href="karczarch7.php" target="_blank">1874 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Teodozja</div>
-            <div class="doc-links">
-                <a href="karczarch1.php" target="_blank">1837 metr. chrztu</a>
-                <a href="domarch4.php" target="_blank">1857 metr. śl.</a>
-                <a href="domarch11.php" target="_blank">1873 metr. zgonu</a>
-                <a href="domarch10.php" target="_blank">1873 nekrolog</a>
-                <a href="domarch9.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- KOPACZ -->
+            <details class="family-node">
+                <summary>KOPACZ</summary>
+                <details class="person-node">
+                    <summary>Kazimierz H.</summary>
+                    <div class="doc-links"><a href="koparch.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Helena A.</summary>
+                    <div class="doc-links"><a href="koparch.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+            </details>
 
-    <!-- KIRSCHNER -->
-    <div class="family-card">
-        <div class="family-title">Kirschner</div>
-        <div class="person-group">
-            <div class="person-name">Wincenty Agapit</div>
-            <div class="doc-links">
-                <a href="kirarch3.php" target="_blank">1797 metr. chrztu</a>
-                <a href="kirarch2.php" target="_blank">1824 metr. śl.</a>
-                <a href="kirarch4.php" target="_blank">1861 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Ludwika</div>
-            <div class="doc-links">
-                <a href="kirarch5.php" target="_blank">1855 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Antonina Józefa</div>
-            <div class="doc-links">
-                <a href="kirarch1.php" target="_blank">1833 metr. chrztu</a>
-                <a href="golebarch11.php" target="_blank">1852 metr. śl.</a>
-                <a href="golebarch3.php" target="_blank">1907 nekrologi</a>
-            </div>
-        </div>
-    </div>
+            <!-- KOZŁOWSKI -->
+            <details class="family-node">
+                <summary>KOZŁOWSKI</summary>
+                <details class="person-node">
+                    <summary>Aleksander M. B. F.</summary>
+                    <div class="doc-links">
+                        <a href="kozlarch.php" target="documentViewer">1890 metr. chrztu</a>
+                        <a href="kozlarch1.php" target="documentViewer">1924 metr. śl.</a>
+                        <a href="kozlarch2.php" target="documentViewer">Kaplica grobowa</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Stanisława M.</summary>
+                    <div class="doc-links">
+                        <a href="kozlarch1.php" target="documentViewer">1924 metr. śl.</a>
+                        <a href="ladarch30.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- KOPACZ -->
-    <div class="family-card">
-        <div class="family-title">Kopacz</div>
-        <div class="person-group">
-            <div class="person-name">Kazimierz H.</div>
-            <div class="doc-links">
-                <a href="koparch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Helena A.</div>
-            <div class="doc-links">
-                <a href="koparch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- KRAIŃSKI -->
+            <details class="family-node">
+                <summary>KRAIŃSKI</summary>
+                <details class="person-node">
+                    <summary>Eugeniusz</summary>
+                    <div class="doc-links"><a href="kraarch7.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Maurycy</summary>
+                    <div class="doc-links"><a href="kraarch7.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Władysław J. W.</summary>
+                    <div class="doc-links">
+                        <a href="kraarch.php" target="documentViewer">1797 metr. chrztu</a>
+                        <a href="kraarch2.php" target="documentViewer">1840 metr. śl.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Aniela</summary>
+                    <div class="doc-links">
+                        <a href="kraarch2.php" target="documentViewer">1840 metr. śl.</a>
+                        <a href="kraarch12.php" target="documentViewer">1844 zap. śl.</a>
+                        <a href="kraarch6.php" target="documentViewer">1887 nekrolog</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Władysław M. W.</summary>
+                    <div class="doc-links">
+                        <a href="kraarch3.php" target="documentViewer">1841 metr. chrztu</a>
+                        <a href="kraarch9.php" target="documentViewer">1926 nekrolog</a>
+                        <a href="kraarch5.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Maria E. Z.</summary>
+                    <div class="doc-links">
+                        <a href="kraarch11.php" target="documentViewer">1932 metr. zgonu</a>
+                        <a href="kraarch8.php" target="documentViewer">1932 nekrologi</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna M.</summary>
+                    <div class="doc-links">
+                        <a href="ladarch.php" target="documentViewer">1895 metr. śl.</a>
+                        <a href="ladarch30.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia</summary>
+                    <div class="doc-links"><a href="fedarch4.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>s. Aniela /Jadwiga/</summary>
+                    <div class="doc-links"><a href="kraarch13.php" target="documentViewer">Krypta</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Antoni M. W.</summary>
+                    <div class="doc-links">
+                        <a href="kraarch10.php" target="documentViewer">1914 metr. śl.</a>
+                        <a href="kraarch4.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Jan S. M.</summary>
+                    <div class="doc-links"><a href="kraarch18.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Elżbieta R. M.</summary>
+                    <div class="doc-links"><a href="kraarch18.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia B. R.</summary>
+                    <div class="doc-links">
+                        <a href="wlodarch1.php" target="documentViewer">1890 metr. chrztu</a>
+                        <a href="kraarch10.php" target="documentViewer">1914 metr. śl.</a>
+                        <a href="kraarch4.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Teresa M. W.</summary>
+                    <div class="doc-links"><a href="wiszarch17.php" target="documentViewer">1908 ślub</a></div>
+                </details>
+            </details>
 
-    <!-- KOZŁOWSKI -->
-    <div class="family-card">
-        <div class="family-title">Kozłowski</div>
-        <div class="person-group">
-            <div class="person-name">Aleksander M. B. F.</div>
-            <div class="doc-links">
-                <a href="kozlarch.php" target="_blank">1890 metr. chrztu</a>
-                <a href="kozlarch1.php" target="_blank">1924 metr. śl.</a>
-                <a href="kozlarch2.php" target="_blank">kaplica grobowa</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Stanisława M.</div>
-            <div class="doc-links">
-                <a href="kozlarch1.php" target="_blank">1924 metr. śl.</a>
-                <a href="ladarch30.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- KROBICKI -->
+            <details class="family-node">
+                <summary>KROBICKI</summary>
+                <details class="person-node">
+                    <summary>Eleutery</summary>
+                    <div class="doc-links">
+                        <a href="krobarch5.php" target="documentViewer">1818 metr. śl.</a>
+                        <a href="krobarch15.php" target="documentViewer">1875 metr. zgonu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Antonina</summary>
+                    <div class="doc-links">
+                        <a href="holubarch2.php" target="documentViewer">1799 metr. chrztu</a>
+                        <a href="krobarch5.php" target="documentViewer">1818 metr. śl.</a>
+                        <a href="krobarch16.php" target="documentViewer">1867 metr. zgomu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Ign. Konstanty</summary>
+                    <div class="doc-links">
+                        <a href="krobarch12.php" target="documentViewer">1824 metr. chrztu</a>
+                        <a href="krobarch6.php" target="documentViewer">1849 metr. śl.</a>
+                        <a href="krobarch10.php" target="documentViewer">1864 zgon</a>
+                        <a href="krobarch2.php" target="documentViewer">1864 nekrologi</a>
+                        <a href="krobarch11.php" target="documentViewer">1864 klepsydra</a>
+                        <a href="krobarch3.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Teofila Józ.</summary>
+                    <div class="doc-links">
+                        <a href="krobarch6.php" target="documentViewer">1849 metr. śl.</a>
+                        <a href="krobarch7.php" target="documentViewer">1905 metr. zgonu</a>
+                        <a href="krobarch.php" target="documentViewer">1905 nekrologi</a>
+                        <a href="krobarch8.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Mich. Leon. El.</summary>
+                    <div class="doc-links">
+                        <a href="ladarch20.php" target="documentViewer">1889 metr. śl.</a>
+                        <a href="krobarch9.php" target="documentViewer">1923 zgon</a>
+                        <a href="krobarch4.php" target="documentViewer">1923 nekrologi</a>
+                        <a href="krobarch3.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia Waleria</summary>
+                    <div class="doc-links">
+                        <a href="ladarch11.php" target="documentViewer">1866 metr. chrztu</a>
+                        <a href="ladarch20.php" target="documentViewer">1889 metr. śl.</a>
+                        <a href="krobarch13.php" target="documentViewer">1927 metr. zgonu</a>
+                        <a href="krobarch17.php" target="documentViewer">1927 nekrolog</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Mieczysław</summary>
+                    <div class="doc-links"><a href="krobarch3.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Witold</summary>
+                    <div class="doc-links"><a href="krobarch3.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Felicja A. A.</summary>
+                    <div class="doc-links"><a href="krobarch3.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Konstanty A.</summary>
+                    <div class="doc-links"><a href="krobarch18.php" target="documentViewer">Grób</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Kazimiera G.</summary>
+                    <div class="doc-links"><a href="krobarch19.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Władysław</summary>
+                    <div class="doc-links"><a href="krobarch20.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Teofila Z. K.</summary>
+                    <div class="doc-links"><a href="krobarch14.php" target="documentViewer">1861 metr. chrztu</a></div>
+                </details>
+            </details>
 
-    <!-- KRAIŃSKI -->
-    <div class="family-card">
-        <div class="family-title">Kraiński</div>
-        <div class="person-group">
-            <div class="person-name">Eugeniusz</div>
-            <div class="doc-links">
-                <a href="kraarch7.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maurycy</div>
-            <div class="doc-links">
-                <a href="kraarch7.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Władysław J. W.</div>
-            <div class="doc-links">
-                <a href="kraarch.php" target="_blank">1797 metr. chrztu</a>
-                <a href="kraarch2.php" target="_blank">1840 metr. śl.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Aniela</div>
-            <div class="doc-links">
-                <a href="kraarch2.php" target="_blank">1840 metr. śl.</a>
-                <a href="kraarch12.php" target="_blank">1844 zap. śl.</a>
-                <a href="kraarch6.php" target="_blank">1887 nekrolog</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Władysław M. W.</div>
-            <div class="doc-links">
-                <a href="kraarch3.php" target="_blank">1841 metr. chrztu</a>
-                <a href="kraarch9.php" target="_blank">1926 nekrolog</a>
-                <a href="kraarch5.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maria E. Z.</div>
-            <div class="doc-links">
-                <a href="kraarch11.php" target="_blank">1932 metr. zgonu</a>
-                <a href="kraarch8.php" target="_blank">1932 nekrologi</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna M.</div>
-            <div class="doc-links">
-                <a href="ladarch.php" target="_blank">1895 metr. śl.</a>
-                <a href="ladarch30.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia</div>
-            <div class="doc-links">
-                <a href="fedarch4.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">s. Aniela /Jadwiga/</div>
-            <div class="doc-links">
-                <a href="kraarch13.php" target="_blank">krypta</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Antoni M. W.</div>
-            <div class="doc-links">
-                <a href="kraarch10.php" target="_blank">1914 metr. śl.</a>
-                <a href="kraarch4.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jan S. M.</div>
-            <div class="doc-links">
-                <a href="kraarch18.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Elżbieta R. M.</div>
-            <div class="doc-links">
-                <a href="kraarch18.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia B. R.</div>
-            <div class="doc-links">
-                <a href="wlodarch1.php" target="_blank">1890 metr. chrztu</a>
-                <a href="kraarch10.php" target="_blank">1914 metr. śl.</a>
-                <a href="kraarch4.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Teresa M. W.</div>
-            <div class="doc-links">
-                <a href="wiszarch17.php" target="_blank">1908 ślub</a>
-            </div>
-        </div>
-    </div>
+            <!-- ŁADOMIRSKI -->
+            <details class="family-node">
+                <summary>ŁADOMIRSKI</summary>
+                <details class="person-node">
+                    <summary>Antoni</summary>
+                    <div class="doc-links"><a href="ladarch1.php" target="documentViewer">1726 dzierż. maj.</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Ewa Zofia</summary>
+                    <div class="doc-links">
+                        <a href="ladarch1.php" target="documentViewer">1726 dzierż. maj.</a>
+                        <a href="ladarch43.php" target="documentViewer">1761 metr. zg.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Kazimierz</summary>
+                    <div class="doc-links">
+                        <a href="ladarch10.php" target="documentViewer">1819 metr. zg.</a>
+                        <a href="ladarch9.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>El. Lud. Anna</summary>
+                    <div class="doc-links">
+                        <a href="golejarch1.php" target="documentViewer">1757 metr. chrztu</a>
+                        <a href="ladarch22.php" target="documentViewer">1820 metr. zg.</a>
+                        <a href="ladarch9.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Gr. Teofil Jac.</summary>
+                    <div class="doc-links">
+                        <a href="ladarch39.php" target="documentViewer">1822 metr. śl.</a>
+                        <a href="ladarch9.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Elżbieta</summary>
+                    <div class="doc-links">
+                        <a href="ladarch47.php" target="documentViewer">1800/20 metr. chrztu</a>
+                        <a href="ladarch39.php" target="documentViewer">1822 metr. śl.</a>
+                        <a href="ladarch25.php" target="documentViewer">1833 metr. śl.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Franciszek Ksaw.</summary>
+                    <div class="doc-links">
+                        <a href="ladarch23.php" target="documentViewer">1823 metr. chrztu</a>
+                        <a href="ladarch26.php" target="documentViewer">1832 metr. zg.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Pr. Ferdynanda M.</summary>
+                    <div class="doc-links">
+                        <a href="ladarch24.php" target="documentViewer">1825 metr. chrztu</a>
+                        <a href="ladarch26.php" target="documentViewer">1832 metr. zg.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Rozalia</summary>
+                    <div class="doc-links"><a href="ladarch31.php" target="documentViewer">1778 skrypt dł.</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Jan</summary>
+                    <div class="doc-links">
+                        <a href="ladarch2.php" target="documentViewer">1768 metr. chrztu</a>
+                        <a href="ladarch44.php" target="documentViewer">1843 metr. zg.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Łu. Barbara Ter.</summary>
+                    <div class="doc-links">
+                        <a href="golejarch2.php" target="documentViewer">1763 metr. chrztu</a>
+                        <a href="ladarch3.php" target="documentViewer">1833 metr. zg.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Józefa</summary>
+                    <div class="doc-links"><a href="ladarch42.php" target="documentViewer">1807 metr. zg.</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Karolina Weronika</summary>
+                    <div class="doc-links">
+                        <a href="ladarch21.php" target="documentViewer">1795/6 metr. chrztu</a>
+                        <a href="ladarch46.php" target="documentViewer">1874 metr. zg.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Fil. Zefiryna Józ.</summary>
+                    <div class="doc-links">
+                        <a href="ladarch12.php" target="documentViewer">1825 akt chrztu</a>
+                        <a href="ladarch38.php" target="documentViewer">1898 akt zgonu</a>
+                        <a href="ladarch14.php" target="documentViewer">1898 nekrolog</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Kaliksta Joanna</summary>
+                    <div class="doc-links">
+                        <a href="ladarch13.php" target="documentViewer">1827 akt chrztu</a>
+                        <a href="ladarch37.php" target="documentViewer">1905 akt zgonu</a>
+                        <a href="ladarch15.php" target="documentViewer">1905 nekrolog</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Leonard Adolf</summary>
+                    <div class="doc-links">
+                        <a href="ladarch28.php" target="documentViewer">1829 akt chrztu</a>
+                        <a href="ladarch29.php" target="documentViewer">1831 akt zg.</a>
+                        <a href="ladarch27.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Wal. Konstanty Br.</summary>
+                    <div class="doc-links">
+                        <a href="ladarch8.php" target="documentViewer">1832 metr. chrztu</a>
+                        <a href="ladarch35.php" target="documentViewer">1862 metr. śl</a>
+                        <a href="ladarch5.php" target="documentViewer">1888-92 legit. szl.</a>
+                        <a href="ladarch16.php" target="documentViewer">1895 nekrologi</a>
+                        <a href="ladarch33.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Katarzyna W.</summary>
+                    <div class="doc-links">
+                        <a href="golaszarch7.php" target="documentViewer">1841 metr. chrztu</a>
+                        <a href="ladarch35.php" target="documentViewer">1862 metr. śl</a>
+                        <a href="ladarch41.php" target="documentViewer">1917 metr. zgonu</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Eme. Stanisław</summary>
+                    <div class="doc-links">
+                        <a href="ladarch34.php" target="documentViewer">1862 metr. chrztu</a>
+                        <a href="ladarch6.php" target="documentViewer">1886 gonitwa</a>
+                        <a href="ladarch45.php" target="documentViewer">1898 metr. zgonu</a>
+                        <a href="ladarch33.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Zdzisław F.</summary>
+                    <div class="doc-links">
+                        <a href="ladarch7.php" target="documentViewer">1864 metr. chrztu</a>
+                        <a href="ladarch4.php" target="documentViewer">1893 legit. szl.</a>
+                        <a href="ladarch.php" target="documentViewer">1895 metr. śl.</a>
+                        <a href="ladarch30.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna M.</summary>
+                    <div class="doc-links">
+                        <a href="ladarch.php" target="documentViewer">1895 metr. śl.</a>
+                        <a href="ladarch30.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Władysław M.</summary>
+                    <div class="doc-links"><a href="ladarch50.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>F. Waleria</summary>
+                    <div class="doc-links"><a href="ladarch51.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>s. Anna /Maria M./</summary>
+                    <div class="doc-links"><a href="ladarch52.php" target="documentViewer">Krypta</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Jadwiga M. R.</summary>
+                    <div class="doc-links"><a href="ladarch53.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia M. F.</summary>
+                    <div class="doc-links"><a href="trzecarch3.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Stanisława M.</summary>
+                    <div class="doc-links">
+                        <a href="kozlarch1.php" target="documentViewer">1924 metr. śl.</a>
+                        <a href="ladarch30.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Józef M. P.</summary>
+                    <div class="doc-links"><a href="ladarch54.php" target="documentViewer">Mogiła</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna</summary>
+                    <div class="doc-links"><a href="ladarch54.php" target="documentViewer">Grób</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Zdzisław M.</summary>
+                    <div class="doc-links"><a href="ladarch55.php" target="documentViewer">Grób</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Andrzej M.</summary>
+                    <div class="doc-links"><a href="ladarch49.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Krystyna W. F.</summary>
+                    <div class="doc-links"><a href="ladarch48.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Antoni M. J.</summary>
+                    <div class="doc-links"><a href="ladarch56.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>M. W. Jadwiga</summary>
+                    <div class="doc-links"><a href="ladarch56.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna</summary>
+                    <div class="doc-links"><a href="ladarch30.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Jan Dominik</summary>
+                    <div class="doc-links"><a href="ladarch32.php" target="documentViewer">1865 metr. chrztu</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia Waleria</summary>
+                    <div class="doc-links">
+                        <a href="ladarch11.php" target="documentViewer">1866 metr. chrztu</a>
+                        <a href="ladarch20.php" target="documentViewer">1889 metr. śl.</a>
+                        <a href="krobarch13.php" target="documentViewer">1927 metr. zgonu</a>
+                        <a href="krobarch17.php" target="documentViewer">1927 nekrolog</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Marian Maciej</summary>
+                    <div class="doc-links"><a href="ladarch40.php" target="documentViewer">1868 metr. chrztu</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Helena Karolina</summary>
+                    <div class="doc-links">
+                        <a href="ladarch36.php" target="documentViewer">1873 metr. chrztu</a>
+                        <a href="ladarch19.php" target="documentViewer">1895 metr. śl.</a>
+                        <a href="golebarch.php" target="documentViewer">1918 nekrologi</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Seweryna</summary>
+                    <div class="doc-links">
+                        <a href="ladarch17.php" target="documentViewer">1875 metr. chrztu</a>
+                        <a href="ladarch18.php" target="documentViewer">1898 ślub</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- KROBICKI -->
-    <div class="family-card">
-        <div class="family-title">Krobicki</div>
-        <div class="person-group">
-            <div class="person-name">Eleutery</div>
-            <div class="doc-links">
-                <a href="krobarch5.php" target="_blank">1818 metr. śl.</a>
-                <a href="krobarch15.php" target="_blank">1875 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Antonina</div>
-            <div class="doc-links">
-                <a href="holubarch2.php" target="_blank">1799 metr. chrztu</a>
-                <a href="krobarch5.php" target="_blank">1818 metr. śl.</a>
-                <a href="krobarch16.php" target="_blank">1867 metr. zgomu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Ign. Konstanty</div>
-            <div class="doc-links">
-                <a href="krobarch12.php" target="_blank">1824 metr. chrztu</a>
-                <a href="krobarch6.php" target="_blank">1849 metr. śl.</a>
-                <a href="krobarch10.php" target="_blank">1864 zgon</a>
-                <a href="krobarch2.php" target="_blank">1864 nekrologi</a>
-                <a href="krobarch11.php" target="_blank">1864 klepsydra</a>
-                <a href="krobarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Teofila Józ.</div>
-            <div class="doc-links">
-                <a href="krobarch6.php" target="_blank">1849 metr. śl.</a>
-                <a href="krobarch7.php" target="_blank">1905 metr. zgonu</a>
-                <a href="krobarch.php" target="_blank">1905 nekrologi</a>
-                <a href="krobarch8.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Mich. Leon. El.</div>
-            <div class="doc-links">
-                <a href="ladarch20.php" target="_blank">1889 metr. śl.</a>
-                <a href="krobarch9.php" target="_blank">1923 zgon</a>
-                <a href="krobarch4.php" target="_blank">1923 nekrologi</a>
-                <a href="krobarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia Waleria</div>
-            <div class="doc-links">
-                <a href="ladarch11.php" target="_blank">1866 metr. chrztu</a>
-                <a href="ladarch20.php" target="_blank">1889 metr. śl.</a>
-                <a href="krobarch13.php" target="_blank">1927 metr. zgonu</a>
-                <a href="krobarch17.php" target="_blank">1927 nekrolog</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Mieczysław</div>
-            <div class="doc-links">
-                <a href="krobarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Witold</div>
-            <div class="doc-links">
-                <a href="krobarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Felicja A. A.</div>
-            <div class="doc-links">
-                <a href="krobarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Konstanty A.</div>
-            <div class="doc-links">
-                <a href="krobarch18.php" target="_blank">grób</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Kazimiera G.</div>
-            <div class="doc-links">
-                <a href="krobarch19.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Władysław</div>
-            <div class="doc-links">
-                <a href="krobarch20.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Teofila Z. K.</div>
-            <div class="doc-links">
-                <a href="krobarch14.php" target="_blank">1861 metr. chrztu</a>
-            </div>
-        </div>
-    </div>
+            <!-- MALCZEWSKI -->
+            <details class="family-node">
+                <summary>MALCZEWSKI</summary>
+                <details class="person-node">
+                    <summary>Piotr Antoni</summary>
+                    <div class="doc-links">
+                        <a href="malczarch.php" target="documentViewer">1766 metr. chrztu</a>
+                        <a href="malczarch2.php" target="documentViewer">1814 opieczętow.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia</summary>
+                    <div class="doc-links"><a href="malczarch4.php" target="documentViewer">1832 metr. zgonu</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Rafała Wiktoria</summary>
+                    <div class="doc-links">
+                        <a href="malczarch3.php" target="documentViewer">1801 metr. chrztu</a>
+                        <a href="golaszarch6.php" target="documentViewer">1825 metr. śl.</a>
+                        <a href="golaszarch1.php" target="documentViewer">1863 metr. zgonu</a>
+                        <a href="golaszarch.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- ŁADOMIRSKI -->
-    <div class="family-card">
-        <div class="family-title">Ładomirski</div>
-        <div class="person-group">
-            <div class="person-name">Antoni</div>
-            <div class="doc-links">
-                <a href="ladarch1.php" target="_blank">1726 dzierż. maj.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Ewa Zofia</div>
-            <div class="doc-links">
-                <a href="ladarch1.php" target="_blank">1726 dzierż. maj.</a>
-                <a href="ladarch43.php" target="_blank">1761 metr. zg.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Kazimierz</div>
-            <div class="doc-links">
-                <a href="ladarch10.php" target="_blank">1819 metr. zg.</a>
-                <a href="ladarch9.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">El. Lud. Anna</div>
-            <div class="doc-links">
-                <a href="golejarch1.php" target="_blank">1757 metr. chrztu</a>
-                <a href="ladarch22.php" target="_blank">1820 metr. zg.</a>
-                <a href="ladarch9.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Gr. Teofil Jac.</div>
-            <div class="doc-links">
-                <a href="ladarch39.php" target="_blank">1822 metr. śl.</a>
-                <a href="ladarch9.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Elżbieta</div>
-            <div class="doc-links">
-                <a href="ladarch47.php" target="_blank">1800/20 metr. chrztu</a>
-                <a href="ladarch39.php" target="_blank">1822 metr. śl.</a>
-                <a href="ladarch25.php" target="_blank">1833 metr. śl.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Franciszek Ksaw.</div>
-            <div class="doc-links">
-                <a href="ladarch23.php" target="_blank">1823 metr. chrztu</a>
-                <a href="ladarch26.php" target="_blank">1832 metr. zg.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Pr. Ferdynanda M.</div>
-            <div class="doc-links">
-                <a href="ladarch24.php" target="_blank">1825 metr. chrztu</a>
-                <a href="ladarch26.php" target="_blank">1832 metr. zg.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Rozalia</div>
-            <div class="doc-links">
-                <a href="ladarch31.php" target="_blank">1778 skrypt dł.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jan</div>
-            <div class="doc-links">
-                <a href="ladarch2.php" target="_blank">1768 metr. chrztu</a>
-                <a href="ladarch44.php" target="_blank">1843 metr. zg.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Łu. Barbara Ter.</div>
-            <div class="doc-links">
-                <a href="golejarch2.php" target="_blank">1763 metr. chrztu</a>
-                <a href="ladarch3.php" target="_blank">1833 metr. zg.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Józefa</div>
-            <div class="doc-links">
-                <a href="ladarch42.php" target="_blank">1807 metr. zg.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Karolina Weronika</div>
-            <div class="doc-links">
-                <a href="ladarch21.php" target="_blank">1795/6 metr. chrztu</a>
-                <a href="ladarch46.php" target="_blank">1874 metr. zg.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Fil. Zefiryna Józ.</div>
-            <div class="doc-links">
-                <a href="ladarch12.php" target="_blank">1825 akt chrztu</a>
-                <a href="ladarch38.php" target="_blank">1898 akt zgonu</a>
-                <a href="ladarch14.php" target="_blank">1898 nekrolog</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Kaliksta Joanna</div>
-            <div class="doc-links">
-                <a href="ladarch13.php" target="_blank">1827 akt chrztu</a>
-                <a href="ladarch37.php" target="_blank">1905 akt zgonu</a>
-                <a href="ladarch15.php" target="_blank">1905 nekrolog</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Leonard Adolf</div>
-            <div class="doc-links">
-                <a href="ladarch28.php" target="_blank">1829 akt chrztu</a>
-                <a href="ladarch29.php" target="_blank">1831 akt zg.</a>
-                <a href="ladarch27.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Wal. Konstanty Br.</div>
-            <div class="doc-links">
-                <a href="ladarch8.php" target="_blank">1832 metr. chrztu</a>
-                <a href="ladarch35.php" target="_blank">1862 metr. śl</a>
-                <a href="ladarch5.php" target="_blank">1888-92 legit. szl.</a>
-                <a href="ladarch16.php" target="_blank">1895 nekrologi</a>
-                <a href="ladarch33.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Katarzyna W.</div>
-            <div class="doc-links">
-                <a href="golaszarch7.php" target="_blank">1841 metr. chrztu</a>
-                <a href="ladarch35.php" target="_blank">1862 metr. śl</a>
-                <a href="ladarch41.php" target="_blank">1917 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Eme. Stanisław</div>
-            <div class="doc-links">
-                <a href="ladarch34.php" target="_blank">1862 metr. chrztu</a>
-                <a href="ladarch6.php" target="_blank">1886 gonitwa</a>
-                <a href="ladarch45.php" target="_blank">1898 metr. zgonu</a>
-                <a href="ladarch33.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zdzisław F.</div>
-            <div class="doc-links">
-                <a href="ladarch7.php" target="_blank">1864 metr. chrztu</a>
-                <a href="ladarch4.php" target="_blank">1893 legit. szl.</a>
-                <a href="ladarch.php" target="_blank">1895 metr. śl.</a>
-                <a href="ladarch30.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna M.</div>
-            <div class="doc-links">
-                <a href="ladarch.php" target="_blank">1895 metr. śl.</a>
-                <a href="ladarch30.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Władysław M.</div>
-            <div class="doc-links">
-                <a href="ladarch50.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">F. Waleria</div>
-            <div class="doc-links">
-                <a href="ladarch51.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">s. Anna /Maria M./</div>
-            <div class="doc-links">
-                <a href="ladarch52.php" target="_blank">krypta</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jadwiga M. R.</div>
-            <div class="doc-links">
-                <a href="ladarch53.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia M. F.</div>
-            <div class="doc-links">
-                <a href="trzecarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Stanisława M.</div>
-            <div class="doc-links">
-                <a href="kozlarch1.php" target="_blank">1924 metr. śl.</a>
-                <a href="ladarch30.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Józef M. P.</div>
-            <div class="doc-links">
-                <a href="ladarch54.php" target="_blank">mogiła</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna</div>
-            <div class="doc-links">
-                <a href="ladarch54.php" target="_blank">grób</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zdzisław M.</div>
-            <div class="doc-links">
-                <a href="ladarch55.php" target="_blank">grób</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Andrzej M.</div>
-            <div class="doc-links">
-                <a href="ladarch49.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Krystyna W. F.</div>
-            <div class="doc-links">
-                <a href="ladarch48.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Antoni M. J.</div>
-            <div class="doc-links">
-                <a href="ladarch56.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">M. W. Jadwiga</div>
-            <div class="doc-links">
-                <a href="ladarch56.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna</div>
-            <div class="doc-links">
-                <a href="ladarch30.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jan Dominik</div>
-            <div class="doc-links">
-                <a href="ladarch32.php" target="_blank">1865 metr. chrztu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia Waleria</div>
-            <div class="doc-links">
-                <a href="ladarch11.php" target="_blank">1866 metr. chrztu</a>
-                <a href="ladarch20.php" target="_blank">1889 metr. śl.</a>
-                <a href="krobarch13.php" target="_blank">1927 metr. zgonu</a>
-                <a href="krobarch17.php" target="_blank">1927 nekrolog</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Marian Maciej</div>
-            <div class="doc-links">
-                <a href="ladarch40.php" target="_blank">1868 metr. chrztu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Helena Karolina</div>
-            <div class="doc-links">
-                <a href="ladarch36.php" target="_blank">1873 metr. chrztu</a>
-                <a href="ladarch19.php" target="_blank">1895 metr. śl.</a>
-                <a href="golebarch.php" target="_blank">1918 nekrologi</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Seweryna</div>
-            <div class="doc-links">
-                <a href="ladarch17.php" target="_blank">1875 metr. chrztu</a>
-                <a href="ladarch18.php" target="_blank">1898 ślub</a>
-            </div>
-        </div>
-    </div>
+            <!-- MEISSNER -->
+            <details class="family-node">
+                <summary>MEISSNER</summary>
+                <details class="person-node">
+                    <summary>Karol M.</summary>
+                    <div class="doc-links"><a href="meisarch.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Maria</summary>
+                    <div class="doc-links"><a href="meisarch.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+            </details>
 
-    <!-- MALCZEWSKI -->
-    <div class="family-card">
-        <div class="family-title">Malczewski</div>
-        <div class="person-group">
-            <div class="person-name">Piotr Antoni</div>
-            <div class="doc-links">
-                <a href="malczarch.php" target="_blank">1766 metr. chrztu</a>
-                <a href="malczarch2.php" target="_blank">1814 opieczętow.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia</div>
-            <div class="doc-links">
-                <a href="malczarch4.php" target="_blank">1832 metr. zgonu</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Rafała Wiktoria</div>
-            <div class="doc-links">
-                <a href="malczarch3.php" target="_blank">1801 metr. chrztu</a>
-                <a href="golaszarch6.php" target="_blank">1825 metr. śl.</a>
-                <a href="golaszarch1.php" target="_blank">1863 metr. zgonu</a>
-                <a href="golaszarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- PANKRATIEW -->
+            <details class="family-node">
+                <summary>PANKRATIEW</summary>
+                <details class="person-node">
+                    <summary>Celestyna</summary>
+                    <div class="doc-links"><a href="pankarch.php" target="documentViewer">1859 metr. zgonu</a></div>
+                </details>
+            </details>
 
-    <!-- MEISSNER -->
-    <div class="family-card">
-        <div class="family-title">Meissner</div>
-        <div class="person-group">
-            <div class="person-name">Karol M.</div>
-            <div class="doc-links">
-                <a href="meisarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maria</div>
-            <div class="doc-links">
-                <a href="meisarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- TELEŻYŃSKI -->
+            <details class="family-node">
+                <summary>TELEŻYŃSKI</summary>
+                <details class="person-node">
+                    <summary>Tadeusz D. K.</summary>
+                    <div class="doc-links"><a href="ladarch53.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Jadwiga M. R.</summary>
+                    <div class="doc-links"><a href="ladarch53.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+            </details>
 
-    <!-- PANKRATIEW -->
-    <div class="family-card">
-        <div class="family-title">Pankratiew</div>
-        <div class="person-group">
-            <div class="person-name">Celestyna</div>
-            <div class="doc-links">
-                <a href="pankarch.php" target="_blank">1859 metr. zgonu</a>
-            </div>
-        </div>
-    </div>
+            <!-- TRZECIESKI -->
+            <details class="family-node">
+                <summary>TRZECIESKI</summary>
+                <details class="person-node">
+                    <summary>Jan Michał</summary>
+                    <div class="doc-links">
+                        <a href="trzecarch4.php" target="documentViewer">1842 metr. zgonu</a>
+                        <a href="trzecarch3.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Magdalena F.</summary>
+                    <div class="doc-links">
+                        <a href="trzecarch5.php" target="documentViewer">1842 metr. zgonu</a>
+                        <a href="trzecarch3.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Teof. Tytus Tom.</summary>
+                    <div class="doc-links">
+                        <a href="trzecarch.php" target="documentViewer">1845 metr. śl.</a>
+                        <a href="trzecarch1.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna A. Z.</summary>
+                    <div class="doc-links">
+                        <a href="trzecarch2.php" target="documentViewer">1821 metr. chrztu</a>
+                        <a href="trzecarch.php" target="documentViewer">1845 metr. śl.</a>
+                        <a href="trzecarch1.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Maria E. Z.</summary>
+                    <div class="doc-links">
+                        <a href="kraarch11.php" target="documentViewer">1932 metr. zgonu</a>
+                        <a href="kraarch8.php" target="documentViewer">1932 nekrologi</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- TELEŻYŃSKI -->
-    <div class="family-card">
-        <div class="family-title">Teleżyński</div>
-        <div class="person-group">
-            <div class="person-name">Tadeusz D. K.</div>
-            <div class="doc-links">
-                <a href="ladarch53.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jadwiga M. R.</div>
-            <div class="doc-links">
-                <a href="ladarch53.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- TYSZKIEWICZ -->
+            <details class="family-node">
+                <summary>TYSZKIEWICZ</summary>
+                <details class="person-node">
+                    <summary>Eustachy S.</summary>
+                    <div class="doc-links"><a href="tyszarch.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia M. F.</summary>
+                    <div class="doc-links"><a href="trzecarch3.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+            </details>
 
-    <!-- TRZECIESKI -->
-    <div class="family-card">
-        <div class="family-title">Trzecieski</div>
-        <div class="person-group">
-            <div class="person-name">Jan Michał</div>
-            <div class="doc-links">
-                <a href="trzecarch4.php" target="_blank">1842 metr. zgonu</a>
-                <a href="trzecarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Magdalena F.</div>
-            <div class="doc-links">
-                <a href="trzecarch5.php" target="_blank">1842 metr. zgonu</a>
-                <a href="trzecarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Teof. Tytus Tom.</div>
-            <div class="doc-links">
-                <a href="trzecarch.php" target="_blank">1845 metr. śl.</a>
-                <a href="trzecarch1.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna A. Z.</div>
-            <div class="doc-links">
-                <a href="trzecarch2.php" target="_blank">1821 metr. chrztu</a>
-                <a href="trzecarch.php" target="_blank">1845 metr. śl.</a>
-                <a href="trzecarch1.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maria E. Z.</div>
-            <div class="doc-links">
-                <a href="kraarch11.php" target="_blank">1932 metr. zgonu</a>
-                <a href="kraarch8.php" target="_blank">1932 nekrologi</a>
-            </div>
-        </div>
-    </div>
+            <!-- WĘGLEŃSKI -->
+            <details class="family-node">
+                <summary>WĘGLEŃSKI</summary>
+                <details class="person-node">
+                    <summary>L. Antoni</summary>
+                    <div class="doc-links">
+                        <a href="weglarch6.php" target="documentViewer">1793 metr. śl.</a>
+                        <a href="weglarch5.php" target="documentViewer">1828 metr. zgonu</a>
+                        <a href="weglarch.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna</summary>
+                    <div class="doc-links">
+                        <a href="weglarch6.php" target="documentViewer">1793 metr. śl.</a>
+                        <a href="weglarch4.php" target="documentViewer">1806 nekrolog</a>
+                        <a href="weglarch.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Wojciech D.</summary>
+                    <div class="doc-links">
+                        <a href="weglarch1.php" target="documentViewer">1863 metr. zgonu</a>
+                        <a href="weglarch.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Emilia R. L.</summary>
+                    <div class="doc-links">
+                        <a href="weglarch3.php" target="documentViewer">1800/3 metr. chtu</a>
+                        <a href="weglarch2.php" target="documentViewer">1856 metr. zgonu</a>
+                        <a href="weglarch.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna A. Z.</summary>
+                    <div class="doc-links">
+                        <a href="trzecarch2.php" target="documentViewer">1821 metr. chrztu</a>
+                        <a href="trzecarch.php" target="documentViewer">1845 metr. śl.</a>
+                        <a href="trzecarch1.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- TYSZKIEWICZ -->
-    <div class="family-card">
-        <div class="family-title">Tyszkiewicz</div>
-        <div class="person-group">
-            <div class="person-name">Eustachy S.</div>
-            <div class="doc-links">
-                <a href="tyszarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia M. F.</div>
-            <div class="doc-links">
-                <a href="trzecarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- WISZNIEWSKI -->
+            <details class="family-node">
+                <summary>WISZNIEWSKI</summary>
+                <div class="doc-links direct-links">
+                    <a href="wiszarch.php" target="documentViewer">Drzewo Genealogiczne</a>
+                    <a href="wiszarch8.php" target="documentViewer">Herby</a>
+                </div>
+                <details class="person-node">
+                    <summary>Kamień p. Owrucz</summary>
+                    <div class="doc-links"><a href="wiszarch20.php" target="documentViewer">1853 spis spow.</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Jan Franciszek</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch29.php" target="documentViewer">1793 metr. chrztu</a>
+                        <a href="wiszarch30.php" target="documentViewer">1839 order</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Leopold</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch18.php" target="documentViewer">1830 św. chrztu</a>
+                        <a href="wiszarch19.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Emilia</summary>
+                    <div class="doc-links"><a href="wiszarch24.php" target="documentViewer">Nekrologi</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Ewarysta</summary>
+                    <div class="doc-links"><a href="wiszarch23.php" target="documentViewer">1869 św. śl.</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Leonard</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch28.php" target="documentViewer">1835 metr. chrztu</a>
+                        <a href="wiszarch26.php" target="documentViewer">1869 metr. śl.</a>
+                        <a href="wiszarch14.php" target="documentViewer">1895 wybuch gazu</a>
+                        <a href="wiszarch4.php" target="documentViewer">1914 klepsydra</a>
+                        <a href="wiszarch5.php" target="documentViewer">1914 metr. zg.</a>
+                        <a href="wiszarch6.php" target="documentViewer">1917 ...</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Ludmiła</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch26.php" target="documentViewer">1869 metr. śl.</a>
+                        <a href="wiszarch16.php" target="documentViewer">1934 pochówek</a>
+                        <a href="wiszarch25.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Maria Helena</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch1.php" target="documentViewer">1871 metr. chrztu</a>
+                        <a href="wiszarch2.php" target="documentViewer">1890 św. 1-go śl.</a>
+                        <a href="wiszarch3.php" target="documentViewer">1908 św. 2-go śl.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia</summary>
+                    <div class="doc-links"><a href="wiszarch27.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Maria Ludwik</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch9.php" target="documentViewer">1879 metr. chrztu</a>
+                        <a href="wiszarch7.php" target="documentViewer">1897 św. dojrz.</a>
+                        <a href="wiszarch13.php" target="documentViewer">1903 ...</a>
+                        <a href="wiszarch17.php" target="documentViewer">1908 ślub</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Teresa M. W.</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch17.php" target="documentViewer">1908 ślub</a>
+                        <a href="wiszarch33.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Jan L. M.</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch21.php" target="documentViewer">1908 św. chrztu</a>
+                        <a href="wiszarch15.php" target="documentViewer">1939 zeszyt ewid.</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Teresa M. A.</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch22.php" target="documentViewer">1910 św. chrztu</a>
+                        <a href="wiszarch33.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Anna M.</summary>
+                    <div class="doc-links"><a href="wiszarch33.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Stanisław</summary>
+                    <div class="doc-links"><a href="wiszarch10.php" target="documentViewer">1999 zaśw. arch.</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Tadeusz M.</summary>
+                    <div class="doc-links"><a href="wiszarch33.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Andrzej Maria</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch11.php" target="documentViewer">1937 św. dojrz.</a>
+                        <a href="wiszarch12.php" target="documentViewer">1961 dypl. WSE</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Jan W. M.</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch32.php" target="documentViewer">1880 metr. chrztu</a>
+                        <a href="wiszarch14.php" target="documentViewer">1895 wybuch gazu</a>
+                        <a href="wiszarch31.php" target="documentViewer">1895 metr. zg.</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- WĘGLEŃSKI -->
-    <div class="family-card">
-        <div class="family-title">Węgleński</div>
-        <div class="person-group">
-            <div class="person-name">L. Antoni</div>
-            <div class="doc-links">
-                <a href="weglarch6.php" target="_blank">1793 metr. śl.</a>
-                <a href="weglarch5.php" target="_blank">1828 metr. zgonu</a>
-                <a href="weglarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna</div>
-            <div class="doc-links">
-                <a href="weglarch6.php" target="_blank">1793 metr. śl.</a>
-                <a href="weglarch4.php" target="_blank">1806 nekrolog</a>
-                <a href="weglarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Wojciech D.</div>
-            <div class="doc-links">
-                <a href="weglarch1.php" target="_blank">1863 metr. zgonu</a>
-                <a href="weglarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Emilia R. L.</div>
-            <div class="doc-links">
-                <a href="weglarch3.php" target="_blank">1800/3 metr. chtu</a>
-                <a href="weglarch2.php" target="_blank">1856 metr. zgonu</a>
-                <a href="weglarch.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna A. Z.</div>
-            <div class="doc-links">
-                <a href="trzecarch2.php" target="_blank">1821 metr. chrztu</a>
-                <a href="trzecarch.php" target="_blank">1845 metr. śl.</a>
-                <a href="trzecarch1.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+            <!-- WŁODEK -->
+            <details class="family-node">
+                <summary>WŁODEK</summary>
+                <details class="person-node">
+                    <summary>Roman</summary>
+                    <div class="doc-links">
+                        <a href="wlodarch.php" target="documentViewer">1850 metr. śl.</a>
+                        <a href="wlodarch2.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Emilia A.</summary>
+                    <div class="doc-links">
+                        <a href="wlodarch.php" target="documentViewer">1850 metr. śl.</a>
+                        <a href="wlodarch6.php" target="documentViewer">1863 metr. zgonu</a>
+                        <a href="wlodarch2.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Zdzisław R. A.</summary>
+                    <div class="doc-links">
+                        <a href="wlodarch7.php" target="documentViewer">1852 metr. chrztu</a>
+                        <a href="goetzarch10.php" target="documentViewer">1879 metr. śl.</a>
+                        <a href="wlodarch8.php" target="documentViewer">1928 metr. zgonu</a>
+                        <a href="wlodarch4.php" target="documentViewer">1928 zgon</a>
+                        <a href="wlodarch3.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Albina T. M.</summary>
+                    <div class="doc-links">
+                        <a href="goetzarch4.php" target="documentViewer">1860 metr. chrztu</a>
+                        <a href="goetzarch10.php" target="documentViewer">1879 metr. śl.</a>
+                        <a href="wlodarch5.php" target="documentViewer">1937 zgon</a>
+                        <a href="wlodarch3.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+                <details class="person-node">
+                    <summary>Zofia B. R.</summary>
+                    <div class="doc-links">
+                        <a href="wlodarch1.php" target="documentViewer">1890 metr. chrztu</a>
+                        <a href="kraarch10.php" target="documentViewer">1914 metr. śl.</a>
+                        <a href="kraarch4.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- WISZNIEWSKI -->
-    <div class="family-card">
-        <div class="family-title">Wiszniewski</div>
-        <div class="person-group">
-            <div class="doc-links" style="margin-bottom: 10px;">
-                <a href="wiszarch.php" target="_blank">Drzewo Genealogiczne</a>
-                <a href="wiszarch8.php" target="_blank">Herby</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Kamień p. Owrucz</div>
-            <div class="doc-links">
-                <a href="wiszarch20.php" target="_blank">1853 spis spow.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jan Franciszek</div>
-            <div class="doc-links">
-                <a href="wiszarch29.php" target="_blank">1793 metr. chrztu</a>
-                <a href="wiszarch30.php" target="_blank">1839 order</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Leopold</div>
-            <div class="doc-links">
-                <a href="wiszarch18.php" target="_blank">1830 św. chrztu</a>
-                <a href="wiszarch19.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Emilia</div>
-            <div class="doc-links">
-                <a href="wiszarch24.php" target="_blank">nekrologi</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Ewarysta</div>
-            <div class="doc-links">
-                <a href="wiszarch23.php" target="_blank">1869 św. śl.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Leonard</div>
-            <div class="doc-links">
-                <a href="wiszarch28.php" target="_blank">1835 metr. chrztu</a>
-                <a href="wiszarch26.php" target="_blank">1869 metr. śl.</a>
-                <a href="wiszarch14.php" target="_blank">1895 wybuch gazu</a>
-                <a href="wiszarch4.php" target="_blank">1914 klepsydra</a>
-                <a href="wiszarch5.php" target="_blank">1914 metr. zg.</a>
-                <a href="wiszarch6.php" target="_blank">1917 ...</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Ludmiła</div>
-            <div class="doc-links">
-                <a href="wiszarch26.php" target="_blank">1869 metr. śl.</a>
-                <a href="wiszarch16.php" target="_blank">1934 pochówek</a>
-                <a href="wiszarch25.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maria Helena</div>
-            <div class="doc-links">
-                <a href="wiszarch1.php" target="_blank">1871 metr. chrztu</a>
-                <a href="wiszarch2.php" target="_blank">1890 św. 1-go śl.</a>
-                <a href="wiszarch3.php" target="_blank">1908 św. 2-go śl.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia</div>
-            <div class="doc-links">
-                <a href="wiszarch27.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Maria Ludwik</div>
-            <div class="doc-links">
-                <a href="wiszarch9.php" target="_blank">1879 metr. chrztu</a>
-                <a href="wiszarch7.php" target="_blank">1897 św. dojrz.</a>
-                <a href="wiszarch13.php" target="_blank">1903 ...</a>
-                <a href="wiszarch17.php" target="_blank">1908 ślub</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Teresa M. W.</div>
-            <div class="doc-links">
-                <a href="wiszarch17.php" target="_blank">1908 ślub</a>
-                <a href="wiszarch33.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jan L. M.</div>
-            <div class="doc-links">
-                <a href="wiszarch21.php" target="_blank">1908 św. chrztu</a>
-                <a href="wiszarch15.php" target="_blank">1939 zeszyt ewid.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Teresa M. A.</div>
-            <div class="doc-links">
-                <a href="wiszarch22.php" target="_blank">1910 św. chrztu</a>
-                <a href="wiszarch33.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Anna M.</div>
-            <div class="doc-links">
-                <a href="wiszarch33.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Stanisław</div>
-            <div class="doc-links">
-                <a href="wiszarch10.php" target="_blank">1999 zaśw. arch.</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Tadeusz M.</div>
-            <div class="doc-links">
-                <a href="wiszarch33.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Andrzej Maria</div>
-            <div class="doc-links">
-                <a href="wiszarch11.php" target="_blank">1937 św. dojrz.</a>
-                <a href="wiszarch12.php" target="_blank">1961 dypl. WSE</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Jan W. M.</div>
-            <div class="doc-links">
-                <a href="wiszarch32.php" target="_blank">1880 metr. chrztu</a>
-                <a href="wiszarch14.php" target="_blank">1895 wybuch gazu</a>
-                <a href="wiszarch31.php" target="_blank">1895 metr. zg.</a>
-            </div>
-        </div>
-    </div>
+            <!-- ZAKRZEWSKI -->
+            <details class="family-node">
+                <summary>ZAKRZEWSKI</summary>
+                <details class="person-node">
+                    <summary>Ludwik</summary>
+                    <div class="doc-links"><a href="zakrzarch1.php" target="documentViewer">Grobowiec</a></div>
+                </details>
+                <details class="person-node">
+                    <summary>Ludmiła</summary>
+                    <div class="doc-links">
+                        <a href="wiszarch26.php" target="documentViewer">1869 metr. śl.</a>
+                        <a href="wiszarch16.php" target="documentViewer">1934 pochówek</a>
+                        <a href="wiszarch25.php" target="documentViewer">Grobowiec</a>
+                    </div>
+                </details>
+            </details>
 
-    <!-- WŁODEK -->
-    <div class="family-card">
-        <div class="family-title">Włodek</div>
-        <div class="person-group">
-            <div class="person-name">Roman</div>
-            <div class="doc-links">
-                <a href="wlodarch.php" target="_blank">1850 metr. śl.</a>
-                <a href="wlodarch2.php" target="_blank">grobowiec</a>
-            </div>
         </div>
-        <div class="person-group">
-            <div class="person-name">Emilia A.</div>
-            <div class="doc-links">
-                <a href="wlodarch.php" target="_blank">1850 metr. śl.</a>
-                <a href="wlodarch6.php" target="_blank">1863 metr. zgonu</a>
-                <a href="wlodarch2.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zdzisław R. A.</div>
-            <div class="doc-links">
-                <a href="wlodarch7.php" target="_blank">1852 metr. chrztu</a>
-                <a href="goetzarch10.php" target="_blank">1879 metr. śl.</a>
-                <a href="wlodarch8.php" target="_blank">1928 metr. zgonu</a>
-                <a href="wlodarch4.php" target="_blank">1928 zgon</a>
-                <a href="wlodarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Albina T. M.</div>
-            <div class="doc-links">
-                <a href="goetzarch4.php" target="_blank">1860 metr. chrztu</a>
-                <a href="goetzarch10.php" target="_blank">1879 metr. śl.</a>
-                <a href="wlodarch5.php" target="_blank">1937 zgon</a>
-                <a href="wlodarch3.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-        <div class="person-group">
-            <div class="person-name">Zofia B. R.</div>
-            <div class="doc-links">
-                <a href="wlodarch1.php" target="_blank">1890 metr. chrztu</a>
-                <a href="kraarch10.php" target="_blank">1914 metr. śl.</a>
-                <a href="kraarch4.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+    </aside>
 
-    <!-- ZAKRZEWSKI -->
-    <div class="family-card">
-        <div class="family-title">Zakrzewski</div>
-        <div class="person-group">
-            <div class="person-name">Ludwik</div>
-            <div class="doc-links">
-                <a href="zakrzarch1.php" target="_blank">grobowiec</a>
-            </div>
+    <!-- PRAWA STRONA: PRZEGLĄDARKA DOKUMENTÓW (IFRAME) -->
+    <main class="viewer-area" id="viewerArea">
+        <!-- Ten panel znika, gdy klikniemy dokument -->
+        <div class="viewer-placeholder" id="viewerPlaceholder">
+            <div class="ornament">⚚</div>
+            <h3>Pusty pulpit</h3>
+            <p>Wybierz dokument z drzewa genealogicznego po lewej stronie, aby wyświetlić jego treść i szczegóły w tym miejscu.</p>
         </div>
-        <div class="person-group">
-            <div class="person-name">Ludmiła</div>
-            <div class="doc-links">
-                <a href="wiszarch26.php" target="_blank">1869 metr. śl.</a>
-                <a href="wiszarch16.php" target="_blank">1934 pochówek</a>
-                <a href="wiszarch25.php" target="_blank">grobowiec</a>
-            </div>
-        </div>
-    </div>
+        <!-- Tutaj wczytywane są pliki docelowe -->
+        <iframe name="documentViewer" title="Podgląd dokumentu"></iframe>
+    </main>
 
 </div>
 
@@ -1714,6 +1594,7 @@
 </footer>
 
 <script>
+    /* Obsługa wysuwanego menu głównego */
     const menuBtn = document.getElementById('menuBtn');
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('overlay');
@@ -1736,6 +1617,28 @@
 
     menuBtn.addEventListener('click', toggleSidebar);
     overlay.addEventListener('click', toggleSidebar);
+
+    /* Obsługa chowania pustego ekranu (placeholder) i podświetlenia w drzewie */
+    const docLinks = document.querySelectorAll('.doc-links a');
+    const placeholder = document.getElementById('viewerPlaceholder');
+
+    docLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Ukryj powitalny ekran
+            placeholder.style.opacity = '0';
+            setTimeout(() => placeholder.style.display = 'none', 400);
+
+            // Zresetuj klasy active ze wszystkich linków
+            docLinks.forEach(l => l.classList.remove('active'));
+            // Dodaj klase do aktualnie klikniętego
+            this.classList.add('active');
+
+            // Automatyczne przewinięcie na dół (do przeglądarki) na telefonach komórkowych
+            if (window.innerWidth <= 1000) {
+                document.getElementById('viewerArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
 </script>
 
 </body>
