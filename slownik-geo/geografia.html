@@ -81,22 +81,22 @@
   #map {  
     height: 550px; width: 100%; border: 1px solid var(--sepia-pale); border-radius: 2px; margin-bottom: 20px;  
     filter: sepia(10%) contrast(98%) brightness(98%);  
-    box-shadow: 0 15px 45px rgba(0,0,0,0.05);  
+    box-shadow: 0 15px 45px rgba(0,0,0,0.05);
+    z-index: 1;  
   }  
 
-  /* --- NOWY, LEKKI WYGLĄD FILTRÓW --- */ 
   .filter-bar { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 45px; }  
   .filter-item {  
     cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 5px 6px 5px 12px;  
     border: 1px solid var(--sepia-pale); background: transparent; font-size: 0.65rem;  
     text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; color: var(--ink-light); 
-    border-radius: 30px; /* Zmiana na lekkie, zaokrąglone pigułki */
+    border-radius: 30px; 
   }  
   .filter-item:hover { background: #fff; border-color: var(--gold); color: var(--ink); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }  
   .filter-item.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }  
     
   .dual-pill {  
-    width: 14px; height: 14px; border-radius: 50%; /* Zmiana z prostokąta na eleganckie kółeczko */
+    width: 14px; height: 14px; border-radius: 50%; 
     border: 1px solid rgba(0,0,0,0.15);  
     position: relative; overflow: hidden; background: linear-gradient(90deg, var(--cl) 50%, var(--cr) 50%);  
   }  
@@ -110,7 +110,6 @@
   } 
   .filter-item.active .btn-wywod-small { background: rgba(255,255,255,0.1); color: var(--cream); border-color: rgba(255,255,255,0.2); } 
   .btn-wywod-small:hover { background: var(--gold) !important; color: #fff !important; border-color: var(--gold) !important; } 
-  /* --- KONIEC NOWEGO WYGLĄDU FILTRÓW --- */
 
   .geo-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }  
   .geo-box {  
@@ -363,18 +362,48 @@
     { id: 100, n: "Zarszyn", rod: "Wiszniewscy", cat: "c7", c: [49.581083, 22.014232], c1: "#ff0000", c2: "#ff0000" } 
 ]; 
 
-   // --- NOWE PARAMETRY DLA PŁYNNEGO ZOOMU NA TOUCHPADZIE ---
+   const initialCenter = [52.0, 19.0];
+   const initialZoom = 6;
+   
+   // Inicjalizacja z wyłączonym wbudowanym zoomem z rolki
    const map = L.map('map', {  
-     center: [52.0, 19.0],  
-     zoom: 6, 
-     zoomSnap: 0,           // Pozwala na idealnie płynne, ułamkowe przybliżanie
-     zoomDelta: 1,          // Skok przy użyciu przycisków na mapie (+/-)
-     wheelPxPerZoomLevel: 120, // Dostrojone dla gładzików laptopów
-     wheelDebounceTime: 15,    // Błyskawiczna reakcja na przewijanie
-     scrollWheelZoom: true
+     center: initialCenter,  
+     zoom: initialZoom, 
+     zoomSnap: 0, 
+     scrollWheelZoom: false
    });  
     
    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);  
+
+   // --- WŁASNY SILNIK CIĄGŁEGO I PŁYNNEGO ZOOMA ---
+   let targetZoom = initialZoom;
+   let mousePoint = map.getCenter();
+
+   map.on('mousemove', function(e) {
+     mousePoint = e.latlng;
+   });
+
+   map.on('zoom', function() {
+     targetZoom = map.getZoom();
+   });
+
+   const mapDiv = document.getElementById('map');
+   mapDiv.addEventListener('wheel', function(e) {
+     e.preventDefault(); 
+     
+     if (!mousePoint) return;
+     
+     const sensitivity = 0.01; 
+     
+     targetZoom -= e.deltaY * sensitivity;
+     
+     const minZ = 3;
+     const maxZ = 18;
+     targetZoom = Math.max(minZ, Math.min(maxZ, targetZoom));
+     
+     map.setZoomAround(mousePoint, targetZoom, { animate: false });
+   }, { passive: false });
+   // --- KONIEC SILNIKA ---
 
    const markerMap = {};  
    const grid = document.getElementById('geoGrid');  
