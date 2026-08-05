@@ -92,6 +92,9 @@
             min-height: 120px;
         }
 
+        .box-short { min-height: 45px !important; padding: 10px 15px !important; font-size: 0.85rem; }
+        .box-short.active { border-color: var(--gold); background: white; }
+
         .box:hover { border-color: var(--gold); background: white; transform: translateY(-2px); }
 
         .corner-ribbon {
@@ -368,8 +371,8 @@
             <span class="marriage-tag">∞ 1914 Dąbrowica, par. Niegowić <a href="kraarch10.php" class="doc-link" target="_blank" title="Akt Małżeństwa"><svg><use href="#icon-doc"></use></svg></a></span>
         </div>
 
-        <!-- GENERACJA 4 (Potomkowie) -->
-        <div class="box g4-box box-potomek">
+        <!-- GENERACJA 4 (Potomkowie) - LINK DO MAPY -->
+        <a href="geografia.html?filter=c6-c8" class="box g4-box box-potomek">
             <div class="corner-ribbon" style="--ribbon-color: var(--color-left);"></div>
             <div class="potomek-img">
                 <img src="../img/genealogia/jelitad.png" class="img-single" style="width:clamp(40px, 6vw, 65px); height:auto; border:none; box-shadow:none;" alt="Jelita">
@@ -381,7 +384,7 @@
                     <strong>z Krainki Kraińscy</strong>
                 </p>
             </div>
-        </div>
+        </a>
 
     </div>
 </div>
