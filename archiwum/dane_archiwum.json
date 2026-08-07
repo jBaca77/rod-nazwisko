@@ -3,8 +3,8 @@
         "title": "Grobowiec rodziny Bartmańskich",
         "text": "Cmentarz Grabiszyński we Wrocławiu\nAniela z Fedorowiczów Bartmańska(20.02.1916 - 07.11.1970)\nTomasz Antoni Bartmański(21.12.1916 - 22.11.1989)\nRafał Bartmański(10.08.1948 - 15.08.1966)\npole 42, rząd 4, nr 115",
         "images": [
-            "https://lik.info.pl/zdjecia/bartarch/grabiszyn%201.jpg",
-            "https://lik.info.pl/zdjecia/bartarch/grabiszyn%202.jpg"
+            "../img/archiwum/bartarch/grabiszyn%201.jpg",
+            "../img/archiwum/bartarch/grabiszyn%202.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=51.087033,16.970451&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -12,7 +12,7 @@
         "title": "Dokument borysarch1",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/borysarch/joanna_1812.png"
+            "../img/archiwum/borysarch/joanna_1812.png"
         ],
         "map_iframe": ""
     },
@@ -20,7 +20,7 @@
         "title": "Dokument borysarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/borysarch/jacek_1812.png"
+            "../img/archiwum/borysarch/jacek_1812.png"
         ],
         "map_iframe": ""
     },
@@ -28,7 +28,7 @@
         "title": "grobowiec Feliksa Domańskiegona cmentarzu w Ubiniu",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/ubinie_1.jpg"
+            "../img/archiwum/domarch/ubinie_1.jpg"
         ],
         "map_iframe": ""
     },
@@ -36,7 +36,7 @@
         "title": "nekrolog Teodozji z Karczewskich Domańskiej",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/teodozja_1873.png"
+            "../img/archiwum/domarch/teodozja_1873.png"
         ],
         "map_iframe": ""
     },
@@ -44,7 +44,7 @@
         "title": "metryka zgonu Teodozji z Karczewskich Domańskiej",
         "text": "Warszawa, par. Nawiedzenia NMP\nzm. 29 kwietnia 1873",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/teodozja_1873.jpg"
+            "../img/archiwum/domarch/teodozja_1873.jpg"
         ],
         "map_iframe": ""
     },
@@ -52,8 +52,8 @@
         "title": "metryka ślubu Feliksa Paweła Hilarego Domańskiego z Barbarą Felicjanną Proszkowską",
         "text": "Ługowa Wola (obecnie część wsi Pnie), par. Promna\n16 października 1825",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/feliks_barbara_1825_1.jpg",
-            "https://lik.info.pl/zdjecia/domarch/feliks_barbara_1825_2.jpg"
+            "../img/archiwum/domarch/feliks_barbara_1825_1.jpg",
+            "../img/archiwum/domarch/feliks_barbara_1825_2.jpg"
         ],
         "map_iframe": ""
     },
@@ -61,7 +61,7 @@
         "title": "świadectwo chrztu Barbary Felicjanny z Proszkowskich Domańskiej",
         "text": "Biejków, par. Promna\nur. i chrz. z wody 4 grudnia 1795\ndop. cer. chrz. 29 stycznia 1805",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/barbara_1795.jpg"
+            "../img/archiwum/domarch/barbara_1795.jpg"
         ],
         "map_iframe": ""
     },
@@ -69,7 +69,7 @@
         "title": "metryka zgonu Barbary Felicjanny z Proszkowskich Domańskiej",
         "text": "Warszawa, par. św. Andrzeja\nzmarła 3 listopada 1837",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/barbara_1837.jpg"
+            "../img/archiwum/domarch/barbara_1837.jpg"
         ],
         "map_iframe": ""
     },
@@ -77,7 +77,7 @@
         "title": "świadectwo chrztu Feliksa Paweła Hilarego Domańskiego",
         "text": "Grzebowilk, par. Kołbiel\nur. 11 stycznia 1790\nchrz. 14 stycznia 1790",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/feliks_1790.jpg"
+            "../img/archiwum/domarch/feliks_1790.jpg"
         ],
         "map_iframe": ""
     },
@@ -85,7 +85,7 @@
         "title": "metryka zgonu Feliksa Paweła Hilarego Domańskiego",
         "text": "Piotrków Trybunalski - Starostwo, par. Piotrków Trybunalski\nzmarł 17 kwietnia 1866",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/feliks_1866.jpg"
+            "../img/archiwum/domarch/feliks_1866.jpg"
         ],
         "map_iframe": ""
     },
@@ -93,7 +93,7 @@
         "title": "nekrolog Feliksa Paweła Hilarego Domańskiego",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/feliks_1866.png"
+            "../img/archiwum/domarch/feliks_1866.png"
         ],
         "map_iframe": ""
     },
@@ -101,7 +101,7 @@
         "title": "metryka zgonu Anny z Janiszewskich Domańskiej",
         "text": "Grzebowilk, par. Kołbiel\nzmarła 26 maja 1825",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/anna_1825.jpg"
+            "../img/archiwum/domarch/anna_1825.jpg"
         ],
         "map_iframe": ""
     },
@@ -109,7 +109,7 @@
         "title": "metryka urudzenia Franciszki Wiktorii Konstancji ze Starzyńskich Domańskiej",
         "text": "Boczki, par. kolegiacka w Łowiczu\nur. 17 października 1816\nzgłoszenie ur. 18 lutego 1818",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/franciszka_1816_18.png"
+            "../img/archiwum/domarch/franciszka_1816_18.png"
         ],
         "map_iframe": ""
     },
@@ -117,7 +117,7 @@
         "title": "nekrolog Feliksa Domańskiego",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/feliks_1939.png"
+            "../img/archiwum/domarch/feliks_1939.png"
         ],
         "map_iframe": ""
     },
@@ -125,7 +125,7 @@
         "title": "metryka ślubu Feliksa Paweła Hilarego Domańskiego z Franciszką Wiktorią Konstancją Starzyńską",
         "text": "Warszawa, par. Nawiedzenie NMP\n1 lutego 1838",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/feliks_franciszka_1838.jpg"
+            "../img/archiwum/domarch/feliks_franciszka_1838.jpg"
         ],
         "map_iframe": ""
     },
@@ -133,7 +133,7 @@
         "title": "metryka zgonu Franciszki Wiktorii Konstancji ze Starzyńskich Domańskiej",
         "text": "Warszawa, par. Narodzenia NMP (na Lesznie)\nzmarła 8 kwietnia 1873",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/franciszka_1873.jpg"
+            "../img/archiwum/domarch/franciszka_1873.jpg"
         ],
         "map_iframe": ""
     },
@@ -141,7 +141,7 @@
         "title": "nekrolog Franciszki Wiktorii Konstancji ze Starzyńskich Domańskiej",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/franciszka_1873.png"
+            "../img/archiwum/domarch/franciszka_1873.png"
         ],
         "map_iframe": ""
     },
@@ -149,7 +149,7 @@
         "title": "Sędzia Pokoju Michał Nikodem Domańskipublicznie dziękuje doktorowi Sebastianowi Orłowskiemuza wyleczenie żony Anny z Janiszewskich",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/nikodem_1822.png"
+            "../img/archiwum/domarch/nikodem_1822.png"
         ],
         "map_iframe": ""
     },
@@ -157,7 +157,7 @@
         "title": "metryka chrztu Zofii Ludwiki Domańskiej",
         "text": "Rożenek, par. Dąbrowa nad Czarną\nur. 25 sierpnia 1858\nchrz. 29 sierpnia 1858",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/zofia_1858.jpg"
+            "../img/archiwum/domarch/zofia_1858.jpg"
         ],
         "map_iframe": ""
     },
@@ -165,7 +165,7 @@
         "title": "metryka zgonu Zofii Ludwiki Domańskiej",
         "text": "Rożenek, par. Dąbrowa nad Czarną\nzmarła 1 listopada 1858",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/zofia_1858_2.jpg"
+            "../img/archiwum/domarch/zofia_1858_2.jpg"
         ],
         "map_iframe": ""
     },
@@ -173,8 +173,8 @@
         "title": "metryka chrztu (cywcywilna) Jadwigi Teresy Domańskiej",
         "text": "Żytniów, par. Żytniów\nur. 14 października 1859\nchrz. 16 października 1859\nmetryka chrztu (kościelna) Jadwigi Teresy Domańskiej",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/jadwiga_1859_b.jpg",
-            "https://lik.info.pl/zdjecia/domarch/jadwiga_1859_a.jpg"
+            "../img/archiwum/domarch/jadwiga_1859_b.jpg",
+            "../img/archiwum/domarch/jadwiga_1859_a.jpg"
         ],
         "map_iframe": ""
     },
@@ -182,7 +182,7 @@
         "title": "metryka chrztu Marianny Franciszki \"Mani\" Domańskiej",
         "text": "Żytniów, par. Żytniów\nur. i chrz. 31 sierpnia 1861",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/maria_1861.jpg"
+            "../img/archiwum/domarch/maria_1861.jpg"
         ],
         "map_iframe": ""
     },
@@ -190,7 +190,7 @@
         "title": "metryka zgonu Marianny Franciszki \"Mani\" Domańskiej",
         "text": "Warszawa, par. Nawiedzenia NMP\nzmarła 29 września 1869 (czasu nowego lub starego)",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/maria_1869.jpg"
+            "../img/archiwum/domarch/maria_1869.jpg"
         ],
         "map_iframe": ""
     },
@@ -198,7 +198,7 @@
         "title": "metryka chrztu Henryki Duklanny Domańskiej",
         "text": "Piotrków Trybunalski na Starostwie, par. Piotrków Tryb.\nur. 12 lipca 1863\nchrz. 2 sierpnia 1863",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/henryka_1863.jpg"
+            "../img/archiwum/domarch/henryka_1863.jpg"
         ],
         "map_iframe": ""
     },
@@ -206,7 +206,7 @@
         "title": "metryka chrztu Feliksa Domańskiego",
         "text": "Warszawa, par. Nawiedzenia NMP\nur. 9 stycznia 1868\nchrz. 26 stycznia 1868",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/feliks_1868.jpg"
+            "../img/archiwum/domarch/feliks_1868.jpg"
         ],
         "map_iframe": ""
     },
@@ -214,9 +214,9 @@
         "title": "grobowiec Henryki Duklanny Domańskiejna cmentarzu Parafii Katedralnej w Zamościusektor VII, grób 4434",
         "text": "D. O. M.\nHENRYKA\nDOMAŃSKA\nZAŁOŻYCIELKA I PRZEŁOŻONA\n[...] GIMNAZJUM ŻEŃSKIEGO\nw PIOTRKOWIE\n* 2 VII 1863 + 9 VI 1923\nw ZAMOŚCIU\nPOKÓJ JEJ DUSZY\nSerwis Mogily.pl - strona cmentarza Parafii Katedralnej",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/zamosc_3.jpg",
-            "https://lik.info.pl/zdjecia/domarch/zamosc_2.jpg",
-            "https://lik.info.pl/zdjecia/domarch/zamosc_1.jpg"
+            "../img/archiwum/domarch/zamosc_3.jpg",
+            "../img/archiwum/domarch/zamosc_2.jpg",
+            "../img/archiwum/domarch/zamosc_1.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.721920,23.263210&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -224,7 +224,7 @@
         "title": "metryka chrztu Zofii Emilii Stanisławy z Domańskich Krechowieckiej",
         "text": "Piotrków Trybunalski na Starostwie, par. Piotrków Tryb.\nur. 26 grudnia 1865\nchrz. 9 sierpnia 1866",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/zofia_1866.jpg"
+            "../img/archiwum/domarch/zofia_1866.jpg"
         ],
         "map_iframe": ""
     },
@@ -232,7 +232,7 @@
         "title": "metryka ślubu Stanisława Krechowieckiego z Zofią Emilią Stanisławą Domańską",
         "text": "Szmidków i Moszków, par. Sokal\n23 listopada 1886",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/zofia_stanislaw_1886_1.png"
+            "../img/archiwum/domarch/zofia_stanislaw_1886_1.png"
         ],
         "map_iframe": ""
     },
@@ -240,7 +240,7 @@
         "title": "doniesienie prasowe o weselu Stanisława Krechowieckiego z Zofią Emilią Stanisławą Domańską",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/zofia_stanislaw_1886_2.png"
+            "../img/archiwum/domarch/zofia_stanislaw_1886_2.png"
         ],
         "map_iframe": ""
     },
@@ -248,7 +248,7 @@
         "title": "metryka chrztu Marii Domańskiej",
         "text": "Warszawa, par. Nawiedzenia NMP\nur. 19 lutego 1870 (czasu nowego lub starego)\nchrz. 9 marca 1870 (czasu nowego lub starego)",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/maria_1870.jpg"
+            "../img/archiwum/domarch/maria_1870.jpg"
         ],
         "map_iframe": ""
     },
@@ -256,7 +256,7 @@
         "title": "metryka chrztu Jadwigi Felicji Domańskiej",
         "text": "Warszawa, par. Nawiedzenia NMP\nur. 11 lipca 1872 (czasu nowego lub starego)\nchrz. 23 października 1872 (czasu nowego lub starego)",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/jadwiga_1872.jpg"
+            "../img/archiwum/domarch/jadwiga_1872.jpg"
         ],
         "map_iframe": ""
     },
@@ -264,7 +264,7 @@
         "title": "metryka zgonu Jadwigi Felicji Domańskiej",
         "text": "Warszawa, par. Nawiedzenia NMP\nzmarła 5 maja 1873 (czasu nowego lub starego)",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/jadwiga_1873.jpg"
+            "../img/archiwum/domarch/jadwiga_1873.jpg"
         ],
         "map_iframe": ""
     },
@@ -272,8 +272,8 @@
         "title": "grobowiec Feliksa Pawła Hilarego Domańskiego",
         "text": "D O M\nTu spoczywają zwłoki\nŚ.p. Felixa\nDOMAŃSKIEGO\nObywatela Ziemskiego\nb. Sędziego Pokoju Okręgu\nSiennickiego\nNajlepszego Męża i Ojca\nzmarłego w 77m roku życia\ndnia 7 Kwietnia\n1866\nPokój Jego Duszy",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/feliks_1866_grob_1.jpg",
-            "https://lik.info.pl/zdjecia/domarch/piotrkow_plan.jpg"
+            "../img/archiwum/domarch/feliks_1866_grob_1.jpg",
+            "../img/archiwum/domarch/piotrkow_plan.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=51.413565,19.693534&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -281,7 +281,7 @@
         "title": "metryka zgonu Marii Domańskiej",
         "text": "Wielgie, par. Wielgie\nzmarła 30 października 1874",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/maria_1874.jpg"
+            "../img/archiwum/domarch/maria_1874.jpg"
         ],
         "map_iframe": ""
     },
@@ -289,7 +289,7 @@
         "title": "metryka zgonu Feliksa Domańskiego",
         "text": "Ubinie, par. Zadwórze\nWielmożny Feliks Domański, właściciel dóbr Ubinie, lat 72\nzmarł 30 czerwca 1939",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/feliks_1939.jpg"
+            "../img/archiwum/domarch/feliks_1939.jpg"
         ],
         "map_iframe": ""
     },
@@ -297,7 +297,7 @@
         "title": "metryka ślubu Edwarda Maksymiliana Domańskiego z Teodozją Karczewską",
         "text": "Rożenek, par. Dąbrowa nad Czarną\n15 listopada 1857",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/edward_teodozja_1857.jpg"
+            "../img/archiwum/domarch/edward_teodozja_1857.jpg"
         ],
         "map_iframe": ""
     },
@@ -305,7 +305,7 @@
         "title": "Grobowiec rodziny Domańskich",
         "text": "Cmentarz parafialny w Chorzelowie\nŚ.P.\nmgr. inż. ANNADOMAŃSKA\nZ GAWLIŃSKICH* 13 II 1896  + 5 III 1952\nmgr. inż. STANISŁAWDOMAŃSKI\n* 13 VIII 1896  + 25 II 1959",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/chorzelow_1.jpg"
+            "../img/archiwum/domarch/chorzelow_1.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.332339,21.442899&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -313,9 +313,9 @@
         "title": "cerkiew g-k i cmentarzSzmitków (przysiółek wsi Moszków/Huta)",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/moszkow_1.jpg",
-            "https://lik.info.pl/zdjecia/domarch/moszkow.png",
-            "https://lik.info.pl/zdjecia/domarch/moszkow_2.jpg"
+            "../img/archiwum/domarch/moszkow_1.jpg",
+            "../img/archiwum/domarch/moszkow.png",
+            "../img/archiwum/domarch/moszkow_2.jpg"
         ],
         "map_iframe": ""
     },
@@ -323,9 +323,9 @@
         "title": "nekrologi Edwarda Maksymiliana Domańskiego",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/edward_1886%20_1.png",
-            "https://lik.info.pl/zdjecia/domarch/edward_1886%20_2.png",
-            "https://lik.info.pl/zdjecia/domarch/edward_1886%20_3.png"
+            "../img/archiwum/domarch/edward_1886%20_1.png",
+            "../img/archiwum/domarch/edward_1886%20_2.png",
+            "../img/archiwum/domarch/edward_1886%20_3.png"
         ],
         "map_iframe": ""
     },
@@ -333,7 +333,7 @@
         "title": "metryka zgonu Edwarda Maksymiliana Domańskiego",
         "text": "Szmidków, par Sokal\n26 grudnia 1886",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/edward_1886.png"
+            "../img/archiwum/domarch/edward_1886.png"
         ],
         "map_iframe": ""
     },
@@ -341,8 +341,8 @@
         "title": "metryka chrztu Edwarda Maksymiliana Domańskiego",
         "text": "Iłówiec, par. Mińsk Mazowiecki\nur. 11 października 1831\nchrz. 15 października 1831\nświadectwo chrztu Edwarda Maksymiliana Domańskiego",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/edward_1831_1.jpg",
-            "https://lik.info.pl/zdjecia/domarch/edward_1831_2.jpg"
+            "../img/archiwum/domarch/edward_1831_1.jpg",
+            "../img/archiwum/domarch/edward_1831_2.jpg"
         ],
         "map_iframe": ""
     },
@@ -350,9 +350,9 @@
         "title": "grobowiec rodziny Domańskichna Starych Powązkach w Warszawiekwatera 8, rząd 7, miejsce 29",
         "text": "Ś.P.\nSTANISŁAW\nKRECHOWIECKI\nŻYŁ LAT 65\nZM. 6 LISTOPADA 1919 R.\nD.O.M.\nTEODOZYA Z KARCZEWSKICH\nDOMAŃSKA\nURODZONA D. 29 MAJA 1837 R.\nZMARŁA DNIA 29 KWIETNIA 1873 R.\nPOKÓJ JEJ DUSZY\nMANIA\nDOMAŃSKA\nZMARŁA 1870 W 10\nROKU ŻYCIA\nJADWIGA\nDOMAŃSKA\nZMARŁA 1873 W 9\nMIESIĄCU ŻYCIA\nSerwis mapowy m.st. Warszawy",
         "images": [
-            "https://lik.info.pl/zdjecia/domarch/powazki_1.jpg",
-            "https://lik.info.pl/zdjecia/domarch/powazki_2.jpg",
-            "https://lik.info.pl/zdjecia/domarch/powazki_3.jpg"
+            "../img/archiwum/domarch/powazki_1.jpg",
+            "../img/archiwum/domarch/powazki_2.jpg",
+            "../img/archiwum/domarch/powazki_3.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=52.252583,20.977948&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -360,7 +360,7 @@
         "title": "Dokument fedarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/Arian_1818.jpg"
+            "../img/archiwum/fedarch/Arian_1818.jpg"
         ],
         "map_iframe": ""
     },
@@ -368,9 +368,9 @@
         "title": "Grób ks. Aleksandra Antoniego Marii /Alego/ Fedorowicza",
         "text": "Cmentarz parafialny w Izabelinie",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/izabelin%202.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/izabelin%203.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/izabelin%201.jpg"
+            "../img/archiwum/fedarch/izabelin%202.jpg",
+            "../img/archiwum/fedarch/izabelin%203.jpg",
+            "../img/archiwum/fedarch/izabelin%201.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=52.293355,20.799367&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -378,8 +378,8 @@
         "title": "Grobowiec Sióstr Franciszkanek Misjonarek Maryi",
         "text": "Nowy cmentarz na Służewie w Warszawie\ns. Olga /Olga Maria Zofia Fedorowicz/\nur. 1908.04.21 Wyszatycezm. 2000 Otwock",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/sluzew%202.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/sluzew%201.jpg"
+            "../img/archiwum/fedarch/sluzew%202.jpg",
+            "../img/archiwum/fedarch/sluzew%201.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=52.173281,21.033576&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -387,8 +387,8 @@
         "title": "Dokument fedarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/Tadeusz_1849.png",
-            "https://lik.info.pl/zdjecia/fedarch/Tadeusz_1849.jpg"
+            "../img/archiwum/fedarch/Tadeusz_1849.png",
+            "../img/archiwum/fedarch/Tadeusz_1849.jpg"
         ],
         "map_iframe": ""
     },
@@ -396,20 +396,20 @@
         "title": "Dokument fedarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/Kazimierz_1854.jpg"
+            "../img/archiwum/fedarch/Kazimierz_1854.jpg"
         ],
         "map_iframe": ""
     },
     "fedarch4": {
         "title": "/zdjęcie z portalu nieobecni.com.pl/",
-        "text": "JAN         EWA z CIEŃSKICH\nFEDOROWICZOWIE\nURODZENI NA KRESACH\n*1911+1994    *1923+2020\nSYBIRACY\nŻOŁNIERZE ARMII\nGENERAŁA ANDERSA",
+        "text": "JAN         EWA z CIEŃSKICH\nFEDOROWICZOWIE\nURODZENI NA KRESACH\n*1911+1994    *1923+2020\nSYBIRACY\nŻOŁNIERZE ARMII\nGENERAŁA ANDERSA",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/grobowiec_laski_0.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/grobowiec_laski_4.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/grobowiec_laski_3.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/grobowiec_laski_2.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/grobowiec_laski_5.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/laski.jpg"
+            "../img/archiwum/fedarch/grobowiec_laski_0.jpg",
+            "../img/archiwum/fedarch/grobowiec_laski_4.jpg",
+            "../img/archiwum/fedarch/grobowiec_laski_3.jpg",
+            "../img/archiwum/fedarch/grobowiec_laski_2.jpg",
+            "../img/archiwum/fedarch/grobowiec_laski_5.jpg",
+            "../img/archiwum/fedarch/laski.jpg"
         ],
         "map_iframe": ""
     },
@@ -417,7 +417,7 @@
         "title": "Dokument fedarch5",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/Aleksander_1875.jpg"
+            "../img/archiwum/fedarch/Aleksander_1875.jpg"
         ],
         "map_iframe": ""
     },
@@ -425,7 +425,7 @@
         "title": "Dokument fedarch6",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/Tadeusz_1919.png"
+            "../img/archiwum/fedarch/Tadeusz_1919.png"
         ],
         "map_iframe": ""
     },
@@ -433,9 +433,9 @@
         "title": "Jerzy Andrzej Maria Fedorowicz (1903.04.19 Szyły - 1939.09.12 Krzepocinek)",
         "text": "Cmentarz przy ul. Kaliskiej w Łęczycy\nKwatera wojenna żołnierzy Wojsk Polskich poległych we wrześniu 1939r.\n11 tablica od lewej",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/leczyca%200.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/leczyca%202.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/leczyca%201.jpg"
+            "../img/archiwum/fedarch/leczyca%200.jpg",
+            "../img/archiwum/fedarch/leczyca%202.jpg",
+            "../img/archiwum/fedarch/leczyca%201.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=52.055354,19.189215&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -443,8 +443,8 @@
         "title": "Grób Andrzeja Antoniego Marii Fedorowicza (1904 Klebanówka - 1942 Maniów)Stary cmentarz na cerkwisku w Maniowie",
         "text": "/Fot. Opiekunowie Bieszczadzkiej Historii/\n/Fot. arch. E. Orłowskiego/\nZapiski Antoniego Kraińskiego:\n\"Inżynier Andrzej oparł się w czasie wojny o Jabłonkę, nie chciał zajęcia w kopalniach nafty w Grabownicy, bo niemieckie, a gdy w czerwcu 1942 roku zaaresztowano w Krakowie Tunia Janiszewskiego, który zajmował się dla nas Maniowem, Druś zdecydował się to robić. Jednak 4 września wskoczywszy, dla kąpieli, do bardzo zimnej a głębokiej wody w górskim potoku utonął.\"\nZapiski ks. Tadeusza Fedorowicza:\n\"W czasie II wojny światowej Druś Fedorowicz mieszkał z rodziną w Głębokiej koło Jarosławia, majątku Zofii Tyszkiewiczowej, żony Tadeusza, ciotecznego brata Fedorowiczów.\nAntoni Kraiński, brat Zofii Fedorowiczowej posiadał w Bieszczadach majątek leśny Maniów. Tam Andrzej Fedorowicz przez pewien czas mieszkał i w 1942 r. utonął w górskiej rzece. Prawdopodobnie był to bardzo upalny dzień, a Druś wszedł do zimnej wody.\"\nLista autorstwa Edwarda Orłowskiego (stan na dzień 01.07.2026 r.)\nLEŚNICYktórzy ponieśli śmierć w latach wojny i prześladowań 1938-1949 na terenie Małopolski Wschodniej i powojennej Rzeszowszczyzny\n(teren przedwojennej Dyrekcji Lasów Państwowych Okręgu Lwowskiego we Lwowie i powojennej Dyrekcji Lasów Państwowych Okręgu Rzeszowskiego z/s w Rzeszowie/Tarnowie)\nL.p.\nNazwiskoiimię,\nwieklubrok urodzenia\nStanowiskopracy-funkcja\nPrzydziałsłużbowylubmiejscepobytu\nDataśmiercilubzaginięcia\nUdział w wojnie i konspiracji, okoliczności śmierci lub zaginięcia\n211.\nFedorowiczAndrzej„Druś”ur. 1904 r.\nzarządcadóbr leśnych\n(inż.mechanik)\nLasy majątkuleśnego\nAntoniegoKraińskiego\nw Maniowie\nGminaWolaMichowa\nPowiat Lesko\n4 IX 1942\nWspółpracownik AK, jego odnalezione zwłoki z głową w potoku i ich ułożenie wskazywały na zabójstwo z zaskoczenia po próbie obrony ze strony ofiary, wg podejrzeń mieszkańców wsi był to mord dokonany skrytobójczo przez bojówkę ukraińską, choć według ustaleń miejscowego posterunku policji ukraińskiej, było to utonięcie. Pochowany w Maniowie.",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/maniow%201.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/maniow%202.jpg"
+            "../img/archiwum/fedarch/maniow%201.jpg",
+            "../img/archiwum/fedarch/maniow%202.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=49.222389,22.196167&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -452,9 +452,9 @@
         "title": "Grobowiec rodziny Saryusz Małeckich",
         "text": "Cmentarz Grabiszyński we Wrocławiu\npole 45, rząd 22, nr 88",
         "images": [
-            "https://lik.info.pl/zdjecia/fedarch/grabiszyn%201.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/grabiszyn%202.jpg",
-            "https://lik.info.pl/zdjecia/fedarch/grabiszyn%203.jpg"
+            "../img/archiwum/fedarch/grabiszyn%201.jpg",
+            "../img/archiwum/fedarch/grabiszyn%202.jpg",
+            "../img/archiwum/fedarch/grabiszyn%203.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=51.086489,16.971803&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -462,8 +462,8 @@
         "title": "Dokument golaszarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/rafaela_i_Maciej_1863_1.jpg",
-            "https://lik.info.pl/zdjecia/golaszarch/rafaela_i_Maciej_1863_2.jpg"
+            "../img/archiwum/golaszarch/rafaela_i_Maciej_1863_1.jpg",
+            "../img/archiwum/golaszarch/rafaela_i_Maciej_1863_2.jpg"
         ],
         "map_iframe": ""
     },
@@ -471,7 +471,7 @@
         "title": "Dokument golaszarch1",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/rafaela_1863.png"
+            "../img/archiwum/golaszarch/rafaela_1863.png"
         ],
         "map_iframe": ""
     },
@@ -479,8 +479,8 @@
         "title": "/zdjęcie ze strony Fundacji Dziedzictwa Kulturowegocmentarzlyczakowski.pl/",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/zdanscy.jpg",
-            "https://lik.info.pl/zdjecia/golaszarch/zdanscy.svg"
+            "../img/archiwum/golaszarch/zdanscy.jpg",
+            "../img/archiwum/golaszarch/zdanscy.svg"
         ],
         "map_iframe": ""
     },
@@ -488,7 +488,7 @@
         "title": "Dokument golaszarch11",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/romana_1838.png"
+            "../img/archiwum/golaszarch/romana_1838.png"
         ],
         "map_iframe": ""
     },
@@ -496,7 +496,7 @@
         "title": "Dokument golaszarch12",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/romana_1859.jpg"
+            "../img/archiwum/golaszarch/romana_1859.jpg"
         ],
         "map_iframe": ""
     },
@@ -504,7 +504,7 @@
         "title": "Dokument golaszarch13",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/romana_1908.png"
+            "../img/archiwum/golaszarch/romana_1908.png"
         ],
         "map_iframe": ""
     },
@@ -512,7 +512,7 @@
         "title": "Dokument golaszarch14",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/romana_1908_n.png"
+            "../img/archiwum/golaszarch/romana_1908_n.png"
         ],
         "map_iframe": ""
     },
@@ -520,7 +520,7 @@
         "title": "Dokument golaszarch15",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/helena_1834.png"
+            "../img/archiwum/golaszarch/helena_1834.png"
         ],
         "map_iframe": ""
     },
@@ -528,7 +528,7 @@
         "title": "Dokument golaszarch16",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/helena_1856.jpg"
+            "../img/archiwum/golaszarch/helena_1856.jpg"
         ],
         "map_iframe": ""
     },
@@ -536,7 +536,7 @@
         "title": "Dokument golaszarch17",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/helena_1912.png"
+            "../img/archiwum/golaszarch/helena_1912.png"
         ],
         "map_iframe": ""
     },
@@ -544,8 +544,8 @@
         "title": "Dokument golaszarch18",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/helena_1912_n2.png",
-            "https://lik.info.pl/zdjecia/golaszarch/helena_1912_n1.png"
+            "../img/archiwum/golaszarch/helena_1912_n2.png",
+            "../img/archiwum/golaszarch/helena_1912_n1.png"
         ],
         "map_iframe": ""
     },
@@ -553,7 +553,7 @@
         "title": "Dokument golaszarch19",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/maciej_1873.png"
+            "../img/archiwum/golaszarch/maciej_1873.png"
         ],
         "map_iframe": ""
     },
@@ -561,7 +561,7 @@
         "title": "Dokument golaszarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/Maciej_1797.png"
+            "../img/archiwum/golaszarch/Maciej_1797.png"
         ],
         "map_iframe": ""
     },
@@ -569,7 +569,7 @@
         "title": "Dokument golaszarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/Maciej_1820.png"
+            "../img/archiwum/golaszarch/Maciej_1820.png"
         ],
         "map_iframe": ""
     },
@@ -577,7 +577,7 @@
         "title": "Dokument golaszarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/mateusz_1810.jpg"
+            "../img/archiwum/golaszarch/mateusz_1810.jpg"
         ],
         "map_iframe": ""
     },
@@ -591,7 +591,7 @@
         "title": "Dokument golaszarch6",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/Maciej_i_Rafala_1825.png"
+            "../img/archiwum/golaszarch/Maciej_i_Rafala_1825.png"
         ],
         "map_iframe": ""
     },
@@ -599,7 +599,7 @@
         "title": "Dokument golaszarch7",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/katarzyna_1841.png"
+            "../img/archiwum/golaszarch/katarzyna_1841.png"
         ],
         "map_iframe": ""
     },
@@ -607,8 +607,8 @@
         "title": "list herbowy - nadanie herbu własnego Kościesza odm.braciom Józefowi, Kazimierzowi, Jakubowi, Franciszkowi, Maciejowi i Antoniemu Gołaszewskim",
         "text": "Z Cesarsko-Królewskiej Zjednoczonej Kancelarii Dworskiej\nJego Cesarski, Królewski i Apostolski Majestat powziął najwyższe decyzje z 20 kwietnia 1830 roku o najłaskawszym uznaniu szlachectwa braci Józefa, Kazimierza, Jakuba, Franciszka, Macieja i Antoniego Gołaszewskich. Do legitymizacji wyżej wymienionych i ich małżeńskich potomków postanawia się, że mogą oni używać herbu opisanego poniżej, a mianowicie:\nNa czerwonym polu (tarczy) dwa skrzyżowane w formie krzyża św. Andrzeja, których groty skierowane są rozbieżnie w kierunku górnych kątów tarczy. Groty te są w swej dolnej części rozdwojone. W swej części górnej bliżej grotów mają poprzeczną belkę. Groty te są spotykane w polskiej heraldyce. Na tarczy widoczne są dwa otwarte, zwrócone do siebie hełmy turniejowe, ozdobione w swej dolnej części złotymi łańcuchami. Grzebienie ozdobione są zwisającymi pióropuszami. Każdy hełm ozdobiony jest złotą koroną. Prawy hełm ozdobiony jest 5 strusimi piórami - dwa srebrne pomiędzy trzema czerwonymi. Korona lewego hełmu ozdobiona jest podwójnym skrzydłem orlim - przednie srebrne, a tylne czerwone.\nTen herb nie może być zmieniony bez szczególnego i najwyższego zezwolenia.\nWiedeń 7 września 1841 roku.",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/dyplom_1841_a.jpg",
-            "https://lik.info.pl/zdjecia/golaszarch/dyplom_1841_b.jpg"
+            "../img/archiwum/golaszarch/dyplom_1841_a.jpg",
+            "../img/archiwum/golaszarch/dyplom_1841_b.jpg"
         ],
         "map_iframe": ""
     },
@@ -616,7 +616,7 @@
         "title": "drzewo genealogiczne rodziny Gołaszewskich",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golaszarch/drzewo_golasz.jpg"
+            "../img/archiwum/golaszarch/drzewo_golasz.jpg"
         ],
         "map_iframe": ""
     },
@@ -624,7 +624,7 @@
         "title": "Dokument goetzarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/1m.jpg"
+            "../img/archiwum/goetzarch/1m.jpg"
         ],
         "map_iframe": ""
     },
@@ -632,11 +632,11 @@
         "title": "PAMIĘCIJANA Z OKOCIMIA GÖTZAZAŁOŻYCIELA I WŁAŚCICIELA BROWARU OKOCIMSKIEGOWŁAŚCICIELA DÓBROZDOBIONEGO CK ZŁOTYM KRZYŻEM ZASŁUGI Z KORONĄ,KOMANDORIĄ PAP. ORDERU Ś. SYLWESTRA,HONOROWEGO OBYWATELA MIASTA BRZESKA ETC., ETC.FUNDATORA KOŚCIOŁA, PARAFII I SZKÓŁ W OKOCIMIU.UR. 15 LISTOPADA 1815, ZM. 14 MARCA 1893.WDZIĘCZNY SYN TABLICĘ TĘ UMIEŚCIŁ.1895",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/kosciol_okocim_2.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/kosciol_okocim_3.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/kosciol_okocim_4.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/kosciol_okocim_5.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/kosciol_okocim_6.jpg"
+            "../img/archiwum/goetzarch/kosciol_okocim_2.jpg",
+            "../img/archiwum/goetzarch/kosciol_okocim_3.jpg",
+            "../img/archiwum/goetzarch/kosciol_okocim_4.jpg",
+            "../img/archiwum/goetzarch/kosciol_okocim_5.jpg",
+            "../img/archiwum/goetzarch/kosciol_okocim_6.jpg"
         ],
         "map_iframe": ""
     },
@@ -644,7 +644,7 @@
         "title": "Dokument goetzarch10",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/albina_zdzislaw_1879.jpg"
+            "../img/archiwum/goetzarch/albina_zdzislaw_1879.jpg"
         ],
         "map_iframe": ""
     },
@@ -652,7 +652,7 @@
         "title": "Dokument goetzarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/2m.jpg"
+            "../img/archiwum/goetzarch/2m.jpg"
         ],
         "map_iframe": ""
     },
@@ -660,13 +660,13 @@
         "title": "JAN GÖTZ OKOCIMSKI",
         "text": "* 15 LISTOPADA 1815\n+ 14 MARCA 1893\nALBINA Z ŻISZKÓW\nGÖTZ OKOCIMSKA\n* 2 CZERWCA 1834\n+ 19 WRZEŚNIA 1914\nBARON JAN GÖTZOKOCIMSKI\nSENATOR RZECZYPOSPOLITEJ POLSKIEJ\n* 18.VII.1864  + 24.IV.1931\nAntoni Jan\nGoetz Okocimski\n* 17.12.1895 Okocim\n+ 31.10.1962 Nairobi\n/Zdjęcia z wnętrza krypty udostępnione zostały przez portal mojeBrzesko.pl/",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/krypta_okocim_1.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/krypta_okocim_2.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/krypta_okocim_3.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/krypta_okocim_4.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/krypta_okocim_5.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/krypta_okocim_6.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/krypta_okocim_7.jpg"
+            "../img/archiwum/goetzarch/krypta_okocim_1.jpg",
+            "../img/archiwum/goetzarch/krypta_okocim_2.jpg",
+            "../img/archiwum/goetzarch/krypta_okocim_3.jpg",
+            "../img/archiwum/goetzarch/krypta_okocim_4.jpg",
+            "../img/archiwum/goetzarch/krypta_okocim_5.jpg",
+            "../img/archiwum/goetzarch/krypta_okocim_6.jpg",
+            "../img/archiwum/goetzarch/krypta_okocim_7.jpg"
         ],
         "map_iframe": ""
     },
@@ -674,7 +674,7 @@
         "title": "Dokument goetzarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/Albina_1860.png"
+            "../img/archiwum/goetzarch/Albina_1860.png"
         ],
         "map_iframe": ""
     },
@@ -682,7 +682,7 @@
         "title": "Dokument goetzarch5",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/Jan_1815.png"
+            "../img/archiwum/goetzarch/Jan_1815.png"
         ],
         "map_iframe": ""
     },
@@ -690,7 +690,7 @@
         "title": "Dokument goetzarch6",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/Antoni_Jozefa_1813.png"
+            "../img/archiwum/goetzarch/Antoni_Jozefa_1813.png"
         ],
         "map_iframe": ""
     },
@@ -698,8 +698,8 @@
         "title": "Dokument goetzarch7",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/Albina_1914_1.png",
-            "https://lik.info.pl/zdjecia/goetzarch/Albina_1914_2.png"
+            "../img/archiwum/goetzarch/Albina_1914_1.png",
+            "../img/archiwum/goetzarch/Albina_1914_2.png"
         ],
         "map_iframe": ""
     },
@@ -707,8 +707,8 @@
         "title": "Dokument goetzarch8",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/jan_1893_1.jpg",
-            "https://lik.info.pl/zdjecia/goetzarch/jan_1893_2.jpg"
+            "../img/archiwum/goetzarch/jan_1893_1.jpg",
+            "../img/archiwum/goetzarch/jan_1893_2.jpg"
         ],
         "map_iframe": ""
     },
@@ -716,7 +716,7 @@
         "title": "Dokument goetzarch9",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/goetzarch/jan_1893.png"
+            "../img/archiwum/goetzarch/jan_1893.png"
         ],
         "map_iframe": ""
     },
@@ -724,8 +724,8 @@
         "title": "Dokument golebarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Helena_1918_1.png",
-            "https://lik.info.pl/zdjecia/golebarch/Helena_1918_2.png"
+            "../img/archiwum/golebarch/Helena_1918_1.png",
+            "../img/archiwum/golebarch/Helena_1918_2.png"
         ],
         "map_iframe": ""
     },
@@ -733,7 +733,7 @@
         "title": "Dokument golebarch10",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Amalia_1823.jpg"
+            "../img/archiwum/golebarch/Amalia_1823.jpg"
         ],
         "map_iframe": ""
     },
@@ -741,7 +741,7 @@
         "title": "Dokument golebarch11",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Marceli_1852.png"
+            "../img/archiwum/golebarch/Marceli_1852.png"
         ],
         "map_iframe": ""
     },
@@ -749,7 +749,7 @@
         "title": "Dokument golebarch12",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Kazimierz_1935_m.png"
+            "../img/archiwum/golebarch/Kazimierz_1935_m.png"
         ],
         "map_iframe": ""
     },
@@ -757,7 +757,7 @@
         "title": "Dokument golebarch13",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/jan_amalia_1814.png"
+            "../img/archiwum/golebarch/jan_amalia_1814.png"
         ],
         "map_iframe": ""
     },
@@ -765,7 +765,7 @@
         "title": "Dokument golebarch14",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/jan_filipina_1830.png"
+            "../img/archiwum/golebarch/jan_filipina_1830.png"
         ],
         "map_iframe": ""
     },
@@ -773,9 +773,9 @@
         "title": "Grobowiec rodziny Gołębskich",
         "text": "Cmentarz Trójcy Świętej przy ul. Kraszewskiego w BytomiuPole 2, nr 110",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/bytom_1.jpg",
-            "https://lik.info.pl/zdjecia/golebarch/bytom_2.jpg",
-            "https://lik.info.pl/zdjecia/golebarch/bytom_3.jpg"
+            "../img/archiwum/golebarch/bytom_1.jpg",
+            "../img/archiwum/golebarch/bytom_2.jpg",
+            "../img/archiwum/golebarch/bytom_3.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.332339,21.442899&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -783,7 +783,7 @@
         "title": "Dokument golebarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Kazimierz_1935.png"
+            "../img/archiwum/golebarch/Kazimierz_1935.png"
         ],
         "map_iframe": ""
     },
@@ -791,8 +791,8 @@
         "title": "Grobowiec rodziny Gołębskich",
         "text": "Cmentarz Prądnik Czerwony w KrakowieKwatera CXCII, rząd 5, miejsce 3\nŚ.P.Z GOŁĘBSKICHMARIAGUMIŃSKA*02.02.1933 +09.08.2020",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/krakow_1.jpg",
-            "https://lik.info.pl/zdjecia/golebarch/krakow_2.jpg"
+            "../img/archiwum/golebarch/krakow_1.jpg",
+            "../img/archiwum/golebarch/krakow_2.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.099313,19.984136&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -800,8 +800,8 @@
         "title": "Dokument golebarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Antonina_1907.png",
-            "https://lik.info.pl/zdjecia/golebarch/Antonina_1907_gn.png"
+            "../img/archiwum/golebarch/Antonina_1907.png",
+            "../img/archiwum/golebarch/Antonina_1907_gn.png"
         ],
         "map_iframe": ""
     },
@@ -809,7 +809,7 @@
         "title": "Dokument golebarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Marceli_1890.png"
+            "../img/archiwum/golebarch/Marceli_1890.png"
         ],
         "map_iframe": ""
     },
@@ -817,7 +817,7 @@
         "title": "Dokument golebarch5",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Amalia_1823.png"
+            "../img/archiwum/golebarch/Amalia_1823.png"
         ],
         "map_iframe": ""
     },
@@ -825,8 +825,8 @@
         "title": "Dokument golebarch6",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Jan_Alojzy_1788.png",
-            "https://lik.info.pl/zdjecia/golebarch/Jan_Alojzy_1788.jpg"
+            "../img/archiwum/golebarch/Jan_Alojzy_1788.png",
+            "../img/archiwum/golebarch/Jan_Alojzy_1788.jpg"
         ],
         "map_iframe": ""
     },
@@ -834,7 +834,7 @@
         "title": "Dokument golebarch7",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Jan_1876.png"
+            "../img/archiwum/golebarch/Jan_1876.png"
         ],
         "map_iframe": ""
     },
@@ -842,8 +842,8 @@
         "title": "Dokument golebarch8",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Jan_1876_1.jpg",
-            "https://lik.info.pl/zdjecia/golebarch/Jan_1876_2.jpg"
+            "../img/archiwum/golebarch/Jan_1876_1.jpg",
+            "../img/archiwum/golebarch/Jan_1876_2.jpg"
         ],
         "map_iframe": ""
     },
@@ -851,7 +851,7 @@
         "title": "Dokument golebarch9",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golebarch/Marceli_1819.png"
+            "../img/archiwum/golebarch/Marceli_1819.png"
         ],
         "map_iframe": ""
     },
@@ -859,7 +859,7 @@
         "title": "Dokument golejarch1",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golejarch/anna_1757.jpg"
+            "../img/archiwum/golejarch/anna_1757.jpg"
         ],
         "map_iframe": ""
     },
@@ -867,7 +867,7 @@
         "title": "Dokument golejarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/golejarch/barbara_1763.png"
+            "../img/archiwum/golejarch/barbara_1763.png"
         ],
         "map_iframe": ""
     },
@@ -875,8 +875,8 @@
         "title": "Dokument gorarch1",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/gorarch/julian_1853_1.jpg",
-            "https://lik.info.pl/zdjecia/gorarch/julian_1853_2.jpg"
+            "../img/archiwum/gorarch/julian_1853_1.jpg",
+            "../img/archiwum/gorarch/julian_1853_2.jpg"
         ],
         "map_iframe": ""
     },
@@ -884,7 +884,7 @@
         "title": "Dokument holubarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/holubarch/anna_1828.png"
+            "../img/archiwum/holubarch/anna_1828.png"
         ],
         "map_iframe": ""
     },
@@ -892,7 +892,7 @@
         "title": "Dokument holubarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/holubarch/Antonina_1799.png"
+            "../img/archiwum/holubarch/Antonina_1799.png"
         ],
         "map_iframe": ""
     },
@@ -900,7 +900,7 @@
         "title": "Dokument holubarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/holubarch/Jan_1838.png"
+            "../img/archiwum/holubarch/Jan_1838.png"
         ],
         "map_iframe": ""
     },
@@ -908,7 +908,7 @@
         "title": "Dokument holubarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/holubarch/Jan_Anna_1797.jpg"
+            "../img/archiwum/holubarch/Jan_Anna_1797.jpg"
         ],
         "map_iframe": ""
     },
@@ -916,7 +916,7 @@
         "title": "metryka chrztu Teodozji z Karczewskich Domańskiej",
         "text": "Gulin, par. Zakrzew\nur. 29 maja 1837\nchrz. 10 czerwca 1837",
         "images": [
-            "https://lik.info.pl/zdjecia/karczarch/teodozja_1837.jpg"
+            "../img/archiwum/karczarch/teodozja_1837.jpg"
         ],
         "map_iframe": ""
     },
@@ -924,8 +924,8 @@
         "title": "metryka ślubu Franciszka Salezego Walentego Rocha Karczewskiego z Józefą Dunin-Brzezińską",
         "text": "Gulin, par. Zakrzew\n22 stycznia 1835\nduplikat metryki ślubu Franciszka Salezego Walentego Rocha Karczewskiego z Józefą Dunin-Brzezińską\nGulin, par. Zakrzew\n22 stycznia 1835",
         "images": [
-            "https://lik.info.pl/zdjecia/karczarch/franciszek_jozefa_1835.jpg",
-            "https://lik.info.pl/zdjecia/karczarch/franciszek_jozefa_1835_dupl.jpg"
+            "../img/archiwum/karczarch/franciszek_jozefa_1835.jpg",
+            "../img/archiwum/karczarch/franciszek_jozefa_1835_dupl.jpg"
         ],
         "map_iframe": ""
     },
@@ -933,7 +933,7 @@
         "title": "świadectwo chrztu Franciszka Salezego Walentego Rocha Karczewskiego",
         "text": "Wszystkim i każdemu komu wiedzieć należy lub w jakikolwiek sposób należeć będzie, znanym i poświadczonym czynimy, że w księdze ochrzczonych kościoła parafialnego ciepielowskiego odczytaliśmy co następuje:\nWieś Ciepielów\nRoku Pańskiego 1804 dnia 29 miesiąca stycznia ja Józef Cedzyński proboszcz ciepielowski ochrzciłem z wody dziecię imionami Franciszek Salezy Walenty Roch syna Jaśnie Wielmożnego Pana Joachima Karczewskiego starosty liwskiego dziedzica dóbr ciepielowskich i Jaśnie Wielmożnej Zofii Świdzińskiej prawnych małżonków. Chrzestnymi byli: Maciej Boczkowski i Łucja Boczkowska obywatele ciepielowscy.\nDnia zaś szóstego miesiąca lutego tegoż roku uzupełniłem ceremonie nad Franciszkiem Salezym Walentym Rochem, przy których asystowali: Wielmożny Pan Homonay kapitan husarii legionu Wełczay i Wielmożna Urodzona Pani Franciszka Nowosielska dziedziczka w Bąkowej.\nNa dowód czego niniejsze ręką naszą podpisane i pieczęcią urzędową solennie umocnione dajemy w rezydencji parafialnej ciepielowskiej dnia 20 stycznia 1835 roku.\n(-) Ojciec Kolumban Jastrzębski proboszcz ciepielowski\nręką własną",
         "images": [
-            "https://lik.info.pl/zdjecia/karczarch/franciszek_1804.jpg"
+            "../img/archiwum/karczarch/franciszek_1804.jpg"
         ],
         "map_iframe": ""
     },
@@ -941,9 +941,9 @@
         "title": "metryka chrztu Józefy z Dunin-Brzezińskich Karczewskiej",
         "text": "Dąbrowa Podłężna, par. Cerekiew\nur. 5 grudnia 1814\nchrz. 19 grudnia 1814\nświadectwo chrztu Józefy z Dunin-Brzezińskich Karczewskiej",
         "images": [
-            "https://lik.info.pl/zdjecia/karczarch/jozefa_1814_a.jpg",
-            "https://lik.info.pl/zdjecia/karczarch/jozefa_1814_b.jpg",
-            "https://lik.info.pl/zdjecia/karczarch/jozefa_1814.jpg"
+            "../img/archiwum/karczarch/jozefa_1814_a.jpg",
+            "../img/archiwum/karczarch/jozefa_1814_b.jpg",
+            "../img/archiwum/karczarch/jozefa_1814.jpg"
         ],
         "map_iframe": ""
     },
@@ -951,7 +951,7 @@
         "title": "metryka zgonu Franciszka Salezego Walentego Rocha Karczewskiego",
         "text": "Budków, par. Żarnów\nzmarł 10 października 1886",
         "images": [
-            "https://lik.info.pl/zdjecia/karczarch/franciszek_1886.jpg"
+            "../img/archiwum/karczarch/franciszek_1886.jpg"
         ],
         "map_iframe": ""
     },
@@ -959,11 +959,11 @@
         "title": "nekrologi Franciszka Salezego Walentego Rocha Karczewskiego",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/karczarch/franciszek_1886_1.png",
-            "https://lik.info.pl/zdjecia/karczarch/franciszek_1886_4.png",
-            "https://lik.info.pl/zdjecia/karczarch/franciszek_1886_5.png",
-            "https://lik.info.pl/zdjecia/karczarch/franciszek_1886_2.png",
-            "https://lik.info.pl/zdjecia/karczarch/franciszek_1886_3.png"
+            "../img/archiwum/karczarch/franciszek_1886_1.png",
+            "../img/archiwum/karczarch/franciszek_1886_4.png",
+            "../img/archiwum/karczarch/franciszek_1886_5.png",
+            "../img/archiwum/karczarch/franciszek_1886_2.png",
+            "../img/archiwum/karczarch/franciszek_1886_3.png"
         ],
         "map_iframe": ""
     },
@@ -971,7 +971,7 @@
         "title": "metryka zgonu Józefy z Dunin-Brzezińskich Karczewskiej",
         "text": "Wielgie, par. Wielgie\nzmarła 10 grudnia 1874",
         "images": [
-            "https://lik.info.pl/zdjecia/karczarch/jozefa_1874.jpg"
+            "../img/archiwum/karczarch/jozefa_1874.jpg"
         ],
         "map_iframe": ""
     },
@@ -979,7 +979,7 @@
         "title": "Dokument kirarch1",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kirarch/antonina_1833.png"
+            "../img/archiwum/kirarch/antonina_1833.png"
         ],
         "map_iframe": ""
     },
@@ -987,7 +987,7 @@
         "title": "Dokument kirarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kirarch/wincenty_ludwika_1824.jpg"
+            "../img/archiwum/kirarch/wincenty_ludwika_1824.jpg"
         ],
         "map_iframe": ""
     },
@@ -995,7 +995,7 @@
         "title": "Dokument kirarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kirarch/wincenty_1797.png"
+            "../img/archiwum/kirarch/wincenty_1797.png"
         ],
         "map_iframe": ""
     },
@@ -1003,7 +1003,7 @@
         "title": "Dokument kirarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kirarch/wincenty_1861.png"
+            "../img/archiwum/kirarch/wincenty_1861.png"
         ],
         "map_iframe": ""
     },
@@ -1011,7 +1011,7 @@
         "title": "Dokument kirarch5",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kirarch/ludwika_1855.png"
+            "../img/archiwum/kirarch/ludwika_1855.png"
         ],
         "map_iframe": ""
     },
@@ -1019,7 +1019,7 @@
         "title": "Grobowiec rodziny Kopaczów",
         "text": "Cmentarz parafialny w Chorzelowie\nŚ.P.\nmgr. inż. KAZIMIERZKOPACZ\nUR. we LWOWIE\n* 9.2.1898  + 20.10.1978\nŚ.P.\nZ DOMAŃSKICH\nmgr. inż. HELENAKOPACZOWA\nUR. w UBINIU\n* 27.2.1901  + 11.11.1974",
         "images": [
-            "https://lik.info.pl/zdjecia/koparch/chorzelow_2.jpg"
+            "../img/archiwum/koparch/chorzelow_2.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.332267,21.443100&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1027,7 +1027,7 @@
         "title": "Dokument kozlarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kozlarch/aleksander_1890.png"
+            "../img/archiwum/kozlarch/aleksander_1890.png"
         ],
         "map_iframe": ""
     },
@@ -1035,7 +1035,7 @@
         "title": "Dokument kozlarch1",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kozlarch/aleksander_1924.jpg"
+            "../img/archiwum/kozlarch/aleksander_1924.jpg"
         ],
         "map_iframe": ""
     },
@@ -1043,16 +1043,16 @@
         "title": "Kaplica grobowa rodziny ZarembówLipa k/Birczy",
         "text": "W krypcie pochowany jest\nAleksander Mieczysław Brunon Florian Kozłowski-Zaremba\nur. 06.10.1890 w Lipie\nzm. we wrześniu 1956r. w Krzeczowicach\nAutorstwo Henryk Bielamowicz - Praca własna, CC BY-SA 4.0, Link\nAutorstwo Henryk Bielamowicz - Praca własna, CC BY-SA 4.0, Link\nKarta ewidencyjna zabytku - serwis Zabytek.pl",
         "images": [
-            "https://lik.info.pl/zdjecia/kozlarch/lipa_1.jpg",
-            "https://lik.info.pl/zdjecia/kozlarch/lipa_2.jpg",
-            "https://lik.info.pl/zdjecia/kozlarch/lipa_3.jpg",
-            "https://lik.info.pl/zdjecia/kozlarch/lipa_4.jpg",
-            "https://lik.info.pl/zdjecia/kozlarch/lipa_5.jpg",
-            "https://lik.info.pl/zdjecia/kozlarch/lipa_6.jpg",
-            "https://lik.info.pl/zdjecia/kozlarch/lipa_7.jpg",
-            "https://lik.info.pl/zdjecia/kozlarch/lipa_8.jpg",
-            "https://lik.info.pl/zdjecia/kozlarch/lipa_9.jpg",
-            "https://lik.info.pl/zdjecia/kozlarch/lipa_10.jpg"
+            "../img/archiwum/kozlarch/lipa_1.jpg",
+            "../img/archiwum/kozlarch/lipa_2.jpg",
+            "../img/archiwum/kozlarch/lipa_3.jpg",
+            "../img/archiwum/kozlarch/lipa_4.jpg",
+            "../img/archiwum/kozlarch/lipa_5.jpg",
+            "../img/archiwum/kozlarch/lipa_6.jpg",
+            "../img/archiwum/kozlarch/lipa_7.jpg",
+            "../img/archiwum/kozlarch/lipa_8.jpg",
+            "../img/archiwum/kozlarch/lipa_9.jpg",
+            "../img/archiwum/kozlarch/lipa_10.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=49.699079,22.378587&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1060,7 +1060,7 @@
         "title": "Dokument kraarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/Wladyslaw_Jerzy_1797.jpg"
+            "../img/archiwum/kraarch/Wladyslaw_Jerzy_1797.jpg"
         ],
         "map_iframe": ""
     },
@@ -1068,7 +1068,7 @@
         "title": "Dokument kraarch10",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/Antoni_1914.jpg"
+            "../img/archiwum/kraarch/Antoni_1914.jpg"
         ],
         "map_iframe": ""
     },
@@ -1076,7 +1076,7 @@
         "title": "Dokument kraarch11",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/Maria_1932.png"
+            "../img/archiwum/kraarch/Maria_1932.png"
         ],
         "map_iframe": ""
     },
@@ -1084,7 +1084,7 @@
         "title": "Dokument kraarch12",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/Eugeniusz_Aniela_1844.jpg"
+            "../img/archiwum/kraarch/Eugeniusz_Aniela_1844.jpg"
         ],
         "map_iframe": ""
     },
@@ -1092,9 +1092,9 @@
         "title": "Krypta s. Anieli (Jadwigi Kraińskiej)w katakumbach Zgromadzenia Sióstr Niepokalanek w Szymanowie",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/jadwiga_1958_1.jpg",
-            "https://lik.info.pl/zdjecia/kraarch/jadwiga_1958_3.jpg",
-            "https://lik.info.pl/zdjecia/kraarch/jadwiga_1958_2.jpg"
+            "../img/archiwum/kraarch/jadwiga_1958_1.jpg",
+            "../img/archiwum/kraarch/jadwiga_1958_3.jpg",
+            "../img/archiwum/kraarch/jadwiga_1958_2.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=52.163742,20.378286&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1102,10 +1102,10 @@
         "title": "sektor SC12, rząd 14, numer 33",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/salwator%202.jpg",
-            "https://lik.info.pl/zdjecia/kraarch/salwator%203.jpg",
-            "https://lik.info.pl/zdjecia/kraarch/salwator%204.jpg",
-            "https://lik.info.pl/zdjecia/kraarch/salwator%201.jpg"
+            "../img/archiwum/kraarch/salwator%202.jpg",
+            "../img/archiwum/kraarch/salwator%203.jpg",
+            "../img/archiwum/kraarch/salwator%204.jpg",
+            "../img/archiwum/kraarch/salwator%201.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.052259,19.903078&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1113,7 +1113,7 @@
         "title": "Dokument kraarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/Wladyslaw_Aniela_1840.jpg"
+            "../img/archiwum/kraarch/Wladyslaw_Aniela_1840.jpg"
         ],
         "map_iframe": ""
     },
@@ -1121,7 +1121,7 @@
         "title": "Dokument kraarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/Wladyslaw_Marian_1841.jpg"
+            "../img/archiwum/kraarch/Wladyslaw_Marian_1841.jpg"
         ],
         "map_iframe": ""
     },
@@ -1129,10 +1129,10 @@
         "title": "Dokument kraarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/katowice_grobowiec_1.jpg",
-            "https://lik.info.pl/zdjecia/kraarch/katowice_grobowiec_2.jpg",
-            "https://lik.info.pl/zdjecia/kraarch/katowice_grobowiec_3.jpg",
-            "https://lik.info.pl/zdjecia/kraarch/katowice_grobowiec_4.jpg"
+            "../img/archiwum/kraarch/katowice_grobowiec_1.jpg",
+            "../img/archiwum/kraarch/katowice_grobowiec_2.jpg",
+            "../img/archiwum/kraarch/katowice_grobowiec_3.jpg",
+            "../img/archiwum/kraarch/katowice_grobowiec_4.jpg"
         ],
         "map_iframe": ""
     },
@@ -1140,7 +1140,7 @@
         "title": "Dokument kraarch5",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/grobowiec_dydnia.jpg"
+            "../img/archiwum/kraarch/grobowiec_dydnia.jpg"
         ],
         "map_iframe": ""
     },
@@ -1148,7 +1148,7 @@
         "title": "Dokument kraarch6",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/Aniela_1887.png"
+            "../img/archiwum/kraarch/Aniela_1887.png"
         ],
         "map_iframe": ""
     },
@@ -1156,9 +1156,9 @@
         "title": "grobowiec rodziny Kraińskichna cmentarzu w Wyszatycach",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/wyszatyce_grobowiec_1.jpg",
-            "https://lik.info.pl/zdjecia/kraarch/wyszatyce_grobowiec_2.jpg",
-            "https://lik.info.pl/zdjecia/kraarch/wyszatyce_grobowiec_3.jpg"
+            "../img/archiwum/kraarch/wyszatyce_grobowiec_1.jpg",
+            "../img/archiwum/kraarch/wyszatyce_grobowiec_2.jpg",
+            "../img/archiwum/kraarch/wyszatyce_grobowiec_3.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=49.841733,22.889854&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1166,8 +1166,8 @@
         "title": "Dokument kraarch8",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/Maria_1932_1.png",
-            "https://lik.info.pl/zdjecia/kraarch/Maria_1932_2.png"
+            "../img/archiwum/kraarch/Maria_1932_1.png",
+            "../img/archiwum/kraarch/Maria_1932_2.png"
         ],
         "map_iframe": ""
     },
@@ -1175,7 +1175,7 @@
         "title": "Dokument kraarch9",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/kraarch/Wladyslaw_1926.png"
+            "../img/archiwum/kraarch/Wladyslaw_1926.png"
         ],
         "map_iframe": ""
     },
@@ -1183,8 +1183,8 @@
         "title": "Dokument krobarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Teofila_1905_1.png",
-            "https://lik.info.pl/zdjecia/krobarch/Teofila_1905_2.png"
+            "../img/archiwum/krobarch/Teofila_1905_1.png",
+            "../img/archiwum/krobarch/Teofila_1905_2.png"
         ],
         "map_iframe": ""
     },
@@ -1192,8 +1192,8 @@
         "title": "Dokument krobarch10",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Konstanty_1864_m.png",
-            "https://lik.info.pl/zdjecia/krobarch/Konstanty_1864.png"
+            "../img/archiwum/krobarch/Konstanty_1864_m.png",
+            "../img/archiwum/krobarch/Konstanty_1864.png"
         ],
         "map_iframe": ""
     },
@@ -1201,7 +1201,7 @@
         "title": "Dokument krobarch11",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Konstanty_1864.jpg"
+            "../img/archiwum/krobarch/Konstanty_1864.jpg"
         ],
         "map_iframe": ""
     },
@@ -1209,7 +1209,7 @@
         "title": "Dokument krobarch12",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/konstanty_1824.png"
+            "../img/archiwum/krobarch/konstanty_1824.png"
         ],
         "map_iframe": ""
     },
@@ -1217,7 +1217,7 @@
         "title": "Dokument krobarch13",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Zofia_1927.png"
+            "../img/archiwum/krobarch/Zofia_1927.png"
         ],
         "map_iframe": ""
     },
@@ -1225,7 +1225,7 @@
         "title": "Dokument krobarch14",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Teofila_1861.png"
+            "../img/archiwum/krobarch/Teofila_1861.png"
         ],
         "map_iframe": ""
     },
@@ -1233,7 +1233,7 @@
         "title": "Dokument krobarch15",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/eleutery_1875.png"
+            "../img/archiwum/krobarch/eleutery_1875.png"
         ],
         "map_iframe": ""
     },
@@ -1241,7 +1241,7 @@
         "title": "Dokument krobarch16",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Antonina_1867.jpg"
+            "../img/archiwum/krobarch/Antonina_1867.jpg"
         ],
         "map_iframe": ""
     },
@@ -1249,7 +1249,7 @@
         "title": "Dokument krobarch17",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Zofia_1927_1.png"
+            "../img/archiwum/krobarch/Zofia_1927_1.png"
         ],
         "map_iframe": ""
     },
@@ -1257,7 +1257,7 @@
         "title": "Grób Konstantego Krobickiego",
         "text": "Cmentarz parafii św. Rocha w Złotowie\n/zdjęcie pobrano z portalu BillionGraves/\nŚ.p.inż. AgronomKONSTANTYKROBICKI*22.3.1898+15.3.1960",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/zlotow.jpg"
+            "../img/archiwum/krobarch/zlotow.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=53.358750,17.034917&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1265,9 +1265,9 @@
         "title": "Grób Kazimiery z Jabłońskich Krobickiej",
         "text": "Cmentarz komunalny w Piasecznie\nsektor 12, rząd 10, numer 8\n/zdjęcia pobrano 04.08.2026 ze strony internetowej cmentarzy komunalnych w Piasecznie i zmodyfikowano/",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/piaseczno%201.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/piaseczno%202.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/piaseczno.jpg"
+            "../img/archiwum/krobarch/piaseczno%201.jpg",
+            "../img/archiwum/krobarch/piaseczno%202.jpg",
+            "../img/archiwum/krobarch/piaseczno.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=52.083392,21.041709&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1275,8 +1275,8 @@
         "title": "Dokument krobarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Konstanty_1864_2.png",
-            "https://lik.info.pl/zdjecia/krobarch/Konstanty_1864_1.png"
+            "../img/archiwum/krobarch/Konstanty_1864_2.png",
+            "../img/archiwum/krobarch/Konstanty_1864_1.png"
         ],
         "map_iframe": ""
     },
@@ -1290,9 +1290,9 @@
         "title": "Dokument krobarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Krobicki_Rakow_1.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/Krobicki_Rakow_2.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/Krobicki_Rakow_3.jpg"
+            "../img/archiwum/krobarch/Krobicki_Rakow_1.jpg",
+            "../img/archiwum/krobarch/Krobicki_Rakow_2.jpg",
+            "../img/archiwum/krobarch/Krobicki_Rakow_3.jpg"
         ],
         "map_iframe": ""
     },
@@ -1300,15 +1300,15 @@
         "title": "Dokument krobarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1923_7.png",
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1923_8.png",
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1923_1.png",
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1923_2.png",
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1923_3.png",
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1923_4.png",
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1923_5.png",
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1924.png",
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1923_6.png"
+            "../img/archiwum/krobarch/Leon_1923_7.png",
+            "../img/archiwum/krobarch/Leon_1923_8.png",
+            "../img/archiwum/krobarch/Leon_1923_1.png",
+            "../img/archiwum/krobarch/Leon_1923_2.png",
+            "../img/archiwum/krobarch/Leon_1923_3.png",
+            "../img/archiwum/krobarch/Leon_1923_4.png",
+            "../img/archiwum/krobarch/Leon_1923_5.png",
+            "../img/archiwum/krobarch/Leon_1924.png",
+            "../img/archiwum/krobarch/Leon_1923_6.png"
         ],
         "map_iframe": ""
     },
@@ -1316,8 +1316,8 @@
         "title": "Dokument krobarch5",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/eleutery_1818_1.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/eleutery_1818_2.png"
+            "../img/archiwum/krobarch/eleutery_1818_1.jpg",
+            "../img/archiwum/krobarch/eleutery_1818_2.png"
         ],
         "map_iframe": ""
     },
@@ -1325,7 +1325,7 @@
         "title": "Dokument krobarch6",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Konstanty_1849.jpg"
+            "../img/archiwum/krobarch/Konstanty_1849.jpg"
         ],
         "map_iframe": ""
     },
@@ -1333,7 +1333,7 @@
         "title": "Dokument krobarch7",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Teofila_1905.png"
+            "../img/archiwum/krobarch/Teofila_1905.png"
         ],
         "map_iframe": ""
     },
@@ -1341,15 +1341,15 @@
         "title": "grobowiec Teofili Józefy z Gołaszewskich Krobickiejna cmentarzu w Kołomyi",
         "text": "2012\n2013\nZdjęcia udostępnione przez Zbigniewa Saganowskiego z Towarzystwa Miłośników Kultury Kresowej\nwww.kresowianie.info/index.html\nTMKK od wielu lat ratuje kresowe cmentarze, w tym cmentarz w Kołomyi\nwww.kresowianie.info/artykuly,c85,kolomyja.html\n2016\nZdjęcia ze strony Towarzystwa Miłośników Kultury Kresowej\nwww.kresowianie.info/artykuly,n735,kolomyja__2016.html",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/kolomyja_2.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/kolomyja_1.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/kolomyja_9.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/kolomyja_8.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/kolomyja_3.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/kolomyja_4.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/kolomyja_5.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/kolomyja_6.jpg",
-            "https://lik.info.pl/zdjecia/krobarch/kolomyja_7.jpg"
+            "../img/archiwum/krobarch/kolomyja_2.jpg",
+            "../img/archiwum/krobarch/kolomyja_1.jpg",
+            "../img/archiwum/krobarch/kolomyja_9.jpg",
+            "../img/archiwum/krobarch/kolomyja_8.jpg",
+            "../img/archiwum/krobarch/kolomyja_3.jpg",
+            "../img/archiwum/krobarch/kolomyja_4.jpg",
+            "../img/archiwum/krobarch/kolomyja_5.jpg",
+            "../img/archiwum/krobarch/kolomyja_6.jpg",
+            "../img/archiwum/krobarch/kolomyja_7.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=48.526716,25.051206&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1357,8 +1357,8 @@
         "title": "Dokument krobarch9",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1923_0.png",
-            "https://lik.info.pl/zdjecia/krobarch/Leon_1923.png"
+            "../img/archiwum/krobarch/Leon_1923_0.png",
+            "../img/archiwum/krobarch/Leon_1923.png"
         ],
         "map_iframe": ""
     },
@@ -1366,7 +1366,7 @@
         "title": "Dokument ladarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/zdzislaw_fabian_1895.jpg"
+            "../img/archiwum/ladarch/zdzislaw_fabian_1895.jpg"
         ],
         "map_iframe": ""
     },
@@ -1374,7 +1374,7 @@
         "title": "Dokument ladarch1",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/antoni_1726.jpg"
+            "../img/archiwum/ladarch/antoni_1726.jpg"
         ],
         "map_iframe": ""
     },
@@ -1382,7 +1382,7 @@
         "title": "Dokument ladarch10",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/kazimierz_1819.png"
+            "../img/archiwum/ladarch/kazimierz_1819.png"
         ],
         "map_iframe": ""
     },
@@ -1390,7 +1390,7 @@
         "title": "Dokument ladarch11",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/zofia_waleria_1866.png"
+            "../img/archiwum/ladarch/zofia_waleria_1866.png"
         ],
         "map_iframe": ""
     },
@@ -1398,7 +1398,7 @@
         "title": "Dokument ladarch12",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/zefiryna_1825.png"
+            "../img/archiwum/ladarch/zefiryna_1825.png"
         ],
         "map_iframe": ""
     },
@@ -1406,7 +1406,7 @@
         "title": "Dokument ladarch13",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/joanna_1827.png"
+            "../img/archiwum/ladarch/joanna_1827.png"
         ],
         "map_iframe": ""
     },
@@ -1414,9 +1414,9 @@
         "title": "Dokument ladarch14",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/zefiryna_1898_1.png",
-            "https://lik.info.pl/zdjecia/ladarch/zefiryna_1898_2.png",
-            "https://lik.info.pl/zdjecia/ladarch/zefiryna_1898_3.png"
+            "../img/archiwum/ladarch/zefiryna_1898_1.png",
+            "../img/archiwum/ladarch/zefiryna_1898_2.png",
+            "../img/archiwum/ladarch/zefiryna_1898_3.png"
         ],
         "map_iframe": ""
     },
@@ -1424,7 +1424,7 @@
         "title": "Dokument ladarch15",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/joanna_1905.png"
+            "../img/archiwum/ladarch/joanna_1905.png"
         ],
         "map_iframe": ""
     },
@@ -1432,10 +1432,10 @@
         "title": "Dokument ladarch16",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/konstanty_1895_3.png",
-            "https://lik.info.pl/zdjecia/ladarch/konstanty_1895_2.png",
-            "https://lik.info.pl/zdjecia/ladarch/konstanty_1895_4.png",
-            "https://lik.info.pl/zdjecia/ladarch/konstanty_1895_1.png"
+            "../img/archiwum/ladarch/konstanty_1895_3.png",
+            "../img/archiwum/ladarch/konstanty_1895_2.png",
+            "../img/archiwum/ladarch/konstanty_1895_4.png",
+            "../img/archiwum/ladarch/konstanty_1895_1.png"
         ],
         "map_iframe": ""
     },
@@ -1443,7 +1443,7 @@
         "title": "Dokument ladarch17",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/seweryna_1875.jpg"
+            "../img/archiwum/ladarch/seweryna_1875.jpg"
         ],
         "map_iframe": ""
     },
@@ -1451,9 +1451,9 @@
         "title": "Dokument ladarch18",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/seweryna_1898_2.png",
-            "https://lik.info.pl/zdjecia/ladarch/seweryna_1898.png",
-            "https://lik.info.pl/zdjecia/ladarch/seweryna_1898.jpg"
+            "../img/archiwum/ladarch/seweryna_1898_2.png",
+            "../img/archiwum/ladarch/seweryna_1898.png",
+            "../img/archiwum/ladarch/seweryna_1898.jpg"
         ],
         "map_iframe": ""
     },
@@ -1461,7 +1461,7 @@
         "title": "Dokument ladarch19",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/helena_karolina_1895.png"
+            "../img/archiwum/ladarch/helena_karolina_1895.png"
         ],
         "map_iframe": ""
     },
@@ -1469,8 +1469,8 @@
         "title": "..............................................",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/jan_1768.png",
-            "https://lik.info.pl/zdjecia/ladarch/jan_1882.png"
+            "../img/archiwum/ladarch/jan_1768.png",
+            "../img/archiwum/ladarch/jan_1882.png"
         ],
         "map_iframe": ""
     },
@@ -1478,8 +1478,8 @@
         "title": "Dokument ladarch20",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/zofia_waleria_1889.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/zofia_waleria_1889.png"
+            "../img/archiwum/ladarch/zofia_waleria_1889.jpg",
+            "../img/archiwum/ladarch/zofia_waleria_1889.png"
         ],
         "map_iframe": ""
     },
@@ -1487,8 +1487,8 @@
         "title": "Dokument ladarch21",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/karolina_weronika_1795.png",
-            "https://lik.info.pl/zdjecia/ladarch/karolina_weronika_1796.png"
+            "../img/archiwum/ladarch/karolina_weronika_1795.png",
+            "../img/archiwum/ladarch/karolina_weronika_1796.png"
         ],
         "map_iframe": ""
     },
@@ -1496,7 +1496,7 @@
         "title": "Dokument ladarch22",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/anna_1820.png"
+            "../img/archiwum/ladarch/anna_1820.png"
         ],
         "map_iframe": ""
     },
@@ -1504,7 +1504,7 @@
         "title": "Dokument ladarch23",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/franciszek_1823.png"
+            "../img/archiwum/ladarch/franciszek_1823.png"
         ],
         "map_iframe": ""
     },
@@ -1512,7 +1512,7 @@
         "title": "Dokument ladarch24",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/ferdynanda_1825.png"
+            "../img/archiwum/ladarch/ferdynanda_1825.png"
         ],
         "map_iframe": ""
     },
@@ -1520,7 +1520,7 @@
         "title": "Dokument ladarch25",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/elzbieta_1833.png"
+            "../img/archiwum/ladarch/elzbieta_1833.png"
         ],
         "map_iframe": ""
     },
@@ -1528,15 +1528,15 @@
         "title": "Dokument ladarch26",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/franciszek_ferdynanda_1832.png"
+            "../img/archiwum/ladarch/franciszek_ferdynanda_1832.png"
         ],
         "map_iframe": ""
     },
     "ladarch27": {
         "title": "D",
-        "text": "TU    LEZY\nLEANARD\nLADOMIRSKI\nUMARL\nDNIA\nII    MARCA\nO      1831      M",
+        "text": "TU  LEZY\nLEANARD\nLADOMIRSKI\nUMARL\nDNIA\nII  MARCA\nO   1831   M",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/leonard_1831.jpg"
+            "../img/archiwum/ladarch/leonard_1831.jpg"
         ],
         "map_iframe": ""
     },
@@ -1544,7 +1544,7 @@
         "title": "Dokument ladarch28",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/leonard_1829.jpg"
+            "../img/archiwum/ladarch/leonard_1829.jpg"
         ],
         "map_iframe": ""
     },
@@ -1552,7 +1552,7 @@
         "title": "Dokument ladarch29",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/leonard_1831.png"
+            "../img/archiwum/ladarch/leonard_1831.png"
         ],
         "map_iframe": ""
     },
@@ -1560,8 +1560,8 @@
         "title": "Dokument ladarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/barbara_1833a.png",
-            "https://lik.info.pl/zdjecia/ladarch/barbara_1833b.png"
+            "../img/archiwum/ladarch/barbara_1833a.png",
+            "../img/archiwum/ladarch/barbara_1833b.png"
         ],
         "map_iframe": ""
     },
@@ -1569,10 +1569,10 @@
         "title": "Dokument ladarch30",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/poznan_grobowiec_1.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/poznan_grobowiec_2.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/poznan_grobowiec_3.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/poznan_grobowiec_4.jpg"
+            "../img/archiwum/ladarch/poznan_grobowiec_1.jpg",
+            "../img/archiwum/ladarch/poznan_grobowiec_2.jpg",
+            "../img/archiwum/ladarch/poznan_grobowiec_3.jpg",
+            "../img/archiwum/ladarch/poznan_grobowiec_4.jpg"
         ],
         "map_iframe": ""
     },
@@ -1580,7 +1580,7 @@
         "title": "Dokument ladarch31",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/rozalia_1778.jpg"
+            "../img/archiwum/ladarch/rozalia_1778.jpg"
         ],
         "map_iframe": ""
     },
@@ -1588,7 +1588,7 @@
         "title": "Dokument ladarch32",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/jan_dominik_1865.jpg"
+            "../img/archiwum/ladarch/jan_dominik_1865.jpg"
         ],
         "map_iframe": ""
     },
@@ -1596,15 +1596,15 @@
         "title": "grobowce Walentego Konstantego Brutusa Ładomirskiego i Emeryka Stanisława Ładomirskiegona cmentarzu w Markowcach",
         "text": "STANISŁAW\nŁADOMIRSKI\n* 8/11 1862 + 28/3 1898\nWIECZNY ODPOCZYNEK\nRACZ MU DAĆ PANIE\n†\nKonstanty\nŁADOMIRSKI\n* 14/2 1832 + 5/12 1895\n1998 (?)\n2000 (?)\nkwieciń 2019\nlipiec 2019",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/markowce_cmentarz_4.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/markowce_cmentarz_3.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/markowce_cmentarz_2.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/markowce_cmentarz_1.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/markowce_cmentarz_5.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/markowce_cmentarz_6.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/markowce_cmentarz_7.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/markowce_cmentarz_8.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/markowce_cmentarz_9.jpg"
+            "../img/archiwum/ladarch/markowce_cmentarz_4.jpg",
+            "../img/archiwum/ladarch/markowce_cmentarz_3.jpg",
+            "../img/archiwum/ladarch/markowce_cmentarz_2.jpg",
+            "../img/archiwum/ladarch/markowce_cmentarz_1.jpg",
+            "../img/archiwum/ladarch/markowce_cmentarz_5.jpg",
+            "../img/archiwum/ladarch/markowce_cmentarz_6.jpg",
+            "../img/archiwum/ladarch/markowce_cmentarz_7.jpg",
+            "../img/archiwum/ladarch/markowce_cmentarz_8.jpg",
+            "../img/archiwum/ladarch/markowce_cmentarz_9.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=48.83074,24.81565&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1612,8 +1612,8 @@
         "title": "Dokument ladarch34",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/stanislaw_1862_0.png",
-            "https://lik.info.pl/zdjecia/ladarch/stanislaw_1862.png"
+            "../img/archiwum/ladarch/stanislaw_1862_0.png",
+            "../img/archiwum/ladarch/stanislaw_1862.png"
         ],
         "map_iframe": ""
     },
@@ -1621,7 +1621,7 @@
         "title": "Dokument ladarch35",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/konstanty_katarzyna_1862.png"
+            "../img/archiwum/ladarch/konstanty_katarzyna_1862.png"
         ],
         "map_iframe": ""
     },
@@ -1629,7 +1629,7 @@
         "title": "Dokument ladarch36",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/helena_karolina_1873.jpg"
+            "../img/archiwum/ladarch/helena_karolina_1873.jpg"
         ],
         "map_iframe": ""
     },
@@ -1637,7 +1637,7 @@
         "title": "Dokument ladarch37",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/joanna_1905_1.png"
+            "../img/archiwum/ladarch/joanna_1905_1.png"
         ],
         "map_iframe": ""
     },
@@ -1645,7 +1645,7 @@
         "title": "Dokument ladarch38",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/zefiryna_1898.jpg"
+            "../img/archiwum/ladarch/zefiryna_1898.jpg"
         ],
         "map_iframe": ""
     },
@@ -1653,7 +1653,7 @@
         "title": "Dokument ladarch39",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/teofil_elzbieta_1822.png"
+            "../img/archiwum/ladarch/teofil_elzbieta_1822.png"
         ],
         "map_iframe": ""
     },
@@ -1667,8 +1667,8 @@
         "title": "Dokument ladarch40",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/marian_1868_0.png",
-            "https://lik.info.pl/zdjecia/ladarch/marian_1868.png"
+            "../img/archiwum/ladarch/marian_1868_0.png",
+            "../img/archiwum/ladarch/marian_1868.png"
         ],
         "map_iframe": ""
     },
@@ -1676,7 +1676,7 @@
         "title": "Dokument ladarch41",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/Katarzyna_1917.jpg"
+            "../img/archiwum/ladarch/Katarzyna_1917.jpg"
         ],
         "map_iframe": ""
     },
@@ -1684,7 +1684,7 @@
         "title": "Dokument ladarch42",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/jozefa_1807.jpg"
+            "../img/archiwum/ladarch/jozefa_1807.jpg"
         ],
         "map_iframe": ""
     },
@@ -1692,7 +1692,7 @@
         "title": "Dokument ladarch43",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/zofia_1761.jpg"
+            "../img/archiwum/ladarch/zofia_1761.jpg"
         ],
         "map_iframe": ""
     },
@@ -1700,7 +1700,7 @@
         "title": "Dokument ladarch44",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/jan_1843.jpg"
+            "../img/archiwum/ladarch/jan_1843.jpg"
         ],
         "map_iframe": ""
     },
@@ -1708,7 +1708,7 @@
         "title": "Dokument ladarch45",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/stanislaw_1898.png"
+            "../img/archiwum/ladarch/stanislaw_1898.png"
         ],
         "map_iframe": ""
     },
@@ -1716,7 +1716,7 @@
         "title": "Dokument ladarch46",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/karolina_weronika_1874.png"
+            "../img/archiwum/ladarch/karolina_weronika_1874.png"
         ],
         "map_iframe": ""
     },
@@ -1724,8 +1724,8 @@
         "title": "Dokument ladarch47",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/elzbieta_1800.png",
-            "https://lik.info.pl/zdjecia/ladarch/elzbieta_1820.png"
+            "../img/archiwum/ladarch/elzbieta_1800.png",
+            "../img/archiwum/ladarch/elzbieta_1820.png"
         ],
         "map_iframe": ""
     },
@@ -1733,11 +1733,11 @@
         "title": "NN",
         "text": "Krystyna Wincenta Franciszkaz Jurczyńskich Ładomirska\nps. \"Krystyna Biała\"\n(1912.12.20 Kraków - 1944.08.07 Warszawa)\nNNps. \"Brzózka\"",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/mpw.svg",
-            "https://lik.info.pl/zdjecia/ladarch/krystyna_1944_1.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/krystyna_1944_2.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/krystyna_1944_3.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/krystyna_1944_4.jpg"
+            "../img/archiwum/ladarch/mpw.svg",
+            "../img/archiwum/ladarch/krystyna_1944_1.jpg",
+            "../img/archiwum/ladarch/krystyna_1944_2.jpg",
+            "../img/archiwum/ladarch/krystyna_1944_3.jpg",
+            "../img/archiwum/ladarch/krystyna_1944_4.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=52.257194,20.951776&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1745,8 +1745,8 @@
         "title": "pas 29, rząd południowy, po prawej Fuchsa - lokalizacja na mapie przybliżona",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/andrzej_rakowicki.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/andrzej_rakowicki_1.jpg"
+            "../img/archiwum/ladarch/andrzej_rakowicki.jpg",
+            "../img/archiwum/ladarch/andrzej_rakowicki_1.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.074801,19.955626&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1760,7 +1760,7 @@
         "title": "Dokument ladarch50",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/wladyslaw_1955.jpg"
+            "../img/archiwum/ladarch/wladyslaw_1955.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.194838,20.755883&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1768,9 +1768,9 @@
         "title": "kwatera 7, rząd 3, numer 11",
         "text": "/zdjęcia pobrano 01.08.2026 ze strony internetowej Cmentarza Komunalnego w Rzeszowie i zmodyfikowano/",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/waleria_rzeszow_2.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/waleria_rzeszow_1.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/waleria_rzeszow_3.jpg"
+            "../img/archiwum/ladarch/waleria_rzeszow_2.jpg",
+            "../img/archiwum/ladarch/waleria_rzeszow_1.jpg",
+            "../img/archiwum/ladarch/waleria_rzeszow_3.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.042889,22.043209&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1778,12 +1778,12 @@
         "title": "Krypta s. Anny (Marii Moniki Ładomirskiej)w katakumbach Zgromadzenia Sióstr Niepokalanek w Jarosławiu",
         "text": "katakumby C\nkatakumby A - kaplica\nkatakumby B",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/jaroslaw%20l.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/jaroslaw%200.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/jaroslaw%20p.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/jaroslaw%203.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/jaroslaw%202.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/jaroslaw%201.jpg"
+            "../img/archiwum/ladarch/jaroslaw%20l.jpg",
+            "../img/archiwum/ladarch/jaroslaw%200.jpg",
+            "../img/archiwum/ladarch/jaroslaw%20p.jpg",
+            "../img/archiwum/ladarch/jaroslaw%203.jpg",
+            "../img/archiwum/ladarch/jaroslaw%202.jpg",
+            "../img/archiwum/ladarch/jaroslaw%201.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.011304,22.703354&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1791,10 +1791,10 @@
         "title": "Grobowiec rodziny TeleżyńskichCmentarz Komunalny nr 2 Junikowo - Poznań",
         "text": "Ś.P.z ŁADOMIRSKICHJADWIGATELEŻYŃSKA* 24.10.1900+ 17.7.1959\nŚ.P. inż. WŁADYSŁAWSPYCHAŁA* 10.9.1915+ 2.1.1980\nŚ.P.inż. TADEUSZTELEŻYŃSKIur. w ODESSIE28.10.1884+ 3.6.1966AVE MARIA\nŚ.P.z TELEŻYŃSKICHIDAKALINOWSKAur. w ODESSIE15.2.1888+ 28.9.1967\n/zdjęcia pobrano z portalu BillionGraves/\npole 14, kwatera 3, rząd 1, miejsce 8",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/telezynscy%202.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/telezynscy%203.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/telezynscy%204.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/telezynscy%201.jpg"
+            "../img/archiwum/ladarch/telezynscy%202.jpg",
+            "../img/archiwum/ladarch/telezynscy%203.jpg",
+            "../img/archiwum/ladarch/telezynscy%204.jpg",
+            "../img/archiwum/ladarch/telezynscy%201.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=52.389438,16.826642&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1802,12 +1802,12 @@
         "title": "Cmentarz w Kiełpinie Poduchownym k/ŁomianekGroby Józefa i Anny z Trąbczyńskich Ładomirskich",
         "text": "Cmentarz wojenny żołnierzy Wojska Polskiego poległych we wrześniu 1939r.\nPAMIĘCI 2500 ŻOŁNIERZY\nARMII POZNAŃ I POMORZE\n8 PUŁKU STRZELCÓW KONNYCH\n12 PUŁKU UŁANÓW\nI INNYCH ODDZIAŁÓW\nPOLEGŁYCH W WALCE\nZ NAJEŹDŹCĄ HITLEROWSKIM\nWE WRZEŚNIU 1939 ROKU\nPOD ŁOMIANKAMI\nJózef Maria Patrycjusz ŁADOMIRSKI\nur. 17.03.1907 w Markowcach\npoległ pod Łomiankami 22.09.1939\nCmentarz parafialny\nAnna z Trąbczyńskich ŁADOMIRSKA\nur. 12.08.1904 w Wieprzowym Jeziorze\nzm. 10.11.1993 w Radochowie",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/kielpin_1.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/kielpin_2.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/kielpin_3.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/kielpin_4.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/kielpin_5.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/kielpin_6.jpg"
+            "../img/archiwum/ladarch/kielpin_1.jpg",
+            "../img/archiwum/ladarch/kielpin_2.jpg",
+            "../img/archiwum/ladarch/kielpin_3.jpg",
+            "../img/archiwum/ladarch/kielpin_4.jpg",
+            "../img/archiwum/ladarch/kielpin_5.jpg",
+            "../img/archiwum/ladarch/kielpin_6.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=52.353397,20.874376&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1815,7 +1815,7 @@
         "title": "Grób Zdzisława ŁadomirskiegoGungahlin Cemetery & Crematorium, Canberra, AustraliaPlaque Beam, Portion 09, Section 06, Position 073",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/canberra.jpg"
+            "../img/archiwum/ladarch/canberra.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=-35.217088,149.134745&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1823,9 +1823,9 @@
         "title": "Grobowiec rodziny KomarnickichCmentarz Stary w Przeworsku",
         "text": "Antoni Maria Józef ŁADOMIRSKI\nur. 15.05.1914 Markowce\nzm. 05.09.1970 Poznań\nMaria Wanda Jadwiga z Komarnickich ŁADOMIRSKA\nur. 02/15.10.1911 Pohrebyszcze\nzm. 18.06.2003 Poznań\nsektor C3, rząd A, numer 10\n/zdjęcia pobrano 03.08.2026 ze strony internetowej cmentarza komunalnego w Przeworsku/",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/przeworsk_1.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/przeworsk_2.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/przeworsk_3.jpg"
+            "../img/archiwum/ladarch/przeworsk_1.jpg",
+            "../img/archiwum/ladarch/przeworsk_2.jpg",
+            "../img/archiwum/ladarch/przeworsk_3.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.061427,22.496099&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1833,7 +1833,7 @@
         "title": "Dokument ladarch6",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/stanislaw_1886.png"
+            "../img/archiwum/ladarch/stanislaw_1886.png"
         ],
         "map_iframe": ""
     },
@@ -1841,8 +1841,8 @@
         "title": "Dokument ladarch7",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/zdzislaw_fabian_1864_0.jpg",
-            "https://lik.info.pl/zdjecia/ladarch/zdzislaw_fabian_1864.jpg"
+            "../img/archiwum/ladarch/zdzislaw_fabian_1864_0.jpg",
+            "../img/archiwum/ladarch/zdzislaw_fabian_1864.jpg"
         ],
         "map_iframe": ""
     },
@@ -1850,7 +1850,7 @@
         "title": "Dokument ladarch8",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/konstanty_ur_1832.png"
+            "../img/archiwum/ladarch/konstanty_ur_1832.png"
         ],
         "map_iframe": ""
     },
@@ -1858,7 +1858,7 @@
         "title": "Dokument ladarch9",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/ladarch/krzywcze_grobowiec.jpg"
+            "../img/archiwum/ladarch/krzywcze_grobowiec.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.694663,22.978249&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1866,7 +1866,7 @@
         "title": "Dokument malczarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/malczarch/Piotr_1766.jpg"
+            "../img/archiwum/malczarch/Piotr_1766.jpg"
         ],
         "map_iframe": ""
     },
@@ -1880,7 +1880,7 @@
         "title": "Dokument malczarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/malczarch/Rafala_1801.png"
+            "../img/archiwum/malczarch/Rafala_1801.png"
         ],
         "map_iframe": ""
     },
@@ -1888,7 +1888,7 @@
         "title": "Dokument malczarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/malczarch/Zofia_1832.png"
+            "../img/archiwum/malczarch/Zofia_1832.png"
         ],
         "map_iframe": ""
     },
@@ -1896,12 +1896,12 @@
         "title": "Ś. P.",
         "text": "MARIA\nz FEDOROWICZÓW\nMEISSNEROWA\nUR. 6 _ 1912 W KLEBANÓWCE\nZM. 20 VIII 1980 W LASKACH\nŚ. P.\nKAROL MARIAN\nMEISSNER\nUR. 13 III 1907 WE LWOWIE\nZM. 19 XI 1988 W LASKACH\nŚ. P.\nELŻBIETA\nMEISSNER\nUR. 28 VIII 1930 W WARSZAWIE\nZM. 15 X 2006 _",
         "images": [
-            "https://lik.info.pl/zdjecia/meisarch/laski%201.jpg",
-            "https://lik.info.pl/zdjecia/meisarch/laski%205.jpg",
-            "https://lik.info.pl/zdjecia/meisarch/laski%202.jpg",
-            "https://lik.info.pl/zdjecia/meisarch/laski%203.jpg",
-            "https://lik.info.pl/zdjecia/meisarch/laski%204.jpg",
-            "https://lik.info.pl/zdjecia/meisarch/laski.jpg"
+            "../img/archiwum/meisarch/laski%201.jpg",
+            "../img/archiwum/meisarch/laski%205.jpg",
+            "../img/archiwum/meisarch/laski%202.jpg",
+            "../img/archiwum/meisarch/laski%203.jpg",
+            "../img/archiwum/meisarch/laski%204.jpg",
+            "../img/archiwum/meisarch/laski.jpg"
         ],
         "map_iframe": ""
     },
@@ -1909,7 +1909,7 @@
         "title": "Dokument pankarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/pankarch/celestyna_fonton_pankratiew_1859_viaregio.png"
+            "../img/archiwum/pankarch/celestyna_fonton_pankratiew_1859_viaregio.png"
         ],
         "map_iframe": ""
     },
@@ -1917,7 +1917,7 @@
         "title": "Dokument trzecarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/trzecarch/tytus_1845.png"
+            "../img/archiwum/trzecarch/tytus_1845.png"
         ],
         "map_iframe": ""
     },
@@ -1925,9 +1925,9 @@
         "title": "†",
         "text": "Tytus Trzecieski\nurodził się w Bażanówce 28 grud. 1811\nzmarł w Polance 24 grud. 1878\nAnna z Węgleńskich Trzecieska\nur. 8 paźdz. 1821 † 23 kwiet. 1857\nPokój Ich Cieniom\n/zdjęcia pobrano 11.06.2018 ze strony internetowej Cmentarza Komunalnego w Jedliczu i zmodyfikowano/",
         "images": [
-            "https://lik.info.pl/zdjecia/trzecarch/tytus_anna_1.jpg",
-            "https://lik.info.pl/zdjecia/trzecarch/tytus_anna_2.jpg",
-            "https://lik.info.pl/zdjecia/trzecarch/jedlicze.png"
+            "../img/archiwum/trzecarch/tytus_anna_1.jpg",
+            "../img/archiwum/trzecarch/tytus_anna_2.jpg",
+            "../img/archiwum/trzecarch/jedlicze.png"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=49.715593,21.639709&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1935,7 +1935,7 @@
         "title": "Dokument trzecarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/trzecarch/anna_1821.png"
+            "../img/archiwum/trzecarch/anna_1821.png"
         ],
         "map_iframe": ""
     },
@@ -1943,15 +1943,15 @@
         "title": "Dokument trzecarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/trzecarch/lyczakow_7.jpg",
-            "https://lik.info.pl/zdjecia/trzecarch/lyczakow_1.jpg",
-            "https://lik.info.pl/zdjecia/trzecarch/lyczakow_9.jpg",
-            "https://lik.info.pl/zdjecia/trzecarch/lyczakow_2.jpg",
-            "https://lik.info.pl/zdjecia/trzecarch/lyczakow_3.jpg",
-            "https://lik.info.pl/zdjecia/trzecarch/lyczakow_4.jpg",
-            "https://lik.info.pl/zdjecia/trzecarch/lyczakow_5.jpg",
-            "https://lik.info.pl/zdjecia/trzecarch/lyczakow_6.jpg",
-            "https://lik.info.pl/zdjecia/trzecarch/lyczakow_8.jpg"
+            "../img/archiwum/trzecarch/lyczakow_7.jpg",
+            "../img/archiwum/trzecarch/lyczakow_1.jpg",
+            "../img/archiwum/trzecarch/lyczakow_9.jpg",
+            "../img/archiwum/trzecarch/lyczakow_2.jpg",
+            "../img/archiwum/trzecarch/lyczakow_3.jpg",
+            "../img/archiwum/trzecarch/lyczakow_4.jpg",
+            "../img/archiwum/trzecarch/lyczakow_5.jpg",
+            "../img/archiwum/trzecarch/lyczakow_6.jpg",
+            "../img/archiwum/trzecarch/lyczakow_8.jpg"
         ],
         "map_iframe": ""
     },
@@ -1959,7 +1959,7 @@
         "title": "Dokument trzecarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/trzecarch/jan_1842.jpg"
+            "../img/archiwum/trzecarch/jan_1842.jpg"
         ],
         "map_iframe": ""
     },
@@ -1967,7 +1967,7 @@
         "title": "Dokument trzecarch5",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/trzecarch/magdalena_1842.png"
+            "../img/archiwum/trzecarch/magdalena_1842.png"
         ],
         "map_iframe": ""
     },
@@ -1975,10 +1975,10 @@
         "title": "sektor F5, rząd 4, numer 20",
         "text": "/zdjęcia pobrano 02.08.2026 ze strony internetowej cmentarza parafialnego w Sopocie i zmodyfikowano/",
         "images": [
-            "https://lik.info.pl/zdjecia/tyszarch/sopot%201.jpg",
-            "https://lik.info.pl/zdjecia/tyszarch/sopot%202.jpg",
-            "https://lik.info.pl/zdjecia/tyszarch/sopot%203.jpg",
-            "https://lik.info.pl/zdjecia/tyszarch/sopot%204.jpg"
+            "../img/archiwum/tyszarch/sopot%201.jpg",
+            "../img/archiwum/tyszarch/sopot%202.jpg",
+            "../img/archiwum/tyszarch/sopot%203.jpg",
+            "../img/archiwum/tyszarch/sopot%204.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=54.449858,18.547935&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -1986,10 +1986,10 @@
         "title": "Dokument weglarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/weglarch/pawlow_1.jpg",
-            "https://lik.info.pl/zdjecia/weglarch/pawlow_2.jpg",
-            "https://lik.info.pl/zdjecia/weglarch/pawlow_3.jpg",
-            "https://lik.info.pl/zdjecia/weglarch/pawlow_4.jpg"
+            "../img/archiwum/weglarch/pawlow_1.jpg",
+            "../img/archiwum/weglarch/pawlow_2.jpg",
+            "../img/archiwum/weglarch/pawlow_3.jpg",
+            "../img/archiwum/weglarch/pawlow_4.jpg"
         ],
         "map_iframe": ""
     },
@@ -1997,7 +1997,7 @@
         "title": "Dokument weglarch1",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/weglarch/wojciech_1863.jpg"
+            "../img/archiwum/weglarch/wojciech_1863.jpg"
         ],
         "map_iframe": ""
     },
@@ -2005,7 +2005,7 @@
         "title": "Dokument weglarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/weglarch/emilia_1856.jpg"
+            "../img/archiwum/weglarch/emilia_1856.jpg"
         ],
         "map_iframe": ""
     },
@@ -2013,7 +2013,7 @@
         "title": "Dokument weglarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/weglarch/emilia_1800.png"
+            "../img/archiwum/weglarch/emilia_1800.png"
         ],
         "map_iframe": ""
     },
@@ -2021,7 +2021,7 @@
         "title": "Dokument weglarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/weglarch/anna_1806.png"
+            "../img/archiwum/weglarch/anna_1806.png"
         ],
         "map_iframe": ""
     },
@@ -2029,7 +2029,7 @@
         "title": "Dokument weglarch5",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/weglarch/antoni_1828.jpg"
+            "../img/archiwum/weglarch/antoni_1828.jpg"
         ],
         "map_iframe": ""
     },
@@ -2037,7 +2037,7 @@
         "title": "Dokument weglarch6",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/weglarch/antoni_anna_1793.jpg"
+            "../img/archiwum/weglarch/antoni_anna_1793.jpg"
         ],
         "map_iframe": ""
     },
@@ -2045,7 +2045,7 @@
         "title": "Dokument wiszarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/drzewo_wisz.png"
+            "../img/archiwum/wiszarch/drzewo_wisz.png"
         ],
         "map_iframe": ""
     },
@@ -2053,8 +2053,8 @@
         "title": "Dokument wiszarch1",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/maria_helena_1871_1.png",
-            "https://lik.info.pl/zdjecia/wiszarch/maria_helena_1871.png"
+            "../img/archiwum/wiszarch/maria_helena_1871_1.png",
+            "../img/archiwum/wiszarch/maria_helena_1871.png"
         ],
         "map_iframe": ""
     },
@@ -2062,7 +2062,7 @@
         "title": "Dokument wiszarch10",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/stanislaw_1999.png"
+            "../img/archiwum/wiszarch/stanislaw_1999.png"
         ],
         "map_iframe": ""
     },
@@ -2076,7 +2076,7 @@
         "title": "Dokument wiszarch12",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/andrzej_maria_1961.jpg"
+            "../img/archiwum/wiszarch/andrzej_maria_1961.jpg"
         ],
         "map_iframe": ""
     },
@@ -2084,7 +2084,7 @@
         "title": "Dokument wiszarch13",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/maria_ludwig_1903.png"
+            "../img/archiwum/wiszarch/maria_ludwig_1903.png"
         ],
         "map_iframe": ""
     },
@@ -2092,7 +2092,7 @@
         "title": "Dokument wiszarch14",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/leonard_1895.png"
+            "../img/archiwum/wiszarch/leonard_1895.png"
         ],
         "map_iframe": ""
     },
@@ -2100,10 +2100,10 @@
         "title": "Dokument wiszarch15",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/jan_1939_a.png",
-            "https://lik.info.pl/zdjecia/wiszarch/jan_1939_b.png",
-            "https://lik.info.pl/zdjecia/wiszarch/jan_1939_c.png",
-            "https://lik.info.pl/zdjecia/wiszarch/jan_1939_d.png"
+            "../img/archiwum/wiszarch/jan_1939_a.png",
+            "../img/archiwum/wiszarch/jan_1939_b.png",
+            "../img/archiwum/wiszarch/jan_1939_c.png",
+            "../img/archiwum/wiszarch/jan_1939_d.png"
         ],
         "map_iframe": ""
     },
@@ -2111,7 +2111,7 @@
         "title": "Dokument wiszarch16",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/ludmila_1934.jpg"
+            "../img/archiwum/wiszarch/ludmila_1934.jpg"
         ],
         "map_iframe": ""
     },
@@ -2119,8 +2119,8 @@
         "title": "Dokument wiszarch17",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/maria_ludwik_1908_o.png",
-            "https://lik.info.pl/zdjecia/wiszarch/maria_ludwik_1908.png"
+            "../img/archiwum/wiszarch/maria_ludwik_1908_o.png",
+            "../img/archiwum/wiszarch/maria_ludwik_1908.png"
         ],
         "map_iframe": ""
     },
@@ -2128,7 +2128,7 @@
         "title": "Dokument wiszarch18",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/leopold_1830.png"
+            "../img/archiwum/wiszarch/leopold_1830.png"
         ],
         "map_iframe": ""
     },
@@ -2136,8 +2136,8 @@
         "title": "Dokument wiszarch19",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/leopold_1909_2.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/leopold_1909_1.jpg"
+            "../img/archiwum/wiszarch/leopold_1909_2.jpg",
+            "../img/archiwum/wiszarch/leopold_1909_1.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.266575,28.633481&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -2145,7 +2145,7 @@
         "title": "Dokument wiszarch2",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/maria_helena_1890.png"
+            "../img/archiwum/wiszarch/maria_helena_1890.png"
         ],
         "map_iframe": ""
     },
@@ -2153,7 +2153,7 @@
         "title": "Dokument wiszarch20",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/kamien_owrucz_1853.png"
+            "../img/archiwum/wiszarch/kamien_owrucz_1853.png"
         ],
         "map_iframe": ""
     },
@@ -2161,7 +2161,7 @@
         "title": "Dokument wiszarch21",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/jan_1908.png"
+            "../img/archiwum/wiszarch/jan_1908.png"
         ],
         "map_iframe": ""
     },
@@ -2169,7 +2169,7 @@
         "title": "Dokument wiszarch22",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/teresa_1910.png"
+            "../img/archiwum/wiszarch/teresa_1910.png"
         ],
         "map_iframe": ""
     },
@@ -2177,8 +2177,8 @@
         "title": "Dokument wiszarch23",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/ewarysta_1869_1.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/ewarysta_1869_2.jpg"
+            "../img/archiwum/wiszarch/ewarysta_1869_1.jpg",
+            "../img/archiwum/wiszarch/ewarysta_1869_2.jpg"
         ],
         "map_iframe": ""
     },
@@ -2186,10 +2186,10 @@
         "title": "Dokument wiszarch24",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/emilia_1899.png",
-            "https://lik.info.pl/zdjecia/wiszarch/emilia_1900_2.png",
-            "https://lik.info.pl/zdjecia/wiszarch/emilia_1900_3.png",
-            "https://lik.info.pl/zdjecia/wiszarch/emilia_1900.png"
+            "../img/archiwum/wiszarch/emilia_1899.png",
+            "../img/archiwum/wiszarch/emilia_1900_2.png",
+            "../img/archiwum/wiszarch/emilia_1900_3.png",
+            "../img/archiwum/wiszarch/emilia_1900.png"
         ],
         "map_iframe": ""
     },
@@ -2197,8 +2197,8 @@
         "title": "Dokument wiszarch25",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/ludmila_1934_2.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/ludmila_1934_3.jpg"
+            "../img/archiwum/wiszarch/ludmila_1934_2.jpg",
+            "../img/archiwum/wiszarch/ludmila_1934_3.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=45.443735,-73.836705&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -2206,8 +2206,8 @@
         "title": "Dokument wiszarch26",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/leonard_ludmila_1869.png",
-            "https://lik.info.pl/zdjecia/wiszarch/leonard_ludmila_1869.jpg"
+            "../img/archiwum/wiszarch/leonard_ludmila_1869.png",
+            "../img/archiwum/wiszarch/leonard_ludmila_1869.jpg"
         ],
         "map_iframe": ""
     },
@@ -2215,11 +2215,11 @@
         "title": "sektor K4, rząd 1, grób 1",
         "text": "/zdjęcia pobrano 11.09.2019 ze strony internetowej cmentarza parafialnego w Zakopanem i zmodyfikowano/",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/zakopane_cm_1.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/zakopane_cm_2.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/zakopane_cm_3.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/zakopane_cm_4.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/zakopane_cm_0.jpg"
+            "../img/archiwum/wiszarch/zakopane_cm_1.jpg",
+            "../img/archiwum/wiszarch/zakopane_cm_2.jpg",
+            "../img/archiwum/wiszarch/zakopane_cm_3.jpg",
+            "../img/archiwum/wiszarch/zakopane_cm_4.jpg",
+            "../img/archiwum/wiszarch/zakopane_cm_0.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=49.301696,19.952858&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -2227,7 +2227,7 @@
         "title": "Dokument wiszarch28",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/leonard_1835.jpg"
+            "../img/archiwum/wiszarch/leonard_1835.jpg"
         ],
         "map_iframe": ""
     },
@@ -2235,7 +2235,7 @@
         "title": "Dokument wiszarch29",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/jan_1793.jpg"
+            "../img/archiwum/wiszarch/jan_1793.jpg"
         ],
         "map_iframe": ""
     },
@@ -2243,7 +2243,7 @@
         "title": "Dokument wiszarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/maria_helena_1908.png"
+            "../img/archiwum/wiszarch/maria_helena_1908.png"
         ],
         "map_iframe": ""
     },
@@ -2251,8 +2251,8 @@
         "title": "Dokument wiszarch30",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/jan_1839_a.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/jan_1839_b.jpg"
+            "../img/archiwum/wiszarch/jan_1839_a.jpg",
+            "../img/archiwum/wiszarch/jan_1839_b.jpg"
         ],
         "map_iframe": ""
     },
@@ -2260,7 +2260,7 @@
         "title": "Dokument wiszarch31",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/jan_1895.png"
+            "../img/archiwum/wiszarch/jan_1895.png"
         ],
         "map_iframe": ""
     },
@@ -2268,7 +2268,7 @@
         "title": "Dokument wiszarch32",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/jan_1880.png"
+            "../img/archiwum/wiszarch/jan_1880.png"
         ],
         "map_iframe": ""
     },
@@ -2276,10 +2276,10 @@
         "title": "/zdjęcia pobrano 28.12.2025 ze strony internetowej cmentarza komunalnego w Nowym Sączu i zmodyfikowano/",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/nowy_sacz_1.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/nowy_sacz_2.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/nowy_sacz_3.jpg",
-            "https://lik.info.pl/zdjecia/wiszarch/nowy_sacz_plan.jpg"
+            "../img/archiwum/wiszarch/nowy_sacz_1.jpg",
+            "../img/archiwum/wiszarch/nowy_sacz_2.jpg",
+            "../img/archiwum/wiszarch/nowy_sacz_3.jpg",
+            "../img/archiwum/wiszarch/nowy_sacz_plan.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=49.617689,20.703546&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -2287,7 +2287,7 @@
         "title": "Dokument wiszarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/leonard_1914.jpg"
+            "../img/archiwum/wiszarch/leonard_1914.jpg"
         ],
         "map_iframe": ""
     },
@@ -2295,8 +2295,8 @@
         "title": "Dokument wiszarch5",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/leonard_1914_3.png",
-            "https://lik.info.pl/zdjecia/wiszarch/leonard_1914_2.png"
+            "../img/archiwum/wiszarch/leonard_1914_3.png",
+            "../img/archiwum/wiszarch/leonard_1914_2.png"
         ],
         "map_iframe": ""
     },
@@ -2304,7 +2304,7 @@
         "title": "Dokument wiszarch6",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/leonard_1917.jpg"
+            "../img/archiwum/wiszarch/leonard_1917.jpg"
         ],
         "map_iframe": ""
     },
@@ -2324,8 +2324,8 @@
         "title": "Dokument wiszarch9",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wiszarch/maria_ludwig_1879_1.png",
-            "https://lik.info.pl/zdjecia/wiszarch/maria_ludwig_1879.png"
+            "../img/archiwum/wiszarch/maria_ludwig_1879_1.png",
+            "../img/archiwum/wiszarch/maria_ludwig_1879.png"
         ],
         "map_iframe": ""
     },
@@ -2333,7 +2333,7 @@
         "title": "Dokument wlodarch",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wlodarch/roman_1850.png"
+            "../img/archiwum/wlodarch/roman_1850.png"
         ],
         "map_iframe": ""
     },
@@ -2341,7 +2341,7 @@
         "title": "Dokument wlodarch1",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wlodarch/Zofia_Boleslawa_1890.png"
+            "../img/archiwum/wlodarch/Zofia_Boleslawa_1890.png"
         ],
         "map_iframe": ""
     },
@@ -2349,10 +2349,10 @@
         "title": "/zdjęcia pobrano 05.06.2019 ze strony internetowej cmentarza parafialnego w Podstolicach i zmodyfikowano/",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wlodarch/podstolice_grobowiec_1.jpg",
-            "https://lik.info.pl/zdjecia/wlodarch/podstolice_grobowiec_2.jpg",
-            "https://lik.info.pl/zdjecia/wlodarch/podstolice_grobowiec_3.jpg",
-            "https://lik.info.pl/zdjecia/wlodarch/podstolice.jpg"
+            "../img/archiwum/wlodarch/podstolice_grobowiec_1.jpg",
+            "../img/archiwum/wlodarch/podstolice_grobowiec_2.jpg",
+            "../img/archiwum/wlodarch/podstolice_grobowiec_3.jpg",
+            "../img/archiwum/wlodarch/podstolice.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=49.958359,19.989157&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -2360,9 +2360,9 @@
         "title": "Dokument wlodarch3",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wlodarch/niegowic_kaplica_1.jpg",
-            "https://lik.info.pl/zdjecia/wlodarch/niegowic_kaplica_2.jpg",
-            "https://lik.info.pl/zdjecia/wlodarch/niegowic_kaplica_3.jpg"
+            "../img/archiwum/wlodarch/niegowic_kaplica_1.jpg",
+            "../img/archiwum/wlodarch/niegowic_kaplica_2.jpg",
+            "../img/archiwum/wlodarch/niegowic_kaplica_3.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=49.940045,20.239039&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     },
@@ -2370,7 +2370,7 @@
         "title": "Dokument wlodarch4",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wlodarch/Zdzislaw_1928.png"
+            "../img/archiwum/wlodarch/Zdzislaw_1928.png"
         ],
         "map_iframe": ""
     },
@@ -2378,7 +2378,7 @@
         "title": "Dokument wlodarch5",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wlodarch/Albina_1937.png"
+            "../img/archiwum/wlodarch/Albina_1937.png"
         ],
         "map_iframe": ""
     },
@@ -2386,7 +2386,7 @@
         "title": "Dokument wlodarch6",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wlodarch/Emilia_1863.png"
+            "../img/archiwum/wlodarch/Emilia_1863.png"
         ],
         "map_iframe": ""
     },
@@ -2394,7 +2394,7 @@
         "title": "Dokument wlodarch7",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wlodarch/Zdzislaw_1852.jpg"
+            "../img/archiwum/wlodarch/Zdzislaw_1852.jpg"
         ],
         "map_iframe": ""
     },
@@ -2402,7 +2402,7 @@
         "title": "Dokument wlodarch8",
         "text": "",
         "images": [
-            "https://lik.info.pl/zdjecia/wlodarch/zdzislaw_1928.jpg"
+            "../img/archiwum/wlodarch/zdzislaw_1928.jpg"
         ],
         "map_iframe": ""
     },
@@ -2410,8 +2410,8 @@
         "title": "grobowiec Ludwika Zakrzewskiegona cmentarzu w Dąbrowie Tarnowskiej",
         "text": "ŚP\nLUDWIK\nZAKRZEWSKI\nPOWSTANIEC 1863 R\nZASŁUŻONY DYREKTOR\nTOWARZYSTWA ZALICZKOWEGO\nI PRZYJACIEL MALUCZKICH\nUMARŁ 1919 w 81 R ŻYCIA\nCZEŚĆ JEGO PAMIĘCI",
         "images": [
-            "https://lik.info.pl/zdjecia/zakrzarch/ludwik_1919_1.jpg",
-            "https://lik.info.pl/zdjecia/zakrzarch/ludwik_1919_2.jpg"
+            "../img/archiwum/zakrzarch/ludwik_1919_1.jpg",
+            "../img/archiwum/zakrzarch/ludwik_1919_2.jpg"
         ],
         "map_iframe": "<iframe src=\"https://maps.google.com/maps?q=50.171915,20.993961&hl=pl&z=18&output=embed\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>"
     }
