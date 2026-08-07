@@ -42,7 +42,7 @@
             color: #3d3628;
         }
 
-        /* Siatka zdjęć (automatycznie obok siebie) */
+        /* Siatka zdjęć */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -59,10 +59,12 @@
             background: #fff;
             padding: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: zoom-in; /* Kursor zmienia się w LUPĘ po najechaniu */
         }
         .gallery img:hover {
-            transform: scale(1.02); 
+            transform: scale(1.03); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
 
         .map-wrapper {
@@ -79,12 +81,63 @@
             color: var(--ink);
         }
         .error { text-align: center; padding: 50px; color: var(--sepia); }
+
+        /* ── LIGHTBOX (POWIĘKSZENIE ZDJĘCIA) ── */
+        .lightbox {
+            display: none; /* Domyślnie ukryte */
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 8, 6, 0.9); /* Ciemne tło */
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox img {
+            max-width: 95%;
+            max-height: 95%;
+            border: 2px solid var(--gold);
+            border-radius: 4px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.6);
+            cursor: zoom-out;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: var(--warm-white);
+            font-size: 50px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: sans-serif;
+        }
+        .lightbox-close:hover {
+            color: var(--gold);
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
 
+    <!-- Tu JavaScript będzie wrzucał wygenerowaną treść -->
     <div id="documentContainer">
         <div style="text-align:center; padding: 50px; color: #b09a7e;">Wczytywanie dokumentu z archiwum...</div>
+    </div>
+
+    <!-- Struktura Lightboxa (ukryta na starcie) -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Powiększony dokument">
     </div>
 
     <script>
@@ -92,10 +145,34 @@
         const docId = params.get('id');
         const container = document.getElementById('documentContainer');
 
+        // Elementy Lightboxa
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        // Funkcje otwierania i zamykania powiększenia
+        function openLightbox(imageSrc) {
+            lightboxImg.src = imageSrc;
+            lightbox.classList.add('show');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('show');
+            setTimeout(() => lightboxImg.src = "", 300); // Czyszczenie po zniknięciu
+        }
+
+        // Zamykanie kliknięciem w X lub w tło
+        closeBtn.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function(e) {
+            if (e.target !== lightboxImg) {
+                closeLightbox();
+            }
+        });
+
+        // Wczytywanie dokumentów
         if (!docId) {
             container.innerHTML = '<div class="error">Nie wybrano żadnego dokumentu. Wybierz pozycję z menu po lewej stronie.</div>';
         } else {
-            // Wczytujemy zaktualizowaną bazę z GitHuba
             fetch('dane_archiwum.json?t=' + new Date().getTime())
                 .then(response => response.json())
                 .then(dane => {
@@ -108,21 +185,19 @@
 
                     let html = `<h2>${dokument.title}</h2>`;
 
-                    // Generowanie tekstu
                     if (dokument.text && dokument.text.trim() !== "") {
                         html += `<div class="text-content">${dokument.text}</div>`;
                     }
 
-                    // Generowanie galerii zdjęć (korzysta ze ścieżek ../img/archiwum/...)
                     if (dokument.images && dokument.images.length > 0) {
                         html += `<div class="gallery">`;
                         dokument.images.forEach(imgUrl => {
-                            html += `<img src="${imgUrl}" alt="Skan dokumentu" loading="lazy">`;
+                            // Zwróć uwagę na usunięte tagi zamykające img i dodaną obsługę kliknięcia
+                            html += `<img src="${imgUrl}" alt="Skan dokumentu" loading="lazy" onclick="openLightbox('${imgUrl}')">`;
                         });
                         html += `</div>`;
                     }
 
-                    // Generowanie mapy
                     if (dokument.map_iframe && dokument.map_iframe.trim() !== "") {
                         html += `
                         <div class="map-wrapper">
