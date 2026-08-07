@@ -48,7 +48,6 @@
         .drawer-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.04); padding-left: 35px; }
         .drawer-links a:hover::before { width: 3px; }
         
-        /* Aktywna zakładka w wysuwanym menu */
         .drawer-links a.active { color: var(--gold-light) !important; background: rgba(255,255,255,0.1) !important; padding-left: 35px; font-weight: 500; }
         .drawer-links a.active::before { width: 3px !important; }
 
@@ -103,13 +102,11 @@
             overflow-y: auto;
             flex-grow: 1;
         }
-        /* Custom scrollbar dla menu */
         .tree-menu::-webkit-scrollbar { width: 6px; }
         .tree-menu::-webkit-scrollbar-track { background: transparent; }
         .tree-menu::-webkit-scrollbar-thumb { background: var(--sepia-pale); border-radius: 10px; }
         .tree-menu::-webkit-scrollbar-thumb:hover { background: var(--sepia-light); }
 
-        /* Detale Rodziny */
         .family-node { margin-bottom: 8px; }
         .family-node > summary {
             font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600;
@@ -121,7 +118,6 @@
         .family-node[open] > summary { color: var(--gold-light); border-bottom-color: transparent; padding-bottom: 4px; }
         .family-node[open] > summary::after { content: '−'; transform: rotate(180deg); }
 
-        /* Detale Osoby */
         .person-node { margin-top: 4px; margin-left: 10px; }
         .person-node > summary {
             font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 500;
@@ -133,7 +129,6 @@
         .person-node[open] > summary { color: var(--ink); }
         .person-node[open] > summary::before { content: '▾'; color: var(--gold); }
 
-        /* Linki do dokumentów */
         .doc-links { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; margin: 4px 0 12px 0; border-left: 1px solid var(--sepia-pale); margin-left: 5px; }
         .doc-links a {
             font-size: 0.85rem; color: var(--sepia); text-decoration: none; padding: 4px 10px; border-radius: 3px; transition: 0.2s; position: relative;
@@ -185,7 +180,6 @@
 
         footer { background: var(--ink); color: rgba(248,244,238,0.4); text-align: center; padding: 40px 24px; font-size: 0.85rem; letter-spacing: 1px; border-top: 1px solid var(--ink-light); }
 
-        /* Responsywność */
         @media (max-width: 1000px) {
             .workspace { flex-direction: column; padding: 30px 15px; }
             .archive-sidebar { width: 100%; position: static; height: auto; max-height: 500px; }
@@ -240,7 +234,6 @@
 </aside>
 
 <div class="workspace">
-    <!-- LEWA STRONA: DRZEWO NAWIGACYJNE -->
     <aside class="archive-sidebar">
         <div class="sidebar-header">
             <h3>Spis Zbiorów</h3>
@@ -248,7 +241,6 @@
         </div>
         <div class="tree-menu">
             
-            <!-- BARTMAŃSKI -->
             <details class="family-node">
                 <summary>BARTMAŃSKI</summary>
                 <details class="person-node">
@@ -261,7 +253,6 @@
                 </details>
             </details>
 
-            <!-- BORYSŁAWSKI -->
             <details class="family-node">
                 <summary>BORYSŁAWSKI</summary>
                 <details class="person-node">
@@ -274,7 +265,6 @@
                 </details>
             </details>
 
-            <!-- DOMAŃSKI -->
             <details class="family-node">
                 <summary>DOMAŃSKI</summary>
                 <details class="person-node">
@@ -409,7 +399,6 @@
                 </details>
             </details>
 
-            <!-- FEDOROWICZ -->
             <details class="family-node">
                 <summary>FEDOROWICZ</summary>
                 <details class="person-node">
@@ -480,7 +469,6 @@
                 </details>
             </details>
 
-            <!-- GOLEJEWSKI -->
             <details class="family-node">
                 <summary>GOLEJEWSKI</summary>
                 <details class="person-node">
@@ -500,7 +488,6 @@
                 </details>
             </details>
 
-            <!-- GOŁASZEWSKI -->
             <details class="family-node">
                 <summary>GOŁASZEWSKI</summary>
                 <div class="doc-links direct-links">
@@ -571,7 +558,6 @@
                 </details>
             </details>
 
-            <!-- GOŁĘBSKI -->
             <details class="family-node">
                 <summary>GOŁĘBSKI</summary>
                 <details class="person-node">
@@ -642,7 +628,6 @@
                 </details>
             </details>
 
-            <!-- GÓRSKI -->
             <details class="family-node">
                 <summary>GÓRSKI</summary>
                 <details class="person-node">
@@ -654,7 +639,6 @@
                 </details>
             </details>
 
-            <!-- GÖTZ-OKOCIMSKI -->
             <details class="family-node">
                 <summary>GÖTZ-OKOCIMSKI</summary>
                 <details class="person-node">
@@ -696,7 +680,6 @@
                 </details>
             </details>
 
-            <!-- HOŁUBOWICZ -->
             <details class="family-node">
                 <summary>HOŁUBOWICZ</summary>
                 <details class="person-node">
@@ -723,7 +706,6 @@
                 </details>
             </details>
 
-            <!-- KARCZEWSKI -->
             <details class="family-node">
                 <summary>KARCZEWSKI</summary>
                 <details class="person-node">
@@ -755,7 +737,6 @@
                 </details>
             </details>
 
-            <!-- KIRSCHNER -->
             <details class="family-node">
                 <summary>KIRSCHNER</summary>
                 <details class="person-node">
@@ -780,7 +761,6 @@
                 </details>
             </details>
 
-            <!-- KOPACZ -->
             <details class="family-node">
                 <summary>KOPACZ</summary>
                 <details class="person-node">
@@ -793,7 +773,6 @@
                 </details>
             </details>
 
-            <!-- KOZŁOWSKI -->
             <details class="family-node">
                 <summary>KOZŁOWSKI</summary>
                 <details class="person-node">
@@ -813,7 +792,6 @@
                 </details>
             </details>
 
-            <!-- KRAIŃSKI -->
             <details class="family-node">
                 <summary>KRAIŃSKI</summary>
                 <details class="person-node">
@@ -898,7 +876,6 @@
                 </details>
             </details>
 
-            <!-- KROBICKI -->
             <details class="family-node">
                 <summary>KROBICKI</summary>
                 <details class="person-node">
@@ -984,7 +961,6 @@
                 </details>
             </details>
 
-            <!-- ŁADOMIRSKI -->
             <details class="family-node">
                 <summary>ŁADOMIRSKI</summary>
                 <details class="person-node">
@@ -1231,7 +1207,6 @@
                 </details>
             </details>
 
-            <!-- MALCZEWSKI -->
             <details class="family-node">
                 <summary>MALCZEWSKI</summary>
                 <details class="person-node">
@@ -1256,7 +1231,6 @@
                 </details>
             </details>
 
-            <!-- MEISSNER -->
             <details class="family-node">
                 <summary>MEISSNER</summary>
                 <details class="person-node">
@@ -1269,7 +1243,6 @@
                 </details>
             </details>
 
-            <!-- PANKRATIEW -->
             <details class="family-node">
                 <summary>PANKRATIEW</summary>
                 <details class="person-node">
@@ -1278,7 +1251,6 @@
                 </details>
             </details>
 
-            <!-- TELEŻYŃSKI -->
             <details class="family-node">
                 <summary>TELEŻYŃSKI</summary>
                 <details class="person-node">
@@ -1291,7 +1263,6 @@
                 </details>
             </details>
 
-            <!-- TRZECIESKI -->
             <details class="family-node">
                 <summary>TRZECIESKI</summary>
                 <details class="person-node">
@@ -1332,7 +1303,6 @@
                 </details>
             </details>
 
-            <!-- TYSZKIEWICZ -->
             <details class="family-node">
                 <summary>TYSZKIEWICZ</summary>
                 <details class="person-node">
@@ -1345,7 +1315,6 @@
                 </details>
             </details>
 
-            <!-- WĘGLEŃSKI -->
             <details class="family-node">
                 <summary>WĘGLEŃSKI</summary>
                 <details class="person-node">
@@ -1389,7 +1358,6 @@
                 </details>
             </details>
 
-            <!-- WISZNIEWSKI -->
             <details class="family-node">
                 <summary>WISZNIEWSKI</summary>
                 <div class="doc-links direct-links">
@@ -1512,7 +1480,6 @@
                 </details>
             </details>
 
-            <!-- WŁODEK -->
             <details class="family-node">
                 <summary>WŁODEK</summary>
                 <details class="person-node">
@@ -1559,7 +1526,6 @@
                 </details>
             </details>
 
-            <!-- ZAKRZEWSKI -->
             <details class="family-node">
                 <summary>ZAKRZEWSKI</summary>
                 <details class="person-node">
@@ -1579,15 +1545,12 @@
         </div>
     </aside>
 
-    <!-- PRAWA STRONA: PRZEGLĄDARKA DOKUMENTÓW (IFRAME) -->
     <main class="viewer-area" id="viewerArea">
-        <!-- Ten panel znika, gdy klikniemy dokument -->
         <div class="viewer-placeholder" id="viewerPlaceholder">
             <div class="ornament">⚚</div>
             <h3>Pusty pulpit</h3>
             <p>Wybierz dokument z drzewa genealogicznego po lewej stronie, aby wyświetlić jego treść i szczegóły w tym miejscu.</p>
         </div>
-        <!-- Tutaj wczytywane są pliki docelowe -->
         <iframe name="documentViewer" title="Podgląd dokumentu"></iframe>
     </main>
 
@@ -1599,7 +1562,6 @@
 </footer>
 
 <script>
-    /* Obsługa wysuwanego menu głównego */
     const menuBtn = document.getElementById('menuBtn');
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('overlay');
@@ -1623,7 +1585,6 @@
     menuBtn.addEventListener('click', toggleSidebar);
     overlay.addEventListener('click', toggleSidebar);
 
-    /* Skrypt odpowiedzialny za podświetlanie aktywnej zakładki z podanego kodu */
     function highlightCurrentPage() {
         const currentPath = window.location.pathname;
         let currentPage = currentPath.split("/").pop();
@@ -1633,7 +1594,6 @@
             const linkHref = link.getAttribute('href');
             link.classList.remove('active');
             if (!linkHref.startsWith('#')) {
-                // Dodajemy active jesli link konczy się nazwą bieżącej podstrony
                 if (linkHref.endsWith(currentPage) || (currentPage === "index.html" && linkHref === "index.html")) {
                     link.classList.add('active');
                 }
@@ -1642,22 +1602,17 @@
     }
     window.addEventListener('DOMContentLoaded', highlightCurrentPage);
 
-    /* Obsługa chowania pustego ekranu (placeholder) i podświetlenia wybranego dokumentu w drzewie */
     const docLinks = document.querySelectorAll('.doc-links a');
     const placeholder = document.getElementById('viewerPlaceholder');
 
     docLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            // Ukryj powitalny ekran
             placeholder.style.opacity = '0';
             setTimeout(() => placeholder.style.display = 'none', 400);
 
-            // Zresetuj klasy active ze wszystkich linków
             docLinks.forEach(l => l.classList.remove('active'));
-            // Dodaj klase do aktualnie klikniętego
             this.classList.add('active');
 
-            // Automatyczne przewinięcie na dół (do przeglądarki) na telefonach komórkowych
             if (window.innerWidth <= 1000) {
                 document.getElementById('viewerArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
