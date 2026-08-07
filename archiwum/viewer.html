@@ -15,7 +15,7 @@
             font-family: 'Jost', sans-serif;
             background-color: var(--warm-white);
             color: var(--ink);
-            padding: 40px;
+            padding: 30px 40px;
             line-height: 1.7;
             margin: 0;
         }
@@ -29,24 +29,42 @@
             margin-top: 0;
             margin-bottom: 25px;
         }
+        
         .text-content {
             font-size: 1.05rem;
             margin-bottom: 40px;
-            white-space: pre-wrap; /* zachowuje entery z tekstu */
-        }
-        .gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .gallery img {
-            max-width: 100%;
-            height: auto;
+            white-space: pre-wrap;
+            background: #fff;
+            padding: 25px;
             border: 1px solid var(--sepia-pale);
             border-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            color: #3d3628;
         }
+
+        /* Siatka zdjęć (automatycznie obok siebie) */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            align-items: center;
+        }
+        .gallery img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+            border: 1px solid var(--sepia-pale);
+            border-radius: 4px;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.02); 
+        }
+
         .map-wrapper {
             margin-top: 30px;
             border: 1px solid var(--sepia-pale);
@@ -65,13 +83,11 @@
 </head>
 <body>
 
-    <!-- Tu JavaScript będzie wrzucał wygenerowaną treść -->
     <div id="documentContainer">
         <div style="text-align:center; padding: 50px; color: #b09a7e;">Wczytywanie dokumentu z archiwum...</div>
     </div>
 
     <script>
-        // 1. Pobieramy ID z paska adresu (np. viewer.html?id=domarch15)
         const params = new URLSearchParams(window.location.search);
         const docId = params.get('id');
         const container = document.getElementById('documentContainer');
@@ -79,35 +95,34 @@
         if (!docId) {
             container.innerHTML = '<div class="error">Nie wybrano żadnego dokumentu. Wybierz pozycję z menu po lewej stronie.</div>';
         } else {
-            // 2. Wczytujemy plik JSON z danymi
-            fetch('dane_archiwum.json')
+            // Wczytujemy zaktualizowaną bazę z GitHuba
+            fetch('dane_archiwum.json?t=' + new Date().getTime())
                 .then(response => response.json())
                 .then(dane => {
                     const dokument = dane[docId];
 
                     if (!dokument) {
-                        container.innerHTML = `<div class="error">Dokument o sygnaturze <b>${docId}</b> nie został odnaleziony w nowej bazie danych.</div>`;
+                        container.innerHTML = `<div class="error">Dokument o sygnaturze <b>${docId}</b> nie został odnaleziony w bazie danych.</div>`;
                         return;
                     }
 
-                    // 3. Budujemy dynamicznie HTML na podstawie tego, co jest w pliku JSON
                     let html = `<h2>${dokument.title}</h2>`;
 
-                    // Jeśli jest tekst
+                    // Generowanie tekstu
                     if (dokument.text && dokument.text.trim() !== "") {
                         html += `<div class="text-content">${dokument.text}</div>`;
                     }
 
-                    // Jeśli są zdjęcia
+                    // Generowanie galerii zdjęć (korzysta ze ścieżek ../img/archiwum/...)
                     if (dokument.images && dokument.images.length > 0) {
                         html += `<div class="gallery">`;
                         dokument.images.forEach(imgUrl => {
-                            html += `<img src="${imgUrl}" alt="Skan dokumentu">`;
+                            html += `<img src="${imgUrl}" alt="Skan dokumentu" loading="lazy">`;
                         });
                         html += `</div>`;
                     }
 
-                    // Jeśli jest mapa
+                    // Generowanie mapy
                     if (dokument.map_iframe && dokument.map_iframe.trim() !== "") {
                         html += `
                         <div class="map-wrapper">
@@ -116,12 +131,11 @@
                         </div>`;
                     }
 
-                    // Wstrzykujemy gotowy kod do widoku
                     container.innerHTML = html;
                 })
                 .catch(error => {
                     console.error("Błąd ładowania bazy:", error);
-                    container.innerHTML = `<div class="error">Wystąpił problem z połączeniem z bazą danych (dane_archiwum.json).<br>Upewnij się, że plik JSON znajduje się w tym samym folderze.</div>`;
+                    container.innerHTML = `<div class="error">Wystąpił problem z połączeniem z plikiem dane_archiwum.json.</div>`;
                 });
         }
     </script>
